@@ -1,0 +1,15 @@
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+AnnouncementModel _$AnnouncementModelFromJson(Map<String, dynamic> json) =>
+    AnnouncementModel(
+      name: json['name'] as String?,
+      announcement: json['announcement'] as String?,
+    );
+
+Map<String, dynamic> _$AnnouncementModelToJson(AnnouncementModel instance) =>
+    <String, dynamic>{
+      'name': instance.name,
+      'announcement': instance.announcement,
+    };

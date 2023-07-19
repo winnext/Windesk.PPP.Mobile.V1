@@ -1,0 +1,14 @@
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+TotalCount _$TotalCountFromJson(Map<String, dynamic> json) => TotalCount(
+      low: json['low'] as int?,
+      high: json['high'] as int?,
+    );
+
+Map<String, dynamic> _$TotalCountToJson(TotalCount instance) =>
+    <String, dynamic>{
+      'low': instance.low,
+      'high': instance.high,
+    };

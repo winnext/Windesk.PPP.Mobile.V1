@@ -2,6 +2,7 @@ import 'package:animated_widgets/animated_widgets.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../../../feature/constants/paths/asset_paths.dart';
 import '../../../feature/extensions/context_extension.dart';
 import '../../../feature/global_providers/global_provider.dart';
@@ -18,7 +19,7 @@ class SplashScreen extends StatelessWidget {
       create: (context) => SplashProvider(),
       child: Consumer<SplashProvider>(
         builder: (context, SplashProvider splashProvider, child) {
-          context.watch<SplashProvider>().setSplashFinished();
+          context.watch<SplashProvider>().setSplashFinished(context);
           _navigate(context);
           return _splashScreenBody(context);
         },
@@ -27,8 +28,12 @@ class SplashScreen extends StatelessWidget {
   }
 
   void _navigate(BuildContext context) {
-    context.read<GlobalProvider>().setDeviceModel(context.read<SplashProvider>().getDeviceModel());
-    context.read<GlobalProvider>().setDeviceVersion(context.read<SplashProvider>().getDeviceVersion());
+    context
+        .read<GlobalProvider>()
+        .setDeviceModel(context.read<SplashProvider>().getDeviceModel());
+    context
+        .read<GlobalProvider>()
+        .setDeviceVersion(context.read<SplashProvider>().getDeviceVersion());
     context.watch<SplashProvider>().isSplashFinished
         ? context.watch<SplashProvider>().isUserAlreadyLoggedIn
             ? context.router.replace(const HomeScreen())

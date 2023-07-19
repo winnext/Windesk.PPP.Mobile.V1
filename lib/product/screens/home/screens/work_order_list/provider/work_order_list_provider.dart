@@ -1,0 +1,117 @@
+import 'package:flutter/material.dart';
+import 'package:vm_fm_4/feature/enums/shared_enums.dart';
+import 'package:vm_fm_4/feature/models/work_space/work_space_appendings.dart';
+import 'package:vm_fm_4/feature/models/work_space/work_space_detail.dart';
+import 'package:vm_fm_4/feature/models/work_space/work_space_my_group_demand_list.dart';
+import 'package:vm_fm_4/feature/service/global_services.dart/work_space_service/work_space_service_repository_impl.dart';
+
+import '../../../../../../feature/database/shared_manager.dart';
+import '../../../../../../feature/injection.dart';
+import '../../../../../../feature/service/global_services.dart/work_order_service/work_order_service_repository_impl.dart';
+
+class WorkOrderListProvider extends ChangeNotifier {
+  final WorkOrderServiceRepositoryImpl service = Injection.getIt.get<WorkOrderServiceRepositoryImpl>();
+  final WorkSpaceServiceRepositoryImpl workSpaceService = WorkSpaceServiceRepositoryImpl();
+
+  int _tabIndex = 0;
+  int get tabIndex => _tabIndex;
+
+  bool _isLoading = false;
+  bool get isLoading => _isLoading;
+
+  bool _isMyWorkOrdersDataFetched = false;
+  bool get isMyWorkOrdersDataFetched => _isMyWorkOrdersDataFetched;
+
+  bool _isMyGroupWorkOrdersDataFetched = false;
+  bool get isMyGroupWorkOrdersDataFetched => _isMyGroupWorkOrdersDataFetched;
+
+  bool _isMyPendikWorkOrdersDataFetched = false;
+  bool get isMyPendikWorkOrdersDataFetched => _isMyPendikWorkOrdersDataFetched;
+
+  List<WorkSpaceDetail> _myWorkSpaceDetails = [];
+  List<WorkSpaceDetail> get myWorkSpaceDetails => _myWorkSpaceDetails;
+
+  WorkSpaceMyGroupDemandList? _workSpaceMyGroupDemandList;
+  WorkSpaceMyGroupDemandList? get workSpaceMyGroupDemandList => _workSpaceMyGroupDemandList;
+
+  List<WorkSpacePendiks> _myPendikWorkSpaceDetails = [];
+  List<WorkSpacePendiks> get myPendikWorkSpaceDetails => _myPendikWorkSpaceDetails;
+
+  void getMyWorkOrders() async {
+    if (_isMyWorkOrdersDataFetched) return;
+    String userToken = await SharedManager().getString(SharedEnum.userToken);
+
+    _isLoading = true;
+    notifyListeners();
+    final result = await workSpaceService.getMyWorkSpaces('swagger', userToken, 1);
+
+    result.fold((l) {
+      _myWorkSpaceDetails = l;
+    }, (r) {});
+
+    _isMyWorkOrdersDataFetched = true;
+    _isLoading = false;
+    notifyListeners();
+  }
+
+  void getMyGroupWorkOrders() async {
+    if (_isMyGroupWorkOrdersDataFetched) return;
+    _isLoading = true;
+    notifyListeners();
+    final String token = await SharedManager().getString(SharedEnum.userToken);
+    if (token.isNotEmpty) {
+      final result = await workSpaceService.getMyGroupDemandList(token);
+
+      result.fold((l) {
+        _workSpaceMyGroupDemandList = l;
+      }, (r) {
+        // TODO hata kontrolu
+      });
+
+      _isMyGroupWorkOrdersDataFetched = true;
+    }
+    _isLoading = false;
+    notifyListeners();
+  }
+
+  void getMyPendikWorkOrders() async {
+    if (_isMyPendikWorkOrdersDataFetched) return;
+
+    _isLoading = true;
+    notifyListeners();
+
+    final String token = await SharedManager().getString(SharedEnum.userToken);
+    if (token.isNotEmpty) {
+      final result = await workSpaceService.getWorkSpacePendiks('swagger', token, 1);
+
+      result.fold((l) {
+        _myPendikWorkSpaceDetails = l;
+      }, (r) {
+        // TODO hata kontrolu
+      });
+
+      _isMyPendikWorkOrdersDataFetched = true;
+    }
+
+    Future.delayed(const Duration(seconds: 2), () {
+      _isMyPendikWorkOrdersDataFetched = true;
+      _isLoading = false;
+      notifyListeners();
+    });
+  }
+
+  void changeTab(int index) {
+    switch (index) {
+      case 0:
+        _tabIndex = 0;
+        break;
+      case 1:
+        _tabIndex = 1;
+        break;
+      case 2:
+        _tabIndex = 2;
+        break;
+    }
+    notifyListeners();
+  }
+}

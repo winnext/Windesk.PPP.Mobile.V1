@@ -1,0 +1,15 @@
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+Calendar _$CalendarFromJson(Map<String, dynamic> json) => Calendar(
+      start: json['start'] as String?,
+      end: json['end'] as String?,
+      title: json['title'] as String?,
+    );
+
+Map<String, dynamic> _$CalendarToJson(Calendar instance) => <String, dynamic>{
+      'start': instance.start,
+      'end': instance.end,
+      'title': instance.title,
+    };

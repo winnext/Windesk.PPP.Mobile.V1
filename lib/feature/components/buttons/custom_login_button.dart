@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+
 import '../../constants/other/colors.dart';
+import '../../constants/style/border_radius.dart';
 import '../../constants/style/custom_paddings.dart';
 import '../../constants/style/font_sizes.dart';
-
-import '../../constants/style/border_radius.dart';
 
 class CustomLoginButton extends StatelessWidget {
   const CustomLoginButton({super.key, required this.title, required this.onPressed});
@@ -28,7 +28,9 @@ class CustomLoginButton extends StatelessWidget {
                 foregroundColor: APPColors.Main.white,
                 shape: RoundedRectangleBorder(borderRadius: CustomBorderRadius.largeBorderRadius),
                 textStyle: const TextStyle(fontSize: FontSizes.button, fontFamily: 'Roboto', letterSpacing: 1)),
-            onPressed: () => onPressed(),
+            onPressed: () {
+              onPressed(context);
+            },
             child: Text(title),
           ),
         ),

@@ -1,0 +1,17 @@
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+WorkOrderAddedResources _$WorkOrderAddedResourcesFromJson(
+        Map<String, dynamic> json) =>
+    WorkOrderAddedResources(
+      fullname: json['fullname'] as String?,
+      code: json['code'] as String?,
+    );
+
+Map<String, dynamic> _$WorkOrderAddedResourcesToJson(
+        WorkOrderAddedResources instance) =>
+    <String, dynamic>{
+      'fullname': instance.fullname,
+      'code': instance.code,
+    };
