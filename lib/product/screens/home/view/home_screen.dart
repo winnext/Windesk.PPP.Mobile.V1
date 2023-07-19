@@ -41,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     InternetListenerClass().internetConnection(context);
-
+    
     return ChangeNotifierProvider(
       create: (context) => HomeProvider(),
       child: Consumer<HomeProvider>(

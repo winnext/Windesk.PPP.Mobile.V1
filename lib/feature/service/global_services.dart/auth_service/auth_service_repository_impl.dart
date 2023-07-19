@@ -1,27 +1,31 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vm_fm_4/feature/constants/paths/service_tools.dart';
 
 import 'package:vm_fm_4/feature/exceptions/custom_service_exceptions.dart';
 import 'package:vm_fm_4/feature/models/auth_models/check_access_token_model.dart';
 
 import 'package:vm_fm_4/feature/models/auth_models/login_model.dart';
+import 'package:vm_fm_4/feature/models/auth_models/record_model.dart';
 
+import '../../../database/shared_manager.dart';
 import '../../../enums/service_response_status_enums.dart';
+import '../../../enums/shared_enums.dart';
 import 'auth_service_repository.dart';
 
 class AuthServiceRepositoryImpl extends AuthServiceRepository {
   @override
   Future<Either<LoginModel, CustomServiceException>> login(String username, String password) async {
+    final String deviceId = await SharedManager().getString(SharedEnum.deviceId);
+    final String deviceType = await SharedManager().getString(SharedEnum.deviceType);
 
     @override
-    String url = ServiceTools.baseUrlV1 + ServiceTools.tokenV1;
+    String url =
+        '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$deviceId&action=loginCheck&username=$username&password=$password&platform=$deviceType&version=3&mobileV2=true';
 
     try {
-      final response = await super.dio.post(
+      final response = await super.dio.get(
             url,
-            data: {'username': username, 'password': password},
             options: Options(),
           );
 
@@ -39,29 +43,22 @@ class AuthServiceRepositoryImpl extends AuthServiceRepository {
   }
 
   @override
-  Future<Either<bool, CustomServiceException>> logout(String refreshToken, String token) async {
-    String url = 'http://10.0.2.2:3012/user/logout';
+  Future<Either<bool, CustomServiceException>> logout(String username) async {
+    final String deviceId = await SharedManager().getString(SharedEnum.deviceId);
+
+    String url = '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$deviceId&action=logout&username=$username';
 
     try {
-      final response = await super.dio.post(
+      final response = await super.dio.get(
             url,
-            options: Options(
-              headers: {
-                'authorization': 'Bearer $token',
-                'refresh_token': refreshToken,
-              },
-            ),
+            options: Options(),
           );
 
-      if (response.statusCode == 200 || response.statusCode == 201) {
-        final data = response.data;
-        super.logger.i(data);
-        if (data[ServiceResponseStatusEnums.success.rawText] == true) {
-          super.logger.i('logout success');
-          return const Left(true);
-        } else {
-          return Right(CustomServiceException(message: CustomServiceMessages.logoutError, statusCode: '400'));
-        }
+      final data = response.data;
+      super.logger.i(data);
+      if (data[ServiceResponseStatusEnums.result.rawText] == 'success') {
+        super.logger.i('logout success');
+        return const Left(true);
       } else {
         return Right(CustomServiceException(message: CustomServiceMessages.logoutError, statusCode: '400'));
       }
