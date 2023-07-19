@@ -9,6 +9,9 @@ import 'package:vm_fm_4/feature/service/global_services.dart/auth_service/auth_s
 import 'package:vm_fm_4/feature/service/global_services.dart/auth_service/auth_service_repository_impl.dart';
 
 class LoginProvider extends ChangeNotifier {
+
+  AuthServiceRepository authService = AuthServiceRepositoryImpl();
+
   bool _loading = false;
   bool get loading => _loading;
 
@@ -35,7 +38,6 @@ class LoginProvider extends ChangeNotifier {
 
   void logIn(BuildContext context) async {
     if (_userName.isNotEmpty && _password.isNotEmpty) {
-      AuthServiceRepository authService = AuthServiceRepositoryImpl();
       _loading = true;
       notifyListeners();
 
