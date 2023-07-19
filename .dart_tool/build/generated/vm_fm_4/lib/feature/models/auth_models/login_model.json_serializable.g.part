@@ -3,24 +3,14 @@
 // **************************************************************************
 
 LoginModel _$LoginModelFromJson(Map<String, dynamic> json) => LoginModel(
-      accessToken: json['accessToken'] as String?,
-      expiresIn: json['expiresIn'] as int?,
-      refreshExpiresIn: json['refreshExpiresIn'] as int?,
-      refreshToken: json['refreshToken'] as String?,
-      tokenType: json['tokenType'] as String?,
-      notBeforePolicy: json['notBeforePolicy'] as int?,
-      sessionState: json['sessionState'] as String?,
-      scope: json['scope'] as String?,
+      resultcode: json['resultcode'] as String?,
+      result: json['result'] as String?,
+      record: json['record'] as List<dynamic>?,
     );
 
 Map<String, dynamic> _$LoginModelToJson(LoginModel instance) =>
     <String, dynamic>{
-      'accessToken': instance.accessToken,
-      'expiresIn': instance.expiresIn,
-      'refreshExpiresIn': instance.refreshExpiresIn,
-      'refreshToken': instance.refreshToken,
-      'tokenType': instance.tokenType,
-      'notBeforePolicy': instance.notBeforePolicy,
-      'sessionState': instance.sessionState,
-      'scope': instance.scope,
+      'resultcode': instance.resultcode,
+      'result': instance.result,
+      'record': instance.record,
     };
