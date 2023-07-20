@@ -1,0 +1,17 @@
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+WorkOrderShiftingsModel _$WorkOrderShiftingsModelFromJson(
+        Map<String, dynamic> json) =>
+    WorkOrderShiftingsModel(
+      code: json['code'] as String?,
+      name: json['name'] as String?,
+    );
+
+Map<String, dynamic> _$WorkOrderShiftingsModelToJson(
+        WorkOrderShiftingsModel instance) =>
+    <String, dynamic>{
+      'code': instance.code,
+      'name': instance.name,
+    };

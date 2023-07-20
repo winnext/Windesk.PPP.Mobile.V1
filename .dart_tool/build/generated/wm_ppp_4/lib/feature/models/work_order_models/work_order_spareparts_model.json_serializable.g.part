@@ -1,0 +1,25 @@
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+WorkOrderSparepartsModel _$WorkOrderSparepartsModelFromJson(
+        Map<String, dynamic> json) =>
+    WorkOrderSparepartsModel(
+      code: json['code'] as String?,
+      module: json['module'] as String?,
+      modulecode: json['modulecode'] as String?,
+      productname: json['productname'] as String?,
+      amount: json['amount'] as String?,
+      unit: json['unit'] as String?,
+    );
+
+Map<String, dynamic> _$WorkOrderSparepartsModelToJson(
+        WorkOrderSparepartsModel instance) =>
+    <String, dynamic>{
+      'code': instance.code,
+      'module': instance.module,
+      'modulecode': instance.modulecode,
+      'productname': instance.productname,
+      'amount': instance.amount,
+      'unit': instance.unit,
+    };
