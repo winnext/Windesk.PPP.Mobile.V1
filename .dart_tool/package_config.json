@@ -548,6 +548,18 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "package_info_plus",
+      "rootUri": "file:///Users/signumtte/.pub-cache/hosted/pub.dev/package_info_plus-4.0.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "package_info_plus_platform_interface",
+      "rootUri": "file:///Users/signumtte/.pub-cache/hosted/pub.dev/package_info_plus_platform_interface-2.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "path",
       "rootUri": "file:///Users/signumtte/.pub-cache/hosted/pub.dev/path-1.8.3",
       "packageUri": "lib/",
@@ -878,7 +890,7 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2023-07-20T06:00:43.921618Z",
+  "generated": "2023-07-20T12:47:10.807895Z",
   "generator": "pub",
   "generatorVersion": "3.0.6"
 }

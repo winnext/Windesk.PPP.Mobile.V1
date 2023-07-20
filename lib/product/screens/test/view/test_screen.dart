@@ -1,13 +1,12 @@
-import 'dart:async';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
-import 'package:wm_ppp_4/feature/components/appbar/custom_tab_appbar.dart';
-import 'package:wm_ppp_4/feature/constants/other/app_strings.dart';
-import 'package:wm_ppp_4/feature/constants/other/colors.dart';
-import 'package:wm_ppp_4/feature/extensions/context_extension.dart';
+import '../../../../feature/components/appbar/custom_tab_appbar.dart';
+import '../../../../feature/constants/other/app_strings.dart';
+import '../../../../feature/constants/other/colors.dart';
+import '../../../../feature/extensions/context_extension.dart';
+import '../../../../feature/global_providers/global_provider.dart';
 
 import '../../../../feature/constants/paths/service_tools.dart';
 import '../test_provider.dart';
@@ -24,73 +23,72 @@ class _TestScreenState extends State<TestScreen> {
   final RoundedLoadingButtonController _controllerButton =
       RoundedLoadingButtonController();
 
-  Function get test => test;
-
-  String get testv1 => "success";
-  String get testv2 => "success";
-
-  connectionTest() async {
-    _controllerButton.success();
-    TestProvider().accessTestV1Function();
-
-    TestProvider().accessTestV2Function();
-
-    _controllerButton.reset();
-    // Timer(Duration(seconds: 1), () {
-    //   TestProvider().accessTestFunction();
-    //   controllerButton.success();
-    //   _controllerButton.reset();
-    // });
-  }
-
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) => TestProvider(),
       child: Consumer<TestProvider>(
           builder: (context, TestProvider testProvider, child) {
+        testProvider.getInfoLoad == false
+            ? testProvider.getTestScreenInfo()
+            : null;
         return Scaffold(
           appBar: const CustomTabAppbar(title: AppStrings.testTab),
-          body: Center(child: _bodyWidget(context)),
+          body: Center(child: _bodyWidget(context, testProvider)),
         );
       }),
     );
   }
 
-  _bodyWidget(BuildContext context) {
+  _bodyWidget(BuildContext context, TestProvider testProvider) {
     return Column(
       children: [
+        _pictureWidget(context),
         _headerWidget(context),
-        _infoWidget(context),
-        _buttonsAndTestResultWidget(context),
+        _infoWidget(context, testProvider),
+        _buttonsAndTestResultWidget(context, testProvider),
       ],
     );
   }
 
-  _headerWidget(BuildContext context) {
-    return const Expanded(
+  Widget _pictureWidget(BuildContext context) {
+    return Expanded(
+      flex: 2,
+      child: Center(
+        child: Image.asset(
+          'assets/images/profile3.png',
+          width: MediaQuery.of(context).size.width / 3,
+          height: MediaQuery.of(context).size.width / 5,
+          fit: BoxFit.cover,
+        ),
+      ),
+    );
+  }
+
+  Widget _headerWidget(BuildContext context) {
+    return Expanded(
       flex: 2,
       child: Padding(
-        padding: EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(10.0),
         child: Column(
           children: [
-            Text(
-              'Windesk Destek',
+            const Text(
+              AppStrings.windeskHelp,
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
-            Text('Kullanıcı Kodu : sgnm1001'),
+            Text(context.read<GlobalProvider>().userName),
           ],
         ),
       ),
     );
   }
 
-  _infoWidget(BuildContext context) {
-    return const Expanded(
+  Widget _infoWidget(BuildContext context, TestProvider testProvider) {
+    return Expanded(
       flex: 5,
       child: Column(
         children: [
-          Padding(
+          const Padding(
             padding: EdgeInsets.all(8.0),
             child: Text(
               ServiceTools.facilityName,
@@ -98,16 +96,19 @@ class _TestScreenState extends State<TestScreen> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Text('Cihaz : ' + 'iphone'),
+            padding: const EdgeInsets.all(8.0),
+            child: Text(AppStrings.device +
+                context.read<TestProvider>().deviceModel.toString()),
           ),
           Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Text('OS : ' + 'IOS'),
+            padding: const EdgeInsets.all(8.0),
+            child: Text(AppStrings.os +
+                context.read<TestProvider>().deviceOS.toString()),
           ),
           Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Text('Uygulama Versiyonu : 1.0.0'),
+            padding: const EdgeInsets.all(8.0),
+            child: Text(AppStrings.appVersion +
+                context.read<TestProvider>().appVersion.toString()),
           ),
           Expanded(
             flex: 4,
@@ -118,12 +119,12 @@ class _TestScreenState extends State<TestScreen> {
                   Padding(
                     padding: EdgeInsets.all(12.0),
                     child: Text(
-                      'Bağlantı Zamanı',
+                      AppStrings.connectionTime,
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
-                  Text('Sunucu Saati : sunucu saati'),
-                  Text('Telefon Saati : tarih'),
+                  Text(AppStrings.serverTime + testProvider.serverTime),
+                  Text(AppStrings.phoneTime + testProvider.phoneTime),
                 ],
               ),
             ),
@@ -133,51 +134,49 @@ class _TestScreenState extends State<TestScreen> {
     );
   }
 
-  _buttonsAndTestResultWidget(
-    BuildContext context,
-  ) {
-    print(context.read<TestProvider>().accessTestV2);
+  Widget _buttonsAndTestResultWidget(
+      BuildContext context, TestProvider testProvider) {
     return Expanded(
       flex: 6,
       child: Column(
         children: [
           // buttonNotify(context, AppStrings.issueNotify, onPressFunction,
           //     _controllerButton),
-          buttonTest(context, AppStrings.accessTest, connectionTest,
-              _controllerButton),
+          buttonTest(
+              context, AppStrings.accessTest, testProvider, _controllerButton),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
                 Container(
-                  child: context.read<TestProvider>().accessTestV2 == 'true'
+                  child: testProvider.accessTestV1 == 'true'
                       ? const Text(
-                          'Windesk : Erişim Başarılı',
+                          AppStrings.windeskSuccess,
                           style: TextStyle(color: Colors.green),
                         )
-                      : testv1 == 'false'
+                      : testProvider.accessTestV1 == 'false'
                           ? const Text(
-                              'Windesk: Erişim Başarısız',
+                              AppStrings.windeskConnFail,
                               style: TextStyle(color: Colors.red),
                             )
                           : const Text(
-                              'Windesk: Erişim Bekleniyor...',
+                              AppStrings.windeskConnWait,
                               style: TextStyle(color: Colors.orange),
                             ),
                 ),
                 Container(
-                  child: context.read<TestProvider>().accessTestV2 == 'true'
+                  child: testProvider.accessTestV2 == 'true'
                       ? const Text(
-                          'Mobil Servis : Erişim Başarılı',
+                          AppStrings.mobilServerSuccess,
                           style: TextStyle(color: Colors.green),
                         )
-                      : TestProvider().accessTestV2 == 'false'
+                      : testProvider.accessTestV2 == 'false'
                           ? const Text(
-                              'Mobil Servis : Erişim Başarısız',
+                              AppStrings.mobilServerConnFail,
                               style: TextStyle(color: Colors.red),
                             )
                           : const Text(
-                              'Mobil Servis : Erişim Bekleniyor...',
+                              AppStrings.mobilServerConnWait,
                               style: TextStyle(color: Colors.orange),
                             ),
                 ),
@@ -190,8 +189,8 @@ class _TestScreenState extends State<TestScreen> {
   }
 }
 
-SizedBox buttonTest(BuildContext context, String buttonText, onPressFunction,
-    controllerButton) {
+SizedBox buttonTest(BuildContext context, String buttonText,
+    TestProvider testProvider, controllerButton) {
   return SizedBox(
     width: context.width * 0.7,
     child: Padding(
@@ -201,11 +200,11 @@ SizedBox buttonTest(BuildContext context, String buttonText, onPressFunction,
         successColor: Colors.amber,
         controller: controllerButton,
         onPressed: () {
-          Timer(Duration(seconds: 1), () {
-            onPressFunction();
-            controllerButton.success();
-            controllerButton.reset();
-          });
+          controllerButton.success();
+          testProvider.accessTestV1Function();
+          testProvider.accessTestV2Function();
+
+          controllerButton.reset();
         },
         valueColor: Colors.white,
         borderRadius: 12,

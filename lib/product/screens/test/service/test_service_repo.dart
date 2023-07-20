@@ -13,4 +13,5 @@ abstract class TestServiceRepository {
   // TEST METHODS
   Future<Either<bool, CustomServiceException>> accessTestWindesk();
   Future<Either<bool, CustomServiceException>> accessTestMobileService();
+  Future<Either<bool, CustomServiceException>> getServerTime(token);
 }

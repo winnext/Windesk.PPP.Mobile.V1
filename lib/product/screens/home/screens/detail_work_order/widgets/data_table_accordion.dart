@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wm_ppp_4/feature/constants/other/colors.dart';
+import '../../../../../../feature/constants/other/colors.dart';
 
 import '../../../../../../feature/constants/other/app_icons.dart';
 
