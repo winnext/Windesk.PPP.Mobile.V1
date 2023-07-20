@@ -6,6 +6,7 @@ import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
 import 'package:wm_ppp_4/feature/global_providers/global_provider.dart';
 import 'package:wm_ppp_4/feature/service/global_services.dart/auth_service/auth_service_repository_impl.dart';
@@ -28,11 +29,15 @@ class SplashProvider extends ChangeNotifier {
 
   void _getDeviceInformation() async {
     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
 
     String? deviceId;
     String? deviceOS;
+    String? deviceModel;
 
     // Gets device information from Android and iOS devices sparingly.
+    String appVersion = packageInfo.version;
+
     if (Platform.isAndroid) {
       AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
       deviceModel = androidInfo.model;
@@ -46,11 +51,14 @@ class SplashProvider extends ChangeNotifier {
       deviceId = iosInfo.identifierForVendor ?? 'unknown ID';
       deviceOS = 'iOS';
     }
+    print('Device ID : ' + deviceId.toString());
 
     // sets device information to shared preferences.
-    if (deviceId != null && deviceOS != null) {
+    if (deviceId != null && deviceOS != null && deviceModel != null) {
       await SharedManager().setString(SharedEnum.deviceId, deviceId);
+      await SharedManager().setString(SharedEnum.deviceModel, deviceModel);
       await SharedManager().setString(SharedEnum.deviceType, deviceOS);
+      await SharedManager().setString(SharedEnum.appVersion, appVersion);
     }
   }
 

@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:wm_ppp_4/feature/models/auth_models/record_model.dart';
 
 part 'generator/login_model.g.dart';
 

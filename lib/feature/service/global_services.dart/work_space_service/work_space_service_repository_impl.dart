@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:wm_ppp_4/feature/exceptions/custom_service_exceptions.dart';
-import 'package:wm_ppp_4/feature/models/work_space/work_space_detail.dart';
-import 'package:wm_ppp_4/feature/models/work_space/work_space_my_group_demand_list.dart';
-import 'package:wm_ppp_4/feature/service/global_services.dart/work_space_service/work_space_service_repository.dart';
+import '../../../exceptions/custom_service_exceptions.dart';
+import '../../../models/work_space/work_space_detail.dart';
+import '../../../models/work_space/work_space_my_group_demand_list.dart';
+import 'work_space_service_repository.dart';
 
 import '../../../models/work_space/work_space_appendings.dart';
 
