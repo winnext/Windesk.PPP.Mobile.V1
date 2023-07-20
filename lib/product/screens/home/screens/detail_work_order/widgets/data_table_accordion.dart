@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:vm_fm_4/feature/constants/other/colors.dart';
+import 'package:wm_ppp_4/feature/constants/other/colors.dart';
 
 import '../../../../../../feature/constants/other/app_icons.dart';
 
 class DataTableAccordion extends StatelessWidget {
-  const DataTableAccordion({super.key, required this.delete, required this.data, required this.labelList});
+  const DataTableAccordion(
+      {super.key,
+      required this.delete,
+      required this.data,
+      required this.labelList});
 
   final Function delete;
   final List<String> labelList;

@@ -1,8 +1,8 @@
 import 'package:accordion/accordion.dart';
 import 'package:flutter/material.dart';
-import 'package:vm_fm_4/feature/components/model_bottom_sheet/add_documents_modal_bottom_sheet.dart';
-import 'package:vm_fm_4/feature/components/model_bottom_sheet/add_photo_modal_bottom_sheet.dart';
-import 'package:vm_fm_4/feature/components/show_modal_bottom_folder/show_modal_bottom_sheet.dart';
+import 'package:wm_ppp_4/feature/components/model_bottom_sheet/add_documents_modal_bottom_sheet.dart';
+import 'package:wm_ppp_4/feature/components/model_bottom_sheet/add_photo_modal_bottom_sheet.dart';
+import 'package:wm_ppp_4/feature/components/show_modal_bottom_folder/show_modal_bottom_sheet.dart';
 
 import '../../../../../../feature/components/buttons/custom_row_accordion_button.dart';
 import '../../../../../../feature/constants/other/app_icons.dart';

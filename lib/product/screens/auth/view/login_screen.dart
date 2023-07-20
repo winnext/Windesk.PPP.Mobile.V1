@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:vm_fm_4/feature/constants/other/snackbar_strings.dart';
-import 'package:vm_fm_4/feature/route/app_route.gr.dart';
+import 'package:wm_ppp_4/feature/constants/other/snackbar_strings.dart';
+import 'package:wm_ppp_4/feature/route/app_route.gr.dart';
 
 import '../../../../feature/components/buttons/custom_login_button.dart';
 import '../../../../feature/components/input_fields/text_fields_input_underline.dart';
@@ -50,7 +50,8 @@ class LoginScreen extends StatelessWidget {
 
 class _LoginScreenBody extends StatelessWidget {
   _LoginScreenBody({required this.provider});
-  final GlobalKey<ScaffoldMessengerState> _globalKey = GlobalKey<ScaffoldMessengerState>();
+  final GlobalKey<ScaffoldMessengerState> _globalKey =
+      GlobalKey<ScaffoldMessengerState>();
 
   final LoginProvider provider;
   final String _userNameHint = 'Kullanıcı Adı';
@@ -62,7 +63,8 @@ class _LoginScreenBody extends StatelessWidget {
     provider.isLoginSuccess ? context.router.push(const HomeScreen()) : null;
     return Scaffold(
       key: _globalKey,
-      appBar: CustomMainAppbar(title: _loginAppbarTitle(context), returnBack: false),
+      appBar: CustomMainAppbar(
+          title: _loginAppbarTitle(context), returnBack: false),
       body: provider.loading
           ? const CustomMainLoading()
           : Column(
@@ -93,7 +95,9 @@ class _LoginScreenBody extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                TextFieldsInputUnderline(hintText: _userNameHint, onChanged: loginProvider.setUserName),
+                TextFieldsInputUnderline(
+                    hintText: _userNameHint,
+                    onChanged: loginProvider.setUserName),
                 TextInputFieldsPasswordInputUnderline(
                   hintText: _passwordHint,
                   onChanged: loginProvider.setPassword,
@@ -113,7 +117,8 @@ class _LoginScreenBody extends StatelessWidget {
       flex: 1,
       child: Text(
         _login,
-        style: const TextStyle(fontSize: FontSizes.titleLarge, fontFamily: 'Roboto'),
+        style: const TextStyle(
+            fontSize: FontSizes.titleLarge, fontFamily: 'Roboto'),
       ),
     );
   }

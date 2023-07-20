@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:vm_fm_4/feature/models/issue_models/issue_list_model.dart';
-import 'package:vm_fm_4/feature/models/issue_models/issue_tracing_list_model.dart';
-import 'package:vm_fm_4/product/screens/issue/service/issue_service_repo_impl.dart';
 
-import '../service/issue_service_repo.dart';
+import '../../../../feature/models/issue_models/issue_list_model.dart';
+import '../../../../feature/models/issue_models/issue_tracing_list_model.dart';
+import '../service/issue_service_repo_impl.dart';
 
 class IssueProvider extends ChangeNotifier {
   final IssueServiceRepoImpml _issueServiceRepository = IssueServiceRepoImpml();

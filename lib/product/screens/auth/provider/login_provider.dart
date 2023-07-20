@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:vm_fm_4/feature/components/snackBar/snackbar.dart';
-import 'package:vm_fm_4/feature/database/shared_manager.dart';
-import 'package:vm_fm_4/feature/enums/shared_enums.dart';
-import 'package:vm_fm_4/feature/global_providers/global_provider.dart';
-import 'package:vm_fm_4/feature/models/auth_models/login_model.dart';
-import 'package:vm_fm_4/feature/service/global_services.dart/auth_service/auth_service_repository.dart';
-import 'package:vm_fm_4/feature/service/global_services.dart/auth_service/auth_service_repository_impl.dart';
+import 'package:wm_ppp_4/feature/components/snackBar/snackbar.dart';
+import 'package:wm_ppp_4/feature/database/shared_manager.dart';
+import 'package:wm_ppp_4/feature/enums/shared_enums.dart';
+import 'package:wm_ppp_4/feature/global_providers/global_provider.dart';
+import 'package:wm_ppp_4/feature/models/auth_models/login_model.dart';
+import 'package:wm_ppp_4/feature/service/global_services.dart/auth_service/auth_service_repository.dart';
+import 'package:wm_ppp_4/feature/service/global_services.dart/auth_service/auth_service_repository_impl.dart';
 
 class LoginProvider extends ChangeNotifier {
-
   AuthServiceRepository authService = AuthServiceRepositoryImpl();
 
   bool _loading = false;
@@ -86,12 +85,13 @@ class LoginProvider extends ChangeNotifier {
   }
 
   void _setTokenToPreferences() async {
-      await SharedManager().setString(SharedEnum.userToken, _userCode);
-      await SharedManager().setString(SharedEnum.userName, _userName);
+    await SharedManager().setString(SharedEnum.userToken, _userCode);
+    await SharedManager().setString(SharedEnum.userName, _userName);
   }
 
   void _setUserName(BuildContext context) async {
-    Provider.of<GlobalProvider>(context, listen: false).setUserName(_userTokenName);
+    Provider.of<GlobalProvider>(context, listen: false)
+        .setUserName(_userTokenName);
   }
 
   void _setField() {
