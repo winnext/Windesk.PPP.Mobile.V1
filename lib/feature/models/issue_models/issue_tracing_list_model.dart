@@ -7,7 +7,7 @@ part './generator_issue/issue_tracing_list_model.g.dart';
 class IssueTracingListModel extends Equatable {
   final String? name;
   final String? code;
-  final dynamic? count;
+  final dynamic count;
 
   const IssueTracingListModel({
     this.name,

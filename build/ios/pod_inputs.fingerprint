@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 {"files":{"/Users/alperen.ozdemir/Desktop/Windesk.PPP.Mobile.V1/ios/Runner.xcodeproj/project.pbxproj":"db2592a2b2c0186d6796417d6deeaf91","/Users/alperen.ozdemir/Desktop/Windesk.PPP.Mobile.V1/ios/Podfile":"93216fe0d639642d4a382e8a79bfcadf","/Users/alperen.ozdemir/Desktop/development/flutter/packages/flutter_tools/bin/podhelper.rb":"af3a512eb831d2c2ac92467a86bb79a2"}}
+=======
+{"files":{"/Users/signumtte/Desktop/Windesk.PPP.Mobile.V1/ios/Runner.xcodeproj/project.pbxproj":"169df11d391189ae1f4245774c89a691","/Users/signumtte/Desktop/Windesk.PPP.Mobile.V1/ios/Podfile":"93216fe0d639642d4a382e8a79bfcadf","/Users/signumtte/develop/flutter/packages/flutter_tools/bin/podhelper.rb":"af3a512eb831d2c2ac92467a86bb79a2"}}
+>>>>>>> 6a72ce721e4fc0306aa9d9a9e1433bcb4844b721

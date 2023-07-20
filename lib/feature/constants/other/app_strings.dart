@@ -72,6 +72,19 @@ class AppStrings {
 //test page strings
   static const accessTest = 'Erişim Testi';
   static const issueNotify = 'Hata Bildir';
+  static const windeskHelp = 'Windesk Destek';
+  static const device = 'Cihaz : ';
+  static const os = 'OS : ';
+  static const appVersion = 'Uygulama Versiyonu : ';
+  static const connectionTime = 'Bağlantı Zamanı';
+  static const serverTime = 'Sunucu Saati : ';
+  static const phoneTime = 'Telefon Saati : ';
+  static const windeskSuccess = 'Windesk : Erişim Başarılı';
+  static const windeskConnFail = 'Windesk : Erişim Başarısız';
+  static const windeskConnWait = 'Windesk : Erişim Bekleniyor...';
+  static const mobilServerSuccess = 'Mobil Servis : Erişim Başarılı';
+  static const mobilServerConnFail = 'Mobil Servis : Erişim Başarısız';
+  static const mobilServerConnWait = 'Mobil Servis : Erişim Bekleniyor...';
 
   //issue filter strings
   static const state = 'Durum';

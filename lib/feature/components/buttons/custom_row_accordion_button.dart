@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:wm_ppp_4/feature/constants/style/border_radius.dart';
-import 'package:wm_ppp_4/feature/extensions/context_extension.dart';
+import '../../constants/style/border_radius.dart';
+import '../../extensions/context_extension.dart';
 
 class CustomRowAccordionButton extends StatelessWidget {
   const CustomRowAccordionButton(
