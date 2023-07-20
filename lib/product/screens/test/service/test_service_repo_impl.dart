@@ -22,7 +22,7 @@ class TestServiceRepositoryImpl extends TestServiceRepository {
       final response = await super.dio.get(url);
       super.logger.e(response.statusCode.toString());
 
-      if (response.statusCode.toString() == ServiceStatusEnums.resultCode) {
+      if (response.statusCode.toString() == '200') {
         result = true;
 
         super.logger.e(result.toString());
@@ -71,6 +71,38 @@ class TestServiceRepositoryImpl extends TestServiceRepository {
       super.logger.e(error.toString());
       return Right(CustomServiceException(
           message: CustomServiceMessages.workOrderAddEffortError,
+          statusCode: '500'));
+    }
+  }
+
+  Future<Either<bool, CustomServiceException>> getServerTime(token) async {
+    bool result = false;
+
+    String url = '${ServiceTools.baseUrlV1}${token}&action=getDateTime';
+    print('URL  :  ' + url);
+    try {
+      final response = await super.dio.get(url,
+          options: Options(
+            responseType: ResponseType.json,
+          ));
+      super.logger.e(response.toString());
+
+      if (response.data[ServiceResponseStatusEnums.result.rawText] ==
+          ServiceStatusEnums.success.rawText) {
+        result = true;
+
+        super.logger.e(result.toString());
+
+        return Left(response.data[ServiceResponseStatusEnums.records.rawText]);
+      } else {
+        return Right(CustomServiceException(
+            message: CustomServiceMessages.getServerTimeError,
+            statusCode: response.statusCode.toString()));
+      }
+    } catch (error) {
+      super.logger.e(error.toString());
+      return Right(CustomServiceException(
+          message: CustomServiceMessages.getServerTimeError,
           statusCode: '500'));
     }
   }

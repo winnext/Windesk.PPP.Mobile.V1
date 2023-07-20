@@ -1,9 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wm_ppp_4/feature/constants/other/colors.dart';
-import 'package:wm_ppp_4/feature/constants/style/custom_paddings.dart';
-import 'package:wm_ppp_4/feature/route/app_route.gr.dart';
+import '../../../../../../feature/constants/other/colors.dart';
+import '../../../../../../feature/constants/style/custom_paddings.dart';
+import '../../../../../../feature/route/app_route.gr.dart';
 
 import '../../../../../../feature/components/buttons/custom_elevated_button_with_icon.dart';
 import '../../../../../../feature/components/input_fields/text_fields_search.dart';

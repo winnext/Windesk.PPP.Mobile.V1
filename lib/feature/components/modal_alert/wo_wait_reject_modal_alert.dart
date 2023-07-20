@@ -1,9 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:wm_ppp_4/feature/constants/other/colors.dart';
+import '../../constants/other/colors.dart';
 
 import '../../constants/other/app_icons.dart';
-import '../../constants/other/app_strings.dart';
 import '../input_fields/dropdown_input_fields.dart';
 
 class WoWaitRejectModalAlert {
@@ -15,13 +14,13 @@ class WoWaitRejectModalAlert {
       Function inputArrayOnChangedFunction) {
     // set up the buttons
     Widget cancelButton = TextButton(
-      child: Text("Reddet"),
+      child: const Text("Reddet"),
       onPressed: () {
         context.router.pop<bool>(false);
       },
     );
     Widget continueButton = TextButton(
-      child: Text("Onayla"),
+      child: const Text("Onayla"),
       onPressed: () {
         context.router.pop<bool>(true);
       },

@@ -1,10 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wm_ppp_4/feature/components/cards/custom_tracing_list_card.dart';
-import 'package:wm_ppp_4/feature/models/issue_models/issue_tracing_list_model.dart';
-import 'package:wm_ppp_4/product/screens/issue/provider/issue_provider.dart';
-import 'package:wm_ppp_4/product/screens/issue/service/issue_service_repo.dart';
+import '../../../../feature/components/cards/custom_tracing_list_card.dart';
+import '../../../../feature/models/issue_models/issue_tracing_list_model.dart';
+import '../provider/issue_provider.dart';
+import '../service/issue_service_repo.dart';
 
 import '../service/issue_service_repo_impl.dart';
 

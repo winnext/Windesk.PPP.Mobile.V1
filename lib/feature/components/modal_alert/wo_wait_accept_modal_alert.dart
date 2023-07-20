@@ -1,18 +1,18 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:wm_ppp_4/feature/constants/other/colors.dart';
+import '../../constants/other/colors.dart';
 
 class WoWaitAcceptModalAlert {
   showAlertDialog(BuildContext context, String textData) {
     // set up the buttons
     Widget cancelButton = TextButton(
-      child: Text("Reddet"),
+      child: const Text("Reddet"),
       onPressed: () {
         context.router.pop<bool>(false);
       },
     );
     Widget continueButton = TextButton(
-      child: Text("Onayla"),
+      child: const Text("Onayla"),
       onPressed: () {
         context.router.pop<bool>(true);
       },

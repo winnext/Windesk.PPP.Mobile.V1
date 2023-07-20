@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:wm_ppp_4/feature/models/issue_models/issue_tracing_list_model.dart';
-import 'package:wm_ppp_4/product/screens/issue/service/issue_service_repo_impl.dart';
+import '../../../../feature/models/issue_models/issue_tracing_list_model.dart';
+import '../service/issue_service_repo_impl.dart';
 
 import '../service/issue_service_repo.dart';
 
@@ -11,7 +11,7 @@ class IssueProvider extends ChangeNotifier {
   bool _loading = false;
   bool get loading => _loading;
 
-  List<IssueTracingListModel> _tracingList = [];
+  final List<IssueTracingListModel> _tracingList = [];
   List<IssueTracingListModel> get tracingList => _tracingList;
 
   void getTracingList() async {

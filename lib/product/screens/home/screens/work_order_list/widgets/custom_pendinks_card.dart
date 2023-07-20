@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:wm_ppp_4/feature/components/buttons/custom_half_buttons.dart';
-import 'package:wm_ppp_4/feature/components/modal_alert/wo_wait_accept_modal_alert.dart';
-import 'package:wm_ppp_4/feature/components/modal_alert/wo_wait_reject_modal_alert.dart';
-import 'package:wm_ppp_4/feature/components/model_bottom_sheet/wo_wait_task_accept_moddal_bottom_sheet.dart';
-import 'package:wm_ppp_4/feature/components/model_bottom_sheet/wo_wait_task_reject_modal_bottom_sheet.dart';
-import 'package:wm_ppp_4/feature/components/show_modal_bottom_folder/show_modal_bottom_sheet.dart';
-import 'package:wm_ppp_4/feature/constants/other/colors.dart';
-import 'package:wm_ppp_4/feature/constants/style/border_radius.dart';
-import 'package:wm_ppp_4/feature/constants/style/font_sizes.dart';
+import '../../../../../../feature/components/buttons/custom_half_buttons.dart';
+import '../../../../../../feature/components/modal_alert/wo_wait_accept_modal_alert.dart';
+import '../../../../../../feature/components/modal_alert/wo_wait_reject_modal_alert.dart';
+
+import '../../../../../../feature/constants/other/colors.dart';
+import '../../../../../../feature/constants/style/border_radius.dart';
+import '../../../../../../feature/constants/style/font_sizes.dart';
 
 import '../../../../../../feature/components/dividers/custom_wo_summary_divider.dart';
 import '../../../../../../feature/constants/other/app_strings.dart';
