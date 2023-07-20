@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+
+import '../../constants/other/colors.dart';
 import '../../constants/style/border_radius.dart';
 import '../../constants/style/font_sizes.dart';
 import '../../extensions/context_extension.dart';
-
-import '../../constants/other/colors.dart';
 
 class CustomCircularHomeButton extends StatelessWidget {
   const CustomCircularHomeButton({
@@ -99,7 +99,7 @@ class _Stack extends StatelessWidget {
       elevation: _elevation,
       shape: RoundedRectangleBorder(borderRadius: CustomBorderRadius.circularBorderRadius, side: BorderSide(color: APPColors.Secondary.blue)),
       backgroundColor: APPColors.Secondary.blue,
-      foregroundColor: APPColors.Main.white,
+      foregroundColor: APPColors.Accent.blue,
     );
   }
 }

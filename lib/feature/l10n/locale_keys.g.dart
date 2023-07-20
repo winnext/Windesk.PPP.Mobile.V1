@@ -82,8 +82,6 @@ abstract class LocaleKeys {
   static const workOrderList = 'İş Emri Listesi';
   static const workOrderSearch = 'İş Emri Arama';
 
-
-
   // page titles
   static const String searchTitle = 'Arama';
   static const String caseSLASearchTitle = 'Vaka-(SLA) Arama';
@@ -103,4 +101,15 @@ abstract class LocaleKeys {
   static const String takePictureTitle = 'Fotoğraf Çek';
   static const String pictureTitle = 'Fotoğraf';
   static const String caseIComplainedDetailTitle = 'Şikayet Ettiğim Vaka  Detay';
+
+  //woEmpty
+  static const String noDescription = 'Açıklama Bulunamadı';
+  static const String noLabel = 'Etiket Bulunamadı';
+  static const String noName = 'İsim Bulunamadı';
+  static const String noCode = 'Kod Bulunamadı';
+  static const String noState = 'Durum Bulunamadı';
+  static const String noDate = 'Tarih Bulunamadı';
+
+  //woSearch
+  static const String woSearch = 'Vaka Arama';
 }

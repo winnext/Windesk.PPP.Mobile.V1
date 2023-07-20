@@ -1,0 +1,26 @@
+{
+    "routes": [{
+        "name": null,
+        "pathParams": [],
+        "pageType": {
+            "import": "package:wm_ppp_4/product/screens/test/view/test_screen.dart",
+            "name": "TestScreen",
+            "isNullable": false,
+            "isRecordType": false
+        },
+        "className": "TestScreen",
+        "returnType": {
+            "import": null,
+            "name": "dynamic",
+            "isNullable": false,
+            "isRecordType": false
+        },
+        "parameters": [],
+        "hasWrappedRoute": false,
+        "replacementInRouteName": null,
+        "hasConstConstructor": true,
+        "deferredLoading": null
+    }],
+    "inputPath": "lib/product/screens/test/view/test_screen.dart",
+    "inputHash": 0
+}

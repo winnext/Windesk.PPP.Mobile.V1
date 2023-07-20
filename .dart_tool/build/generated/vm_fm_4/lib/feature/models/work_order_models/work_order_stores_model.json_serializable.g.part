@@ -1,0 +1,15 @@
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+WorkOrderStores _$WorkOrderStoresFromJson(Map<String, dynamic> json) =>
+    WorkOrderStores(
+      name: json['name'] as String?,
+      code: json['code'] as String?,
+    );
+
+Map<String, dynamic> _$WorkOrderStoresToJson(WorkOrderStores instance) =>
+    <String, dynamic>{
+      'name': instance.name,
+      'code': instance.code,
+    };

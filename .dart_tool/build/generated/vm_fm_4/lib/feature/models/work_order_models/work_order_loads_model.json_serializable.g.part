@@ -1,0 +1,24 @@
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+WorkOrderLoadsModel _$WorkOrderLoadsModelFromJson(Map<String, dynamic> json) =>
+    WorkOrderLoadsModel(
+      code: json['code'] as String?,
+      user: json['user'] as String?,
+      startdate: json['startdate'],
+      type: json['type'] as String?,
+      typeName: json['typeName'] as String?,
+      timeworked: (json['timeworked'] as num?)?.toDouble(),
+    );
+
+Map<String, dynamic> _$WorkOrderLoadsModelToJson(
+        WorkOrderLoadsModel instance) =>
+    <String, dynamic>{
+      'code': instance.code,
+      'user': instance.user,
+      'startdate': instance.startdate,
+      'type': instance.type,
+      'typeName': instance.typeName,
+      'timeworked': instance.timeworked,
+    };

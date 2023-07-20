@@ -1,0 +1,62 @@
+{
+    "routes": [{
+        "name": null,
+        "pathParams": [],
+        "pageType": {
+            "import": "package:wm_ppp_4/product/screens/home/screens/detail_work_order/view/detail_work_order_screen.dart",
+            "name": "DetailWorkOrderScreen",
+            "isNullable": false,
+            "isRecordType": false
+        },
+        "className": "DetailWorkOrderScreen",
+        "returnType": {
+            "import": null,
+            "name": "dynamic",
+            "isNullable": false,
+            "isRecordType": false
+        },
+        "parameters": [{
+            "type": {
+                "import": "package:flutter/material.dart",
+                "name": "Key",
+                "isNullable": true,
+                "isRecordType": false
+            },
+            "name": "key",
+            "alias": "key",
+            "isPositional": false,
+            "isOptional": true,
+            "hasRequired": false,
+            "isRequired": false,
+            "isNamed": true,
+            "isPathParam": false,
+            "isInheritedPathParam": false,
+            "isQueryParam": false,
+            "defaultValueCode": null
+        }, {
+            "type": {
+                "import": "package:wm_ppp_4/feature/models/work_space/work_space_detail.dart",
+                "name": "WorkSpaceDetail",
+                "isNullable": false,
+                "isRecordType": false
+            },
+            "name": "workSpaceDetail",
+            "alias": "workSpaceDetail",
+            "isPositional": false,
+            "isOptional": false,
+            "hasRequired": false,
+            "isRequired": true,
+            "isNamed": true,
+            "isPathParam": false,
+            "isInheritedPathParam": false,
+            "isQueryParam": false,
+            "defaultValueCode": null
+        }],
+        "hasWrappedRoute": false,
+        "replacementInRouteName": null,
+        "hasConstConstructor": false,
+        "deferredLoading": null
+    }],
+    "inputPath": "lib/product/screens/home/screens/detail_work_order/view/detail_work_order_screen.dart",
+    "inputHash": 0
+}

@@ -1,0 +1,65 @@
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+WorkOrderDetailsModel _$WorkOrderDetailsModelFromJson(
+        Map<String, dynamic> json) =>
+    WorkOrderDetailsModel(
+      id: json['id'] as String?,
+      code: json['code'] as String?,
+      name: json['name'] as String?,
+      module: json['module'] as String?,
+      service: json['service'] as String?,
+      modulecode: json['modulecode'],
+      modulename: json['modulename'],
+      modulelocation: json['modulelocation'] as String?,
+      status: json['status'] as String?,
+      statusname: json['statusname'] as String?,
+      responsible: json['responsible'],
+      iuser: json['iuser'] as String?,
+      idate: json['idate'] as String?,
+      plannedStartdate: json['plannedStartdate'] as String?,
+      plannedEnddate: json['plannedEnddate'],
+      plannedTime: json['plannedTime'],
+      priority: json['priority'] as String?,
+      actualStartdate: json['actualStartdate'] as String?,
+      actualEnddate: json['actualEnddate'],
+      actualTime: json['actualTime'],
+      downtime: json['downtime'],
+      permissionneed: json['permissionneed'] as String?,
+      closeneed: json['closeneed'] as String?,
+      worksafetyneed: json['worksafetyneed'] as String?,
+      enfectionrisk: json['enfectionrisk'] as String?,
+      description: json['description'],
+    );
+
+Map<String, dynamic> _$WorkOrderDetailsModelToJson(
+        WorkOrderDetailsModel instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'code': instance.code,
+      'name': instance.name,
+      'module': instance.module,
+      'service': instance.service,
+      'modulecode': instance.modulecode,
+      'modulename': instance.modulename,
+      'modulelocation': instance.modulelocation,
+      'status': instance.status,
+      'statusname': instance.statusname,
+      'responsible': instance.responsible,
+      'iuser': instance.iuser,
+      'idate': instance.idate,
+      'plannedStartdate': instance.plannedStartdate,
+      'plannedEnddate': instance.plannedEnddate,
+      'plannedTime': instance.plannedTime,
+      'priority': instance.priority,
+      'actualStartdate': instance.actualStartdate,
+      'actualEnddate': instance.actualEnddate,
+      'actualTime': instance.actualTime,
+      'downtime': instance.downtime,
+      'permissionneed': instance.permissionneed,
+      'closeneed': instance.closeneed,
+      'worksafetyneed': instance.worksafetyneed,
+      'enfectionrisk': instance.enfectionrisk,
+      'description': instance.description,
+    };
