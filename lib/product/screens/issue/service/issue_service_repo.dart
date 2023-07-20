@@ -5,7 +5,7 @@ import 'package:vm_fm_4/feature/models/issue_models/issue_tracing_list_model.dar
 import '../../../../feature/exceptions/custom_service_exceptions.dart';
 import '../../../../feature/injection.dart';
 import '../../../../feature/log/log_manager.dart';
-import '../../../../feature/models/home_page_models/announcement_model.dart';
+import '../../../../feature/models/issue_models/issue_list_model.dart';
 import '../../../../feature/service/service_manager.dart';
 
 abstract class IssueServiceRepository {
@@ -14,4 +14,5 @@ abstract class IssueServiceRepository {
 
   // TEST METHODS
   Future<Either<List<IssueTracingListModel>, CustomServiceException>> getIssueTracingList();
+  Future<Either<List<IssueListModel>, CustomServiceException>> getIssueList(Map<String, dynamic> queryParameters, String issueListType);
 }

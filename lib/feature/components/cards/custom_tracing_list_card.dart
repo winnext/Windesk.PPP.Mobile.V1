@@ -1,8 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 import '../../constants/other/colors.dart';
 import '../../extensions/context_extension.dart';
+import '../../route/app_route.gr.dart';
 
+@RoutePage()
 class CustomTracingList extends StatelessWidget {
   const CustomTracingList({super.key, required this.title, required this.count, required this.code});
 
@@ -14,19 +17,9 @@ class CustomTracingList extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       child: GestureDetector(
-        // onTap: () {
-        //   count.toString() == '0'
-        //       ? null
-        //       : Navigator.push(
-        //           context,
-        //           MaterialPageRoute(
-        //             builder: (context) => IssueList(
-        //               moduleCode: code,
-        //               moduleName: title,
-        //             ),
-        //           ),
-        //         );
-        // },
+        onTap: () {
+          count.toString() == '0' ? null : context.router.push(IssueList(issueModuleCode: code));
+        },
         child: Padding(
           padding: const EdgeInsets.fromLTRB(20, 5, 20, 10),
           child: Container(
@@ -56,7 +49,7 @@ class CustomTracingList extends StatelessWidget {
         key: const Key('listElements.name'),
         title.toString(),
         maxLines: 1,
-        style: TextStyle(fontSize: 15, color: count == '0' ? APPColors.Main.grey : APPColors.Main.black),
+        style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500, color: count == '0' ? APPColors.Main.grey : APPColors.Main.black),
       ),
     );
   }
