@@ -69,6 +69,9 @@ class AppStrings {
   static const addPdf = 'Pdf Ekle';
   static const addImage = 'Fotoğraf Ekle';
   static const addedDocumants = 'Eklenmiş Dökümanlar';
+//test page strings
+  static const accessTest = 'Erişim Testi';
+  static const issueNotify = 'Hata Bildir';
 
   //issue filter strings
   static const state = 'Durum';

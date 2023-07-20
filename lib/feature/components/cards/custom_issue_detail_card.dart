@@ -1,10 +1,10 @@
 // ignore_for_file:file_names, prefer_const_constructors_in_immutables,prefer_const_constructors,prefer_const_literals_to_create_immutables,use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
-import 'package:vm_fm_4/feature/constants/functions/null_check_widget.dart';
-import 'package:vm_fm_4/feature/constants/other/time_functions.dart';
-import 'package:vm_fm_4/feature/constants/style/custom_paddings.dart';
-import 'package:vm_fm_4/feature/l10n/locale_keys.g.dart';
+import 'package:wm_ppp_4/feature/constants/functions/null_check_widget.dart';
+import 'package:wm_ppp_4/feature/constants/other/time_functions.dart';
+import 'package:wm_ppp_4/feature/constants/style/custom_paddings.dart';
+import 'package:wm_ppp_4/feature/l10n/locale_keys.g.dart';
 
 import '../../constants/other/colors.dart';
 
@@ -132,10 +132,13 @@ class DetailListWidget extends StatelessWidget {
                         children: [
                           statusCode == 'OPlanned'
                               ? Container(
-                                  decoration: BoxDecoration(color: APPColors.NewNotifi.blue, borderRadius: BorderRadius.circular(3)),
+                                  decoration: BoxDecoration(
+                                      color: APPColors.NewNotifi.blue,
+                                      borderRadius: BorderRadius.circular(3)),
                                   padding: EdgeInsets.all(3),
                                   child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
                                     children: [
                                       Text(LocaleKeys.plannedIssue),
                                       Text(planedDate.toString()),
@@ -143,17 +146,37 @@ class DetailListWidget extends StatelessWidget {
                                   ),
                                 )
                               : respondedTimer == LocaleKeys.oneStr
-                                  ? timeBarWidget(LocaleKeys.targetResponsedDate, targetRDate, respondedTimer.toString(), fixTimer.toString(),
-                                      targetFDate.toString(), fixedDate.toString())
-                                  : timeBarWidget(LocaleKeys.targetResponsed, respondedDate, respondedTimer.toString(), fixTimer.toString(),
-                                      targetFDate.toString(), fixedDate.toString())
+                                  ? timeBarWidget(
+                                      LocaleKeys.targetResponsedDate,
+                                      targetRDate,
+                                      respondedTimer.toString(),
+                                      fixTimer.toString(),
+                                      targetFDate.toString(),
+                                      fixedDate.toString())
+                                  : timeBarWidget(
+                                      LocaleKeys.targetResponsed,
+                                      respondedDate,
+                                      respondedTimer.toString(),
+                                      fixTimer.toString(),
+                                      targetFDate.toString(),
+                                      fixedDate.toString())
                         ],
                       ),
                       Column(children: [
                         fixTimer == LocaleKeys.oneStr
-                            ? timeBarWidget(LocaleKeys.targetFixedDate, targetFDate, respondedTimer.toString(), fixTimer.toString(),
-                                targetFDate.toString(), fixedDate.toString())
-                            : timeBarWidget(LocaleKeys.fixedDate, fixedDate, respondedTimer.toString(), fixTimer.toString(), targetFDate.toString(),
+                            ? timeBarWidget(
+                                LocaleKeys.targetFixedDate,
+                                targetFDate,
+                                respondedTimer.toString(),
+                                fixTimer.toString(),
+                                targetFDate.toString(),
+                                fixedDate.toString())
+                            : timeBarWidget(
+                                LocaleKeys.fixedDate,
+                                fixedDate,
+                                respondedTimer.toString(),
+                                fixTimer.toString(),
+                                targetFDate.toString(),
                                 fixedDate.toString())
                       ])
                     ],
@@ -169,11 +192,14 @@ class DetailListWidget extends StatelessWidget {
                   issueSummaryRow(LocaleKeys.callReason, cmdb ?? ""),
                   issueSummaryRow(LocaleKeys.openingDate, idate ?? ""),
                   issueSummaryRow(LocaleKeys.incallNumber, ani ?? ""),
-                  issueSummaryRow(LocaleKeys.targetFixed, TimeClass().timeRecover(targetRDate).toString()),
-                  issueSummaryRow(LocaleKeys.targetResponsed, TimeClass().timeRecover(targetFDate).toString()),
-                  issueSummaryRow(LocaleKeys.hys, hys ?? "" ),
+                  issueSummaryRow(LocaleKeys.targetFixed,
+                      TimeClass().timeRecover(targetRDate).toString()),
+                  issueSummaryRow(LocaleKeys.targetResponsed,
+                      TimeClass().timeRecover(targetFDate).toString()),
+                  issueSummaryRow(LocaleKeys.hys, hys ?? ""),
                   issueSummaryRow(LocaleKeys.hds, hds ?? ""),
-                  issueSummaryRow(LocaleKeys.assignmentGroup, assignmentGroupName ?? ""),
+                  issueSummaryRow(
+                      LocaleKeys.assignmentGroup, assignmentGroupName ?? ""),
                   issueSummaryRow(LocaleKeys.assigneName, assigneName ?? ""),
                 ],
               ),
@@ -184,7 +210,8 @@ class DetailListWidget extends StatelessWidget {
     );
   }
 
-  Container timeBarWidget(String header, targetTime, respondedTime, fixTime, targetDate, fixedDate) {
+  Container timeBarWidget(String header, targetTime, respondedTime, fixTime,
+      targetDate, fixedDate) {
     return Container(
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(3)),
       padding: EdgeInsets.all(3),
@@ -197,7 +224,8 @@ class DetailListWidget extends StatelessWidget {
               Text(LocaleKeys.noTimeInfo),
               Text(
                 TimeClass().timeRecover(targetTime),
-                style: TimeClass().fixStyle(respondedTime, fixTime, targetDate, fixedDate),
+                style: TimeClass()
+                    .fixStyle(respondedTime, fixTime, targetDate, fixedDate),
               ))
         ],
       ),
@@ -228,7 +256,10 @@ class DetailListWidget extends StatelessWidget {
                   Text(LocaleKeys.noInfo),
                   Text(
                     description,
-                    style: TextStyle(color: APPColors.Secondary.black, fontSize: 14, fontWeight: FontWeight.w400),
+                    style: TextStyle(
+                        color: APPColors.Secondary.black,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400),
                   ),
                 )),
           ],

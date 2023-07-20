@@ -32,10 +32,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
       routerConfig: _appRouter.config(),
       title: AppStrings.appName,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
-        useMaterial3: true,
-      ),
     );
   }
 }

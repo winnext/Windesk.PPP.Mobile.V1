@@ -10,33 +10,33 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i15;
 import 'package:flutter/material.dart' as _i16;
-import 'package:vm_fm_4/feature/models/work_space/work_space_appendings.dart'
+import 'package:wm_ppp_4/feature/models/work_space/work_space_appendings.dart'
     as _i17;
-import 'package:vm_fm_4/feature/models/work_space/work_space_detail.dart'
+import 'package:wm_ppp_4/feature/models/work_space/work_space_detail.dart'
     as _i18;
-import 'package:vm_fm_4/feature/route/empty_router.dart' as _i13;
-import 'package:vm_fm_4/product/screens/auth/view/login_screen.dart' as _i10;
-import 'package:vm_fm_4/product/screens/home/screens/detail_work_order/view/detail_work_order_screen.dart'
+import 'package:wm_ppp_4/feature/route/empty_router.dart' as _i13;
+import 'package:wm_ppp_4/product/screens/auth/view/login_screen.dart' as _i10;
+import 'package:wm_ppp_4/product/screens/home/screens/detail_work_order/view/detail_work_order_screen.dart'
     as _i3;
-import 'package:vm_fm_4/product/screens/home/screens/pending_detail_work_order/pending_detail_work_order_screen.dart'
+import 'package:wm_ppp_4/product/screens/home/screens/pending_detail_work_order/pending_detail_work_order_screen.dart'
     as _i2;
-import 'package:vm_fm_4/product/screens/home/screens/search_work_order/view/search_work_order_screen.dart'
+import 'package:wm_ppp_4/product/screens/home/screens/search_work_order/view/search_work_order_screen.dart'
     as _i4;
-import 'package:vm_fm_4/product/screens/home/screens/work_order_list/provider/work_order_list_provider.dart'
+import 'package:wm_ppp_4/product/screens/home/screens/work_order_list/provider/work_order_list_provider.dart'
     as _i19;
-import 'package:vm_fm_4/product/screens/home/screens/work_order_list/tabs/my_work_orders.dart'
+import 'package:wm_ppp_4/product/screens/home/screens/work_order_list/tabs/my_work_orders.dart'
     as _i5;
-import 'package:vm_fm_4/product/screens/home/screens/work_order_list/view/work_order_list_screen.dart'
+import 'package:wm_ppp_4/product/screens/home/screens/work_order_list/view/work_order_list_screen.dart'
     as _i6;
-import 'package:vm_fm_4/product/screens/home/view/home_screen.dart' as _i7;
-import 'package:vm_fm_4/product/screens/issue/screens/issue_tracing_list.dart'
+import 'package:wm_ppp_4/product/screens/home/view/home_screen.dart' as _i7;
+import 'package:wm_ppp_4/product/screens/issue/screens/issue_tracing_list.dart'
     as _i14;
-import 'package:vm_fm_4/product/screens/new_order/new_order_screen.dart'
+import 'package:wm_ppp_4/product/screens/new_order/new_order_screen.dart'
     as _i12;
-import 'package:vm_fm_4/product/screens/search/search_screen.dart' as _i11;
-import 'package:vm_fm_4/product/screens/splash/splash_screen.dart' as _i8;
-import 'package:vm_fm_4/product/screens/test/view/test_screen.dart' as _i9;
-import 'package:vm_fm_4/product/wrapper/app_wrapper.dart' as _i1;
+import 'package:wm_ppp_4/product/screens/search/search_screen.dart' as _i11;
+import 'package:wm_ppp_4/product/screens/splash/splash_screen.dart' as _i8;
+import 'package:wm_ppp_4/product/screens/test/view/test_screen.dart' as _i9;
+import 'package:wm_ppp_4/product/wrapper/app_wrapper.dart' as _i1;
 
 abstract class $AppRouter extends _i15.RootStackRouter {
   $AppRouter({super.navigatorKey});
