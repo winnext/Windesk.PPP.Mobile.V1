@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:vm_fm_4/feature/models/work_space/work_space_state.dart';
-import 'package:vm_fm_4/feature/models/work_space/work_space_task.dart';
+import 'work_space_state.dart';
+import 'work_space_task.dart';
 
 import 'work_space.dart';
 import 'work_space_calendar.dart';
@@ -28,7 +28,8 @@ class WorkSpacePendiks extends Equatable {
     this.workSpaceUserInformation,
   );
 
-  factory WorkSpacePendiks.fromJson(Map<String, dynamic> json) => _$WorkSpaceAppendingsFromJson(json);
+  factory WorkSpacePendiks.fromJson(Map<String, dynamic> json) =>
+      _$WorkSpaceAppendingsFromJson(json);
 
   Map<String, dynamic> toJson() => _$WorkSpaceAppendingsToJson(this);
 

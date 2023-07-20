@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:vm_fm_4/feature/models/auth_models/check_access_token_model.dart';
+import '../../../models/auth_models/check_access_token_model.dart';
 
 import '../../../exceptions/custom_service_exceptions.dart';
 import '../../../injection.dart';
@@ -12,9 +12,11 @@ abstract class AuthServiceRepository {
   final Dio dio = Injection.getIt.get<ServiceManager>().dio;
   final logger = Injection.getIt.get<LogManager>().logger;
 
-  Future<Either<LoginModel, CustomServiceException>> login(String username, String password);
+  Future<Either<LoginModel, CustomServiceException>> login(
+      String username, String password);
 
-  Future<Either<bool, CustomServiceException>> logout(String refreshToken, String token);
+  Future<Either<bool, CustomServiceException>> logout(String username);
 
-  Future<Either<CheckAccesTokenModel, CustomServiceException>> checkAccessToken(String token);
+  Future<Either<CheckAccesTokenModel, CustomServiceException>> checkAccessToken(
+      String token);
 }

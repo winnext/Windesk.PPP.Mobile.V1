@@ -1,17 +1,18 @@
 // ignore_for_file: unused_element
 
 import 'package:flutter/material.dart';
-import 'package:vm_fm_4/feature/enums/shared_enums.dart';
-import 'package:vm_fm_4/feature/exceptions/custom_service_exceptions.dart';
-import 'package:vm_fm_4/feature/service/global_services.dart/auth_service/auth_service_repository.dart';
-import 'package:vm_fm_4/feature/service/global_services.dart/auth_service/auth_service_repository_impl.dart';
-import 'package:vm_fm_4/product/screens/home/service/home_service_repo_impl.dart';
+import 'package:wm_ppp_4/feature/enums/shared_enums.dart';
+import 'package:wm_ppp_4/feature/exceptions/custom_service_exceptions.dart';
+import 'package:wm_ppp_4/feature/service/global_services.dart/auth_service/auth_service_repository.dart';
+import 'package:wm_ppp_4/feature/service/global_services.dart/auth_service/auth_service_repository_impl.dart';
+import 'package:wm_ppp_4/product/screens/home/service/home_service_repo_impl.dart';
 
 import '../../../../feature/database/shared_manager.dart';
 import '../../../../feature/models/home_page_models/announcement_model.dart';
 
 class HomeProvider extends ChangeNotifier {
-  final AuthServiceRepository _authServiceRepository = AuthServiceRepositoryImpl();
+  final AuthServiceRepository _authServiceRepository =
+      AuthServiceRepositoryImpl();
   bool _isUserLogout = false;
   bool get isUserLogout => _isUserLogout;
 
@@ -52,11 +53,10 @@ class HomeProvider extends ChangeNotifier {
   }
 
   void logOut() async {
-    final String refreshToken = await SharedManager().getString(SharedEnum.refreshToken);
-    final String token = await SharedManager().getString(SharedEnum.userToken);
-
-    if (token.isNotEmpty && refreshToken.isNotEmpty) {
-      final response = await _authServiceRepository.logout(refreshToken, token);
+    final String userCode =
+        await SharedManager().getString(SharedEnum.userToken);
+    if (userCode.isNotEmpty) {
+      final response = await _authServiceRepository.logout(userCode);
       response.fold(
         (l) => {
           _isUserLogout = true,

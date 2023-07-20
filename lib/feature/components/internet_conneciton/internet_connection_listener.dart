@@ -3,7 +3,7 @@
 import 'dart:io';
 
 import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'package:vm_fm_4/feature/components/snackBar/snackbar.dart';
+import 'package:wm_ppp_4/feature/components/snackBar/snackbar.dart';
 
 class InternetListenerClass {
   internetConnection(context) async {

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:vm_fm_4/feature/components/dividers/custom_wo_summary_divider.dart';
-import 'package:vm_fm_4/feature/constants/other/colors.dart';
-import 'package:vm_fm_4/feature/constants/style/border_radius.dart';
-import 'package:vm_fm_4/feature/constants/style/custom_paddings.dart';
-import 'package:vm_fm_4/feature/extensions/context_extension.dart';
 
+import '../../constants/other/colors.dart';
+import '../../constants/style/border_radius.dart';
+import '../../constants/style/custom_paddings.dart';
+import '../../extensions/context_extension.dart';
 import '../../models/work_space/work_space_appendings.dart';
+import '../dividers/custom_wo_summary_divider.dart';
 
 class CustomUndetailPendingCard extends StatelessWidget {
   const CustomUndetailPendingCard({super.key, required this.workSpacePendiks});
@@ -33,19 +33,31 @@ class CustomUndetailPendingCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('WO ${workSpacePendiks.task?.id.toString() ?? 0} ${workSpacePendiks.task?.name ?? ''}', style: _style()),
+              Text(
+                  'WO ${workSpacePendiks.task?.id.toString() ?? 0} ${workSpacePendiks.task?.name ?? ''}',
+                  style: _style()),
               const CustomWoSummaryDivider(),
-              Text(workSpacePendiks.task?.description ?? _noDesc, style: _style()),
+              Text(workSpacePendiks.task?.description ?? _noDesc,
+                  style: _style()),
               const CustomWoSummaryDivider(),
               Text(workSpacePendiks.task?.user ?? _noUserName, style: _style()),
               const CustomWoSummaryDivider(),
-              Text(workSpacePendiks.state?.name ?? _noStateName, style: _style()),
+              Text(workSpacePendiks.state?.name ?? _noStateName,
+                  style: _style()),
               const CustomWoSummaryDivider(),
-              Text(workSpacePendiks.workspace?.createdAt.toString() ?? '', style: _style()),
+              Text(workSpacePendiks.workspace?.createdAt.toString() ?? '',
+                  style: _style()),
               const CustomWoSummaryDivider(),
-              Text(workSpacePendiks.workSpaceUserInformation?.createdAt.toString() ?? _noCreatedAtTime, style: _style()),
+              Text(
+                  workSpacePendiks.workSpaceUserInformation?.createdAt
+                          .toString() ??
+                      _noCreatedAtTime,
+                  style: _style()),
               const CustomWoSummaryDivider(),
-              Text(workSpacePendiks.workSpaceUserInformation?.referenceId ?? _noReferenceId, style: _style()),
+              Text(
+                  workSpacePendiks.workSpaceUserInformation?.referenceId ??
+                      _noReferenceId,
+                  style: _style()),
               const CustomWoSummaryDivider(),
             ],
           ),

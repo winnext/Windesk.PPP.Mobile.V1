@@ -1,9 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:vm_fm_4/feature/constants/other/colors.dart';
-import 'package:vm_fm_4/feature/constants/style/custom_paddings.dart';
-import 'package:vm_fm_4/feature/route/app_route.gr.dart';
+import '../../../../../../feature/constants/other/colors.dart';
+import '../../../../../../feature/constants/style/custom_paddings.dart';
+import '../../../../../../feature/route/app_route.gr.dart';
 
 import '../../../../../../feature/components/buttons/custom_elevated_button_with_icon.dart';
 import '../../../../../../feature/components/input_fields/text_fields_search.dart';
@@ -31,9 +31,12 @@ class _SearchWorkOrderScreenState extends State<SearchWorkOrderScreen> {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
         create: (context) => WorkOrderDetailProvider(),
-        child: Consumer<WorkOrderDetailProvider>(builder: (context, WorkOrderDetailProvider woDetailProvider, child) {
+        child: Consumer<WorkOrderDetailProvider>(builder:
+            (context, WorkOrderDetailProvider woDetailProvider, child) {
           context.read<WorkOrderDetailProvider>().isSuccess
-              ? context.router.push(DetailWorkOrderScreen(workSpaceDetail: context.read<WorkOrderDetailProvider>().woDetailList!))
+              ? context.router.push(DetailWorkOrderScreen(
+                  workSpaceDetail:
+                      context.read<WorkOrderDetailProvider>().woDetailList!))
               : null;
           return Scaffold(
             appBar: AppBar(),
@@ -54,7 +57,9 @@ class _SearchWorkOrderScreenState extends State<SearchWorkOrderScreen> {
                             icon: Icons.send,
                             iconColor: APPColors.Main.white,
                             onPressFunction: () {
-                              context.read<WorkOrderDetailProvider>().getWorkOrderWithSearch(_woNumber);
+                              context
+                                  .read<WorkOrderDetailProvider>()
+                                  .getWorkOrderWithSearch(_woNumber);
                             },
                           )
                         ],

@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:vm_fm_4/feature/components/snackBar/snackbar.dart';
-import 'package:vm_fm_4/feature/database/shared_manager.dart';
-import 'package:vm_fm_4/feature/enums/shared_enums.dart';
-import 'package:vm_fm_4/feature/global_providers/global_provider.dart';
-import 'package:vm_fm_4/feature/models/auth_models/login_model.dart';
-import 'package:vm_fm_4/feature/service/global_services.dart/auth_service/auth_service_repository.dart';
-import 'package:vm_fm_4/feature/service/global_services.dart/auth_service/auth_service_repository_impl.dart';
+import '../../../../feature/components/snackBar/snackbar.dart';
+import '../../../../feature/database/shared_manager.dart';
+import '../../../../feature/enums/shared_enums.dart';
+import '../../../../feature/service/global_services.dart/auth_service/auth_service_repository.dart';
+import '../../../../feature/service/global_services.dart/auth_service/auth_service_repository_impl.dart';
 
 class LoginProvider extends ChangeNotifier {
+  AuthServiceRepository authService = AuthServiceRepositoryImpl();
+
   bool _loading = false;
   bool get loading => _loading;
 
   String _userName = '';
   String get userName => _userName;
+
+  String _userCode = '';
+  String get userCode => _userName;
 
   String _password = '';
   String get password => _password;
@@ -27,36 +29,37 @@ class LoginProvider extends ChangeNotifier {
   bool _textFieldEmptyError = false;
   bool get textFieldEmptyError => _textFieldEmptyError;
 
-  String _userToken = '';
-  String _userTokenName = '';
-
   void logIn(BuildContext context) async {
     if (_userName.isNotEmpty && _password.isNotEmpty) {
-      AuthServiceRepository authService = AuthServiceRepositoryImpl();
       _loading = true;
       notifyListeners();
 
       final response = await authService.login(userName, password);
 
-      LoginModel loginModel;
-
       response.fold((login) {
-        // _setUserName(context);
-        _isLoginSuccess = true;
+        _loading = false;
         notifyListeners();
-
-        Future.delayed(const Duration(milliseconds: 1000), () {
-          loginModel = login;
-          _userToken = loginModel.accessToken ?? '';
-          _userTokenName = userName;
-          _setTokenToPreferences(login.refreshToken ?? '');
-          _setField();
-        });
-        Future.delayed(const Duration(milliseconds: 1000), () {
+        if (login.result == 'success') {
+          _isLoginSuccess = true;
+          _userName = login.record![0]['FULLNAME'];
+          _userCode = login.record![0]['CODE'];
+          _setTokenToPreferences();
           notifyListeners();
+
+          Future.delayed(const Duration(milliseconds: 1000), () {
+            _isLoginSuccess = false;
+            notifyListeners();
+          });
+        } else {
           _loading = false;
           _isLoginSuccess = false;
-        });
+          _isErrorActive = true;
+          notifyListeners();
+          Future.delayed(const Duration(milliseconds: 1000), () {
+            _isErrorActive = false;
+            notifyListeners();
+          });
+        }
       }, (error) {
         _isLoginSuccess = false;
         _isErrorActive = true;
@@ -75,21 +78,9 @@ class LoginProvider extends ChangeNotifier {
     }
   }
 
-  void _setTokenToPreferences(String refreshToken) async {
-    if (_userToken != '' && _userName != '' && refreshToken != '') {
-      await SharedManager().setString(SharedEnum.userToken, _userToken);
-      await SharedManager().setString(SharedEnum.userName, _userTokenName);
-      await SharedManager().setString(SharedEnum.refreshToken, refreshToken);
-    }
-  }
-
-  void _setUserName(BuildContext context) async {
-    Provider.of<GlobalProvider>(context, listen: false).setUserName(_userTokenName);
-  }
-
-  void _setField() {
-    _userName = "";
-    _password = "";
+  void _setTokenToPreferences() async {
+    await SharedManager().setString(SharedEnum.userToken, _userCode);
+    await SharedManager().setString(SharedEnum.userName, _userName);
   }
 
   // set functions
@@ -111,8 +102,6 @@ class LoginProvider extends ChangeNotifier {
     _isLoginSuccess = false;
     _textFieldEmptyError = false;
     _isErrorActive = false;
-    _userToken = '';
-    _userTokenName = '';
     notifyListeners();
   }
 }

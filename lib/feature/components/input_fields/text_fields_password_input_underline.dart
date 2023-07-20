@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:vm_fm_4/feature/constants/other/colors.dart';
 
 import '../../constants/other/app_icons.dart';
+import '../../constants/other/colors.dart';
 import '../../constants/style/font_sizes.dart';
 
 class TextInputFieldsPasswordInputUnderline extends StatelessWidget {
@@ -35,10 +35,16 @@ class TextInputFieldsPasswordInputUnderline extends StatelessWidget {
         labelText: labelText,
         suffixIcon: IconButton(
           onPressed: () => changeVisibility(),
-          icon: showPassword ? const Icon(AppIcons.visibilityOff) : const Icon(AppIcons.visibility),
+          icon: showPassword
+              ? const Icon(AppIcons.visibilityOff)
+              : const Icon(AppIcons.visibility),
         ),
       ),
-      style: TextStyle(fontSize: FontSizes.button, fontFamily: 'Roboto', letterSpacing: 1, color: APPColors.Main.black),
+      style: TextStyle(
+          fontSize: FontSizes.button,
+          fontFamily: 'Roboto',
+          letterSpacing: 1,
+          color: APPColors.Main.black),
       onChanged: (String value) => onChanged(value),
       validator: (value) {
         if (value == null || value.isEmpty) {

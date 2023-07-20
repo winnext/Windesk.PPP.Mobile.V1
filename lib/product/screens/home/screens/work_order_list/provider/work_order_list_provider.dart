@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:vm_fm_4/feature/enums/shared_enums.dart';
-import 'package:vm_fm_4/feature/models/work_space/work_space_appendings.dart';
-import 'package:vm_fm_4/feature/models/work_space/work_space_detail.dart';
-import 'package:vm_fm_4/feature/models/work_space/work_space_my_group_demand_list.dart';
-import 'package:vm_fm_4/feature/service/global_services.dart/work_space_service/work_space_service_repository_impl.dart';
 
 import '../../../../../../feature/database/shared_manager.dart';
+import '../../../../../../feature/enums/shared_enums.dart';
 import '../../../../../../feature/injection.dart';
+import '../../../../../../feature/models/work_space/work_space_appendings.dart';
+import '../../../../../../feature/models/work_space/work_space_detail.dart';
+import '../../../../../../feature/models/work_space/work_space_my_group_demand_list.dart';
 import '../../../../../../feature/service/global_services.dart/work_order_service/work_order_service_repository_impl.dart';
+import '../../../../../../feature/service/global_services.dart/work_space_service/work_space_service_repository_impl.dart';
 
 class WorkOrderListProvider extends ChangeNotifier {
-  final WorkOrderServiceRepositoryImpl service = Injection.getIt.get<WorkOrderServiceRepositoryImpl>();
-  final WorkSpaceServiceRepositoryImpl workSpaceService = WorkSpaceServiceRepositoryImpl();
+  final WorkOrderServiceRepositoryImpl service =
+      Injection.getIt.get<WorkOrderServiceRepositoryImpl>();
+  final WorkSpaceServiceRepositoryImpl workSpaceService =
+      WorkSpaceServiceRepositoryImpl();
 
   int _tabIndex = 0;
   int get tabIndex => _tabIndex;
@@ -32,10 +34,12 @@ class WorkOrderListProvider extends ChangeNotifier {
   List<WorkSpaceDetail> get myWorkSpaceDetails => _myWorkSpaceDetails;
 
   WorkSpaceMyGroupDemandList? _workSpaceMyGroupDemandList;
-  WorkSpaceMyGroupDemandList? get workSpaceMyGroupDemandList => _workSpaceMyGroupDemandList;
+  WorkSpaceMyGroupDemandList? get workSpaceMyGroupDemandList =>
+      _workSpaceMyGroupDemandList;
 
   List<WorkSpacePendiks> _myPendikWorkSpaceDetails = [];
-  List<WorkSpacePendiks> get myPendikWorkSpaceDetails => _myPendikWorkSpaceDetails;
+  List<WorkSpacePendiks> get myPendikWorkSpaceDetails =>
+      _myPendikWorkSpaceDetails;
 
   void getMyWorkOrders() async {
     if (_isMyWorkOrdersDataFetched) return;
@@ -43,7 +47,8 @@ class WorkOrderListProvider extends ChangeNotifier {
 
     _isLoading = true;
     notifyListeners();
-    final result = await workSpaceService.getMyWorkSpaces('swagger', userToken, 1);
+    final result =
+        await workSpaceService.getMyWorkSpaces('swagger', userToken, 1);
 
     result.fold((l) {
       _myWorkSpaceDetails = l;
@@ -64,9 +69,7 @@ class WorkOrderListProvider extends ChangeNotifier {
 
       result.fold((l) {
         _workSpaceMyGroupDemandList = l;
-      }, (r) {
-        // TODO hata kontrolu
-      });
+      }, (r) {});
 
       _isMyGroupWorkOrdersDataFetched = true;
     }
@@ -82,13 +85,12 @@ class WorkOrderListProvider extends ChangeNotifier {
 
     final String token = await SharedManager().getString(SharedEnum.userToken);
     if (token.isNotEmpty) {
-      final result = await workSpaceService.getWorkSpacePendiks('swagger', token, 1);
+      final result =
+          await workSpaceService.getWorkSpacePendiks('swagger', token, 1);
 
       result.fold((l) {
         _myPendikWorkSpaceDetails = l;
-      }, (r) {
-        // TODO hata kontrolu
-      });
+      }, (r) {});
 
       _isMyPendikWorkOrdersDataFetched = true;
     }

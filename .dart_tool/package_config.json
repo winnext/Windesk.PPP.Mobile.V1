@@ -548,6 +548,18 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "package_info_plus",
+      "rootUri": "file:///Users/alperen.ozdemir/.pub-cache/hosted/pub.dev/package_info_plus-4.0.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "package_info_plus_platform_interface",
+      "rootUri": "file:///Users/alperen.ozdemir/.pub-cache/hosted/pub.dev/package_info_plus_platform_interface-2.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "path",
       "rootUri": "file:///Users/alperen.ozdemir/.pub-cache/hosted/pub.dev/path-1.8.3",
       "packageUri": "lib/",
@@ -872,13 +884,13 @@
       "languageVersion": "2.19"
     },
     {
-      "name": "vm_fm_4",
+      "name": "wm_ppp_4",
       "rootUri": "../",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2023-07-20T14:04:24.392409Z",
+  "generated": "2023-07-20T14:05:01.347398Z",
   "generator": "pub",
   "generatorVersion": "3.0.5"
 }
