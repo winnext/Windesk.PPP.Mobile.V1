@@ -9,7 +9,7 @@ part of '../issue_tracing_list_model.dart';
 IssueTracingListModel _$IssueTracingListModelFromJson(Map<String, dynamic> json) => IssueTracingListModel(
       name: json['name'] as String?,
       code: json['code'] as String?,
-      count: json['count'] as dynamic?,
+      count: json['count'] as dynamic,
     );
 
 Map<String, dynamic> _$IssueTracingListModelToJson(IssueTracingListModel instance) => <String, dynamic>{

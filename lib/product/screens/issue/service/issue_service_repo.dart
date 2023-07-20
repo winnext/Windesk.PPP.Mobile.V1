@@ -1,11 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:wm_ppp_4/feature/models/issue_models/issue_tracing_list_model.dart';
+import '../../../../feature/models/issue_models/issue_tracing_list_model.dart';
 
 import '../../../../feature/exceptions/custom_service_exceptions.dart';
 import '../../../../feature/injection.dart';
 import '../../../../feature/log/log_manager.dart';
-import '../../../../feature/models/home_page_models/announcement_model.dart';
 import '../../../../feature/service/service_manager.dart';
 
 abstract class IssueServiceRepository {

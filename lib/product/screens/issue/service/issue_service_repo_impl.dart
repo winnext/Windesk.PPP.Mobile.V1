@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:wm_ppp_4/feature/exceptions/custom_service_exceptions.dart';
-import 'package:wm_ppp_4/feature/models/issue_models/issue_tracing_list_model.dart';
-import 'package:wm_ppp_4/product/screens/issue/service/issue_service_repo.dart';
+import '../../../../feature/exceptions/custom_service_exceptions.dart';
+import '../../../../feature/models/issue_models/issue_tracing_list_model.dart';
+import 'issue_service_repo.dart';
 
 import '../../../../feature/constants/paths/service_tools.dart';
 import '../../../../feature/database/shared_manager.dart';
