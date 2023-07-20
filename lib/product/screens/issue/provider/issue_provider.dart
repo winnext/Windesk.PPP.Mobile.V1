@@ -90,6 +90,13 @@ class IssueProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  String _issueListType = '';
+  String get issueListType => _issueListType;
+  set setissueListType(String issueListType) {
+    _issueListType = issueListType;
+    notifyListeners();
+  }
+
   int _currentPage = 1;
   int get currentPage => _currentPage;
   set setcurrentPage(int currentPage) {
@@ -97,11 +104,26 @@ class IssueProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  bool _totalRecordCount = false;
+  bool get totalRecordCount => _totalRecordCount;
+
   List<IssueTracingListModel> _tracingList = [];
   List<IssueTracingListModel> get tracingList => _tracingList;
 
   List<IssueListModel> _issueList = [];
   List<IssueListModel> get issueList => _issueList;
+
+  bool notificationController(ScrollNotification scrollInfo) {
+    if (!loading && scrollInfo.metrics.pixels == scrollInfo.metrics.maxScrollExtent) {
+      if (_totalRecordCount == true) {
+        return false;
+      }
+      _currentPage = 1 + _currentPage;
+      getIssueList(_currentPage, issueListType);
+      notifyListeners();
+    } else {}
+    return false;
+  }
 
   void getIssueTracingList() async {
     _isFetch = true;
@@ -135,17 +157,18 @@ class IssueProvider extends ChangeNotifier {
     };
     _isFetch = true;
     _loading = true;
+    _issueListType = issueListType;
     notifyListeners();
     final response = await _issueServiceRepository.getIssueList(queryParameters, issueListType);
     response.fold(
         (l) => {
-              _issueList = l,
+              _issueList.addAll(l),
               _loading = false,
-              notifyListeners(),
+              l.length % 10 == 0 ? null : _totalRecordCount = true,
             },
         (r) => {
               _loading = false,
-              notifyListeners(),
             });
+    notifyListeners();
   }
 }

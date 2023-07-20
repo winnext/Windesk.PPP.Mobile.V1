@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import '../../constants/other/colors.dart';
 
 import '../../constants/other/app_icons.dart';
+import '../../constants/other/colors.dart';
 import '../input_fields/dropdown_input_fields.dart';
 
 class WoWaitRejectModalAlert {

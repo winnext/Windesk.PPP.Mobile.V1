@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../constants/other/colors.dart';
 
+import '../../constants/other/colors.dart';
 import '../../constants/style/border_radius.dart';
 
 class DropDownInputFields extends StatelessWidget {

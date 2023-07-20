@@ -45,13 +45,11 @@ class IssueServiceRepoImpml extends IssueServiceRepository {
     final String userCode = await SharedManager().getString(SharedEnum.userToken);
 
     String url = '${ServiceTools.baseUrlV2}/list/$issueListType/issue';
-    print('url' + url.toString());
 
     try {
       final response =
           await dio.get(url, queryParameters: queryParameters, options: Options(headers: {"xusercode": userCode, "xtoken": ServiceTools.tokenV2}));
       final data = response.data['records'];
-      print('object' + data.toString());
       issueList = IssueListModel.fromJsonList(data);
       super.logger.i(issueList);
       return Left(issueList);
