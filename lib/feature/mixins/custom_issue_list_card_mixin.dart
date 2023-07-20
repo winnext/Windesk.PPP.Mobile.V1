@@ -12,7 +12,7 @@ mixin CustomIssueListCardConstantsMixin<T extends CustomIssueListCard> {
   final String locationStr = 'Lokasyon';
   final String placeStr = 'Mahal';
   final String descriptionStr = 'Açıklama';
-  final String descriptionDateStr = 'Açıklama Tarihi';
+  final String descriptionDateStr = 'Açılma Tarihi';
   final String happenedDescription = 'Gerçekleşen Açıklama';
   final String happenedDescriptionDaterError = 'Düzeltme tarihine ulaşılamadı : ';
   final String numErrorStr = '5000000000000000';

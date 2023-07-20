@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:vm_fm_4/feature/models/auth_models/record_model.dart';
 
 part 'generator/login_model.g.dart';
 
@@ -15,7 +14,6 @@ class LoginModel extends Equatable {
     this.result,
     this.record,
   });
-
   factory LoginModel.fromJson(Map<String, dynamic> json) => _$LoginModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$LoginModelToJson(this);

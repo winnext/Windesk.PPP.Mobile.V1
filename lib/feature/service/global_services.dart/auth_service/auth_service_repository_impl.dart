@@ -1,12 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:vm_fm_4/feature/constants/paths/service_tools.dart';
+import '../../../constants/paths/service_tools.dart';
 
-import 'package:vm_fm_4/feature/exceptions/custom_service_exceptions.dart';
-import 'package:vm_fm_4/feature/models/auth_models/check_access_token_model.dart';
+import '../../../exceptions/custom_service_exceptions.dart';
+import '../../../models/auth_models/check_access_token_model.dart';
 
-import 'package:vm_fm_4/feature/models/auth_models/login_model.dart';
-import 'package:vm_fm_4/feature/models/auth_models/record_model.dart';
+import '../../../models/auth_models/login_model.dart';
 
 import '../../../database/shared_manager.dart';
 import '../../../enums/service_response_status_enums.dart';

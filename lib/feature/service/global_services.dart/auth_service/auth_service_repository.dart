@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:vm_fm_4/feature/models/auth_models/check_access_token_model.dart';
+import '../../../models/auth_models/check_access_token_model.dart';
 
 import '../../../exceptions/custom_service_exceptions.dart';
 import '../../../injection.dart';
