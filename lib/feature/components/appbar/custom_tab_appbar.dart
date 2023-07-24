@@ -6,9 +6,11 @@ class CustomTabAppbar extends StatelessWidget implements PreferredSizeWidget {
   const CustomTabAppbar({
     Key? key,
     required this.title,
+    this.returnBack,
   }) : super(key: key);
 
   final String title;
+  final bool? returnBack;
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +20,11 @@ class CustomTabAppbar extends StatelessWidget implements PreferredSizeWidget {
         style: TextStyle(color: APPColors.Main.black),
       ),
       centerTitle: true,
+      leading: returnBack == true
+          ? IconButton(
+              onPressed: () => Navigator.pop(context),
+              icon: const Icon(Icons.arrow_back_ios, color: Colors.black))
+          : null,
       backgroundColor: APPColors.Main.white,
       elevation: 10,
     );
