@@ -34,7 +34,9 @@ class HomeProvider extends ChangeNotifier {
   }
 
   void logoutFunction() async {
-    final result = HomeServiceRepositoryImpl().logout();
+    final String userName =
+        await SharedManager().getString(SharedEnum.userName);
+    final result = HomeServiceRepositoryImpl().logout(userName);
     // ignore: unrelated_type_equality_checks
     if (result == 'success') {
       _isUserLogout = true;
@@ -53,10 +55,11 @@ class HomeProvider extends ChangeNotifier {
   }
 
   void logOut() async {
-    final String userCode =
-        await SharedManager().getString(SharedEnum.userToken);
-    if (userCode.isNotEmpty) {
-      final response = await _authServiceRepository.logout(userCode);
+    final String userName =
+        await SharedManager().getString(SharedEnum.userName);
+    print(userName);
+    if (userName.isNotEmpty) {
+      final response = await _authServiceRepository.logout(userName);
       response.fold(
         (l) => {
           _isUserLogout = true,
@@ -64,6 +67,7 @@ class HomeProvider extends ChangeNotifier {
           notifyListeners(),
           Future.delayed(const Duration(seconds: 1), () {
             _isUserLogout = false;
+            print('true');
           }),
         },
         (r) => {
@@ -72,6 +76,7 @@ class HomeProvider extends ChangeNotifier {
           notifyListeners(),
           Future.delayed(const Duration(seconds: 1), () {
             _logoutError = false;
+            print('false');
           })
         },
       );

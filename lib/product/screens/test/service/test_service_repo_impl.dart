@@ -75,11 +75,12 @@ class TestServiceRepositoryImpl extends TestServiceRepository {
     }
   }
 
+  @override
   Future<Either<bool, CustomServiceException>> getServerTime(token) async {
     bool result = false;
 
-    String url = '${ServiceTools.baseUrlV1}${token}&action=getDateTime';
-    print('URL  :  ' + url);
+    String url = '${ServiceTools.baseUrlV1}$token&action=getDateTime';
+    print(url);
     try {
       final response = await super.dio.get(url,
           options: Options(

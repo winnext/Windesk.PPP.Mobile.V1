@@ -71,7 +71,6 @@ class TestProvider extends ChangeNotifier {
 
   void getServerTime() async {
     String token = await SharedManager().getString(SharedEnum.deviceId);
-    print('token : ' + token);
     var getServerTimeResult = await testServices.getServerTime(token);
     getServerTimeResult.fold((l) => {print(l)}, (r) => null);
   }

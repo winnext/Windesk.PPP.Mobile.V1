@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 @immutable
 class ServiceTools {
   const ServiceTools._();
-
+//Signum ortamı
   // static const String baseUrlV1 =
   //     'https://demo.signumtte.com/windesk/app/webroot/integration/WindeskMobile.php?use_rest=1&wsusername=wdmobile&wspassword=wdsgnm1017_&token=';
   // static const String baseUrlV2 = 'http://windeskmobile.signumtte.com';
@@ -12,15 +12,35 @@ class ServiceTools {
   // static const attachPath = "https://demo.signumtte.com/windesk";
   // static const attachPathLive =
   //     "http://10.32.12.42/windesktest/xreadattach.php?token=$tokenV1&id=";
-  // static const facilityName = "İstanbul Finans Merkezi";
-
+  // static const facilityName = "Signumtte Ortamı";
+//GSH BETA
+  // static const String baseUrlV1 =
+  //     'http://geskwdtestapp.gaziantep.yerel/windesk/app/webroot/integration/WindeskMobile.php?use_rest=1&wsusername=wdmobile&wspassword=wdsgnm1017_&token=';
+  // static const String baseUrlV2 = 'http://wd-mobile-test.gaziantep.yerel';
+  // static const tokenV1 = 'anteptest!_';
+  // static const tokenV2 = 'anteptest!';
+  // static const attachPath = "http://geskwdtestapp.gaziantep.yerel/windesk";
+  // static const attachPathLive =
+  //     "http://geskwdtestapp.gaziantep.yerel/windesk/xreadattach.php?token=$tokenV1&id=";
+  // static const facilityName = "Gaziantep Şehir Hastanesi";
+//GSH PROD
   static const String baseUrlV1 =
-      'http://geskwdtestapp.gaziantep.yerel/windesk/app/webroot/integration/WindeskMobile.php?use_rest=1&wsusername=wdmobile&wspassword=wdsgnm1017_&token=';
-  static const String baseUrlV2 = 'http://wd-mobile-test.gaziantep.yerel';
-  static const tokenV1 = 'anteptest!_';
-  static const tokenV2 = 'anteptest!';
-  static const attachPath = "http://geskwdtestapp.gaziantep.yerel/windesk";
+      'http://mym.gaziantep.yerel/windesk/app/webroot/integration/WindeskMobile.php?use_rest=1&wsusername=wdmobile&wspassword=wdsgnm1017_&token=antep!_';
+  static const String baseUrlV2 = 'http://wd-mobile-prod.gaziantep.yerel';
+  static const tokenV1 = 'antep!_';
+  static const tokenV2 = 'antep!';
+  static const attachPath = "http://geskwdprodapp01.gaziantep.yerel/windesk";
   static const attachPathLive =
-      "http://geskwdtestapp.gaziantep.yerel/windesk/xreadattach.php?token=$tokenV1&id=";
+      "http://geskwdprodapp01.gaziantep.yerel/windesk/xreadattach.php?token=$tokenV1&id=";
   static const facilityName = "Gaziantep Şehir Hastanesi";
+  //ISH BETA
+  // static const String baseUrlV1 =
+  //     'http://10.32.12.42/windesktest/app/webroot/integration/WindeskMobile.php?use_rest=1&wsusername=wdmobile&wspassword=wdsgnm1017_&token=wdishtest!_';
+  // static const String baseUrlV2 = 'http://windeskmobiletest.ish.yerel';
+  // static const tokenV1 = 'wdishtest!_';
+  // static const tokenV2 = 'ishtest!';
+  // static const attachPath = "http://10.32.12.42/windesktest/";
+  // static const attachPathLive =
+  //     "http://10.32.12.42/windesktest/xreadattach.php?token=$tokenV1&id=";
+  // static const facilityName = "Isparta Şehir Hastanesi";
 }

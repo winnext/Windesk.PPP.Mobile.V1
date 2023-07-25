@@ -43,7 +43,6 @@ class _TestScreenState extends State<TestScreen> {
   _bodyWidget(BuildContext context, TestProvider testProvider) {
     return Column(
       children: [
-        _pictureWidget(context),
         _headerWidget(context),
         _infoWidget(context, testProvider),
         _buttonsAndTestResultWidget(context, testProvider),
@@ -53,7 +52,7 @@ class _TestScreenState extends State<TestScreen> {
 
   Widget _pictureWidget(BuildContext context) {
     return Expanded(
-      flex: 2,
+      flex: 1,
       child: Center(
         child: Image.asset(
           'assets/images/profile3.png',
@@ -67,11 +66,11 @@ class _TestScreenState extends State<TestScreen> {
 
   Widget _headerWidget(BuildContext context) {
     return Expanded(
-      flex: 2,
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(
           children: [
+            _pictureWidget(context),
             const Text(
               AppStrings.windeskHelp,
               style: TextStyle(fontWeight: FontWeight.bold),
@@ -85,7 +84,6 @@ class _TestScreenState extends State<TestScreen> {
 
   Widget _infoWidget(BuildContext context, TestProvider testProvider) {
     return Expanded(
-      flex: 5,
       child: Column(
         children: [
           const Padding(
@@ -113,10 +111,10 @@ class _TestScreenState extends State<TestScreen> {
           Expanded(
             flex: 4,
             child: Padding(
-              padding: EdgeInsets.all(10.0),
+              padding: const EdgeInsets.all(10.0),
               child: Column(
                 children: [
-                  Padding(
+                  const Padding(
                     padding: EdgeInsets.all(12.0),
                     child: Text(
                       AppStrings.connectionTime,
@@ -137,7 +135,6 @@ class _TestScreenState extends State<TestScreen> {
   Widget _buttonsAndTestResultWidget(
       BuildContext context, TestProvider testProvider) {
     return Expanded(
-      flex: 6,
       child: Column(
         children: [
           // buttonNotify(context, AppStrings.issueNotify, onPressFunction,

@@ -14,12 +14,12 @@ import 'home_service_repo.dart';
 class HomeServiceRepositoryImpl extends HomeServiceRepository {
   // TEST SERVICES
   @override
-  Future<Either<bool, CustomServiceException>> logout() async {
+  Future<Either<bool, CustomServiceException>> logout(String userName) async {
     bool result = false;
     String deviceToken = await SharedManager().getString(SharedEnum.deviceId);
 
     String url =
-        '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$deviceToken&action=logout&username=';
+        '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$deviceToken&action=logout&username=$userName';
 
     try {
       final response = await super.dio.get(url);

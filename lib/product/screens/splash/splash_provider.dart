@@ -51,7 +51,6 @@ class SplashProvider extends ChangeNotifier {
       deviceId = iosInfo.identifierForVendor ?? 'unknown ID';
       deviceOS = 'iOS';
     }
-    print('Device ID : ' + deviceId.toString());
 
     // sets device information to shared preferences.
     if (deviceId != null && deviceOS != null && deviceModel != null) {
