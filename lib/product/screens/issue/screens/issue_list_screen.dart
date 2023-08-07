@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../../feature/components/appbar/custom_main_appbar.dart';
 import '../../../../feature/components/cards/custom_issue_list_card.dart';
+import '../../../../feature/components/loading/custom_loading_indicator.dart';
 import '../../../../feature/l10n/locale_keys.g.dart';
-import '../../home/screens/work_order_list/widgets/custom_loading_indicator.dart';
 import '../provider/issue_provider.dart';
 
 import '../../../../feature/models/issue_models/issue_list_model.dart';

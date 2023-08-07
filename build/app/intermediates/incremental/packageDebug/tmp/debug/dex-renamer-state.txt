@@ -1,4 +1,4 @@
-#Mon Jul 24 10:51:09 TRT 2023
-base.0=/Users/muratcan.yusufoglu/Desktop/Windesk.PPP.Mobile.V1/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
-renamed.0=classes.dex
+#Mon Aug 07 14:07:05 TRT 2023
+base.0=C\:\\Users\\mert7\\Desktop\\Flutter\\work\\Windesk.PPP.Mobile.V1\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
 path.0=classes.dex
+renamed.0=classes.dex

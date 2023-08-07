@@ -4,7 +4,7 @@
             "outputFile": "com.windesk.pppmobilev4.app-mergeDebugResources-28:/values-v24/values-v24.xml",
             "map": [
                 {
-                    "source": "/Users/muratcan.yusufoglu/.gradle/caches/transforms-3/0d8f864747d178a809876d59e7f7fd7a/transformed/media-1.1.0/res/values-v24/values-v24.xml",
+                    "source": "C:\\Users\\mert7\\.gradle\\caches\\transforms-3\\0d8f864747d178a809876d59e7f7fd7a\\transformed\\media-1.1.0\\res\\values-v24\\values-v24.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",

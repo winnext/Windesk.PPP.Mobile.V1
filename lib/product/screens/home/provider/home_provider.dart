@@ -33,12 +33,12 @@ class HomeProvider extends ChangeNotifier {
   }
 
   void logoutFunction() async {
-    final result = HomeServiceRepositoryImpl().logout('');
-    // ignore: unrelated_type_equality_checks
-    if (result == 'success') {
-      _isUserLogout = true;
-      notifyListeners();
-    }
+    // final result = HomeServiceRepositoryImpl().logout('');
+    // // ignore: unrelated_type_equality_checks
+    // if (result == 'success') {
+    //   _isUserLogout = true;
+    //   notifyListeners();
+    // }
   }
 
   void getAnnouncement() {
