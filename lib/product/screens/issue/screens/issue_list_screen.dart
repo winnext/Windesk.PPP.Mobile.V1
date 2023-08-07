@@ -11,9 +11,9 @@ import '../../../../feature/models/issue_models/issue_list_model.dart';
 
 @RoutePage()
 class IssueList extends StatelessWidget {
-  IssueList({super.key, required this.issueModuleCode});
+  const IssueList({super.key, required this.issueModuleCode});
 
-  String issueModuleCode;
+  final String issueModuleCode;
 
   @override
   Widget build(BuildContext context) {
@@ -26,46 +26,42 @@ class IssueList extends StatelessWidget {
               title: Text(LocaleKeys.issueList),
               returnBack: true,
             ),
-            body: 
-
-                Stack(
-                  children:[ Column(
-
-                      children: [
-                        Expanded(
-                          flex: 1,
-                          child: NotificationListener<ScrollNotification>(
-                          onNotification: issueProvider.notificationController,
-                          child: ListView.builder(
-                              itemCount: context.read<IssueProvider>().issueList.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                IssueListModel issueListElement = context.read<IssueProvider>().issueList[index];
-                                return CustomIssueListCard(
-                                    code: issueListElement.code.toString(),
-                                    statusCode: issueListElement.statuscode.toString(),
-                                    targetFDate: issueListElement.target_fdate.toString(),
-                                    targetRDate: issueListElement.target_rdate.toString(),
-                                    description: issueListElement.description.toString(),
-                                    sumdesc1: issueListElement.sumdec1.toString(),
-                                    statusName: issueListElement.statusname.toString(),
-                                    space: issueListElement.space.toString(),
-                                    location: issueListElement.location.toString(),
-                                    idate: issueListElement.idate.toString(),
-                                    planedDate: issueListElement.planneddate.toString(),
-                                    respondedIDate: issueListElement.responded_idate.toString(),
-                                    responseTimer: issueListElement.response_timer.toString(),
-                                    fixedTimer: issueListElement.fixed_timer.toString(),
-                                    fixedIDate: issueListElement.fixed_idate.toString(),
-                                    onPressed: () {},
-                                    onPressedLong: () {});
-                              }),
-                          ),
-                        ),
-                      ],
+            body: Stack(children: [
+              Column(
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: NotificationListener<ScrollNotification>(
+                      onNotification: issueProvider.notificationController,
+                      child: ListView.builder(
+                          itemCount: context.read<IssueProvider>().issueList.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            IssueListModel issueListElement = context.read<IssueProvider>().issueList[index];
+                            return CustomIssueListCard(
+                                code: issueListElement.code.toString(),
+                                statusCode: issueListElement.statuscode.toString(),
+                                targetFDate: issueListElement.target_fdate.toString(),
+                                targetRDate: issueListElement.target_rdate.toString(),
+                                description: issueListElement.description.toString(),
+                                sumdesc1: issueListElement.sumdec1.toString(),
+                                statusName: issueListElement.statusname.toString(),
+                                space: issueListElement.space.toString(),
+                                location: issueListElement.location.toString(),
+                                idate: issueListElement.idate.toString(),
+                                planedDate: issueListElement.planneddate.toString(),
+                                respondedIDate: issueListElement.responded_idate.toString(),
+                                responseTimer: issueListElement.response_timer.toString(),
+                                fixedTimer: issueListElement.fixed_timer.toString(),
+                                fixedIDate: issueListElement.fixed_idate.toString(),
+                                onPressed: () {},
+                                onPressedLong: () {});
+                          }),
                     ),
-                issueProvider.loading
-                ? const CustomLoadingIndicator(): const SizedBox()]
-                ),
+                  ),
+                ],
+              ),
+              issueProvider.loading ? const CustomLoadingIndicator() : const SizedBox()
+            ]),
           );
         }));
   }
