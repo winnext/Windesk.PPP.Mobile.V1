@@ -11,30 +11,22 @@ import '../../../../feature/models/issue_models/issue_list_model.dart';
 
 class IssueServiceRepoImpml extends IssueServiceRepository {
   @override
-  Future<Either<List<IssueTracingListModel>, CustomServiceException>>
-      getIssueTracingList() async {
+  Future<Either<List<IssueTracingListModel>, CustomServiceException>> getIssueTracingList() async {
     List<IssueTracingListModel> tracingList = [];
 
-    final String userCode =
-        await SharedManager().getString(SharedEnum.userToken);
+    final String userCode = await SharedManager().getString(SharedEnum.userToken);
 
     String url = '${ServiceTools.baseUrlV2}/list/module/issue';
 
     try {
-      final response = await dio.get(url,
-          options: Options(headers: {
-            "xusercode": userCode,
-            "xtoken": ServiceTools.tokenV2
-          }));
-
+      final response = await dio.get(url, options: Options(headers: {"xusercode": userCode, "xtoken": ServiceTools.tokenV2}));
       final data = response.data['lists'];
       tracingList = IssueTracingListModel.fromJsonList(data);
       super.logger.i(tracingList);
       return Left(tracingList);
     } catch (error) {
       super.logger.e(error.toString());
-      return Right(CustomServiceException(
-          message: CustomServiceMessages.loginError, statusCode: '400'));
+      return Right(CustomServiceException(message: CustomServiceMessages.loginError, statusCode: '400'));
     }
   }
 

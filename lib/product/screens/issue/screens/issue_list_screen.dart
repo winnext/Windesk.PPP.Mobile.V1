@@ -23,14 +23,12 @@ class IssueList extends StatelessWidget {
           issueProvider.isFetch ? null : issueProvider.getIssueList(1, issueModuleCode);
           return Scaffold(
             appBar: const CustomMainAppbar(
-              title: Text(LocaleKeys.issueList),
+              title: Text(LocaleKeys.issueList, style: TextStyle(color: Colors.black),),
               returnBack: true,
             ),
             body: 
-
                 Stack(
                   children:[ Column(
-
                       children: [
                         Expanded(
                           flex: 1,

@@ -25,7 +25,7 @@ class _IssueTracingListState extends State<IssueTracingList> {
         child: Consumer<IssueProvider>(builder: (context, IssueProvider issueProvider, child) {
           issueProvider.isFetch ? null : issueProvider.getIssueTracingList();
           return Scaffold(
-              appBar: const CustomMainAppbar(title: Text(LocaleKeys.vakalist), returnBack: true,),
+              appBar: const CustomMainAppbar(title: Text(LocaleKeys.vakalist,style: TextStyle(color: Colors.black)), returnBack: true,),
               body: issueProvider.loading
                   ? const CustomLoadingIndicator()
                   : Column(
