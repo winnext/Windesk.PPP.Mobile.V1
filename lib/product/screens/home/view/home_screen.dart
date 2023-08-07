@@ -173,7 +173,7 @@ class _HomeScreenState extends State<HomeScreen> {
               size: 35, color: APPColors.Main.black),
           tooltip: AppStrings.logout,
           onPressed: () {
-            provider.logOut();
+            provider.logoutFunction();
           },
         ),
       ],

@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 {"sdk":"3.1.0-333.0.dev (dev) (Thu Jul 20 13:04:10 2023 -0700) on \"macos_x64\"","analyzer":"/Users/muratcan.yusufoglu/.pub-cache/hosted/pub.dev/analyzer-5.13.0","build_resolvers":"/Users/muratcan.yusufoglu/.pub-cache/hosted/pub.dev/build_resolvers-2.2.1"}
+=======
+{"sdk":"3.0.6 (stable) (Tue Jul 11 18:49:07 2023 +0000) on \"macos_x64\"","analyzer":"/Users/signumtte/.pub-cache/hosted/pub.dev/analyzer-5.13.0","build_resolvers":"/Users/signumtte/.pub-cache/hosted/pub.dev/build_resolvers-2.2.1"}
+>>>>>>> e7c444f7fe218f1ee8eabd67a87b4c8bdb04ac65

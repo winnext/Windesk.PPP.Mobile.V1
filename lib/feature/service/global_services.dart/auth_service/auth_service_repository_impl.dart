@@ -20,11 +20,13 @@ class AuthServiceRepositoryImpl extends AuthServiceRepository {
         await SharedManager().getString(SharedEnum.deviceId);
     final String deviceType =
         await SharedManager().getString(SharedEnum.deviceType);
+    final String firebaseToken =
+        await SharedManager().getString(SharedEnum.firebaseToken);
 
     @override
     String url =
         '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$deviceId&action=loginCheck&username=$username&password=$password&platform=$deviceType&version=3&mobileV2=true';
-
+    print('login url : ' + url);
     try {
       final response = await super.dio.get(
             url,
@@ -32,7 +34,15 @@ class AuthServiceRepositoryImpl extends AuthServiceRepository {
           );
 
       final data = response.data;
-
+      String action = deviceType == 'ios' ? 'addIOSToken' : 'addFireBaseToken';
+      String sendFirebaseTokenUrl =
+          '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$deviceId&&username=$username&platform=$deviceType&action=$action&firebasetoken=$firebaseToken';
+      final responseSendFirebaseTokenUrl = await super.dio.get(
+            sendFirebaseTokenUrl,
+            options: Options(),
+          );
+      print('response send firebase token ');
+      print(responseSendFirebaseTokenUrl);
       LoginModel loginModel = LoginModel.fromJson(data);
 
       super.logger.i(loginModel);

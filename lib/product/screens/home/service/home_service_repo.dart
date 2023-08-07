@@ -12,6 +12,7 @@ abstract class HomeServiceRepository {
   final logger = Injection.getIt.get<LogManager>().logger;
 
   // TEST METHODS
-  Future<Either<bool, CustomServiceException>> logout();
-  Future<Either<List<AnnouncementModel>, CustomServiceException>> getAnnouncements();
+  Future<Either<bool, CustomServiceException>> logout(String userName);
+  Future<Either<List<AnnouncementModel>, CustomServiceException>>
+      getAnnouncements();
 }

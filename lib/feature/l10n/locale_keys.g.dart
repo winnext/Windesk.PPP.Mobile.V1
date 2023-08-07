@@ -49,6 +49,10 @@ abstract class LocaleKeys {
   static const hataMesaji = 'hataMesaji';
   static const email = 'email';
   static const vakalist = 'Vaka-(SLA) Listesi';
+  static const issueSearchPage = 'Vaka-(SLA) Arama';
+  static const assetSearchPage = 'Varlık Arama';
+  static const spaceSearchPage = 'Mahal Arama';
+  static const woSearchPage = 'İş Emri Arama';
 
   //issue summary
   static const String issueSituation = 'Vaka Durumu';
@@ -93,14 +97,16 @@ abstract class LocaleKeys {
   static const String mahalSearchTitle = 'Mahal Arama';
   static const String mahalSearchDetailtTitle = 'Mahal Detayı';
   static const String workOrderSearchTitle = 'İş Emri Arama';
-  static const String myAppointmentRequestsDetailTitle = 'Randevulu Taleplerim Detay';
+  static const String myAppointmentRequestsDetailTitle =
+      'Randevulu Taleplerim Detay';
   static const String myAppointmentRequestsTitle = 'Randevulu Taleplerim';
   static const String myOpenRequests = 'Açık Taleplerim';
   static const String myOpenRequestsDetail = 'Açık Taleplerim Detay';
   static const String newNotif = 'Yeni Bildirim';
   static const String takePictureTitle = 'Fotoğraf Çek';
   static const String pictureTitle = 'Fotoğraf';
-  static const String caseIComplainedDetailTitle = 'Şikayet Ettiğim Vaka  Detay';
+  static const String caseIComplainedDetailTitle =
+      'Şikayet Ettiğim Vaka  Detay';
 
   //woEmpty
   static const String noDescription = 'Açıklama Bulunamadı';
