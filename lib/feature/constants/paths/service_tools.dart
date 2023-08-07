@@ -14,6 +14,20 @@ class ServiceTools {
       "http://10.32.12.42/windesktest/xreadattach.php?token=$tokenV1&id=";
   static const facilityName = "İstanbul Finans Merkezi";
 
+  //// ESH PREPROD
+// const PPP_PROJECT = "esh";
+// const BASE_URL_V2 = 'http://windeskmobiletest.eskisehir.yerel';
+// const TOKEN_V1 = 'wdeshtest!_';
+// const TOKEN_V2 = 'eshtest!';
+// const ATTACHPATHLIVE =
+//     "http://10.126.12.21/esh/xreadattach.php?token=${TOKEN_V1}&id=";
+// const base_url_v1 =
+//     'http://10.126.12.21/esh/app/webroot/integration/WindeskMobile.php?use_rest=1&wsusername=' +
+//         'wdmobile' +
+//         '&wspassword=' +
+//         'wdsgnm1017_' +
+//         '&token=';
+
   // static const String baseUrlV1 =
   //     'http://geskwdtestapp.gaziantep.yerel/windesk/app/webroot/integration/WindeskMobile.php?use_rest=1&wsusername=wdmobile&wspassword=wdsgnm1017_&token=';
   // static const String baseUrlV2 = 'http://wd-mobile-test.gaziantep.yerel';
