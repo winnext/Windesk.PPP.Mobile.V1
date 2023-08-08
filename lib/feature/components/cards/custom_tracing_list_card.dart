@@ -7,18 +7,23 @@ import '../../route/app_route.gr.dart';
 
 @RoutePage()
 class CustomTracingList extends StatelessWidget {
-  const CustomTracingList({super.key, required this.title, required this.count, required this.code});
+  const CustomTracingList({super.key, required this.title, required this.count, required this.code, required this.isWorkOrder});
 
   final String title;
   final String count;
   final String code;
+  final bool isWorkOrder;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       child: GestureDetector(
         onTap: () {
-          count.toString() == '0' ? null : context.router.push(IssueList(issueModuleCode: code));
+          if (isWorkOrder) {
+            count.toString() == '0' ? null : context.router.push(const WorkOrderListScreen());
+          } else {
+            count.toString() == '0' ? null : context.router.push(IssueListScreen(issueModuleCode: code));
+          }
         },
         child: Padding(
           padding: const EdgeInsets.fromLTRB(20, 5, 20, 10),

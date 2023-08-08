@@ -4,9 +4,9 @@ import 'package:provider/provider.dart';
 
 import '../../../../feature/components/appbar/custom_main_appbar.dart';
 import '../../../../feature/components/cards/custom_tracing_list_card.dart';
+import '../../../../feature/components/loading/custom_loading_indicator.dart';
 import '../../../../feature/l10n/locale_keys.g.dart';
 import '../../../../feature/models/issue_models/issue_tracing_list_model.dart';
-import '../../home/screens/work_order_list/widgets/custom_loading_indicator.dart';
 import '../provider/issue_provider.dart';
 
 @RoutePage()
@@ -25,7 +25,10 @@ class _IssueTracingListState extends State<IssueTracingList> {
         child: Consumer<IssueProvider>(builder: (context, IssueProvider issueProvider, child) {
           issueProvider.isFetch ? null : issueProvider.getIssueTracingList();
           return Scaffold(
-              appBar: const CustomMainAppbar(title: Text(LocaleKeys.vakalist), returnBack: true,),
+              appBar: const CustomMainAppbar(
+                title: Text(LocaleKeys.vakalist),
+                returnBack: true,
+              ),
               body: issueProvider.loading
                   ? const CustomLoadingIndicator()
                   : Column(
@@ -37,9 +40,11 @@ class _IssueTracingListState extends State<IssueTracingList> {
                               itemBuilder: (BuildContext context, int index) {
                                 IssueTracingListModel tracingListElement = context.read<IssueProvider>().tracingList[index];
                                 return CustomTracingList(
-                                    title: tracingListElement.name.toString(),
-                                    count: tracingListElement.count.toString(),
-                                    code: tracingListElement.code.toString());
+                                  title: tracingListElement.name.toString(),
+                                  count: tracingListElement.count.toString(),
+                                  code: tracingListElement.code.toString(),
+                                  isWorkOrder: false,
+                                );
                               }),
                         )
                       ],
