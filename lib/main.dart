@@ -7,6 +7,7 @@ import 'feature/injection.dart';
 import 'feature/route/app_route.dart';
 import 'feature/service/firebase/firebase_notification.dart';
 
+// empty commit
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
