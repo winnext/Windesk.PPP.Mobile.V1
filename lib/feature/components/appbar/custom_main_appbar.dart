@@ -10,6 +10,7 @@ class CustomMainAppbar extends StatelessWidget implements PreferredSizeWidget {
     this.returnBack,
     this.actions,
     this.elevation,
+    this.popFunction,
   }) : super(key: key);
 
   final Widget title;
@@ -17,6 +18,7 @@ class CustomMainAppbar extends StatelessWidget implements PreferredSizeWidget {
   final List<Widget>? actions;
   final bool? returnBack;
   final double? elevation;
+  final Function? popFunction;
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +27,12 @@ class CustomMainAppbar extends StatelessWidget implements PreferredSizeWidget {
       centerTitle: true,
       leading: returnBack == true
           ? IconButton(
-              onPressed: () => Navigator.pop(context),
-              icon: const Icon(Icons.arrow_back_ios, color: Colors.black))
+              onPressed: () {
+                popFunction != null ? popFunction!() : null;
+                Navigator.pop(context);
+              },
+              icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
+            )
           : leading,
       automaticallyImplyLeading: returnBack ?? false,
       actions: actions != null ? actions! : [],

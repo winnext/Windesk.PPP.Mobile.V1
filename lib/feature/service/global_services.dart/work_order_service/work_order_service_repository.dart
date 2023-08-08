@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:wm_ppp_4/feature/models/work_order_models/work_order_list_model.dart';
 import 'package:wm_ppp_4/feature/models/work_order_models/work_order_tracing_list_model.dart';
 
 import '../../../exceptions/custom_service_exceptions.dart';
@@ -22,6 +23,17 @@ abstract class WorkOrderServiceRepository {
 
   // GET WORK ORDER TRACING LIST
   Future<Either<List<WorkOrderTracingListModel>, CustomServiceException>> getWorkOrderTracingList(String xuserCode);
+
+  Future<Either<List<WorkOrderListModel>, CustomServiceException>> getWorkOrderList(
+    String xuserCode,
+    String workOrderCode,
+    String startLimit,
+    String endLimit,
+    String build,
+    String floor,
+    String responsible,
+    String status,
+  );
 
   // GET WORK ORDER METHODS
   Future<Either<List<WorkOrderLoadsModel>, CustomServiceException>> getWorkOrderLoads(String workOrderCode);

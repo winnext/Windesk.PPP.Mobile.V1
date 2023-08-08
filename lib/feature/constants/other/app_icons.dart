@@ -54,4 +54,6 @@ class AppIcons {
   static const IconData assetSearchIcon = Icons.archive;
   static const IconData spaceSearchIcon = Icons.flag;
   static const IconData woSearchIcon = Icons.explore;
+
+  static const IconData filter = Icons.filter_alt;
 }
