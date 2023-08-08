@@ -79,7 +79,7 @@ class LoginProvider extends ChangeNotifier {
   }
 
   void _setTokenToPreferences() async {
-    await SharedManager().setString(SharedEnum.userToken, _userCode);
+    await SharedManager().setString(SharedEnum.userCode, _userCode);
     await SharedManager().setString(SharedEnum.userName, _userName);
   }
 

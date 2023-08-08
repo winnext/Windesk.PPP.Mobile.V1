@@ -52,7 +52,7 @@ class HomeProvider extends ChangeNotifier {
   }
 
   void logOut() async {
-    final String userCode = await SharedManager().getString(SharedEnum.userToken);
+    final String userCode = await SharedManager().getString(SharedEnum.userCode);
     if (userCode.isNotEmpty) {
       final response = await _authServiceRepository.logout(userCode);
       response.fold(

@@ -21,10 +21,17 @@ class AppRouter extends $AppRouter {
               children: [
                 RedirectRoute(path: '', redirectTo: 'homeScreen'),
                 AutoRoute(path: 'homeScreen', page: HomeScreen.page, initial: true),
+
+                // work order
+                AutoRoute(path: 'workOrderListScreen', page: WorkOrderListScreen.page),
                 AutoRoute(path: 'workOrderScreen', page: WorkOrderScreen.page),
+
+                // search work order
                 AutoRoute(path: 'searchWorkOrderScreen', page: SearchWorkOrderScreen.page),
+
+                // issue
                 AutoRoute(path: 'issueTracingList', page: IssueTracingList.page),
-                AutoRoute(path: 'issueList', page: IssueList.page),
+                AutoRoute(path: 'IssueListScreen', page: IssueListScreen.page),
               ],
             ),
             AutoRoute(path: 'newOrderScreen', page: NewOrderScreen.page),

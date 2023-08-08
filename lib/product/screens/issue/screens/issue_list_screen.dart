@@ -10,8 +10,8 @@ import '../provider/issue_provider.dart';
 import '../../../../feature/models/issue_models/issue_list_model.dart';
 
 @RoutePage()
-class IssueList extends StatelessWidget {
-  const IssueList({super.key, required this.issueModuleCode});
+class IssueListScreen extends StatelessWidget {
+  const IssueListScreen({super.key, required this.issueModuleCode});
 
   final String issueModuleCode;
 

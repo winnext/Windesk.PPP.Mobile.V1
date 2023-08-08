@@ -416,6 +416,7 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
   Future<Either<List<WorkOrderTracingListModel>, CustomServiceException>> getWorkOrderTracingList(String xuserCode) async {
     String url = '${ServiceTools.baseUrlV2}/list/module/workorder';
 
+    print('before get work order tracing list');
     try {
       final response = await super.dio.get(
             url,
@@ -428,10 +429,11 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
           );
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        final data = response.data;
+        if (response.data[ServiceResponseStatusEnums.result.rawText] == ServiceStatusEnums.success.rawText) {
+          final data = response.data;
 
-        if (data['result'] == ServiceResponseStatusEnums.result.rawText) {
           List<WorkOrderTracingListModel> tracingList = WorkOrderTracingListModel.fromJsonList(data['lists']);
+          super.logger.e(tracingList.toString());
 
           return Left(tracingList);
         } else {

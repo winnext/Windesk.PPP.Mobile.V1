@@ -14,7 +14,7 @@ class IssueServiceRepoImpml extends IssueServiceRepository {
   Future<Either<List<IssueTracingListModel>, CustomServiceException>> getIssueTracingList() async {
     List<IssueTracingListModel> tracingList = [];
 
-    final String userCode = await SharedManager().getString(SharedEnum.userToken);
+    final String userCode = await SharedManager().getString(SharedEnum.userCode);
 
     String url = '${ServiceTools.baseUrlV2}/list/module/issue';
 
@@ -35,7 +35,7 @@ class IssueServiceRepoImpml extends IssueServiceRepository {
   Future<Either<List<IssueListModel>, CustomServiceException>> getIssueList(Map<String, dynamic> queryParameters, String issueListType) async {
     List<IssueListModel> issueList = [];
 
-    final String userCode = await SharedManager().getString(SharedEnum.userToken);
+    final String userCode = await SharedManager().getString(SharedEnum.userCode);
 
     String url = '${ServiceTools.baseUrlV2}/list/$issueListType/issue';
 

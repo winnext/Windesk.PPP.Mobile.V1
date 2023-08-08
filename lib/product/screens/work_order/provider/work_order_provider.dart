@@ -11,17 +11,39 @@ class WorkOrderProvider extends ChangeNotifier {
 
   bool _initialState = true;
 
+  // loading
+  bool _isLoading = false;
+  bool get isLoading => _isLoading;
+
   List<WorkOrderTracingListModel> workOrderTracingListModel = [];
 
+  void update() {
+    notifyListeners();
+  }
+
   void getWorkOrderList() async {
-    final String userName = await SharedManager().getString(SharedEnum.userName);
     if (_initialState) {
       _initialState = false;
-      workSpaceService.getWorkOrderTracingList(userName).then((value) {
-        value.fold((l) => {workOrderTracingListModel = l}, (r) => {});
-        notifyListeners();
-      });
+      _changeLoading();
       notifyListeners();
+
+      final String userName = await SharedManager().getString(SharedEnum.userCode);
+
+      await workSpaceService.getWorkOrderTracingList(userName).then((value) {
+        value.fold(
+          (l) => {
+            workOrderTracingListModel = l,
+          },
+          (r) => {},
+        );
+      });
+      _changeLoading();
     }
+
+    notifyListeners();
+  }
+
+  void _changeLoading() {
+    _isLoading = !_isLoading;
   }
 }

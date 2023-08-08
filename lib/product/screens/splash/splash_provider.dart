@@ -90,7 +90,7 @@ class SplashProvider extends ChangeNotifier {
     final String userName = await SharedManager().getString(SharedEnum.userName);
 
     if (userName.isNotEmpty) {
-      final String userToken = await SharedManager().getString(SharedEnum.userToken);
+      final String userToken = await SharedManager().getString(SharedEnum.userCode);
       await _authService.checkAccessToken(userToken).then((value) {
         value.fold((l) {
           if (l.isTokenValid == true) {

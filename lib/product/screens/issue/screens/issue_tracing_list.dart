@@ -40,9 +40,11 @@ class _IssueTracingListState extends State<IssueTracingList> {
                               itemBuilder: (BuildContext context, int index) {
                                 IssueTracingListModel tracingListElement = context.read<IssueProvider>().tracingList[index];
                                 return CustomTracingList(
-                                    title: tracingListElement.name.toString(),
-                                    count: tracingListElement.count.toString(),
-                                    code: tracingListElement.code.toString());
+                                  title: tracingListElement.name.toString(),
+                                  count: tracingListElement.count.toString(),
+                                  code: tracingListElement.code.toString(),
+                                  isWorkOrder: false,
+                                );
                               }),
                         )
                       ],
