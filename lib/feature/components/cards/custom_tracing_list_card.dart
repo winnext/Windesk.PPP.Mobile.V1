@@ -20,7 +20,7 @@ class CustomTracingList extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           if (isWorkOrder) {
-            count.toString() == '0' ? null : context.router.push(WorkOrderListScreen());
+            count.toString() == '0' ? null : context.router.push(WorkOrderListScreen(workOrderCode: code, workOrderName: title));
           } else {
             count.toString() == '0' ? null : context.router.push(IssueListScreen(issueModuleCode: code));
           }

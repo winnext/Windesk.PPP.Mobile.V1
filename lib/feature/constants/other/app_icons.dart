@@ -41,4 +41,5 @@ class AppIcons {
   static const IconData documantScanner = Icons.document_scanner;
   static const IconData personal = Icons.person;
   static const IconData people = Icons.people;
+  static const IconData filter = Icons.filter_alt;
 }

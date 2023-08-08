@@ -30,8 +30,6 @@ class _Body extends StatelessWidget {
       create: (context) => WorkOrderProvider(),
       child: Consumer(builder: (context, WorkOrderProvider workOrderProvider, child) {
         workOrderProvider.getWorkOrderList();
-        workOrderProvider.update();
-        print(workOrderProvider.isLoading);
         return workOrderProvider.isLoading ? const CustomLoadingIndicator() : _workOrderList(workOrderProvider);
       }),
     );

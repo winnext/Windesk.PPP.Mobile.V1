@@ -127,9 +127,14 @@ abstract class $AppRouter extends _i15.RootStackRouter {
       );
     },
     WorkOrderListScreen.name: (routeData) {
+      final args = routeData.argsAs<WorkOrderListScreenArgs>();
       return _i15.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i14.WorkOrderListScreen(),
+        child: _i14.WorkOrderListScreen(
+          key: args.key,
+          workOrderCode: args.workOrderCode,
+          workOrderName: args.workOrderName,
+        ),
       );
     },
   };
@@ -382,14 +387,43 @@ class SearchWorkOrderScreen extends _i15.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i14.WorkOrderListScreen]
-class WorkOrderListScreen extends _i15.PageRouteInfo<void> {
-  const WorkOrderListScreen({List<_i15.PageRouteInfo>? children})
-      : super(
+class WorkOrderListScreen extends _i15.PageRouteInfo<WorkOrderListScreenArgs> {
+  WorkOrderListScreen({
+    _i16.Key? key,
+    required String workOrderCode,
+    required String workOrderName,
+    List<_i15.PageRouteInfo>? children,
+  }) : super(
           WorkOrderListScreen.name,
+          args: WorkOrderListScreenArgs(
+            key: key,
+            workOrderCode: workOrderCode,
+            workOrderName: workOrderName,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'WorkOrderListScreen';
 
-  static const _i15.PageInfo<void> page = _i15.PageInfo<void>(name);
+  static const _i15.PageInfo<WorkOrderListScreenArgs> page =
+      _i15.PageInfo<WorkOrderListScreenArgs>(name);
+}
+
+class WorkOrderListScreenArgs {
+  const WorkOrderListScreenArgs({
+    this.key,
+    required this.workOrderCode,
+    required this.workOrderName,
+  });
+
+  final _i16.Key? key;
+
+  final String workOrderCode;
+
+  final String workOrderName;
+
+  @override
+  String toString() {
+    return 'WorkOrderListScreenArgs{key: $key, workOrderCode: $workOrderCode, workOrderName: $workOrderName}';
+  }
 }
