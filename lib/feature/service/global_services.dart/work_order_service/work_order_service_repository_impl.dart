@@ -1,6 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:wm_ppp_4/feature/models/work_order_models/work_order_list_model.dart';
+import 'package:wm_ppp_4/feature/models/work_order_models/work_order_tracing_list_model.dart';
 
+import '../../../constants/paths/service_tools.dart';
 import '../../../enums/service_response_status_enums.dart';
 import '../../../enums/service_status_enums.dart';
 import '../../../exceptions/custom_service_exceptions.dart';
@@ -407,6 +410,86 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
     } catch (error) {
       super.logger.e(error.toString());
       return Right(CustomServiceException(message: CustomServiceMessages.workOrderDeleteSparepartsError, statusCode: '500'));
+    }
+  }
+
+  // GET WORK ORDER SERVICES
+  @override
+  Future<Either<List<WorkOrderTracingListModel>, CustomServiceException>> getWorkOrderTracingList(String xuserCode) async {
+    String url = '${ServiceTools.baseUrlV2}/list/module/workorder';
+
+    try {
+      final response = await super.dio.get(
+            url,
+            options: Options(
+              headers: {
+                'xusercode': xuserCode,
+                'xtoken': ServiceTools.tokenV2,
+              },
+            ),
+          );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        if (response.data[ServiceResponseStatusEnums.result.rawText] == ServiceStatusEnums.success.rawText) {
+          final data = response.data;
+
+          List<WorkOrderTracingListModel> tracingList = WorkOrderTracingListModel.fromJsonList(data['lists']);
+          super.logger.e(tracingList.toString());
+
+          return Left(tracingList);
+        } else {
+          return Right(CustomServiceException(message: 'Work Order Tracing List Model Error', statusCode: '500'));
+        }
+      } else {
+        return Right(CustomServiceException(message: 'Work Order Tracing List Model Error', statusCode: '500'));
+      }
+    } catch (e) {
+      super.logger.e(e.toString());
+      return Right(CustomServiceException(message: 'Work Order Tracing List Model Error', statusCode: '500'));
+    }
+  }
+
+  @override
+  Future<Either<List<WorkOrderListModel>, CustomServiceException>> getWorkOrderList(
+    String xuserCode,
+    String workOrderCode,
+    String startLimit,
+    String endLimit,
+    String build,
+    String floor,
+    String responsible,
+    String status,
+  ) async {
+    String url = '${ServiceTools.baseUrlV2}/list/$workOrderCode/workorder?start=$startLimit&end=20&build&floor&responsible&status';
+
+    try {
+      final response = await super.dio.get(
+            url,
+            options: Options(
+              headers: {
+                'xusercode': xuserCode,
+                'xtoken': ServiceTools.tokenV2,
+              },
+            ),
+          );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        if (response.data[ServiceResponseStatusEnums.result.rawText] == ServiceStatusEnums.success.rawText) {
+          final data = response.data;
+
+          List<WorkOrderListModel> workOrderList = WorkOrderListModel.fromJsonList(data['records']);
+          super.logger.e(workOrderList.toString());
+
+          return Left(workOrderList);
+        } else {
+          return Right(CustomServiceException(message: 'Work Order List Model Error', statusCode: '500'));
+        }
+      } else {
+        return Right(CustomServiceException(message: 'Work Order List Model Error', statusCode: '500'));
+      }
+    } catch (e) {
+      super.logger.e(e.toString());
+      return Right(CustomServiceException(message: 'Work Order List Model Error', statusCode: '500'));
     }
   }
 }

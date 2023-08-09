@@ -11,35 +11,29 @@
 import 'package:auto_route/auto_route.dart' as _i17;
 import 'package:flutter/material.dart' as _i18;
 import 'package:wm_ppp_4/feature/components/cards/custom_tracing_list_card.dart'
-    as _i16;
-import 'package:wm_ppp_4/feature/models/work_space/work_space_appendings.dart'
-    as _i19;
-import 'package:wm_ppp_4/feature/models/work_space/work_space_detail.dart'
-    as _i20;
-import 'package:wm_ppp_4/feature/route/empty_router.dart' as _i15;
-import 'package:wm_ppp_4/product/screens/auth/view/login_screen.dart' as _i10;
-import 'package:wm_ppp_4/product/screens/home/screens/detail_work_order/view/detail_work_order_screen.dart'
-    as _i3;
-import 'package:wm_ppp_4/product/screens/home/screens/pending_detail_work_order/pending_detail_work_order_screen.dart'
     as _i2;
-import 'package:wm_ppp_4/product/screens/home/screens/search_work_order/view/search_work_order_screen.dart'
-    as _i4;
-import 'package:wm_ppp_4/product/screens/home/screens/work_order_list/provider/work_order_list_provider.dart'
-    as _i21;
-import 'package:wm_ppp_4/product/screens/home/screens/work_order_list/tabs/my_work_orders.dart'
-    as _i5;
-import 'package:wm_ppp_4/product/screens/home/screens/work_order_list/view/work_order_list_screen.dart'
-    as _i6;
-import 'package:wm_ppp_4/product/screens/home/view/home_screen.dart' as _i7;
+import 'package:wm_ppp_4/feature/route/empty_router.dart' as _i3;
+import 'package:wm_ppp_4/feature/route/empty_search_router.dart' as _i4;
+import 'package:wm_ppp_4/product/screens/auth/view/login_screen.dart' as _i9;
+import 'package:wm_ppp_4/product/screens/home/view/home_screen.dart' as _i5;
 import 'package:wm_ppp_4/product/screens/issue/screens/issue_list_screen.dart'
-    as _i14;
-import 'package:wm_ppp_4/product/screens/issue/screens/issue_tracing_list_screen.dart'
-    as _i13;
+    as _i6;
+import 'package:wm_ppp_4/product/screens/issue/screens/issue_tracing_list.dart'
+    as _i8;
 import 'package:wm_ppp_4/product/screens/new_order/new_order_screen.dart'
+    as _i10;
+import 'package:wm_ppp_4/product/screens/search/screens/issue_search/view/issue_search_page.dart'
+    as _i7;
+import 'package:wm_ppp_4/product/screens/search/view/search_screen.dart'
+    as _i11;
+import 'package:wm_ppp_4/product/screens/search_work_order/view/search_work_order_screen.dart'
     as _i12;
-import 'package:wm_ppp_4/product/screens/search/search_screen.dart' as _i11;
-import 'package:wm_ppp_4/product/screens/splash/splash_screen.dart' as _i8;
-import 'package:wm_ppp_4/product/screens/test/view/test_screen.dart' as _i9;
+import 'package:wm_ppp_4/product/screens/splash/splash_screen.dart' as _i13;
+import 'package:wm_ppp_4/product/screens/test/view/test_screen.dart' as _i14;
+import 'package:wm_ppp_4/product/screens/work_order/view/work_order_list_screen.dart'
+    as _i15;
+import 'package:wm_ppp_4/product/screens/work_order/view/work_order_screen.dart'
+    as _i16;
 import 'package:wm_ppp_4/product/wrapper/app_wrapper.dart' as _i1;
 
 abstract class $AppRouter extends _i17.RootStackRouter {
@@ -53,70 +47,69 @@ abstract class $AppRouter extends _i17.RootStackRouter {
         child: const _i1.AppWrapper(),
       );
     },
-    PendingDetailWorkOrderScreen.name: (routeData) {
-      final args = routeData.argsAs<PendingDetailWorkOrderScreenArgs>();
+    CustomTracingList.name: (routeData) {
+      final args = routeData.argsAs<CustomTracingListArgs>();
       return _i17.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i2.PendingDetailWorkOrderScreen(
+        child: _i2.CustomTracingList(
           key: args.key,
-          workSpacePendiks: args.workSpacePendiks,
+          title: args.title,
+          count: args.count,
+          code: args.code,
+          isWorkOrder: args.isWorkOrder,
         ),
       );
     },
-    DetailWorkOrderScreen.name: (routeData) {
-      final args = routeData.argsAs<DetailWorkOrderScreenArgs>();
+    EmptyRouter.name: (routeData) {
       return _i17.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i3.DetailWorkOrderScreen(
-          key: args.key,
-          workSpaceDetail: args.workSpaceDetail,
-        ),
+        child: const _i3.EmptyRouter(),
       );
     },
-    SearchWorkOrderScreen.name: (routeData) {
+    EmptySearchRouter.name: (routeData) {
       return _i17.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i4.SearchWorkOrderScreen(),
-      );
-    },
-    MyWorkOrders.name: (routeData) {
-      final args = routeData.argsAs<MyWorkOrdersArgs>();
-      return _i17.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: _i5.MyWorkOrders(
-          key: args.key,
-          provider: args.provider,
-        ),
-      );
-    },
-    WorkOrderListScreen.name: (routeData) {
-      return _i17.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i6.WorkOrderListScreen(),
+        child: const _i4.EmptySearchRouter(),
       );
     },
     HomeScreen.name: (routeData) {
       return _i17.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i7.HomeScreen(),
+        child: const _i5.HomeScreen(),
       );
     },
-    SplashScreen.name: (routeData) {
+    IssueListScreen.name: (routeData) {
+      final args = routeData.argsAs<IssueListScreenArgs>();
       return _i17.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i8.SplashScreen(),
+        child: _i6.IssueListScreen(
+          key: args.key,
+          issueModuleCode: args.issueModuleCode,
+        ),
       );
     },
-    TestScreen.name: (routeData) {
+    IssueSearchRoute.name: (routeData) {
       return _i17.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i9.TestScreen(),
+        child: const _i7.IssueSearchPage(),
+      );
+    },
+    IssueTracingList.name: (routeData) {
+      return _i17.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i8.IssueTracingList(),
       );
     },
     LoginScreen.name: (routeData) {
       return _i17.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i10.LoginScreen(),
+        child: const _i9.LoginScreen(),
+      );
+    },
+    NewOrderScreen.name: (routeData) {
+      return _i17.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i10.NewOrderScreen(),
       );
     },
     SearchScreen.name: (routeData) {
@@ -125,44 +118,39 @@ abstract class $AppRouter extends _i17.RootStackRouter {
         child: const _i11.SearchScreen(),
       );
     },
-    NewOrderScreen.name: (routeData) {
+    SearchWorkOrderScreen.name: (routeData) {
       return _i17.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i12.NewOrderScreen(),
+        child: const _i12.SearchWorkOrderScreen(),
       );
     },
-    IssueTracingList.name: (routeData) {
+    SplashScreen.name: (routeData) {
       return _i17.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i13.IssueTracingList(),
+        child: const _i13.SplashScreen(),
       );
     },
-    IssueList.name: (routeData) {
-      final args = routeData.argsAs<IssueListArgs>();
+    TestScreen.name: (routeData) {
       return _i17.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i14.IssueList(
+        child: const _i14.TestScreen(),
+      );
+    },
+    WorkOrderListScreen.name: (routeData) {
+      final args = routeData.argsAs<WorkOrderListScreenArgs>();
+      return _i17.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: _i15.WorkOrderListScreen(
           key: args.key,
-          issueModuleCode: args.issueModuleCode,
+          workOrderCode: args.workOrderCode,
+          workOrderName: args.workOrderName,
         ),
       );
     },
-    EmptyRouter.name: (routeData) {
+    WorkOrderScreen.name: (routeData) {
       return _i17.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i15.EmptyRouter(),
-      );
-    },
-    CustomTracingList.name: (routeData) {
-      final args = routeData.argsAs<CustomTracingListArgs>();
-      return _i17.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: _i16.CustomTracingList(
-          key: args.key,
-          title: args.title,
-          count: args.count,
-          code: args.code,
-        ),
+        child: const _i16.WorkOrderScreen(),
       );
     },
   };
@@ -183,151 +171,88 @@ class AppWrapper extends _i17.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i2.PendingDetailWorkOrderScreen]
-class PendingDetailWorkOrderScreen
-    extends _i17.PageRouteInfo<PendingDetailWorkOrderScreenArgs> {
-  PendingDetailWorkOrderScreen({
+/// [_i2.CustomTracingList]
+class CustomTracingList extends _i17.PageRouteInfo<CustomTracingListArgs> {
+  CustomTracingList({
     _i18.Key? key,
-    required _i19.WorkSpacePendiks workSpacePendiks,
+    required String title,
+    required String count,
+    required String code,
+    required bool isWorkOrder,
     List<_i17.PageRouteInfo>? children,
   }) : super(
-          PendingDetailWorkOrderScreen.name,
-          args: PendingDetailWorkOrderScreenArgs(
+          CustomTracingList.name,
+          args: CustomTracingListArgs(
             key: key,
-            workSpacePendiks: workSpacePendiks,
+            title: title,
+            count: count,
+            code: code,
+            isWorkOrder: isWorkOrder,
           ),
           initialChildren: children,
         );
 
-  static const String name = 'PendingDetailWorkOrderScreen';
+  static const String name = 'CustomTracingList';
 
-  static const _i17.PageInfo<PendingDetailWorkOrderScreenArgs> page =
-      _i17.PageInfo<PendingDetailWorkOrderScreenArgs>(name);
+  static const _i17.PageInfo<CustomTracingListArgs> page =
+      _i17.PageInfo<CustomTracingListArgs>(name);
 }
 
-class PendingDetailWorkOrderScreenArgs {
-  const PendingDetailWorkOrderScreenArgs({
+class CustomTracingListArgs {
+  const CustomTracingListArgs({
     this.key,
-    required this.workSpacePendiks,
+    required this.title,
+    required this.count,
+    required this.code,
+    required this.isWorkOrder,
   });
 
   final _i18.Key? key;
 
-  final _i19.WorkSpacePendiks workSpacePendiks;
+  final String title;
+
+  final String count;
+
+  final String code;
+
+  final bool isWorkOrder;
 
   @override
   String toString() {
-    return 'PendingDetailWorkOrderScreenArgs{key: $key, workSpacePendiks: $workSpacePendiks}';
+    return 'CustomTracingListArgs{key: $key, title: $title, count: $count, code: $code, isWorkOrder: $isWorkOrder}';
   }
 }
 
 /// generated route for
-/// [_i3.DetailWorkOrderScreen]
-class DetailWorkOrderScreen
-    extends _i17.PageRouteInfo<DetailWorkOrderScreenArgs> {
-  DetailWorkOrderScreen({
-    _i18.Key? key,
-    required _i20.WorkSpaceDetail workSpaceDetail,
-    List<_i17.PageRouteInfo>? children,
-  }) : super(
-          DetailWorkOrderScreen.name,
-          args: DetailWorkOrderScreenArgs(
-            key: key,
-            workSpaceDetail: workSpaceDetail,
-          ),
-          initialChildren: children,
-        );
-
-  static const String name = 'DetailWorkOrderScreen';
-
-  static const _i17.PageInfo<DetailWorkOrderScreenArgs> page =
-      _i17.PageInfo<DetailWorkOrderScreenArgs>(name);
-}
-
-class DetailWorkOrderScreenArgs {
-  const DetailWorkOrderScreenArgs({
-    this.key,
-    required this.workSpaceDetail,
-  });
-
-  final _i18.Key? key;
-
-  final _i20.WorkSpaceDetail workSpaceDetail;
-
-  @override
-  String toString() {
-    return 'DetailWorkOrderScreenArgs{key: $key, workSpaceDetail: $workSpaceDetail}';
-  }
-}
-
-/// generated route for
-/// [_i4.SearchWorkOrderScreen]
-class SearchWorkOrderScreen extends _i17.PageRouteInfo<void> {
-  const SearchWorkOrderScreen({List<_i17.PageRouteInfo>? children})
+/// [_i3.EmptyRouter]
+class EmptyRouter extends _i17.PageRouteInfo<void> {
+  const EmptyRouter({List<_i17.PageRouteInfo>? children})
       : super(
-          SearchWorkOrderScreen.name,
+          EmptyRouter.name,
           initialChildren: children,
         );
 
-  static const String name = 'SearchWorkOrderScreen';
+  static const String name = 'EmptyRouter';
 
   static const _i17.PageInfo<void> page = _i17.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i5.MyWorkOrders]
-class MyWorkOrders extends _i17.PageRouteInfo<MyWorkOrdersArgs> {
-  MyWorkOrders({
-    _i18.Key? key,
-    required _i21.WorkOrderListProvider provider,
-    List<_i17.PageRouteInfo>? children,
-  }) : super(
-          MyWorkOrders.name,
-          args: MyWorkOrdersArgs(
-            key: key,
-            provider: provider,
-          ),
-          initialChildren: children,
-        );
-
-  static const String name = 'MyWorkOrders';
-
-  static const _i17.PageInfo<MyWorkOrdersArgs> page =
-      _i17.PageInfo<MyWorkOrdersArgs>(name);
-}
-
-class MyWorkOrdersArgs {
-  const MyWorkOrdersArgs({
-    this.key,
-    required this.provider,
-  });
-
-  final _i18.Key? key;
-
-  final _i21.WorkOrderListProvider provider;
-
-  @override
-  String toString() {
-    return 'MyWorkOrdersArgs{key: $key, provider: $provider}';
-  }
-}
-
-/// generated route for
-/// [_i6.WorkOrderListScreen]
-class WorkOrderListScreen extends _i17.PageRouteInfo<void> {
-  const WorkOrderListScreen({List<_i17.PageRouteInfo>? children})
+/// [_i4.EmptySearchRouter]
+class EmptySearchRouter extends _i17.PageRouteInfo<void> {
+  const EmptySearchRouter({List<_i17.PageRouteInfo>? children})
       : super(
-          WorkOrderListScreen.name,
+          EmptySearchRouter.name,
           initialChildren: children,
         );
 
-  static const String name = 'WorkOrderListScreen';
+  static const String name = 'EmptySearchRouter';
 
   static const _i17.PageInfo<void> page = _i17.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i7.HomeScreen]
+/// [_i5.HomeScreen]
 class HomeScreen extends _i17.PageRouteInfo<void> {
   const HomeScreen({List<_i17.PageRouteInfo>? children})
       : super(
@@ -341,35 +266,73 @@ class HomeScreen extends _i17.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i8.SplashScreen]
-class SplashScreen extends _i17.PageRouteInfo<void> {
-  const SplashScreen({List<_i17.PageRouteInfo>? children})
-      : super(
-          SplashScreen.name,
+/// [_i6.IssueListScreen]
+class IssueListScreen extends _i17.PageRouteInfo<IssueListScreenArgs> {
+  IssueListScreen({
+    _i18.Key? key,
+    required String issueModuleCode,
+    List<_i17.PageRouteInfo>? children,
+  }) : super(
+          IssueListScreen.name,
+          args: IssueListScreenArgs(
+            key: key,
+            issueModuleCode: issueModuleCode,
+          ),
           initialChildren: children,
         );
 
-  static const String name = 'SplashScreen';
+  static const String name = 'IssueListScreen';
+
+  static const _i17.PageInfo<IssueListScreenArgs> page =
+      _i17.PageInfo<IssueListScreenArgs>(name);
+}
+
+class IssueListScreenArgs {
+  const IssueListScreenArgs({
+    this.key,
+    required this.issueModuleCode,
+  });
+
+  final _i18.Key? key;
+
+  final String issueModuleCode;
+
+  @override
+  String toString() {
+    return 'IssueListScreenArgs{key: $key, issueModuleCode: $issueModuleCode}';
+  }
+}
+
+/// generated route for
+/// [_i7.IssueSearchPage]
+class IssueSearchRoute extends _i17.PageRouteInfo<void> {
+  const IssueSearchRoute({List<_i17.PageRouteInfo>? children})
+      : super(
+          IssueSearchRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'IssueSearchRoute';
 
   static const _i17.PageInfo<void> page = _i17.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i9.TestScreen]
-class TestScreen extends _i17.PageRouteInfo<void> {
-  const TestScreen({List<_i17.PageRouteInfo>? children})
+/// [_i8.IssueTracingList]
+class IssueTracingList extends _i17.PageRouteInfo<void> {
+  const IssueTracingList({List<_i17.PageRouteInfo>? children})
       : super(
-          TestScreen.name,
+          IssueTracingList.name,
           initialChildren: children,
         );
 
-  static const String name = 'TestScreen';
+  static const String name = 'IssueTracingList';
 
   static const _i17.PageInfo<void> page = _i17.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i10.LoginScreen]
+/// [_i9.LoginScreen]
 class LoginScreen extends _i17.PageRouteInfo<void> {
   const LoginScreen({List<_i17.PageRouteInfo>? children})
       : super(
@@ -378,6 +341,20 @@ class LoginScreen extends _i17.PageRouteInfo<void> {
         );
 
   static const String name = 'LoginScreen';
+
+  static const _i17.PageInfo<void> page = _i17.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i10.NewOrderScreen]
+class NewOrderScreen extends _i17.PageRouteInfo<void> {
+  const NewOrderScreen({List<_i17.PageRouteInfo>? children})
+      : super(
+          NewOrderScreen.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'NewOrderScreen';
 
   static const _i17.PageInfo<void> page = _i17.PageInfo<void>(name);
 }
@@ -397,129 +374,100 @@ class SearchScreen extends _i17.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i12.NewOrderScreen]
-class NewOrderScreen extends _i17.PageRouteInfo<void> {
-  const NewOrderScreen({List<_i17.PageRouteInfo>? children})
+/// [_i12.SearchWorkOrderScreen]
+class SearchWorkOrderScreen extends _i17.PageRouteInfo<void> {
+  const SearchWorkOrderScreen({List<_i17.PageRouteInfo>? children})
       : super(
-          NewOrderScreen.name,
+          SearchWorkOrderScreen.name,
           initialChildren: children,
         );
 
-  static const String name = 'NewOrderScreen';
+  static const String name = 'SearchWorkOrderScreen';
 
   static const _i17.PageInfo<void> page = _i17.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i13.IssueTracingList]
-class IssueTracingList extends _i17.PageRouteInfo<void> {
-  const IssueTracingList({List<_i17.PageRouteInfo>? children})
+/// [_i13.SplashScreen]
+class SplashScreen extends _i17.PageRouteInfo<void> {
+  const SplashScreen({List<_i17.PageRouteInfo>? children})
       : super(
-          IssueTracingList.name,
+          SplashScreen.name,
           initialChildren: children,
         );
 
-  static const String name = 'IssueTracingList';
+  static const String name = 'SplashScreen';
 
   static const _i17.PageInfo<void> page = _i17.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i14.IssueList]
-class IssueList extends _i17.PageRouteInfo<IssueListArgs> {
-  IssueList({
+/// [_i14.TestScreen]
+class TestScreen extends _i17.PageRouteInfo<void> {
+  const TestScreen({List<_i17.PageRouteInfo>? children})
+      : super(
+          TestScreen.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'TestScreen';
+
+  static const _i17.PageInfo<void> page = _i17.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i15.WorkOrderListScreen]
+class WorkOrderListScreen extends _i17.PageRouteInfo<WorkOrderListScreenArgs> {
+  WorkOrderListScreen({
     _i18.Key? key,
-    required String issueModuleCode,
+    required String workOrderCode,
+    required String workOrderName,
     List<_i17.PageRouteInfo>? children,
   }) : super(
-          IssueList.name,
-          args: IssueListArgs(
+          WorkOrderListScreen.name,
+          args: WorkOrderListScreenArgs(
             key: key,
-            issueModuleCode: issueModuleCode,
+            workOrderCode: workOrderCode,
+            workOrderName: workOrderName,
           ),
           initialChildren: children,
         );
 
-  static const String name = 'IssueList';
+  static const String name = 'WorkOrderListScreen';
 
-  static const _i17.PageInfo<IssueListArgs> page =
-      _i17.PageInfo<IssueListArgs>(name);
+  static const _i17.PageInfo<WorkOrderListScreenArgs> page =
+      _i17.PageInfo<WorkOrderListScreenArgs>(name);
 }
 
-class IssueListArgs {
-  const IssueListArgs({
+class WorkOrderListScreenArgs {
+  const WorkOrderListScreenArgs({
     this.key,
-    required this.issueModuleCode,
+    required this.workOrderCode,
+    required this.workOrderName,
   });
 
   final _i18.Key? key;
 
-  final String issueModuleCode;
+  final String workOrderCode;
+
+  final String workOrderName;
 
   @override
   String toString() {
-    return 'IssueListArgs{key: $key, issueModuleCode: $issueModuleCode}';
+    return 'WorkOrderListScreenArgs{key: $key, workOrderCode: $workOrderCode, workOrderName: $workOrderName}';
   }
 }
 
 /// generated route for
-/// [_i15.EmptyRouter]
-class EmptyRouter extends _i17.PageRouteInfo<void> {
-  const EmptyRouter({List<_i17.PageRouteInfo>? children})
+/// [_i16.WorkOrderScreen]
+class WorkOrderScreen extends _i17.PageRouteInfo<void> {
+  const WorkOrderScreen({List<_i17.PageRouteInfo>? children})
       : super(
-          EmptyRouter.name,
+          WorkOrderScreen.name,
           initialChildren: children,
         );
 
-  static const String name = 'EmptyRouter';
+  static const String name = 'WorkOrderScreen';
 
   static const _i17.PageInfo<void> page = _i17.PageInfo<void>(name);
-}
-
-/// generated route for
-/// [_i16.CustomTracingList]
-class CustomTracingList extends _i17.PageRouteInfo<CustomTracingListArgs> {
-  CustomTracingList({
-    _i18.Key? key,
-    required String title,
-    required String count,
-    required String code,
-    List<_i17.PageRouteInfo>? children,
-  }) : super(
-          CustomTracingList.name,
-          args: CustomTracingListArgs(
-            key: key,
-            title: title,
-            count: count,
-            code: code,
-          ),
-          initialChildren: children,
-        );
-
-  static const String name = 'CustomTracingList';
-
-  static const _i17.PageInfo<CustomTracingListArgs> page =
-      _i17.PageInfo<CustomTracingListArgs>(name);
-}
-
-class CustomTracingListArgs {
-  const CustomTracingListArgs({
-    this.key,
-    required this.title,
-    required this.count,
-    required this.code,
-  });
-
-  final _i18.Key? key;
-
-  final String title;
-
-  final String count;
-
-  final String code;
-
-  @override
-  String toString() {
-    return 'CustomTracingListArgs{key: $key, title: $title, count: $count, code: $code}';
-  }
 }

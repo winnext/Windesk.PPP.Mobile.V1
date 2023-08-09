@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_final_fields
+
 import 'package:flutter/material.dart';
 
 import '../../../../feature/models/issue_models/issue_list_model.dart';

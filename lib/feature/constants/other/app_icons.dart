@@ -41,4 +41,19 @@ class AppIcons {
   static const IconData documantScanner = Icons.document_scanner;
   static const IconData personal = Icons.person;
   static const IconData people = Icons.people;
+
+  //search icons
+
+  static const IconData caseSLASearchIcon = Icons.explore;
+  static const IconData entitySearchIcon = Icons.archive;
+  static const IconData mahalSearchIcon = Icons.flag;
+  static const IconData workOrderSearchIcon = Icons.explore;
+
+  //search page icons
+  static const IconData issueSearchIcon = Icons.explore;
+  static const IconData assetSearchIcon = Icons.archive;
+  static const IconData spaceSearchIcon = Icons.flag;
+  static const IconData woSearchIcon = Icons.explore;
+
+  static const IconData filter = Icons.filter_alt;
 }

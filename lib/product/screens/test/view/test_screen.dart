@@ -20,18 +20,14 @@ class TestScreen extends StatefulWidget {
 }
 
 class _TestScreenState extends State<TestScreen> {
-  final RoundedLoadingButtonController _controllerButton =
-      RoundedLoadingButtonController();
+  final RoundedLoadingButtonController _controllerButton = RoundedLoadingButtonController();
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) => TestProvider(),
-      child: Consumer<TestProvider>(
-          builder: (context, TestProvider testProvider, child) {
-        testProvider.getInfoLoad == false
-            ? testProvider.getTestScreenInfo()
-            : null;
+      child: Consumer<TestProvider>(builder: (context, TestProvider testProvider, child) {
+        testProvider.getInfoLoad == false ? testProvider.getTestScreenInfo() : null;
         return Scaffold(
           appBar: const CustomTabAppbar(title: AppStrings.testTab),
           body: Center(child: _bodyWidget(context, testProvider)),
@@ -43,7 +39,6 @@ class _TestScreenState extends State<TestScreen> {
   _bodyWidget(BuildContext context, TestProvider testProvider) {
     return Column(
       children: [
-        _pictureWidget(context),
         _headerWidget(context),
         _infoWidget(context, testProvider),
         _buttonsAndTestResultWidget(context, testProvider),
@@ -53,7 +48,7 @@ class _TestScreenState extends State<TestScreen> {
 
   Widget _pictureWidget(BuildContext context) {
     return Expanded(
-      flex: 2,
+      flex: 1,
       child: Center(
         child: Image.asset(
           'assets/images/profile3.png',
@@ -67,11 +62,11 @@ class _TestScreenState extends State<TestScreen> {
 
   Widget _headerWidget(BuildContext context) {
     return Expanded(
-      flex: 2,
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(
           children: [
+            _pictureWidget(context),
             const Text(
               AppStrings.windeskHelp,
               style: TextStyle(fontWeight: FontWeight.bold),
@@ -85,7 +80,6 @@ class _TestScreenState extends State<TestScreen> {
 
   Widget _infoWidget(BuildContext context, TestProvider testProvider) {
     return Expanded(
-      flex: 5,
       child: Column(
         children: [
           const Padding(
@@ -97,26 +91,23 @@ class _TestScreenState extends State<TestScreen> {
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text(AppStrings.device +
-                context.read<TestProvider>().deviceModel.toString()),
+            child: Text(AppStrings.device + context.read<TestProvider>().deviceModel.toString()),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text(AppStrings.os +
-                context.read<TestProvider>().deviceOS.toString()),
+            child: Text(AppStrings.os + context.read<TestProvider>().deviceOS.toString()),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text(AppStrings.appVersion +
-                context.read<TestProvider>().appVersion.toString()),
+            child: Text(AppStrings.appVersion + context.read<TestProvider>().appVersion.toString()),
           ),
           Expanded(
             flex: 4,
             child: Padding(
-              padding: EdgeInsets.all(10.0),
+              padding: const EdgeInsets.all(10.0),
               child: Column(
                 children: [
-                  Padding(
+                  const Padding(
                     padding: EdgeInsets.all(12.0),
                     child: Text(
                       AppStrings.connectionTime,
@@ -134,16 +125,13 @@ class _TestScreenState extends State<TestScreen> {
     );
   }
 
-  Widget _buttonsAndTestResultWidget(
-      BuildContext context, TestProvider testProvider) {
+  Widget _buttonsAndTestResultWidget(BuildContext context, TestProvider testProvider) {
     return Expanded(
-      flex: 6,
       child: Column(
         children: [
           // buttonNotify(context, AppStrings.issueNotify, onPressFunction,
           //     _controllerButton),
-          buttonTest(
-              context, AppStrings.accessTest, testProvider, _controllerButton),
+          buttonTest(context, AppStrings.accessTest, testProvider, _controllerButton),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
@@ -189,8 +177,7 @@ class _TestScreenState extends State<TestScreen> {
   }
 }
 
-SizedBox buttonTest(BuildContext context, String buttonText,
-    TestProvider testProvider, controllerButton) {
+SizedBox buttonTest(BuildContext context, String buttonText, TestProvider testProvider, controllerButton) {
   return SizedBox(
     width: context.width * 0.7,
     child: Padding(
@@ -209,19 +196,15 @@ SizedBox buttonTest(BuildContext context, String buttonText,
         valueColor: Colors.white,
         borderRadius: 12,
         child: Center(
-          child: Text(
-              buttonText == AppStrings.accessTest
-                  ? AppStrings.accessTest
-                  : AppStrings.issueNotify,
-              style: const TextStyle(color: Colors.white)),
+          child:
+              Text(buttonText == AppStrings.accessTest ? AppStrings.accessTest : AppStrings.issueNotify, style: const TextStyle(color: Colors.white)),
         ),
       ),
     ),
   );
 }
 
-SizedBox buttonNotify(BuildContext context, String buttonText, onPressFunction,
-    controllerButton) {
+SizedBox buttonNotify(BuildContext context, String buttonText, onPressFunction, controllerButton) {
   return SizedBox(
     width: context.width * 0.7,
     child: Padding(
@@ -234,11 +217,8 @@ SizedBox buttonNotify(BuildContext context, String buttonText, onPressFunction,
         valueColor: Colors.white,
         borderRadius: 12,
         child: Center(
-          child: Text(
-              buttonText == AppStrings.accessTest
-                  ? AppStrings.accessTest
-                  : AppStrings.issueNotify,
-              style: const TextStyle(color: Colors.white)),
+          child:
+              Text(buttonText == AppStrings.accessTest ? AppStrings.accessTest : AppStrings.issueNotify, style: const TextStyle(color: Colors.white)),
         ),
       ),
     ),

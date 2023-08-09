@@ -11,8 +11,7 @@ import '../../../../feature/database/shared_manager.dart';
 import '../../../../feature/models/home_page_models/announcement_model.dart';
 
 class HomeProvider extends ChangeNotifier {
-  final AuthServiceRepository _authServiceRepository =
-      AuthServiceRepositoryImpl();
+  final AuthServiceRepository _authServiceRepository = AuthServiceRepositoryImpl();
   bool _isUserLogout = false;
   bool get isUserLogout => _isUserLogout;
 
@@ -34,12 +33,12 @@ class HomeProvider extends ChangeNotifier {
   }
 
   void logoutFunction() async {
-    final result = HomeServiceRepositoryImpl().logout();
-    // ignore: unrelated_type_equality_checks
-    if (result == 'success') {
-      _isUserLogout = true;
-      notifyListeners();
-    }
+    // final result = HomeServiceRepositoryImpl().logout('');
+    // // ignore: unrelated_type_equality_checks
+    // if (result == 'success') {
+    //   _isUserLogout = true;
+    //   notifyListeners();
+    // }
   }
 
   void getAnnouncement() {
@@ -53,8 +52,7 @@ class HomeProvider extends ChangeNotifier {
   }
 
   void logOut() async {
-    final String userCode =
-        await SharedManager().getString(SharedEnum.userToken);
+    final String userCode = await SharedManager().getString(SharedEnum.userCode);
     if (userCode.isNotEmpty) {
       final response = await _authServiceRepository.logout(userCode);
       response.fold(
