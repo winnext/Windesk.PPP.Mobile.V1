@@ -20,6 +20,14 @@ class AppStrings {
   static const String workOrderSearch = 'İş Emri Arama';
   static const String newWorkOrder = 'Yeni İş Emri';
 
+  //caseSlaSearch
+  static const String entitiySearch = 'Varlık Arama';
+
+  static const String entitiyCode = 'Varlık Kodu';
+  static const String serialNumber = 'Seri No';
+  static const String rfid = 'RFID';
+  static const String space = 'Mahal';
+
   // date strings
   static const day = 'gün';
   static const hour = 'saat';
@@ -38,6 +46,8 @@ class AppStrings {
   static const reject = 'Reddet';
   static const save = 'Kaydet';
   static const approve = 'Onayla';
+  static const String clean = 'Temizle';
+  static const String search = 'Ara';
 
   //Add efforts labels
   static const addEffort = 'Efor Ekle';

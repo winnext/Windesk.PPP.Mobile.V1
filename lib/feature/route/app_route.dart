@@ -45,7 +45,8 @@ class AppRouter extends $AppRouter {
               children: [
                 RedirectRoute(path: '', redirectTo: 'searchScreen'),
                 AutoRoute(path: 'searchScreen', page: SearchScreen.page, initial: true),
-                AutoRoute(path: 'issueSearchPage', page: IssueSearchRoute.page)
+                AutoRoute(path: 'issueSearchPage', page: IssueSearchRoute.page),
+                AutoRoute(path: 'assetSearchPage', page: AssetSearchRoute.page)
               ],
             ),
             AutoRoute(path: 'testScreen', page: TestScreen.page),
