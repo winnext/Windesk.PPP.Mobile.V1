@@ -120,14 +120,14 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
   @override
   Future<Either<WorkOrderDetailsModel, CustomServiceException>> getWorkOrderDetails(String workOrderCode) async {
     WorkOrderDetailsModel workOrderDeatails;
-    String url = 'http://windeskmobile.signumtte.com/workorder/detail/$workOrderCode';
+    String url = '${ServiceTools.baseUrlV2}/workorder/detail/$workOrderCode';
 
     try {
       final response = await super.dio.get(url,
           options: Options(
             headers: {
               'xusercode': "sgnm1040",
-              'xtoken': 'demo!',
+              'xtoken': ServiceTools.tokenV2,
             },
           ));
 
