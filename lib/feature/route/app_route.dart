@@ -24,7 +24,8 @@ class AppRouter extends $AppRouter {
 
                 // work order
                 AutoRoute(path: 'workOrderListScreen', page: WorkOrderListScreen.page),
-                AutoRoute(path: 'workOrderScreen', page: WorkOrderScreen.page),
+                AutoRoute(path: 'workOrderScreen', page: WorkOrderMainScreen.page),
+                AutoRoute(path: 'workOrderDetailScreen', page: WorkOrderDetailScreen.page),
 
                 // search work order
                 AutoRoute(path: 'searchWorkOrderScreen', page: SearchWorkOrderScreen.page),

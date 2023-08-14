@@ -1,4 +1,4 @@
-#Tue Aug 08 16:38:15 TRT 2023
+#Mon Aug 14 08:38:23 TRT 2023
 base.0=/home/mertsaygili/Masaüstü/develop/Windesk.PPP.Mobile.V1/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
 path.0=classes.dex
 renamed.0=classes.dex
