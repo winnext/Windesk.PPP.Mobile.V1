@@ -56,4 +56,10 @@ class AppIcons {
   static const IconData woSearchIcon = Icons.explore;
 
   static const IconData filter = Icons.filter_alt;
+
+  // work order card icons
+  static const IconData location = Icons.location_on;
+  static const IconData building = Icons.home_work;
+  static const IconData floor = Icons.layers;
+  static const IconData clock = Icons.access_time;
 }

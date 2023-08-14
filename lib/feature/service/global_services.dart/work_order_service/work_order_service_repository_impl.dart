@@ -118,7 +118,7 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
   }
 
   @override
-  Future<Either<WorkOrderDetailsModel, CustomServiceException>> getWorkOrderDetails(String workOrderCode) async {
+  Future<Either<WorkOrderDetailsModel, CustomServiceException>> getWorkOrderDetails(String userCode, String workOrderCode) async {
     WorkOrderDetailsModel workOrderDeatails;
     String url = '${ServiceTools.baseUrlV2}/workorder/detail/$workOrderCode';
 
@@ -126,7 +126,7 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
       final response = await super.dio.get(url,
           options: Options(
             headers: {
-              'xusercode': "sgnm1040",
+              'xusercode': userCode,
               'xtoken': ServiceTools.tokenV2,
             },
           ));

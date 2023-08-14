@@ -44,7 +44,7 @@ abstract class WorkOrderServiceRepository {
 
   Future<Either<List<WorkOrderShiftingsModel>, CustomServiceException>> getWorkOrderShiftings();
 
-  Future<Either<WorkOrderDetailsModel, CustomServiceException>> getWorkOrderDetails(String workOrderCode);
+  Future<Either<WorkOrderDetailsModel, CustomServiceException>> getWorkOrderDetails(String userCode, String workOrderCode);
 
   Future<Either<List<WorkOrderSparepartsModel>, CustomServiceException>> getWorkOrderSpareparts(String workOrderCode);
 
