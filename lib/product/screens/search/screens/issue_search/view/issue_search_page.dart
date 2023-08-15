@@ -15,11 +15,9 @@ class IssueSearchPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    test() {}
     return ChangeNotifierProvider(
         create: (context) => IssueSearchProvider(),
-        child: Consumer<IssueSearchProvider>(
-            builder: (context, IssueSearchProvider issueSearchProvider, child) {
+        child: Consumer<IssueSearchProvider>(builder: (context, IssueSearchProvider issueSearchProvider, child) {
           return Scaffold(
             appBar: const CustomTabAppbar(
               title: AppStrings.caseSlaSearch,
@@ -38,8 +36,8 @@ class IssueSearchPage extends StatelessWidget {
                         },
                         labelText: 'Vaka No'),
                   ),
-                  Divider(),
-                  Divider(),
+                  const Divider(),
+                  const Divider(),
                   SizedBox(
                     width: MediaQuery.of(context).size.width / 3,
                     child: CustomCircularWithTextButton(

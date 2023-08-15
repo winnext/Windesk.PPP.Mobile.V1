@@ -45,13 +45,13 @@
     },
     {
       "name": "auto_route",
-      "rootUri": "file:///Users/muratcan.yusufoglu/.pub-cache/hosted/pub.dev/auto_route-7.7.1",
+      "rootUri": "file:///Users/muratcan.yusufoglu/.pub-cache/hosted/pub.dev/auto_route-7.8.0",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "auto_route_generator",
-      "rootUri": "file:///Users/muratcan.yusufoglu/.pub-cache/hosted/pub.dev/auto_route_generator-7.2.0",
+      "rootUri": "file:///Users/muratcan.yusufoglu/.pub-cache/hosted/pub.dev/auto_route_generator-7.3.0",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -189,7 +189,7 @@
     },
     {
       "name": "device_info_plus",
-      "rootUri": "file:///Users/muratcan.yusufoglu/.pub-cache/hosted/pub.dev/device_info_plus-9.0.2",
+      "rootUri": "file:///Users/muratcan.yusufoglu/.pub-cache/hosted/pub.dev/device_info_plus-9.0.3",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -201,7 +201,7 @@
     },
     {
       "name": "dio",
-      "rootUri": "file:///Users/muratcan.yusufoglu/.pub-cache/hosted/pub.dev/dio-5.3.0",
+      "rootUri": "file:///Users/muratcan.yusufoglu/.pub-cache/hosted/pub.dev/dio-5.3.2",
       "packageUri": "lib/",
       "languageVersion": "2.15"
     },
@@ -314,6 +314,12 @@
       "languageVersion": "3.0"
     },
     {
+      "name": "flutter_barcode_scanner",
+      "rootUri": "file:///Users/muratcan.yusufoglu/.pub-cache/hosted/pub.dev/flutter_barcode_scanner-2.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "flutter_lints",
       "rootUri": "file:///Users/muratcan.yusufoglu/.pub-cache/hosted/pub.dev/flutter_lints-2.0.2",
       "packageUri": "lib/",
@@ -405,7 +411,7 @@
     },
     {
       "name": "image_picker",
-      "rootUri": "file:///Users/muratcan.yusufoglu/.pub-cache/hosted/pub.dev/image_picker-1.0.1",
+      "rootUri": "file:///Users/muratcan.yusufoglu/.pub-cache/hosted/pub.dev/image_picker-1.0.2",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -417,7 +423,7 @@
     },
     {
       "name": "image_picker_for_web",
-      "rootUri": "file:///Users/muratcan.yusufoglu/.pub-cache/hosted/pub.dev/image_picker_for_web-2.2.0",
+      "rootUri": "file:///Users/muratcan.yusufoglu/.pub-cache/hosted/pub.dev/image_picker_for_web-3.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -453,9 +459,9 @@
     },
     {
       "name": "injectable",
-      "rootUri": "file:///Users/muratcan.yusufoglu/.pub-cache/hosted/pub.dev/injectable-2.1.2",
+      "rootUri": "file:///Users/muratcan.yusufoglu/.pub-cache/hosted/pub.dev/injectable-2.2.0",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "3.0"
     },
     {
       "name": "internet_connection_checker",
@@ -549,7 +555,7 @@
     },
     {
       "name": "package_info_plus",
-      "rootUri": "file:///Users/muratcan.yusufoglu/.pub-cache/hosted/pub.dev/package_info_plus-4.0.2",
+      "rootUri": "file:///Users/muratcan.yusufoglu/.pub-cache/hosted/pub.dev/package_info_plus-4.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -567,19 +573,19 @@
     },
     {
       "name": "path_provider_linux",
-      "rootUri": "file:///Users/muratcan.yusufoglu/.pub-cache/hosted/pub.dev/path_provider_linux-2.1.11",
+      "rootUri": "file:///Users/muratcan.yusufoglu/.pub-cache/hosted/pub.dev/path_provider_linux-2.2.0",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "path_provider_platform_interface",
-      "rootUri": "file:///Users/muratcan.yusufoglu/.pub-cache/hosted/pub.dev/path_provider_platform_interface-2.0.6",
+      "rootUri": "file:///Users/muratcan.yusufoglu/.pub-cache/hosted/pub.dev/path_provider_platform_interface-2.1.0",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.18"
     },
     {
       "name": "path_provider_windows",
-      "rootUri": "file:///Users/muratcan.yusufoglu/.pub-cache/hosted/pub.dev/path_provider_windows-2.1.7",
+      "rootUri": "file:///Users/muratcan.yusufoglu/.pub-cache/hosted/pub.dev/path_provider_windows-2.2.0",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -855,7 +861,7 @@
     },
     {
       "name": "win32",
-      "rootUri": "file:///Users/muratcan.yusufoglu/.pub-cache/hosted/pub.dev/win32-5.0.5",
+      "rootUri": "file:///Users/muratcan.yusufoglu/.pub-cache/hosted/pub.dev/win32-5.0.6",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
@@ -867,7 +873,7 @@
     },
     {
       "name": "xdg_directories",
-      "rootUri": "file:///Users/muratcan.yusufoglu/.pub-cache/hosted/pub.dev/xdg_directories-1.0.1",
+      "rootUri": "file:///Users/muratcan.yusufoglu/.pub-cache/hosted/pub.dev/xdg_directories-1.0.2",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -890,7 +896,7 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2023-08-07T08:40:26.274390Z",
+  "generated": "2023-08-15T06:53:34.069562Z",
   "generator": "pub",
   "generatorVersion": "3.1.0-333.0.dev"
 }

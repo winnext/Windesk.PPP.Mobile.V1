@@ -10,4 +10,3 @@ RecordModel _$RecordModelFromJson(Map<String, dynamic> json) => RecordModel(
       code: json['CODE'] as String?,
       fullname: json['FULLNAME'] as String?,
     );
-

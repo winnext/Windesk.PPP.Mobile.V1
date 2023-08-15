@@ -21,6 +21,7 @@ class ServiceTools {
   static const attachPath = "http://10.126.12.21/esh";
   static const attachPathLive = "http://10.126.12.21/esh/xreadattach.php?token=$tokenV1&id=";
   static const facilityName = "Eskişehir Şehir Hastanesi";
+  static const appName = "ESH";
 
   // static const String baseUrlV1 =
   //     'http://geskwdtestapp.gaziantep.yerel/windesk/app/webroot/integration/WindeskMobile.php?use_rest=1&wsusername=wdmobile&wspassword=wdsgnm1017_&token=';

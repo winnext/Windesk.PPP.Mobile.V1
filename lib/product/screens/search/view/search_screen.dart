@@ -21,7 +21,7 @@ class SearchScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Expanded(child: SizedBox()),
+            const Expanded(child: SizedBox()),
             searchPageIcons(context),
           ],
         ),
@@ -36,35 +36,17 @@ class SearchScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          rowIconButtonSection(
-              context,
-              LocaleKeys.issueSearch,
-              AppIcons.caseSLASearchIcon,
-              const IssueSearchRoute(),
-              LocaleKeys.entitySearchTitle,
-              AppIcons.entitySearchIcon,
-              const TestScreen()),
-          rowIconButtonSection(
-              context,
-              LocaleKeys.mahalSearchTitle,
-              AppIcons.mahalSearchIcon,
-              const WorkOrderListScreen(),
-              LocaleKeys.workOrderSearch,
-              AppIcons.workOrderSearchIcon,
-              const SearchWorkOrderScreen()),
+          rowIconButtonSection(context, LocaleKeys.issueSearch, AppIcons.caseSLASearchIcon, const IssueSearchRoute(), LocaleKeys.entitySearchTitle,
+              AppIcons.entitySearchIcon, const SearchWorkOrderScreen()),
+          rowIconButtonSection(context, LocaleKeys.mahalSearchTitle, AppIcons.mahalSearchIcon, const WorkOrderScreen(), LocaleKeys.workOrderSearch,
+              AppIcons.workOrderSearchIcon, const SearchWorkOrderScreen()),
         ],
       ),
     );
   }
 
-  Expanded rowIconButtonSection(
-      BuildContext context,
-      String buttonTitle1,
-      IconData buttonIcon1,
-      PageRouteInfo<dynamic> navigateRouteName1,
-      String buttonTitle2,
-      IconData buttonIcon2,
-      PageRouteInfo<dynamic> navigateRouteName2) {
+  Expanded rowIconButtonSection(BuildContext context, String buttonTitle1, IconData buttonIcon1, PageRouteInfo<dynamic> navigateRouteName1,
+      String buttonTitle2, IconData buttonIcon2, PageRouteInfo<dynamic> navigateRouteName2) {
     return Expanded(
       child: Center(
         child: Row(

@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../service/search_service_repo_impl.dart';
 
 class IssueSearchProvider extends ChangeNotifier {
-  final SearchServiceRepoImpml _searchServiceRepository =
-      SearchServiceRepoImpml();
+  final SearchServiceRepoImpml _searchServiceRepository = SearchServiceRepoImpml();
 
   String _searchIssueCode = '';
   String get searchIssueCode => _searchIssueCode;
@@ -13,9 +12,8 @@ class IssueSearchProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  printSearchData() async {
-    final response =
-        await _searchServiceRepository.checkIssueByAuth(searchIssueCode);
-    response.fold((l) => {print(l)}, (r) => {print('fail')});
+  void printSearchData() async {
+    final response = await _searchServiceRepository.checkIssueByAuth(searchIssueCode);
+    response.fold((l) => {}, (r) => {});
   }
 }
