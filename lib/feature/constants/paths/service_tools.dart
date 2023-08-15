@@ -15,13 +15,24 @@ class ServiceTools {
   // static const facilityName = "İstanbul Finans Merkezi";
 
   // ESH PREPROD
+  // static const pppProject = "esh";
+  // static const baseUrlV2 = 'http://windeskmobiletest.eskisehir.yerel';
+  // static const tokenV1 = 'wdeshtest!_';
+  // static const tokenV2 = 'eshtest!';
+  // static const attachPathLive = "http://10.126.12.21/esh/xreadattach.php?token=$tokenV1&id=";
+  // static const baseUrlV1 =
+  //     'http://10.126.12.21/esh3/app/webroot/integration/WindeskMobile.php?use_rest=1&wsusername=wdmobile&wspassword=wdsgnm1017_&token=';
+  // static const facilityName = 'Eskişehir Şehir Hastanesi';
+
+  // ESH PROD
   static const pppProject = "esh";
-  static const baseUrlV2 = 'http://windeskmobiletest.eskisehir.yerel';
-  static const tokenV1 = 'wdeshtest!_';
-  static const tokenV2 = 'eshtest!';
-  static const attachPathLive = "http://10.126.12.21/esh/xreadattach.php?token=$tokenV1&id=";
+  static const baseUrlV2 = 'http://windeskmobile.eskisehir.yerel/';
+  static const tokenV1 = 'wdeshprod!_';
+  static const tokenV2 = 'eshprod!';
+  static const attachPathLive =
+      "http://10.126.12.141/windesk/xreadattach.php?token=$tokenV1&id=";
   static const baseUrlV1 =
-      'http://10.126.12.21/esh/app/webroot/integration/WindeskMobile.php?use_rest=1&wsusername=wdmobile&wspassword=wdsgnm1017_&token=';
+      'http://10.126.12.141/windesk/app/webroot/integration/WindeskMobile.php?use_rest=1&wsusername=wdmobile&wspassword=wdsgnm1017_&token=$tokenV1';
   static const facilityName = 'Eskişehir Şehir Hastanesi';
 
   // static const String baseUrlV1 =
