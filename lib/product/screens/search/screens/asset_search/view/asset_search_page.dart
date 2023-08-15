@@ -1,8 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wm_ppp_4/feature/components/buttons/custom_circular_with_text_button.dart';
-import 'package:wm_ppp_4/feature/constants/other/colors.dart';
 
 import '../../../../../../feature/components/appbar/custom_tab_appbar.dart';
 import '../../../../../../feature/components/buttons/custom_half_buttons.dart';
