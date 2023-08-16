@@ -16,8 +16,8 @@ class TestServiceRepositoryImpl extends TestServiceRepository {
     bool result = false;
 
     String url =
-        '${ServiceTools.attachPathLive}?&timestamp=${DateTime.now().millisecondsSinceEpoch.toString()}';
-
+        '${ServiceTools.attachPath}?&timestamp=${DateTime.now().millisecondsSinceEpoch.toString()}';
+    print(url);
     try {
       final response = await super.dio.get(url);
       super.logger.e(response.statusCode.toString());
@@ -45,7 +45,7 @@ class TestServiceRepositoryImpl extends TestServiceRepository {
   Future<Either<bool, CustomServiceException>> accessTestMobileService() async {
     bool result = false;
 
-    String url = '${ServiceTools.baseUrlV2}workorder/reactive';
+    String url = '${ServiceTools.baseUrlV2}/workorder/reactive';
 
     try {
       final response = await super.dio.get(url,
@@ -79,7 +79,8 @@ class TestServiceRepositoryImpl extends TestServiceRepository {
   Future<Either<bool, CustomServiceException>> getServerTime(token) async {
     bool result = false;
 
-    String url = '${ServiceTools.baseUrlV1}$token&action=getDateTime';
+    String url =
+        '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$token&action=getDateTime';
     print('URL : ' + url);
     try {
       final response = await super.dio.get(url,
@@ -94,7 +95,7 @@ class TestServiceRepositoryImpl extends TestServiceRepository {
 
         super.logger.e(result);
 
-        return Left(response.data[ServiceResponseStatusEnums.records.rawText]);
+        return Left(true);
       } else {
         return Right(CustomServiceException(
             message: CustomServiceMessages.getServerTimeError,
