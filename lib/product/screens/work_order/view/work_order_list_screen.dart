@@ -67,7 +67,7 @@ class WorkOrderListScreen extends StatelessWidget {
               return InkWell(
                   onTap: () {
                     context.read<WorkOrderListProvider>().closeTimer();
-                    context.router.push(WorkOrderDetailScreen(workorderId: value.workOrderListModel[index].code ?? 'WOO0000001'));
+                    context.router.push(WorkOrderDetailScreen(workorderCode: value.workOrderListModel[index].code ?? 'WOO0000001'));
                   },
                   child: CustomWorkorderListCard(model: model));
             },

@@ -57,10 +57,11 @@ class AppStrings {
   static const chooseShift = 'Vardiya Seçiniz';
 
   // accordion titles
-  static const requstMaterial = 'Malzeme Talebi';
-  static const addPiece = 'Parça Ekle';
+  static const materials = 'Malzemeler';
+  static const workers = 'Personeller';
   static const efforts = 'Eforlar';
-  static const addDocumant = 'Döküman Ekle';
+  static const documants = 'Dökümanlar';
+  static const order = 'Talimat';
 
   // sub accordion titles
   static const addedMaterials = 'Eklenmiş Parçalar';
@@ -69,7 +70,8 @@ class AppStrings {
   static const addPdf = 'Pdf Ekle';
   static const addImage = 'Fotoğraf Ekle';
   static const addedDocumants = 'Eklenmiş Dökümanlar';
-//test page strings
+
+  //test page strings
   static const accessTest = 'Erişim Testi';
   static const issueNotify = 'Hata Bildir';
   static const windeskHelp = 'Windesk Destek';
@@ -95,4 +97,7 @@ class AppStrings {
 
   static const logout = 'Çıkış Yap';
   static const title = 'Yardım Masası Uygulaması';
+
+  // wokr order sheets
+  static const String choosenEffortDuration = 'Efor Süresi Seçiniz';
 }

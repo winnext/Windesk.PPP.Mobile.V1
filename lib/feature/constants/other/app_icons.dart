@@ -32,6 +32,7 @@ class AppIcons {
   static const IconData add = Icons.add;
   static const IconData delete = Icons.delete;
   static const IconData warehouse = Icons.warehouse;
+  static const IconData efforts = Icons.work_history;
   static const IconData tool = Icons.build;
   static const IconData photoAlbum = Icons.photo_album;
   static const IconData insightsRounded = Icons.insights_rounded;
@@ -41,6 +42,7 @@ class AppIcons {
   static const IconData documantScanner = Icons.document_scanner;
   static const IconData personal = Icons.person;
   static const IconData people = Icons.people;
+  static const IconData order = Icons.reorder;
 
   //search icons
 

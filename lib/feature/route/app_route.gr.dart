@@ -144,7 +144,7 @@ abstract class $AppRouter extends _i18.RootStackRouter {
         routeData: routeData,
         child: _i15.WorkOrderDetailScreen(
           key: args.key,
-          workorderId: args.workorderId,
+          workorderCode: args.workorderCode,
         ),
       );
     },
@@ -433,13 +433,13 @@ class WorkOrderDetailScreen
     extends _i18.PageRouteInfo<WorkOrderDetailScreenArgs> {
   WorkOrderDetailScreen({
     _i19.Key? key,
-    required String workorderId,
+    required String workorderCode,
     List<_i18.PageRouteInfo>? children,
   }) : super(
           WorkOrderDetailScreen.name,
           args: WorkOrderDetailScreenArgs(
             key: key,
-            workorderId: workorderId,
+            workorderCode: workorderCode,
           ),
           initialChildren: children,
         );
@@ -453,16 +453,16 @@ class WorkOrderDetailScreen
 class WorkOrderDetailScreenArgs {
   const WorkOrderDetailScreenArgs({
     this.key,
-    required this.workorderId,
+    required this.workorderCode,
   });
 
   final _i19.Key? key;
 
-  final String workorderId;
+  final String workorderCode;
 
   @override
   String toString() {
-    return 'WorkOrderDetailScreenArgs{key: $key, workorderId: $workorderId}';
+    return 'WorkOrderDetailScreenArgs{key: $key, workorderCode: $workorderCode}';
   }
 }
 

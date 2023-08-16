@@ -34,6 +34,18 @@ class ServiceTools {
       'http://10.126.12.21/esh/app/webroot/integration/WindeskMobile.php?use_rest=1&wsusername=wdmobile&wspassword=wdsgnm1017_&token=';
   static const facilityName = 'Eskişehir Şehir Hastanesi';
 
+  // GSH PREPROD
+  // static const pppProject = "antep";
+  // static const baseUrlV2 = 'http://wd-mobile-test.gaziantep.yerel';
+  // static const tokenV1 = 'anteptest!_';
+  // static const tokenV2 = 'anteptest!';
+
+  // static const attachPath = "http://geskwdtestapp.gaziantep.yerel/windesk";
+  // static const attachPathLive = "http://geskwdtestapp.gaziantep.yerel/windesk/xreadattach.php?token=$tokenV1&id=";
+  // static const baseUrlV1 =
+  //     'http://geskwdtestapp.gaziantep.yerel/windesk/app/webroot/integration/WindeskMobile.php?use_rest=1&wsusername=wdmobile&wspassword=wdsgnm1017_&token=';
+  // static const facilityName = 'Gaziantep Şehir Hastanesi';
+
   // static const String baseUrlV1 =
   //     'http://geskwdtestapp.gaziantep.yerel/windesk/app/webroot/integration/WindeskMobile.php?use_rest=1&wsusername=wdmobile&wspassword=wdsgnm1017_&token=';
   // static const String baseUrlV2 = 'http://wd-mobile-test.gaziantep.yerel';

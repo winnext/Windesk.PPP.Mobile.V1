@@ -20,15 +20,18 @@ import 'work_order_service_repository.dart';
 
 class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
   // GET SERVICES
-  @override
-  Future<Either<List<WorkOrderLoadsModel>, CustomServiceException>> getWorkOrderLoads(String workOrderCode) async {
+  @override // efforts
+  Future<Either<List<WorkOrderLoadsModel>, CustomServiceException>> getWorkOrderLoads(String userId, String workOrderCode) async {
     List<WorkOrderLoadsModel> loads = [];
-    String url = 'http://windeskmobile.signumtte.com/workorder/$workOrderCode/workloads';
+    String url = '${ServiceTools.baseUrlV2}/workorder/$workOrderCode/workloads';
 
     try {
       final response = await super.dio.get(url,
           options: Options(
-            headers: {'xusercode': "sgnm1040", 'xtoken': 'demo!'},
+            headers: {
+              'xusercode': userId,
+              'xtoken': ServiceTools.tokenV2,
+            },
           ));
 
       if (response.data[ServiceResponseStatusEnums.result.rawText] == ServiceStatusEnums.success.rawText) {
