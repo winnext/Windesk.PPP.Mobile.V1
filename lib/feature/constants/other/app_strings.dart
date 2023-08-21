@@ -53,8 +53,6 @@ class AppStrings {
 
   // add personal strings
   static const addPersonal = 'Personel Ekle';
-  static const choosePersonal = 'Personel Seçiniz';
-  static const chooseShift = 'Vardiya Seçiniz';
 
   // accordion titles
   static const materials = 'Malzemeler';
@@ -65,6 +63,7 @@ class AppStrings {
 
   // sub accordion titles
   static const addedMaterials = 'Eklenmiş Parçalar';
+  static const addedPersonals = 'Eklenmiş Personaller';
   static const addedEfforts = 'Eklenmiş Eforlar';
   static const requstedMaterials = 'Talep Edilen Malzemeler';
   static const addPdf = 'Pdf Ekle';
@@ -98,6 +97,8 @@ class AppStrings {
   static const logout = 'Çıkış Yap';
   static const title = 'Yardım Masası Uygulaması';
 
-  // wokr order sheets
+  // work order sheets
   static const String choosenEffortDuration = 'Efor Süresi Seçiniz';
+  static const choosePersonal = 'Personel Seçiniz';
+  static const chooseShift = 'Vardiya Seçiniz';
 }

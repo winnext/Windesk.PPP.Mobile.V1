@@ -10,6 +10,9 @@ class WorkOrderDetailAccordionProvider extends ChangeNotifier {
   bool userClickedEfforts = false;
   bool userFetchedEfforts = false;
 
+  bool userCLickedPersonals = false;
+  bool userFetchedPersonals = false;
+
   bool isLoading = false;
 
   List<WorkOrderLoadsModel> loads = [];
@@ -20,6 +23,10 @@ class WorkOrderDetailAccordionProvider extends ChangeNotifier {
 
   void setUserClickedEfforts() {
     userClickedEfforts = true;
+  }
+
+  void setUserClickedPersonals() async {
+    userCLickedPersonals = true;
   }
 
   void fetchEffortList(String workOrderCode) async {

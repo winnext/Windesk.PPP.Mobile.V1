@@ -42,7 +42,7 @@ abstract class WorkOrderServiceRepository {
 
   Future<Either<List<WorkOrderResourcesModel>, CustomServiceException>> getWorkOrderResources(String workOrderCode);
 
-  Future<Either<List<WorkOrderShiftingsModel>, CustomServiceException>> getWorkOrderShiftings();
+  Future<Either<List<WorkOrderShiftingsModel>, CustomServiceException>> getWorkOrderShiftings(String userToken);
 
   Future<Either<WorkOrderDetailsModel, CustomServiceException>> getWorkOrderDetails(String userCode, String workOrderCode);
 
@@ -52,7 +52,7 @@ abstract class WorkOrderServiceRepository {
 
   Future<Either<List<WorkOrderStores>, CustomServiceException>> getWorkOrderStores();
 
-  Future<Either<List<WorkOrderAddedResources>, CustomServiceException>> getWorkOrderAddedResources(String serviceCode);
+  Future<Either<List<WorkOrderAddedResources>, CustomServiceException>> getWorkOrderAddedResources(String userToken, String serviceCode);
 
   // ADD WORK ORDER METHODS
   Future<Either<bool, CustomServiceException>> addWorkOrderEffort(String workOrderCode, String workPeriod);

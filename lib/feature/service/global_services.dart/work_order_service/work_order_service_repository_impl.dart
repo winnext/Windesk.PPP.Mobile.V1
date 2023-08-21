@@ -97,16 +97,14 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
   }
 
   @override
-  Future<Either<List<WorkOrderShiftingsModel>, CustomServiceException>> getWorkOrderShiftings() async {
+  Future<Either<List<WorkOrderShiftingsModel>, CustomServiceException>> getWorkOrderShiftings(String userToken) async {
     List<WorkOrderShiftingsModel> shiftings = [];
 
-    String url =
-        'https://demo.signumtte.com/windesk/app/webroot/integration/WindeskMobile.php?use_rest=1&wsusername=wdmobile&wspassword=wdsgnm1017_&token=wddemo!_null&action=getVardiyas';
+    String url = '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=getVardiyas';
     try {
       final response = await super.dio.get(url);
       if (response.data[ServiceResponseStatusEnums.result.rawText] == ServiceStatusEnums.success.rawText) {
         final data = response.data[ServiceResponseStatusEnums.records.rawText];
-        super.logger.e(shiftings.toString());
 
         shiftings = WorkOrderShiftingsModel.fromJsonList(data);
 
@@ -217,10 +215,10 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
   }
 
   @override
-  Future<Either<List<WorkOrderAddedResources>, CustomServiceException>> getWorkOrderAddedResources(String serviceCode) async {
+  Future<Either<List<WorkOrderAddedResources>, CustomServiceException>> getWorkOrderAddedResources(String userToken, String serviceCode) async {
     List<WorkOrderAddedResources> addedResources;
-    String url =
-        'https://demo.signumtte.com/windesk/app/webroot/integration/WindeskMobile.php?use_rest=1&wsusername=wdmobile&wspassword=wdsgnm1017_&token=wddemo!_null&action=getResponsible&service=$serviceCode';
+    String url = '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=getResponsible&service=$serviceCode';
+    print(url);
     try {
       final response = await super.dio.get(url);
       if (response.data[ServiceResponseStatusEnums.result.rawText] == ServiceStatusEnums.success.rawText) {
