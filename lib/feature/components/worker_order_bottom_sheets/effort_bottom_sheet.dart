@@ -77,13 +77,14 @@ class EffortBottomSheet extends StatelessWidget {
                       )
                     ],
                   ),
-            const SizedBox(height: 25),
+            const SizedBox(height: 10),
             CustomHalfButtons(
               leftTitle: const Text(AppStrings.reject),
               rightTitle: const Text(AppStrings.approve),
               leftOnPressed: () => Navigator.pop(context),
               rightOnPressed: () {},
-            )
+            ),
+            const SizedBox(height: 5),
           ],
         ),
       ),
