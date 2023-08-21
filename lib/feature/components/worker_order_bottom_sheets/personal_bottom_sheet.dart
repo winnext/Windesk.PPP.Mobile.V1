@@ -22,7 +22,7 @@ class PersonalBottomSheet extends StatelessWidget {
           child: Consumer<WorkOrderPersonSheetProvider>(
             builder: (context, WorkOrderPersonSheetProvider value, child) {
               _init(value);
-              return _body(value);
+              return _body(context, value);
             },
           ),
         ),
@@ -34,7 +34,7 @@ class PersonalBottomSheet extends StatelessWidget {
     value.getInfos();
   }
 
-  Widget _body(WorkOrderPersonSheetProvider value) {
+  Widget _body(BuildContext context, WorkOrderPersonSheetProvider value) {
     return value.init
         ? const Center(child: CircularProgressIndicator())
         : Column(
@@ -58,7 +58,7 @@ class PersonalBottomSheet extends StatelessWidget {
               CustomHalfButtons(
                 leftTitle: const Text(AppStrings.approve),
                 rightTitle: const Text(AppStrings.reject),
-                leftOnPressed: () {},
+                leftOnPressed: () => Navigator.of(context).pop(),
                 rightOnPressed: () {},
               ),
               const SizedBox(height: 25),

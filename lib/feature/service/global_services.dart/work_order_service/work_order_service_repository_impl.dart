@@ -194,10 +194,9 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
   }
 
   @override
-  Future<Either<List<WorkOrderStores>, CustomServiceException>> getWorkOrderStores() async {
+  Future<Either<List<WorkOrderStores>, CustomServiceException>> getWorkOrderStores(String userToken, String userName) async {
     List<WorkOrderStores> stores;
-    String url =
-        'https://demo.signumtte.com/windesk/app/webroot/integration/WindeskMobile.php?use_rest=1&wsusername=wdmobile&wspassword=wdsgnm1017_&token=wddemo!_null&action=getStore&user=sgnm1040';
+    String url = '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=getStore&user=$userName';
     try {
       final response = await super.dio.get(url);
       if (response.data[ServiceResponseStatusEnums.result.rawText] == ServiceStatusEnums.success.rawText) {
@@ -218,7 +217,6 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
   Future<Either<List<WorkOrderAddedResources>, CustomServiceException>> getWorkOrderAddedResources(String userToken, String serviceCode) async {
     List<WorkOrderAddedResources> addedResources;
     String url = '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=getResponsible&service=$serviceCode';
-    print(url);
     try {
       final response = await super.dio.get(url);
       if (response.data[ServiceResponseStatusEnums.result.rawText] == ServiceStatusEnums.success.rawText) {

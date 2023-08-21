@@ -3,6 +3,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wm_ppp_4/product/screens/work_order/work_order_detail/widgets/accordions/documants_accordion.dart';
+import 'package:wm_ppp_4/product/screens/work_order/work_order_detail/widgets/accordions/materials_accordion.dart';
 import 'package:wm_ppp_4/product/screens/work_order/work_order_detail/widgets/accordions/person_accordion.dart';
 
 import '../../../../../feature/components/appbar/custom_main_appbar.dart';
@@ -56,7 +57,7 @@ class WorkOrderDetailScreen extends StatelessWidget {
           BaseAccordion(
             list: [
               _accordionSection(AppStrings.efforts, EffortAccordion(workOrderCode: workorderCode), AppIcons.efforts),
-              _accordionSection(AppStrings.materials, const SizedBox(), AppIcons.warehouse),
+              _accordionSection(AppStrings.materials, MaterialAccordion(workOrderCode: workorderCode), AppIcons.warehouse),
               _accordionSection(AppStrings.workers, PersonAccordion(workOrderCode: workorderCode), AppIcons.people),
               _accordionSection(AppStrings.documants, DocumantsAccordion(workOrderCode: workorderCode), AppIcons.documantScanner),
               _accordionSection(AppStrings.order, const SizedBox(), AppIcons.order),

@@ -65,4 +65,5 @@ class AppIcons {
   static const IconData floor = Icons.layers;
   static const IconData clock = Icons.access_time;
   static const IconData addPerson = Icons.person_add;
+  static const IconData addMaterial = Icons.add_business;
 }

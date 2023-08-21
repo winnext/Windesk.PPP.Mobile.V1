@@ -50,7 +50,7 @@ abstract class WorkOrderServiceRepository {
 
   Future<Either<WorkOrderDateActionModel, CustomServiceException>> getWorkOrderDateAction(String workOrderCode, String actionType);
 
-  Future<Either<List<WorkOrderStores>, CustomServiceException>> getWorkOrderStores();
+  Future<Either<List<WorkOrderStores>, CustomServiceException>> getWorkOrderStores(String userToken, String userName);
 
   Future<Either<List<WorkOrderAddedResources>, CustomServiceException>> getWorkOrderAddedResources(String userToken, String serviceCode);
 

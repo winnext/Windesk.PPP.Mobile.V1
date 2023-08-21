@@ -62,7 +62,7 @@ class AppStrings {
   static const order = 'Talimat';
 
   // sub accordion titles
-  static const addedMaterials = 'Eklenmiş Parçalar';
+  static const addedMaterials = 'Eklenmiş Malzemeler';
   static const addedPersonals = 'Eklenmiş Personaller';
   static const addedEfforts = 'Eklenmiş Eforlar';
   static const requstedMaterials = 'Talep Edilen Malzemeler';
