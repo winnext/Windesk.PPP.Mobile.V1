@@ -3,6 +3,7 @@ import 'package:wm_ppp_4/feature/database/shared_manager.dart';
 import 'package:wm_ppp_4/feature/enums/shared_enums.dart';
 import 'package:wm_ppp_4/feature/injection.dart';
 import 'package:wm_ppp_4/feature/models/work_order_models/work_order_store_product_model.dart';
+import 'package:wm_ppp_4/feature/models/work_order_models/work_order_store_product_package_info_model.dart';
 import 'package:wm_ppp_4/feature/models/work_order_models/work_order_stores_model.dart';
 import 'package:wm_ppp_4/feature/service/global_services.dart/work_order_service/work_order_service_repository.dart';
 import 'package:wm_ppp_4/feature/service/global_services.dart/work_order_service/work_order_service_repository_impl.dart';
@@ -12,6 +13,7 @@ class WorkOrderMaterialSheetProvider extends ChangeNotifier {
   bool init = true;
   bool isLoading = false;
   bool showProduct = false;
+  bool showPackageInfo = false;
 
   String userToken = '';
   String userCode = '';
@@ -21,6 +23,9 @@ class WorkOrderMaterialSheetProvider extends ChangeNotifier {
 
   List<WorkOrderStoreProductModel> storeProducts = [];
   List<String> storeProductNames = [];
+
+  List<WorkOrderStoreProductPackageInfoModel> productPackageInfo = [];
+  List<String> productPackageNames = [];
 
   void initState() async {
     if (init) {
@@ -76,9 +81,43 @@ class WorkOrderMaterialSheetProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> getStoreProductPackageInfos(String productName) async {
+    String productCode = '';
+    productPackageInfo = [];
+    productPackageNames = [];
+
+    // get product def code
+    for (var product in storeProducts) {
+      if (product.name?.compareTo(productName) == 0) productCode = product.productdefcode ?? '';
+    }
+
+    if (productCode.isNotEmpty) {
+      final response = await _service.getWorkOrderStoreProductPackageInfo(userToken, productCode);
+
+      response.fold(
+        (l) => {
+          productPackageInfo = l,
+          _filterProductPackageInfos(),
+        },
+        (r) => {
+          productPackageInfo = [],
+        },
+      );
+    }
+    showPackageInfo = true;
+    notifyListeners();
+  }
+
+  void _filterProductPackageInfos() {
+    for (var packageInfo in productPackageInfo) {
+      if (!productPackageNames.contains(packageInfo.amount) || packageInfo.amount != null) productPackageNames.add(packageInfo.amount ?? '');
+    }
+    notifyListeners();
+  }
+
   void _filterStoreProductNames() {
     for (var product in storeProducts) {
-      if (!storeProductNames.contains(product.name)) storeProductNames.add(product.name ?? '');
+      if (!storeProductNames.contains(product.name) || product.name != null || product.name != '') storeProductNames.add(product.name ?? '');
     }
     notifyListeners();
   }

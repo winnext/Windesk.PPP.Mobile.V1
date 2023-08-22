@@ -103,4 +103,6 @@ class AppStrings {
   static const chooseShift = 'Vardiya Seçiniz';
   static const pickStore = 'Depo Seçiniz';
   static const pickProduct = 'Malzeme Seçiniz';
+  static const pickProductAmount = 'Ürün Miktarı Seçiniz';
+  static const enterProductAmount = 'Miktar Gİriniz';
 }

@@ -9,7 +9,7 @@ part of '../work_order_store_product_package_info_model.dart';
 WorkOrderStoreProductPackageInfoModel _$WorkOrderStoreProductPackageInfoModelFromJson(Map<String, dynamic> json) =>
     WorkOrderStoreProductPackageInfoModel(
       code: json['CODE'] as String?,
-      amount: json['AMOUN'] as String?,
+      amount: json['AMOUNT'] as String?,
       unitcode: json['UNITCODE'] as String?,
     );
 
