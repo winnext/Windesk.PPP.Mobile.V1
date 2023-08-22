@@ -71,9 +71,10 @@ dependencies:
   # network connection
   internet_connection_checker: ^1.0.0+1
 
-  # image picker
+  # image picker, file picker
   image_picker: ^1.0.1
   url_launcher: ^6.1.12
+  file_picker: ^5.3.3
 
   # number picker
   numberpicker: ^2.1.2
