@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:wm_ppp_4/feature/components/buttons/custom_half_buttons.dart';
 import 'package:wm_ppp_4/feature/components/input_fields/dropdown_input_fields.dart';
 import 'package:wm_ppp_4/feature/components/input_fields/text_fields_input.dart';
+import 'package:wm_ppp_4/feature/components/snackBar/snackbar.dart';
 import 'package:wm_ppp_4/feature/constants/other/app_icons.dart';
 import 'package:wm_ppp_4/feature/constants/other/app_strings.dart';
 import 'package:wm_ppp_4/feature/constants/style/custom_paddings.dart';
@@ -20,6 +21,13 @@ class MaterialBottomSheet extends StatelessWidget {
       create: (context) => WorkOrderMaterialSheetProvider(),
       child: Consumer<WorkOrderMaterialSheetProvider>(
         builder: (context, WorkOrderMaterialSheetProvider value, child) {
+          if (value.errorAccur) {
+            snackBar(context, AppStrings.materialAddedError, 'error');
+          }
+          if (value.materialSuccessfullyAdded) {
+            snackBar(context, AppStrings.materialAdded, 'success');
+            Navigator.of(context).pop();
+          }
           _init(value);
           return _body(context, value);
         },
@@ -56,7 +64,7 @@ class MaterialBottomSheet extends StatelessWidget {
                   value.showPackageInfo
                       ? DropDownInputFields(
                           labelText: AppStrings.pickProductAmount,
-                          onChangedFunction: (val) {},
+                          onChangedFunction: (val) => value.setChoosenPackageInfo(val),
                           rightIcon: AppIcons.arrowDown,
                           dropDownArray: value.productPackageNames,
                         )
@@ -66,7 +74,7 @@ class MaterialBottomSheet extends StatelessWidget {
                       ? Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 24.0),
                           child: TextFieldsInput(
-                            onChangedFunction: (val) {},
+                            onChangedFunction: (val) => value.setChoosenAmount(val),
                             labelText: AppStrings.enterProductAmount,
                           ),
                         )
@@ -76,8 +84,8 @@ class MaterialBottomSheet extends StatelessWidget {
                       ? CustomHalfButtons(
                           leftTitle: const Text(AppStrings.reject),
                           rightTitle: const Text(AppStrings.approve),
-                          leftOnPressed: () {},
-                          rightOnPressed: () {},
+                          leftOnPressed: () => Navigator.of(context).pop(),
+                          rightOnPressed: () => value.addMaterial(workOrderCode),
                         )
                       : const SizedBox()
                 ],

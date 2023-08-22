@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:wm_ppp_4/feature/database/shared_manager.dart';
-import 'package:wm_ppp_4/feature/enums/shared_enums.dart';
-import 'package:wm_ppp_4/feature/injection.dart';
-import 'package:wm_ppp_4/feature/models/work_order_models/work_order_store_product_model.dart';
-import 'package:wm_ppp_4/feature/models/work_order_models/work_order_store_product_package_info_model.dart';
-import 'package:wm_ppp_4/feature/models/work_order_models/work_order_stores_model.dart';
-import 'package:wm_ppp_4/feature/service/global_services.dart/work_order_service/work_order_service_repository.dart';
-import 'package:wm_ppp_4/feature/service/global_services.dart/work_order_service/work_order_service_repository_impl.dart';
+import '../../../../../feature/database/shared_manager.dart';
+import '../../../../../feature/enums/shared_enums.dart';
+import '../../../../../feature/injection.dart';
+import '../../../../../feature/models/work_order_models/work_order_store_product_model.dart';
+import '../../../../../feature/models/work_order_models/work_order_store_product_package_info_model.dart';
+import '../../../../../feature/models/work_order_models/work_order_stores_model.dart';
+import '../../../../../feature/service/global_services.dart/work_order_service/work_order_service_repository.dart';
+import '../../../../../feature/service/global_services.dart/work_order_service/work_order_service_repository_impl.dart';
 
 class WorkOrderMaterialSheetProvider extends ChangeNotifier {
   final WorkOrderServiceRepository _service = Injection.getIt.get<WorkOrderServiceRepositoryImpl>();
@@ -14,9 +14,16 @@ class WorkOrderMaterialSheetProvider extends ChangeNotifier {
   bool isLoading = false;
   bool showProduct = false;
   bool showPackageInfo = false;
+  bool materialSuccessfullyAdded = false;
+  bool errorAccur = false;
 
   String userToken = '';
   String userCode = '';
+
+  String choosenProductCode = '';
+  String choosenProductPackageInfoName = '';
+  String choosenProductPackageInfoCode = '';
+  String choosenAmount = '';
 
   List<WorkOrderStores> stores = [];
   List<String> storeNames = [];
@@ -26,6 +33,53 @@ class WorkOrderMaterialSheetProvider extends ChangeNotifier {
 
   List<WorkOrderStoreProductPackageInfoModel> productPackageInfo = [];
   List<String> productPackageNames = [];
+
+  void setChoosenAmount(String val) => choosenAmount = val;
+
+  void setChoosenPackageInfo(String val) => choosenProductPackageInfoName = val;
+
+  void addMaterial(String workOrderCode) async {
+    for (var product in productPackageInfo) {
+      if (choosenProductPackageInfoName.compareTo(product.amount ?? '') == 0) {
+        choosenProductPackageInfoCode = product.code.toString();
+      }
+    }
+
+    final response = await _service.addWorkOrderSpareparts(
+      userToken,
+      workOrderCode,
+      choosenProductCode,
+      choosenAmount,
+      choosenProductPackageInfoCode,
+    );
+
+    response.fold(
+      (l) => {
+        if (l == true)
+          {
+            materialSuccessfullyAdded = true,
+          }
+        else
+          {
+            errorAccur = true,
+          }
+      },
+      (r) => {
+        errorAccur = true,
+      },
+    );
+
+    notifyListeners();
+
+    Future.delayed(
+      const Duration(seconds: 2),
+      () {
+        errorAccur = false;
+        materialSuccessfullyAdded = false;
+      },
+    );
+    notifyListeners();
+  }
 
   void initState() async {
     if (init) {
@@ -88,7 +142,10 @@ class WorkOrderMaterialSheetProvider extends ChangeNotifier {
 
     // get product def code
     for (var product in storeProducts) {
-      if (product.name?.compareTo(productName) == 0) productCode = product.productdefcode ?? '';
+      if (product.name?.compareTo(productName) == 0) {
+        productCode = product.productdefcode ?? '';
+        choosenProductCode = product.productdefcode ?? '';
+      }
     }
 
     if (productCode.isNotEmpty) {

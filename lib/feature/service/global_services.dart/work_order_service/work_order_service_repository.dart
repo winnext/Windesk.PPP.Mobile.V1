@@ -70,7 +70,13 @@ abstract class WorkOrderServiceRepository {
 
   Future<Either<bool, CustomServiceException>> addWorkOrderImage(String workOrderCode, String image, String desc);
 
-  Future<Either<bool, CustomServiceException>> addWorkOrderSpareparts(String workOrderCode, String product, String amount, String unit);
+  Future<Either<bool, CustomServiceException>> addWorkOrderSpareparts(
+    String userToken,
+    String workOrderCode,
+    String product,
+    String amount,
+    String unit,
+  );
 
   // DELETE WORK ORDER METHODS
   Future<Either<bool, CustomServiceException>> deleteWorkOrderSpareparts(String workOrderCode);

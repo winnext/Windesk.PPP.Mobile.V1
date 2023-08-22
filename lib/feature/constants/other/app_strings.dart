@@ -109,5 +109,7 @@ class AppStrings {
 
   // snackbar messages
   static const String effortAdded = 'Effor başarıyla eklenmiştir';
+  static const String materialAdded = 'Malzeme eklenmiştir';
   static const String effortAddedError = 'Effor eklenirken bir sorunla karşıaşıldı, lütfen birazdan tekrar deneyininiz';
+  static const String materialAddedError = 'Malzeme eklenirken bir sorunla karşıaşıldı, lütfen birazdan tekrar deneyininiz';
 }

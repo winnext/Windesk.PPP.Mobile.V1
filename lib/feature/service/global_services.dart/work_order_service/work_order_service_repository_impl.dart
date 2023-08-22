@@ -359,11 +359,18 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
   }
 
   @override
-  Future<Either<bool, CustomServiceException>> addWorkOrderSpareparts(String workOrderCode, String product, String amount, String unit) async {
+  Future<Either<bool, CustomServiceException>> addWorkOrderSpareparts(
+    String userToken,
+    String workOrderCode,
+    String product,
+    String amount,
+    String unit,
+  ) async {
     bool result = false;
 
     String url =
-        'https://demo.signumtte.com/windesk/app/webroot/integration/WindeskMobile.php?use_rest=1&wsusername=wdmobile&wspassword=wdsgnm1017_&token=wddemo!_6BCFD9E7-75A8-4688-8E85-10C5E2B4A96E&action=addMaterial&module=stproductdef&modulecode=S00000000002067&workordercode=MYM_WO00000551&amount=12&unit=PCK0000010893';
+        '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=addMaterial&module=stproductdef&modulecode=$product&workordercode=$workOrderCode&amount=$amount&unit=$unit';
+
     try {
       final response = await super.dio.get(url);
       super.logger.e(response.toString());
