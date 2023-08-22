@@ -1,8 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:wm_ppp_4/feature/models/work_order_models/work_order_list_model.dart';
-import 'package:wm_ppp_4/feature/models/work_order_models/work_order_store_product_model.dart';
-import 'package:wm_ppp_4/feature/models/work_order_models/work_order_tracing_list_model.dart';
+import '../../../models/work_order_models/work_order_list_model.dart';
+import '../../../models/work_order_models/work_order_store_product_model.dart';
+import '../../../models/work_order_models/work_order_store_product_package_info_model.dart';
+import '../../../models/work_order_models/work_order_tracing_list_model.dart';
 
 import '../../../constants/paths/service_tools.dart';
 import '../../../enums/service_response_status_enums.dart';
@@ -227,6 +228,30 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
         storeProducts = WorkOrderStoreProductModel.fromJsonList(data);
 
         return Left(storeProducts);
+      } else {
+        return Right(CustomServiceException(message: CustomServiceMessages.workOrderStoresError, statusCode: response.statusCode.toString()));
+      }
+    } catch (error) {
+      super.logger.e(error.toString());
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderStoresError, statusCode: '500'));
+    }
+  }
+
+  @override
+  Future<Either<List<WorkOrderStoreProductPackageInfoModel>, CustomServiceException>> getWorkOrderStoreProductPackageInfo(
+    String userToken,
+    String productCode,
+  ) async {
+    List<WorkOrderStoreProductPackageInfoModel> productPackages;
+    String url = '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=getPackageInfoByProduct&productDefCode=$productCode';
+
+    try {
+      final response = await super.dio.get(url);
+      if (response.data[ServiceResponseStatusEnums.result.rawText] == ServiceStatusEnums.success.rawText) {
+        final data = response.data[ServiceResponseStatusEnums.records.rawText];
+        productPackages = WorkOrderStoreProductPackageInfoModel.fromJsonList(data);
+
+        return Left(productPackages);
       } else {
         return Right(CustomServiceException(message: CustomServiceMessages.workOrderStoresError, statusCode: response.statusCode.toString()));
       }
