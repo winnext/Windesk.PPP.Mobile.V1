@@ -151,14 +151,14 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
   }
 
   @override
-  Future<Either<List<WorkOrderSparepartsModel>, CustomServiceException>> getWorkOrderSpareparts(String workOrderCode) async {
+  Future<Either<List<WorkOrderSparepartsModel>, CustomServiceException>> getWorkOrderSpareparts(String userName, String workOrderCode) async {
     List<WorkOrderSparepartsModel> spareparts = [];
-    String url = 'http://windeskmobile.signumtte.com/workorder/$workOrderCode/spareparts';
+    String url = '${ServiceTools.baseUrlV2}/workorder/$workOrderCode/spareparts';
 
     try {
       final response = await super.dio.get(url,
           options: Options(
-            headers: {'xusercode': "sgnm1040", 'xtoken': 'demo!'},
+            headers: {'xusercode': userName, 'xtoken': ServiceTools.tokenV2},
           ));
 
       if (response.data[ServiceResponseStatusEnums.result.rawText] == ServiceStatusEnums.success.rawText) {

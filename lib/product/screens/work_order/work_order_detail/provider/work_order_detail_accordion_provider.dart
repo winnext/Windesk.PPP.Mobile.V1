@@ -3,6 +3,7 @@ import 'package:wm_ppp_4/feature/database/shared_manager.dart';
 import 'package:wm_ppp_4/feature/enums/shared_enums.dart';
 import 'package:wm_ppp_4/feature/injection.dart';
 import 'package:wm_ppp_4/feature/models/work_order_models/work_order_loads_model.dart';
+import 'package:wm_ppp_4/feature/models/work_order_models/work_order_spareparts_model.dart';
 import 'package:wm_ppp_4/feature/service/global_services.dart/work_order_service/work_order_service_repository_impl.dart';
 
 class WorkOrderDetailAccordionProvider extends ChangeNotifier {
@@ -19,6 +20,7 @@ class WorkOrderDetailAccordionProvider extends ChangeNotifier {
   bool isLoading = false;
 
   List<WorkOrderLoadsModel> loads = [];
+  List<WorkOrderSparepartsModel> spareparts = [];
 
   void update() {
     notifyListeners();
@@ -53,5 +55,28 @@ class WorkOrderDetailAccordionProvider extends ChangeNotifier {
       userFetchedEfforts = true;
       notifyListeners();
     }
+  }
+
+  void fetchMaterialList(String workOrderCode) async {
+    if (!userFetchedMaterials) {
+      isLoading = true;
+      String userId = await SharedManager().getString(SharedEnum.userCode);
+
+      final response = await _service.getWorkOrderSpareparts(userId, workOrderCode);
+
+      response.fold(
+        (l) => {
+          spareparts = l,
+          print(spareparts),
+        },
+        (r) => {
+          spareparts = [],
+        },
+      );
+    }
+
+    isLoading = false;
+    userFetchedMaterials = true;
+    notifyListeners();
   }
 }
