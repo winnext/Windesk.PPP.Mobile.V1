@@ -18,7 +18,7 @@ import 'package:wm_ppp_4/product/screens/auth/view/login_screen.dart' as _i9;
 import 'package:wm_ppp_4/product/screens/home/view/home_screen.dart' as _i5;
 import 'package:wm_ppp_4/product/screens/issue/screens/issue_list_screen.dart'
     as _i6;
-import 'package:wm_ppp_4/product/screens/issue/screens/issue_tracing_list.dart'
+import 'package:wm_ppp_4/product/screens/issue/screens/issue_tracing_list_screen.dart'
     as _i8;
 import 'package:wm_ppp_4/product/screens/new_order/new_order_screen.dart'
     as _i10;

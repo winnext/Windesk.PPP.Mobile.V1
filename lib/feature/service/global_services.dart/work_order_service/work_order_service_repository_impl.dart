@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:wm_ppp_4/feature/models/work_order_models/work_order_list_model.dart';
+import 'package:wm_ppp_4/feature/models/work_order_models/work_order_store_product_model.dart';
 import 'package:wm_ppp_4/feature/models/work_order_models/work_order_tracing_list_model.dart';
 
 import '../../../constants/paths/service_tools.dart';
@@ -197,6 +198,7 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
   Future<Either<List<WorkOrderStores>, CustomServiceException>> getWorkOrderStores(String userToken, String userName) async {
     List<WorkOrderStores> stores;
     String url = '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=getStore&user=$userName';
+
     try {
       final response = await super.dio.get(url);
       if (response.data[ServiceResponseStatusEnums.result.rawText] == ServiceStatusEnums.success.rawText) {
@@ -204,6 +206,27 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
         stores = WorkOrderStores.fromJsonList(data);
 
         return Left(stores);
+      } else {
+        return Right(CustomServiceException(message: CustomServiceMessages.workOrderStoresError, statusCode: response.statusCode.toString()));
+      }
+    } catch (error) {
+      super.logger.e(error.toString());
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderStoresError, statusCode: '500'));
+    }
+  }
+
+  @override
+  Future<Either<List<WorkOrderStoreProductModel>, CustomServiceException>> getWorkOrderStoreProducts(String userToken, String storeCode) async {
+    List<WorkOrderStoreProductModel> storeProducts;
+    String url = '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=getProduct&storagecode=$storeCode';
+
+    try {
+      final response = await super.dio.get(url);
+      if (response.data[ServiceResponseStatusEnums.result.rawText] == ServiceStatusEnums.success.rawText) {
+        final data = response.data[ServiceResponseStatusEnums.records.rawText];
+        storeProducts = WorkOrderStoreProductModel.fromJsonList(data);
+
+        return Left(storeProducts);
       } else {
         return Right(CustomServiceException(message: CustomServiceMessages.workOrderStoresError, statusCode: response.statusCode.toString()));
       }

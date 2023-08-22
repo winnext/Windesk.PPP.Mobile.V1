@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:wm_ppp_4/feature/models/work_order_models/work_order_list_model.dart';
+import 'package:wm_ppp_4/feature/models/work_order_models/work_order_store_product_model.dart';
 import 'package:wm_ppp_4/feature/models/work_order_models/work_order_tracing_list_model.dart';
 
 import '../../../exceptions/custom_service_exceptions.dart';
@@ -51,6 +52,8 @@ abstract class WorkOrderServiceRepository {
   Future<Either<WorkOrderDateActionModel, CustomServiceException>> getWorkOrderDateAction(String workOrderCode, String actionType);
 
   Future<Either<List<WorkOrderStores>, CustomServiceException>> getWorkOrderStores(String userToken, String userName);
+
+  Future<Either<List<WorkOrderStoreProductModel>, CustomServiceException>> getWorkOrderStoreProducts(String userToken, String storeCode);
 
   Future<Either<List<WorkOrderAddedResources>, CustomServiceException>> getWorkOrderAddedResources(String userToken, String serviceCode);
 

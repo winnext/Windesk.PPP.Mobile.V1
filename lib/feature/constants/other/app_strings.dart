@@ -101,4 +101,6 @@ class AppStrings {
   static const String choosenEffortDuration = 'Efor Süresi Seçiniz';
   static const choosePersonal = 'Personel Seçiniz';
   static const chooseShift = 'Vardiya Seçiniz';
+  static const pickStore = 'Depo Seçiniz';
+  static const pickProduct = 'Malzeme Seçiniz';
 }
