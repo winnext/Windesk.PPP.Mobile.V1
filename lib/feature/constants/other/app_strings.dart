@@ -106,4 +106,8 @@ class AppStrings {
   static const pickProductAmount = 'Ürün Miktarı Seçiniz';
   static const enterProductAmount = 'Miktar Giriniz';
   static const enterDescription = 'Açıklama Giriniz';
+
+  // snackbar messages
+  static const String effortAdded = 'Effor başarıyla eklenmiştir';
+  static const String effortAddedError = 'Effor eklenirken bir sorunla karşıaşıldı, lütfen birazdan tekrar deneyininiz';
 }

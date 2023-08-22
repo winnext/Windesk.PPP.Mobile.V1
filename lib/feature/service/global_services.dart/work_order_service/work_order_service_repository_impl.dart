@@ -1,9 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import '../../../models/work_order_models/work_order_list_model.dart';
-import '../../../models/work_order_models/work_order_store_product_model.dart';
-import '../../../models/work_order_models/work_order_store_product_package_info_model.dart';
-import '../../../models/work_order_models/work_order_tracing_list_model.dart';
 
 import '../../../constants/paths/service_tools.dart';
 import '../../../enums/service_response_status_enums.dart';
@@ -13,11 +9,15 @@ import '../../../models/work_order_models/work_order_added_resources_model.dart'
 import '../../../models/work_order_models/work_order_attachments_model.dart';
 import '../../../models/work_order_models/work_order_date_action_model.dart';
 import '../../../models/work_order_models/work_order_details_model.dart';
+import '../../../models/work_order_models/work_order_list_model.dart';
 import '../../../models/work_order_models/work_order_loads_model.dart';
 import '../../../models/work_order_models/work_order_resources_model.dart';
 import '../../../models/work_order_models/work_order_shiftings_model.dart';
 import '../../../models/work_order_models/work_order_spareparts_model.dart';
+import '../../../models/work_order_models/work_order_store_product_model.dart';
+import '../../../models/work_order_models/work_order_store_product_package_info_model.dart';
 import '../../../models/work_order_models/work_order_stores_model.dart';
+import '../../../models/work_order_models/work_order_tracing_list_model.dart';
 import 'work_order_service_repository.dart';
 
 class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
@@ -283,11 +283,12 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
 
   // ADD SERVICES
   @override
-  Future<Either<bool, CustomServiceException>> addWorkOrderEffort(String workOrderCode, String workPeriod) async {
+  Future<Either<bool, CustomServiceException>> addWorkOrderEffort(String userToken, String workOrderCode, String userName, String workPeriod) async {
     bool result = false;
 
     String url =
-        'https://demo.signumtte.com/windesk/app/webroot/integration/WindeskMobile.php?use_rest=1&wsusername=wdmobile&wspassword=wdsgnm1017_&token=wddemo!_null&action=addWorkorderEffort&workordercode=wo00002986&username=sgnm1040&module=workorder&workperiod=000010000&startdate=1&type=PREDICTED&description=test';
+        '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=addWorkorderEffort&workordercode=$workOrderCode&username=$userName&module=workorder&workperiod=$workPeriod&startdate=1&type=PREDICTED&description=test';
+
     try {
       final response = await super.dio.get(url);
       super.logger.e(response.toString());

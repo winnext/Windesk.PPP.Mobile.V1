@@ -64,7 +64,7 @@ abstract class WorkOrderServiceRepository {
   Future<Either<List<WorkOrderAddedResources>, CustomServiceException>> getWorkOrderAddedResources(String userToken, String serviceCode);
 
   // ADD WORK ORDER METHODS
-  Future<Either<bool, CustomServiceException>> addWorkOrderEffort(String workOrderCode, String workPeriod);
+  Future<Either<bool, CustomServiceException>> addWorkOrderEffort(String userToken, String workOrderCode, String userName, String workPeriod);
 
   Future<Either<bool, CustomServiceException>> addWorkOrderPersonal(String workOrderCode, String moduleCode, String tuwnofWork);
 

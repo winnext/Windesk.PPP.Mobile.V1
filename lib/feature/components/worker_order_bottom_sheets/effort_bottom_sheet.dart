@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'package:provider/provider.dart';
 import 'package:wm_ppp_4/feature/components/buttons/custom_half_buttons.dart';
+import 'package:wm_ppp_4/feature/components/snackBar/snackbar.dart';
 import 'package:wm_ppp_4/feature/constants/other/app_strings.dart';
 import 'package:wm_ppp_4/feature/constants/other/colors.dart';
 import 'package:wm_ppp_4/feature/constants/style/custom_paddings.dart';
@@ -11,7 +12,9 @@ import 'package:wm_ppp_4/feature/extensions/context_extension.dart';
 import 'package:wm_ppp_4/product/screens/work_order/work_order_detail/provider/work_order_effort_sheet_provider.dart';
 
 class EffortBottomSheet extends StatelessWidget {
-  EffortBottomSheet({super.key});
+  EffortBottomSheet({super.key, required this.workOrderCode});
+
+  final String workOrderCode;
 
   final List<String> _hourItems = ["15 dk", "30 dk", "45 dk", "1 sa", "2 sa", "6 sa", "Serbest Seçim"];
   final int _maxDay = 100;
@@ -23,9 +26,16 @@ class EffortBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => WorkOrderEffortSheetProvider(),
-      child: Consumer<WorkOrderEffortSheetProvider>(
-        builder: (context, value, child) => _body(context, value),
-      ),
+      child: Consumer<WorkOrderEffortSheetProvider>(builder: (context, value, child) {
+        if (value.succesfullyEffortAdded) {
+          snackBar(context, AppStrings.effortAdded, 'success');
+          Navigator.of(context).pop();
+        }
+        if (value.errorAccur) {
+          snackBar(context, AppStrings.effortAddedError, 'error');
+        }
+        return _body(context, value);
+      }),
     );
   }
 
@@ -40,7 +50,10 @@ class EffortBottomSheet extends StatelessWidget {
             DropdownButtonFormField(
               hint: const Text(AppStrings.choosenEffortDuration),
               items: _hourItems.map((e) => DropdownMenuItem(value: e, child: Text(e))).toList(),
-              onChanged: (val) => value.onChangedChoosenEffortDuration(val != null ? val.toString() : ""),
+              onChanged: (val) {
+                value.isUserClickedDropdown = true;
+                value.onChangedChoosenEffortDuration(val != null ? val.toString() : "");
+              },
             ),
             value.choosenEffortType == _hourItems.last ? const SizedBox(height: 20) : const SizedBox(),
             value.choosenEffortType != _hourItems.last
@@ -82,7 +95,9 @@ class EffortBottomSheet extends StatelessWidget {
               leftTitle: const Text(AppStrings.reject),
               rightTitle: const Text(AppStrings.approve),
               leftOnPressed: () => Navigator.pop(context),
-              rightOnPressed: () {},
+              rightOnPressed: () {
+                value.addEffort(workOrderCode);
+              },
             ),
             const SizedBox(height: 5),
           ],
