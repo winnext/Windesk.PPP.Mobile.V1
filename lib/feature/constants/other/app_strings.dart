@@ -104,5 +104,6 @@ class AppStrings {
   static const pickStore = 'Depo Seçiniz';
   static const pickProduct = 'Malzeme Seçiniz';
   static const pickProductAmount = 'Ürün Miktarı Seçiniz';
-  static const enterProductAmount = 'Miktar Gİriniz';
+  static const enterProductAmount = 'Miktar Giriniz';
+  static const enterDescription = 'Açıklama Giriniz';
 }
