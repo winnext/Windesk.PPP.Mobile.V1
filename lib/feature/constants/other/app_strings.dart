@@ -112,4 +112,6 @@ class AppStrings {
   static const String materialAdded = 'Malzeme eklenmiştir';
   static const String effortAddedError = 'Effor eklenirken bir sorunla karşıaşıldı, lütfen birazdan tekrar deneyininiz';
   static const String materialAddedError = 'Malzeme eklenirken bir sorunla karşıaşıldı, lütfen birazdan tekrar deneyininiz';
+  static const String personalAdded = 'Personal başarıyla eklenmiştir';
+  static const String personalAddedError = 'Personal eklenirken bir hatayla karşılaşıldı, lütfen birazdan tekrar deneyininiz';
 }

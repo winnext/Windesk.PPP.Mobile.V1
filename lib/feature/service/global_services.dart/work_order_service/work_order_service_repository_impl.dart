@@ -75,14 +75,13 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
   }
 
   @override
-  Future<Either<List<WorkOrderResourcesModel>, CustomServiceException>> getWorkOrderResources(String workOrderCode) async {
+  Future<Either<List<WorkOrderResourcesModel>, CustomServiceException>> getWorkOrderResources(String userCode, String workOrderCode) async {
     List<WorkOrderResourcesModel> resources = [];
-    String url = 'http://windeskmobile.signumtte.com/workorder/$workOrderCode/resources';
-
+    String url = '${ServiceTools.baseUrlV2}/workorder/$workOrderCode/resources';
     try {
       final response = await super.dio.get(url,
           options: Options(
-            headers: {'xusercode': "sgnm1040", 'xtoken': 'demo!'},
+            headers: {'xusercode': userCode, 'xtoken': ServiceTools.tokenV2},
           ));
 
       if (response.data[ServiceResponseStatusEnums.result.rawText] == ServiceStatusEnums.success.rawText) {
@@ -123,7 +122,7 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
   @override
   Future<Either<WorkOrderDetailsModel, CustomServiceException>> getWorkOrderDetails(String userCode, String workOrderCode) async {
     WorkOrderDetailsModel workOrderDeatails;
-    String url = '${ServiceTools.baseUrlV2}/workorder/detail/$workOrderCode';
+    String url = '${ServiceTools.baseUrlV1}/workorder/detail/$workOrderCode';
 
     try {
       final response = await super.dio.get(url,
@@ -334,11 +333,12 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
   }
 
   @override
-  Future<Either<bool, CustomServiceException>> addWorkOrderPersonal(String workOrderCode, String moduleCode, String tuwnofWork) async {
+  Future<Either<bool, CustomServiceException>> addWorkOrderPersonal(
+      String userToken, String workOrderCode, String moduleCode, String tuwnofWork) async {
     bool result = false;
-
     String url =
-        'https://demo.signumtte.com/windesk/app/webroot/integration/WindeskMobile.php?use_rest=1&wsusername=wdmobile&wspassword=wdsgnm1017_&token=wddemo!_null&action=addResourceStaff&module=xusr&modulecode=K200462&workordercode=wo00002986&turnofwork=V00000001';
+        '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=addResourceStaff&module=xusr&modulecode=$moduleCode&workordercode=$workOrderCode&turnofwork=$tuwnofWork';
+
     try {
       final response = await super.dio.get(url);
       super.logger.e(response.toString());

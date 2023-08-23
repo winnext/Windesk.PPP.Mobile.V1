@@ -11,9 +11,46 @@ class WorkOrderPersonSheetProvider extends ChangeNotifier {
 
   List<WorkOrderShiftingsModel> shiftings = [];
   List<WorkOrderAddedResources> addedResources = [];
+  String userCode = '';
+  String userPeriodCode = '';
+  bool isSuccess = false;
+  bool errorAccur = false;
   bool init = true;
   bool isLoading = false;
 
+  void addPersonal(String workOrderCode) async {
+    if (userCode.isEmpty) userCode = addedResources.first.code.toString();
+    if (userPeriodCode.isEmpty) userPeriodCode = shiftings.first.code.toString();
+
+    String userToken = await SharedManager().getString(SharedEnum.deviceId);
+    final response = await _service.addWorkOrderPersonal(userToken, workOrderCode, userCode, userPeriodCode);
+
+    response.fold(
+      (l) => {
+        if (l)
+          {
+            isSuccess = true,
+          }
+        else
+          {
+            errorAccur = true,
+          }
+      },
+      (r) => {
+        errorAccur = true,
+      },
+    );
+    notifyListeners();
+    Future.delayed(
+      const Duration(seconds: 2),
+      () {
+        errorAccur = false;
+        isSuccess = false;
+      },
+    );
+  }
+
+  // TODO SERVICE NEREDEN GELIYOR?, SIMDILIK 12 VERILDI
   void getInfos() async {
     if (init) {
       setLoading();
@@ -55,5 +92,23 @@ class WorkOrderPersonSheetProvider extends ChangeNotifier {
   void setLoading() {
     isLoading = !isLoading;
     notifyListeners();
+  }
+
+  void setUserPeriod(String val) {
+    for (var shifting in shiftings) {
+      if (shifting.name == val) {
+        userPeriodCode = shifting.code.toString();
+        return;
+      }
+    }
+  }
+
+  void setUserCode(String val) {
+    for (var resource in addedResources) {
+      if (resource.fullname == val) {
+        userCode = resource.code.toString();
+        return;
+      }
+    }
   }
 }
