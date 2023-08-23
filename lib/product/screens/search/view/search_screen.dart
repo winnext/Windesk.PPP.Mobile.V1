@@ -37,9 +37,9 @@ class SearchScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           rowIconButtonSection(context, LocaleKeys.issueSearch, AppIcons.caseSLASearchIcon, const IssueSearchRoute(), LocaleKeys.entitySearchTitle,
-              AppIcons.entitySearchIcon, const SearchWorkOrderScreen()),
-          rowIconButtonSection(context, LocaleKeys.mahalSearchTitle, AppIcons.mahalSearchIcon, const WorkOrderScreen(), LocaleKeys.workOrderSearch,
-              AppIcons.workOrderSearchIcon, const SearchWorkOrderScreen()),
+              AppIcons.entitySearchIcon, const TestScreen()),
+          rowIconButtonSection(context, LocaleKeys.mahalSearchTitle, AppIcons.mahalSearchIcon, const WorkOrderMainScreen(),
+              LocaleKeys.workOrderSearch, AppIcons.workOrderSearchIcon, const SearchWorkOrderScreen()),
         ],
       ),
     );

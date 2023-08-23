@@ -2,13 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
-import '../../../../../../feature/database/shared_manager.dart';
-import '../../../../../../feature/enums/shared_enums.dart';
 import '../../../service/search_service_repo_impl.dart';
 
 class AssetSearchProvider extends ChangeNotifier {
-  final SearchServiceRepoImpml _searchServiceRepository =
-      SearchServiceRepoImpml();
+  final SearchServiceRepoImpml _searchServiceRepository = SearchServiceRepoImpml();
 
   bool _isLoading = false;
   bool get isLoading => _isLoading;
@@ -90,8 +87,7 @@ class AssetSearchProvider extends ChangeNotifier {
     String barcodeScanRes;
 
     try {
-      barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
-          '#ff6666', 'İptal', true, ScanMode.BARCODE);
+      barcodeScanRes = await FlutterBarcodeScanner.scanBarcode('#ff6666', 'İptal', true, ScanMode.BARCODE);
     } on PlatformException {
       barcodeScanRes = 'Failed to get platform version.';
     }

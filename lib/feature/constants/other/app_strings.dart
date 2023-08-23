@@ -63,23 +63,24 @@ class AppStrings {
 
   // add personal strings
   static const addPersonal = 'Personel Ekle';
-  static const choosePersonal = 'Personel Seçiniz';
-  static const chooseShift = 'Vardiya Seçiniz';
 
   // accordion titles
-  static const requstMaterial = 'Malzeme Talebi';
-  static const addPiece = 'Parça Ekle';
+  static const materials = 'Malzemeler';
+  static const workers = 'Personeller';
   static const efforts = 'Eforlar';
-  static const addDocumant = 'Döküman Ekle';
+  static const documants = 'Dökümanlar';
+  static const order = 'Talimat';
 
   // sub accordion titles
-  static const addedMaterials = 'Eklenmiş Parçalar';
+  static const addedMaterials = 'Eklenmiş Malzemeler';
+  static const addedPersonals = 'Eklenmiş Personaller';
   static const addedEfforts = 'Eklenmiş Eforlar';
   static const requstedMaterials = 'Talep Edilen Malzemeler';
   static const addPdf = 'Pdf Ekle';
   static const addImage = 'Fotoğraf Ekle';
   static const addedDocumants = 'Eklenmiş Dökümanlar';
-//test page strings
+
+  //test page strings
   static const accessTest = 'Erişim Testi';
   static const issueNotify = 'Hata Bildir';
   static const windeskHelp = 'Windesk Destek';
@@ -105,4 +106,26 @@ class AppStrings {
 
   static const logout = 'Çıkış Yap';
   static const title = 'Yardım Masası Uygulaması';
+
+  // work order sheets
+  static const String choosenEffortDuration = 'Efor Süresi Seçiniz';
+  static const choosePersonal = 'Personel Seçiniz';
+  static const chooseShift = 'Vardiya Seçiniz';
+  static const pickStore = 'Depo Seçiniz';
+  static const pickProduct = 'Malzeme Seçiniz';
+  static const pickProductAmount = 'Ürün Miktarı Seçiniz';
+  static const enterProductAmount = 'Miktar Giriniz';
+  static const enterDescription = 'Açıklama Giriniz';
+
+  // snackbar messages
+  static const String effortAdded = 'Effor başarıyla eklenmiştir';
+  static const String materialAdded = 'Malzeme eklenmiştir';
+  static const String effortAddedError = 'Effor eklenirken bir sorunla karşıaşıldı, lütfen birazdan tekrar deneyininiz';
+  static const String materialAddedError = 'Malzeme eklenirken bir sorunla karşıaşıldı, lütfen birazdan tekrar deneyininiz';
+  static const String personalAdded = 'Personal başarıyla eklenmiştir';
+  static const String personalAddedError = 'Personal eklenirken bir hatayla karşılaşıldı, lütfen birazdan tekrar deneyininiz';
+  static const String imageAdded = 'Fotoğraf başarıyla eklendi';
+  static const String imageAddedError = 'Fotoğraf eklenirken bir hatayla karşılaşıldı, lütfen birazdan tekrar deneyininiz';
+  static const String docAdded = 'Belge başarıyla eklenmiştir';
+  static const String docAddedError = 'Belge eklenirken bir hatayla karşılaşıldı, lütfen birazdan tekrar deneyininiz';
 }

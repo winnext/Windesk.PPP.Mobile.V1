@@ -32,6 +32,7 @@ class AppIcons {
   static const IconData add = Icons.add;
   static const IconData delete = Icons.delete;
   static const IconData warehouse = Icons.warehouse;
+  static const IconData efforts = Icons.work_history;
   static const IconData tool = Icons.build;
   static const IconData photoAlbum = Icons.photo_album;
   static const IconData insightsRounded = Icons.insights_rounded;
@@ -41,6 +42,7 @@ class AppIcons {
   static const IconData documantScanner = Icons.document_scanner;
   static const IconData personal = Icons.person;
   static const IconData people = Icons.people;
+  static const IconData order = Icons.reorder;
 
   //search icons
 
@@ -56,4 +58,13 @@ class AppIcons {
   static const IconData woSearchIcon = Icons.explore;
 
   static const IconData filter = Icons.filter_alt;
+
+  // work order card icons
+  static const IconData location = Icons.location_on;
+  static const IconData building = Icons.home_work;
+  static const IconData floor = Icons.layers;
+  static const IconData clock = Icons.access_time;
+  static const IconData addPerson = Icons.person_add;
+  static const IconData addMaterial = Icons.add_business;
+  static const IconData galery = Icons.photo_album;
 }

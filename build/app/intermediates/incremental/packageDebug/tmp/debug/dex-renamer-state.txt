@@ -1,0 +1,4 @@
+#Wed Aug 23 08:29:39 TRT 2023
+base.0=/home/mertsaygili/Desktop/Flutter/Windesk.PPP.Mobile.V1/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
+path.0=classes.dex
+renamed.0=classes.dex
