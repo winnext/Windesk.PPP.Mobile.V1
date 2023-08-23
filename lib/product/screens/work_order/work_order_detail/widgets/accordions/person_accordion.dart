@@ -44,7 +44,7 @@ class PersonAccordion extends StatelessWidget {
           Consumer<WorkOrderDetailAccordionProvider>(
             builder: (context, WorkOrderDetailAccordionProvider value, child) {
               if (value.successDeleted) {
-                snackBar(context, AppStrings.deleteResources, 'success');
+                snackBar(context, AppStrings.personalDeleted, 'success');
               }
               if (value.errorAccur) {
                 snackBar(context, AppStrings.deleteError, 'error');

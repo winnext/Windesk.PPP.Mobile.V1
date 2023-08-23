@@ -401,7 +401,7 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
   @override
   Future<Either<bool, CustomServiceException>> deleteWorkOrderEffort(String userToken, String userName, String effortCode) async {
     bool result = false;
-    String url = '${ServiceTools.baseUrlV1}${ServiceTools.tokenV2}_$userToken&action=deleteWorkorderWorklog&code=$effortCode&username=$userName';
+    String url = '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=deleteWorkorderWorklog&code=$effortCode&username=$userName';
 
     try {
       final response = await super.dio.get(url);
@@ -431,7 +431,7 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
   ) async {
     bool result = false;
     String url =
-        '${ServiceTools.baseUrlV1}${ServiceTools.tokenV2}$userToken&action=deleteWorkorderResource&username=$userName&module=xusr&moduleCode=$moduleCode&workorderCode=$workOrderCode';
+        '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=deleteWorkorderResource&username=$userName&module=xusr&moduleCode=$moduleCode&workorderCode=$workOrderCode';
     try {
       final response = await super.dio.get(url);
       super.logger.e(response.toString());
@@ -454,7 +454,7 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
   @override
   Future<Either<bool, CustomServiceException>> deleteWorkOrderSpareparts(String userToken, String userName, String materialCode) async {
     bool result = false;
-    String url = '${ServiceTools.baseUrlV1}${ServiceTools.tokenV2}$userToken&action=deleteWorkorderSparepart&code=$materialCode&username=$userName';
+    String url = '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=deleteWorkorderSparepart&code=$materialCode&username=$userName';
 
     try {
       final response = await super.dio.get(url);
