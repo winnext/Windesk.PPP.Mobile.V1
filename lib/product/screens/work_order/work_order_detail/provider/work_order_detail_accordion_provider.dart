@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:wm_ppp_4/feature/database/shared_manager.dart';
 import 'package:wm_ppp_4/feature/enums/shared_enums.dart';
@@ -21,6 +22,9 @@ class WorkOrderDetailAccordionProvider extends ChangeNotifier {
 
   bool userClickedDocumants = false;
   bool userFetchedDocumants = false;
+
+  bool successDeleted = false;
+  bool errorAccur = false;
 
   bool isLoading = false;
 
@@ -47,6 +51,59 @@ class WorkOrderDetailAccordionProvider extends ChangeNotifier {
 
   void setUserClickedDocumants() async {
     userClickedDocumants = true;
+  }
+
+  void deleteResource(String workOrderCode, String resourceCode) async {
+    final String userToken = await SharedManager().getString(SharedEnum.deviceId);
+    final String userCode = await SharedManager().getString(SharedEnum.userCode);
+    final response = await _service.deleteWorkOrderPersonal(userToken, userCode, workOrderCode, resourceCode);
+
+    response.fold(
+      (l) => {
+        l ? successDeleted = true : errorAccur = true,
+      },
+      (r) => {
+        errorAccur = true,
+      },
+    );
+
+    notifyListeners();
+    _setValues();
+  }
+
+  void deleteSparepart(String materialCode) async {
+    final String userToken = await SharedManager().getString(SharedEnum.deviceId);
+    final String userCode = await SharedManager().getString(SharedEnum.userCode);
+    final response = await _service.deleteWorkOrderSpareparts(userToken, userCode, materialCode);
+
+    response.fold(
+      (l) => {
+        l ? successDeleted = true : errorAccur = true,
+      },
+      (r) => {
+        errorAccur = true,
+      },
+    );
+
+    notifyListeners();
+    _setValues();
+  }
+
+  void deleteEffort(String effortCode) async {
+    final String userToken = await SharedManager().getString(SharedEnum.deviceId);
+    final String userCode = await SharedManager().getString(SharedEnum.userCode);
+    final response = await _service.deleteWorkOrderEffort(userToken, userCode, effortCode);
+
+    response.fold(
+      (l) => {
+        l ? successDeleted = true : errorAccur = true,
+      },
+      (r) => {
+        errorAccur = true,
+      },
+    );
+    notifyListeners();
+    _setValues();
   }
 
   void fetchEffortList(String workOrderCode) async {
@@ -86,11 +143,11 @@ class WorkOrderDetailAccordionProvider extends ChangeNotifier {
           spareparts = [],
         },
       );
-    }
 
-    isLoading = false;
-    userFetchedMaterials = true;
-    notifyListeners();
+      isLoading = false;
+      userFetchedMaterials = true;
+      notifyListeners();
+    }
   }
 
   void fetchResourcesList(String workOrderCode) async {
@@ -109,11 +166,10 @@ class WorkOrderDetailAccordionProvider extends ChangeNotifier {
           resources = [],
         },
       );
+      isLoading = false;
+      userFetchedPersonals = true;
+      notifyListeners();
     }
-
-    isLoading = false;
-    userFetchedPersonals = true;
-    notifyListeners();
   }
 
   void fetchDocumantsList(String workOrderCode) async {
@@ -136,5 +192,15 @@ class WorkOrderDetailAccordionProvider extends ChangeNotifier {
     isLoading = false;
     userFetchedDocumants = true;
     notifyListeners();
+  }
+
+  void _setValues() {
+    Future.delayed(
+      const Duration(seconds: 2),
+      () {
+        successDeleted = false;
+        errorAccur = false;
+      },
+    );
   }
 }

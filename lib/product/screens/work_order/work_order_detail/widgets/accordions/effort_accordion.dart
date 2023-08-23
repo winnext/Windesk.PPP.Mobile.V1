@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
+import 'package:wm_ppp_4/feature/components/snackBar/snackbar.dart';
 import '../../../../../../feature/components/generic_bottom_sheet/base_bottom_sheet.dart';
 import '../../../../../../feature/components/worker_order_bottom_sheets/effort_bottom_sheet.dart';
 
@@ -33,11 +34,16 @@ class EffortAccordion extends StatelessWidget {
           AppStrings.addedEfforts,
           AppIcons.efforts,
           () {
-            context.read<WorkOrderDetailAccordionProvider>().update();
             context.read<WorkOrderDetailAccordionProvider>().setUserClickedEfforts();
           },
           Consumer<WorkOrderDetailAccordionProvider>(
-            builder: (context, value, child) {
+            builder: (contextK, value, child) {
+              if (value.successDeleted) {
+                snackBar(context, AppStrings.deleteEffort, 'success');
+              }
+              if (value.errorAccur) {
+                snackBar(context, AppStrings.deleteError, 'error');
+              }
               SchedulerBinding.instance.addPostFrameCallback(
                 (timeStamp) {
                   context.read<WorkOrderDetailAccordionProvider>().userClickedEfforts
@@ -49,7 +55,7 @@ class EffortAccordion extends StatelessWidget {
                   // show loading while fetching data
                   ? const Center(child: CircularProgressIndicator())
                   // show data table
-                  : DataTableEffort(context: context, data: context.read<WorkOrderDetailAccordionProvider>().loads);
+                  : DataTableEffort(contextK: context, data: context.read<WorkOrderDetailAccordionProvider>().loads);
             },
           ),
         ),

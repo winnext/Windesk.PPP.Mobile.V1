@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:wm_ppp_4/feature/components/modal_alert/work_order_alert_dialog.dart';
+import 'package:wm_ppp_4/feature/constants/other/app_strings.dart';
 import 'package:wm_ppp_4/feature/models/work_order_models/work_order_loads_model.dart';
+import 'package:wm_ppp_4/product/screens/work_order/work_order_detail/provider/work_order_detail_accordion_provider.dart';
 
 import '../../../../../../../feature/constants/other/app_icons.dart';
 import '../../../../../../../feature/constants/other/colors.dart';
 
 class DataTableEffort extends StatelessWidget {
-  DataTableEffort({super.key, required this.context, required this.data});
+  DataTableEffort({super.key, required this.contextK, required this.data});
 
-  final BuildContext context;
+  final BuildContext contextK;
   final List<WorkOrderLoadsModel> data;
 
   final List<String> _labelList = ['İsim', 'Süre', 'Sil'];
@@ -39,7 +43,13 @@ class DataTableEffort extends StatelessWidget {
               DataCell(Text(data[i].timeworked.toString(), style: _cellTextStyle())),
               DataCell(
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    await WorkOrderAlertDialog.showAlertDialog(context, AppStrings.deleteTitle, AppStrings.deleteEffort).then(
+                      (value) => {
+                        value ? contextK.read<WorkOrderDetailAccordionProvider>().deleteEffort(data[i].code.toString()) : null,
+                      },
+                    );
+                  },
                   icon: Icon(AppIcons.delete, color: APPColors.Login.red),
                 ),
               ),

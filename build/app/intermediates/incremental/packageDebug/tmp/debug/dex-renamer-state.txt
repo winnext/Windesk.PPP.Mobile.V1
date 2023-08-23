@@ -1,4 +1,4 @@
-#Wed Aug 23 13:30:37 TRT 2023
+#Wed Aug 23 14:22:13 TRT 2023
 base.0=/home/mertsaygili/Desktop/Flutter/Windesk.PPP.Mobile.V1/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
 base.1=/home/mertsaygili/Desktop/Flutter/Windesk.PPP.Mobile.V1/build/app/intermediates/dex/debug/mergeDexDebug/classes2.dex
 base.2=/home/mertsaygili/Desktop/Flutter/Windesk.PPP.Mobile.V1/build/app/intermediates/dex/debug/mergeDexDebug/classes3.dex

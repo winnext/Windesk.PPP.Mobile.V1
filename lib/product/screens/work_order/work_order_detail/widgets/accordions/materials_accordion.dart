@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
+import 'package:wm_ppp_4/feature/components/snackBar/snackbar.dart';
 
 import '../../../../../../feature/components/generic_bottom_sheet/base_bottom_sheet.dart';
 import '../../../../../../feature/components/worker_order_bottom_sheets/material_bottom_sheet.dart';
@@ -36,6 +37,12 @@ class MaterialAccordion extends StatelessWidget {
           },
           Consumer<WorkOrderDetailAccordionProvider>(
             builder: (context, value, child) {
+              if (value.successDeleted) {
+                snackBar(context, AppStrings.deleteSparepart, 'success');
+              }
+              if (value.errorAccur) {
+                snackBar(context, AppStrings.deleteError, 'error');
+              }
               SchedulerBinding.instance.addPostFrameCallback(
                 (timeStamp) {
                   context.read<WorkOrderDetailAccordionProvider>().userClickedMaterials

@@ -128,4 +128,14 @@ class AppStrings {
   static const String imageAddedError = 'Fotoğraf eklenirken bir hatayla karşılaşıldı, lütfen birazdan tekrar deneyininiz';
   static const String docAdded = 'Belge başarıyla eklenmiştir';
   static const String docAddedError = 'Belge eklenirken bir hatayla karşılaşıldı, lütfen birazdan tekrar deneyininiz';
+  static const String effortDeleted = 'Effor başarıyla silinmiştir';
+  static const String sparepartsDeleted = 'Malzeme başarıyla silinmiştir';
+  static const String personalDeleted = 'Personel başarıyla silinmiştir';
+  static const String deleteError = 'Silme işlemi gerçekleştirilemedi.';
+
+  // alert dialog
+  static const String deleteTitle = 'Silme İşlemi';
+  static const String deleteEffort = ' kodlu eforu silmek istediğinize emin misiniz?';
+  static const String deleteResources = ' kodlu personeli silmek istediğinize emin misiniz?';
+  static const String deleteSparepart = ' kodlu materyali silmek istediğinize emin misiniz?';
 }

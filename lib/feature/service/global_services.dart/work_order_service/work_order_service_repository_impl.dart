@@ -399,11 +399,11 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
 
   // DELETE SERVICES
   @override
-  Future<Either<bool, CustomServiceException>> deleteWorkOrderEffort(String workOrderCode) async {
+  Future<Either<bool, CustomServiceException>> deleteWorkOrderEffort(String userToken, String userName, String effortCode) async {
     bool result = false;
+    String url = '${ServiceTools.baseUrlV1}${ServiceTools.tokenV2}_$userToken&action=deleteWorkorderWorklog&code=$effortCode&username=$userName';
+    print(url);
 
-    String url =
-        'https://demo.signumtte.com/windesk/app/webroot/integration/WindeskMobile.php?use_rest=1&wsusername=wdmobile&wspassword=wdsgnm1017_&token=wddemo!_null&action=deleteWorkorderWorklog&code=WL00000261&username=sgnm1040';
     try {
       final response = await super.dio.get(url);
       super.logger.e(response.toString());
@@ -424,11 +424,15 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
   }
 
   @override
-  Future<Either<bool, CustomServiceException>> deleteWorkOrderPersonal(String workOrderCode, String moduleCode) async {
+  Future<Either<bool, CustomServiceException>> deleteWorkOrderPersonal(
+    String userToken,
+    String userName,
+    String workOrderCode,
+    String moduleCode,
+  ) async {
     bool result = false;
-
     String url =
-        'https://demo.signumtte.com/windesk/app/webroot/integration/WindeskMobile.php?use_rest=1&wsusername=wdmobile&wspassword=wdsgnm1017_&token=wddemo!_null&action=deleteWorkorderResource&username=sgnm1040&module=xusr&moduleCode=K200462&workorderCode=wo00002986';
+        '${ServiceTools.baseUrlV1}${ServiceTools.tokenV2}$userToken&action=deleteWorkorderResource&username=$userName&module=xusr&moduleCode=$moduleCode&workorderCode=$workOrderCode';
     try {
       final response = await super.dio.get(url);
       super.logger.e(response.toString());
@@ -449,11 +453,10 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
   }
 
   @override
-  Future<Either<bool, CustomServiceException>> deleteWorkOrderSpareparts(String workOrderCode) async {
+  Future<Either<bool, CustomServiceException>> deleteWorkOrderSpareparts(String userToken, String userName, String materialCode) async {
     bool result = false;
+    String url = '${ServiceTools.baseUrlV1}${ServiceTools.tokenV2}$userToken&action=deleteWorkorderSparepart&code=$materialCode&username=$userName';
 
-    String url =
-        'https://demo.signumtte.com/windesk/app/webroot/integration/WindeskMobile.php?use_rest=1&wsusername=wdmobile&wspassword=wdsgnm1017_&token=wddemo!_null&action=deleteWorkorderSparepart&code=malzeme kod&username=sgnm1040';
     try {
       final response = await super.dio.get(url);
       super.logger.e(response.toString());

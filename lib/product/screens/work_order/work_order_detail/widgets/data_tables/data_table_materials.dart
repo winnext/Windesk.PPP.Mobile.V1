@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:wm_ppp_4/feature/components/modal_alert/work_order_alert_dialog.dart';
+import 'package:wm_ppp_4/feature/constants/other/app_strings.dart';
 import 'package:wm_ppp_4/feature/models/work_order_models/work_order_spareparts_model.dart';
+import 'package:wm_ppp_4/product/screens/work_order/work_order_detail/provider/work_order_detail_accordion_provider.dart';
 
 import '../../../../../../../feature/constants/other/app_icons.dart';
 import '../../../../../../../feature/constants/other/colors.dart';
@@ -39,7 +43,13 @@ class DataTableMaterials extends StatelessWidget {
               DataCell(Text(data[i].amount.toString(), style: _cellTextStyle())),
               DataCell(
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    await WorkOrderAlertDialog.showAlertDialog(context, AppStrings.deleteTitle, AppStrings.deleteSparepart).then(
+                      (value) => {
+                        value ? context.read<WorkOrderDetailAccordionProvider>().deleteSparepart(data[i].code.toString()) : null,
+                      },
+                    );
+                  },
                   icon: Icon(AppIcons.delete, color: APPColors.Login.red),
                 ),
               ),
