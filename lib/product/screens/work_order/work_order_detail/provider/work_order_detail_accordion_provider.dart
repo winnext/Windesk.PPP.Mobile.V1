@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:wm_ppp_4/feature/database/shared_manager.dart';
 import 'package:wm_ppp_4/feature/enums/shared_enums.dart';
 import 'package:wm_ppp_4/feature/injection.dart';
+import 'package:wm_ppp_4/feature/models/work_order_models/work_order_attachments_model.dart';
 import 'package:wm_ppp_4/feature/models/work_order_models/work_order_loads_model.dart';
 import 'package:wm_ppp_4/feature/models/work_order_models/work_order_resources_model.dart';
 import 'package:wm_ppp_4/feature/models/work_order_models/work_order_spareparts_model.dart';
@@ -18,11 +19,15 @@ class WorkOrderDetailAccordionProvider extends ChangeNotifier {
   bool userClickedMaterials = false;
   bool userFetchedMaterials = false;
 
+  bool userClickedDocumants = false;
+  bool userFetchedDocumants = false;
+
   bool isLoading = false;
 
   List<WorkOrderLoadsModel> loads = [];
   List<WorkOrderSparepartsModel> spareparts = [];
   List<WorkOrderResourcesModel> resources = [];
+  List<WorkOrderAttachmentsModel> attachments = [];
 
   void update() {
     notifyListeners();
@@ -38,6 +43,10 @@ class WorkOrderDetailAccordionProvider extends ChangeNotifier {
 
   void setUserClickedMaterials() async {
     userClickedMaterials = true;
+  }
+
+  void setUserClickedDocumants() async {
+    userClickedDocumants = true;
   }
 
   void fetchEffortList(String workOrderCode) async {
@@ -104,6 +113,28 @@ class WorkOrderDetailAccordionProvider extends ChangeNotifier {
 
     isLoading = false;
     userFetchedPersonals = true;
+    notifyListeners();
+  }
+
+  void fetchDocumantsList(String workOrderCode) async {
+    if (!userFetchedDocumants) {
+      isLoading = true;
+      notifyListeners();
+
+      String userCode = await SharedManager().getString(SharedEnum.userCode);
+      final response = await _service.getWorkOrderAttachments(userCode, workOrderCode);
+
+      response.fold(
+        (l) => {
+          attachments = l,
+        },
+        (r) => {
+          attachments = [],
+        },
+      );
+    }
+    isLoading = false;
+    userFetchedDocumants = true;
     notifyListeners();
   }
 }

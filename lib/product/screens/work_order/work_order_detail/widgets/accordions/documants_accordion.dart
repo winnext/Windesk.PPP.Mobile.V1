@@ -41,14 +41,14 @@ class DocumantsAccordion extends StatelessWidget {
           AppIcons.documantScanner,
           () {
             context.read<WorkOrderDetailAccordionProvider>().update();
-            context.read<WorkOrderDetailAccordionProvider>().setUserClickedEfforts();
+            context.read<WorkOrderDetailAccordionProvider>().setUserClickedDocumants();
           },
           Consumer<WorkOrderDetailAccordionProvider>(
             builder: (context, value, child) {
               SchedulerBinding.instance.addPostFrameCallback(
                 (timeStamp) {
-                  context.read<WorkOrderDetailAccordionProvider>().userClickedEfforts
-                      ? context.read<WorkOrderDetailAccordionProvider>().fetchEffortList(workOrderCode)
+                  context.read<WorkOrderDetailAccordionProvider>().userClickedDocumants
+                      ? context.read<WorkOrderDetailAccordionProvider>().fetchDocumantsList(workOrderCode)
                       : null;
                 },
               );

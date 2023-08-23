@@ -40,7 +40,7 @@ abstract class WorkOrderServiceRepository {
   // GET WORK ORDER METHODS
   Future<Either<List<WorkOrderLoadsModel>, CustomServiceException>> getWorkOrderLoads(String userId, String workOrderCode);
 
-  Future<Either<List<WorkOrderAttachmentsModel>, CustomServiceException>> getWorkOrderAttachments(String workOrderCode);
+  Future<Either<List<WorkOrderAttachmentsModel>, CustomServiceException>> getWorkOrderAttachments(String userCode, String workOrderCode);
 
   Future<Either<List<WorkOrderResourcesModel>, CustomServiceException>> getWorkOrderResources(String userCode, String workOrderCode);
 
