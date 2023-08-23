@@ -38,7 +38,7 @@ class MaterialAccordion extends StatelessWidget {
           Consumer<WorkOrderDetailAccordionProvider>(
             builder: (context, value, child) {
               if (value.successDeleted) {
-                snackBar(context, AppStrings.deleteSparepart, 'success');
+                snackBar(context, AppStrings.sparepartsDeleted, 'success');
               }
               if (value.errorAccur) {
                 snackBar(context, AppStrings.deleteError, 'error');

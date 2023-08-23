@@ -39,7 +39,7 @@ class EffortAccordion extends StatelessWidget {
           Consumer<WorkOrderDetailAccordionProvider>(
             builder: (contextK, value, child) {
               if (value.successDeleted) {
-                snackBar(context, AppStrings.deleteEffort, 'success');
+                snackBar(context, AppStrings.effortDeleted, 'success');
               }
               if (value.errorAccur) {
                 snackBar(context, AppStrings.deleteError, 'error');
