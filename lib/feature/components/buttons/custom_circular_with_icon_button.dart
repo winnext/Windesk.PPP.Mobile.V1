@@ -13,8 +13,8 @@ class CustomCircularWithIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: context.width * 0.18,
-      height: context.width * 0.15,
+      width: context.width * 0.15,
+      height: context.height * 0.06,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           backgroundColor: bgColor,
@@ -23,10 +23,7 @@ class CustomCircularWithIconButton extends StatelessWidget {
           ),
         ),
         onPressed: () => onPressFunction(),
-        child: Icon(
-          icon,
-          color: iconColor,
-        ),
+        child: Center(child: Icon(icon, color: iconColor)),
       ),
     );
   }

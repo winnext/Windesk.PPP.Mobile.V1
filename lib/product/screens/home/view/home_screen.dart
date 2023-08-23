@@ -84,7 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
             context,
             LocaleKeys.workOrderList,
             AppIcons.contentPasteSearch,
-            const WorkOrderScreen(),
+            const WorkOrderMainScreen(),
             LocaleKeys.workOrderSearch,
             AppIcons.contentPasteOff,
             const SearchWorkOrderScreen(),

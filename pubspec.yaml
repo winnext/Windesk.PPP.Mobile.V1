@@ -53,19 +53,33 @@ dependencies:
 
   # device info --get device info
   device_info_plus: ^9.0.2
+  package_info_plus: ^4.0.2
 
   # snackbar
   top_snackbar_flutter: ^3.1.0
 
-
+  # icons
   cupertino_icons: ^1.0.2
+
+  # button
   rounded_loading_button: ^2.1.0
-  accordion: ^2.5.1
-  url_launcher: ^6.1.12
   badges: ^3.1.1
+  
+  # ui design accordion
+  accordion: ^2.5.1
+
+  # network connection
   internet_connection_checker: ^1.0.0+1
+
+  # image picker, file picker
   image_picker: ^1.0.1
-  package_info_plus: ^4.0.2
+  url_launcher: ^6.1.12
+  file_picker: ^5.3.3
+
+  # number picker
+  numberpicker: ^2.1.2
+  flutter_barcode_scanner: ^2.0.0
+
 
 dev_dependencies:
   flutter_test:

@@ -24,7 +24,16 @@ class AppRouter extends $AppRouter {
 
                 // work order
                 AutoRoute(path: 'workOrderListScreen', page: WorkOrderListScreen.page),
-                AutoRoute(path: 'workOrderScreen', page: WorkOrderScreen.page),
+                CustomRoute(
+                  path: 'workOrderScreen',
+                  page: WorkOrderMainScreen.page,
+                  transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
+                ),
+                CustomRoute(
+                  path: 'workOrderDetailScreen',
+                  page: WorkOrderDetailScreen.page,
+                  transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
+                ),
 
                 // search work order
                 AutoRoute(path: 'searchWorkOrderScreen', page: SearchWorkOrderScreen.page),
@@ -32,6 +41,9 @@ class AppRouter extends $AppRouter {
                 // issue
                 AutoRoute(path: 'issueTracingList', page: IssueTracingList.page),
                 AutoRoute(path: 'IssueListScreen', page: IssueListScreen.page),
+                AutoRoute(path: 'IssueDetailScreen', page: IssueDetailScreen.page),
+
+                //AutoRoute(path: 'IssueDetailScreen', page: IssueDetailScreen.page),
               ],
             ),
             AutoRoute(path: 'newOrderScreen', page: NewOrderScreen.page),
@@ -45,7 +57,7 @@ class AppRouter extends $AppRouter {
               children: [
                 RedirectRoute(path: '', redirectTo: 'searchScreen'),
                 AutoRoute(path: 'searchScreen', page: SearchScreen.page, initial: true),
-                AutoRoute(path: 'issueSearchPage', page: IssueSearchRoute.page)
+                AutoRoute(path: 'issueSearchPage', page: IssueSearchRoute.page),
               ],
             ),
             AutoRoute(path: 'testScreen', page: TestScreen.page),

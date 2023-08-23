@@ -15,8 +15,7 @@ class TestServiceRepositoryImpl extends TestServiceRepository {
   Future<Either<bool, CustomServiceException>> accessTestWindesk() async {
     bool result = false;
 
-    String url = '${ServiceTools.attachPathLive}?&timestamp=${DateTime.now().millisecondsSinceEpoch.toString()}';
-
+    String url = '${ServiceTools.attachPath}?&timestamp=${DateTime.now().millisecondsSinceEpoch.toString()}';
     try {
       final response = await super.dio.get(url);
       super.logger.e(response.statusCode.toString());
@@ -45,7 +44,7 @@ class TestServiceRepositoryImpl extends TestServiceRepository {
     try {
       final response = await super.dio.get(url,
           options: Options(
-            headers: {'xusercode': "sgnm1032", 'xtoken': ServiceTools.tokenV2},
+            headers: {'xusercode': "sgnm1031", 'xtoken': ServiceTools.tokenV2},
             responseType: ResponseType.json,
           ));
       super.logger.e(response.toString());
@@ -69,7 +68,7 @@ class TestServiceRepositoryImpl extends TestServiceRepository {
   Future<Either<bool, CustomServiceException>> getServerTime(token) async {
     bool result = false;
 
-    String url = '${ServiceTools.baseUrlV1}$token&action=getDateTime';
+    String url = '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$token&action=getDateTime';
     try {
       final response = await super.dio.get(url,
           options: Options(
@@ -80,9 +79,9 @@ class TestServiceRepositoryImpl extends TestServiceRepository {
       if (response.data[ServiceResponseStatusEnums.result.rawText] == ServiceStatusEnums.success.rawText) {
         result = true;
 
-        super.logger.e(result.toString());
+        super.logger.e(result);
 
-        return Left(response.data[ServiceResponseStatusEnums.records.rawText]);
+        return const Left(true);
       } else {
         return Right(CustomServiceException(message: CustomServiceMessages.getServerTimeError, statusCode: response.statusCode.toString()));
       }

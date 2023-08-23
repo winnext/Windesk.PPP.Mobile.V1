@@ -20,7 +20,6 @@ class IssueServiceRepoImpml extends IssueServiceRepository {
 
     try {
       final response = await dio.get(url, options: Options(headers: {"xusercode": userCode, "xtoken": ServiceTools.tokenV2}));
-
       final data = response.data['lists'];
       tracingList = IssueTracingListModel.fromJsonList(data);
       super.logger.i(tracingList);

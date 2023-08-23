@@ -38,8 +38,8 @@ class SearchScreen extends StatelessWidget {
         children: [
           rowIconButtonSection(context, LocaleKeys.issueSearch, AppIcons.caseSLASearchIcon, const IssueSearchRoute(), LocaleKeys.entitySearchTitle,
               AppIcons.entitySearchIcon, const TestScreen()),
-          rowIconButtonSection(context, LocaleKeys.mahalSearchTitle, AppIcons.mahalSearchIcon, const WorkOrderScreen(), LocaleKeys.workOrderSearch,
-              AppIcons.workOrderSearchIcon, const SearchWorkOrderScreen()),
+          rowIconButtonSection(context, LocaleKeys.mahalSearchTitle, AppIcons.mahalSearchIcon, const WorkOrderMainScreen(),
+              LocaleKeys.workOrderSearch, AppIcons.workOrderSearchIcon, const SearchWorkOrderScreen()),
         ],
       ),
     );
