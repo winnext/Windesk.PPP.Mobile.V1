@@ -27,7 +27,9 @@ class WorkOrderListScreen extends StatelessWidget {
         appBar: _appbar(context),
         body: Consumer<WorkOrderListProvider>(
           builder: (context, WorkOrderListProvider value, child) {
-            value.getWorkOrderList(workOrderCode);
+            SchedulerBinding.instance.addPostFrameCallback((_) {
+              value.getWorkOrderList(workOrderCode);
+            });
             return value.isLoading ? const CustomLoadingIndicator() : _successBody(value, workOrderCode);
           },
         ),
@@ -61,8 +63,13 @@ class WorkOrderListScreen extends StatelessWidget {
         Expanded(
           flex: 92,
           child: ListView.builder(
-            itemCount: value.workOrderListModel.length,
+            itemCount: value.workOrderListModel.length + 1,
             itemBuilder: (context, index) {
+              if (index == value.workOrderListModel.length && value.isLastPage) return null;
+              if (index == value.workOrderListModel.length) {
+                value.getMoreOrderList(workOrderCode);
+                return value.isLastPage ? const SizedBox() : const Center(child: CircularProgressIndicator());
+              }
               final model = value.workOrderListModel[index];
               return InkWell(
                   onTap: () {

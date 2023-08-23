@@ -402,7 +402,6 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
   Future<Either<bool, CustomServiceException>> deleteWorkOrderEffort(String userToken, String userName, String effortCode) async {
     bool result = false;
     String url = '${ServiceTools.baseUrlV1}${ServiceTools.tokenV2}_$userToken&action=deleteWorkorderWorklog&code=$effortCode&username=$userName';
-    print(url);
 
     try {
       final response = await super.dio.get(url);
@@ -525,7 +524,7 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
     String responsible,
     String status,
   ) async {
-    String url = '${ServiceTools.baseUrlV2}/list/$workOrderCode/workorder?start=$startLimit&end=20&build&floor&responsible&status';
+    String url = '${ServiceTools.baseUrlV2}/list/$workOrderCode/workorder?start=$startLimit&end=$endLimit&build&floor&responsible&status';
 
     try {
       final response = await super.dio.get(
