@@ -5,6 +5,7 @@ import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import '../../../service/search_service_repo_impl.dart';
 
 class AssetSearchProvider extends ChangeNotifier {
+  // ignore: unused_field
   final SearchServiceRepoImpml _searchServiceRepository = SearchServiceRepoImpml();
 
   bool _isLoading = false;
@@ -135,6 +136,6 @@ class AssetSearchProvider extends ChangeNotifier {
   }
 
   void assetSearch() {
-    print('assetSearch');
+    // print('assetSearch');
   }
 }
