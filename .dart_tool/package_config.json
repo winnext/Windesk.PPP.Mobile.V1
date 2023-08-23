@@ -320,6 +320,12 @@
       "languageVersion": "3.0"
     },
     {
+      "name": "flutter_barcode_scanner",
+      "rootUri": "file:///home/mertsaygili/.pub-cache/hosted/pub.dev/flutter_barcode_scanner-2.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "flutter_lints",
       "rootUri": "file:///home/mertsaygili/.pub-cache/hosted/pub.dev/flutter_lints-2.0.2",
       "packageUri": "lib/",
@@ -908,7 +914,7 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2023-08-22T09:09:54.681797Z",
+  "generated": "2023-08-23T08:27:33.859604Z",
   "generator": "pub",
   "generatorVersion": "3.1.0"
 }
