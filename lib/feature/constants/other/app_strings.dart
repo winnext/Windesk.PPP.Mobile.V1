@@ -114,4 +114,8 @@ class AppStrings {
   static const String materialAddedError = 'Malzeme eklenirken bir sorunla karşıaşıldı, lütfen birazdan tekrar deneyininiz';
   static const String personalAdded = 'Personal başarıyla eklenmiştir';
   static const String personalAddedError = 'Personal eklenirken bir hatayla karşılaşıldı, lütfen birazdan tekrar deneyininiz';
+  static const String imageAdded = 'Fotoğraf başarıyla eklendi';
+  static const String imageAddedError = 'Fotoğraf eklenirken bir hatayla karşılaşıldı, lütfen birazdan tekrar deneyininiz';
+  static const String docAdded = 'Belge başarıyla eklenmiştir';
+  static const String docAddedError = 'Belge eklenirken bir hatayla karşılaşıldı, lütfen birazdan tekrar deneyininiz';
 }

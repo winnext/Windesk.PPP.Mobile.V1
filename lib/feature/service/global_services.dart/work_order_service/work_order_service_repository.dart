@@ -68,7 +68,8 @@ abstract class WorkOrderServiceRepository {
 
   Future<Either<bool, CustomServiceException>> addWorkOrderPersonal(String userToken, String workOrderCode, String moduleCode, String tuwnofWork);
 
-  Future<Either<bool, CustomServiceException>> addWorkOrderImage(String workOrderCode, String image, String desc);
+  Future<Either<bool, CustomServiceException>> addWorkOrderAttachment(
+      String userToken, String userName, String workOrderCode, String image, String desc);
 
   Future<Either<bool, CustomServiceException>> addWorkOrderSpareparts(
     String userToken,

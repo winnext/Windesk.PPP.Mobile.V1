@@ -35,7 +35,7 @@ class DataTableDocumants extends StatelessWidget {
         rows: [
           for (var i = 0; i < (data.length); i++) ...{
             DataRow(cells: [
-              DataCell(Text(data[i].filename.toString(), style: _cellTextStyle())),
+              DataCell(Text(data[i].dispfilename.toString(), style: _cellTextStyle())),
               DataCell(Text(data[i].atchtype.toString(), style: _cellTextStyle())),
               DataCell(
                 IconButton(

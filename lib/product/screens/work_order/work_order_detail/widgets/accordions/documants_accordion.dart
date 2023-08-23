@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
+import 'package:wm_ppp_4/product/screens/work_order/work_order_detail/widgets/data_tables/data_table_documants.dart';
 
 import '../../../../../../feature/components/generic_bottom_sheet/base_bottom_sheet.dart';
 import '../../../../../../feature/components/worker_order_bottom_sheets/image_bottom_sheet.dart';
@@ -9,7 +10,6 @@ import '../../../../../../feature/constants/other/app_icons.dart';
 import '../../../../../../feature/constants/other/app_strings.dart';
 import '../../provider/work_order_detail_accordion_provider.dart';
 import '../base_accordion.dart';
-import '../data_tables/data_table_effort.dart';
 import '../sub_accordion_section.dart';
 
 class DocumantsAccordion extends StatelessWidget {
@@ -25,14 +25,14 @@ class DocumantsAccordion extends StatelessWidget {
           context,
           AppStrings.addImage,
           AppIcons.camera,
-          () => BaseBottomSheet.show(context, const ImageBottomSheet()),
+          () => BaseBottomSheet.show(context, ImageBottomSheet(workOrderCode: workOrderCode)),
           const SizedBox(height: 0),
         ),
         SubAccordionSection.subAccordion(
           context,
           AppStrings.addPdf,
           AppIcons.pictureAsPdf,
-          () => BaseBottomSheet.show(context, const PDFBottomSheet()),
+          () => BaseBottomSheet.show(context, PDFBottomSheet(workOrderCode: workOrderCode)),
           const SizedBox(height: 0),
         ),
         SubAccordionSection.subAccordion(
@@ -56,7 +56,7 @@ class DocumantsAccordion extends StatelessWidget {
                   // show loading while fetching data
                   ? const Center(child: CircularProgressIndicator())
                   // show data table
-                  : DataTableEffort(context: context, data: context.read<WorkOrderDetailAccordionProvider>().loads);
+                  : DataTableDocumants(context: context, data: context.read<WorkOrderDetailAccordionProvider>().attachments);
             },
           ),
         ),

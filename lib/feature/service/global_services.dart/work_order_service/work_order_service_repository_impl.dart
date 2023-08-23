@@ -308,13 +308,20 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
   }
 
   @override
-  Future<Either<bool, CustomServiceException>> addWorkOrderImage(String workOrderCode, String image, String desc) async {
+  Future<Either<bool, CustomServiceException>> addWorkOrderAttachment(
+    String userToken,
+    String userName,
+    String workOrderCode,
+    String image,
+    String desc,
+  ) async {
     bool result = false;
-
     String url =
-        'https://demo.signumtte.com/windesk/app/webroot/integration/WindeskMobile.php?use_rest=1&wsusername=wdmobile&wspassword=wdsgnm1017_&token=wddemo!_null&action=addAttachment&username=sgnm1040&moduleName=workorder&issueCode=wo00002986';
+        '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=addAttachment&username=$userName&moduleName=workorder&issueCode=$workOrderCode';
+
+    FormData formData = FormData.fromMap({"base64string": image, 'description': desc});
     try {
-      final response = await super.dio.get(url);
+      final response = await super.dio.post(url, data: formData);
       super.logger.e(response.toString());
 
       if (response.data[ServiceResponseStatusEnums.result.rawText] == ServiceStatusEnums.success.rawText) {
