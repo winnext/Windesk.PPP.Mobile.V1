@@ -2,9 +2,9 @@ import 'package:accordion/accordion.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wm_ppp_4/product/screens/work_order/work_order_detail/widgets/accordions/documants_accordion.dart';
-import 'package:wm_ppp_4/product/screens/work_order/work_order_detail/widgets/accordions/materials_accordion.dart';
-import 'package:wm_ppp_4/product/screens/work_order/work_order_detail/widgets/accordions/person_accordion.dart';
+import '../widgets/accordions/documants_accordion.dart';
+import '../widgets/accordions/materials_accordion.dart';
+import '../widgets/accordions/person_accordion.dart';
 
 import '../../../../../feature/components/appbar/custom_main_appbar.dart';
 import '../../../../../feature/components/cards/custom_work_order_detail_card.dart';
@@ -12,7 +12,6 @@ import '../../../../../feature/components/loading/custom_loading_indicator.dart'
 import '../../../../../feature/constants/other/app_icons.dart';
 import '../../../../../feature/constants/other/app_strings.dart';
 import '../../../../../feature/constants/other/colors.dart';
-import '../../../../../feature/constants/style/custom_paddings.dart';
 import '../provider/work_order_detail_accordion_provider.dart';
 import '../provider/work_order_detail_provider_main.dart';
 import '../widgets/accordions/effort_accordion.dart';
@@ -34,13 +33,10 @@ class WorkOrderDetailScreen extends StatelessWidget {
           ChangeNotifierProvider(create: (context) => WorkOrderDetailMainProvider()),
           ChangeNotifierProvider(create: (context) => WorkOrderDetailAccordionProvider()),
         ],
-        child: Padding(
-          padding: CustomPaddings.pageNormal,
-          child: Consumer<WorkOrderDetailMainProvider>(
-            builder: (context, value, child) {
-              return value.initState ? _initBody(value) : _successBody(value);
-            },
-          ),
+        child: Consumer<WorkOrderDetailMainProvider>(
+          builder: (context, value, child) {
+            return value.initState ? _initBody(value) : _successBody(value);
+          },
         ),
       ),
     );

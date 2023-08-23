@@ -12,6 +12,7 @@ class CustomPaddings {
   static EdgeInsets onlyBottomMedium = const EdgeInsets.only(bottom: 16.0);
 
   static EdgeInsets pageNormal = const EdgeInsets.symmetric(vertical: 10, horizontal: 15);
-  static EdgeInsets pageNormalX = const EdgeInsets.symmetric(vertical: 15, horizontal: 15);
+  static EdgeInsets pageNormalVerticalX = const EdgeInsets.symmetric(vertical: 15, horizontal: 15);
+  static EdgeInsets pageNormalHorizontalX = const EdgeInsets.symmetric(vertical: 10, horizontal: 25);
   static EdgeInsets pageHigh = const EdgeInsets.symmetric(vertical: 20, horizontal: 30);
 }

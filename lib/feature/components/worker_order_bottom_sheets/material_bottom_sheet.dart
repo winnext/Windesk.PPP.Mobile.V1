@@ -41,7 +41,7 @@ class MaterialBottomSheet extends StatelessWidget {
       child: value.isLoading
           ? const Center(child: CircularProgressIndicator())
           : Padding(
-              padding: CustomPaddings.pageNormalX,
+              padding: CustomPaddings.pageNormalVerticalX,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [

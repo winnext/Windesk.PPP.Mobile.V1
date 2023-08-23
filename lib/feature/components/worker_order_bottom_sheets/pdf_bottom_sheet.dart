@@ -41,7 +41,7 @@ class PDFBottomSheet extends StatelessWidget {
 
   Widget _body(BuildContext context, WorkOrderPdfSheetProvider value) {
     return Padding(
-      padding: CustomPaddings.pageNormalX,
+      padding: CustomPaddings.pageNormalVerticalX,
       child: value.isLoading
           ? const Center(child: CircularProgressIndicator())
           : Column(

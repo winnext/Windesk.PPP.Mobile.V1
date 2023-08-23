@@ -24,45 +24,48 @@ class CustomWorkOrderDetailCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: _elevation,
-      shape: RoundedRectangleBorder(borderRadius: CustomBorderRadius.mediumBorderRadius),
-      child: SizedBox(
-        width: context.width,
-        child: Padding(
-          padding: CustomPaddings.pageNormal,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(data.name ?? _noNameText, style: _boldStyle()),
-              const SizedBox(height: 4),
-              Text(data.description ?? _noDescriptionText, style: _lowStyle()),
-              const SizedBox(height: 16),
-              _ColumnRow(
-                iconData: AppIcons.location,
-                title: _locationLabel,
-                content: data.modulelocation ?? _noLocationText,
-                boldStyle: _boldStyle,
-                lowStyle: _lowStyle,
-              ),
-              const SizedBox(height: 16),
-              _ColumnRow(
-                iconData: AppIcons.building,
-                title: _deviceBarcodeLabel,
-                content: data.downtime ?? _noBarcodeLabel,
-                boldStyle: _boldStyle,
-                lowStyle: _lowStyle,
-              ),
-              const SizedBox(height: 16),
-              _ColumnRow(
-                iconData: AppIcons.clock,
-                title: '',
-                content: "${data.plannedStartdate} -> ${data.plannedEnddate}",
-                boldStyle: _boldStyle,
-                lowStyle: _lowStyle,
-              ),
-            ],
+    return Padding(
+      padding: CustomPaddings.pageNormal,
+      child: Card(
+        elevation: _elevation,
+        shape: RoundedRectangleBorder(borderRadius: CustomBorderRadius.mediumBorderRadius),
+        child: SizedBox(
+          width: context.width,
+          child: Padding(
+            padding: CustomPaddings.pageNormal,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(data.name ?? _noNameText, style: _boldStyle()),
+                const SizedBox(height: 4),
+                Text(data.description ?? _noDescriptionText, style: _lowStyle()),
+                const SizedBox(height: 16),
+                _ColumnRow(
+                  iconData: AppIcons.location,
+                  title: _locationLabel,
+                  content: data.modulelocation ?? _noLocationText,
+                  boldStyle: _boldStyle,
+                  lowStyle: _lowStyle,
+                ),
+                const SizedBox(height: 16),
+                _ColumnRow(
+                  iconData: AppIcons.building,
+                  title: _deviceBarcodeLabel,
+                  content: data.downtime ?? _noBarcodeLabel,
+                  boldStyle: _boldStyle,
+                  lowStyle: _lowStyle,
+                ),
+                const SizedBox(height: 16),
+                _ColumnRow(
+                  iconData: AppIcons.clock,
+                  title: '',
+                  content: "${data.plannedStartdate} -> ${data.plannedEnddate}",
+                  boldStyle: _boldStyle,
+                  lowStyle: _lowStyle,
+                ),
+              ],
+            ),
           ),
         ),
       ),
