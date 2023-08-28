@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:wm_ppp_4/product/screens/search/screens/asset_search/view/asset_search_page.dart';
 
 import '../../../feature/components/appbar/custom_tab_appbar.dart';
 import '../../../feature/components/buttons/custom_circular_home_button.dart';
@@ -28,10 +29,10 @@ class SearchScreen extends StatelessWidget {
             context,
             LocaleKeys.issueSearchPage,
             AppIcons.issueSearchIcon,
-            const TestScreen(),
+            const IssueSearchRoute(),
             LocaleKeys.assetSearchPage,
             AppIcons.assetSearchIcon,
-            const TestScreen()),
+            const AssetSearchRoute()),
         rowIconButtonSection(
             context,
             LocaleKeys.spaceSearchPage,
