@@ -34,7 +34,11 @@ class EffortAccordion extends StatelessWidget {
           AppStrings.addedEfforts,
           AppIcons.efforts,
           () {
-            context.read<WorkOrderDetailAccordionProvider>().setUserClickedEfforts();
+            SchedulerBinding.instance.addPostFrameCallback(
+              (timeStamp) {
+                context.read<WorkOrderDetailAccordionProvider>().fetchEffortList(workOrderCode);
+              },
+            );
           },
           Consumer<WorkOrderDetailAccordionProvider>(
             builder: (contextK, value, child) {

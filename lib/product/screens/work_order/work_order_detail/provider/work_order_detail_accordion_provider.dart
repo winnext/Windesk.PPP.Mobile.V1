@@ -39,6 +39,7 @@ class WorkOrderDetailAccordionProvider extends ChangeNotifier {
 
   void setUserClickedEfforts() {
     userClickedEfforts = true;
+    notifyListeners();
   }
 
   void setUserClickedPersonals() async {
@@ -188,10 +189,10 @@ class WorkOrderDetailAccordionProvider extends ChangeNotifier {
           attachments = [],
         },
       );
+      isLoading = false;
+      userFetchedDocumants = true;
+      notifyListeners();
     }
-    isLoading = false;
-    userFetchedDocumants = true;
-    notifyListeners();
   }
 
   void _setValues() {
