@@ -13,10 +13,11 @@ import '../buttons/custom_half_buttons.dart';
 import '../input_fields/text_fields_input_underline.dart';
 
 class ImageBottomSheet extends StatelessWidget {
-  const ImageBottomSheet({super.key, required this.workOrderCode, required this.clearContext});
+  const ImageBottomSheet({super.key, required this.workOrderCode, required this.clearContext, this.dontUseCleanFun});
 
   final String workOrderCode;
   final BuildContext clearContext;
+  final bool? dontUseCleanFun;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +31,11 @@ class ImageBottomSheet extends StatelessWidget {
             builder: (context, WorkOrderImageSheetProvider value, child) {
               if (value.isSuccess) {
                 snackBar(context, AppStrings.imageAdded, 'success');
-                clearContext.read<WorkOrderDetailAccordionProvider>().clearDocumantStates();
+                dontUseCleanFun != null
+                    ? dontUseCleanFun!
+                        ? null
+                        : clearContext.read<WorkOrderDetailAccordionProvider>().clearDocumantStates()
+                    : clearContext.read<WorkOrderDetailAccordionProvider>().clearDocumantStates();
                 Navigator.of(context).pop();
               }
               if (value.errorAccur) {

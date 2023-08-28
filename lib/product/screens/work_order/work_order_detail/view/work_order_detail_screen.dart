@@ -43,31 +43,39 @@ class WorkOrderDetailScreen extends StatelessWidget {
               }
             });
 
-            return value.initState ? _initBody(value) : _successBody(value);
+            return value.initState ? _initBody(value) : _successBody(context, value, workorderCode);
           },
         ),
       ),
     );
   }
 
-  Widget _successBody(WorkOrderDetailMainProvider value) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          CustomWorkOrderDetailCard(data: value.workOrderDetailsModel),
-          const SizedBox(height: 16),
-          WorkOrderDetailButtons(value: value, workOrderCode: workorderCode),
-          const SizedBox(height: 32),
-          BaseAccordion(
-            list: [
-              _accordionSection(AppStrings.efforts, EffortAccordion(workOrderCode: workorderCode), AppIcons.efforts),
-              _accordionSection(AppStrings.materials, MaterialAccordion(workOrderCode: workorderCode), AppIcons.warehouse),
-              _accordionSection(AppStrings.workers, PersonAccordion(workOrderCode: workorderCode), AppIcons.people),
-              _accordionSection(AppStrings.documants, DocumantsAccordion(workOrderCode: workorderCode), AppIcons.documantScanner),
-              _accordionSection(AppStrings.order, const SizedBox(), AppIcons.order),
-            ],
-          )
-        ],
+  Widget _successBody(BuildContext context, WorkOrderDetailMainProvider value, String workOrderCode) {
+    return RefreshIndicator(
+      onRefresh: () async {
+        value.getWorkOrderWithoutPermission(workOrderCode);
+        context.read<WorkOrderDetailAccordionProvider>().setProvider();
+      },
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            CustomWorkOrderDetailCard(data: value.workOrderDetailsModel),
+            const SizedBox(height: 16),
+            WorkOrderDetailButtons(value: value, workOrderCode: workorderCode, clearContext: context),
+            const SizedBox(height: 32),
+            !value.isStartEnable
+                ? BaseAccordion(
+                    list: [
+                      _accordionSection(AppStrings.efforts, EffortAccordion(workOrderCode: workorderCode), AppIcons.efforts),
+                      _accordionSection(AppStrings.materials, MaterialAccordion(workOrderCode: workorderCode), AppIcons.warehouse),
+                      _accordionSection(AppStrings.workers, PersonAccordion(workOrderCode: workorderCode), AppIcons.people),
+                      _accordionSection(AppStrings.documants, DocumantsAccordion(workOrderCode: workorderCode), AppIcons.documantScanner),
+                      _accordionSection(AppStrings.order, const SizedBox(), AppIcons.order),
+                    ],
+                  )
+                : const SizedBox()
+          ],
+        ),
       ),
     );
   }

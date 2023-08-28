@@ -37,7 +37,7 @@ class WorkOrderDetailMainProvider extends ChangeNotifier {
     }
   }
 
-  void _getWorkOrderWithoutPermission(String workOrderCode) async {
+  void getWorkOrderWithoutPermission(String workOrderCode) async {
     String userCode = await SharedManager().getString(SharedEnum.userCode);
     final response = await _service.getWorkOrderDetails(userCode, workOrderCode);
 
@@ -71,7 +71,7 @@ class WorkOrderDetailMainProvider extends ChangeNotifier {
       },
     );
     if (changedWorkOrderStatus) {
-      _getWorkOrderWithoutPermission(workOrderCode);
+      getWorkOrderWithoutPermission(workOrderCode);
     }
   }
 

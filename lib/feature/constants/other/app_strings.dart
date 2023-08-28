@@ -116,6 +116,9 @@ class AppStrings {
   static const pickProductAmount = 'Ürün Miktarı Seçiniz';
   static const enterProductAmount = 'Miktar Giriniz';
   static const enterDescription = 'Açıklama Giriniz';
+  static const addDocumant = 'Döküman Ekle';
+  static const chooseFromGalery = 'Galeriden Seç';
+  static const chooseFromCamera = 'Kameradan Seç';
 
   // snackbar messages
   static const String effortAdded = 'Effor başarıyla eklenmiştir';

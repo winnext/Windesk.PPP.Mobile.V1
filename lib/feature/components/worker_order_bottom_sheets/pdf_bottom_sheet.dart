@@ -14,10 +14,11 @@ import 'package:wm_ppp_4/product/screens/work_order/work_order_detail/provider/w
 import 'package:wm_ppp_4/product/screens/work_order/work_order_detail/provider/work_order_pdf_sheet_provider.dart';
 
 class PDFBottomSheet extends StatelessWidget {
-  const PDFBottomSheet({super.key, required this.workOrderCode, required this.clearContext});
+  const PDFBottomSheet({super.key, required this.workOrderCode, required this.clearContext, this.dontUseCleanFun});
 
   final String workOrderCode;
   final BuildContext clearContext;
+  final bool? dontUseCleanFun;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +30,11 @@ class PDFBottomSheet extends StatelessWidget {
           builder: (context, WorkOrderPdfSheetProvider value, child) {
             if (value.isSuccess) {
               snackBar(context, AppStrings.docAdded, 'success');
-              clearContext.read<WorkOrderDetailAccordionProvider>().clearDocumantStates();
+              dontUseCleanFun != null
+                  ? dontUseCleanFun!
+                      ? null
+                      : clearContext.read<WorkOrderDetailAccordionProvider>().clearDocumantStates()
+                  : clearContext.read<WorkOrderDetailAccordionProvider>().clearDocumantStates();
               Navigator.of(context).pop();
             }
             if (value.errorAccur) {

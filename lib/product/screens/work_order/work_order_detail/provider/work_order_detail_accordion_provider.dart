@@ -33,6 +33,19 @@ class WorkOrderDetailAccordionProvider extends ChangeNotifier {
   List<WorkOrderResourcesModel> resources = [];
   List<WorkOrderAttachmentsModel> attachments = [];
 
+  void setProvider() {
+    userCLickedPersonals = false;
+    userFetchedPersonals = false;
+    userClickedMaterials = false;
+    userFetchedMaterials = false;
+    userClickedDocumants = false;
+    userFetchedDocumants = false;
+    userClickedEfforts = false;
+    userFetchedEfforts = false;
+    successDeleted = false;
+    errorAccur = false;
+  }
+
   void update() {
     notifyListeners();
   }
