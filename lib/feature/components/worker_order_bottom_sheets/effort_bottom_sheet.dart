@@ -9,12 +9,14 @@ import 'package:wm_ppp_4/feature/constants/other/app_strings.dart';
 import 'package:wm_ppp_4/feature/constants/other/colors.dart';
 import 'package:wm_ppp_4/feature/constants/style/custom_paddings.dart';
 import 'package:wm_ppp_4/feature/extensions/context_extension.dart';
+import 'package:wm_ppp_4/product/screens/work_order/work_order_detail/provider/work_order_detail_accordion_provider.dart';
 import 'package:wm_ppp_4/product/screens/work_order/work_order_detail/provider/work_order_effort_sheet_provider.dart';
 
 class EffortBottomSheet extends StatelessWidget {
-  EffortBottomSheet({super.key, required this.workOrderCode});
+  EffortBottomSheet({super.key, required this.workOrderCode, required this.clearContext});
 
   final String workOrderCode;
+  final BuildContext clearContext;
 
   final List<String> _hourItems = ["15 dk", "30 dk", "45 dk", "1 sa", "2 sa", "6 sa", "Serbest Seçim"];
   final int _maxDay = 100;
@@ -29,6 +31,7 @@ class EffortBottomSheet extends StatelessWidget {
       child: Consumer<WorkOrderEffortSheetProvider>(builder: (context, value, child) {
         if (value.succesfullyEffortAdded) {
           snackBar(context, AppStrings.effortAdded, 'success');
+          clearContext.read<WorkOrderDetailAccordionProvider>().clearEffortStates();
           Navigator.of(context).pop();
         }
         if (value.errorAccur) {

@@ -24,7 +24,7 @@ class MaterialAccordion extends StatelessWidget {
           context,
           AppStrings.addMaterial,
           AppIcons.add,
-          () => BaseBottomSheet.show(context, MaterialBottomSheet(workOrderCode: workOrderCode)),
+          () => BaseBottomSheet.show(context, MaterialBottomSheet(workOrderCode: workOrderCode, clearContext: context)),
           const SizedBox(height: 0),
         ),
         SubAccordionSection.subAccordion(
@@ -39,6 +39,7 @@ class MaterialAccordion extends StatelessWidget {
             builder: (context, value, child) {
               if (value.successDeleted) {
                 snackBar(context, AppStrings.sparepartsDeleted, 'success');
+                context.read<WorkOrderDetailAccordionProvider>().clearMaterialStates();
               }
               if (value.errorAccur) {
                 snackBar(context, AppStrings.deleteError, 'error');

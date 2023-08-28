@@ -7,11 +7,13 @@ import 'package:wm_ppp_4/feature/constants/other/app_icons.dart';
 import 'package:wm_ppp_4/feature/constants/other/app_strings.dart';
 import 'package:wm_ppp_4/feature/constants/style/custom_paddings.dart';
 import 'package:wm_ppp_4/feature/extensions/context_extension.dart';
+import 'package:wm_ppp_4/product/screens/work_order/work_order_detail/provider/work_order_detail_accordion_provider.dart';
 import 'package:wm_ppp_4/product/screens/work_order/work_order_detail/provider/work_order_person_sheet_provider.dart';
 
 class PersonalBottomSheet extends StatelessWidget {
-  const PersonalBottomSheet({super.key, required this.workOrderCode});
+  const PersonalBottomSheet({super.key, required this.workOrderCode, required this.clearContext});
   final String workOrderCode;
+  final BuildContext clearContext;
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +27,8 @@ class PersonalBottomSheet extends StatelessWidget {
             builder: (context, WorkOrderPersonSheetProvider value, child) {
               if (value.isSuccess) {
                 snackBar(context, AppStrings.personalAdded, 'success');
+                clearContext.read<WorkOrderDetailAccordionProvider>().clearPersonStates();
+
                 Navigator.of(context).pop();
               }
               if (value.errorAccur) {

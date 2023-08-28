@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wm_ppp_4/feature/components/snackBar/snackbar.dart';
+import '../snackBar/snackbar.dart';
+import '../../../product/screens/work_order/work_order_detail/provider/work_order_detail_accordion_provider.dart';
 
 import '../../../product/screens/work_order/work_order_detail/provider/work_order_image_sheet_provider.dart';
 import '../../constants/other/app_icons.dart';
@@ -12,9 +13,10 @@ import '../buttons/custom_half_buttons.dart';
 import '../input_fields/text_fields_input_underline.dart';
 
 class ImageBottomSheet extends StatelessWidget {
-  const ImageBottomSheet({super.key, required this.workOrderCode});
+  const ImageBottomSheet({super.key, required this.workOrderCode, required this.clearContext});
 
   final String workOrderCode;
+  final BuildContext clearContext;
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +30,7 @@ class ImageBottomSheet extends StatelessWidget {
             builder: (context, WorkOrderImageSheetProvider value, child) {
               if (value.isSuccess) {
                 snackBar(context, AppStrings.imageAdded, 'success');
+                clearContext.read<WorkOrderDetailAccordionProvider>().clearDocumantStates();
                 Navigator.of(context).pop();
               }
               if (value.errorAccur) {

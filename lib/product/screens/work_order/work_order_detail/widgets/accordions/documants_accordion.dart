@@ -25,14 +25,14 @@ class DocumantsAccordion extends StatelessWidget {
           context,
           AppStrings.addImage,
           AppIcons.camera,
-          () => BaseBottomSheet.show(context, ImageBottomSheet(workOrderCode: workOrderCode)),
+          () => BaseBottomSheet.show(context, ImageBottomSheet(workOrderCode: workOrderCode, clearContext: context)),
           const SizedBox(height: 0),
         ),
         SubAccordionSection.subAccordion(
           context,
           AppStrings.addPdf,
           AppIcons.pictureAsPdf,
-          () => BaseBottomSheet.show(context, PDFBottomSheet(workOrderCode: workOrderCode)),
+          () => BaseBottomSheet.show(context, PDFBottomSheet(workOrderCode: workOrderCode, clearContext: context)),
           const SizedBox(height: 0),
         ),
         SubAccordionSection.subAccordion(

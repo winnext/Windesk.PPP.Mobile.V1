@@ -26,7 +26,7 @@ class EffortAccordion extends StatelessWidget {
           context,
           AppStrings.addEffort,
           AppIcons.add,
-          () => BaseBottomSheet.show(context, EffortBottomSheet(workOrderCode: workOrderCode)),
+          () => BaseBottomSheet.show(context, EffortBottomSheet(workOrderCode: workOrderCode, clearContext: context)),
           const SizedBox(height: 0),
         ),
         SubAccordionSection.subAccordion(

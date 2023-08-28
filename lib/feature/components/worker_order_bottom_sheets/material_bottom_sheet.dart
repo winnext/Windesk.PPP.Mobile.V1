@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wm_ppp_4/feature/components/buttons/custom_half_buttons.dart';
-import 'package:wm_ppp_4/feature/components/input_fields/dropdown_input_fields.dart';
-import 'package:wm_ppp_4/feature/components/input_fields/text_fields_input.dart';
-import 'package:wm_ppp_4/feature/components/snackBar/snackbar.dart';
-import 'package:wm_ppp_4/feature/constants/other/app_icons.dart';
-import 'package:wm_ppp_4/feature/constants/other/app_strings.dart';
-import 'package:wm_ppp_4/feature/constants/style/custom_paddings.dart';
-import 'package:wm_ppp_4/feature/extensions/context_extension.dart';
-import 'package:wm_ppp_4/product/screens/work_order/work_order_detail/provider/work_order_material_sheet_provider.dart';
+import '../buttons/custom_half_buttons.dart';
+import '../input_fields/dropdown_input_fields.dart';
+import '../input_fields/text_fields_input.dart';
+import '../snackBar/snackbar.dart';
+import '../../constants/other/app_icons.dart';
+import '../../constants/other/app_strings.dart';
+import '../../constants/style/custom_paddings.dart';
+import '../../extensions/context_extension.dart';
+import '../../../product/screens/work_order/work_order_detail/provider/work_order_detail_accordion_provider.dart';
+import '../../../product/screens/work_order/work_order_detail/provider/work_order_material_sheet_provider.dart';
 
 class MaterialBottomSheet extends StatelessWidget {
-  const MaterialBottomSheet({super.key, required this.workOrderCode});
+  const MaterialBottomSheet({super.key, required this.workOrderCode, required this.clearContext});
 
+  final BuildContext clearContext;
   final String workOrderCode;
 
   @override
@@ -26,9 +28,11 @@ class MaterialBottomSheet extends StatelessWidget {
           }
           if (value.materialSuccessfullyAdded) {
             snackBar(context, AppStrings.materialAdded, 'success');
+            clearContext.read<WorkOrderDetailAccordionProvider>().clearMaterialStates();
             Navigator.of(context).pop();
           }
           _init(value);
+
           return _body(context, value);
         },
       ),
@@ -43,7 +47,6 @@ class MaterialBottomSheet extends StatelessWidget {
           : Padding(
               padding: CustomPaddings.pageNormalVerticalX,
               child: Column(
-                mainAxisSize: MainAxisSize.min,
                 children: [
                   DropDownInputFields(
                     labelText: AppStrings.pickStore,

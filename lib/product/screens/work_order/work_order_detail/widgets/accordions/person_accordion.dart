@@ -26,11 +26,7 @@ class PersonAccordion extends StatelessWidget {
           context,
           AppStrings.addPersonal,
           AppIcons.add,
-          () => BaseBottomSheet.show(
-              context,
-              PersonalBottomSheet(
-                workOrderCode: workOrderCode,
-              )),
+          () => BaseBottomSheet.show(context, PersonalBottomSheet(workOrderCode: workOrderCode, clearContext: context)),
           const SizedBox(height: 0),
         ),
         SubAccordionSection.subAccordion(

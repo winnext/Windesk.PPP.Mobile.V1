@@ -54,6 +54,30 @@ class WorkOrderDetailAccordionProvider extends ChangeNotifier {
     userClickedDocumants = true;
   }
 
+  void clearEffortStates() {
+    userClickedEfforts = false;
+    userFetchedEfforts = false;
+    notifyListeners();
+  }
+
+  void clearMaterialStates() {
+    userClickedMaterials = false;
+    userFetchedMaterials = false;
+    notifyListeners();
+  }
+
+  void clearDocumantStates() {
+    userClickedDocumants = false;
+    userFetchedDocumants = false;
+    notifyListeners();
+  }
+
+  void clearPersonStates() {
+    userCLickedPersonals = false;
+    userFetchedPersonals = false;
+    notifyListeners();
+  }
+
   void deleteResource(String workOrderCode, String resourceCode) async {
     final String userToken = await SharedManager().getString(SharedEnum.deviceId);
     final String userCode = await SharedManager().getString(SharedEnum.userCode);
