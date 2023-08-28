@@ -432,6 +432,7 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
     bool result = false;
     String url =
         '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=deleteWorkorderResource&username=$userName&module=xusr&moduleCode=$moduleCode&workorderCode=$workOrderCode';
+
     try {
       final response = await super.dio.get(url);
       super.logger.e(response.toString());
@@ -469,6 +470,36 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
       } else {
         return Right(
           CustomServiceException(message: CustomServiceMessages.workOrderDeleteSparepartsError, statusCode: response.statusCode.toString()),
+        );
+      }
+    } catch (error) {
+      super.logger.e(error.toString());
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderDeleteSparepartsError, statusCode: '500'));
+    }
+  }
+
+  @override
+  Future<Either<bool, CustomServiceException>> deteleteWorkOrderDocumant(String userToken, String userName, String documantId) async {
+    bool result = false;
+    // String url = '';
+    String url = '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=deleteWorkorderAttachment&username=$userName&id=$documantId';
+
+    try {
+      final response = await super.dio.get(url);
+      super.logger.e(response.toString());
+
+      if (response.data[ServiceResponseStatusEnums.result.rawText] == ServiceStatusEnums.success.rawText) {
+        result = true;
+
+        super.logger.e(result.toString());
+
+        return Left(result);
+      } else {
+        return Right(
+          CustomServiceException(
+            message: CustomServiceMessages.workOrderDeleteSparepartsError,
+            statusCode: response.statusCode.toString(),
+          ),
         );
       }
     } catch (error) {

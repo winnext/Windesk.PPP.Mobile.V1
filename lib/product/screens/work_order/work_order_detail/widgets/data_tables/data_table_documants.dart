@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:wm_ppp_4/feature/components/modal_alert/work_order_alert_dialog.dart';
+import 'package:wm_ppp_4/feature/constants/other/app_strings.dart';
+import 'package:wm_ppp_4/product/screens/work_order/work_order_detail/provider/work_order_detail_accordion_provider.dart';
 
 import '../../../../../../../feature/constants/other/app_icons.dart';
 import '../../../../../../../feature/constants/other/colors.dart';
@@ -39,7 +43,14 @@ class DataTableDocumants extends StatelessWidget {
               DataCell(Text(data[i].atchtype.toString(), style: _cellTextStyle())),
               DataCell(
                 IconButton(
-                  onPressed: () async {},
+                  onPressed: () async {
+                    await WorkOrderAlertDialog.showAlertDialog(context, AppStrings.deleteTitle, '${data[i].id} ${AppStrings.deleteDocumant}').then(
+                      (value) => {
+                        value ? context.read<WorkOrderDetailAccordionProvider>().deleteDocumant(data[i].id.toString()) : null,
+                        context.read<WorkOrderDetailAccordionProvider>().update(),
+                      },
+                    );
+                  },
                   icon: Icon(AppIcons.delete, color: APPColors.Login.red),
                 ),
               ),

@@ -78,7 +78,32 @@ class WorkOrderDetailAccordionProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void deleteDocumant(String workOrderCode, String documantCode) {}
+  void deleteDocumant(String documantCode) async {
+    final String userToken = await SharedManager().getString(SharedEnum.deviceId);
+    final String userCode = await SharedManager().getString(SharedEnum.userCode);
+    final response = await _service.deteleteWorkOrderDocumant(userToken, userCode, documantCode);
+
+    response.fold(
+      (l) => {
+        l
+            ? {
+                successDeleted = true,
+                // remove from list, fast update
+                attachments.where((element) => element.id.toString() == documantCode).toList().forEach((element) {
+                  resources.remove(element);
+                }),
+                notifyListeners(),
+              }
+            : errorAccur = true,
+      },
+      (r) => {
+        errorAccur = true,
+      },
+    );
+
+    notifyListeners();
+    _setValues();
+  }
 
   void deleteResource(String workOrderCode, String resourceCode) async {
     final String userToken = await SharedManager().getString(SharedEnum.deviceId);

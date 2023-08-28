@@ -132,11 +132,12 @@ class AppStrings {
   static const String sparepartsDeleted = 'Malzeme başarıyla silinmiştir';
   static const String personalDeleted = 'Personel başarıyla silinmiştir';
   static const String deleteError = 'Silme işlemi gerçekleştirilemedi.';
-  static const docDeleted = 'Belge başarıyla silinmiştir';
+  static const String docDeleted = 'Belge başarıyla silinmiştir';
 
   // alert dialog
   static const String deleteTitle = 'Silme İşlemi';
   static const String deleteEffort = ' kodlu eforu silmek istediğinize emin misiniz?';
   static const String deleteResources = ' kodlu personeli silmek istediğinize emin misiniz?';
   static const String deleteSparepart = ' kodlu materyali silmek istediğinize emin misiniz?';
+  static const String deleteDocumant = ' kodlu dökümanı silmek istediğinize emin misiniz?';
 }

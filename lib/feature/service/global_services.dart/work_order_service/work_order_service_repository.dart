@@ -85,4 +85,6 @@ abstract class WorkOrderServiceRepository {
   Future<Either<bool, CustomServiceException>> deleteWorkOrderPersonal(String userToken, String userName, String workOrderCode, String moduleCode);
 
   Future<Either<bool, CustomServiceException>> deleteWorkOrderEffort(String userToken, String userName, String effortCode);
+
+  Future<Either<bool, CustomServiceException>> deteleteWorkOrderDocumant(String userToken, String userName, String documantId);
 }
