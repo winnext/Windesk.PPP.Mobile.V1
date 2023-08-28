@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:wm_ppp_4/feature/models/work_order_models/work_order_change_state_model.dart';
 
 import '../../../constants/paths/service_tools.dart';
 import '../../../enums/service_response_status_enums.dart';
@@ -21,6 +22,42 @@ import '../../../models/work_order_models/work_order_tracing_list_model.dart';
 import 'work_order_service_repository.dart';
 
 class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
+  // Change Work Order Status
+  @override
+  Future<Either<WorkOrderChangeStateModel, CustomServiceException>> changeWorkOrderStatus(
+      String userToken, String userName, String workOrderCode, String status) async {
+    WorkOrderChangeStateModel model;
+
+    String url =
+        '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=workorderActualDateActions&workorderCode=$workOrderCode&username=$userName&type=$status&nfc=0&workorder_wait_reason=&workorder_wait_reasoncode=';
+
+    try {
+      final response = await super.dio.get(url);
+      super.logger.e(response.toString());
+
+      if (response.data[ServiceResponseStatusEnums.result.rawText] == true) {
+        model = WorkOrderChangeStateModel(
+          result: response.data[ServiceResponseStatusEnums.result.rawText],
+          message: response.data['uyari'],
+        );
+
+        super.logger.e(model);
+
+        return Left(model);
+      } else {
+        return Right(
+          CustomServiceException(
+            message: CustomServiceMessages.workOrderDeleteSparepartsError,
+            statusCode: response.statusCode.toString(),
+          ),
+        );
+      }
+    } catch (error) {
+      super.logger.e(error.toString());
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderDeleteSparepartsError, statusCode: '500'));
+    }
+  }
+
   // GET SERVICES
   @override // efforts
   Future<Either<List<WorkOrderLoadsModel>, CustomServiceException>> getWorkOrderLoads(String userId, String workOrderCode) async {
@@ -122,7 +159,7 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
   @override
   Future<Either<WorkOrderDetailsModel, CustomServiceException>> getWorkOrderDetails(String userCode, String workOrderCode) async {
     WorkOrderDetailsModel workOrderDeatails;
-    String url = '${ServiceTools.baseUrlV1}/workorder/detail/$workOrderCode';
+    String url = '${ServiceTools.baseUrlV2}/workorder/detail/$workOrderCode';
 
     try {
       final response = await super.dio.get(url,
@@ -132,6 +169,7 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
               'xtoken': ServiceTools.tokenV2,
             },
           ));
+      super.logger.e(response);
 
       if (response.data[ServiceResponseStatusEnums.result.rawText] == ServiceStatusEnums.success.rawText) {
         final data = response.data[ServiceResponseStatusEnums.detail.rawText];

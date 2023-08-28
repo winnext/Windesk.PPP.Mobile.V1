@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:wm_ppp_4/feature/models/work_order_models/work_order_change_state_model.dart';
 import 'package:wm_ppp_4/feature/models/work_order_models/work_order_list_model.dart';
 import 'package:wm_ppp_4/feature/models/work_order_models/work_order_store_product_model.dart';
 import 'package:wm_ppp_4/feature/models/work_order_models/work_order_store_product_package_info_model.dart';
@@ -22,6 +23,10 @@ import '../../service_manager.dart';
 abstract class WorkOrderServiceRepository {
   final Dio dio = Injection.getIt.get<ServiceManager>().dio;
   final logger = Injection.getIt.get<LogManager>().logger;
+
+  // CHANGE WORK ORDER STATUS
+  Future<Either<WorkOrderChangeStateModel, CustomServiceException>> changeWorkOrderStatus(
+      String userToken, String userName, String workOrderCode, String status);
 
   // GET WORK ORDER TRACING LIST
   Future<Either<List<WorkOrderTracingListModel>, CustomServiceException>> getWorkOrderTracingList(String xuserCode);

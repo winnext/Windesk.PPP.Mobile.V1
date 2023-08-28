@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wm_ppp_4/feature/constants/other/app_strings.dart';
 
 import '../../../../../feature/constants/other/app_icons.dart';
 import '../../../../../feature/constants/other/colors.dart';
@@ -6,8 +7,9 @@ import '../../../../../feature/constants/style/border_radius.dart';
 import '../provider/work_order_detail_provider_main.dart';
 
 class WorkOrderDetailButtons extends StatelessWidget {
-  const WorkOrderDetailButtons({super.key, required this.value});
+  const WorkOrderDetailButtons({super.key, required this.value, required this.workOrderCode});
 
+  final String workOrderCode;
   final WorkOrderDetailMainProvider value;
 
   @override
@@ -19,9 +21,23 @@ class WorkOrderDetailButtons extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            _elevatedButton(APPColors.Login.blue, 'Başlat', false, () {}),
+            _elevatedButton(
+              APPColors.Login.blue,
+              AppStrings.start,
+              value.isStartEnable,
+              () {
+                value.changeWorkOrderStatus(workOrderCode, 'start');
+              },
+            ),
             const SizedBox(width: 15),
-            _elevatedButton(APPColors.Main.red, 'Bitir', true, () {}),
+            _elevatedButton(
+              APPColors.Main.red,
+              AppStrings.end,
+              value.isEndEnable,
+              () {
+                value.changeWorkOrderStatus(workOrderCode, 'end');
+              },
+            ),
           ],
         )
       ],

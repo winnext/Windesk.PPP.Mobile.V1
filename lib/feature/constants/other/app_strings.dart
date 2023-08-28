@@ -133,6 +133,7 @@ class AppStrings {
   static const String personalDeleted = 'Personel başarıyla silinmiştir';
   static const String deleteError = 'Silme işlemi gerçekleştirilemedi.';
   static const String docDeleted = 'Belge başarıyla silinmiştir';
+  static const String stateChanged = 'İş Emri durumu değiştirilmiştir';
 
   // alert dialog
   static const String deleteTitle = 'Silme İşlemi';

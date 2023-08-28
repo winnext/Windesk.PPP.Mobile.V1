@@ -1,7 +1,9 @@
 import 'package:accordion/accordion.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
+import 'package:wm_ppp_4/feature/components/snackBar/snackbar.dart';
 import '../widgets/accordions/documants_accordion.dart';
 import '../widgets/accordions/materials_accordion.dart';
 import '../widgets/accordions/person_accordion.dart';
@@ -35,6 +37,12 @@ class WorkOrderDetailScreen extends StatelessWidget {
         ],
         child: Consumer<WorkOrderDetailMainProvider>(
           builder: (context, value, child) {
+            SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+              if (value.changedWorkOrderStatus) {
+                snackBar(context, value.changeStateModel.message != null ? value.changeStateModel.message! : AppStrings.stateChanged, 'success');
+              }
+            });
+
             return value.initState ? _initBody(value) : _successBody(value);
           },
         ),
@@ -48,7 +56,7 @@ class WorkOrderDetailScreen extends StatelessWidget {
         children: [
           CustomWorkOrderDetailCard(data: value.workOrderDetailsModel),
           const SizedBox(height: 16),
-          WorkOrderDetailButtons(value: value),
+          WorkOrderDetailButtons(value: value, workOrderCode: workorderCode),
           const SizedBox(height: 32),
           BaseAccordion(
             list: [
