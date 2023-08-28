@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:wm_ppp_4/product/screens/search/screens/asset_search/view/asset_search_page.dart';
 
 import '../../../feature/components/appbar/custom_tab_appbar.dart';
 import '../../../feature/components/buttons/custom_circular_home_button.dart';
@@ -15,9 +14,7 @@ class SearchScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: const CustomTabAppbar(title: AppStrings.searchTab),
-        body: Center(child: _bodyWidget(context)));
+    return Scaffold(appBar: const CustomTabAppbar(title: AppStrings.searchTab), body: Center(child: _bodyWidget(context)));
   }
 
   Widget _bodyWidget(context) {
@@ -25,34 +22,16 @@ class SearchScreen extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        rowIconButtonSection(
-            context,
-            LocaleKeys.issueSearchPage,
-            AppIcons.issueSearchIcon,
-            const IssueSearchRoute(),
-            LocaleKeys.assetSearchPage,
-            AppIcons.assetSearchIcon,
-            const AssetSearchRoute()),
-        rowIconButtonSection(
-            context,
-            LocaleKeys.spaceSearchPage,
-            AppIcons.spaceSearchIcon,
-            const TestScreen(),
-            LocaleKeys.workOrderSearch,
-            AppIcons.woSearchIcon,
-            const TestScreen()),
+        rowIconButtonSection(context, LocaleKeys.issueSearchPage, AppIcons.issueSearchIcon, const IssueSearchRoute(), LocaleKeys.assetSearchPage,
+            AppIcons.assetSearchIcon, const AssetSearchRoute()),
+        rowIconButtonSection(context, LocaleKeys.spaceSearchPage, AppIcons.spaceSearchIcon, const TestScreen(), LocaleKeys.workOrderSearch,
+            AppIcons.woSearchIcon, const TestScreen()),
       ],
     );
   }
 
-  Widget rowIconButtonSection(
-      BuildContext context,
-      String buttonTitle1,
-      IconData buttonIcon1,
-      PageRouteInfo<dynamic> navigateRouteName1,
-      String buttonTitle2,
-      IconData buttonIcon2,
-      PageRouteInfo<dynamic> navigateRouteName2) {
+  Widget rowIconButtonSection(BuildContext context, String buttonTitle1, IconData buttonIcon1, PageRouteInfo<dynamic> navigateRouteName1,
+      String buttonTitle2, IconData buttonIcon2, PageRouteInfo<dynamic> navigateRouteName2) {
     return Expanded(
       child: Center(
         child: Row(

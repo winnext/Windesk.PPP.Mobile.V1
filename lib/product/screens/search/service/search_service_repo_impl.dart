@@ -9,16 +9,12 @@ import '../../../../feature/enums/shared_enums.dart';
 
 class SearchServiceRepoImpml extends SearchServiceRepository {
   @override
-  Future<Either<bool, CustomServiceException>> checkIssueByAuth(
-      String issueCode) async {
-    final String userName =
-        await SharedManager().getString(SharedEnum.userCode);
+  Future<Either<bool, CustomServiceException>> checkIssueByAuth(String issueCode) async {
+    final String userName = await SharedManager().getString(SharedEnum.userCode);
     String deviceId = await SharedManager().getString(SharedEnum.deviceId);
 
-    String url =
-        '${ServiceTools.baseUrlV1}$deviceId&action=checkIssueByAuthorizedServices&issueCode=$issueCode&username=$userName';
+    String url = '${ServiceTools.baseUrlV1}$deviceId&action=checkIssueByAuthorizedServices&issueCode=$issueCode&username=$userName';
     try {
-      print(url);
       final response = await dio.get(url,
           options: Options(
             responseType: ResponseType.json,
@@ -29,8 +25,7 @@ class SearchServiceRepoImpml extends SearchServiceRepository {
       return Left(data);
     } catch (error) {
       super.logger.e(error.toString());
-      return Right(CustomServiceException(
-          message: CustomServiceMessages.loginError, statusCode: '400'));
+      return Right(CustomServiceException(message: CustomServiceMessages.loginError, statusCode: '400'));
     }
   }
 }

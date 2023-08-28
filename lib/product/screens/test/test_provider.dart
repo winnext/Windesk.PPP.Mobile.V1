@@ -58,8 +58,7 @@ class TestProvider extends ChangeNotifier {
     String saat = serverTime[8] + serverTime[9];
     String dakika = serverTime[10] + serverTime[11];
     String saniye = serverTime[12] + serverTime[13];
-    _serverTime =
-        gun + '/' + ay + '/' + yil + ' ' + saat + ':' + dakika + ':' + saniye;
+    _serverTime = '$gun/$ay/$yil $saat:$dakika:$saniye';
   }
 
   String _phoneTime = '';
@@ -78,7 +77,6 @@ class TestProvider extends ChangeNotifier {
 
   void getServerTime() async {
     String token = await SharedManager().getString(SharedEnum.deviceId);
-    print(token);
     var getServerTimeResult = await testServices.getServerTime(token);
     getServerTimeResult.fold(
       (l) => {setServerTime = l},
@@ -105,8 +103,7 @@ class TestProvider extends ChangeNotifier {
     setAccessTestV1 = 'loading';
     notifyListeners();
     var accesTestResult = await testServices.accessTestWindesk();
-    accesTestResult.fold(
-        (l) => {setAccessTestV1 = 'true'}, (r) => setAccessTestV1 = 'false');
+    accesTestResult.fold((l) => {setAccessTestV1 = 'true'}, (r) => setAccessTestV1 = 'false');
     notifyListeners();
   }
 
@@ -115,8 +112,7 @@ class TestProvider extends ChangeNotifier {
     notifyListeners();
 
     var accesTestResult = await testServices.accessTestMobileService();
-    accesTestResult.fold(
-        (l) => {setAccessTestV2 = 'true'}, (r) => setAccessTestV2 = 'false');
+    accesTestResult.fold((l) => {setAccessTestV2 = 'true'}, (r) => setAccessTestV2 = 'false');
 
     notifyListeners();
   }
