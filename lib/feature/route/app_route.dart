@@ -9,7 +9,8 @@ class AppRouter extends $AppRouter {
 
   @override
   List<AutoRoute> get routes => [
-        AutoRoute(page: SplashScreen.page, path: '/splashScreen', initial: true),
+        AutoRoute(
+            page: SplashScreen.page, path: '/splashScreen', initial: true),
         AutoRoute(path: '/loginScreen', page: LoginScreen.page),
         AutoRoute(
           path: '/appWrapper',
@@ -20,10 +21,13 @@ class AppRouter extends $AppRouter {
               page: EmptyRouter.page,
               children: [
                 RedirectRoute(path: '', redirectTo: 'homeScreen'),
-                AutoRoute(path: 'homeScreen', page: HomeScreen.page, initial: true),
+                AutoRoute(
+                    path: 'homeScreen', page: HomeScreen.page, initial: true),
 
                 // work order
-                AutoRoute(path: 'workOrderListScreen', page: WorkOrderListScreen.page),
+                AutoRoute(
+                    path: 'workOrderListScreen',
+                    page: WorkOrderListScreen.page),
                 CustomRoute(
                   path: 'workOrderScreen',
                   page: WorkOrderMainScreen.page,
@@ -36,12 +40,16 @@ class AppRouter extends $AppRouter {
                 ),
 
                 // search work order
-                AutoRoute(path: 'searchWorkOrderScreen', page: SearchWorkOrderScreen.page),
+                AutoRoute(
+                    path: 'searchWorkOrderScreen',
+                    page: SearchWorkOrderScreen.page),
 
                 // issue
-                AutoRoute(path: 'issueTracingList', page: IssueTracingList.page),
+                AutoRoute(
+                    path: 'issueTracingList', page: IssueTracingList.page),
                 AutoRoute(path: 'IssueListScreen', page: IssueListScreen.page),
-                AutoRoute(path: 'IssueDetailScreen', page: IssueDetailScreen.page),
+                AutoRoute(
+                    path: 'IssueDetailScreen', page: IssueDetailScreen.page),
 
                 //AutoRoute(path: 'IssueDetailScreen', page: IssueDetailScreen.page),
               ],
@@ -56,8 +64,12 @@ class AppRouter extends $AppRouter {
               page: EmptySearchRouter.page,
               children: [
                 RedirectRoute(path: '', redirectTo: 'searchScreen'),
-                AutoRoute(path: 'searchScreen', page: SearchScreen.page, initial: true),
+                AutoRoute(
+                    path: 'searchScreen',
+                    page: SearchScreen.page,
+                    initial: true),
                 AutoRoute(path: 'issueSearchPage', page: IssueSearchRoute.page),
+                AutoRoute(path: 'assetSearchPage', page: AssetSearchRoute.page),
               ],
             ),
             AutoRoute(path: 'testScreen', page: TestScreen.page),

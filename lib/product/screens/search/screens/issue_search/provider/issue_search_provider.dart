@@ -12,8 +12,10 @@ class IssueSearchProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void printSearchData() async {
-    final response = await _searchServiceRepository.checkIssueByAuth(searchIssueCode);
-    response.fold((l) => {}, (r) => {});
+  printSearchData() async {
+    final response =
+        await _searchServiceRepository.checkIssueByAuth(searchIssueCode);
+    // ignore: avoid_print
+    response.fold((l) => {print(l)}, (r) => {print('fail')});
   }
 }

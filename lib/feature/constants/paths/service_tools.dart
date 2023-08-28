@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 
+import '../../database/shared_manager.dart';
+import '../../enums/shared_enums.dart';
+
 @immutable
 class ServiceTools {
-  const ServiceTools._();
+  //const ServiceTools._();
+
 //Signum ortamı
   // static const String baseUrlV1 =
   //     'https://demo.signumtte.com/windesk/app/webroot/integration/WindeskMobile.php?use_rest=1&wsusername=wdmobile&wspassword=wdsgnm1017_&token=';
