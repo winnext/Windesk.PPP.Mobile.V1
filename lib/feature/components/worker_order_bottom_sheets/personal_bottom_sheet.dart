@@ -28,7 +28,6 @@ class PersonalBottomSheet extends StatelessWidget {
               if (value.isSuccess) {
                 snackBar(context, AppStrings.personalAdded, 'success');
                 clearContext.read<WorkOrderDetailAccordionProvider>().clearPersonStates();
-
                 Navigator.of(context).pop();
               }
               if (value.errorAccur) {

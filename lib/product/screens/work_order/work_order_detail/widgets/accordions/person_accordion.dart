@@ -39,14 +39,15 @@ class PersonAccordion extends StatelessWidget {
           },
           Consumer<WorkOrderDetailAccordionProvider>(
             builder: (context, WorkOrderDetailAccordionProvider value, child) {
-              if (value.successDeleted) {
-                snackBar(context, AppStrings.personalDeleted, 'success');
-              }
-              if (value.errorAccur) {
-                snackBar(context, AppStrings.deleteError, 'error');
-              }
               SchedulerBinding.instance.addPostFrameCallback(
                 (timeStamp) {
+                  if (value.successDeleted && value.userCLickedPersonals) {
+                    snackBar(context, AppStrings.personalDeleted, 'success');
+                    context.read<WorkOrderDetailAccordionProvider>().clearPersonStates();
+                  }
+                  if (value.errorAccur && value.userCLickedPersonals) {
+                    snackBar(context, AppStrings.deleteError, 'error');
+                  }
                   context.read<WorkOrderDetailAccordionProvider>().userCLickedPersonals
                       ? context.read<WorkOrderDetailAccordionProvider>().fetchResourcesList(workOrderCode)
                       : null;

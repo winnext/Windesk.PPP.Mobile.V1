@@ -78,6 +78,8 @@ class WorkOrderDetailAccordionProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void deleteDocumant(String workOrderCode, String documantCode) {}
+
   void deleteResource(String workOrderCode, String resourceCode) async {
     final String userToken = await SharedManager().getString(SharedEnum.deviceId);
     final String userCode = await SharedManager().getString(SharedEnum.userCode);
@@ -85,7 +87,16 @@ class WorkOrderDetailAccordionProvider extends ChangeNotifier {
 
     response.fold(
       (l) => {
-        l ? successDeleted = true : errorAccur = true,
+        l
+            ? {
+                successDeleted = true,
+                // remove from list, fast update
+                resources.where((element) => element.modulecode == resourceCode).toList().forEach((element) {
+                  resources.remove(element);
+                }),
+                notifyListeners(),
+              }
+            : errorAccur = true,
       },
       (r) => {
         errorAccur = true,
@@ -103,7 +114,15 @@ class WorkOrderDetailAccordionProvider extends ChangeNotifier {
 
     response.fold(
       (l) => {
-        l ? successDeleted = true : errorAccur = true,
+        l
+            ? {
+                successDeleted = true,
+                // remove from list, fast update
+                spareparts.where((element) => element.modulecode == materialCode).toList().forEach((element) {
+                  spareparts.remove(element);
+                }),
+              }
+            : errorAccur = true,
       },
       (r) => {
         errorAccur = true,
@@ -121,7 +140,15 @@ class WorkOrderDetailAccordionProvider extends ChangeNotifier {
 
     response.fold(
       (l) => {
-        l ? successDeleted = true : errorAccur = true,
+        l
+            ? {
+                successDeleted = true,
+                // remove from list, fast update
+                loads.where((element) => element.code == effortCode).toList().forEach((element) {
+                  loads.remove(element);
+                }),
+              }
+            : errorAccur = true,
       },
       (r) => {
         errorAccur = true,

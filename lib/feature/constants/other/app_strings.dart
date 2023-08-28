@@ -132,6 +132,7 @@ class AppStrings {
   static const String sparepartsDeleted = 'Malzeme başarıyla silinmiştir';
   static const String personalDeleted = 'Personel başarıyla silinmiştir';
   static const String deleteError = 'Silme işlemi gerçekleştirilemedi.';
+  static const docDeleted = 'Belge başarıyla silinmiştir';
 
   // alert dialog
   static const String deleteTitle = 'Silme İşlemi';

@@ -44,9 +44,10 @@ class DataTableMaterials extends StatelessWidget {
               DataCell(
                 IconButton(
                   onPressed: () async {
-                    await WorkOrderAlertDialog.showAlertDialog(context, AppStrings.deleteTitle, AppStrings.deleteSparepart).then(
+                    await WorkOrderAlertDialog.showAlertDialog(context, AppStrings.deleteTitle, '${data[i].code} ${AppStrings.deleteSparepart}').then(
                       (value) => {
                         value ? context.read<WorkOrderDetailAccordionProvider>().deleteSparepart(data[i].code.toString()) : null,
+                        context.read<WorkOrderDetailAccordionProvider>().update(),
                       },
                     );
                   },

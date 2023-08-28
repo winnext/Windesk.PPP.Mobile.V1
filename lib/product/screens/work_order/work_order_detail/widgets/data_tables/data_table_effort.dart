@@ -44,9 +44,10 @@ class DataTableEffort extends StatelessWidget {
               DataCell(
                 IconButton(
                   onPressed: () async {
-                    await WorkOrderAlertDialog.showAlertDialog(context, AppStrings.deleteTitle, AppStrings.deleteEffort).then(
+                    await WorkOrderAlertDialog.showAlertDialog(context, AppStrings.deleteTitle, '${data[i].code} ${AppStrings.deleteEffort}').then(
                       (value) => {
                         value ? contextK.read<WorkOrderDetailAccordionProvider>().deleteEffort(data[i].code.toString()) : null,
+                        context.read<WorkOrderDetailAccordionProvider>().update(),
                       },
                     );
                   },

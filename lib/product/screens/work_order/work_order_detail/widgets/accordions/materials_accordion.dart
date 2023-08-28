@@ -37,15 +37,15 @@ class MaterialAccordion extends StatelessWidget {
           },
           Consumer<WorkOrderDetailAccordionProvider>(
             builder: (context, value, child) {
-              if (value.successDeleted) {
-                snackBar(context, AppStrings.sparepartsDeleted, 'success');
-                context.read<WorkOrderDetailAccordionProvider>().clearMaterialStates();
-              }
-              if (value.errorAccur) {
-                snackBar(context, AppStrings.deleteError, 'error');
-              }
               SchedulerBinding.instance.addPostFrameCallback(
                 (timeStamp) {
+                  if (value.successDeleted && value.userClickedMaterials) {
+                    snackBar(context, AppStrings.sparepartsDeleted, 'success');
+                    context.read<WorkOrderDetailAccordionProvider>().clearMaterialStates();
+                  }
+                  if (value.errorAccur && value.userClickedMaterials) {
+                    snackBar(context, AppStrings.deleteError, 'error');
+                  }
                   context.read<WorkOrderDetailAccordionProvider>().userClickedMaterials
                       ? context.read<WorkOrderDetailAccordionProvider>().fetchMaterialList(workOrderCode)
                       : null;

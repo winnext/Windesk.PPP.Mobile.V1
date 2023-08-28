@@ -42,14 +42,15 @@ class EffortAccordion extends StatelessWidget {
           },
           Consumer<WorkOrderDetailAccordionProvider>(
             builder: (contextK, value, child) {
-              if (value.successDeleted) {
-                snackBar(context, AppStrings.effortDeleted, 'success');
-              }
-              if (value.errorAccur) {
-                snackBar(context, AppStrings.deleteError, 'error');
-              }
               SchedulerBinding.instance.addPostFrameCallback(
                 (timeStamp) {
+                  if (value.successDeleted && value.userClickedEfforts) {
+                    snackBar(context, AppStrings.effortDeleted, 'success');
+                    context.read<WorkOrderDetailAccordionProvider>().clearEffortStates();
+                  }
+                  if (value.errorAccur && value.userClickedEfforts) {
+                    snackBar(context, AppStrings.deleteError, 'error');
+                  }
                   context.read<WorkOrderDetailAccordionProvider>().userClickedEfforts
                       ? context.read<WorkOrderDetailAccordionProvider>().fetchEffortList(workOrderCode)
                       : null;

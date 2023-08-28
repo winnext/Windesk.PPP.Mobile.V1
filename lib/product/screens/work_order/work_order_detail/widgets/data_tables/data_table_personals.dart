@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wm_ppp_4/feature/components/modal_alert/work_order_alert_dialog.dart';
-import 'package:wm_ppp_4/feature/constants/other/app_strings.dart';
-import 'package:wm_ppp_4/feature/models/work_order_models/work_order_resources_model.dart';
-import 'package:wm_ppp_4/product/screens/work_order/work_order_detail/provider/work_order_detail_accordion_provider.dart';
+import '../../../../../../feature/components/modal_alert/work_order_alert_dialog.dart';
+import '../../../../../../feature/constants/other/app_strings.dart';
+import '../../../../../../feature/models/work_order_models/work_order_resources_model.dart';
+import '../../provider/work_order_detail_accordion_provider.dart';
 
 import '../../../../../../../feature/constants/other/app_icons.dart';
 import '../../../../../../../feature/constants/other/colors.dart';
@@ -45,9 +45,11 @@ class DataTablePersonsals extends StatelessWidget {
               DataCell(
                 IconButton(
                   onPressed: () async {
-                    await WorkOrderAlertDialog.showAlertDialog(context, AppStrings.deleteTitle, AppStrings.deleteResources).then(
+                    await WorkOrderAlertDialog.showAlertDialog(context, AppStrings.deleteTitle, '${data[i].modulecode} ${AppStrings.deleteResources}')
+                        .then(
                       (value) => {
                         value ? context.read<WorkOrderDetailAccordionProvider>().deleteResource(data[i].modulecode.toString(), workOrderCode) : null,
+                        context.read<WorkOrderDetailAccordionProvider>().update(),
                       },
                     );
                   },

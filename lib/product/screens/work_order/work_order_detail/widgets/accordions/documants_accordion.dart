@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
+import 'package:wm_ppp_4/feature/components/snackBar/snackbar.dart';
 import 'package:wm_ppp_4/product/screens/work_order/work_order_detail/widgets/data_tables/data_table_documants.dart';
 
 import '../../../../../../feature/components/generic_bottom_sheet/base_bottom_sheet.dart';
@@ -47,6 +48,13 @@ class DocumantsAccordion extends StatelessWidget {
             builder: (context, value, child) {
               SchedulerBinding.instance.addPostFrameCallback(
                 (timeStamp) {
+                  if (value.successDeleted && value.userClickedDocumants) {
+                    snackBar(context, AppStrings.docDeleted, 'success');
+                    context.read<WorkOrderDetailAccordionProvider>().clearDocumantStates();
+                  }
+                  if (value.errorAccur && value.userClickedDocumants) {
+                    snackBar(context, AppStrings.deleteError, 'error');
+                  }
                   context.read<WorkOrderDetailAccordionProvider>().userClickedDocumants
                       ? context.read<WorkOrderDetailAccordionProvider>().fetchDocumantsList(workOrderCode)
                       : null;

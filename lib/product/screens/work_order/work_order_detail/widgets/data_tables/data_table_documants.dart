@@ -39,7 +39,7 @@ class DataTableDocumants extends StatelessWidget {
               DataCell(Text(data[i].atchtype.toString(), style: _cellTextStyle())),
               DataCell(
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () async {},
                   icon: Icon(AppIcons.delete, color: APPColors.Login.red),
                 ),
               ),
