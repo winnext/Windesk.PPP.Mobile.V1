@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 import 'package:wm_ppp_4/feature/components/cards/custom_workorder_list_card.dart';
+import 'package:wm_ppp_4/feature/components/modal_alert/work_order_filter_alert_dialog.dart';
 import 'package:wm_ppp_4/feature/route/app_route.gr.dart';
 import '../../../../feature/components/appbar/custom_main_appbar.dart';
 import '../../../../feature/components/loading/custom_loading_indicator.dart';
@@ -49,7 +50,7 @@ class WorkOrderListScreen extends StatelessWidget {
       },
       actions: [
         IconButton(
-          onPressed: () {},
+          onPressed: () => WorkOrderFilterAlertDialog.showAlertDialog(context),
           icon: Icon(AppIcons.filter, color: APPColors.Secondary.black),
         ),
       ],
