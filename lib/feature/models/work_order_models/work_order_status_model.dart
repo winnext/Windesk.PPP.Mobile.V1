@@ -16,6 +16,14 @@ class WorkOrderStatusModel extends Equatable {
 
   Map<String, dynamic> toJson() => _$WorkOrderStatusModelToJson(this);
 
+  static List<WorkOrderStatusModel> fromJsonList(List<dynamic> jsonList) {
+    List<WorkOrderStatusModel> items = [];
+    for (var json in jsonList) {
+      items.add(WorkOrderStatusModel.fromJson(json));
+    }
+    return items;
+  }
+
   @override
   List<Object?> get props => [
         dispvalue,

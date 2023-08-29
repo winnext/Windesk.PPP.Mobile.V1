@@ -1,10 +1,13 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:wm_ppp_4/feature/models/work_order_models/work_order_change_state_model.dart';
-import 'package:wm_ppp_4/feature/models/work_order_models/work_order_list_model.dart';
-import 'package:wm_ppp_4/feature/models/work_order_models/work_order_store_product_model.dart';
-import 'package:wm_ppp_4/feature/models/work_order_models/work_order_store_product_package_info_model.dart';
-import 'package:wm_ppp_4/feature/models/work_order_models/work_order_tracing_list_model.dart';
+import 'package:wm_ppp_4/feature/enums/building_type_enums.dart';
+import '../../../models/work_order_models/work_order_buildings_and_floors_model.dart';
+import '../../../models/work_order_models/work_order_change_state_model.dart';
+import '../../../models/work_order_models/work_order_list_model.dart';
+import '../../../models/work_order_models/work_order_status_model.dart';
+import '../../../models/work_order_models/work_order_store_product_model.dart';
+import '../../../models/work_order_models/work_order_store_product_package_info_model.dart';
+import '../../../models/work_order_models/work_order_tracing_list_model.dart';
 
 import '../../../exceptions/custom_service_exceptions.dart';
 import '../../../injection.dart';
@@ -92,4 +95,14 @@ abstract class WorkOrderServiceRepository {
   Future<Either<bool, CustomServiceException>> deleteWorkOrderEffort(String userToken, String userName, String effortCode);
 
   Future<Either<bool, CustomServiceException>> deteleteWorkOrderDocumant(String userToken, String userName, String documantId);
+
+  // FILTER SERVICES
+  Future<Either<List<WorkOrderStatusModel>, CustomServiceException>> getWorkOrderStatus(String userToken);
+
+  Future<Either<List<WorkOrderBuildingsAndFloorsModel>, CustomServiceException>> getWorkOrderBuildingsAndFloors(
+    String userToken,
+    BuildingTypeEnums buildingType,
+  );
+
+  Future<Either<bool, CustomServiceException>> getWorkOrderDetailsByCode(String userToken, String workOrderCode, String userName);
 }

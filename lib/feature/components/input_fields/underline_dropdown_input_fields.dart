@@ -12,7 +12,7 @@ class UnderlineDropdownInputFields extends StatelessWidget {
   Widget build(BuildContext context) {
     return DropdownButtonFormField(
       isDense: true,
-      isExpanded: false,
+      isExpanded: true,
       style: TextStyle(color: APPColors.Main.white),
       dropdownColor: APPColors.Modal.blue,
       decoration: InputDecoration(

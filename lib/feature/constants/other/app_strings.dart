@@ -146,4 +146,5 @@ class AppStrings {
   static const String deleteDocumant = ' kodlu dökümanı silmek istediğinize emin misiniz?';
   static const String myResponsibles = 'Sorumlu Olduklarım';
   static const String filter = 'Filtrele';
+  static const String cantFound = 'Kayıt bulunamadı';
 }

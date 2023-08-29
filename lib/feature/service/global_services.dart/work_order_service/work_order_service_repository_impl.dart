@@ -1,6 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:wm_ppp_4/feature/enums/building_type_enums.dart';
+import 'package:wm_ppp_4/feature/models/work_order_models/work_order_buildings_and_floors_model.dart';
 import 'package:wm_ppp_4/feature/models/work_order_models/work_order_change_state_model.dart';
+import 'package:wm_ppp_4/feature/models/work_order_models/work_order_status_model.dart';
 
 import '../../../constants/paths/service_tools.dart';
 import '../../../enums/service_response_status_enums.dart';
@@ -593,7 +596,8 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
     String responsible,
     String status,
   ) async {
-    String url = '${ServiceTools.baseUrlV2}/list/$workOrderCode/workorder?start=$startLimit&end=$endLimit&build&floor&responsible&status';
+    String url =
+        '${ServiceTools.baseUrlV2}/list/$workOrderCode/workorder?start=$startLimit&end=$endLimit&build=$build&floor=$floor&responsible&status=$status';
 
     try {
       final response = await super.dio.get(
@@ -623,6 +627,74 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
     } catch (e) {
       super.logger.e(e.toString());
       return Right(CustomServiceException(message: 'Work Order List Model Error', statusCode: '500'));
+    }
+  }
+
+  // FILTER SERVICES
+  @override
+  Future<Either<List<WorkOrderBuildingsAndFloorsModel>, CustomServiceException>> getWorkOrderBuildingsAndFloors(
+    String userToken,
+    BuildingTypeEnums buildingType,
+  ) async {
+    String url = '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=getSpaceBfwByType&type=${buildingType.rawValue}';
+
+    try {
+      final response = await super.dio.get(url);
+      super.logger.e(response.toString());
+      if (response.data[ServiceResponseStatusEnums.result.rawText] == ServiceStatusEnums.success.rawText) {
+        final data = response.data[ServiceResponseStatusEnums.records.rawText];
+
+        List<WorkOrderBuildingsAndFloorsModel> buildings = WorkOrderBuildingsAndFloorsModel.fromJsonList(data);
+
+        return Left(buildings);
+      } else {
+        return Right(CustomServiceException(message: CustomServiceMessages.workOrderAddPersonalError, statusCode: response.statusCode.toString()));
+      }
+    } catch (e) {
+      super.logger.e(e.toString());
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderAddPersonalError, statusCode: '500'));
+    }
+  }
+
+  @override
+  Future<Either<List<WorkOrderStatusModel>, CustomServiceException>> getWorkOrderStatus(String userToken) async {
+    String url = '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=getWorkorderStatuses';
+
+    try {
+      final response = await super.dio.get(url);
+      super.logger.e(response.toString());
+      if (response.data[ServiceResponseStatusEnums.result.rawText] == ServiceStatusEnums.success.rawText) {
+        final data = response.data[ServiceResponseStatusEnums.records.rawText];
+
+        List<WorkOrderStatusModel> status = WorkOrderStatusModel.fromJsonList(data);
+
+        return Left(status);
+      } else {
+        return Right(CustomServiceException(message: CustomServiceMessages.workOrderAddPersonalError, statusCode: response.statusCode.toString()));
+      }
+    } catch (e) {
+      super.logger.e(e.toString());
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderAddPersonalError, statusCode: '500'));
+    }
+  }
+
+  @override
+  Future<Either<bool, CustomServiceException>> getWorkOrderDetailsByCode(String userToken, String workOrderCode, String userName) async {
+    String url =
+        '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=checkWorkorderByAuthorizedServices&workorderCode=$workOrderCode&username=$userName';
+    print(url);
+
+    try {
+      final response = await super.dio.get(url);
+      super.logger.e(response.toString());
+      if (response.data[ServiceResponseStatusEnums.result.rawText] == ServiceStatusEnums.success.rawText) {
+        return const Left(true);
+      } else {
+        return Right(CustomServiceException(message: CustomServiceMessages.workOrderAddPersonalError, statusCode: response.statusCode.toString()));
+      }
+    } catch (e) {
+      super.logger.e(e.toString());
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderAddPersonalError, statusCode: '500'));
     }
   }
 }
