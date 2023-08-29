@@ -23,6 +23,9 @@ class LoginProvider extends ChangeNotifier {
   bool _isLoginSuccess = false;
   bool get isLoginSuccess => _isLoginSuccess;
 
+  bool _isLoginInfoSave = false;
+  bool get isLoginInfoSave => _isLoginInfoSave;
+
   bool _isErrorActive = false;
   bool get isErrorActive => _isErrorActive;
 
@@ -30,11 +33,11 @@ class LoginProvider extends ChangeNotifier {
   bool get textFieldEmptyError => _textFieldEmptyError;
 
   void logIn(BuildContext context) async {
-    if (_userName.isNotEmpty && _password.isNotEmpty) {
+    if (_userCode.isNotEmpty && _password.isNotEmpty) {
       _loading = true;
       notifyListeners();
-
-      final response = await authService.login(userName, password);
+      print('object --- ' + _userCode + _password);
+      final response = await authService.login(_userCode, password);
 
       response.fold((login) {
         _loading = false;
@@ -43,6 +46,7 @@ class LoginProvider extends ChangeNotifier {
           _isLoginSuccess = true;
           _userName = login.record![0]['FULLNAME'];
           _userCode = login.record![0]['CODE'];
+          _password = password;
           _setTokenToPreferences();
           notifyListeners();
 
@@ -81,6 +85,7 @@ class LoginProvider extends ChangeNotifier {
   void _setTokenToPreferences() async {
     await SharedManager().setString(SharedEnum.userCode, _userCode);
     await SharedManager().setString(SharedEnum.userName, _userName);
+    await SharedManager().setString(SharedEnum.userPassword, _password);
   }
 
   // set functions
@@ -88,17 +93,35 @@ class LoginProvider extends ChangeNotifier {
     _userName = value;
   }
 
+  void setUserCode(String value) {
+    _userCode = value;
+    notifyListeners();
+  }
+
   void setPassword(String value) {
     _password = value;
+    notifyListeners();
+  }
+
+  void setPasswordAndUserName() async {
+    String userCode = await SharedManager().getString(SharedEnum.userCode);
+    String userPassword = await SharedManager().getString(SharedEnum.userPassword);
+    print('-----' + userCode + userPassword);
+    setPassword(userPassword);
+    setUserCode(userCode);
   }
 
   void showSnckbar(BuildContext context, String message, String type) {
     snackBar(context, message, type);
   }
 
+  void setIsLoginSaveInfo(bool value) async {
+    _isLoginInfoSave = value;
+    await SharedManager().setBool(SharedEnum.isLoginInfoSave, _isLoginInfoSave);
+  }
+
   void setStart() {
-    _password = '';
-    _userName = '';
+    _userCode = '';
     _isLoginSuccess = false;
     _textFieldEmptyError = false;
     _isErrorActive = false;

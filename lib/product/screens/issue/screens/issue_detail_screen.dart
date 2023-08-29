@@ -10,9 +10,9 @@ class IssueDetailScreen extends StatelessWidget {
   final String workOrderCode;
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      appBar: CustomMainAppbar(title: Text('Detay'), returnBack: true,),
-      body: DefaultTabController(initialIndex:0, length: ServiceTools.appName == 'antep' ? 4 : 3, child: TabBar(
+    return  Scaffold(
+      appBar: CustomMainAppbar(title: Text(workOrderCode), returnBack: true,),
+      body: const DefaultTabController(initialIndex:0, length: ServiceTools.appName == 'antep' ? 4 : 3, child: TabBar(
         indicatorColor: Colors.black,
         labelStyle: TextStyle(fontSize: 11),
         labelColor: Colors.black,

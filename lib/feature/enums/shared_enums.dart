@@ -7,4 +7,6 @@ enum SharedEnum {
   refreshToken,
   userCode,
   userName,
+  userPassword,
+  isLoginInfoSave,
 }

@@ -32,15 +32,6 @@ class HomeProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void logoutFunction() async {
-    // final result = HomeServiceRepositoryImpl().logout('');
-    // // ignore: unrelated_type_equality_checks
-    // if (result == 'success') {
-    //   _isUserLogout = true;
-    //   notifyListeners();
-    // }
-  }
-
   void getAnnouncement() {
     final result = HomeServiceRepositoryImpl().getAnnouncements();
     if (result is CustomServiceException) {
@@ -58,7 +49,6 @@ class HomeProvider extends ChangeNotifier {
       response.fold(
         (l) => {
           _isUserLogout = true,
-          _clearShared(),
           notifyListeners(),
           Future.delayed(const Duration(seconds: 1), () {
             _isUserLogout = false;
