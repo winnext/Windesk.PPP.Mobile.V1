@@ -682,7 +682,6 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
   Future<Either<bool, CustomServiceException>> getWorkOrderDetailsByCode(String userToken, String workOrderCode, String userName) async {
     String url =
         '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=checkWorkorderByAuthorizedServices&workorderCode=$workOrderCode&username=$userName';
-    print(url);
 
     try {
       final response = await super.dio.get(url);
