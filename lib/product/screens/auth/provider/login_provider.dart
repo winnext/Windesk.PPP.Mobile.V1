@@ -106,7 +106,6 @@ class LoginProvider extends ChangeNotifier {
   void setPasswordAndUserName() async {
     String userCode = await SharedManager().getString(SharedEnum.userCode);
     String userPassword = await SharedManager().getString(SharedEnum.userPassword);
-    print('-----' + userCode + userPassword);
     setPassword(userPassword);
     setUserCode(userCode);
   }

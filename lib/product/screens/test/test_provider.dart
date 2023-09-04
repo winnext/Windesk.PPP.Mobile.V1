@@ -52,7 +52,13 @@ class TestProvider extends ChangeNotifier {
   String _serverTime = '';
   get serverTime => _serverTime;
   set setServerTime(String serverTime) {
-    _serverTime = serverTime;
+    String yil = serverTime[0] + serverTime[1] + serverTime[2] + serverTime[3];
+    String ay = serverTime[4] + serverTime[5];
+    String gun = serverTime[6] + serverTime[7];
+    String saat = serverTime[8] + serverTime[9];
+    String dakika = serverTime[10] + serverTime[11];
+    String saniye = serverTime[12] + serverTime[13];
+    _serverTime = '$gun/$ay/$yil $saat:$dakika:$saniye';
   }
 
   String _phoneTime = '';
@@ -73,7 +79,7 @@ class TestProvider extends ChangeNotifier {
     String token = await SharedManager().getString(SharedEnum.deviceId);
     var getServerTimeResult = await testServices.getServerTime(token);
     getServerTimeResult.fold(
-      (l) => {},
+      (l) => {setServerTime = l},
       (r) => null,
     );
   }

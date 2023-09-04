@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 import 'package:wm_ppp_4/feature/components/cards/custom_workorder_list_card.dart';
+import 'package:wm_ppp_4/feature/route/app_route.gr.dart';
 import '../../../../feature/components/appbar/custom_main_appbar.dart';
 import '../../../../feature/components/loading/custom_loading_indicator.dart';
 import '../../../../feature/constants/other/colors.dart';
@@ -26,7 +27,9 @@ class WorkOrderListScreen extends StatelessWidget {
         appBar: _appbar(context),
         body: Consumer<WorkOrderListProvider>(
           builder: (context, WorkOrderListProvider value, child) {
-            value.getWorkOrderList(workOrderCode);
+            SchedulerBinding.instance.addPostFrameCallback((_) {
+              value.getWorkOrderList(workOrderCode);
+            });
             return value.isLoading ? const CustomLoadingIndicator() : _successBody(value, workOrderCode);
           },
         ),
@@ -60,10 +63,20 @@ class WorkOrderListScreen extends StatelessWidget {
         Expanded(
           flex: 92,
           child: ListView.builder(
-            itemCount: value.workOrderListModel.length,
+            itemCount: value.workOrderListModel.length + 1,
             itemBuilder: (context, index) {
+              if (index == value.workOrderListModel.length && value.isLastPage) return null;
+              if (index == value.workOrderListModel.length) {
+                value.getMoreOrderList(workOrderCode);
+                return value.isLastPage ? const SizedBox() : const Center(child: CircularProgressIndicator());
+              }
               final model = value.workOrderListModel[index];
-              return CustomWorkorderListCard(model: model);
+              return InkWell(
+                  onTap: () {
+                    context.read<WorkOrderListProvider>().closeTimer();
+                    context.router.push(WorkOrderDetailScreen(workorderCode: value.workOrderListModel[index].code ?? 'WOO0000001'));
+                  },
+                  child: CustomWorkorderListCard(model: model));
             },
           ),
         ),

@@ -76,8 +76,6 @@ class _LoginScreenBodyState extends State<_LoginScreenBody> {
     widget.provider.setPasswordAndUserName();
 
     Future.delayed(const Duration(milliseconds: 1000), () {
-      print('Asd, ' + widget.provider.userCode);
-      print('saasdsa');
       _isChecked = widget.provider.isLoginInfoSave;
       _isChecked == true ? {controllerUserName.text = widget.provider.userCode, controllerPassword.text = widget.provider.password} : null;
     });
@@ -127,16 +125,16 @@ class _LoginScreenBodyState extends State<_LoginScreenBody> {
                   changeVisibility: provider.setShowPassword,
                   showPassword: provider.showPassword,
                 ),
-                Checkbox(
-                  checkColor: Colors.white,
-                  value: _isChecked,
-                  onChanged: (bool? value) {
-                    setState(() {
-                      _isChecked = value ?? false;
-                      loginProvider.setIsLoginSaveInfo(_isChecked);
-                    });
-                  },
-                ),
+                // Checkbox(
+                //   checkColor: Colors.white,
+                //   value: _isChecked,
+                //   onChanged: (bool? value) {
+                //     setState(() {
+                //       _isChecked = value ?? false;
+                //       loginProvider.setIsLoginSaveInfo(_isChecked);
+                //     });
+                //   },
+                // ),
               ],
             ),
           ),

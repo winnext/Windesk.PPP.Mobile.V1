@@ -15,9 +15,7 @@ class TestServiceRepositoryImpl extends TestServiceRepository {
   Future<Either<bool, CustomServiceException>> accessTestWindesk() async {
     bool result = false;
 
-    String url =
-        '${ServiceTools.attachPathLive}?&timestamp=${DateTime.now().millisecondsSinceEpoch.toString()}';
-
+    String url = '${ServiceTools.attachPath}?&timestamp=${DateTime.now().millisecondsSinceEpoch.toString()}';
     try {
       final response = await super.dio.get(url);
       super.logger.e(response.statusCode.toString());
@@ -29,15 +27,11 @@ class TestServiceRepositoryImpl extends TestServiceRepository {
 
         return Left(result);
       } else {
-        return Right(CustomServiceException(
-            message: CustomServiceMessages.workOrderAddEffortError,
-            statusCode: response.statusCode.toString()));
+        return Right(CustomServiceException(message: CustomServiceMessages.workOrderAddEffortError, statusCode: response.statusCode.toString()));
       }
     } catch (error) {
       super.logger.e(error.toString());
-      return Right(CustomServiceException(
-          message: CustomServiceMessages.workOrderAddEffortError,
-          statusCode: '500'));
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderAddEffortError, statusCode: '500'));
     }
   }
 
@@ -45,7 +39,7 @@ class TestServiceRepositoryImpl extends TestServiceRepository {
   Future<Either<bool, CustomServiceException>> accessTestMobileService() async {
     bool result = false;
 
-    String url = '${ServiceTools.baseUrlV2}workorder/reactive';
+    String url = '${ServiceTools.baseUrlV2}/workorder/reactive';
 
     try {
       final response = await super.dio.get(url,
@@ -55,56 +49,45 @@ class TestServiceRepositoryImpl extends TestServiceRepository {
           ));
       super.logger.e(response.toString());
 
-      if (response.data[ServiceResponseStatusEnums.result.rawText] ==
-          ServiceStatusEnums.success.rawText) {
+      if (response.data[ServiceResponseStatusEnums.result.rawText] == ServiceStatusEnums.success.rawText) {
         result = true;
 
-        super.logger.e(result.toString());
+        //super.logger.e(result.toString());
 
         return Left(result);
       } else {
-        return Right(CustomServiceException(
-            message: CustomServiceMessages.workOrderAddEffortError,
-            statusCode: response.statusCode.toString()));
+        return Right(CustomServiceException(message: CustomServiceMessages.workOrderAddEffortError, statusCode: response.statusCode.toString()));
       }
     } catch (error) {
       super.logger.e(error.toString());
-      return Right(CustomServiceException(
-          message: CustomServiceMessages.workOrderAddEffortError,
-          statusCode: '500'));
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderAddEffortError, statusCode: '500'));
     }
   }
 
   @override
-  Future<Either<bool, CustomServiceException>> getServerTime(token) async {
-    bool result = false;
+  Future<Either<String, CustomServiceException>> getServerTime(token) async {
+    String result = 'false';
 
-    String url = '${ServiceTools.baseUrlV1}$token&action=getDateTime';
-    print('URL : ' + url);
+    String url = '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$token&action=getDateTime';
     try {
       final response = await super.dio.get(url,
           options: Options(
             responseType: ResponseType.json,
           ));
-      super.logger.e(response.toString());
+      super.logger.e(response.data['records'].toString());
 
-      if (response.data[ServiceResponseStatusEnums.result.rawText] ==
-          ServiceStatusEnums.success.rawText) {
-        result = true;
+      if (response.data[ServiceResponseStatusEnums.result.rawText] == ServiceStatusEnums.success.rawText) {
+        result = 'true';
 
         super.logger.e(result);
 
-        return Left(response.data[ServiceResponseStatusEnums.records.rawText]);
+        return Left(response.data['records']);
       } else {
-        return Right(CustomServiceException(
-            message: CustomServiceMessages.getServerTimeError,
-            statusCode: response.statusCode.toString()));
+        return Right(CustomServiceException(message: CustomServiceMessages.getServerTimeError, statusCode: response.statusCode.toString()));
       }
     } catch (error) {
       super.logger.e(error.toString());
-      return Right(CustomServiceException(
-          message: CustomServiceMessages.getServerTimeError,
-          statusCode: '500'));
+      return Right(CustomServiceException(message: CustomServiceMessages.getServerTimeError, statusCode: '500'));
     }
   }
 }

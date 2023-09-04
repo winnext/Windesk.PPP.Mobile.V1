@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:wm_ppp_4/feature/models/work_order_models/work_order_list_model.dart';
-import 'package:wm_ppp_4/feature/models/work_order_models/work_order_tracing_list_model.dart';
+import 'package:wm_ppp_4/feature/models/work_order_models/work_order_change_state_model.dart';
 
 import '../../../constants/paths/service_tools.dart';
 import '../../../enums/service_response_status_enums.dart';
@@ -11,24 +10,67 @@ import '../../../models/work_order_models/work_order_added_resources_model.dart'
 import '../../../models/work_order_models/work_order_attachments_model.dart';
 import '../../../models/work_order_models/work_order_date_action_model.dart';
 import '../../../models/work_order_models/work_order_details_model.dart';
+import '../../../models/work_order_models/work_order_list_model.dart';
 import '../../../models/work_order_models/work_order_loads_model.dart';
 import '../../../models/work_order_models/work_order_resources_model.dart';
 import '../../../models/work_order_models/work_order_shiftings_model.dart';
 import '../../../models/work_order_models/work_order_spareparts_model.dart';
+import '../../../models/work_order_models/work_order_store_product_model.dart';
+import '../../../models/work_order_models/work_order_store_product_package_info_model.dart';
 import '../../../models/work_order_models/work_order_stores_model.dart';
+import '../../../models/work_order_models/work_order_tracing_list_model.dart';
 import 'work_order_service_repository.dart';
 
 class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
-  // GET SERVICES
+  // Change Work Order Status
   @override
-  Future<Either<List<WorkOrderLoadsModel>, CustomServiceException>> getWorkOrderLoads(String workOrderCode) async {
+  Future<Either<WorkOrderChangeStateModel, CustomServiceException>> changeWorkOrderStatus(
+      String userToken, String userName, String workOrderCode, String status) async {
+    WorkOrderChangeStateModel model;
+
+    String url =
+        '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=workorderActualDateActions&workorderCode=$workOrderCode&username=$userName&type=$status&nfc=0&workorder_wait_reason=&workorder_wait_reasoncode=';
+
+    try {
+      final response = await super.dio.get(url);
+      super.logger.e(response.toString());
+
+      if (response.data[ServiceResponseStatusEnums.result.rawText] == true) {
+        model = WorkOrderChangeStateModel(
+          result: response.data[ServiceResponseStatusEnums.result.rawText],
+          message: response.data['uyari'],
+        );
+
+        super.logger.e(model);
+
+        return Left(model);
+      } else {
+        return Right(
+          CustomServiceException(
+            message: CustomServiceMessages.workOrderDeleteSparepartsError,
+            statusCode: response.statusCode.toString(),
+          ),
+        );
+      }
+    } catch (error) {
+      super.logger.e(error.toString());
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderDeleteSparepartsError, statusCode: '500'));
+    }
+  }
+
+  // GET SERVICES
+  @override // efforts
+  Future<Either<List<WorkOrderLoadsModel>, CustomServiceException>> getWorkOrderLoads(String userId, String workOrderCode) async {
     List<WorkOrderLoadsModel> loads = [];
-    String url = 'http://windeskmobile.signumtte.com/workorder/$workOrderCode/workloads';
+    String url = '${ServiceTools.baseUrlV2}/workorder/$workOrderCode/workloads';
 
     try {
       final response = await super.dio.get(url,
           options: Options(
-            headers: {'xusercode': "sgnm1040", 'xtoken': 'demo!'},
+            headers: {
+              'xusercode': userId,
+              'xtoken': ServiceTools.tokenV2,
+            },
           ));
 
       if (response.data[ServiceResponseStatusEnums.result.rawText] == ServiceStatusEnums.success.rawText) {
@@ -46,14 +88,14 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
   }
 
   @override
-  Future<Either<List<WorkOrderAttachmentsModel>, CustomServiceException>> getWorkOrderAttachments(String workOrderCode) async {
+  Future<Either<List<WorkOrderAttachmentsModel>, CustomServiceException>> getWorkOrderAttachments(String userCode, String workOrderCode) async {
     List<WorkOrderAttachmentsModel> attachments = [];
-    String url = 'http://windeskmobile.signumtte.com/workorder/$workOrderCode/attachments';
+    String url = '${ServiceTools.baseUrlV2}/workorder/$workOrderCode/attachments';
 
     try {
       final response = await super.dio.get(url,
           options: Options(
-            headers: {'xusercode': "sgnm1040", 'xtoken': 'demo!'},
+            headers: {'xusercode': userCode, 'xtoken': ServiceTools.tokenV2},
           ));
       if (response.data[ServiceResponseStatusEnums.result.rawText] == ServiceStatusEnums.success.rawText) {
         final data = response.data[ServiceResponseStatusEnums.records.rawText];
@@ -70,14 +112,13 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
   }
 
   @override
-  Future<Either<List<WorkOrderResourcesModel>, CustomServiceException>> getWorkOrderResources(String workOrderCode) async {
+  Future<Either<List<WorkOrderResourcesModel>, CustomServiceException>> getWorkOrderResources(String userCode, String workOrderCode) async {
     List<WorkOrderResourcesModel> resources = [];
-    String url = 'http://windeskmobile.signumtte.com/workorder/$workOrderCode/resources';
-
+    String url = '${ServiceTools.baseUrlV2}/workorder/$workOrderCode/resources';
     try {
       final response = await super.dio.get(url,
           options: Options(
-            headers: {'xusercode': "sgnm1040", 'xtoken': 'demo!'},
+            headers: {'xusercode': userCode, 'xtoken': ServiceTools.tokenV2},
           ));
 
       if (response.data[ServiceResponseStatusEnums.result.rawText] == ServiceStatusEnums.success.rawText) {
@@ -94,16 +135,14 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
   }
 
   @override
-  Future<Either<List<WorkOrderShiftingsModel>, CustomServiceException>> getWorkOrderShiftings() async {
+  Future<Either<List<WorkOrderShiftingsModel>, CustomServiceException>> getWorkOrderShiftings(String userToken) async {
     List<WorkOrderShiftingsModel> shiftings = [];
 
-    String url =
-        'https://demo.signumtte.com/windesk/app/webroot/integration/WindeskMobile.php?use_rest=1&wsusername=wdmobile&wspassword=wdsgnm1017_&token=wddemo!_null&action=getVardiyas';
+    String url = '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=getVardiyas';
     try {
       final response = await super.dio.get(url);
       if (response.data[ServiceResponseStatusEnums.result.rawText] == ServiceStatusEnums.success.rawText) {
         final data = response.data[ServiceResponseStatusEnums.records.rawText];
-        super.logger.e(shiftings.toString());
 
         shiftings = WorkOrderShiftingsModel.fromJsonList(data);
 
@@ -118,18 +157,19 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
   }
 
   @override
-  Future<Either<WorkOrderDetailsModel, CustomServiceException>> getWorkOrderDetails(String workOrderCode) async {
+  Future<Either<WorkOrderDetailsModel, CustomServiceException>> getWorkOrderDetails(String userCode, String workOrderCode) async {
     WorkOrderDetailsModel workOrderDeatails;
-    String url = 'http://windeskmobile.signumtte.com/workorder/detail/$workOrderCode';
+    String url = '${ServiceTools.baseUrlV2}/workorder/detail/$workOrderCode';
 
     try {
       final response = await super.dio.get(url,
           options: Options(
             headers: {
-              'xusercode': "sgnm1040",
-              'xtoken': 'demo!',
+              'xusercode': userCode,
+              'xtoken': ServiceTools.tokenV2,
             },
           ));
+      super.logger.e(response);
 
       if (response.data[ServiceResponseStatusEnums.result.rawText] == ServiceStatusEnums.success.rawText) {
         final data = response.data[ServiceResponseStatusEnums.detail.rawText];
@@ -148,14 +188,14 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
   }
 
   @override
-  Future<Either<List<WorkOrderSparepartsModel>, CustomServiceException>> getWorkOrderSpareparts(String workOrderCode) async {
+  Future<Either<List<WorkOrderSparepartsModel>, CustomServiceException>> getWorkOrderSpareparts(String userName, String workOrderCode) async {
     List<WorkOrderSparepartsModel> spareparts = [];
-    String url = 'http://windeskmobile.signumtte.com/workorder/$workOrderCode/spareparts';
+    String url = '${ServiceTools.baseUrlV2}/workorder/$workOrderCode/spareparts';
 
     try {
       final response = await super.dio.get(url,
           options: Options(
-            headers: {'xusercode': "sgnm1040", 'xtoken': 'demo!'},
+            headers: {'xusercode': userName, 'xtoken': ServiceTools.tokenV2},
           ));
 
       if (response.data[ServiceResponseStatusEnums.result.rawText] == ServiceStatusEnums.success.rawText) {
@@ -193,10 +233,10 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
   }
 
   @override
-  Future<Either<List<WorkOrderStores>, CustomServiceException>> getWorkOrderStores() async {
+  Future<Either<List<WorkOrderStores>, CustomServiceException>> getWorkOrderStores(String userToken, String userName) async {
     List<WorkOrderStores> stores;
-    String url =
-        'https://demo.signumtte.com/windesk/app/webroot/integration/WindeskMobile.php?use_rest=1&wsusername=wdmobile&wspassword=wdsgnm1017_&token=wddemo!_null&action=getStore&user=sgnm1040';
+    String url = '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=getStore&user=$userName';
+
     try {
       final response = await super.dio.get(url);
       if (response.data[ServiceResponseStatusEnums.result.rawText] == ServiceStatusEnums.success.rawText) {
@@ -214,10 +254,54 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
   }
 
   @override
-  Future<Either<List<WorkOrderAddedResources>, CustomServiceException>> getWorkOrderAddedResources(String serviceCode) async {
+  Future<Either<List<WorkOrderStoreProductModel>, CustomServiceException>> getWorkOrderStoreProducts(String userToken, String storeCode) async {
+    List<WorkOrderStoreProductModel> storeProducts;
+    String url = '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=getProduct&storagecode=$storeCode';
+
+    try {
+      final response = await super.dio.get(url);
+      if (response.data[ServiceResponseStatusEnums.result.rawText] == ServiceStatusEnums.success.rawText) {
+        final data = response.data[ServiceResponseStatusEnums.records.rawText];
+        storeProducts = WorkOrderStoreProductModel.fromJsonList(data);
+
+        return Left(storeProducts);
+      } else {
+        return Right(CustomServiceException(message: CustomServiceMessages.workOrderStoresError, statusCode: response.statusCode.toString()));
+      }
+    } catch (error) {
+      super.logger.e(error.toString());
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderStoresError, statusCode: '500'));
+    }
+  }
+
+  @override
+  Future<Either<List<WorkOrderStoreProductPackageInfoModel>, CustomServiceException>> getWorkOrderStoreProductPackageInfo(
+    String userToken,
+    String productCode,
+  ) async {
+    List<WorkOrderStoreProductPackageInfoModel> productPackages;
+    String url = '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=getPackageInfoByProduct&productDefCode=$productCode';
+
+    try {
+      final response = await super.dio.get(url);
+      if (response.data[ServiceResponseStatusEnums.result.rawText] == ServiceStatusEnums.success.rawText) {
+        final data = response.data[ServiceResponseStatusEnums.records.rawText];
+        productPackages = WorkOrderStoreProductPackageInfoModel.fromJsonList(data);
+
+        return Left(productPackages);
+      } else {
+        return Right(CustomServiceException(message: CustomServiceMessages.workOrderStoresError, statusCode: response.statusCode.toString()));
+      }
+    } catch (error) {
+      super.logger.e(error.toString());
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderStoresError, statusCode: '500'));
+    }
+  }
+
+  @override
+  Future<Either<List<WorkOrderAddedResources>, CustomServiceException>> getWorkOrderAddedResources(String userToken, String serviceCode) async {
     List<WorkOrderAddedResources> addedResources;
-    String url =
-        'https://demo.signumtte.com/windesk/app/webroot/integration/WindeskMobile.php?use_rest=1&wsusername=wdmobile&wspassword=wdsgnm1017_&token=wddemo!_null&action=getResponsible&service=$serviceCode';
+    String url = '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=getResponsible&service=$serviceCode';
     try {
       final response = await super.dio.get(url);
       if (response.data[ServiceResponseStatusEnums.result.rawText] == ServiceStatusEnums.success.rawText) {
@@ -236,11 +320,12 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
 
   // ADD SERVICES
   @override
-  Future<Either<bool, CustomServiceException>> addWorkOrderEffort(String workOrderCode, String workPeriod) async {
+  Future<Either<bool, CustomServiceException>> addWorkOrderEffort(String userToken, String workOrderCode, String userName, String workPeriod) async {
     bool result = false;
 
     String url =
-        'https://demo.signumtte.com/windesk/app/webroot/integration/WindeskMobile.php?use_rest=1&wsusername=wdmobile&wspassword=wdsgnm1017_&token=wddemo!_null&action=addWorkorderEffort&workordercode=wo00002986&username=sgnm1040&module=workorder&workperiod=000010000&startdate=1&type=PREDICTED&description=test';
+        '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=addWorkorderEffort&workordercode=$workOrderCode&username=$userName&module=workorder&workperiod=$workPeriod&startdate=1&type=PREDICTED&description=test';
+
     try {
       final response = await super.dio.get(url);
       super.logger.e(response.toString());
@@ -261,13 +346,20 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
   }
 
   @override
-  Future<Either<bool, CustomServiceException>> addWorkOrderImage(String workOrderCode, String image, String desc) async {
+  Future<Either<bool, CustomServiceException>> addWorkOrderAttachment(
+    String userToken,
+    String userName,
+    String workOrderCode,
+    String image,
+    String desc,
+  ) async {
     bool result = false;
-
     String url =
-        'https://demo.signumtte.com/windesk/app/webroot/integration/WindeskMobile.php?use_rest=1&wsusername=wdmobile&wspassword=wdsgnm1017_&token=wddemo!_null&action=addAttachment&username=sgnm1040&moduleName=workorder&issueCode=wo00002986';
+        '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=addAttachment&username=$userName&moduleName=workorder&issueCode=$workOrderCode';
+
+    FormData formData = FormData.fromMap({"base64string": image, 'description': desc});
     try {
-      final response = await super.dio.get(url);
+      final response = await super.dio.post(url, data: formData);
       super.logger.e(response.toString());
 
       if (response.data[ServiceResponseStatusEnums.result.rawText] == ServiceStatusEnums.success.rawText) {
@@ -286,11 +378,12 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
   }
 
   @override
-  Future<Either<bool, CustomServiceException>> addWorkOrderPersonal(String workOrderCode, String moduleCode, String tuwnofWork) async {
+  Future<Either<bool, CustomServiceException>> addWorkOrderPersonal(
+      String userToken, String workOrderCode, String moduleCode, String tuwnofWork) async {
     bool result = false;
-
     String url =
-        'https://demo.signumtte.com/windesk/app/webroot/integration/WindeskMobile.php?use_rest=1&wsusername=wdmobile&wspassword=wdsgnm1017_&token=wddemo!_null&action=addResourceStaff&module=xusr&modulecode=K200462&workordercode=wo00002986&turnofwork=V00000001';
+        '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=addResourceStaff&module=xusr&modulecode=$moduleCode&workordercode=$workOrderCode&turnofwork=$tuwnofWork';
+
     try {
       final response = await super.dio.get(url);
       super.logger.e(response.toString());
@@ -311,11 +404,18 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
   }
 
   @override
-  Future<Either<bool, CustomServiceException>> addWorkOrderSpareparts(String workOrderCode, String product, String amount, String unit) async {
+  Future<Either<bool, CustomServiceException>> addWorkOrderSpareparts(
+    String userToken,
+    String workOrderCode,
+    String product,
+    String amount,
+    String unit,
+  ) async {
     bool result = false;
 
     String url =
-        'https://demo.signumtte.com/windesk/app/webroot/integration/WindeskMobile.php?use_rest=1&wsusername=wdmobile&wspassword=wdsgnm1017_&token=wddemo!_6BCFD9E7-75A8-4688-8E85-10C5E2B4A96E&action=addMaterial&module=stproductdef&modulecode=S00000000002067&workordercode=MYM_WO00000551&amount=12&unit=PCK0000010893';
+        '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=addMaterial&module=stproductdef&modulecode=$product&workordercode=$workOrderCode&amount=$amount&unit=$unit';
+
     try {
       final response = await super.dio.get(url);
       super.logger.e(response.toString());
@@ -337,11 +437,10 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
 
   // DELETE SERVICES
   @override
-  Future<Either<bool, CustomServiceException>> deleteWorkOrderEffort(String workOrderCode) async {
+  Future<Either<bool, CustomServiceException>> deleteWorkOrderEffort(String userToken, String userName, String effortCode) async {
     bool result = false;
+    String url = '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=deleteWorkorderWorklog&code=$effortCode&username=$userName';
 
-    String url =
-        'https://demo.signumtte.com/windesk/app/webroot/integration/WindeskMobile.php?use_rest=1&wsusername=wdmobile&wspassword=wdsgnm1017_&token=wddemo!_null&action=deleteWorkorderWorklog&code=WL00000261&username=sgnm1040';
     try {
       final response = await super.dio.get(url);
       super.logger.e(response.toString());
@@ -362,11 +461,16 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
   }
 
   @override
-  Future<Either<bool, CustomServiceException>> deleteWorkOrderPersonal(String workOrderCode, String moduleCode) async {
+  Future<Either<bool, CustomServiceException>> deleteWorkOrderPersonal(
+    String userToken,
+    String userName,
+    String workOrderCode,
+    String moduleCode,
+  ) async {
     bool result = false;
-
     String url =
-        'https://demo.signumtte.com/windesk/app/webroot/integration/WindeskMobile.php?use_rest=1&wsusername=wdmobile&wspassword=wdsgnm1017_&token=wddemo!_null&action=deleteWorkorderResource&username=sgnm1040&module=xusr&moduleCode=K200462&workorderCode=wo00002986';
+        '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=deleteWorkorderResource&username=$userName&module=xusr&moduleCode=$moduleCode&workorderCode=$workOrderCode';
+
     try {
       final response = await super.dio.get(url);
       super.logger.e(response.toString());
@@ -387,11 +491,10 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
   }
 
   @override
-  Future<Either<bool, CustomServiceException>> deleteWorkOrderSpareparts(String workOrderCode) async {
+  Future<Either<bool, CustomServiceException>> deleteWorkOrderSpareparts(String userToken, String userName, String materialCode) async {
     bool result = false;
+    String url = '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=deleteWorkorderSparepart&code=$materialCode&username=$userName';
 
-    String url =
-        'https://demo.signumtte.com/windesk/app/webroot/integration/WindeskMobile.php?use_rest=1&wsusername=wdmobile&wspassword=wdsgnm1017_&token=wddemo!_null&action=deleteWorkorderSparepart&code=malzeme kod&username=sgnm1040';
     try {
       final response = await super.dio.get(url);
       super.logger.e(response.toString());
@@ -405,6 +508,36 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
       } else {
         return Right(
           CustomServiceException(message: CustomServiceMessages.workOrderDeleteSparepartsError, statusCode: response.statusCode.toString()),
+        );
+      }
+    } catch (error) {
+      super.logger.e(error.toString());
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderDeleteSparepartsError, statusCode: '500'));
+    }
+  }
+
+  @override
+  Future<Either<bool, CustomServiceException>> deteleteWorkOrderDocumant(String userToken, String userName, String documantId) async {
+    bool result = false;
+    // String url = '';
+    String url = '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=deleteWorkorderAttachment&username=$userName&id=$documantId';
+
+    try {
+      final response = await super.dio.get(url);
+      super.logger.e(response.toString());
+
+      if (response.data[ServiceResponseStatusEnums.result.rawText] == ServiceStatusEnums.success.rawText) {
+        result = true;
+
+        super.logger.e(result.toString());
+
+        return Left(result);
+      } else {
+        return Right(
+          CustomServiceException(
+            message: CustomServiceMessages.workOrderDeleteSparepartsError,
+            statusCode: response.statusCode.toString(),
+          ),
         );
       }
     } catch (error) {
@@ -460,7 +593,7 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
     String responsible,
     String status,
   ) async {
-    String url = '${ServiceTools.baseUrlV2}/list/$workOrderCode/workorder?start=$startLimit&end=20&build&floor&responsible&status';
+    String url = '${ServiceTools.baseUrlV2}/list/$workOrderCode/workorder?start=$startLimit&end=$endLimit&build&floor&responsible&status';
 
     try {
       final response = await super.dio.get(

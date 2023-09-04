@@ -11,9 +11,9 @@ class SearchServiceRepoImpml extends SearchServiceRepository {
   @override
   Future<Either<bool, CustomServiceException>> checkIssueByAuth(String issueCode) async {
     final String userName = await SharedManager().getString(SharedEnum.userCode);
-    String token = await SharedManager().getString(SharedEnum.deviceId);
+    String deviceId = await SharedManager().getString(SharedEnum.deviceId);
 
-    String url = '${ServiceTools.baseUrlV1}$token&action=checkIssueByAuthorizedServices&issueCode=$issueCode&username=$userName';
+    String url = '${ServiceTools.baseUrlV1}$deviceId&action=checkIssueByAuthorizedServices&issueCode=$issueCode&username=$userName';
     try {
       final response = await dio.get(url,
           options: Options(

@@ -33,6 +33,7 @@ class WorkOrderListProvider extends ChangeNotifier {
   // pagination values
   int _startLimit = 0;
   int _endLimit = 10;
+  bool isLastPage = false;
   final int _dataPerPage = 10;
 
   // String filter values
@@ -57,7 +58,7 @@ class WorkOrderListProvider extends ChangeNotifier {
         userCode,
         workOrderCode,
         _startLimit.toString(),
-        _startLimit.toString(),
+        _endLimit.toString(),
         build,
         floor,
         responsible,
@@ -67,8 +68,8 @@ class WorkOrderListProvider extends ChangeNotifier {
       response.fold(
         (l) => {
           _startLimit = _endLimit + 1,
-          _endLimit = _endLimit + _dataPerPage,
-          workOrderListModel.addAll(l),
+          _endLimit = _endLimit + _dataPerPage + 1,
+          workOrderListModel = l,
         },
         (r) => {
           _fetchWorkOrderListError = true,
@@ -78,6 +79,37 @@ class WorkOrderListProvider extends ChangeNotifier {
     }
     notifyListeners();
     _fetchWorkOrderListError = false;
+  }
+
+  void getMoreOrderList(String workOrderCode) async {
+    String userCode = await SharedManager().getString(SharedEnum.userCode);
+
+    final response = await workOrderService.getWorkOrderList(
+      userCode,
+      workOrderCode,
+      _startLimit.toString(),
+      _endLimit.toString(),
+      build,
+      floor,
+      responsible,
+      status,
+    );
+
+    response.fold(
+      (l) => {
+        if (l.length != 10)
+          {
+            isLastPage = true,
+          },
+        _startLimit = _endLimit + 1,
+        _endLimit = _endLimit + _dataPerPage + 1,
+        workOrderListModel.addAll(l),
+      },
+      (r) => {
+        _fetchWorkOrderListError = true,
+      },
+    );
+    notifyListeners();
   }
 
   void getCurrentTime() {
