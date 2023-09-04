@@ -41,10 +41,55 @@ class WorkOrderListProvider extends ChangeNotifier {
   String floor = '';
   String responsible = '';
   String status = '';
+  String buildingName = '';
+  String floorName = '';
+  String statusName = '';
 
-  void setLoading() {
-    _isLoading = !_isLoading;
+  void setBuildingName(String val) {
+    buildingName = val;
+    notifyListeners();
   }
+
+  void setFloorName(String val) {
+    floorName = val;
+    notifyListeners();
+  }
+
+  void setStatusName(String val) {
+    statusName = val;
+    notifyListeners();
+  }
+
+  void setBuild(String val) => build = val;
+
+  void setFloor(String val) => floor = val;
+
+  void setStatus(String val) => status = val;
+
+  void setLoading() => _isLoading = !_isLoading;
+
+  void clearBuild(String workOrderCode) {
+    build = '';
+    buildingName = '';
+    notifyListeners();
+    getWorkOrderListWithoutPermission(workOrderCode);
+  }
+
+  void clearFloor(String workOrderCode) {
+    floor = '';
+    floorName = '';
+    notifyListeners();
+    getWorkOrderListWithoutPermission(workOrderCode);
+  }
+
+  void clearStatus(String workOrderCode) {
+    status = '';
+    statusName = '';
+    notifyListeners();
+    getWorkOrderListWithoutPermission(workOrderCode);
+  }
+
+  void searchWorkOrder(String workOrderCode) {}
 
   void getWorkOrderList(String workOrderCode) async {
     if (_initialState) {
@@ -76,9 +121,49 @@ class WorkOrderListProvider extends ChangeNotifier {
         },
       );
       setLoading();
+      notifyListeners();
+      _fetchWorkOrderListError = false;
     }
+  }
+
+  void getWorkOrderListWithoutPermission(String workOrderCode) async {
+    _startLimit = 0;
+    _endLimit = 10;
+    setLoading();
     notifyListeners();
-    _fetchWorkOrderListError = false;
+
+    // ignore: avoid_print
+    print('build: $build');
+    // ignore: avoid_print
+    print('floor: $floor');
+    // ignore: avoid_print
+    print('status: $status');
+
+    String userCode = await SharedManager().getString(SharedEnum.userCode);
+
+    final response = await workOrderService.getWorkOrderList(
+      userCode,
+      workOrderCode,
+      _startLimit.toString(),
+      _endLimit.toString(),
+      build,
+      floor,
+      responsible,
+      status,
+    );
+
+    response.fold(
+      (l) => {
+        _startLimit = _endLimit + 1,
+        _endLimit = _endLimit + _dataPerPage + 1,
+        workOrderListModel = l,
+      },
+      (r) => {
+        _fetchWorkOrderListError = true,
+      },
+    );
+    setLoading();
+    notifyListeners();
   }
 
   void getMoreOrderList(String workOrderCode) async {

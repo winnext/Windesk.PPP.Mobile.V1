@@ -42,7 +42,6 @@ class WorkOrderDetailScreen extends StatelessWidget {
                 snackBar(context, value.changeStateModel.message != null ? value.changeStateModel.message! : AppStrings.stateChanged, 'success');
               }
             });
-
             return value.initState ? _initBody(value) : _successBody(context, value, workorderCode);
           },
         ),

@@ -36,7 +36,6 @@ class LoginProvider extends ChangeNotifier {
     if (_userCode.isNotEmpty && _password.isNotEmpty) {
       _loading = true;
       notifyListeners();
-      print('object --- ' + _userCode + _password);
       final response = await authService.login(_userCode, password);
 
       response.fold((login) {

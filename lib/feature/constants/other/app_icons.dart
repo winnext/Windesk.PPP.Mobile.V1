@@ -45,7 +45,6 @@ class AppIcons {
   static const IconData order = Icons.reorder;
 
   //search icons
-
   static const IconData caseSLASearchIcon = Icons.explore;
   static const IconData entitySearchIcon = Icons.archive;
   static const IconData mahalSearchIcon = Icons.flag;
@@ -67,4 +66,7 @@ class AppIcons {
   static const IconData addPerson = Icons.person_add;
   static const IconData addMaterial = Icons.add_business;
   static const IconData galery = Icons.photo_album;
+
+  // app
+  static const IconData close = Icons.close;
 }
