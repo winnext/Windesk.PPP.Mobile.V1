@@ -7,7 +7,8 @@ import 'package:wm_ppp_4/feature/models/work_order_models/work_order_shiftings_m
 import 'package:wm_ppp_4/feature/service/global_services.dart/work_order_service/work_order_service_repository_impl.dart';
 
 class WorkOrderPersonSheetProvider extends ChangeNotifier {
-  final WorkOrderServiceRepositoryImpl _service = Injection.getIt.get<WorkOrderServiceRepositoryImpl>();
+  final WorkOrderServiceRepositoryImpl _service =
+      Injection.getIt.get<WorkOrderServiceRepositoryImpl>();
 
   List<WorkOrderShiftingsModel> shiftings = [];
   List<WorkOrderAddedResources> addedResources = [];
@@ -20,10 +21,13 @@ class WorkOrderPersonSheetProvider extends ChangeNotifier {
 
   void addPersonal(String workOrderCode) async {
     if (userCode.isEmpty) userCode = addedResources.first.code.toString();
-    if (userPeriodCode.isEmpty) userPeriodCode = shiftings.first.code.toString();
+    if (userPeriodCode.isEmpty) {
+      userPeriodCode = shiftings.first.code.toString();
+    }
 
     String userToken = await SharedManager().getString(SharedEnum.deviceId);
-    final response = await _service.addWorkOrderPersonal(userToken, workOrderCode, userCode, userPeriodCode);
+    final response = await _service.addWorkOrderPersonal(
+        userToken, workOrderCode, userCode, userPeriodCode);
 
     response.fold(
       (l) => {
@@ -50,7 +54,6 @@ class WorkOrderPersonSheetProvider extends ChangeNotifier {
     );
   }
 
-  // TODO SERVICE NEREDEN GELIYOR?, SIMDILIK 12 VERILDI
   void getInfos() async {
     if (init) {
       setLoading();
@@ -77,7 +80,8 @@ class WorkOrderPersonSheetProvider extends ChangeNotifier {
   }
 
   Future<void> getPersonals(String userToken, String serviceCode) async {
-    final response = await _service.getWorkOrderAddedResources(userToken, serviceCode);
+    final response =
+        await _service.getWorkOrderAddedResources(userToken, serviceCode);
 
     response.fold(
       (l) => {
