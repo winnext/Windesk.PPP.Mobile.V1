@@ -80,6 +80,7 @@ abstract class LocaleKeys {
   static const String zeroStr = '0';
   static const String oneStr = '1';
   static const String oPlanned = 'OPlanned';
+  static const String description = 'Açıklama';
 
   //home page titles
   static const issueList = 'Vaka-(SLA) Listesi';
@@ -117,8 +118,4 @@ abstract class LocaleKeys {
 
   //woSearch
   static const String woSearch = 'Vaka Arama';
-
-  //issueSummary
-  static const String description = 'Açıklama Bulunamadı';
-
 }

@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_final_fields
 
 import 'package:flutter/material.dart';
+import 'package:wm_ppp_4/feature/models/issue_models/issue_activities_model.dart';
 import 'package:wm_ppp_4/feature/models/issue_models/issue_summary_model.dart';
 import 'package:wm_ppp_4/feature/models/issue_models/issue_summary_time_model.dart';
 
@@ -126,6 +127,9 @@ class IssueProvider extends ChangeNotifier {
   IssueSummaryTimeModel _issueSummaryTimeInfo = const IssueSummaryTimeModel();
   IssueSummaryTimeModel get issueSummaryTimeInfo => _issueSummaryTimeInfo;
 
+  List<IssueActivitiesModel> _issueActivities = [];
+  List<IssueActivitiesModel> get issueActivities => _issueActivities;
+
   bool notificationController(ScrollNotification scrollInfo) {
     if (!loading && scrollInfo.metrics.pixels == scrollInfo.metrics.maxScrollExtent) {
       if (_totalRecordCount == true) {
@@ -188,7 +192,6 @@ class IssueProvider extends ChangeNotifier {
   void getIssueSummary(String issuecode) async {
     _isFetch = true;
     _loading = true;
-    _issueListType = issueListType;
     notifyListeners();
     final response = await _issueServiceRepository.getIssueSummary(issuecode);
     response.fold(
@@ -205,12 +208,28 @@ class IssueProvider extends ChangeNotifier {
   void getIssueTimeInfo(String issuecode) async {
     _isFetchSummary = true;
     _loading = true;
-    _issueListType = issueListType;
     notifyListeners();
     final response = await _issueServiceRepository.getIssueTimeInfo(issuecode);
     response.fold(
         (l) => {
               _issueSummaryTimeInfo = l,
+              _loading = false,
+            },
+        (r) => {
+              _loading = false,
+            });
+    notifyListeners();
+  }
+
+  void getIssueActivities(String issuecode) async {
+    _isFetch = true;
+    _loading = true;
+    notifyListeners();
+    final response = await _issueServiceRepository.getIssueActivities(issuecode);
+    
+    response.fold(
+        (l) => {
+              _issueActivities.addAll(l),
               _loading = false,
             },
         (r) => {

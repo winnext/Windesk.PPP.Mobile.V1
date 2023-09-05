@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:wm_ppp_4/feature/enums/service_response_status_enums.dart';
+import 'package:wm_ppp_4/feature/models/issue_models/issue_activities_model.dart';
 import 'package:wm_ppp_4/feature/models/issue_models/issue_summary_model.dart';
 import 'package:wm_ppp_4/feature/models/issue_models/issue_summary_time_model.dart';
 import '../../../../feature/exceptions/custom_service_exceptions.dart';
@@ -84,6 +85,25 @@ class IssueServiceRepoImpml extends IssueServiceRepository {
       IssueSummaryTimeModel issueSummaryTimeInfo = IssueSummaryTimeModel.fromJson(data);
       super.logger.i(issueSummaryTimeInfo);
       return Left(issueSummaryTimeInfo);
+    } catch (error) {
+      super.logger.e(error.toString());
+      return Right(CustomServiceException(message: CustomServiceMessages.loginError, statusCode: '400'));
+    }
+  }
+
+  @override
+  Future<Either<List<IssueActivitiesModel>, CustomServiceException>> getIssueActivities(String issueCode) async {
+    final String userCode = await SharedManager().getString(SharedEnum.userCode);
+    String url = '${ServiceTools.baseUrlV2}/issue/$issueCode/activities';
+    List<IssueActivitiesModel> issueActivitiesModel;
+
+    try {
+      final response = await dio.get(url, options: Options(headers: {"xusercode": userCode, "xtoken": ServiceTools.tokenV2}));
+      final data = response.data[ServiceResponseStatusEnums.records.rawText];
+
+      issueActivitiesModel = IssueActivitiesModel.fromJsonList(data);
+      super.logger.i(issueActivitiesModel);
+      return Left(issueActivitiesModel);
     } catch (error) {
       super.logger.e(error.toString());
       return Right(CustomServiceException(message: CustomServiceMessages.loginError, statusCode: '400'));

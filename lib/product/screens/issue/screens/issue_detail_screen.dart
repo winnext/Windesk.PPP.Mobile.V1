@@ -27,15 +27,13 @@ class IssueDetailScreen extends StatelessWidget {
                   IssueSummaryScreen(
                     issueCode: issueCode,
                   ),
-                  const IssueActivitiesScreen(),
+                  IssueActivitiesScreen(issueCode: issueCode),
                   const IssueFilesScreen(),
                   const IssueNotesScreen()
                 ]
               : <Widget>[
-                  IssueSummaryScreen(
-                    issueCode: issueCode,
-                  ),
-                  const IssueActivitiesScreen(),
+                  IssueSummaryScreen(issueCode: issueCode),
+                  IssueActivitiesScreen(issueCode: issueCode),
                   const IssueFilesScreen(),
                 ],
         ),
