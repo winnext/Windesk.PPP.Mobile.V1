@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:wm_ppp_4/feature/models/issue_models/issue_summary_model.dart';
+import 'package:wm_ppp_4/feature/models/issue_models/issue_summary_time_model.dart';
 
 import '../../../../feature/models/issue_models/issue_list_model.dart';
 import '../../../../feature/models/issue_models/issue_tracing_list_model.dart';
@@ -15,6 +16,9 @@ class IssueProvider extends ChangeNotifier {
 
   bool _isFetch = false;
   bool get isFetch => _isFetch;
+
+  bool _isFetchSummary = false;
+  bool get isFetchSummary => _isFetchSummary;
 
   String _moduleCode = '';
   String get moduleCode => _moduleCode;
@@ -116,8 +120,11 @@ class IssueProvider extends ChangeNotifier {
   List<IssueListModel> _issueList = [];
   List<IssueListModel> get issueList => _issueList;
 
-  IssueSummaryModel _issueSummaryDetail = IssueSummaryModel();
+  IssueSummaryModel _issueSummaryDetail = const IssueSummaryModel();
   IssueSummaryModel get issueSummaryDetail => _issueSummaryDetail;
+
+  IssueSummaryTimeModel _issueSummaryTimeInfo = const IssueSummaryTimeModel();
+  IssueSummaryTimeModel get issueSummaryTimeInfo => _issueSummaryTimeInfo;
 
   bool notificationController(ScrollNotification scrollInfo) {
     if (!loading && scrollInfo.metrics.pixels == scrollInfo.metrics.maxScrollExtent) {
@@ -187,6 +194,23 @@ class IssueProvider extends ChangeNotifier {
     response.fold(
         (l) => {
               _issueSummaryDetail = l,
+              _loading = false,
+            },
+        (r) => {
+              _loading = false,
+            });
+    notifyListeners();
+  }
+
+  void getIssueTimeInfo(String issuecode) async {
+    _isFetchSummary = true;
+    _loading = true;
+    _issueListType = issueListType;
+    notifyListeners();
+    final response = await _issueServiceRepository.getIssueTimeInfo(issuecode);
+    response.fold(
+        (l) => {
+              _issueSummaryTimeInfo = l,
               _loading = false,
             },
         (r) => {

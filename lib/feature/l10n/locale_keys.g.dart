@@ -79,6 +79,7 @@ abstract class LocaleKeys {
   static const String noTimeInfo = 'Zaman Bilgisi Yok';
   static const String zeroStr = '0';
   static const String oneStr = '1';
+  static const String oPlanned = 'OPlanned';
 
   //home page titles
   static const issueList = 'Vaka-(SLA) Listesi';
