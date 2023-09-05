@@ -155,7 +155,7 @@ class _HomeScreenState extends State<HomeScreen> {
           icon: Icon(AppIcons.powerSettingsOff, size: 35, color: APPColors.Main.black),
           tooltip: AppStrings.logout,
           onPressed: () {
-            provider.logoutFunction();
+            provider.logOut();
           },
         ),
       ],

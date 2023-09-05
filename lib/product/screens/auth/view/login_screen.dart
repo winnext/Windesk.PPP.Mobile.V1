@@ -48,30 +48,52 @@ class LoginScreen extends StatelessWidget {
   }
 }
 
-class _LoginScreenBody extends StatelessWidget {
-  _LoginScreenBody({required this.provider});
-  final GlobalKey<ScaffoldMessengerState> _globalKey =
-      GlobalKey<ScaffoldMessengerState>();
-
+class _LoginScreenBody extends StatefulWidget {
+  const _LoginScreenBody({required this.provider});
   final LoginProvider provider;
+
+  @override
+  State<_LoginScreenBody> createState() => _LoginScreenBodyState();
+}
+
+class _LoginScreenBodyState extends State<_LoginScreenBody> {
+  final GlobalKey<ScaffoldMessengerState> _globalKey = GlobalKey<ScaffoldMessengerState>();
+
   final String _userNameHint = 'Kullanıcı Adı';
+
   final String _passwordHint = 'Şifre';
+
   final String _login = 'Giriş Yap';
+
+  late bool _isChecked = false;
+
+  final TextEditingController controllerUserName = TextEditingController();
+  final TextEditingController controllerPassword = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    widget.provider.setPasswordAndUserName();
+
+    Future.delayed(const Duration(milliseconds: 1000), () {
+      _isChecked = widget.provider.isLoginInfoSave;
+      _isChecked == true ? {controllerUserName.text = widget.provider.userCode, controllerPassword.text = widget.provider.password} : null;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    provider.isLoginSuccess ? context.router.push(const HomeScreen()) : null;
+    widget.provider.isLoginSuccess ? context.router.push(const HomeScreen()) : null;
     return Scaffold(
       key: _globalKey,
-      appBar: CustomMainAppbar(
-          title: _loginAppbarTitle(context), returnBack: false),
-      body: provider.loading
+      appBar: CustomMainAppbar(title: _loginAppbarTitle(context), returnBack: false),
+      body: widget.provider.loading
           ? const CustomMainLoading()
           : Column(
               children: <Widget>[
                 _loginImage(context),
                 _loginTitleWidget(),
-                _textFields(context, provider),
+                _textFields(context, widget.provider),
                 _loginButton(),
               ],
             ),
@@ -81,7 +103,7 @@ class _LoginScreenBody extends StatelessWidget {
   Expanded _loginButton() {
     return Expanded(
       flex: 2,
-      child: CustomLoginButton(title: _login, onPressed: provider.logIn),
+      child: CustomLoginButton(title: _login, onPressed: widget.provider.logIn),
     );
   }
 
@@ -95,15 +117,24 @@ class _LoginScreenBody extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                TextFieldsInputUnderline(
-                    hintText: _userNameHint,
-                    onChanged: loginProvider.setUserName),
+                TextFieldsInputUnderline(controller: controllerUserName, hintText: _userNameHint, onChanged: loginProvider.setUserCode),
                 TextInputFieldsPasswordInputUnderline(
+                  controller: controllerPassword,
                   hintText: _passwordHint,
                   onChanged: loginProvider.setPassword,
                   changeVisibility: provider.setShowPassword,
                   showPassword: provider.showPassword,
                 ),
+                // Checkbox(
+                //   checkColor: Colors.white,
+                //   value: _isChecked,
+                //   onChanged: (bool? value) {
+                //     setState(() {
+                //       _isChecked = value ?? false;
+                //       loginProvider.setIsLoginSaveInfo(_isChecked);
+                //     });
+                //   },
+                // ),
               ],
             ),
           ),
@@ -117,8 +148,7 @@ class _LoginScreenBody extends StatelessWidget {
       flex: 1,
       child: Text(
         _login,
-        style: const TextStyle(
-            fontSize: FontSizes.titleLarge, fontFamily: 'Roboto'),
+        style: const TextStyle(fontSize: FontSizes.titleLarge, fontFamily: 'Roboto'),
       ),
     );
   }

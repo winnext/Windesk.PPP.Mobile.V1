@@ -21,6 +21,7 @@ class WorkOrderDetailMainProvider extends ChangeNotifier {
   void getWorkOrderDetail(String workOrderCode) async {
     if (initState) {
       initState = false;
+      notifyListeners();
       String userCode = await SharedManager().getString(SharedEnum.userCode);
       final response = await _service.getWorkOrderDetails(userCode, workOrderCode);
 

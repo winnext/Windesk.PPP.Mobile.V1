@@ -60,7 +60,6 @@ class AuthServiceRepositoryImpl extends AuthServiceRepository {
             url,
             options: Options(),
           );
-
       final data = response.data;
       super.logger.i(data);
       if (data[ServiceResponseStatusEnums.result.rawText] == 'success') {

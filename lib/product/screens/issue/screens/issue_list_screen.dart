@@ -58,7 +58,7 @@ class IssueListScreen extends StatelessWidget {
                                 fixedTimer: issueListElement.fixed_timer.toString(),
                                 fixedIDate: issueListElement.fixed_idate.toString(),
                                 onPressed: (String woCode) {
-                                  context.router.push(IssueDetailScreen(workOrderCode: woCode));
+                                  context.router.push(IssueDetailScreen(issueCode: woCode));
                                 },
                                 onPressedLong: () {});
                           }),

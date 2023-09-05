@@ -14,9 +14,7 @@ void main() {
   FirebaseNotification.init();
   runApp(
     MultiProvider(
-      providers: [
-        ChangeNotifierProvider<GlobalProvider>(create: (_) => GlobalProvider()),
-      ],
+      providers: [ChangeNotifierProvider<GlobalProvider>(create: (_) => GlobalProvider())],
       child: MyApp(),
     ),
   );

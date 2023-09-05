@@ -1,5 +1,6 @@
 // ignore_for_file:file_names, prefer_const_constructors_in_immutables,prefer_const_constructors,prefer_const_literals_to_create_immutables,use_key_in_widget_constructors
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:wm_ppp_4/feature/constants/style/border_radius.dart';
 import 'package:wm_ppp_4/feature/constants/style/font_sizes.dart';
@@ -91,7 +92,7 @@ class CustomWoDetailCard extends StatelessWidget {
                 softWrap: true,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(color: APPColors.Secondary.black, fontSize: 15, fontFamily: "Poppins", fontWeight: FontWeight.bold),
-              ),
+              ).tr(),
             ),
             Padding(
               padding: const EdgeInsets.all(2.0),

@@ -56,12 +56,12 @@ abstract class LocaleKeys {
 
   //issue summary
   static const String issueSituation = 'Vaka Durumu';
-  static const String issueOwner = 'Vaka Durumu';
+  static const String issueOwner = 'Vaka Sahibi';
   static const String explanation = 'Açıklama';
   static const String space = 'Mahal';
   static const String spaceLoc = 'Mahal Yeri';
   static const String callReason = 'Arama Nedeni';
-  static const String cfgIngo = 'Varlık Bilgisi';
+  static const String cfgInfo = 'Varlık Bilgisi';
   static const String openingDate = 'Açılma Tarihi';
   static const String incallNumber = 'Arayan Numara';
   static const String targetResponsedDate = 'Hedef Yanıtlama Tarihi';
@@ -79,6 +79,8 @@ abstract class LocaleKeys {
   static const String noTimeInfo = 'Zaman Bilgisi Yok';
   static const String zeroStr = '0';
   static const String oneStr = '1';
+  static const String oPlanned = 'OPlanned';
+  static const String description = 'Açıklama';
 
   //home page titles
   static const issueList = 'Vaka-(SLA) Listesi';
@@ -97,16 +99,14 @@ abstract class LocaleKeys {
   static const String mahalSearchTitle = 'Mahal Arama';
   static const String mahalSearchDetailtTitle = 'Mahal Detayı';
   static const String workOrderSearchTitle = 'İş Emri Arama';
-  static const String myAppointmentRequestsDetailTitle =
-      'Randevulu Taleplerim Detay';
+  static const String myAppointmentRequestsDetailTitle = 'Randevulu Taleplerim Detay';
   static const String myAppointmentRequestsTitle = 'Randevulu Taleplerim';
   static const String myOpenRequests = 'Açık Taleplerim';
   static const String myOpenRequestsDetail = 'Açık Taleplerim Detay';
   static const String newNotif = 'Yeni Bildirim';
   static const String takePictureTitle = 'Fotoğraf Çek';
   static const String pictureTitle = 'Fotoğraf';
-  static const String caseIComplainedDetailTitle =
-      'Şikayet Ettiğim Vaka  Detay';
+  static const String caseIComplainedDetailTitle = 'Şikayet Ettiğim Vaka  Detay';
 
   //woEmpty
   static const String noDescription = 'Açıklama Bulunamadı';

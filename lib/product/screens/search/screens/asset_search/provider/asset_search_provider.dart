@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:wm_ppp_4/feature/models/work_order_models/work_order_asset_search_list_model.dart';
 
 import '../../../service/search_service_repo_impl.dart';
 
 class AssetSearchProvider extends ChangeNotifier {
   // ignore: unused_field
-  final SearchServiceRepoImpml _searchServiceRepository = SearchServiceRepoImpml();
-
+  final SearchServiceRepoImpml _searchServiceRepository =
+      SearchServiceRepoImpml();
+  List<WorkOrderAssetSearchList> assetSearchListPageModel = [];
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
@@ -88,7 +90,8 @@ class AssetSearchProvider extends ChangeNotifier {
     String barcodeScanRes;
 
     try {
-      barcodeScanRes = await FlutterBarcodeScanner.scanBarcode('#ff6666', 'İptal', true, ScanMode.BARCODE);
+      barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
+          '#ff6666', 'İptal', true, ScanMode.BARCODE);
     } on PlatformException {
       barcodeScanRes = 'Failed to get platform version.';
     }
@@ -135,7 +138,15 @@ class AssetSearchProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void assetSearch() {
-    // print('assetSearch');
+  void getAssetSearchList(entityCode, seriNo, rfid, typeCode, brandCode,
+      modelCode, locCode, currentPage) async {
+    num limitStart = 20 * (currentPage - 1);
+    num limitEnd = 20 * currentPage;
+    final response = await _searchServiceRepository
+        .assetSearchList(entityCode, seriNo, rfid, typeCode, brandCode,
+            modelCode, locCode, limitStart.toString(), limitEnd.toString());
+            response.fold((l) => {
+              assetSearchListPageModel = l,
+            }, (r) => null);
   }
 }

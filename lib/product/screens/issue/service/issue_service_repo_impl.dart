@@ -1,5 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:wm_ppp_4/feature/enums/service_response_status_enums.dart';
+import 'package:wm_ppp_4/feature/models/issue_models/issue_activities_model.dart';
+import 'package:wm_ppp_4/feature/models/issue_models/issue_summary_model.dart';
+import 'package:wm_ppp_4/feature/models/issue_models/issue_summary_time_model.dart';
 import '../../../../feature/exceptions/custom_service_exceptions.dart';
 import '../../../../feature/models/issue_models/issue_tracing_list_model.dart';
 import 'issue_service_repo.dart';
@@ -45,6 +49,61 @@ class IssueServiceRepoImpml extends IssueServiceRepository {
       issueList = IssueListModel.fromJsonList(data);
       super.logger.i(issueList);
       return Left(issueList);
+    } catch (error) {
+      super.logger.e(error.toString());
+      return Right(CustomServiceException(message: CustomServiceMessages.loginError, statusCode: '400'));
+    }
+  }
+
+  @override
+  Future<Either<IssueSummaryModel, CustomServiceException>> getIssueSummary(String issueCode) async {
+    String url = '${ServiceTools.baseUrlV2}/issue/$issueCode';
+    final String userCode = await SharedManager().getString(SharedEnum.userCode);
+
+    try {
+      final response = await dio.get(url, options: Options(headers: {"xusercode": userCode, "xtoken": ServiceTools.tokenV2}));
+      final data = response.data[ServiceResponseStatusEnums.detail.rawText];
+
+      IssueSummaryModel issueSummary = IssueSummaryModel.fromJson(data);
+      super.logger.i(issueSummary);
+      return Left(issueSummary);
+    } catch (error) {
+      super.logger.e(error.toString());
+      return Right(CustomServiceException(message: CustomServiceMessages.loginError, statusCode: '400'));
+    }
+  }
+
+  @override
+  Future<Either<IssueSummaryTimeModel, CustomServiceException>> getIssueTimeInfo(String issueCode) async {
+    final String userCode = await SharedManager().getString(SharedEnum.userCode);
+    String url = '${ServiceTools.baseUrlV2}/issue/$issueCode/summary';
+
+    try {
+      final response = await dio.get(url, options: Options(headers: {"xusercode": userCode, "xtoken": ServiceTools.tokenV2}));
+      final data = response.data[ServiceResponseStatusEnums.detail.rawText];
+
+      IssueSummaryTimeModel issueSummaryTimeInfo = IssueSummaryTimeModel.fromJson(data);
+      super.logger.i(issueSummaryTimeInfo);
+      return Left(issueSummaryTimeInfo);
+    } catch (error) {
+      super.logger.e(error.toString());
+      return Right(CustomServiceException(message: CustomServiceMessages.loginError, statusCode: '400'));
+    }
+  }
+
+  @override
+  Future<Either<List<IssueActivitiesModel>, CustomServiceException>> getIssueActivities(String issueCode) async {
+    final String userCode = await SharedManager().getString(SharedEnum.userCode);
+    String url = '${ServiceTools.baseUrlV2}/issue/$issueCode/activities';
+    List<IssueActivitiesModel> issueActivitiesModel;
+
+    try {
+      final response = await dio.get(url, options: Options(headers: {"xusercode": userCode, "xtoken": ServiceTools.tokenV2}));
+      final data = response.data[ServiceResponseStatusEnums.records.rawText];
+
+      issueActivitiesModel = IssueActivitiesModel.fromJsonList(data);
+      super.logger.i(issueActivitiesModel);
+      return Left(issueActivitiesModel);
     } catch (error) {
       super.logger.e(error.toString());
       return Right(CustomServiceException(message: CustomServiceMessages.loginError, statusCode: '400'));

@@ -103,7 +103,8 @@ class TestProvider extends ChangeNotifier {
     setAccessTestV1 = 'loading';
     notifyListeners();
     var accesTestResult = await testServices.accessTestWindesk();
-    accesTestResult.fold((l) => {setAccessTestV1 = 'true'}, (r) => setAccessTestV1 = 'false');
+    accesTestResult.fold(
+        (l) => {setAccessTestV1 = 'true'}, (r) => setAccessTestV1 = 'false');
     notifyListeners();
   }
 
@@ -112,7 +113,8 @@ class TestProvider extends ChangeNotifier {
     notifyListeners();
 
     var accesTestResult = await testServices.accessTestMobileService();
-    accesTestResult.fold((l) => {setAccessTestV2 = 'true'}, (r) => setAccessTestV2 = 'false');
+    accesTestResult.fold(
+        (l) => {setAccessTestV2 = 'true'}, (r) => setAccessTestV2 = 'false');
 
     notifyListeners();
   }

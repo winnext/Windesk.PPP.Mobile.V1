@@ -20,10 +20,11 @@ class ServiceTools {
   static const tokenV1 = 'wdeshtest!_';
   static const tokenV2 = 'eshtest!';
   static const attachPath = "http://10.126.12.21/esh";
-  static const attachPathLive = "http://10.126.12.21/esh/xreadattach.php?token=$tokenV1&id=";
+  static const attachPathLive =
+      "http://10.126.12.21/esh/xreadattach.php?token=$tokenV1&id=";
   static const facilityName = "Eskişehir Şehir Hastanesi";
   static const appName = "ESH";
-
+  
   // GSH PREPROD
   // static const pppProject = "antep";
   // static const baseUrlV2 = 'http://wd-mobile-test.gaziantep.yerel';
