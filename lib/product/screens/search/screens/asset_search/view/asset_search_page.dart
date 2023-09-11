@@ -44,7 +44,7 @@ class AssetSearchPage extends StatelessWidget {
                         actionFunction: assetSearchProvider.scanSerialNumber),
                     TextFieldsInputWithActionAndController(
                         textController: assetSearchProvider.rfidCode,
-                        labelText: AppStrings.rfid,
+                        labelText: AppStrings.rfid, 
                         actionIcon: AppIcons.qr,
                         actionFunction: assetSearchProvider.scanRfid),
                     TextFieldsInputWithActionAndController(
@@ -63,7 +63,8 @@ class AssetSearchPage extends StatelessWidget {
                         ),
                         leftOnPressed: assetSearchProvider.clearInput,
                         rightOnPressed: () async {
-                         
+                          await assetSearchProvider.getAssetSearchList(
+                              '', '', '', '', '', '', 'A-BK(T)-027', 1);
                           context.router.push(const AssetSearchListRoute());
                         }),
                   ],

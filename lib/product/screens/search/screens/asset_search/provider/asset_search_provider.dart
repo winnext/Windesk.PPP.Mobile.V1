@@ -9,7 +9,15 @@ class AssetSearchProvider extends ChangeNotifier {
   // ignore: unused_field
   final SearchServiceRepoImpml _searchServiceRepository =
       SearchServiceRepoImpml();
-  List<WorkOrderAssetSearchList> assetSearchListPageModel = [];
+  List<WorkOrderAssetSearchList> _assetSearchListPageModel = [];
+  List<WorkOrderAssetSearchList> get assetSearchListPageModel =>
+      _assetSearchListPageModel;
+  set setAssetSearchListPageModel(
+      List<WorkOrderAssetSearchList> assetSearchListPageModel) {
+    _assetSearchListPageModel = assetSearchListPageModel;
+    notifyListeners();
+  }
+
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
@@ -138,15 +146,21 @@ class AssetSearchProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void getAssetSearchList(entityCode, seriNo, rfid, typeCode, brandCode,
-      modelCode, locCode, currentPage) async {
+  getAssetSearchList(entityCode, seriNo, rfid, typeCode, brandCode, modelCode,
+      locCode, currentPage) async {
     num limitStart = 20 * (currentPage - 1);
     num limitEnd = 20 * currentPage;
-    final response = await _searchServiceRepository
-        .assetSearchList(entityCode, seriNo, rfid, typeCode, brandCode,
-            modelCode, locCode, limitStart.toString(), limitEnd.toString());
-            response.fold((l) => {
-              assetSearchListPageModel = l,
-            }, (r) => null);
+    final response = await _searchServiceRepository.assetSearchList(
+        entityCode,
+        seriNo,
+        rfid,
+        typeCode,
+        brandCode,
+        modelCode,
+        locCode,
+        limitStart.toString(),
+        limitEnd.toString());
+    response.fold((l) => {setAssetSearchListPageModel = l, notifyListeners()},
+        (r) => null);
   }
 }

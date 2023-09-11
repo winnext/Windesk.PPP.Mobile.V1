@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 import 'package:wm_ppp_4/feature/components/appbar/custom_main_appbar.dart';
 
@@ -11,10 +12,12 @@ class AssetSearchListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return ChangeNotifierProvider(
         create: (context) => AssetSearchProvider(),
         child: Consumer<AssetSearchProvider>(
             builder: (context, AssetSearchProvider assetSearchProvider, child) {
+          print(assetSearchProvider.assetSearchListPageModel);
           return SizedBox(
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
@@ -26,13 +29,20 @@ class AssetSearchListPage extends StatelessWidget {
                 body: Container(
                   color: const Color.fromARGB(255, 224, 224, 224),
                   child: Center(
-                      child: '12'.isNotEmpty
+                      child: assetSearchProvider
+                                  .assetSearchListPageModel.length >
+                              0
                           ? Padding(
                               padding: const EdgeInsets.all(12.0),
                               child: SingleChildScrollView(
                                 child: Column(
                                   children: [
-                                    for (int i = 0; i < 20; i++)
+                                    for (int i = 0;
+                                        i <
+                                            assetSearchProvider
+                                                .assetSearchListPageModel
+                                                .length;
+                                        i++)
                                       Center(
                                           child: GestureDetector(
                                         onTap: () async {
@@ -58,8 +68,7 @@ class AssetSearchListPage extends StatelessWidget {
                                                   BorderRadius.circular(15),
                                             ),
                                             child: const Padding(
-                                              padding:
-                                                  EdgeInsets.all(9.0),
+                                              padding: EdgeInsets.all(9.0),
                                               child: Column(
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,

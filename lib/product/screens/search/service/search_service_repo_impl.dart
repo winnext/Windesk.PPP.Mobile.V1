@@ -52,15 +52,16 @@ class SearchServiceRepoImpml extends SearchServiceRepository {
 
     //http://10.126.12.21/esh/app/webroot/integration/WindeskMobile.php?use_rest=1&wsusername=wdmobile&wspassword=wdsgnm1017_&token=wdeshtest!_6BCFD9E7-75A8-4688-8E85-10C5E2B4A96E&action=getEntity&username=sgnm1031&case_no=&serino=&rfid=&serviceCode=&typeCode=&defnCode=&brand=&model=&mahalno=A-BK(T)-027&limitStart=1&limitEnd=20
     String url =
-        '${ServiceTools.baseUrlV1}$deviceId&action=getEntity&username=$userName&case_no=$entityCode&serino=$seriNo&rfid=$rfid&serviceCode=&typeCode=$typeCode&defnCode=&brand=$brandCode&model=$modelCode&mahalno=$locCode&limitStart=$limitStart&limitEnd=$limitEnd';
+        '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$deviceId&action=getEntity&username=$userName&case_no=$entityCode&serino=$seriNo&rfid=$rfid&serviceCode=&typeCode=$typeCode&defnCode=&brand=$brandCode&model=$modelCode&mahalno=$locCode&limitStart=$limitStart&limitEnd=$limitEnd';
     try {
       final response = await dio.get(url,
           options: Options(
             responseType: ResponseType.json,
           ));
-          final data = response.data;
+      final data = response.data;
 
-      List<WorkOrderAssetSearchList> assetSearchListPage = WorkOrderAssetSearchList.fromJsonList(data['records']);
+      List<WorkOrderAssetSearchList> assetSearchListPage =
+          WorkOrderAssetSearchList.fromJsonList(data['records']);
       super.logger.i(assetSearchListPage);
       return Left(assetSearchListPage);
     } catch (error) {
