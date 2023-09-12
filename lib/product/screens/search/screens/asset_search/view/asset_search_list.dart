@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 import 'package:wm_ppp_4/feature/components/appbar/custom_main_appbar.dart';
 
@@ -12,37 +11,25 @@ class AssetSearchListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     return ChangeNotifierProvider(
         create: (context) => AssetSearchProvider(),
-        child: Consumer<AssetSearchProvider>(
-            builder: (context, AssetSearchProvider assetSearchProvider, child) {
-          print(assetSearchProvider.assetSearchListPageModel);
+        child: Consumer<AssetSearchProvider>(builder: (context, AssetSearchProvider assetSearchProvider, child) {
           return SizedBox(
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
               child: Scaffold(
                 resizeToAvoidBottomInset: true,
-                appBar: const CustomMainAppbar(
-                    title: Text('LocaleKeys.entitySearchResultTitle'),
-                    returnBack: true),
+                appBar: const CustomMainAppbar(title: Text('LocaleKeys.entitySearchResultTitle'), returnBack: true),
                 body: Container(
                   color: const Color.fromARGB(255, 224, 224, 224),
                   child: Center(
-                      child: assetSearchProvider
-                                  .assetSearchListPageModel.length >
-                              0
+                      child: assetSearchProvider.assetSearchListPageModel.isNotEmpty
                           ? Padding(
                               padding: const EdgeInsets.all(12.0),
                               child: SingleChildScrollView(
                                 child: Column(
                                   children: [
-                                    for (int i = 0;
-                                        i <
-                                            assetSearchProvider
-                                                .assetSearchListPageModel
-                                                .length;
-                                        i++)
+                                    for (int i = 0; i < assetSearchProvider.assetSearchListPageModel.length; i++)
                                       Center(
                                           child: GestureDetector(
                                         onTap: () async {
@@ -54,42 +41,29 @@ class AssetSearchListPage extends StatelessWidget {
                                         child: Padding(
                                           padding: const EdgeInsets.all(8.0),
                                           child: Container(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.9,
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .height *
-                                                0.19,
+                                            width: MediaQuery.of(context).size.width * 0.9,
+                                            height: MediaQuery.of(context).size.height * 0.19,
                                             decoration: BoxDecoration(
                                               color: Colors.white,
-                                              borderRadius:
-                                                  BorderRadius.circular(15),
+                                              borderRadius: BorderRadius.circular(15),
                                             ),
                                             child: const Padding(
                                               padding: EdgeInsets.all(9.0),
                                               child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
                                                     'codes[i]',
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 25),
+                                                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
                                                   ),
                                                   Text(
                                                     'names[i]',
-                                                    style:
-                                                        TextStyle(fontSize: 19),
+                                                    style: TextStyle(fontSize: 19),
                                                   ),
                                                   Text(''),
                                                   Text(
                                                     'locTrees[i]',
-                                                    style:
-                                                        TextStyle(fontSize: 15),
+                                                    style: TextStyle(fontSize: 15),
                                                   ),
                                                 ],
                                               ),

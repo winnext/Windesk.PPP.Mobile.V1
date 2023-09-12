@@ -81,6 +81,7 @@ abstract class LocaleKeys {
   static const String oneStr = '1';
   static const String oPlanned = 'OPlanned';
   static const String description = 'Açıklama';
+  static const String clickthelink = 'Linke tıklayınız';
 
   //home page titles
   static const issueList = 'Vaka-(SLA) Listesi';

@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'issue_summary_time_model.g.dart';
+part 'generator_issue/issue_summary_time_model.g.dart';
 
 @JsonSerializable()
 class IssueSummaryTimeModel extends Equatable {

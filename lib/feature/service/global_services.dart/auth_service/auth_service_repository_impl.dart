@@ -38,7 +38,6 @@ class AuthServiceRepositoryImpl extends AuthServiceRepository {
       String action = deviceType == 'ios' ? 'addIOSToken' : 'addFireBaseToken';
       String sendFirebaseTokenUrl =
           '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$deviceId&&username=$username&platform=$deviceType&action=$action&firebasetoken=$firebaseToken';
-      print(sendFirebaseTokenUrl);
 
       final responseSendFirebaseTokenUrl = await super.dio.get(
             sendFirebaseTokenUrl,

@@ -36,9 +36,9 @@ class _IssueTracingListState extends State<IssueTracingList> {
                         Expanded(
                           flex: 1,
                           child: ListView.builder(
-                              itemCount: context.read<IssueProvider>().tracingList.length,
+                              itemCount: issueProvider.tracingList.length,
                               itemBuilder: (BuildContext context, int index) {
-                                IssueTracingListModel tracingListElement = context.read<IssueProvider>().tracingList[index];
+                                IssueTracingListModel tracingListElement = issueProvider.tracingList[index];
                                 return CustomTracingList(
                                   title: tracingListElement.name.toString(),
                                   count: tracingListElement.count.toString(),

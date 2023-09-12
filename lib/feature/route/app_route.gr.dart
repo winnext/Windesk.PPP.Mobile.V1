@@ -126,9 +126,13 @@ abstract class $AppRouter extends _i25.RootStackRouter {
       );
     },
     IssueFilesScreen.name: (routeData) {
+      final args = routeData.argsAs<IssueFilesScreenArgs>();
       return _i25.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i10.IssueFilesScreen(),
+        child: _i10.IssueFilesScreen(
+          key: args.key,
+          issueCode: args.issueCode,
+        ),
       );
     },
     IssueListScreen.name: (routeData) {
@@ -451,16 +455,40 @@ class IssueDetailScreenArgs {
 
 /// generated route for
 /// [_i10.IssueFilesScreen]
-class IssueFilesScreen extends _i25.PageRouteInfo<void> {
-  const IssueFilesScreen({List<_i25.PageRouteInfo>? children})
-      : super(
+class IssueFilesScreen extends _i25.PageRouteInfo<IssueFilesScreenArgs> {
+  IssueFilesScreen({
+    _i26.Key? key,
+    required String issueCode,
+    List<_i25.PageRouteInfo>? children,
+  }) : super(
           IssueFilesScreen.name,
+          args: IssueFilesScreenArgs(
+            key: key,
+            issueCode: issueCode,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'IssueFilesScreen';
 
-  static const _i25.PageInfo<void> page = _i25.PageInfo<void>(name);
+  static const _i25.PageInfo<IssueFilesScreenArgs> page =
+      _i25.PageInfo<IssueFilesScreenArgs>(name);
+}
+
+class IssueFilesScreenArgs {
+  const IssueFilesScreenArgs({
+    this.key,
+    required this.issueCode,
+  });
+
+  final _i26.Key? key;
+
+  final String issueCode;
+
+  @override
+  String toString() {
+    return 'IssueFilesScreenArgs{key: $key, issueCode: $issueCode}';
+  }
 }
 
 /// generated route for
