@@ -59,7 +59,7 @@ class AssetSearchProvider extends ChangeNotifier {
   }
 
   final _spaceCode = TextEditingController();
-
+  
   TextEditingController get spaceCode => _spaceCode;
 
   set setSpaceCode(String spaceCode) {
@@ -146,8 +146,8 @@ class AssetSearchProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  getAssetSearchList(entityCode, seriNo, rfid, typeCode, brandCode, modelCode,
-      locCode, currentPage) async {
+  getAssetSearchList(context, entityCode, seriNo, rfid, typeCode, brandCode,
+      modelCode, locCode, currentPage) async {
     num limitStart = 20 * (currentPage - 1);
     num limitEnd = 20 * currentPage;
     final response = await _searchServiceRepository.assetSearchList(
@@ -161,6 +161,6 @@ class AssetSearchProvider extends ChangeNotifier {
         limitStart.toString(),
         limitEnd.toString());
     response.fold((l) => {setAssetSearchListPageModel = l, notifyListeners()},
-        (r) => null);
+        (r) => setAssetSearchListPageModel = []);
   }
 }

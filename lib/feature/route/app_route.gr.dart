@@ -32,6 +32,8 @@ import 'package:wm_ppp_4/product/screens/issue/screens/issue_tracing_list.dart'
     as _i15;
 import 'package:wm_ppp_4/product/screens/new_order/new_order_screen.dart'
     as _i17;
+import 'package:wm_ppp_4/product/screens/search/screens/asset_search/provider/asset_search_provider.dart'
+    as _i27;
 import 'package:wm_ppp_4/product/screens/search/screens/asset_search/view/asset_search_list.dart'
     as _i2;
 import 'package:wm_ppp_4/product/screens/search/screens/asset_search/view/asset_search_page.dart'
@@ -63,9 +65,13 @@ abstract class $AppRouter extends _i25.RootStackRouter {
       );
     },
     AssetSearchListRoute.name: (routeData) {
+      final args = routeData.argsAs<AssetSearchListRouteArgs>();
       return _i25.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i2.AssetSearchListPage(),
+        child: _i2.AssetSearchListPage(
+          key: args.key,
+          assetSearchProviderx: args.assetSearchProviderx,
+        ),
       );
     },
     AssetSearchRoute.name: (routeData) {
@@ -255,16 +261,41 @@ class AppWrapper extends _i25.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i2.AssetSearchListPage]
-class AssetSearchListRoute extends _i25.PageRouteInfo<void> {
-  const AssetSearchListRoute({List<_i25.PageRouteInfo>? children})
-      : super(
+class AssetSearchListRoute
+    extends _i25.PageRouteInfo<AssetSearchListRouteArgs> {
+  AssetSearchListRoute({
+    _i26.Key? key,
+    required _i27.AssetSearchProvider assetSearchProviderx,
+    List<_i25.PageRouteInfo>? children,
+  }) : super(
           AssetSearchListRoute.name,
+          args: AssetSearchListRouteArgs(
+            key: key,
+            assetSearchProviderx: assetSearchProviderx,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'AssetSearchListRoute';
 
-  static const _i25.PageInfo<void> page = _i25.PageInfo<void>(name);
+  static const _i25.PageInfo<AssetSearchListRouteArgs> page =
+      _i25.PageInfo<AssetSearchListRouteArgs>(name);
+}
+
+class AssetSearchListRouteArgs {
+  const AssetSearchListRouteArgs({
+    this.key,
+    required this.assetSearchProviderx,
+  });
+
+  final _i26.Key? key;
+
+  final _i27.AssetSearchProvider assetSearchProviderx;
+
+  @override
+  String toString() {
+    return 'AssetSearchListRouteArgs{key: $key, assetSearchProviderx: $assetSearchProviderx}';
+  }
 }
 
 /// generated route for

@@ -6,26 +6,30 @@ part of '../issue_summary_time_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-IssueSummaryTimeModel _$IssueSummaryTimeModelFromJson(Map<String, dynamic> json) => IssueSummaryTimeModel(
-      code: json['CODE'] as String?,
-      respondedDate: json['RESPONDED_DATE'] as String?,
-      respondedTimer: json['RESPONDED_TIMER'] as String?,
-      fixedDate: json['FIXED_DATE'] as String?,
-      fixTimer: json['FIX_TIMER'] as String?,
-      statuscode: json['STATUS_CODE'] as String?,
-      planneddate: json['PLANNED_DATE'],
-      targetFdate: json['TARGET_FDATE'] as String?,
-      targetRdate: json['TARGET_RDATE'] as String?,
+IssueSummaryTimeModel _$IssueSummaryTimeModelFromJson(
+        Map<String, dynamic> json) =>
+    IssueSummaryTimeModel(
+      code: json['code'] as String?,
+      respondedDate: json['respondedDate'] as String?,
+      respondedTimer: json['respondedTimer'] as String?,
+      fixedDate: json['fixedDate'] as String?,
+      fixTimer: json['fixTimer'] as String?,
+      statuscode: json['statuscode'] as String?,
+      planneddate: json['planneddate'],
+      targetFdate: json['targetFdate'] as String?,
+      targetRdate: json['targetRdate'] as String?,
     );
 
-Map<String, dynamic> _$IssueSummaryTimeModelToJson(IssueSummaryTimeModel instance) => <String, dynamic>{
-      'CODE': instance.code,
-      'TARGET_FDATE': instance.targetFdate,
-      'TARGET_RDATE': instance.targetRdate,
-      'STATUS_CODE': instance.statuscode,
-      'RESPONDED_DATE': instance.respondedDate,
-      'RESPONDED_TIMER': instance.respondedTimer,
-      'FIXED_DATE': instance.fixedDate,
-      'FIX_TIMER': instance.fixTimer,
-      'PLANNED_DATE': instance.planneddate,
+Map<String, dynamic> _$IssueSummaryTimeModelToJson(
+        IssueSummaryTimeModel instance) =>
+    <String, dynamic>{
+      'code': instance.code,
+      'targetFdate': instance.targetFdate,
+      'targetRdate': instance.targetRdate,
+      'statuscode': instance.statuscode,
+      'respondedDate': instance.respondedDate,
+      'respondedTimer': instance.respondedTimer,
+      'fixedDate': instance.fixedDate,
+      'fixTimer': instance.fixTimer,
+      'planneddate': instance.planneddate,
     };
