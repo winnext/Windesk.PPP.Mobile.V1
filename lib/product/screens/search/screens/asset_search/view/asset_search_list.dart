@@ -12,7 +12,7 @@ class AssetSearchListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
+    return ChangeNotifierProvider(  
         create: (context) => AssetSearchProvider(),
         child: Consumer<AssetSearchProvider>(
             builder: (context, AssetSearchProvider assetSearchProvider, child) {
@@ -28,7 +28,7 @@ class AssetSearchListPage extends StatelessWidget {
                   color: const Color.fromARGB(255, 224, 224, 224),
                   child: Center(
                       child: assetSearchProviderx
-                                  .assetSearchListPageModel.isNotEmpty
+                              .assetSearchListPageModel.isNotEmpty
                           ? Padding(
                               padding: const EdgeInsets.all(12.0),
                               child: SingleChildScrollView(
@@ -65,7 +65,8 @@ class AssetSearchListPage extends StatelessWidget {
                                                   BorderRadius.circular(15),
                                             ),
                                             child: Padding(
-                                              padding: const EdgeInsets.all(9.0),
+                                              padding:
+                                                  const EdgeInsets.all(9.0),
                                               child: Column(
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
@@ -87,8 +88,8 @@ class AssetSearchListPage extends StatelessWidget {
                                                             i]
                                                         .name
                                                         .toString(),
-                                                    style:
-                                                        const TextStyle(fontSize: 19),
+                                                    style: const TextStyle(
+                                                        fontSize: 19),
                                                   ),
                                                   const Text(''),
                                                   Text(
@@ -97,8 +98,8 @@ class AssetSearchListPage extends StatelessWidget {
                                                             i]
                                                         .loctree
                                                         .toString(),
-                                                    style:
-                                                        const TextStyle(fontSize: 15),
+                                                    style: const TextStyle(
+                                                        fontSize: 15),
                                                   ),
                                                 ],
                                               ),

@@ -10,14 +10,14 @@ import '../../../../feature/enums/shared_enums.dart';
 
 class SearchServiceRepoImpml extends SearchServiceRepository {
   @override
-  Future<Either<bool, CustomServiceException>> checkIssueByAuth(
+  Future<Either<int, CustomServiceException>> checkIssueByAuth(
       String issueCode) async {
     final String userName =
         await SharedManager().getString(SharedEnum.userCode);
     String deviceId = await SharedManager().getString(SharedEnum.deviceId);
 
     String url =
-        '${ServiceTools.baseUrlV1}$deviceId&action=checkIssueByAuthorizedServices&issueCode=$issueCode&username=$userName';
+        '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$deviceId&action=checkIssueByAuthorizedServices&issueCode=$issueCode&username=$userName';
     try {
       final response = await dio.get(url,
           options: Options(
@@ -26,7 +26,7 @@ class SearchServiceRepoImpml extends SearchServiceRepository {
 
       final data = response.data['result'];
       super.logger.i(data);
-      return Left(data);
+      return Left(int.parse(response.data['count'].toString()));
     } catch (error) {
       super.logger.e(error.toString());
       return Right(CustomServiceException(
