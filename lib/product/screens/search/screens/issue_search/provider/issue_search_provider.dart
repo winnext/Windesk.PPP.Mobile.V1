@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:wm_ppp_4/feature/components/snackBar/snackbar.dart';
+import 'package:wm_ppp_4/product/screens/issue/view/issue_detail_screen.dart';
 
 import '../../../service/search_service_repo_impl.dart';
 
@@ -12,10 +14,18 @@ class IssueSearchProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  printSearchData() async {
-    final response =
-        await _searchServiceRepository.checkIssueByAuth(searchIssueCode);
+  printSearchData(context) async {
+    final response = await _searchServiceRepository.checkIssueByAuth(searchIssueCode);
     // ignore: avoid_print
-    response.fold((l) => {print(l)}, (r) => {print('fail')});
+    response.fold(
+        (l) => {
+              if (l > 0)
+                {
+                  context.router.push(IssueDetailScreen(issueCode: searchIssueCode)),
+                }
+              else
+                {snackBar(context, "Girdiğiniz vaka numarası hatalı veya vakayı görmeye yetkiniz yoktur.", 'error')}
+            },
+        (r) => {});
   }
 }

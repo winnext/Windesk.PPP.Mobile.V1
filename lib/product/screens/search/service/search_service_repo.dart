@@ -12,7 +12,7 @@ abstract class SearchServiceRepository {
   final logger = Injection.getIt.get<LogManager>().logger;
 
   // TEST METHODS
-  Future<Either<bool, CustomServiceException>> checkIssueByAuth(
+  Future<Either<int, CustomServiceException>> checkIssueByAuth(
       String issueCode);
   Future<Either<List<WorkOrderAssetSearchList>, CustomServiceException>>
       assetSearchList(

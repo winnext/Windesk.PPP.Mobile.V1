@@ -15,13 +15,14 @@ class IssueActivitiesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return ChangeNotifierProvider(
-        create: (context) => IssueProvider(),
-        child: Consumer<IssueProvider>(
-          builder: (context, IssueProvider issueProvider, child) {
-            issueProvider.isFetch ? null : issueProvider.getIssueActivities(issueCode);
-            return issueProvider.issueActivities.isNotEmpty ? _activitiesBody(size, issueProvider) : const NoDataWidget();
-          },
-        ));
+      create: (context) => IssueProvider(),
+      child: Consumer<IssueProvider>(
+        builder: (context, IssueProvider issueProvider, child) {
+          issueProvider.isFetch ? null : issueProvider.getIssueActivities(issueCode);
+          return issueProvider.issueActivities.isNotEmpty ? _activitiesBody(size, issueProvider) : const NoDataWidget();
+        },
+      ),
+    );
   }
 
   SizedBox _activitiesBody(Size size, IssueProvider issueProvider) {
