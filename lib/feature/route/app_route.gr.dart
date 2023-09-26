@@ -16,19 +16,19 @@ import 'package:wm_ppp_4/feature/route/empty_router.dart' as _i5;
 import 'package:wm_ppp_4/feature/route/empty_search_router.dart' as _i6;
 import 'package:wm_ppp_4/product/screens/auth/view/login_screen.dart' as _i16;
 import 'package:wm_ppp_4/product/screens/home/view/home_screen.dart' as _i7;
-import 'package:wm_ppp_4/product/screens/issue/screens/issue_activities_screen.dart'
+import 'package:wm_ppp_4/product/screens/issue/view/issue_activities_screen.dart'
     as _i8;
-import 'package:wm_ppp_4/product/screens/issue/screens/issue_detail_screen.dart'
+import 'package:wm_ppp_4/product/screens/issue/view/issue_detail_screen.dart'
     as _i9;
-import 'package:wm_ppp_4/product/screens/issue/screens/issue_files_screen.dart'
+import 'package:wm_ppp_4/product/screens/issue/view/issue_files_screen.dart'
     as _i10;
-import 'package:wm_ppp_4/product/screens/issue/screens/issue_list_screen.dart'
+import 'package:wm_ppp_4/product/screens/issue/view/issue_list_screen.dart'
     as _i11;
-import 'package:wm_ppp_4/product/screens/issue/screens/issue_notes_screen.dart'
+import 'package:wm_ppp_4/product/screens/issue/view/issue_notes_screen.dart'
     as _i12;
-import 'package:wm_ppp_4/product/screens/issue/screens/issue_summary_screen.dart'
+import 'package:wm_ppp_4/product/screens/issue/view/issue_summary_screen.dart'
     as _i14;
-import 'package:wm_ppp_4/product/screens/issue/screens/issue_tracing_list.dart'
+import 'package:wm_ppp_4/product/screens/issue/view/issue_tracing_list.dart'
     as _i15;
 import 'package:wm_ppp_4/product/screens/new_order/new_order_screen.dart'
     as _i17;

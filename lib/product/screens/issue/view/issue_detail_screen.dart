@@ -2,10 +2,10 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:wm_ppp_4/feature/constants/other/colors.dart';
 import 'package:wm_ppp_4/feature/constants/paths/service_tools.dart';
-import 'package:wm_ppp_4/product/screens/issue/screens/issue_activities_screen.dart';
-import 'package:wm_ppp_4/product/screens/issue/screens/issue_files_screen.dart';
-import 'package:wm_ppp_4/product/screens/issue/screens/issue_notes_screen.dart';
-import 'package:wm_ppp_4/product/screens/issue/screens/issue_summary_screen.dart';
+import 'package:wm_ppp_4/product/screens/issue/view/issue_summary_screen.dart';
+import 'package:wm_ppp_4/product/screens/issue/view/issue_activities_screen.dart';
+import 'package:wm_ppp_4/product/screens/issue/view/issue_files_screen.dart';
+import 'package:wm_ppp_4/product/screens/issue/view/issue_notes_screen.dart';
 
 @RoutePage()
 class IssueDetailScreen extends StatelessWidget {
@@ -53,16 +53,7 @@ AppBar _issueSummaryAppbar(Size size, BuildContext context) {
     toolbarHeight: size.height / 20,
     centerTitle: true,
     leading: IconButton(
-      onPressed: () => {
-        // Navigator.push(
-        //     context,
-        //     MaterialPageRoute(
-        //       builder: (context) => IssueList(
-        //         moduleCode: listViewProvider.moduleCode.toString(),
-        //         moduleName: listViewProvider.moduleName.toString(),
-        //       ),
-        //     ))
-      },
+      onPressed: () => {Navigator.pop(context)},
       icon: Icon(Icons.arrow_back_rounded, color: APPColors.Main.black),
       alignment: Alignment.topCenter,
     ),

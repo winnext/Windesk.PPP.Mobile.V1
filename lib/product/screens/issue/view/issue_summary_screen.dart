@@ -37,56 +37,7 @@ class IssueSummaryScreen extends StatelessWidget {
                           children: [
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Column(
-                                  children: [
-                                    issueProvider.issueSummaryTimeInfo.planneddate == LocaleKeys.oPlanned
-                                        ? Container(
-                                            decoration: BoxDecoration(color: APPColors.NewNotifi.blue, borderRadius: BorderRadius.circular(3)),
-                                            padding: const EdgeInsets.all(3),
-                                            child: Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                              children: [
-                                                const Text(LocaleKeys.plannedIssue),
-                                                Text(issueProvider.issueSummaryTimeInfo.planneddate.toString()),
-                                              ],
-                                            ),
-                                          )
-                                        : issueProvider.issueSummaryTimeInfo.respondedTimer == LocaleKeys.oneStr
-                                            ? upTimeBar(
-                                                issueProvider,
-                                                LocaleKeys.targetResponsedDate,
-                                                issueProvider.issueSummaryTimeInfo.targetFdate.toString(),
-                                                issueProvider.issueSummaryTimeInfo.respondedTimer.toString(),
-                                                issueProvider.issueSummaryTimeInfo.fixTimer.toString(),
-                                                issueProvider.issueSummaryTimeInfo.fixedDate.toString())
-                                            : upTimeBar(
-                                                issueProvider,
-                                                LocaleKeys.responsedDate,
-                                                issueProvider.issueSummaryTimeInfo.targetFdate.toString(),
-                                                issueProvider.issueSummaryTimeInfo.respondedTimer.toString(),
-                                                issueProvider.issueSummaryTimeInfo.fixTimer.toString(),
-                                                issueProvider.issueSummaryTimeInfo.fixedDate.toString())
-                                  ],
-                                ),
-                                Column(children: [
-                                  issueProvider.issueSummaryTimeInfo.fixTimer == LocaleKeys.oneStr
-                                      ? upTimeBar(
-                                          issueProvider,
-                                          LocaleKeys.targetFixedDate,
-                                          issueProvider.issueSummaryTimeInfo.targetFdate.toString(),
-                                          issueProvider.issueSummaryTimeInfo.respondedTimer.toString(),
-                                          issueProvider.issueSummaryTimeInfo.fixTimer.toString(),
-                                          issueProvider.issueSummaryTimeInfo.fixedDate.toString())
-                                      : upTimeBar(
-                                          issueProvider,
-                                          LocaleKeys.fixedDate,
-                                          issueProvider.issueSummaryTimeInfo.targetFdate.toString(),
-                                          issueProvider.issueSummaryTimeInfo.respondedTimer.toString(),
-                                          issueProvider.issueSummaryTimeInfo.fixTimer.toString(),
-                                          issueProvider.issueSummaryTimeInfo.fixedDate.toString())
-                                ])
-                              ],
+                              children: [_responseWidget(issueProvider), _fixWidget(issueProvider)],
                             ),
                             issueSummaryRow(issueProvider.issueSummaryDetail.code, issueProvider.issueSummaryDetail.idate),
                             issueSummaryRow(LocaleKeys.issueSituation, issueProvider.issueSummaryDetail.statusname.toString()),
@@ -117,7 +68,41 @@ class IssueSummaryScreen extends StatelessWidget {
         ));
   }
 
-  Container upTimeBar(IssueProvider issueProvider, String title, String targetDate, String respondedTimer, String fixTimer, String fixedDate) {
+  Column _fixWidget(IssueProvider issueProvider) {
+    return Column(children: [
+      issueProvider.issueSummaryTimeInfo.fixTimer == LocaleKeys.oneStr
+          ? upTimeBar(issueProvider, LocaleKeys.targetFixedDate, issueProvider.issueSummaryTimeInfo.fixTimer.toString(),
+              issueProvider.issueSummaryTimeInfo.targetFdate.toString(), issueProvider.issueSummaryTimeInfo.fixedDate.toString())
+          : upTimeBar(issueProvider, LocaleKeys.fixedDate, issueProvider.issueSummaryTimeInfo.fixTimer.toString(),
+              issueProvider.issueSummaryTimeInfo.targetFdate.toString(), issueProvider.issueSummaryTimeInfo.fixedDate.toString())
+    ]);
+  }
+
+  Column _responseWidget(IssueProvider issueProvider) {
+    return Column(
+      children: [
+        issueProvider.issueSummaryTimeInfo.planneddate == LocaleKeys.oPlanned
+            ? Container(
+                decoration: BoxDecoration(color: APPColors.NewNotifi.blue, borderRadius: BorderRadius.circular(3)),
+                padding: const EdgeInsets.all(3),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    const Text(LocaleKeys.plannedIssue),
+                    Text(issueProvider.issueSummaryTimeInfo.planneddate),
+                  ],
+                ),
+              )
+            : issueProvider.issueSummaryTimeInfo.respondedTimer == LocaleKeys.oneStr
+                ? upTimeBar(issueProvider, LocaleKeys.targetResponsedDate, issueProvider.issueSummaryTimeInfo.respondedTimer.toString(),
+                    issueProvider.issueSummaryTimeInfo.targetRdate.toString(), issueProvider.issueSummaryTimeInfo.respondedDate.toString())
+                : upTimeBar(issueProvider, LocaleKeys.responsedDate, issueProvider.issueSummaryTimeInfo.respondedTimer.toString(),
+                    issueProvider.issueSummaryTimeInfo.targetRdate.toString(), issueProvider.issueSummaryTimeInfo.respondedDate.toString())
+      ],
+    );
+  }
+
+  Container upTimeBar(IssueProvider issueProvider, String title, String respondedTimer, String targetDate, String fixedDate) {
     return Container(
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(3)),
       padding: const EdgeInsets.all(3),
@@ -130,7 +115,7 @@ class IssueSummaryScreen extends StatelessWidget {
               ? const Text('')
               : Text(
                   TimeClass().timeRecover(targetDate),
-                  style: TimeClass().fixStyle(respondedTimer, fixTimer, targetDate, fixedDate),
+                  style: TimeClass().fixStyle(respondedTimer, targetDate, fixedDate),
                 ),
         ],
       ),
