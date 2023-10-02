@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:wm_ppp_4/feature/components/buttons/custom_issue_action_button.dart';
 import 'package:wm_ppp_4/feature/constants/other/colors.dart';
 import 'package:wm_ppp_4/feature/constants/paths/service_tools.dart';
 import 'package:wm_ppp_4/product/screens/issue/view/issue_summary_screen.dart';
@@ -36,6 +37,9 @@ class IssueDetailScreen extends StatelessWidget {
                   IssueActivitiesScreen(issueCode: issueCode),
                   IssueFilesScreen(issueCode: issueCode),
                 ],
+        ),
+        floatingActionButton: IssueActionButton(
+          issueCode: issueCode,
         ),
       ),
     );
