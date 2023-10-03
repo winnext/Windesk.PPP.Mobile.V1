@@ -90,7 +90,12 @@ abstract class LocaleKeys {
   static const String takeOver = 'Üzerine Al';
   static const String plannedCancel = 'Randevu İptal';
   static const String sparepartNeed = 'Yedek Parça Gerekiyor';
+  static const String addDescription = "Açıklama Giriniz";
+  static const String photoAdded = "Fotoğraf Eklendi";
+  static const String photoAddedError = "Fotoğraf Ekleme Başarısız";
 
+
+  
   //home page titles
   static const issueList = 'Vaka-(SLA) Listesi';
   static const issueSearch = 'Vaka-(SLA) Arama';

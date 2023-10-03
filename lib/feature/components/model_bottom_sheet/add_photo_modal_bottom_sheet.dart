@@ -13,6 +13,7 @@ class AddPhotoModalBottomSheet extends StatelessWidget {
   final Function saveImageFunction;
   final Function saveDescFunction;
   final Function addPhotoFunction;
+
   final String hintDescText;
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,7 @@ class AddPhotoModalBottomSheet extends StatelessWidget {
 
   _bodyWidget(BuildContext context) {
     return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.6,
+      height: MediaQuery.of(context).size.height * 0.5,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
         child: Column(
@@ -90,6 +91,7 @@ class _PhotoStackState extends State<_PhotoStack> {
     final image = await _imagePicker.pickImage(source: ImageSource.camera);
     if (image != null) {
       _image = File((image).path);
+      return _image;
     }
   }
 
@@ -118,8 +120,6 @@ class _PhotoStackState extends State<_PhotoStack> {
                 onPressed: () {
                   getImage().then((value) {
                     widget.saveImageFunction(value);
-                  }).then((value) {
-                    setState(() {});
                   });
                 },
                 child: const Icon(Icons.add, size: 36),

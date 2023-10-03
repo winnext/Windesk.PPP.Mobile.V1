@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:wm_ppp_4/feature/enums/service_response_status_enums.dart';
+import 'package:wm_ppp_4/feature/enums/service_status_enums.dart';
 import 'package:wm_ppp_4/feature/models/issue_action_models/issue_available_activities_model.dart';
 import 'package:wm_ppp_4/feature/models/issue_action_models/issue_operation_list_model.dart';
 import 'package:wm_ppp_4/feature/models/issue_models/issue_activities_model.dart';
@@ -166,6 +167,36 @@ class IssueServiceRepoImpml extends IssueServiceRepository {
     } catch (error) {
       super.logger.e(error.toString());
       return Right(CustomServiceException(message: CustomServiceMessages.loginError, statusCode: '400'));
+    }
+  }
+
+  @override
+  Future<Either<bool, CustomServiceException>> addIssueAttachmentMethod(
+    String userToken,
+    String userName,
+    String issueCode,
+    String image,
+    String desc,
+  ) async {
+    bool result = false;
+    String url =
+        '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=addAttachment&issueCode=$issueCode&username=$userName&moduleName=issue';
+
+    FormData formData = FormData.fromMap({"base64string": image, 'description': desc});
+    try {
+      final response = await super.dio.post(url, data: formData);
+      super.logger.i(response.toString());
+
+      if (response.data[ServiceResponseStatusEnums.result.rawText] == ServiceStatusEnums.success.rawText) {
+        result = true;
+        super.logger.i(result.toString());
+        return Left(result);
+      } else {
+        return Right(CustomServiceException(message: CustomServiceMessages.workOrderAddImageError, statusCode: response.statusCode.toString()));
+      }
+    } catch (error) {
+      super.logger.e(error.toString());
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderAddImageError, statusCode: '500'));
     }
   }
 }
