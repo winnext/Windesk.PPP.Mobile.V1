@@ -16,22 +16,24 @@ import 'package:wm_ppp_4/feature/route/empty_router.dart' as _i5;
 import 'package:wm_ppp_4/feature/route/empty_search_router.dart' as _i6;
 import 'package:wm_ppp_4/product/screens/auth/view/login_screen.dart' as _i16;
 import 'package:wm_ppp_4/product/screens/home/view/home_screen.dart' as _i7;
-import 'package:wm_ppp_4/product/screens/issue/screens/issue_activities_screen.dart'
+import 'package:wm_ppp_4/product/screens/issue/view/issue_activities_screen.dart'
     as _i8;
-import 'package:wm_ppp_4/product/screens/issue/screens/issue_detail_screen.dart'
+import 'package:wm_ppp_4/product/screens/issue/view/issue_detail_screen.dart'
     as _i9;
-import 'package:wm_ppp_4/product/screens/issue/screens/issue_files_screen.dart'
+import 'package:wm_ppp_4/product/screens/issue/view/issue_files_screen.dart'
     as _i10;
-import 'package:wm_ppp_4/product/screens/issue/screens/issue_list_screen.dart'
+import 'package:wm_ppp_4/product/screens/issue/view/issue_list_screen.dart'
     as _i11;
-import 'package:wm_ppp_4/product/screens/issue/screens/issue_notes_screen.dart'
+import 'package:wm_ppp_4/product/screens/issue/view/issue_notes_screen.dart'
     as _i12;
-import 'package:wm_ppp_4/product/screens/issue/screens/issue_summary_screen.dart'
+import 'package:wm_ppp_4/product/screens/issue/view/issue_summary_screen.dart'
     as _i14;
-import 'package:wm_ppp_4/product/screens/issue/screens/issue_tracing_list.dart'
+import 'package:wm_ppp_4/product/screens/issue/view/issue_tracing_list.dart'
     as _i15;
 import 'package:wm_ppp_4/product/screens/new_order/new_order_screen.dart'
     as _i17;
+import 'package:wm_ppp_4/product/screens/search/screens/asset_search/provider/asset_search_provider.dart'
+    as _i27;
 import 'package:wm_ppp_4/product/screens/search/screens/asset_search/view/asset_search_list.dart'
     as _i2;
 import 'package:wm_ppp_4/product/screens/search/screens/asset_search/view/asset_search_page.dart'
@@ -63,9 +65,13 @@ abstract class $AppRouter extends _i25.RootStackRouter {
       );
     },
     AssetSearchListRoute.name: (routeData) {
+      final args = routeData.argsAs<AssetSearchListRouteArgs>();
       return _i25.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i2.AssetSearchListPage(),
+        child: _i2.AssetSearchListPage(
+          key: args.key,
+          assetSearchProviderx: args.assetSearchProviderx,
+        ),
       );
     },
     AssetSearchRoute.name: (routeData) {
@@ -126,9 +132,13 @@ abstract class $AppRouter extends _i25.RootStackRouter {
       );
     },
     IssueFilesScreen.name: (routeData) {
+      final args = routeData.argsAs<IssueFilesScreenArgs>();
       return _i25.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i10.IssueFilesScreen(),
+        child: _i10.IssueFilesScreen(
+          key: args.key,
+          issueCode: args.issueCode,
+        ),
       );
     },
     IssueListScreen.name: (routeData) {
@@ -251,16 +261,41 @@ class AppWrapper extends _i25.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i2.AssetSearchListPage]
-class AssetSearchListRoute extends _i25.PageRouteInfo<void> {
-  const AssetSearchListRoute({List<_i25.PageRouteInfo>? children})
-      : super(
+class AssetSearchListRoute
+    extends _i25.PageRouteInfo<AssetSearchListRouteArgs> {
+  AssetSearchListRoute({
+    _i26.Key? key,
+    required _i27.AssetSearchProvider assetSearchProviderx,
+    List<_i25.PageRouteInfo>? children,
+  }) : super(
           AssetSearchListRoute.name,
+          args: AssetSearchListRouteArgs(
+            key: key,
+            assetSearchProviderx: assetSearchProviderx,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'AssetSearchListRoute';
 
-  static const _i25.PageInfo<void> page = _i25.PageInfo<void>(name);
+  static const _i25.PageInfo<AssetSearchListRouteArgs> page =
+      _i25.PageInfo<AssetSearchListRouteArgs>(name);
+}
+
+class AssetSearchListRouteArgs {
+  const AssetSearchListRouteArgs({
+    this.key,
+    required this.assetSearchProviderx,
+  });
+
+  final _i26.Key? key;
+
+  final _i27.AssetSearchProvider assetSearchProviderx;
+
+  @override
+  String toString() {
+    return 'AssetSearchListRouteArgs{key: $key, assetSearchProviderx: $assetSearchProviderx}';
+  }
 }
 
 /// generated route for
@@ -451,16 +486,40 @@ class IssueDetailScreenArgs {
 
 /// generated route for
 /// [_i10.IssueFilesScreen]
-class IssueFilesScreen extends _i25.PageRouteInfo<void> {
-  const IssueFilesScreen({List<_i25.PageRouteInfo>? children})
-      : super(
+class IssueFilesScreen extends _i25.PageRouteInfo<IssueFilesScreenArgs> {
+  IssueFilesScreen({
+    _i26.Key? key,
+    required String issueCode,
+    List<_i25.PageRouteInfo>? children,
+  }) : super(
           IssueFilesScreen.name,
+          args: IssueFilesScreenArgs(
+            key: key,
+            issueCode: issueCode,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'IssueFilesScreen';
 
-  static const _i25.PageInfo<void> page = _i25.PageInfo<void>(name);
+  static const _i25.PageInfo<IssueFilesScreenArgs> page =
+      _i25.PageInfo<IssueFilesScreenArgs>(name);
+}
+
+class IssueFilesScreenArgs {
+  const IssueFilesScreenArgs({
+    this.key,
+    required this.issueCode,
+  });
+
+  final _i26.Key? key;
+
+  final String issueCode;
+
+  @override
+  String toString() {
+    return 'IssueFilesScreenArgs{key: $key, issueCode: $issueCode}';
+  }
 }
 
 /// generated route for

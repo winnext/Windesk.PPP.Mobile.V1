@@ -103,9 +103,9 @@ PODS:
   - package_info_plus (0.4.5):
     - Flutter
   - PromisesObjC (2.3.1)
-  - SDWebImage (5.17.0):
-    - SDWebImage/Core (= 5.17.0)
-  - SDWebImage/Core (5.17.0)
+  - SDWebImage (5.18.0):
+    - SDWebImage/Core (= 5.18.0)
+  - SDWebImage/Core (5.18.0)
   - shared_preferences_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
@@ -187,7 +187,7 @@ SPEC CHECKSUMS:
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   package_info_plus: fd030dabf36271f146f1f3beacd48f564b0f17f7
   PromisesObjC: c50d2056b5253dadbd6c2bea79b0674bd5a52fa4
-  SDWebImage: 750adf017a315a280c60fde706ab1e552a3ae4e9
+  SDWebImage: 182830bcddc30cde95fbc60dfe4badc3553d94ba
   shared_preferences_foundation: 5b919d13b803cadd15ed2dc053125c68730e5126
   SwiftyGif: 93a1cc87bf3a51916001cf8f3d63835fb64c819f
   url_launcher_ios: 08a3dfac5fb39e8759aeb0abbd5d9480f30fc8b4

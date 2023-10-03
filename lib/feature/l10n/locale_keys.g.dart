@@ -81,7 +81,21 @@ abstract class LocaleKeys {
   static const String oneStr = '1';
   static const String oPlanned = 'OPlanned';
   static const String description = 'Açıklama';
+  static const String clickthelink = 'Linke tıklayınız';
 
+  //issue activities
+  static const String addPhoto = 'Fotoğraf Ekle';
+  static const String addActivity = 'Aktivite Ekle';
+  static const String changeCfg = 'Varlık Değiştir';
+  static const String takeOver = 'Üzerine Al';
+  static const String plannedCancel = 'Randevu İptal';
+  static const String sparepartNeed = 'Yedek Parça Gerekiyor';
+  static const String addDescription = "Açıklama Giriniz";
+  static const String photoAdded = "Fotoğraf Eklendi";
+  static const String photoAddedError = "Fotoğraf Ekleme Başarısız";
+
+
+  
   //home page titles
   static const issueList = 'Vaka-(SLA) Listesi';
   static const issueSearch = 'Vaka-(SLA) Arama';

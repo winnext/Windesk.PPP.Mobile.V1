@@ -7,11 +7,12 @@ import '../provider/asset_search_provider.dart';
 
 @RoutePage()
 class AssetSearchListPage extends StatelessWidget {
-  const AssetSearchListPage({super.key});
+  const AssetSearchListPage({super.key, required this.assetSearchProviderx});
+  final AssetSearchProvider assetSearchProviderx;
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
+    return ChangeNotifierProvider(  
         create: (context) => AssetSearchProvider(),
         child: Consumer<AssetSearchProvider>(
             builder: (context, AssetSearchProvider assetSearchProvider, child) {
@@ -26,13 +27,19 @@ class AssetSearchListPage extends StatelessWidget {
                 body: Container(
                   color: const Color.fromARGB(255, 224, 224, 224),
                   child: Center(
-                      child: '12'.isNotEmpty
+                      child: assetSearchProviderx
+                              .assetSearchListPageModel.isNotEmpty
                           ? Padding(
                               padding: const EdgeInsets.all(12.0),
                               child: SingleChildScrollView(
                                 child: Column(
                                   children: [
-                                    for (int i = 0; i < 20; i++)
+                                    for (int i = 0;
+                                        i <
+                                            assetSearchProviderx
+                                                .assetSearchListPageModel
+                                                .length;
+                                        i++)
                                       Center(
                                           child: GestureDetector(
                                         onTap: () async {
@@ -57,30 +64,42 @@ class AssetSearchListPage extends StatelessWidget {
                                               borderRadius:
                                                   BorderRadius.circular(15),
                                             ),
-                                            child: const Padding(
+                                            child: Padding(
                                               padding:
-                                                  EdgeInsets.all(9.0),
+                                                  const EdgeInsets.all(9.0),
                                               child: Column(
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                    'codes[i]',
-                                                    style: TextStyle(
+                                                    assetSearchProviderx
+                                                        .assetSearchListPageModel[
+                                                            i]
+                                                        .code
+                                                        .toString(),
+                                                    style: const TextStyle(
                                                         fontWeight:
                                                             FontWeight.bold,
                                                         fontSize: 25),
                                                   ),
                                                   Text(
-                                                    'names[i]',
-                                                    style:
-                                                        TextStyle(fontSize: 19),
+                                                    assetSearchProviderx
+                                                        .assetSearchListPageModel[
+                                                            i]
+                                                        .name
+                                                        .toString(),
+                                                    style: const TextStyle(
+                                                        fontSize: 19),
                                                   ),
-                                                  Text(''),
+                                                  const Text(''),
                                                   Text(
-                                                    'locTrees[i]',
-                                                    style:
-                                                        TextStyle(fontSize: 15),
+                                                    assetSearchProviderx
+                                                        .assetSearchListPageModel[
+                                                            i]
+                                                        .loctree
+                                                        .toString(),
+                                                    style: const TextStyle(
+                                                        fontSize: 15),
                                                   ),
                                                 ],
                                               ),

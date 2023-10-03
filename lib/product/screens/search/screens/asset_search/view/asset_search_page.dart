@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:wm_ppp_4/feature/components/snackBar/snackbar.dart';
 import 'package:wm_ppp_4/feature/route/app_route.gr.dart';
 
 import '../../../../../../feature/components/appbar/custom_tab_appbar.dart';
@@ -63,8 +64,27 @@ class AssetSearchPage extends StatelessWidget {
                         ),
                         leftOnPressed: assetSearchProvider.clearInput,
                         rightOnPressed: () async {
-                         
-                          context.router.push(const AssetSearchListRoute());
+                          if (assetSearchProvider.entityCode.text != '' ||
+                              assetSearchProvider.serialNumber.text != '' ||
+                              assetSearchProvider.rfidCode.text != '' ||
+                              assetSearchProvider.spaceCode.text != '') {
+                            await assetSearchProvider.getAssetSearchList(
+                                context,
+                                assetSearchProvider.entityCode.text,
+                                assetSearchProvider.serialNumber.text,
+                                assetSearchProvider.rfidCode.text,
+                                '',
+                                '',
+                                '',
+                                assetSearchProvider.spaceCode.text,
+                                1);
+                            // ignore: use_build_context_synchronously
+                            context.router.push(AssetSearchListRoute(
+                                assetSearchProviderx: assetSearchProvider));
+                          } else {
+                            snackBar(context, "Lütfen en az bir alan doldurun.",
+                                'error');
+                          }
                         }),
                   ],
                 ),

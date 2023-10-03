@@ -58,15 +58,16 @@ class TimeClass {
     return finalDuration;
   }
 
-  TextStyle fixStyle(respondedTimer, fixTimer, targetFDate, fixedDate) {
+  TextStyle fixStyle(timer, targetDate, fixedDate) {
     String dateNow = DateFormat(yMDHSFormat).format(DateTime.now());
     final TextStyle conditionOfTextStyle;
-    if (respondedTimer == 0 && fixTimer == 0) {
-      conditionOfTextStyle = int.parse(fixedDate.toString()) - int.parse(targetFDate.toString()) < 0
-          ? TextStyle(color: APPColors.Main.white, backgroundColor: APPColors.Main.green, fontSize: FontSizes.caption - 1)
-          : TextStyle(color: APPColors.Main.white, backgroundColor: APPColors.Main.red, fontSize: FontSizes.caption - 1);
+    if (timer == "0") {
+      conditionOfTextStyle = int.parse(fixedDate.toString()) - int.parse(targetDate.toString()) < 0
+          ? TextStyle(
+              color: APPColors.Main.white, backgroundColor: APPColors.Main.green, fontSize: FontSizes.caption - 1, fontWeight: FontWeight.bold)
+          : TextStyle(color: APPColors.Main.white, backgroundColor: APPColors.Main.red, fontSize: FontSizes.caption - 1, fontWeight: FontWeight.bold);
     } else {
-      conditionOfTextStyle = int.parse(dateNow.toString()) - int.parse(targetFDate.toString()) < 0
+      conditionOfTextStyle = int.parse(dateNow.toString()) - int.parse(targetDate.toString()) < 0
           ? TextStyle(color: APPColors.Main.green, backgroundColor: APPColors.Main.white, fontSize: FontSizes.caption - 1)
           : TextStyle(color: APPColors.Main.red, backgroundColor: APPColors.Main.white, fontSize: FontSizes.caption - 1);
     }

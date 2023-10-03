@@ -1,6 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:wm_ppp_4/feature/models/issue_action_models/issue_available_activities_model.dart';
+import 'package:wm_ppp_4/feature/models/issue_action_models/issue_operation_list_model.dart';
 import 'package:wm_ppp_4/feature/models/issue_models/issue_activities_model.dart';
+import 'package:wm_ppp_4/feature/models/issue_models/issue_attachments_model.dart';
 import 'package:wm_ppp_4/feature/models/issue_models/issue_summary_model.dart';
 import 'package:wm_ppp_4/feature/models/issue_models/issue_summary_time_model.dart';
 import '../../../../feature/models/issue_models/issue_tracing_list_model.dart';
@@ -21,4 +24,10 @@ abstract class IssueServiceRepository {
   Future<Either<IssueSummaryModel, CustomServiceException>> getIssueSummary(String issueCode);
   Future<Either<IssueSummaryTimeModel, CustomServiceException>> getIssueTimeInfo(String issueCode);
   Future<Either<List<IssueActivitiesModel>, CustomServiceException>> getIssueActivities(String issueCode);
+  Future<Either<List<IssueAttachmentsModel>, CustomServiceException>> getIssueAttachment(String issueCode);
+  Future<Either<List<IssueAvailableActivities>, CustomServiceException>> getAvailableActivities(String issueCode);
+  Future<Either<IssueOperationList, CustomServiceException>> getIssueOperations(String issueCode);
+  Future<Either<bool, CustomServiceException>> addIssueAttachmentMethod(
+      String userToken, String userName, String issueCode, String image, String desc);
+
 }
