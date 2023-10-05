@@ -38,7 +38,7 @@ import 'package:wm_ppp_4/product/screens/search/screens/asset_search/view/asset_
     as _i2;
 import 'package:wm_ppp_4/product/screens/search/screens/asset_search/view/asset_search_page.dart'
     as _i3;
-import 'package:wm_ppp_4/product/screens/search/screens/issue_search/view/issue_search_page.dart'
+import 'package:wm_ppp_4/product/screens/search/screens/wo_search/view/wo_search_page.dart'
     as _i13;
 import 'package:wm_ppp_4/product/screens/search/search_screen.dart' as _i18;
 import 'package:wm_ppp_4/product/screens/search_work_order/view/search_work_order_screen.dart'
