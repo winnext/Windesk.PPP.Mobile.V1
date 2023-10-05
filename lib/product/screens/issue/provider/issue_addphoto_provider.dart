@@ -27,6 +27,16 @@ class IssueAddPhotoProvider extends ChangeNotifier {
   bool isSuccess = false;
   bool errorAccur = false;
 
+  void setDesc(String val) {
+    _desc = val;
+    notifyListeners();
+  }
+
+  void setFile(File file) {
+    _image = file;
+    notifyListeners();
+  }
+
   void addImage(String issueCode) async {
     if (image.toString() != '') {
       isLoading = true;
@@ -47,7 +57,7 @@ class IssueAddPhotoProvider extends ChangeNotifier {
             }
           else
             {
-              errorAccur = true,
+                errorAccur = true,
             }
         },
         (r) => {
@@ -62,15 +72,5 @@ class IssueAddPhotoProvider extends ChangeNotifier {
       isSuccess = false;
       errorAccur = false;
     });
-  }
-
-  void setDesc(String val) {
-    _desc = val;
-    notifyListeners();
-  }
-
-  void setFile(File file) {
-    _image = file;
-    notifyListeners();
   }
 }

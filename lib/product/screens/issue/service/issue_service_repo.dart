@@ -29,5 +29,7 @@ abstract class IssueServiceRepository {
   Future<Either<IssueOperationList, CustomServiceException>> getIssueOperations(String issueCode);
   Future<Either<bool, CustomServiceException>> addIssueAttachmentMethod(
       String userToken, String userName, String issueCode, String image, String desc);
+  Future<Either<bool, CustomServiceException>> takeOverIssue(
+      String userToken, String userName, String issueCode);
 
 }

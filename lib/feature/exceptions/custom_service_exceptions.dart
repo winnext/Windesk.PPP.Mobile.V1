@@ -48,4 +48,7 @@ class CustomServiceMessages {
   static const String announcementViewError = 'Error while fetching Announcements';
   // test page
   static const String getServerTimeError = 'Error while fetching getServerTime';
+
+  // issue page
+  static const String takeOverIssue = 'Error while take over ıssue';
 }

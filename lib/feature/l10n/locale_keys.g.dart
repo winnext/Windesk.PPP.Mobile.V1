@@ -93,9 +93,11 @@ abstract class LocaleKeys {
   static const String addDescription = "Açıklama Giriniz";
   static const String photoAdded = "Fotoğraf Eklendi";
   static const String photoAddedError = "Fotoğraf Ekleme Başarısız";
+  static const String sureAboutTakeOverIssue = "Bu vakayı üzerinize almak istediğinizden emin misiniz?";
+  static const String okay = "Tamam";
+  static const String processDone = "İşlem başarılı şekilde gerçekleşti";
+  static const String processCancell = "İşlem gerçekleştirilirken bir hata oluştu.";
 
-
-  
   //home page titles
   static const issueList = 'Vaka-(SLA) Listesi';
   static const issueSearch = 'Vaka-(SLA) Arama';

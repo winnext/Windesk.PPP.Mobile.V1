@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wm_ppp_4/feature/components/input_fields/text_fields_input.dart';
 import 'package:wm_ppp_4/feature/components/input_fields/text_fields_input_with_action_and_controller.dart';
+import 'package:wm_ppp_4/feature/components/issue_components/take_over_issue.dart';
 import 'package:wm_ppp_4/feature/components/model_bottom_sheet/add_photo_modal_bottom_sheet.dart';
 import 'package:wm_ppp_4/feature/components/snackBar/snackbar.dart';
 import 'package:wm_ppp_4/feature/constants/other/app_strings.dart';
@@ -27,13 +28,15 @@ class IssueActionModal extends StatelessWidget {
           ],
           child: Consumer2<IssueActionProvider, IssueAddPhotoProvider>(
             builder: (context, IssueActionProvider issueProvider, IssueAddPhotoProvider issueAddPhotoProvider, child) {
-              if (issueAddPhotoProvider.isSuccess) {
-                snackBar(context, LocaleKeys.photoAdded, 'success');
+              if (issueAddPhotoProvider.isSuccess || issueProvider.isSuccessTakeOver) {
+                snackBar(context, LocaleKeys.processDone, 'success');
                 Navigator.of(context).pop();
               }
-              if(issueAddPhotoProvider.errorAccur){
-                snackBar(context, LocaleKeys.photoAddedError, 'error');
+              if (issueAddPhotoProvider.errorAccur || issueProvider.errorAccur) {
+                snackBar(context, LocaleKeys.processCancell, 'error');
+                Navigator.of(context).pop();
               }
+
               issueProvider.isFetch ? null : issueProvider.getIssueOperations(issueCode);
               return Column(
                 children: [
@@ -41,24 +44,7 @@ class IssueActionModal extends StatelessWidget {
                       ? _operationWidget(
                           size, issueProvider, LocaleKeys.addPhoto, issueProvider.isPhotoSectionOpen, issueProvider.setisPhotoSectionOpen)
                       : Container(),
-                  issueProvider.isPhotoSectionOpen
-                      ? Container(
-                          height: MediaQuery.of(context).size.height * 0.5,
-                          color: APPColors.Main.white,
-                          width: size.width / 1.09,
-                          child: Column(
-                            children: [
-                              AddPhotoModalBottomSheet((File photoDile) {
-                                issueAddPhotoProvider.setFile(photoDile);
-                              }, (description) {
-                                issueAddPhotoProvider.setDesc(description);
-                              }, () {
-                                issueAddPhotoProvider.addImage(issueCode);
-                              }, LocaleKeys.addDescription),
-                            ],
-                          ),
-                        )
-                      : Container(),
+                  issueProvider.isPhotoSectionOpen ? addPhotoBottomSheet(context, size, issueAddPhotoProvider) : Container(),
                   issueProvider.issueOperationList.isActivity == true
                       ? _operationWidget(
                           size, issueProvider, LocaleKeys.addActivity, issueProvider.isActivitySectionOpen, issueProvider.setisActivitySectionOpen)
@@ -69,7 +55,18 @@ class IssueActionModal extends StatelessWidget {
                   issueProvider.issueOperationList.isTakeOver == true
                       ? _operationWidget(
                           size, issueProvider, LocaleKeys.takeOver, issueProvider.isTakeOverSectionOpen, issueProvider.setisTakeOverSectionOpen)
+                      : Container(),                      
+                  
+                  issueProvider.isTakeOverSectionOpen
+                      ? TakeOverIssue(
+                          title: LocaleKeys.takeOver,
+                          explanation: LocaleKeys.sureAboutTakeOverIssue,
+                          onConfirm: () {
+                            issueProvider.takeOverIssue(issueCode);
+                          },
+                          confirmButtonText: LocaleKeys.okay)
                       : Container(),
+
                   issueProvider.issueOperationList.isPlannedCancel == true
                       ? _operationWidget(size, issueProvider, LocaleKeys.plannedCancel, issueProvider.isPlannedCancelSectionOpen,
                           issueProvider.setisPlannedSectionOpen)
@@ -82,6 +79,25 @@ class IssueActionModal extends StatelessWidget {
               );
             },
           )),
+    );
+  }
+
+  Container addPhotoBottomSheet(BuildContext context, Size size, IssueAddPhotoProvider issueAddPhotoProvider) {
+    return Container(
+      height: MediaQuery.of(context).size.height * 0.5,
+      color: APPColors.Main.white,
+      width: size.width / 1.09,
+      child: Column(
+        children: [
+          AddPhotoModalBottomSheet((File photoDile) {
+            issueAddPhotoProvider.setFile(photoDile);
+          }, (description) {
+            issueAddPhotoProvider.setDesc(description);
+          }, () {
+            issueAddPhotoProvider.addImage(issueCode);
+          }, LocaleKeys.addDescription),
+        ],
+      ),
     );
   }
 
