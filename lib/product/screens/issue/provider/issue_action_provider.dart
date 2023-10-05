@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wm_ppp_4/feature/database/shared_manager.dart';
 import 'package:wm_ppp_4/feature/enums/shared_enums.dart';
+import 'package:wm_ppp_4/feature/models/issue_action_models/issue_available_activities_model.dart';
 import 'package:wm_ppp_4/feature/models/issue_action_models/issue_operation_list_model.dart';
 import 'package:wm_ppp_4/product/screens/issue/service/issue_service_repo_impl.dart';
 
@@ -9,6 +10,9 @@ class IssueActionProvider extends ChangeNotifier {
 
   bool _isFetch = false;
   bool get isFetch => _isFetch;
+
+  bool _isFetchActivity = true;
+  bool get isFetchActivity => _isFetchActivity;
 
   bool _isPhotoSectionOpen = false;
   bool get isPhotoSectionOpen => _isPhotoSectionOpen;
@@ -36,6 +40,9 @@ class IssueActionProvider extends ChangeNotifier {
 
   IssueOperationList _issueOperationList = const IssueOperationList();
   IssueOperationList get issueOperationList => _issueOperationList;
+
+  List<IssueAvailableActivities> _availableActivities = [];
+  List<IssueAvailableActivities> get availableActivities => _availableActivities;
 
   void setisPhotoSectionOpen(bool photoSection) {
     _isPhotoSectionOpen = photoSection;
@@ -106,5 +113,26 @@ class IssueActionProvider extends ChangeNotifier {
       errorAccur = false;
       notifyListeners();
     });
+  }
+
+  void getAvailableActivities(String issuecode) async {
+    String userToken = await SharedManager().getString(SharedEnum.deviceId);
+    _loading = true;
+    notifyListeners();
+    final response = await _issueServiceRepository.getAvailableActivities(issuecode, userToken);
+
+    response.fold(
+        (l) => {
+              _availableActivities.addAll(l),
+              for (int i = 0; i < _availableActivities.length; i++) {
+                print('asdasd'+ _availableActivities[i].code.toString())
+              },
+              _loading = false,
+            },
+        (r) => {
+              _loading = false,
+            });
+    _isFetchActivity = false;
+    notifyListeners();
   }
 }

@@ -6,9 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:wm_ppp_4/feature/database/shared_manager.dart';
 import 'package:wm_ppp_4/feature/enums/shared_enums.dart';
-import 'package:wm_ppp_4/product/screens/issue/service/issue_service_repo.dart';
 import 'package:wm_ppp_4/product/screens/issue/service/issue_service_repo_impl.dart';
-import '../../../../../feature/injection.dart';
 
 class IssueAddPhotoProvider extends ChangeNotifier {
   final IssueServiceRepoImpml _issueServiceRepository = IssueServiceRepoImpml();
@@ -19,9 +17,6 @@ class IssueAddPhotoProvider extends ChangeNotifier {
 
   String _desc = '';
   String get desc => _desc;
-
-  // String _image = '';
-  // String get image => _image;
 
   bool isLoading = false;
   bool isSuccess = false;
@@ -42,7 +37,7 @@ class IssueAddPhotoProvider extends ChangeNotifier {
       isLoading = true;
       notifyListeners();
 
-      Uint8List imagebytes = await image!.readAsBytes(); //convert to bytes
+      Uint8List imagebytes = await image.readAsBytes(); //convert to bytes
       String base64string = base64.encode(imagebytes); //convert bytes to base64 string
 
       String userToken = await SharedManager().getString(SharedEnum.deviceId);
@@ -57,7 +52,7 @@ class IssueAddPhotoProvider extends ChangeNotifier {
             }
           else
             {
-                errorAccur = true,
+              errorAccur = true,
             }
         },
         (r) => {

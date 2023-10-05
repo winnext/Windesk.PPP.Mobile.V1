@@ -254,6 +254,7 @@ class IssueProvider extends ChangeNotifier {
     response.fold(
         (l) => {
               _issueAttachmentList.addAll(l),
+              _issueAttachmentList.map((e) => print('e'+ e.toString())),
               _loading = false,
             },
         (r) => {

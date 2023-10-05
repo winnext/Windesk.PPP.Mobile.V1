@@ -25,7 +25,7 @@ abstract class IssueServiceRepository {
   Future<Either<IssueSummaryTimeModel, CustomServiceException>> getIssueTimeInfo(String issueCode);
   Future<Either<List<IssueActivitiesModel>, CustomServiceException>> getIssueActivities(String issueCode);
   Future<Either<List<IssueAttachmentsModel>, CustomServiceException>> getIssueAttachment(String issueCode);
-  Future<Either<List<IssueAvailableActivities>, CustomServiceException>> getAvailableActivities(String issueCode);
+  Future<Either<List<IssueAvailableActivities>, CustomServiceException>> getAvailableActivities(String issueCode,String userToken);
   Future<Either<IssueOperationList, CustomServiceException>> getIssueOperations(String issueCode);
   Future<Either<bool, CustomServiceException>> addIssueAttachmentMethod(
       String userToken, String userName, String issueCode, String image, String desc);

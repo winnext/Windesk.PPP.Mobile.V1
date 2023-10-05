@@ -134,16 +134,16 @@ class IssueServiceRepoImpml extends IssueServiceRepository {
   }
 
   @override
-  Future<Either<List<IssueAvailableActivities>, CustomServiceException>> getAvailableActivities(String issueCode) async {
-    final String userCode = await SharedManager().getString(SharedEnum.userCode);
-    String url = '${ServiceTools.baseUrlV2}/issue/$issueCode/attachments';
+  Future<Either<List<IssueAvailableActivities>, CustomServiceException>> getAvailableActivities(String issueCode, String userToken) async {
+    String url = '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=getAvailableActivities&issueCode=$issueCode&module=issue';
     List<IssueAvailableActivities> issueAttachmentsModel;
 
     try {
-      final response = await dio.get(url, options: Options(headers: {"xusercode": userCode, "xtoken": ServiceTools.tokenV2}));
+      final response = await dio.get(url);
       final data = response.data[ServiceResponseStatusEnums.records.rawText];
 
       issueAttachmentsModel = IssueAvailableActivities.fromJsonList(data);
+      print('response' + issueAttachmentsModel.toString());
       super.logger.i(issueAttachmentsModel);
       return Left(issueAttachmentsModel);
     } catch (error) {
