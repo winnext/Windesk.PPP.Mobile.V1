@@ -98,6 +98,7 @@ abstract class LocaleKeys {
   static const String processDone = "İşlem başarılı şekilde gerçekleşti";
   static const String processCancell = "İşlem gerçekleştirilirken bir hata oluştu.";
   static const String state = "Durum";
+  static const String addMoreTime = "Ek Süre (Gün)";
 
   //home page titles
   static const issueList = 'Vaka-(SLA) Listesi';
