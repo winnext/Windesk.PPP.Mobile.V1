@@ -34,7 +34,7 @@ class AddActivity extends StatelessWidget {
                 ? const CustomLoadingIndicator()
                 : SingleChildScrollView(
                     child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(10.0),
                       child: Column(
                         children: [
                           DropDownInputFields(
@@ -49,19 +49,25 @@ class AddActivity extends StatelessWidget {
                           Text('Bu aktivitenin girilmesi, talebin durumunu ${issueActionProvider.selectedActivityName} olarak değiştirecektir.'),
                           NullCheckWidget().conditionCheckWidget(
                               issueActionProvider.isBarcodeSpace,
-                              TextFieldsInputWithActionAndController(
-                                  textController: issueActionProvider.spaceCode,
-                                  labelText: AppStrings.space,
-                                  actionIcon: AppIcons.qr,
-                                  actionFunction: issueActionProvider.scanSpace)),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 8.0),
+                                child: TextFieldsInputWithActionAndController(
+                                    textController: issueActionProvider.spaceCode,
+                                    labelText: LocaleKeys.spaceCode,
+                                    actionIcon: AppIcons.qr,
+                                    actionFunction: issueActionProvider.scanSpace),
+                              )),
                           NullCheckWidget().conditionCheckWidget(
                             issueActionProvider.isadditionaltimeInput,
-                            TextFieldsInput(
-                              labelText:
-                                  issueActionProvider.additionaltimeInput != '' ? issueActionProvider.additionaltimeInput : LocaleKeys.addMoreTime,
-                              onChangedFunction: (String time) {
-                                issueActionProvider.setadditionaltimeInput(time);
-                              },
+                            Padding(
+                                padding: const EdgeInsets.only(top: 8.0),
+                              child: TextFieldsInput(
+                                labelText:
+                                    LocaleKeys.addMoreTime,
+                                onChangedFunction: (String time) {
+                                  issueActionProvider.setadditionaltimeInput(time);
+                                },
+                              ),
                             ),
                           ),
                           //   //live select
@@ -88,11 +94,14 @@ class AddActivity extends StatelessWidget {
                               )),
                           NullCheckWidget().conditionCheckWidget(
                               issueActionProvider.minDescLength,
-                              TextFieldsInput(
-                                labelText: issueActionProvider.description != '' ? issueActionProvider.description : LocaleKeys.description,
-                                onChangedFunction: (String text) {
-                                  issueActionProvider.setdescription(text);
-                                },
+                              Padding(
+                                padding: const EdgeInsets.only(top: 8.0),
+                                child: TextFieldsInput(
+                                  labelText: LocaleKeys.description,
+                                  onChangedFunction: (String text) {
+                                    issueActionProvider.setdescription(text);
+                                  },
+                                ),
                               )),
                           NullCheckWidget().conditionCheckWidget(issueActionProvider.mobilePhoto, AddJustPhotoModalBottomSheet(() {})),
                           _saveOrQuit(context, issueActionProvider)

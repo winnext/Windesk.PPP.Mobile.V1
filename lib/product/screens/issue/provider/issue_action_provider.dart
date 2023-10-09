@@ -43,7 +43,9 @@ class IssueActionProvider extends ChangeNotifier {
   bool get loading => _loading;
 
   bool isSuccessTakeOver = false;
-  bool errorAccur = false;
+
+  bool _errorAccur = false;
+  bool get errorAccur => _errorAccur;
 
   String _selectedActivityName = '';
   String get selectedActivityName => _selectedActivityName;
@@ -65,6 +67,12 @@ class IssueActionProvider extends ChangeNotifier {
 
   String _selectedActivityCode = '';
   String get selectedActivityCode => _selectedActivityCode;
+
+  String _barcodeScenRes = '';
+  String get barcodeScenRes => _barcodeScenRes;
+
+  String _errorMessage = '';
+  String get errorMessage => _errorMessage;
 
   bool _isBarcodeSpace = false;
   bool get isBarcodeSpace => _isBarcodeSpace;
@@ -273,7 +281,7 @@ class IssueActionProvider extends ChangeNotifier {
               isSuccessTakeOver = true,
             },
         (r) => {
-              errorAccur = true,
+              _errorAccur = true,
             });
 
     _loading = false;
@@ -281,7 +289,7 @@ class IssueActionProvider extends ChangeNotifier {
 
     Future.delayed(const Duration(seconds: 2), () {
       isSuccessTakeOver = false;
-      errorAccur = false;
+      _errorAccur = false;
       notifyListeners();
     });
   }
@@ -318,7 +326,13 @@ class IssueActionProvider extends ChangeNotifier {
     } on PlatformException {
       barcodeScanRes = 'Failed to get platform version.';
     }
+    setEntityCode = '';
+    setSerialNumber = '';
+    setRfidCode = '';
+    setSpaceCode = '';
+
     if (barcodeScanRes != '-1') {
+      _barcodeScenRes = barcodeScenRes;
       if (state == 'entitiy') {
         setEntityCode = barcodeScanRes;
       } else if (state == 'serialNumber') {
@@ -372,7 +386,6 @@ class IssueActionProvider extends ChangeNotifier {
                 {
                   _getLiveSelectAsgUsersName.add(_getLiveSelectAsgUsers[i].fullname.toString()),
                 },
-              print('asd' + _getLiveSelectAsgUsersName.toString()),
               _loading = false,
             },
         (r) => {
@@ -384,14 +397,14 @@ class IssueActionProvider extends ChangeNotifier {
 
   void saveIssueActivity(String issuecode) async {
     _loading = true;
-    
+
     String userToken = await SharedManager().getString(SharedEnum.deviceId);
     String userCode = await SharedManager().getString(SharedEnum.userCode);
 
     Uint8List? imagebytes = await image?.readAsBytes(); //convert to bytes
     String base64string = '';
     if (imagebytes != null) {
-     base64string = base64.encode(imagebytes); //convert bytes to base64 string
+      base64string = base64.encode(imagebytes); //convert bytes to base64 string
     }
     notifyListeners();
 
@@ -417,6 +430,34 @@ class IssueActionProvider extends ChangeNotifier {
             });
     _isFetchActivity = false;
     notifyListeners();
+  }
+
+  void changeCfg(issuecode) async {
+    _loading = true;
+
+    String userToken = await SharedManager().getString(SharedEnum.deviceId);
+
+    final response = await _issueServiceRepository.changeCfg(
+      userToken,
+      issuecode,
+      barcodeScenRes
+    );
+    response.fold(
+        (l) => {
+              isSuccessTakeOver = true,
+
+            },
+        (r) => {
+              _errorAccur = true,
+            });
+    _loading = false;
+    notifyListeners();
+
+    Future.delayed(const Duration(seconds: 2), () {
+      isSuccessTakeOver = false;
+      _errorAccur = false;
+      notifyListeners();
+    });
   }
 
   void clearAll() {

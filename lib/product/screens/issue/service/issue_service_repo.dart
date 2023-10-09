@@ -42,6 +42,8 @@ abstract class IssueServiceRepository {
     String additionalTime,
     String module,
     String image,);
+  Future<Either<bool, CustomServiceException>> changeCfg(
+       String userToken, String issueCode, String cfgCode);
 
 
 }

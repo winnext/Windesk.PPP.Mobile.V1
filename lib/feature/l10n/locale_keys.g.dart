@@ -100,6 +100,10 @@ abstract class LocaleKeys {
   static const String state = "Durum";
   static const String addMoreTime = "Ek Süre (Gün)";
   static const String selectActivity = "Aktivite Seçiniz";
+  static const String spaceCode = 'Mahal Kodu';
+  static const String entityCode = 'Varlık Kodu';
+  static const String serialNumber = 'Seri No';
+  static const String rfid = 'RFID';
 
 
   //home page titles

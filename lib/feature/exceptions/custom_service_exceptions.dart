@@ -51,4 +51,6 @@ class CustomServiceMessages {
 
   // issue page
   static const String takeOverIssue = 'Error while take over ıssue';
+  static const String changeCfg = 'İlgili koda karşılık alan bulunamadı';
+
 }

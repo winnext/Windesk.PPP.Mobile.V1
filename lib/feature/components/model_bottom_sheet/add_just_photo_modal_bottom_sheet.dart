@@ -19,7 +19,7 @@ class AddJustPhotoModalBottomSheet extends StatelessWidget {
 
   _bodyWidget(BuildContext context) {
     return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.5,
+      height: MediaQuery.of(context).size.height * 0.3,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
         child: Column(

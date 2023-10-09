@@ -302,4 +302,30 @@ class IssueServiceRepoImpml extends IssueServiceRepository {
       return Right(CustomServiceException(message: CustomServiceMessages.workOrderAddImageError, statusCode: '500'));
     }
   }
+  
+  @override
+  Future<Either<bool, CustomServiceException>> changeCfg(
+    String userToken,
+    String issueCode,
+    String cfgCode,
+  ) async {
+    bool result = false;
+    String url = '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=changeCfg&issueCode=$issueCode&cfgCode=$cfgCode';
+
+    try {
+      final response = await super.dio.get(url);
+      super.logger.i(response.toString());
+
+      if (response.data[ServiceResponseStatusEnums.success.rawText].toString() == ServiceStatusEnums.isTrue.rawText) {
+        result = true;
+        super.logger.i(result.toString());
+        return Left(result);
+      } else {
+        return Right(CustomServiceException(message: CustomServiceMessages.takeOverIssue, statusCode: response.statusCode.toString()));
+      }
+    } catch (error) {
+      super.logger.e(error.toString());
+      return Right(CustomServiceException(message: CustomServiceMessages.takeOverIssue, statusCode: '500'));
+    }
+  }
 }
