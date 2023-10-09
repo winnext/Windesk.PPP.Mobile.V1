@@ -21,11 +21,17 @@ class IssueSearchProvider extends ChangeNotifier {
         (l) => {
               if (l > 0)
                 {
-                  context.router.push(IssueDetailScreen(issueCode: searchIssueCode)),
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            IssueDetailScreen(issueCode: searchIssueCode)),
+                  )
                 }
               else
                 {snackBar(context, "Girdiğiniz vaka numarası hatalı veya vakayı görmeye yetkiniz yoktur.", 'error')}
             },
-        (r) => {});
+        // ignore: avoid_print
+        (r) => {print('error')});
   }
 }

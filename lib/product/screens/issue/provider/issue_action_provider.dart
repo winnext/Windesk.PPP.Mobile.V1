@@ -372,7 +372,6 @@ class IssueActionProvider extends ChangeNotifier {
                 {
                   _getLiveSelectAsgUsersName.add(_getLiveSelectAsgUsers[i].fullname.toString()),
                 },
-              print('asd' + _getLiveSelectAsgUsersName.toString()),
               _loading = false,
             },
         (r) => {
