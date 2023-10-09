@@ -10,8 +10,8 @@ import '../../../../../../feature/components/appbar/custom_tab_appbar.dart';
 import '../../../../../../feature/constants/other/app_strings.dart';
 
 @RoutePage()
-class IssueSearchPage extends StatelessWidget {
-  const IssueSearchPage({super.key});
+class WoSearchPage extends StatelessWidget {
+  const WoSearchPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class IssueSearchPage extends StatelessWidget {
               title: AppStrings.workOrderSearch,
               returnBack: true,
             ),
-            body: Center( 
+            body: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,

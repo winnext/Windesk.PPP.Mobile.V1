@@ -8,8 +8,8 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i25;
-import 'package:flutter/material.dart' as _i26;
+import 'package:auto_route/auto_route.dart' as _i27;
+import 'package:flutter/material.dart' as _i28;
 import 'package:wm_ppp_4/feature/components/cards/custom_tracing_list_card.dart'
     as _i4;
 import 'package:wm_ppp_4/feature/route/empty_router.dart' as _i5;
@@ -33,40 +33,44 @@ import 'package:wm_ppp_4/product/screens/issue/view/issue_tracing_list.dart'
 import 'package:wm_ppp_4/product/screens/new_order/new_order_screen.dart'
     as _i17;
 import 'package:wm_ppp_4/product/screens/search/screens/asset_search/provider/asset_search_provider.dart'
-    as _i27;
+    as _i29;
 import 'package:wm_ppp_4/product/screens/search/screens/asset_search/view/asset_search_list.dart'
     as _i2;
 import 'package:wm_ppp_4/product/screens/search/screens/asset_search/view/asset_search_page.dart'
     as _i3;
-import 'package:wm_ppp_4/product/screens/search/screens/wo_search/view/wo_search_page.dart'
+import 'package:wm_ppp_4/product/screens/search/screens/issue_search/view/issue_search_page.dart'
     as _i13;
+import 'package:wm_ppp_4/product/screens/search/screens/space_search/view/space_search_page.dart'
+    as _i20;
+import 'package:wm_ppp_4/product/screens/search/screens/wo_search/view/wo_search_page.dart'
+    as _i23;
 import 'package:wm_ppp_4/product/screens/search/search_screen.dart' as _i18;
 import 'package:wm_ppp_4/product/screens/search_work_order/view/search_work_order_screen.dart'
     as _i19;
-import 'package:wm_ppp_4/product/screens/splash/splash_screen.dart' as _i20;
-import 'package:wm_ppp_4/product/screens/test/view/test_screen.dart' as _i21;
+import 'package:wm_ppp_4/product/screens/splash/splash_screen.dart' as _i21;
+import 'package:wm_ppp_4/product/screens/test/view/test_screen.dart' as _i22;
 import 'package:wm_ppp_4/product/screens/work_order/view/work_order_list_screen.dart'
-    as _i23;
+    as _i25;
 import 'package:wm_ppp_4/product/screens/work_order/view/work_order_main_screen.dart'
-    as _i24;
+    as _i26;
 import 'package:wm_ppp_4/product/screens/work_order/work_order_detail/view/work_order_detail_screen.dart'
-    as _i22;
+    as _i24;
 import 'package:wm_ppp_4/product/wrapper/app_wrapper.dart' as _i1;
 
-abstract class $AppRouter extends _i25.RootStackRouter {
+abstract class $AppRouter extends _i27.RootStackRouter {
   $AppRouter({super.navigatorKey});
 
   @override
-  final Map<String, _i25.PageFactory> pagesMap = {
+  final Map<String, _i27.PageFactory> pagesMap = {
     AppWrapper.name: (routeData) {
-      return _i25.AutoRoutePage<dynamic>(
+      return _i27.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i1.AppWrapper(),
       );
     },
     AssetSearchListRoute.name: (routeData) {
       final args = routeData.argsAs<AssetSearchListRouteArgs>();
-      return _i25.AutoRoutePage<dynamic>(
+      return _i27.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i2.AssetSearchListPage(
           key: args.key,
@@ -75,14 +79,14 @@ abstract class $AppRouter extends _i25.RootStackRouter {
       );
     },
     AssetSearchRoute.name: (routeData) {
-      return _i25.AutoRoutePage<dynamic>(
+      return _i27.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i3.AssetSearchPage(),
       );
     },
     CustomTracingList.name: (routeData) {
       final args = routeData.argsAs<CustomTracingListArgs>();
-      return _i25.AutoRoutePage<dynamic>(
+      return _i27.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i4.CustomTracingList(
           key: args.key,
@@ -94,26 +98,26 @@ abstract class $AppRouter extends _i25.RootStackRouter {
       );
     },
     EmptyRouter.name: (routeData) {
-      return _i25.AutoRoutePage<dynamic>(
+      return _i27.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i5.EmptyRouter(),
       );
     },
     EmptySearchRouter.name: (routeData) {
-      return _i25.AutoRoutePage<dynamic>(
+      return _i27.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i6.EmptySearchRouter(),
       );
     },
     HomeScreen.name: (routeData) {
-      return _i25.AutoRoutePage<dynamic>(
+      return _i27.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i7.HomeScreen(),
       );
     },
     IssueActivitiesScreen.name: (routeData) {
       final args = routeData.argsAs<IssueActivitiesScreenArgs>();
-      return _i25.AutoRoutePage<dynamic>(
+      return _i27.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i8.IssueActivitiesScreen(
           key: args.key,
@@ -123,7 +127,7 @@ abstract class $AppRouter extends _i25.RootStackRouter {
     },
     IssueDetailScreen.name: (routeData) {
       final args = routeData.argsAs<IssueDetailScreenArgs>();
-      return _i25.AutoRoutePage<dynamic>(
+      return _i27.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i9.IssueDetailScreen(
           key: args.key,
@@ -133,7 +137,7 @@ abstract class $AppRouter extends _i25.RootStackRouter {
     },
     IssueFilesScreen.name: (routeData) {
       final args = routeData.argsAs<IssueFilesScreenArgs>();
-      return _i25.AutoRoutePage<dynamic>(
+      return _i27.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i10.IssueFilesScreen(
           key: args.key,
@@ -143,7 +147,7 @@ abstract class $AppRouter extends _i25.RootStackRouter {
     },
     IssueListScreen.name: (routeData) {
       final args = routeData.argsAs<IssueListScreenArgs>();
-      return _i25.AutoRoutePage<dynamic>(
+      return _i27.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i11.IssueListScreen(
           key: args.key,
@@ -152,20 +156,20 @@ abstract class $AppRouter extends _i25.RootStackRouter {
       );
     },
     IssueNotesScreen.name: (routeData) {
-      return _i25.AutoRoutePage<dynamic>(
+      return _i27.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i12.IssueNotesScreen(),
       );
     },
     IssueSearchRoute.name: (routeData) {
-      return _i25.AutoRoutePage<dynamic>(
+      return _i27.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i13.IssueSearchPage(),
       );
     },
     IssueSummaryScreen.name: (routeData) {
       final args = routeData.argsAs<IssueSummaryScreenArgs>();
-      return _i25.AutoRoutePage<dynamic>(
+      return _i27.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i14.IssueSummaryScreen(
           key: args.key,
@@ -174,52 +178,64 @@ abstract class $AppRouter extends _i25.RootStackRouter {
       );
     },
     IssueTracingList.name: (routeData) {
-      return _i25.AutoRoutePage<dynamic>(
+      return _i27.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i15.IssueTracingList(),
       );
     },
     LoginScreen.name: (routeData) {
-      return _i25.AutoRoutePage<dynamic>(
+      return _i27.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i16.LoginScreen(),
       );
     },
     NewOrderScreen.name: (routeData) {
-      return _i25.AutoRoutePage<dynamic>(
+      return _i27.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i17.NewOrderScreen(),
       );
     },
     SearchScreen.name: (routeData) {
-      return _i25.AutoRoutePage<dynamic>(
+      return _i27.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i18.SearchScreen(),
       );
     },
     SearchWorkOrderScreen.name: (routeData) {
-      return _i25.AutoRoutePage<dynamic>(
+      return _i27.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i19.SearchWorkOrderScreen(),
       );
     },
-    SplashScreen.name: (routeData) {
-      return _i25.AutoRoutePage<dynamic>(
+    SpaceSearchRoute.name: (routeData) {
+      return _i27.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i20.SplashScreen(),
+        child: const _i20.SpaceSearchPage(),
+      );
+    },
+    SplashScreen.name: (routeData) {
+      return _i27.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i21.SplashScreen(),
       );
     },
     TestScreen.name: (routeData) {
-      return _i25.AutoRoutePage<dynamic>(
+      return _i27.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i21.TestScreen(),
+        child: const _i22.TestScreen(),
+      );
+    },
+    WoSearchRoute.name: (routeData) {
+      return _i27.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i23.WoSearchPage(),
       );
     },
     WorkOrderDetailScreen.name: (routeData) {
       final args = routeData.argsAs<WorkOrderDetailScreenArgs>();
-      return _i25.AutoRoutePage<dynamic>(
+      return _i27.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i22.WorkOrderDetailScreen(
+        child: _i24.WorkOrderDetailScreen(
           key: args.key,
           workorderCode: args.workorderCode,
         ),
@@ -227,9 +243,9 @@ abstract class $AppRouter extends _i25.RootStackRouter {
     },
     WorkOrderListScreen.name: (routeData) {
       final args = routeData.argsAs<WorkOrderListScreenArgs>();
-      return _i25.AutoRoutePage<dynamic>(
+      return _i27.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i23.WorkOrderListScreen(
+        child: _i25.WorkOrderListScreen(
           key: args.key,
           workOrderCode: args.workOrderCode,
           workOrderName: args.workOrderName,
@@ -237,9 +253,9 @@ abstract class $AppRouter extends _i25.RootStackRouter {
       );
     },
     WorkOrderMainScreen.name: (routeData) {
-      return _i25.AutoRoutePage<dynamic>(
+      return _i27.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i24.WorkOrderMainScreen(),
+        child: const _i26.WorkOrderMainScreen(),
       );
     },
   };
@@ -247,8 +263,8 @@ abstract class $AppRouter extends _i25.RootStackRouter {
 
 /// generated route for
 /// [_i1.AppWrapper]
-class AppWrapper extends _i25.PageRouteInfo<void> {
-  const AppWrapper({List<_i25.PageRouteInfo>? children})
+class AppWrapper extends _i27.PageRouteInfo<void> {
+  const AppWrapper({List<_i27.PageRouteInfo>? children})
       : super(
           AppWrapper.name,
           initialChildren: children,
@@ -256,17 +272,17 @@ class AppWrapper extends _i25.PageRouteInfo<void> {
 
   static const String name = 'AppWrapper';
 
-  static const _i25.PageInfo<void> page = _i25.PageInfo<void>(name);
+  static const _i27.PageInfo<void> page = _i27.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i2.AssetSearchListPage]
 class AssetSearchListRoute
-    extends _i25.PageRouteInfo<AssetSearchListRouteArgs> {
+    extends _i27.PageRouteInfo<AssetSearchListRouteArgs> {
   AssetSearchListRoute({
-    _i26.Key? key,
-    required _i27.AssetSearchProvider assetSearchProviderx,
-    List<_i25.PageRouteInfo>? children,
+    _i28.Key? key,
+    required _i29.AssetSearchProvider assetSearchProviderx,
+    List<_i27.PageRouteInfo>? children,
   }) : super(
           AssetSearchListRoute.name,
           args: AssetSearchListRouteArgs(
@@ -278,8 +294,8 @@ class AssetSearchListRoute
 
   static const String name = 'AssetSearchListRoute';
 
-  static const _i25.PageInfo<AssetSearchListRouteArgs> page =
-      _i25.PageInfo<AssetSearchListRouteArgs>(name);
+  static const _i27.PageInfo<AssetSearchListRouteArgs> page =
+      _i27.PageInfo<AssetSearchListRouteArgs>(name);
 }
 
 class AssetSearchListRouteArgs {
@@ -288,9 +304,9 @@ class AssetSearchListRouteArgs {
     required this.assetSearchProviderx,
   });
 
-  final _i26.Key? key;
+  final _i28.Key? key;
 
-  final _i27.AssetSearchProvider assetSearchProviderx;
+  final _i29.AssetSearchProvider assetSearchProviderx;
 
   @override
   String toString() {
@@ -300,8 +316,8 @@ class AssetSearchListRouteArgs {
 
 /// generated route for
 /// [_i3.AssetSearchPage]
-class AssetSearchRoute extends _i25.PageRouteInfo<void> {
-  const AssetSearchRoute({List<_i25.PageRouteInfo>? children})
+class AssetSearchRoute extends _i27.PageRouteInfo<void> {
+  const AssetSearchRoute({List<_i27.PageRouteInfo>? children})
       : super(
           AssetSearchRoute.name,
           initialChildren: children,
@@ -309,19 +325,19 @@ class AssetSearchRoute extends _i25.PageRouteInfo<void> {
 
   static const String name = 'AssetSearchRoute';
 
-  static const _i25.PageInfo<void> page = _i25.PageInfo<void>(name);
+  static const _i27.PageInfo<void> page = _i27.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i4.CustomTracingList]
-class CustomTracingList extends _i25.PageRouteInfo<CustomTracingListArgs> {
+class CustomTracingList extends _i27.PageRouteInfo<CustomTracingListArgs> {
   CustomTracingList({
-    _i26.Key? key,
+    _i28.Key? key,
     required String title,
     required String count,
     required String code,
     required bool isWorkOrder,
-    List<_i25.PageRouteInfo>? children,
+    List<_i27.PageRouteInfo>? children,
   }) : super(
           CustomTracingList.name,
           args: CustomTracingListArgs(
@@ -336,8 +352,8 @@ class CustomTracingList extends _i25.PageRouteInfo<CustomTracingListArgs> {
 
   static const String name = 'CustomTracingList';
 
-  static const _i25.PageInfo<CustomTracingListArgs> page =
-      _i25.PageInfo<CustomTracingListArgs>(name);
+  static const _i27.PageInfo<CustomTracingListArgs> page =
+      _i27.PageInfo<CustomTracingListArgs>(name);
 }
 
 class CustomTracingListArgs {
@@ -349,7 +365,7 @@ class CustomTracingListArgs {
     required this.isWorkOrder,
   });
 
-  final _i26.Key? key;
+  final _i28.Key? key;
 
   final String title;
 
@@ -367,8 +383,8 @@ class CustomTracingListArgs {
 
 /// generated route for
 /// [_i5.EmptyRouter]
-class EmptyRouter extends _i25.PageRouteInfo<void> {
-  const EmptyRouter({List<_i25.PageRouteInfo>? children})
+class EmptyRouter extends _i27.PageRouteInfo<void> {
+  const EmptyRouter({List<_i27.PageRouteInfo>? children})
       : super(
           EmptyRouter.name,
           initialChildren: children,
@@ -376,13 +392,13 @@ class EmptyRouter extends _i25.PageRouteInfo<void> {
 
   static const String name = 'EmptyRouter';
 
-  static const _i25.PageInfo<void> page = _i25.PageInfo<void>(name);
+  static const _i27.PageInfo<void> page = _i27.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i6.EmptySearchRouter]
-class EmptySearchRouter extends _i25.PageRouteInfo<void> {
-  const EmptySearchRouter({List<_i25.PageRouteInfo>? children})
+class EmptySearchRouter extends _i27.PageRouteInfo<void> {
+  const EmptySearchRouter({List<_i27.PageRouteInfo>? children})
       : super(
           EmptySearchRouter.name,
           initialChildren: children,
@@ -390,13 +406,13 @@ class EmptySearchRouter extends _i25.PageRouteInfo<void> {
 
   static const String name = 'EmptySearchRouter';
 
-  static const _i25.PageInfo<void> page = _i25.PageInfo<void>(name);
+  static const _i27.PageInfo<void> page = _i27.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i7.HomeScreen]
-class HomeScreen extends _i25.PageRouteInfo<void> {
-  const HomeScreen({List<_i25.PageRouteInfo>? children})
+class HomeScreen extends _i27.PageRouteInfo<void> {
+  const HomeScreen({List<_i27.PageRouteInfo>? children})
       : super(
           HomeScreen.name,
           initialChildren: children,
@@ -404,17 +420,17 @@ class HomeScreen extends _i25.PageRouteInfo<void> {
 
   static const String name = 'HomeScreen';
 
-  static const _i25.PageInfo<void> page = _i25.PageInfo<void>(name);
+  static const _i27.PageInfo<void> page = _i27.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i8.IssueActivitiesScreen]
 class IssueActivitiesScreen
-    extends _i25.PageRouteInfo<IssueActivitiesScreenArgs> {
+    extends _i27.PageRouteInfo<IssueActivitiesScreenArgs> {
   IssueActivitiesScreen({
-    _i26.Key? key,
+    _i28.Key? key,
     required String issueCode,
-    List<_i25.PageRouteInfo>? children,
+    List<_i27.PageRouteInfo>? children,
   }) : super(
           IssueActivitiesScreen.name,
           args: IssueActivitiesScreenArgs(
@@ -426,8 +442,8 @@ class IssueActivitiesScreen
 
   static const String name = 'IssueActivitiesScreen';
 
-  static const _i25.PageInfo<IssueActivitiesScreenArgs> page =
-      _i25.PageInfo<IssueActivitiesScreenArgs>(name);
+  static const _i27.PageInfo<IssueActivitiesScreenArgs> page =
+      _i27.PageInfo<IssueActivitiesScreenArgs>(name);
 }
 
 class IssueActivitiesScreenArgs {
@@ -436,7 +452,7 @@ class IssueActivitiesScreenArgs {
     required this.issueCode,
   });
 
-  final _i26.Key? key;
+  final _i28.Key? key;
 
   final String issueCode;
 
@@ -448,11 +464,11 @@ class IssueActivitiesScreenArgs {
 
 /// generated route for
 /// [_i9.IssueDetailScreen]
-class IssueDetailScreen extends _i25.PageRouteInfo<IssueDetailScreenArgs> {
+class IssueDetailScreen extends _i27.PageRouteInfo<IssueDetailScreenArgs> {
   IssueDetailScreen({
-    _i26.Key? key,
+    _i28.Key? key,
     required String issueCode,
-    List<_i25.PageRouteInfo>? children,
+    List<_i27.PageRouteInfo>? children,
   }) : super(
           IssueDetailScreen.name,
           args: IssueDetailScreenArgs(
@@ -464,8 +480,8 @@ class IssueDetailScreen extends _i25.PageRouteInfo<IssueDetailScreenArgs> {
 
   static const String name = 'IssueDetailScreen';
 
-  static const _i25.PageInfo<IssueDetailScreenArgs> page =
-      _i25.PageInfo<IssueDetailScreenArgs>(name);
+  static const _i27.PageInfo<IssueDetailScreenArgs> page =
+      _i27.PageInfo<IssueDetailScreenArgs>(name);
 }
 
 class IssueDetailScreenArgs {
@@ -474,7 +490,7 @@ class IssueDetailScreenArgs {
     required this.issueCode,
   });
 
-  final _i26.Key? key;
+  final _i28.Key? key;
 
   final String issueCode;
 
@@ -486,11 +502,11 @@ class IssueDetailScreenArgs {
 
 /// generated route for
 /// [_i10.IssueFilesScreen]
-class IssueFilesScreen extends _i25.PageRouteInfo<IssueFilesScreenArgs> {
+class IssueFilesScreen extends _i27.PageRouteInfo<IssueFilesScreenArgs> {
   IssueFilesScreen({
-    _i26.Key? key,
+    _i28.Key? key,
     required String issueCode,
-    List<_i25.PageRouteInfo>? children,
+    List<_i27.PageRouteInfo>? children,
   }) : super(
           IssueFilesScreen.name,
           args: IssueFilesScreenArgs(
@@ -502,8 +518,8 @@ class IssueFilesScreen extends _i25.PageRouteInfo<IssueFilesScreenArgs> {
 
   static const String name = 'IssueFilesScreen';
 
-  static const _i25.PageInfo<IssueFilesScreenArgs> page =
-      _i25.PageInfo<IssueFilesScreenArgs>(name);
+  static const _i27.PageInfo<IssueFilesScreenArgs> page =
+      _i27.PageInfo<IssueFilesScreenArgs>(name);
 }
 
 class IssueFilesScreenArgs {
@@ -512,7 +528,7 @@ class IssueFilesScreenArgs {
     required this.issueCode,
   });
 
-  final _i26.Key? key;
+  final _i28.Key? key;
 
   final String issueCode;
 
@@ -524,11 +540,11 @@ class IssueFilesScreenArgs {
 
 /// generated route for
 /// [_i11.IssueListScreen]
-class IssueListScreen extends _i25.PageRouteInfo<IssueListScreenArgs> {
+class IssueListScreen extends _i27.PageRouteInfo<IssueListScreenArgs> {
   IssueListScreen({
-    _i26.Key? key,
+    _i28.Key? key,
     required String issueModuleCode,
-    List<_i25.PageRouteInfo>? children,
+    List<_i27.PageRouteInfo>? children,
   }) : super(
           IssueListScreen.name,
           args: IssueListScreenArgs(
@@ -540,8 +556,8 @@ class IssueListScreen extends _i25.PageRouteInfo<IssueListScreenArgs> {
 
   static const String name = 'IssueListScreen';
 
-  static const _i25.PageInfo<IssueListScreenArgs> page =
-      _i25.PageInfo<IssueListScreenArgs>(name);
+  static const _i27.PageInfo<IssueListScreenArgs> page =
+      _i27.PageInfo<IssueListScreenArgs>(name);
 }
 
 class IssueListScreenArgs {
@@ -550,7 +566,7 @@ class IssueListScreenArgs {
     required this.issueModuleCode,
   });
 
-  final _i26.Key? key;
+  final _i28.Key? key;
 
   final String issueModuleCode;
 
@@ -562,8 +578,8 @@ class IssueListScreenArgs {
 
 /// generated route for
 /// [_i12.IssueNotesScreen]
-class IssueNotesScreen extends _i25.PageRouteInfo<void> {
-  const IssueNotesScreen({List<_i25.PageRouteInfo>? children})
+class IssueNotesScreen extends _i27.PageRouteInfo<void> {
+  const IssueNotesScreen({List<_i27.PageRouteInfo>? children})
       : super(
           IssueNotesScreen.name,
           initialChildren: children,
@@ -571,13 +587,13 @@ class IssueNotesScreen extends _i25.PageRouteInfo<void> {
 
   static const String name = 'IssueNotesScreen';
 
-  static const _i25.PageInfo<void> page = _i25.PageInfo<void>(name);
+  static const _i27.PageInfo<void> page = _i27.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i13.IssueSearchPage]
-class IssueSearchRoute extends _i25.PageRouteInfo<void> {
-  const IssueSearchRoute({List<_i25.PageRouteInfo>? children})
+class IssueSearchRoute extends _i27.PageRouteInfo<void> {
+  const IssueSearchRoute({List<_i27.PageRouteInfo>? children})
       : super(
           IssueSearchRoute.name,
           initialChildren: children,
@@ -585,16 +601,18 @@ class IssueSearchRoute extends _i25.PageRouteInfo<void> {
 
   static const String name = 'IssueSearchRoute';
 
-  static const _i25.PageInfo<void> page = _i25.PageInfo<void>(name);
+  static const _i27.PageInfo<void> page = _i27.PageInfo<void>(name);
 }
+
+
 
 /// generated route for
 /// [_i14.IssueSummaryScreen]
-class IssueSummaryScreen extends _i25.PageRouteInfo<IssueSummaryScreenArgs> {
+class IssueSummaryScreen extends _i27.PageRouteInfo<IssueSummaryScreenArgs> {
   IssueSummaryScreen({
-    _i26.Key? key,
+    _i28.Key? key,
     required String issueCode,
-    List<_i25.PageRouteInfo>? children,
+    List<_i27.PageRouteInfo>? children,
   }) : super(
           IssueSummaryScreen.name,
           args: IssueSummaryScreenArgs(
@@ -606,8 +624,8 @@ class IssueSummaryScreen extends _i25.PageRouteInfo<IssueSummaryScreenArgs> {
 
   static const String name = 'IssueSummaryScreen';
 
-  static const _i25.PageInfo<IssueSummaryScreenArgs> page =
-      _i25.PageInfo<IssueSummaryScreenArgs>(name);
+  static const _i27.PageInfo<IssueSummaryScreenArgs> page =
+      _i27.PageInfo<IssueSummaryScreenArgs>(name);
 }
 
 class IssueSummaryScreenArgs {
@@ -616,7 +634,7 @@ class IssueSummaryScreenArgs {
     required this.issueCode,
   });
 
-  final _i26.Key? key;
+  final _i28.Key? key;
 
   final String issueCode;
 
@@ -628,8 +646,8 @@ class IssueSummaryScreenArgs {
 
 /// generated route for
 /// [_i15.IssueTracingList]
-class IssueTracingList extends _i25.PageRouteInfo<void> {
-  const IssueTracingList({List<_i25.PageRouteInfo>? children})
+class IssueTracingList extends _i27.PageRouteInfo<void> {
+  const IssueTracingList({List<_i27.PageRouteInfo>? children})
       : super(
           IssueTracingList.name,
           initialChildren: children,
@@ -637,13 +655,13 @@ class IssueTracingList extends _i25.PageRouteInfo<void> {
 
   static const String name = 'IssueTracingList';
 
-  static const _i25.PageInfo<void> page = _i25.PageInfo<void>(name);
+  static const _i27.PageInfo<void> page = _i27.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i16.LoginScreen]
-class LoginScreen extends _i25.PageRouteInfo<void> {
-  const LoginScreen({List<_i25.PageRouteInfo>? children})
+class LoginScreen extends _i27.PageRouteInfo<void> {
+  const LoginScreen({List<_i27.PageRouteInfo>? children})
       : super(
           LoginScreen.name,
           initialChildren: children,
@@ -651,13 +669,13 @@ class LoginScreen extends _i25.PageRouteInfo<void> {
 
   static const String name = 'LoginScreen';
 
-  static const _i25.PageInfo<void> page = _i25.PageInfo<void>(name);
+  static const _i27.PageInfo<void> page = _i27.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i17.NewOrderScreen]
-class NewOrderScreen extends _i25.PageRouteInfo<void> {
-  const NewOrderScreen({List<_i25.PageRouteInfo>? children})
+class NewOrderScreen extends _i27.PageRouteInfo<void> {
+  const NewOrderScreen({List<_i27.PageRouteInfo>? children})
       : super(
           NewOrderScreen.name,
           initialChildren: children,
@@ -665,13 +683,13 @@ class NewOrderScreen extends _i25.PageRouteInfo<void> {
 
   static const String name = 'NewOrderScreen';
 
-  static const _i25.PageInfo<void> page = _i25.PageInfo<void>(name);
+  static const _i27.PageInfo<void> page = _i27.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i18.SearchScreen]
-class SearchScreen extends _i25.PageRouteInfo<void> {
-  const SearchScreen({List<_i25.PageRouteInfo>? children})
+class SearchScreen extends _i27.PageRouteInfo<void> {
+  const SearchScreen({List<_i27.PageRouteInfo>? children})
       : super(
           SearchScreen.name,
           initialChildren: children,
@@ -679,13 +697,13 @@ class SearchScreen extends _i25.PageRouteInfo<void> {
 
   static const String name = 'SearchScreen';
 
-  static const _i25.PageInfo<void> page = _i25.PageInfo<void>(name);
+  static const _i27.PageInfo<void> page = _i27.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i19.SearchWorkOrderScreen]
-class SearchWorkOrderScreen extends _i25.PageRouteInfo<void> {
-  const SearchWorkOrderScreen({List<_i25.PageRouteInfo>? children})
+class SearchWorkOrderScreen extends _i27.PageRouteInfo<void> {
+  const SearchWorkOrderScreen({List<_i27.PageRouteInfo>? children})
       : super(
           SearchWorkOrderScreen.name,
           initialChildren: children,
@@ -693,13 +711,27 @@ class SearchWorkOrderScreen extends _i25.PageRouteInfo<void> {
 
   static const String name = 'SearchWorkOrderScreen';
 
-  static const _i25.PageInfo<void> page = _i25.PageInfo<void>(name);
+  static const _i27.PageInfo<void> page = _i27.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i20.SplashScreen]
-class SplashScreen extends _i25.PageRouteInfo<void> {
-  const SplashScreen({List<_i25.PageRouteInfo>? children})
+/// [_i20.SpaceSearchPage]
+class SpaceSearchRoute extends _i27.PageRouteInfo<void> {
+  const SpaceSearchRoute({List<_i27.PageRouteInfo>? children})
+      : super(
+          SpaceSearchRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SpaceSearchRoute';
+
+  static const _i27.PageInfo<void> page = _i27.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i21.SplashScreen]
+class SplashScreen extends _i27.PageRouteInfo<void> {
+  const SplashScreen({List<_i27.PageRouteInfo>? children})
       : super(
           SplashScreen.name,
           initialChildren: children,
@@ -707,13 +739,13 @@ class SplashScreen extends _i25.PageRouteInfo<void> {
 
   static const String name = 'SplashScreen';
 
-  static const _i25.PageInfo<void> page = _i25.PageInfo<void>(name);
+  static const _i27.PageInfo<void> page = _i27.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i21.TestScreen]
-class TestScreen extends _i25.PageRouteInfo<void> {
-  const TestScreen({List<_i25.PageRouteInfo>? children})
+/// [_i22.TestScreen]
+class TestScreen extends _i27.PageRouteInfo<void> {
+  const TestScreen({List<_i27.PageRouteInfo>? children})
       : super(
           TestScreen.name,
           initialChildren: children,
@@ -721,17 +753,31 @@ class TestScreen extends _i25.PageRouteInfo<void> {
 
   static const String name = 'TestScreen';
 
-  static const _i25.PageInfo<void> page = _i25.PageInfo<void>(name);
+  static const _i27.PageInfo<void> page = _i27.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i22.WorkOrderDetailScreen]
+/// [_i23.WoSearchPage]
+class WoSearchRoute extends _i27.PageRouteInfo<void> {
+  const WoSearchRoute({List<_i27.PageRouteInfo>? children})
+      : super(
+          WoSearchRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'WoSearchRoute';
+
+  static const _i27.PageInfo<void> page = _i27.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i24.WorkOrderDetailScreen]
 class WorkOrderDetailScreen
-    extends _i25.PageRouteInfo<WorkOrderDetailScreenArgs> {
+    extends _i27.PageRouteInfo<WorkOrderDetailScreenArgs> {
   WorkOrderDetailScreen({
-    _i26.Key? key,
+    _i28.Key? key,
     required String workorderCode,
-    List<_i25.PageRouteInfo>? children,
+    List<_i27.PageRouteInfo>? children,
   }) : super(
           WorkOrderDetailScreen.name,
           args: WorkOrderDetailScreenArgs(
@@ -743,8 +789,8 @@ class WorkOrderDetailScreen
 
   static const String name = 'WorkOrderDetailScreen';
 
-  static const _i25.PageInfo<WorkOrderDetailScreenArgs> page =
-      _i25.PageInfo<WorkOrderDetailScreenArgs>(name);
+  static const _i27.PageInfo<WorkOrderDetailScreenArgs> page =
+      _i27.PageInfo<WorkOrderDetailScreenArgs>(name);
 }
 
 class WorkOrderDetailScreenArgs {
@@ -753,7 +799,7 @@ class WorkOrderDetailScreenArgs {
     required this.workorderCode,
   });
 
-  final _i26.Key? key;
+  final _i28.Key? key;
 
   final String workorderCode;
 
@@ -764,13 +810,13 @@ class WorkOrderDetailScreenArgs {
 }
 
 /// generated route for
-/// [_i23.WorkOrderListScreen]
-class WorkOrderListScreen extends _i25.PageRouteInfo<WorkOrderListScreenArgs> {
+/// [_i25.WorkOrderListScreen]
+class WorkOrderListScreen extends _i27.PageRouteInfo<WorkOrderListScreenArgs> {
   WorkOrderListScreen({
-    _i26.Key? key,
+    _i28.Key? key,
     required String workOrderCode,
     required String workOrderName,
-    List<_i25.PageRouteInfo>? children,
+    List<_i27.PageRouteInfo>? children,
   }) : super(
           WorkOrderListScreen.name,
           args: WorkOrderListScreenArgs(
@@ -783,8 +829,8 @@ class WorkOrderListScreen extends _i25.PageRouteInfo<WorkOrderListScreenArgs> {
 
   static const String name = 'WorkOrderListScreen';
 
-  static const _i25.PageInfo<WorkOrderListScreenArgs> page =
-      _i25.PageInfo<WorkOrderListScreenArgs>(name);
+  static const _i27.PageInfo<WorkOrderListScreenArgs> page =
+      _i27.PageInfo<WorkOrderListScreenArgs>(name);
 }
 
 class WorkOrderListScreenArgs {
@@ -794,7 +840,7 @@ class WorkOrderListScreenArgs {
     required this.workOrderName,
   });
 
-  final _i26.Key? key;
+  final _i28.Key? key;
 
   final String workOrderCode;
 
@@ -807,9 +853,9 @@ class WorkOrderListScreenArgs {
 }
 
 /// generated route for
-/// [_i24.WorkOrderMainScreen]
-class WorkOrderMainScreen extends _i25.PageRouteInfo<void> {
-  const WorkOrderMainScreen({List<_i25.PageRouteInfo>? children})
+/// [_i26.WorkOrderMainScreen]
+class WorkOrderMainScreen extends _i27.PageRouteInfo<void> {
+  const WorkOrderMainScreen({List<_i27.PageRouteInfo>? children})
       : super(
           WorkOrderMainScreen.name,
           initialChildren: children,
@@ -817,5 +863,5 @@ class WorkOrderMainScreen extends _i25.PageRouteInfo<void> {
 
   static const String name = 'WorkOrderMainScreen';
 
-  static const _i25.PageInfo<void> page = _i25.PageInfo<void>(name);
+  static const _i27.PageInfo<void> page = _i27.PageInfo<void>(name);
 }

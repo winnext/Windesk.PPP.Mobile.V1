@@ -25,7 +25,7 @@ class SearchServiceRepoImpml extends SearchServiceRepository {
           ));
 
       final data = response.data['result'];
-      super.logger.i(data);
+      super.logger.i(response);
       return Left(int.parse(response.data['count'].toString()));
     } catch (error) {
       super.logger.e(error.toString());
@@ -34,8 +34,8 @@ class SearchServiceRepoImpml extends SearchServiceRepository {
     }
   }
 
-   Future<Either<int, CustomServiceException>> checkWorkorderByAuthorizedServices(
-      String woCode) async {
+  Future<Either<int, CustomServiceException>>
+      checkWorkorderByAuthorizedServices(String woCode) async {
     final String userName =
         await SharedManager().getString(SharedEnum.userCode);
     String deviceId = await SharedManager().getString(SharedEnum.deviceId);

@@ -10,11 +10,11 @@
 		</data>
 		<key>flutter_assets/AssetManifest.bin</key>
 		<data>
-		SwJki48nZ2bws6NoWPHMOgMCjrA=
+		gD6DvdICnBdPA2p33CqvuSn/K8M=
 		</data>
 		<key>flutter_assets/AssetManifest.json</key>
 		<data>
-		QG9TWp8c/QVvxK4v8iic20xf8vA=
+		BA1DZ2LqoyRJgIISkUpl0/6jtvM=
 		</data>
 		<key>flutter_assets/FontManifest.json</key>
 		<data>
@@ -22,7 +22,7 @@
 		</data>
 		<key>flutter_assets/NOTICES.Z</key>
 		<data>
-		Q/I27XxB7484gVuISaJdOk/iXdQ=
+		JofiszaMGnPbpLEH9g0Z4mZxS2Y=
 		</data>
 		<key>flutter_assets/assets/images/ardgrup_logo.png</key>
 		<data>
@@ -62,27 +62,11 @@
 		</data>
 		<key>flutter_assets/kernel_blob.bin</key>
 		<data>
-		OJtvZxTEtKSbP7acWshFKHwgHT8=
+		yG2UynzhO/KbKVtJGRlSz4hjRyM=
 		</data>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
 		<data>
 		P7bb/oR3EhwqCIH1M6LyTuBIWYU=
-		</data>
-		<key>flutter_assets/packages/easy_localization/i18n/ar-DZ.json</key>
-		<data>
-		holI7B3wBPGOywo0UYp947TPIK4=
-		</data>
-		<key>flutter_assets/packages/easy_localization/i18n/ar.json</key>
-		<data>
-		holI7B3wBPGOywo0UYp947TPIK4=
-		</data>
-		<key>flutter_assets/packages/easy_localization/i18n/en-US.json</key>
-		<data>
-		HUVl6+7lJRDcSC8ESVBBlCJW61g=
-		</data>
-		<key>flutter_assets/packages/easy_localization/i18n/en.json</key>
-		<data>
-		HUVl6+7lJRDcSC8ESVBBlCJW61g=
 		</data>
 		<key>flutter_assets/shaders/ink_sparkle.frag</key>
 		<data>
@@ -99,14 +83,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			BU4ezKdhqaGs3GKPnFcL+/mxxqcmQLlWxbbOSgE+B1k=
+			agRQKo+UhZuFv0+ntaqbfi3mJ84r7JI1kco0Ei12JlM=
 			</data>
 		</dict>
 		<key>flutter_assets/AssetManifest.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Md3cZ8JdOGH2NE+mayECMVlPfz6JX6QAVQKN3DmP+2U=
+			ncSOQkDIZKN9wM+iWxn5hvSDavgbGmbhPAl7NGNiAWc=
 			</data>
 		</dict>
 		<key>flutter_assets/FontManifest.json</key>
@@ -120,7 +104,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			2DIDNo/dvP2mo9/imlPii4pq/Vqn4aEm5/fYBMCw1I0=
+			cm9COorct1deuvH576+5srOmtkVKaZRuG6/LQGmRcOA=
 			</data>
 		</dict>
 		<key>flutter_assets/assets/images/ardgrup_logo.png</key>
@@ -190,7 +174,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			kQs+bRvHj8XD0pwJlcmTRbWlzwIygcvdQoVyvlg+7M4=
+			oityzLQuIuuYkgb6jBzCk1Xjr1HO2XfAciq8R9282v4=
 			</data>
 		</dict>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
@@ -198,34 +182,6 @@
 			<key>hash2</key>
 			<data>
 			x6NX+tjyECiQtyzbbjyY8U2zoZ7GDbJtE+T+k/dzgI0=
-			</data>
-		</dict>
-		<key>flutter_assets/packages/easy_localization/i18n/ar-DZ.json</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			YGQRzN3RCDeGsw7C7ZBCSxbcTejilehCGheMDs9cD8A=
-			</data>
-		</dict>
-		<key>flutter_assets/packages/easy_localization/i18n/ar.json</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			YGQRzN3RCDeGsw7C7ZBCSxbcTejilehCGheMDs9cD8A=
-			</data>
-		</dict>
-		<key>flutter_assets/packages/easy_localization/i18n/en-US.json</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			dYKsyvXuZEbcvZHvOc/P5j+MszF0/RS5nzkBBWEz9SA=
-			</data>
-		</dict>
-		<key>flutter_assets/packages/easy_localization/i18n/en.json</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			dYKsyvXuZEbcvZHvOc/P5j+MszF0/RS5nzkBBWEz9SA=
 			</data>
 		</dict>
 		<key>flutter_assets/shaders/ink_sparkle.frag</key>

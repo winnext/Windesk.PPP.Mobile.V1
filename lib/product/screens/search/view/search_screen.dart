@@ -48,7 +48,7 @@ class SearchScreen extends StatelessWidget {
               context,
               LocaleKeys.mahalSearchTitle,
               AppIcons.mahalSearchIcon,
-              const IssueSearchRoute(),
+              const AssetSearchRoute(),
 
               //const WorkOrderScreen(),
               LocaleKeys.workOrderSearch,

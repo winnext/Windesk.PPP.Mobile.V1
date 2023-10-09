@@ -36,10 +36,10 @@ class SearchScreen extends StatelessWidget {
             context,
             LocaleKeys.spaceSearchPage,
             AppIcons.spaceSearchIcon,
-            const TestScreen(),
+            const SpaceSearchRoute(),
             LocaleKeys.workOrderSearch,
             AppIcons.woSearchIcon,
-            const IssueSearchRoute()),
+            const WoSearchRoute()),
       ],
     );
   }

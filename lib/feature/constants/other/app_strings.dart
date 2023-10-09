@@ -22,6 +22,7 @@ class AppStrings {
 
   //caseSlaSearch
   static const String entitiySearch = 'Varlık Arama';
+  static const String spaceSearch = 'Mahal Arama';
 
   static const String entitiyCode = 'Varlık Kodu';
   static const String serialNumber = 'Seri No';
@@ -123,14 +124,19 @@ class AppStrings {
   // snackbar messages
   static const String effortAdded = 'Effor başarıyla eklenmiştir';
   static const String materialAdded = 'Malzeme eklenmiştir';
-  static const String effortAddedError = 'Effor eklenirken bir sorunla karşıaşıldı, lütfen birazdan tekrar deneyininiz';
-  static const String materialAddedError = 'Malzeme eklenirken bir sorunla karşıaşıldı, lütfen birazdan tekrar deneyininiz';
+  static const String effortAddedError =
+      'Effor eklenirken bir sorunla karşıaşıldı, lütfen birazdan tekrar deneyininiz';
+  static const String materialAddedError =
+      'Malzeme eklenirken bir sorunla karşıaşıldı, lütfen birazdan tekrar deneyininiz';
   static const String personalAdded = 'Personal başarıyla eklenmiştir';
-  static const String personalAddedError = 'Personal eklenirken bir hatayla karşılaşıldı, lütfen birazdan tekrar deneyininiz';
+  static const String personalAddedError =
+      'Personal eklenirken bir hatayla karşılaşıldı, lütfen birazdan tekrar deneyininiz';
   static const String imageAdded = 'Fotoğraf başarıyla eklendi';
-  static const String imageAddedError = 'Fotoğraf eklenirken bir hatayla karşılaşıldı, lütfen birazdan tekrar deneyininiz';
+  static const String imageAddedError =
+      'Fotoğraf eklenirken bir hatayla karşılaşıldı, lütfen birazdan tekrar deneyininiz';
   static const String docAdded = 'Belge başarıyla eklenmiştir';
-  static const String docAddedError = 'Belge eklenirken bir hatayla karşılaşıldı, lütfen birazdan tekrar deneyininiz';
+  static const String docAddedError =
+      'Belge eklenirken bir hatayla karşılaşıldı, lütfen birazdan tekrar deneyininiz';
   static const String effortDeleted = 'Effor başarıyla silinmiştir';
   static const String sparepartsDeleted = 'Malzeme başarıyla silinmiştir';
   static const String personalDeleted = 'Personel başarıyla silinmiştir';
@@ -140,10 +146,14 @@ class AppStrings {
 
   // alert dialog
   static const String deleteTitle = 'Silme İşlemi';
-  static const String deleteEffort = ' kodlu eforu silmek istediğinize emin misiniz?';
-  static const String deleteResources = ' kodlu personeli silmek istediğinize emin misiniz?';
-  static const String deleteSparepart = ' kodlu materyali silmek istediğinize emin misiniz?';
-  static const String deleteDocumant = ' kodlu dökümanı silmek istediğinize emin misiniz?';
+  static const String deleteEffort =
+      ' kodlu eforu silmek istediğinize emin misiniz?';
+  static const String deleteResources =
+      ' kodlu personeli silmek istediğinize emin misiniz?';
+  static const String deleteSparepart =
+      ' kodlu materyali silmek istediğinize emin misiniz?';
+  static const String deleteDocumant =
+      ' kodlu dökümanı silmek istediğinize emin misiniz?';
   static const String myResponsibles = 'Sorumlu Olduklarım';
   static const String filter = 'Filtrele';
   static const String cantFound = 'Kayıt bulunamadı';
