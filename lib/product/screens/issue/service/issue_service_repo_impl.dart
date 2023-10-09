@@ -3,6 +3,8 @@ import 'package:dio/dio.dart';
 import 'package:wm_ppp_4/feature/enums/service_response_status_enums.dart';
 import 'package:wm_ppp_4/feature/enums/service_status_enums.dart';
 import 'package:wm_ppp_4/feature/models/issue_action_models/issue_available_activities_model.dart';
+import 'package:wm_ppp_4/feature/models/issue_action_models/issue_live_select_asg_groups_model.dart';
+import 'package:wm_ppp_4/feature/models/issue_action_models/issue_live_select_asg_users_model.dart';
 import 'package:wm_ppp_4/feature/models/issue_action_models/issue_operation_list_model.dart';
 import 'package:wm_ppp_4/feature/models/issue_models/issue_activities_model.dart';
 import 'package:wm_ppp_4/feature/models/issue_models/issue_attachments_model.dart';
@@ -143,7 +145,6 @@ class IssueServiceRepoImpml extends IssueServiceRepository {
       final data = response.data[ServiceResponseStatusEnums.records.rawText];
 
       issueAttachmentsModel = IssueAvailableActivities.fromJsonList(data);
-      print('response' + issueAttachmentsModel.toString());
       super.logger.i(issueAttachmentsModel);
       return Left(issueAttachmentsModel);
     } catch (error) {
@@ -223,6 +224,82 @@ class IssueServiceRepoImpml extends IssueServiceRepository {
     } catch (error) {
       super.logger.e(error.toString());
       return Right(CustomServiceException(message: CustomServiceMessages.takeOverIssue, statusCode: '500'));
+    }
+  }
+
+  @override
+  Future<Either<List<LiveSelectAsgGroupsModel>, CustomServiceException>> getLiveSelectAsgGroups(String issueCode, String userToken) async {
+    String url = '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=getLiveSelectAsgGroups&issueCode=$issueCode';
+    List<LiveSelectAsgGroupsModel> liveSelectAsgGroups;
+
+    try {
+      final response = await dio.get(url);
+      final data = response.data[ServiceResponseStatusEnums.records.rawText];
+
+      liveSelectAsgGroups = LiveSelectAsgGroupsModel.fromJsonList(data);
+      super.logger.i(liveSelectAsgGroups);
+      return Left(liveSelectAsgGroups);
+    } catch (error) {
+      super.logger.e(error.toString());
+      return Right(CustomServiceException(message: CustomServiceMessages.loginError, statusCode: '400'));
+    }
+  }
+
+  @override
+  Future<Either<List<LiveSelectAsgUsersModel>, CustomServiceException>> getLiveSelectAsgUser(
+      String issueCode, String userToken, String asgGroupCode) async {
+    String url = '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=getLiveSelectUsers&asgGroupCode=$asgGroupCode';
+    List<LiveSelectAsgUsersModel> liveSelectAsgUsers;
+
+    try {
+      final response = await dio.get(url);
+      final data = response.data[ServiceResponseStatusEnums.records.rawText];
+
+      liveSelectAsgUsers = LiveSelectAsgUsersModel.fromJsonList(data);
+      super.logger.i(liveSelectAsgUsers);
+      return Left(liveSelectAsgUsers);
+    } catch (error) {
+      super.logger.e(error.toString());
+      return Right(CustomServiceException(message: CustomServiceMessages.loginError, statusCode: '400'));
+    }
+  }
+
+  @override
+  Future<Either<bool, CustomServiceException>> saveIssueActivity(
+    issueCode,
+    userToken,
+    asgGroupCode,
+    username,
+    activityCode,
+    description,
+    locationCode,
+    asgUserCode,
+    additionalTime,
+    module,
+    image,
+  ) async {
+    bool result = false;
+    String url =
+        '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=addActivity&issueCode=$issueCode&username=$username&activityCode=$activityCode&locationCode=$locationCode&asgGroupCode=$asgGroupCode&asgUserCode=$asgUserCode&additionalTime=$additionalTime&module=issue&from_mobile=1&cardNo='
+        '&patientNo='
+        '&sampleNo='
+        '&description=$description';
+    print('url' + url.toString());
+    FormData formData = FormData.fromMap({"base64string": image});
+    try {
+      final response = await super.dio.post(url, data: formData);
+      super.logger.i(response.toString());
+
+      if (response.data[ServiceResponseStatusEnums.result.rawText] == ServiceStatusEnums.success.rawText) {
+        result = true;
+        super.logger.i(result.toString());
+        return Left(result);
+      } else {
+        return Right(CustomServiceException(message: CustomServiceMessages.workOrderAddImageError, statusCode: response.statusCode.toString()));
+      }
+    } catch (error) {
+      super.logger.e(error.toString());
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderAddImageError, statusCode: '500'));
     }
   }
 }

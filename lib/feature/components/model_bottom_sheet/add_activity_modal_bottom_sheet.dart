@@ -17,70 +17,69 @@ class IssueActionModal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Padding(
-      padding: const EdgeInsets.only(top: 200),
-      child: MultiProvider(
-          providers: [
-            ChangeNotifierProvider<IssueActionProvider>(create: (_) => IssueActionProvider()),
-            ChangeNotifierProvider<IssueAddPhotoProvider>(create: (_) => IssueAddPhotoProvider()),
-          ],
-          child: Consumer2<IssueActionProvider, IssueAddPhotoProvider>(
-            builder: (context, IssueActionProvider issueProvider, IssueAddPhotoProvider issueAddPhotoProvider, child) {
-              if (issueAddPhotoProvider.isSuccess || issueProvider.isSuccessTakeOver) {
-                snackBar(context, LocaleKeys.processDone, 'success');
-                Navigator.of(context).pop();
-              }
-              if (issueAddPhotoProvider.errorAccur || issueProvider.errorAccur) {
-                snackBar(context, LocaleKeys.processCancell, 'error');
-                Navigator.of(context).pop();
-              }
-
-              issueProvider.isFetch ? null : issueProvider.getIssueOperations(issueCode);
-              return Column(
-                children: [
-                  issueProvider.issueOperationList.isPhoto == true
-                      ? _operationWidget(
-                          size, issueProvider, LocaleKeys.addPhoto, issueProvider.isPhotoSectionOpen, issueProvider.setisPhotoSectionOpen)
-                      : Container(),
-                  issueProvider.isPhotoSectionOpen ? addPhotoBottomSheet(context, size, issueAddPhotoProvider) : Container(),
-
-                  issueProvider.issueOperationList.isActivity == true
-                      ? _operationWidget(
-                          size, issueProvider, LocaleKeys.addActivity, issueProvider.isActivitySectionOpen, issueProvider.setisActivitySectionOpen)
-                      : Container(),
-                      issueProvider.isActivitySectionOpen ? AddActivity(issueCode: issueCode,) : Container(),
-
-                  issueProvider.issueOperationList.isChangeCfg == true
-                      ? _operationWidget(size, issueProvider, LocaleKeys.changeCfg, issueProvider.isCfgSectionOpen, issueProvider.setisCfgSectionOpen)
-                      : Container(),
-                  issueProvider.issueOperationList.isTakeOver == true
-                      ? _operationWidget(
-                          size, issueProvider, LocaleKeys.takeOver, issueProvider.isTakeOverSectionOpen, issueProvider.setisTakeOverSectionOpen)
-                      : Container(),                      
-                  
-                  issueProvider.isTakeOverSectionOpen
-                      ? TakeOverIssue(
-                          title: LocaleKeys.takeOver,
-                          explanation: LocaleKeys.sureAboutTakeOverIssue,
-                          onConfirm: () {
-                            issueProvider.takeOverIssue(issueCode);
-                          },
-                          confirmButtonText: LocaleKeys.okay)
-                      : Container(),
-
-                  issueProvider.issueOperationList.isPlannedCancel == true
-                      ? _operationWidget(size, issueProvider, LocaleKeys.plannedCancel, issueProvider.isPlannedCancelSectionOpen,
-                          issueProvider.setisPlannedSectionOpen)
-                      : Container(),
-                  issueProvider.issueOperationList.isSparepart == true
-                      ? _operationWidget(size, issueProvider, LocaleKeys.sparepartNeed, issueProvider.isSparepartSectionOpen,
-                          issueProvider.setisSparepartSectionOpen)
-                      : Container(),
-                ],
-              );
-            },
-          )),
-    );
+    return MultiProvider(
+        providers: [
+          ChangeNotifierProvider<IssueActionProvider>(create: (_) => IssueActionProvider()),
+          ChangeNotifierProvider<IssueAddPhotoProvider>(create: (_) => IssueAddPhotoProvider()),
+        ],
+        child: Consumer2<IssueActionProvider, IssueAddPhotoProvider>(
+          builder: (context, IssueActionProvider issueProvider, IssueAddPhotoProvider issueAddPhotoProvider, child) {
+            if (issueAddPhotoProvider.isSuccess || issueProvider.isSuccessTakeOver) {
+              snackBar(context, LocaleKeys.processDone, 'success');
+              Navigator.of(context).pop();
+            }
+            if (issueAddPhotoProvider.errorAccur || issueProvider.errorAccur) {
+              snackBar(context, LocaleKeys.processCancell, 'error');
+              Navigator.of(context).pop();
+            }
+            issueProvider.isFetch ? null : issueProvider.getIssueOperations(issueCode);
+            return Center(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    issueProvider.issueOperationList.isPhoto == true
+                        ? _operationWidget(
+                            size, issueProvider, LocaleKeys.addPhoto, issueProvider.isPhotoSectionOpen, issueProvider.setisPhotoSectionOpen)
+                        : Container(),
+                    issueProvider.isPhotoSectionOpen ? addPhotoBottomSheet(context, size, issueAddPhotoProvider) : Container(),
+                    issueProvider.issueOperationList.isActivity == true
+                        ? _operationWidget(
+                            size, issueProvider, LocaleKeys.addActivity, issueProvider.isActivitySectionOpen, issueProvider.setisActivitySectionOpen)
+                        : Container(),
+                        issueProvider.isActivitySectionOpen ? AddActivity(issueCode: issueCode,) : Container(),
+              
+                    issueProvider.issueOperationList.isChangeCfg == true
+                        ? _operationWidget(size, issueProvider, LocaleKeys.changeCfg, issueProvider.isCfgSectionOpen, issueProvider.setisCfgSectionOpen)
+                        : Container(),
+                    issueProvider.issueOperationList.isTakeOver == true
+                        ? _operationWidget(
+                            size, issueProvider, LocaleKeys.takeOver, issueProvider.isTakeOverSectionOpen, issueProvider.setisTakeOverSectionOpen)
+                        : Container(),                      
+                    
+                    issueProvider.isTakeOverSectionOpen
+                        ? TakeOverIssue(
+                            title: LocaleKeys.takeOver,
+                            explanation: LocaleKeys.sureAboutTakeOverIssue,
+                            onConfirm: () {
+                              issueProvider.takeOverIssue(issueCode);
+                            },
+                            confirmButtonText: LocaleKeys.okay)
+                        : Container(),
+              
+                    issueProvider.issueOperationList.isPlannedCancel == true
+                        ? _operationWidget(size, issueProvider, LocaleKeys.plannedCancel, issueProvider.isPlannedCancelSectionOpen,
+                            issueProvider.setisPlannedSectionOpen)
+                        : Container(),
+                    issueProvider.issueOperationList.isSparepart == true
+                        ? _operationWidget(size, issueProvider, LocaleKeys.sparepartNeed, issueProvider.isSparepartSectionOpen,
+                            issueProvider.setisSparepartSectionOpen)
+                        : Container(),
+                  ],
+                ),
+              ),
+            );
+          },
+        ));
   }
 
   Container addPhotoBottomSheet(BuildContext context, Size size, IssueAddPhotoProvider issueAddPhotoProvider) {

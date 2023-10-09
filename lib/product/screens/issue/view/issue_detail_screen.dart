@@ -41,6 +41,7 @@ class IssueDetailScreen extends StatelessWidget {
         floatingActionButton: IssueActionButton(
           issueCode: issueCode,
         ),
+        
       ),
     );
   }

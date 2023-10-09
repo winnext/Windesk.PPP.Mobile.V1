@@ -1,6 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:wm_ppp_4/feature/models/issue_action_models/issue_available_activities_model.dart';
+import 'package:wm_ppp_4/feature/models/issue_action_models/issue_live_select_asg_groups_model.dart';
+import 'package:wm_ppp_4/feature/models/issue_action_models/issue_live_select_asg_users_model.dart';
 import 'package:wm_ppp_4/feature/models/issue_action_models/issue_operation_list_model.dart';
 import 'package:wm_ppp_4/feature/models/issue_models/issue_activities_model.dart';
 import 'package:wm_ppp_4/feature/models/issue_models/issue_attachments_model.dart';
@@ -31,5 +33,15 @@ abstract class IssueServiceRepository {
       String userToken, String userName, String issueCode, String image, String desc);
   Future<Either<bool, CustomServiceException>> takeOverIssue(
       String userToken, String userName, String issueCode);
+  Future<Either<List<LiveSelectAsgGroupsModel>, CustomServiceException>> getLiveSelectAsgGroups(String issueCode,String userToken);
+  Future<Either<List<LiveSelectAsgUsersModel>, CustomServiceException>> getLiveSelectAsgUser(String issueCode,String userToken,String asgGroupCode);
+  Future<Either<bool, CustomServiceException>> saveIssueActivity(String issueCode,String userToken,String asgGroupCode,String username,String activityCode,
+    String description,
+    String locationCode,
+    String asgUserCode,
+    String additionalTime,
+    String module,
+    String image,);
+
 
 }

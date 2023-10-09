@@ -9,9 +9,11 @@ class TextFieldsInputWithActionAndController extends StatelessWidget {
     required this.actionIcon,
     required this.actionFunction,
     required this.textController,
+    this.hinText
   });
   final Function actionFunction;
   final String labelText;
+  final String? hinText;
   final IconData actionIcon;
   final TextEditingController textController;
 
@@ -27,6 +29,7 @@ class TextFieldsInputWithActionAndController extends StatelessWidget {
               border: OutlineInputBorder(
                   borderRadius: CustomBorderRadius.textFieldBorderRadius),
               labelText: labelText,
+              hintText: hinText ?? '',
             ),
           ),
         ),

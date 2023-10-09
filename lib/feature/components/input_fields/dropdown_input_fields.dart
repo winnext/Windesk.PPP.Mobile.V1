@@ -10,9 +10,11 @@ class DropDownInputFields extends StatelessWidget {
     required this.onChangedFunction,
     required this.rightIcon,
     required this.dropDownArray,
+    this.hintText,
   });
 
   final String labelText;
+  final String? hintText;
   final Function onChangedFunction;
   final IconData rightIcon;
   final List<String> dropDownArray;
@@ -26,6 +28,7 @@ class DropDownInputFields extends StatelessWidget {
             borderRadius: CustomBorderRadius.textFieldBorderRadius,
             borderSide: BorderSide(color: APPColors.Main.black, width: 4)),
         labelText: labelText,
+        hintText: hintText
       ),
       icon: Icon(rightIcon),
       items: dropDownArray.map((String items) {

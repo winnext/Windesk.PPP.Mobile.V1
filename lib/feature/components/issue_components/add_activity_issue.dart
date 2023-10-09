@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:wm_ppp_4/feature/components/buttons/custom_half_buttons.dart';
 import 'package:wm_ppp_4/feature/components/input_fields/dropdown_input_fields.dart';
 import 'package:wm_ppp_4/feature/components/input_fields/text_fields_input.dart';
 import 'package:wm_ppp_4/feature/components/input_fields/text_fields_input_with_action.dart';
 import 'package:wm_ppp_4/feature/components/input_fields/text_fields_input_with_action_and_controller.dart';
+import 'package:wm_ppp_4/feature/components/loading/custom_loading_indicator.dart';
+import 'package:wm_ppp_4/feature/components/loading/custom_main_loading.dart';
+import 'package:wm_ppp_4/feature/components/model_bottom_sheet/add_just_photo_modal_bottom_sheet.dart';
+import 'package:wm_ppp_4/feature/constants/functions/null_check_widget.dart';
 import 'package:wm_ppp_4/feature/constants/other/app_icons.dart';
 import 'package:wm_ppp_4/feature/constants/other/app_strings.dart';
 import 'package:wm_ppp_4/feature/constants/other/colors.dart';
@@ -20,41 +25,102 @@ class AddActivity extends StatelessWidget {
       child: Consumer<IssueActionProvider>(
         builder: (context, IssueActionProvider issueActionProvider, child) {
           issueActionProvider.isFetchActivity ? issueActionProvider.getAvailableActivities(issueCode) : null;
-          return SingleChildScrollView(
-            child: Container(
-              height: MediaQuery.of(context).size.height * 0.5,
-              width: MediaQuery.of(context).size.width / 1.09,
-              color: APPColors.Main.white,
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: DropDownInputFields(
-                      labelText: LocaleKeys.state,
-                      onChangedFunction: (item) {
-                        issueActionProvider.setSelectedActivityName(item.toString());
-                      },
-                      rightIcon: Icons.arrow_drop_down,
-                      dropDownArray: issueActionProvider.availableActivitiesName,
-                    ),),
-                    const Divider(thickness: 2),
-                    Text('Bu aktivitenin girilmesi, talebin durumunu ${issueActionProvider.selectedActivityName} olarak değiştirecektir.'),
-                    issueActionProvider.selectedActivity[0].barcodeSpace == 'Y' ?  
-                    TextFieldsInputWithActionAndController(
-                        textController: issueActionProvider.spaceCode,
-                        labelText: AppStrings.space,
-                        actionIcon: AppIcons.qr,
-                        actionFunction: issueActionProvider.scanSpace)
-                  : Container(),
-                    issueActionProvider.selectedActivity[0].additionaltimeInput == 'Y' ?  
-                    TextFieldsInput(labelText: LocaleKeys.addMoreTime, onChangedFunction: (){},)
-
-                ],
-              ),
-            ),
+          issueActionProvider.isassigneeccType ? issueActionProvider.getLiveSelectAsgGroupsFunc(issueCode) : null;
+          return Container(
+            height: MediaQuery.of(context).size.height * 0.5,
+            width: MediaQuery.of(context).size.width / 1.09,
+            color: APPColors.Main.white,
+            child: issueActionProvider.loading
+                ? const CustomLoadingIndicator()
+                : SingleChildScrollView(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          DropDownInputFields(
+                            labelText: LocaleKeys.selectActivity,
+                            onChangedFunction: (item) {
+                              issueActionProvider.setSelectedActivityName(item.toString());
+                            },
+                            rightIcon: Icons.arrow_drop_down,
+                            dropDownArray: issueActionProvider.availableActivitiesName,
+                          ),
+                          const Divider(thickness: 2),
+                          Text('Bu aktivitenin girilmesi, talebin durumunu ${issueActionProvider.selectedActivityName} olarak değiştirecektir.'),
+                          NullCheckWidget().conditionCheckWidget(
+                              issueActionProvider.isBarcodeSpace,
+                              TextFieldsInputWithActionAndController(
+                                  textController: issueActionProvider.spaceCode,
+                                  labelText: AppStrings.space,
+                                  actionIcon: AppIcons.qr,
+                                  actionFunction: issueActionProvider.scanSpace)),
+                          NullCheckWidget().conditionCheckWidget(
+                            issueActionProvider.isadditionaltimeInput,
+                            TextFieldsInput(
+                              labelText:
+                                  issueActionProvider.additionaltimeInput != '' ? issueActionProvider.additionaltimeInput : LocaleKeys.addMoreTime,
+                              onChangedFunction: (String time) {
+                                issueActionProvider.setadditionaltimeInput(time);
+                              },
+                            ),
+                          ),
+                          //   //live select
+                          NullCheckWidget().conditionCheckWidget(
+                              issueActionProvider.getLiveSelectAsgGroupsName.isNotEmpty,
+                              DropDownInputFields(
+                                labelText: LocaleKeys.state,
+                                onChangedFunction: (item) {
+                                  issueActionProvider.setSelectedAsgGroups(issueCode, item.toString());
+                                },
+                                rightIcon: Icons.arrow_drop_down,
+                                dropDownArray: issueActionProvider.getLiveSelectAsgGroupsName,
+                              )),
+                          NullCheckWidget().conditionCheckWidget(
+                              issueActionProvider.selectedAsgGroupCode.isNotEmpty,
+                              DropDownInputFields(
+                                labelText: LocaleKeys.state,
+                                onChangedFunction: (item) {
+                                  issueActionProvider.setSelectedAsgUser(item.toString());
+                                },
+                                rightIcon: Icons.arrow_drop_down,
+                                dropDownArray:
+                                    issueActionProvider.getLiveSelectAsgUsersName.isNotEmpty ? issueActionProvider.getLiveSelectAsgUsersName : [''],
+                              )),
+                          NullCheckWidget().conditionCheckWidget(
+                              issueActionProvider.minDescLength,
+                              TextFieldsInput(
+                                labelText: issueActionProvider.description != '' ? issueActionProvider.description : LocaleKeys.description,
+                                onChangedFunction: (String text) {
+                                  issueActionProvider.setdescription(text);
+                                },
+                              )),
+                          NullCheckWidget().conditionCheckWidget(issueActionProvider.mobilePhoto, AddJustPhotoModalBottomSheet(() {})),
+                          _saveOrQuit(context, issueActionProvider)
+                        ],
+                      ),
+                    ),
+                  ),
           );
         },
       ),
+    );
+  }
+
+  Padding _saveOrQuit(BuildContext context, IssueActionProvider issueActionProvider) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: CustomHalfButtons(
+          leftTitle: const Text(
+            AppStrings.cancel,
+            style: TextStyle(color: Colors.white),
+          ),
+          rightTitle: const Text(AppStrings.save, style: TextStyle(color: Colors.white)),
+          leftOnPressed: () {
+            Navigator.pop(context);
+          },
+          rightOnPressed: () {
+            issueActionProvider.saveIssueActivity(issueCode);
+          }),
     );
   }
 }
