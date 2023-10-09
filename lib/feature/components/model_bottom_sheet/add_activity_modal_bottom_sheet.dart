@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wm_ppp_4/feature/components/issue_components/add_activity_issue.dart';
+import 'package:wm_ppp_4/feature/components/issue_components/change_cfg_issue.dart';
 import 'package:wm_ppp_4/feature/components/issue_components/take_over_issue.dart';
 import 'package:wm_ppp_4/feature/components/model_bottom_sheet/add_photo_modal_bottom_sheet.dart';
 import 'package:wm_ppp_4/feature/components/snackBar/snackbar.dart';
@@ -46,16 +47,24 @@ class IssueActionModal extends StatelessWidget {
                         ? _operationWidget(
                             size, issueProvider, LocaleKeys.addActivity, issueProvider.isActivitySectionOpen, issueProvider.setisActivitySectionOpen)
                         : Container(),
-                        issueProvider.isActivitySectionOpen ? AddActivity(issueCode: issueCode,) : Container(),
-              
+                    issueProvider.isActivitySectionOpen
+                        ? AddActivity(
+                            issueCode: issueCode,
+                          )
+                        : Container(),
                     issueProvider.issueOperationList.isChangeCfg == true
-                        ? _operationWidget(size, issueProvider, LocaleKeys.changeCfg, issueProvider.isCfgSectionOpen, issueProvider.setisCfgSectionOpen)
+                        ? _operationWidget(
+                            size, issueProvider, LocaleKeys.changeCfg, issueProvider.isCfgSectionOpen, issueProvider.setisCfgSectionOpen)
+                        : Container(),
+                    issueProvider.isCfgSectionOpen
+                        ? ChangeCfgScreen(
+                            issueCode: issueCode,
+                          )
                         : Container(),
                     issueProvider.issueOperationList.isTakeOver == true
                         ? _operationWidget(
                             size, issueProvider, LocaleKeys.takeOver, issueProvider.isTakeOverSectionOpen, issueProvider.setisTakeOverSectionOpen)
-                        : Container(),                      
-                    
+                        : Container(),
                     issueProvider.isTakeOverSectionOpen
                         ? TakeOverIssue(
                             title: LocaleKeys.takeOver,
@@ -65,7 +74,6 @@ class IssueActionModal extends StatelessWidget {
                             },
                             confirmButtonText: LocaleKeys.okay)
                         : Container(),
-              
                     issueProvider.issueOperationList.isPlannedCancel == true
                         ? _operationWidget(size, issueProvider, LocaleKeys.plannedCancel, issueProvider.isPlannedCancelSectionOpen,
                             issueProvider.setisPlannedSectionOpen)
