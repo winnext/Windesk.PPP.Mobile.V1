@@ -66,7 +66,7 @@ class IssueActionModal extends StatelessWidget {
                             size, issueProvider, LocaleKeys.takeOver, issueProvider.isTakeOverSectionOpen, issueProvider.setisTakeOverSectionOpen)
                         : Container(),
                     issueProvider.isTakeOverSectionOpen
-                        ? TakeOverIssue(
+                        ? NeedApprovalForIssueComponent(
                             title: LocaleKeys.takeOver,
                             explanation: LocaleKeys.sureAboutTakeOverIssue,
                             onConfirm: () {
@@ -78,12 +78,20 @@ class IssueActionModal extends StatelessWidget {
                         ? _operationWidget(size, issueProvider, LocaleKeys.plannedCancel, issueProvider.isPlannedCancelSectionOpen,
                             issueProvider.setisPlannedSectionOpen)
                         : Container(),
+                    issueProvider.isPlannedCancelSectionOpen ? 
+                    NeedApprovalForIssueComponent(
+                            title: LocaleKeys.plannedDateRequest,
+                            explanation: LocaleKeys.sureAboutPlannedCancel,
+                            onConfirm: () {
+                              issueProvider.cancelIssuePlanned(issueCode);
+                            },
+                            confirmButtonText: LocaleKeys.okay) : Container(),
                     issueProvider.issueOperationList.isSparepart == true
                         ? _operationWidget(size, issueProvider, LocaleKeys.sparepartNeed, issueProvider.isSparepartSectionOpen,
                             issueProvider.setisSparepartSectionOpen)
                         : Container(),
                     issueProvider.isSparepartSectionOpen ?
-                        TakeOverIssue(
+                        NeedApprovalForIssueComponent(
                             title: LocaleKeys.requestForSparepart,
                             explanation: LocaleKeys.sureAboutKeepProcess,
                             onConfirm: () {

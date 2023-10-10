@@ -35,6 +35,8 @@ abstract class IssueServiceRepository {
       String userToken, String userName, String issueCode);
   Future<Either<bool, CustomServiceException>> createSparepartIssue(
       String userToken, String issueCode);
+  Future<Either<bool, CustomServiceException>> cancelIssuePlanned(
+      String userToken, String userName, String issueCode);
   Future<Either<List<LiveSelectAsgGroupsModel>, CustomServiceException>> getLiveSelectAsgGroups(String issueCode,String userToken);
   Future<Either<List<LiveSelectAsgUsersModel>, CustomServiceException>> getLiveSelectAsgUser(String issueCode,String userToken,String asgGroupCode);
   Future<Either<bool, CustomServiceException>> saveIssueActivity(String issueCode,String userToken,String asgGroupCode,String username,String activityCode,

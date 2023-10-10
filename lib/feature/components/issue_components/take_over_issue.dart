@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class TakeOverIssue extends StatelessWidget {
-  const TakeOverIssue({super.key, required this.explanation, required this.title, required this.onConfirm, required this.confirmButtonText});
+class NeedApprovalForIssueComponent extends StatelessWidget {
+  const NeedApprovalForIssueComponent({super.key, required this.explanation, required this.title, required this.onConfirm, required this.confirmButtonText});
   final String title;
   final String explanation;
   final String confirmButtonText;

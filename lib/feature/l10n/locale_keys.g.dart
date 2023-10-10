@@ -88,7 +88,9 @@ abstract class LocaleKeys {
   static const String addActivity = 'Aktivite Ekle';
   static const String changeCfg = 'Varlık Değiştir';
   static const String takeOver = 'Üzerine Al';
-  static const String plannedCancel = 'Randevu İptal';
+  static const String plannedCancel = 'Randevu Talebi';
+  static const String plannedDateRequest = 'Randevu İptal';
+  static const String sureAboutPlannedCancel = 'Bu talebin randevusunu iptal etmek istediğinize emin misiniz?';
   static const String sparepartNeed = 'Yedek Parça Gerekiyor';
   static const String addDescription = "Açıklama Giriniz";
   static const String photoAdded = "Fotoğraf Eklendi";

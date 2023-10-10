@@ -252,6 +252,31 @@ class IssueServiceRepoImpml extends IssueServiceRepository {
   }
 
   @override
+  Future<Either<bool, CustomServiceException>> cancelIssuePlanned(
+    String userToken,
+    String userName,
+    String issueCode,
+  ) async {
+    bool result = false;
+    String url = '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=cancelIssuePlanned&issueCode=$issueCode&username=$userName';
+    try {
+      final response = await super.dio.get(url);
+      super.logger.i(response.toString());
+
+      if (response.data[ServiceResponseStatusEnums.result.rawText] == ServiceStatusEnums.success.rawText) {
+        result = true;
+        super.logger.i(result.toString());
+        return Left(result);
+      } else {
+        return Right(CustomServiceException(message: CustomServiceMessages.takeOverIssue, statusCode: response.statusCode.toString()));
+      }
+    } catch (error) {
+      super.logger.e(error.toString());
+      return Right(CustomServiceException(message: CustomServiceMessages.takeOverIssue, statusCode: '500'));
+    }
+  }
+
+  @override
   Future<Either<List<LiveSelectAsgGroupsModel>, CustomServiceException>> getLiveSelectAsgGroups(String issueCode, String userToken) async {
     String url = '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=getLiveSelectAsgGroups&issueCode=$issueCode';
     List<LiveSelectAsgGroupsModel> liveSelectAsgGroups;
@@ -334,8 +359,7 @@ class IssueServiceRepoImpml extends IssueServiceRepository {
     String cfgCode,
   ) async {
     bool result = false;
-    String url = '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=changeCfg&issueCode=$issueCode&cfgCode=$cfgCode';
-
+    String url = '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=changeCfg&issuecode=$issueCode&cfgCode=$cfgCode';
     try {
       final response = await super.dio.get(url);
       super.logger.i(response.toString());
@@ -349,7 +373,7 @@ class IssueServiceRepoImpml extends IssueServiceRepository {
       }
     } catch (error) {
       super.logger.e(error.toString());
-      return Right(CustomServiceException(message: CustomServiceMessages.takeOverIssue, statusCode: '500'));
+      return Right(CustomServiceException(message: CustomServiceMessages.changeCfg, statusCode: '500'));
     }
   }
 }

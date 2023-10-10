@@ -320,6 +320,31 @@ class IssueActionProvider extends ChangeNotifier {
     });
   }
 
+  void cancelIssuePlanned(issuecode) async {
+    _loading = true;
+
+    String userToken = await SharedManager().getString(SharedEnum.deviceId);
+    String userName = await SharedManager().getString(SharedEnum.userName);
+
+    final response = await _issueServiceRepository.cancelIssuePlanned(userToken, userName, issuecode);
+    response.fold(
+        (l) => {
+              isSuccessTakeOver = true,
+            },
+        (r) => {
+              _errorAccur = true,
+            });
+
+    _loading = false;
+    notifyListeners();
+
+    Future.delayed(const Duration(seconds: 2), () {
+      isSuccessTakeOver = false;
+      _errorAccur = false;
+      notifyListeners();
+    });
+  }
+
   void getAvailableActivities(String issuecode) async {
     String userToken = await SharedManager().getString(SharedEnum.deviceId);
     final IssueProvider issueProvider;
