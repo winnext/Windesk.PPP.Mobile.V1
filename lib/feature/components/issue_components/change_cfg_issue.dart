@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wm_ppp_4/feature/components/buttons/custom_half_buttons.dart';
 import 'package:wm_ppp_4/feature/components/input_fields/text_fields_input_with_action_and_controller.dart';
+import 'package:wm_ppp_4/feature/components/snackBar/snackbar.dart';
 import 'package:wm_ppp_4/feature/constants/other/app_icons.dart';
 import 'package:wm_ppp_4/feature/constants/other/app_strings.dart';
 import 'package:wm_ppp_4/feature/constants/other/colors.dart';
@@ -21,8 +22,15 @@ class ChangeCfgScreen extends StatelessWidget {
       }),
     );
   }
-
   SingleChildScrollView _changeCfgBody(BuildContext context, IssueActionProvider issueActionProvider) {
+              if (issueActionProvider.isSuccessEnterActivity) {
+              snackBar(context, LocaleKeys.processDone, 'success');
+              Navigator.of(context).pop();
+            }
+            if (issueActionProvider.errorAccur) {
+              snackBar(context, LocaleKeys.processCancell, 'error');
+              Navigator.of(context).pop();
+            }
     return SingleChildScrollView(
       child: Container(
         width: MediaQuery.of(context).size.width / 1.09,

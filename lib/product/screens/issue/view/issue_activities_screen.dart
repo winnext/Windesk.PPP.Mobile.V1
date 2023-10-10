@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 import 'package:wm_ppp_4/feature/components/cards/custom_issue_activities_card.dart';
 import 'package:wm_ppp_4/feature/components/cards/custom_nodata_card.dart';
@@ -14,12 +15,14 @@ class IssueActivitiesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return ChangeNotifierProvider(
-      create: (context) => IssueProvider(),
+    return ChangeNotifierProvider<IssueProvider>.value(
+      value: IssueProvider(),
       child: Consumer<IssueProvider>(
-        builder: (context, IssueProvider issueProvider, child) {
-          issueProvider.isFetch ? null : issueProvider.getIssueActivities(issueCode);
-          return issueProvider.issueActivities.isNotEmpty ? _activitiesBody(size, issueProvider) : const NoDataWidget();
+        builder: (context, value, child) {
+          SchedulerBinding.instance.addPostFrameCallback((_) {
+            value.isFetch ? null : value.getIssueActivities(issueCode);
+          });
+          return value.issueActivities.isNotEmpty ? _activitiesBody(size, value) : const NoDataWidget();
         },
       ),
     );

@@ -30,7 +30,7 @@ class IssueActionModal extends StatelessWidget {
               Navigator.of(context).pop();
             }
             if (issueAddPhotoProvider.errorAccur || issueProvider.errorAccur) {
-              snackBar(context, LocaleKeys.processCancell, 'error');
+              snackBar(context, LocaleKeys.processCancell + issueProvider.errorMessage, 'error');
               Navigator.of(context).pop();
             }
             issueProvider.isFetch ? null : issueProvider.getIssueOperations(issueCode);
@@ -82,6 +82,14 @@ class IssueActionModal extends StatelessWidget {
                         ? _operationWidget(size, issueProvider, LocaleKeys.sparepartNeed, issueProvider.isSparepartSectionOpen,
                             issueProvider.setisSparepartSectionOpen)
                         : Container(),
+                    issueProvider.isSparepartSectionOpen ?
+                        TakeOverIssue(
+                            title: LocaleKeys.requestForSparepart,
+                            explanation: LocaleKeys.sureAboutKeepProcess,
+                            onConfirm: () {
+                              issueProvider.createSparepartIssue(issueCode);
+                            },
+                            confirmButtonText: LocaleKeys.okay) : Container()
                   ],
                 ),
               ),

@@ -228,6 +228,30 @@ class IssueServiceRepoImpml extends IssueServiceRepository {
   }
 
   @override
+  Future<Either<bool, CustomServiceException>> createSparepartIssue(
+    String userToken,
+    String issueCode,
+  ) async {
+    bool result = false;
+    String url = '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=createSparepartIssue&issuecode=$issueCode';
+    try {
+      final response = await super.dio.get(url);
+      super.logger.i(response.toString());
+
+      if (response.data[ServiceResponseStatusEnums.result.rawText] == ServiceStatusEnums.success.rawText) {
+        result = true;
+        super.logger.i(result.toString());
+        return Left(result);
+      } else {
+        return Right(CustomServiceException(message: CustomServiceMessages.takeOverIssue, statusCode: response.statusCode.toString()));
+      }
+    } catch (error) {
+      super.logger.e(error.toString());
+      return Right(CustomServiceException(message: CustomServiceMessages.takeOverIssue, statusCode: '500'));
+    }
+  }
+
+  @override
   Future<Either<List<LiveSelectAsgGroupsModel>, CustomServiceException>> getLiveSelectAsgGroups(String issueCode, String userToken) async {
     String url = '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=getLiveSelectAsgGroups&issueCode=$issueCode';
     List<LiveSelectAsgGroupsModel> liveSelectAsgGroups;
@@ -284,13 +308,13 @@ class IssueServiceRepoImpml extends IssueServiceRepository {
         '&patientNo='
         '&sampleNo='
         '&description=$description';
-    print('url' + url.toString());
+
     FormData formData = FormData.fromMap({"base64string": image});
     try {
       final response = await super.dio.post(url, data: formData);
       super.logger.i(response.toString());
 
-      if (response.data[ServiceResponseStatusEnums.result.rawText] == ServiceStatusEnums.success.rawText) {
+      if (response.data[ServiceResponseStatusEnums.success.rawText] == true) {
         result = true;
         super.logger.i(result.toString());
         return Left(result);
@@ -302,7 +326,7 @@ class IssueServiceRepoImpml extends IssueServiceRepository {
       return Right(CustomServiceException(message: CustomServiceMessages.workOrderAddImageError, statusCode: '500'));
     }
   }
-  
+
   @override
   Future<Either<bool, CustomServiceException>> changeCfg(
     String userToken,
@@ -321,7 +345,7 @@ class IssueServiceRepoImpml extends IssueServiceRepository {
         super.logger.i(result.toString());
         return Left(result);
       } else {
-        return Right(CustomServiceException(message: CustomServiceMessages.takeOverIssue, statusCode: response.statusCode.toString()));
+        return Right(CustomServiceException(message: CustomServiceMessages.changeCfg, statusCode: response.statusCode.toString()));
       }
     } catch (error) {
       super.logger.e(error.toString());

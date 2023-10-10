@@ -17,8 +17,8 @@ class IssueSummaryModel extends Equatable {
   final String? contactname;
   final String? assignmentgroup;
   final String? assignmentgroupname;
-  final String? assigneecontactcode;
-  final String? assigneename;
+  final dynamic assigneecontactcode;
+  final dynamic assigneename;
   final String? idate;
   final dynamic planneddate;
   final dynamic planneddesc;

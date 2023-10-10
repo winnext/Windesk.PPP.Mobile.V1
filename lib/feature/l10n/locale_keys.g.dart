@@ -98,12 +98,18 @@ abstract class LocaleKeys {
   static const String processDone = "İşlem başarılı şekilde gerçekleşti";
   static const String processCancell = "İşlem gerçekleştirilirken bir hata oluştu.";
   static const String state = "Durum";
+  static const String selectGroup = "Grup Seçiniz";
+  static const String selectUser = "User Seçiniz";
   static const String addMoreTime = "Ek Süre (Gün)";
   static const String selectActivity = "Aktivite Seçiniz";
   static const String spaceCode = 'Mahal Kodu';
   static const String entityCode = 'Varlık Kodu';
   static const String serialNumber = 'Seri No';
   static const String rfid = 'RFID';
+  static const String requestForSparepart = 'Yedek Parça Talebi';
+  static const String sureAboutKeepProcess = 'Bu işleme devam etmek istediğinize emin misiniz?';
+
+
 
 
   //home page titles

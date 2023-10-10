@@ -18,6 +18,10 @@ class IssueProvider extends ChangeNotifier {
 
   bool _isFetch = false;
   bool get isFetch => _isFetch;
+  set setisFetch(bool isFetch) {
+    _isFetch = isFetch;
+    notifyListeners();
+  }
 
   bool _isFetchSummary = false;
   bool get isFetchSummary => _isFetchSummary;
@@ -231,9 +235,9 @@ class IssueProvider extends ChangeNotifier {
   void getIssueActivities(String issuecode) async {
     _isFetch = true;
     _loading = true;
+    _issueActivities.clear();
     notifyListeners();
     final response = await _issueServiceRepository.getIssueActivities(issuecode);
-
     response.fold(
         (l) => {
               _issueActivities.addAll(l),
@@ -245,16 +249,16 @@ class IssueProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+
   void getIssueAttachment(String issuecode) async {
     _isFetchAttachment = true;
     _loading = true;
     notifyListeners();
     final response = await _issueServiceRepository.getIssueAttachment(issuecode);
-    
+
     response.fold(
         (l) => {
               _issueAttachmentList.addAll(l),
-              _issueAttachmentList.map((e) => print('e'+ e.toString())),
               _loading = false,
             },
         (r) => {

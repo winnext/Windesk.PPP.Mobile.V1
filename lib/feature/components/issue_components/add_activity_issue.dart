@@ -8,24 +8,37 @@ import 'package:wm_ppp_4/feature/components/input_fields/text_fields_input_with_
 import 'package:wm_ppp_4/feature/components/loading/custom_loading_indicator.dart';
 import 'package:wm_ppp_4/feature/components/loading/custom_main_loading.dart';
 import 'package:wm_ppp_4/feature/components/model_bottom_sheet/add_just_photo_modal_bottom_sheet.dart';
+import 'package:wm_ppp_4/feature/components/snackBar/snackbar.dart';
 import 'package:wm_ppp_4/feature/constants/functions/null_check_widget.dart';
 import 'package:wm_ppp_4/feature/constants/other/app_icons.dart';
 import 'package:wm_ppp_4/feature/constants/other/app_strings.dart';
 import 'package:wm_ppp_4/feature/constants/other/colors.dart';
 import 'package:wm_ppp_4/feature/l10n/locale_keys.g.dart';
 import 'package:wm_ppp_4/product/screens/issue/provider/issue_action_provider.dart';
+import 'package:wm_ppp_4/product/screens/issue/provider/issue_provider.dart';
 
 class AddActivity extends StatelessWidget {
   AddActivity({super.key, required this.issueCode});
   String issueCode;
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => IssueActionProvider(),
-      child: Consumer<IssueActionProvider>(
-        builder: (context, IssueActionProvider issueActionProvider, child) {
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<IssueActionProvider>.value(value: IssueActionProvider()),
+        ChangeNotifierProvider<IssueProvider>.value(value: IssueProvider()),
+      ],
+      child: Consumer2<IssueActionProvider, IssueProvider>(
+        builder: (context, IssueActionProvider issueActionProvider, IssueProvider issueProvider, child) {
           issueActionProvider.isFetchActivity ? issueActionProvider.getAvailableActivities(issueCode) : null;
           issueActionProvider.isassigneeccType ? issueActionProvider.getLiveSelectAsgGroupsFunc(issueCode) : null;
+          if (issueActionProvider.isSuccessEnterActivity) {
+            snackBar(context, LocaleKeys.processDone, 'success');
+            Navigator.of(context).pop();
+          }
+          if (issueActionProvider.errorAccur) {
+            snackBar(context, LocaleKeys.processCancell, 'error');
+            Navigator.of(context).pop();
+          }
           return Container(
             height: MediaQuery.of(context).size.height * 0.5,
             width: MediaQuery.of(context).size.width / 1.09,
@@ -60,10 +73,9 @@ class AddActivity extends StatelessWidget {
                           NullCheckWidget().conditionCheckWidget(
                             issueActionProvider.isadditionaltimeInput,
                             Padding(
-                                padding: const EdgeInsets.only(top: 8.0),
+                              padding: const EdgeInsets.only(top: 8.0),
                               child: TextFieldsInput(
-                                labelText:
-                                    LocaleKeys.addMoreTime,
+                                labelText: LocaleKeys.addMoreTime,
                                 onChangedFunction: (String time) {
                                   issueActionProvider.setadditionaltimeInput(time);
                                 },
@@ -73,24 +85,30 @@ class AddActivity extends StatelessWidget {
                           //   //live select
                           NullCheckWidget().conditionCheckWidget(
                               issueActionProvider.getLiveSelectAsgGroupsName.isNotEmpty,
-                              DropDownInputFields(
-                                labelText: LocaleKeys.state,
-                                onChangedFunction: (item) {
-                                  issueActionProvider.setSelectedAsgGroups(issueCode, item.toString());
-                                },
-                                rightIcon: Icons.arrow_drop_down,
-                                dropDownArray: issueActionProvider.getLiveSelectAsgGroupsName,
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: DropDownInputFields(
+                                  labelText: LocaleKeys.selectGroup,
+                                  onChangedFunction: (item) {
+                                    issueActionProvider.setSelectedAsgGroups(issueCode, item.toString());
+                                  },
+                                  rightIcon: Icons.arrow_drop_down,
+                                  dropDownArray: issueActionProvider.getLiveSelectAsgGroupsName,
+                                ),
                               )),
                           NullCheckWidget().conditionCheckWidget(
-                              issueActionProvider.selectedAsgGroupCode.isNotEmpty,
-                              DropDownInputFields(
-                                labelText: LocaleKeys.state,
-                                onChangedFunction: (item) {
-                                  issueActionProvider.setSelectedAsgUser(item.toString());
-                                },
-                                rightIcon: Icons.arrow_drop_down,
-                                dropDownArray:
-                                    issueActionProvider.getLiveSelectAsgUsersName.isNotEmpty ? issueActionProvider.getLiveSelectAsgUsersName : [''],
+                              issueActionProvider.getLiveSelectAsgGroupsName.isNotEmpty,
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: DropDownInputFields(
+                                  labelText: LocaleKeys.selectUser,
+                                  onChangedFunction: (item) {
+                                    issueActionProvider.setSelectedAsgUser(item.toString());
+                                  },
+                                  rightIcon: Icons.arrow_drop_down,
+                                  dropDownArray:
+                                      issueActionProvider.getLiveSelectAsgUsersName.isNotEmpty ? issueActionProvider.getLiveSelectAsgUsersName : [''],
+                                ),
                               )),
                           NullCheckWidget().conditionCheckWidget(
                               issueActionProvider.minDescLength,
@@ -104,7 +122,7 @@ class AddActivity extends StatelessWidget {
                                 ),
                               )),
                           NullCheckWidget().conditionCheckWidget(issueActionProvider.mobilePhoto, AddJustPhotoModalBottomSheet(() {})),
-                          _saveOrQuit(context, issueActionProvider)
+                          _saveOrQuit(context, issueActionProvider, issueProvider)
                         ],
                       ),
                     ),
@@ -115,7 +133,7 @@ class AddActivity extends StatelessWidget {
     );
   }
 
-  Padding _saveOrQuit(BuildContext context, IssueActionProvider issueActionProvider) {
+  Padding _saveOrQuit(BuildContext context, IssueActionProvider issueActionProvider, IssueProvider issueProvider) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: CustomHalfButtons(
@@ -128,7 +146,8 @@ class AddActivity extends StatelessWidget {
             Navigator.pop(context);
           },
           rightOnPressed: () {
-            issueActionProvider.saveIssueActivity(issueCode);
+            issueActionProvider.saveIssueActivity(issueCode, issueProvider);
+            issueProvider.setisFetch = true;
           }),
     );
   }

@@ -10,6 +10,7 @@ import 'package:wm_ppp_4/feature/models/issue_action_models/issue_available_acti
 import 'package:wm_ppp_4/feature/models/issue_action_models/issue_live_select_asg_groups_model.dart';
 import 'package:wm_ppp_4/feature/models/issue_action_models/issue_live_select_asg_users_model.dart';
 import 'package:wm_ppp_4/feature/models/issue_action_models/issue_operation_list_model.dart';
+import 'package:wm_ppp_4/product/screens/issue/provider/issue_provider.dart';
 import 'package:wm_ppp_4/product/screens/issue/service/issue_service_repo_impl.dart';
 
 class IssueActionProvider extends ChangeNotifier {
@@ -43,6 +44,8 @@ class IssueActionProvider extends ChangeNotifier {
   bool get loading => _loading;
 
   bool isSuccessTakeOver = false;
+  bool isSuccessEnterActivity = false;
+  bool isSuccessChangeCfg = false;
 
   bool _errorAccur = false;
   bool get errorAccur => _errorAccur;
@@ -294,8 +297,32 @@ class IssueActionProvider extends ChangeNotifier {
     });
   }
 
+  void createSparepartIssue(issuecode) async {
+    _loading = true;
+    String userToken = await SharedManager().getString(SharedEnum.deviceId);
+
+    final response = await _issueServiceRepository.createSparepartIssue(userToken, issuecode);
+    response.fold(
+        (l) => {
+              isSuccessTakeOver = true,
+            },
+        (r) => {
+              _errorAccur = true,
+            });
+
+    _loading = false;
+    notifyListeners();
+
+    Future.delayed(const Duration(seconds: 2), () {
+      isSuccessTakeOver = false;
+      _errorAccur = false;
+      notifyListeners();
+    });
+  }
+
   void getAvailableActivities(String issuecode) async {
     String userToken = await SharedManager().getString(SharedEnum.deviceId);
+    final IssueProvider issueProvider;
     _loading = true;
     notifyListeners();
     final response = await _issueServiceRepository.getAvailableActivities(issuecode, userToken);
@@ -395,7 +422,7 @@ class IssueActionProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void saveIssueActivity(String issuecode) async {
+  void saveIssueActivity(String issuecode, IssueProvider issueProvider) async {
     _loading = true;
 
     String userToken = await SharedManager().getString(SharedEnum.deviceId);
@@ -423,13 +450,22 @@ class IssueActionProvider extends ChangeNotifier {
     );
     response.fold(
         (l) => {
+              isSuccessEnterActivity = true,
               _loading = false,
             },
         (r) => {
               _loading = false,
+              _errorAccur = true,
             });
     _isFetchActivity = false;
+
     notifyListeners();
+    Future.delayed(const Duration(seconds: 2), () {
+      isSuccessTakeOver = false;
+      isSuccessEnterActivity = false;
+      _errorAccur = false;
+      notifyListeners();
+    });
   }
 
   void changeCfg(issuecode) async {
@@ -437,24 +473,20 @@ class IssueActionProvider extends ChangeNotifier {
 
     String userToken = await SharedManager().getString(SharedEnum.deviceId);
 
-    final response = await _issueServiceRepository.changeCfg(
-      userToken,
-      issuecode,
-      barcodeScenRes
-    );
+    final response = await _issueServiceRepository.changeCfg(userToken, issuecode, barcodeScenRes);
     response.fold(
         (l) => {
-              isSuccessTakeOver = true,
-
+              isSuccessChangeCfg = true,
             },
         (r) => {
               _errorAccur = true,
+              _errorMessage = r.message,
             });
     _loading = false;
     notifyListeners();
 
     Future.delayed(const Duration(seconds: 2), () {
-      isSuccessTakeOver = false;
+      isSuccessChangeCfg = false;
       _errorAccur = false;
       notifyListeners();
     });
