@@ -44,24 +44,16 @@ class IssueFilterModalBottomSheet extends StatelessWidget {
   }
 
   _bodyWidget(BuildContext context) {
-    return SizedBox(
+    return Container(
+      color: Colors.white,
       height: MediaQuery.of(context).size.height * 0.75,
       width: context.width,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
         child: Column(
           children: [
-            _inputS(
-                context,
-                stateList,
-                buildList,
-                floorList,
-                wingList,
-                selectStateFunction,
-                selectBuildFunction,
-                selectFloorFunction,
-                selectWingFunction,
-                taskForMeFunction),
+            _inputS(context, stateList, buildList, floorList, wingList, selectStateFunction, selectBuildFunction, selectFloorFunction,
+                selectWingFunction, taskForMeFunction),
             _selectedParamS(selectedParamList, selectedParamListDeleteItem),
             _buttons(context, filterStartFunction),
           ],
@@ -70,19 +62,10 @@ class IssueFilterModalBottomSheet extends StatelessWidget {
     );
   }
 
-  Expanded _inputS(
-      context,
-      stateList,
-      buildList,
-      floorList,
-      wingList,
-      selectStateFunction,
-      selectBuildFunction,
-      selectFloorFunction,
-      selectWingFunction,
-      taskForMeFunction) {
+  Expanded _inputS(context, stateList, buildList, floorList, wingList, selectStateFunction, selectBuildFunction, selectFloorFunction,
+      selectWingFunction, taskForMeFunction) {
     return Expanded(
-      flex: 60,
+      flex: 5,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -90,38 +73,23 @@ class IssueFilterModalBottomSheet extends StatelessWidget {
               child: Padding(
             padding: const EdgeInsets.all(10.0),
             child: CustomCircularWithTextButton(
-                bgColor: APPColors.Login.blue,
-                onPressFunction: taskForMeFunction,
-                textButton: AppStrings.taskForMe,
-                textColor: APPColors.Main.white),
+                bgColor: APPColors.Login.blue, onPressFunction: taskForMeFunction, textButton: AppStrings.taskForMe, textColor: APPColors.Main.white),
           )),
           Expanded(
             child: DropDownInputFields(
-                labelText: AppStrings.state,
-                onChangedFunction: selectStateFunction,
-                rightIcon: AppIcons.arrowDown,
-                dropDownArray: stateList),
+                labelText: AppStrings.state, onChangedFunction: selectStateFunction, rightIcon: AppIcons.arrowDown, dropDownArray: stateList),
           ),
           Expanded(
             child: DropDownInputFields(
-                labelText: AppStrings.build,
-                onChangedFunction: selectBuildFunction,
-                rightIcon: AppIcons.arrowDown,
-                dropDownArray: buildList),
+                labelText: AppStrings.build, onChangedFunction: selectBuildFunction, rightIcon: AppIcons.arrowDown, dropDownArray: buildList),
           ),
           Expanded(
             child: DropDownInputFields(
-                labelText: AppStrings.floor,
-                onChangedFunction: selectFloorFunction,
-                rightIcon: AppIcons.arrowDown,
-                dropDownArray: floorList),
+                labelText: AppStrings.floor, onChangedFunction: selectFloorFunction, rightIcon: AppIcons.arrowDown, dropDownArray: floorList),
           ),
           Expanded(
             child: DropDownInputFields(
-                labelText: AppStrings.wing,
-                onChangedFunction: selectWingFunction,
-                rightIcon: AppIcons.arrowDown,
-                dropDownArray: wingList),
+                labelText: AppStrings.wing, onChangedFunction: selectWingFunction, rightIcon: AppIcons.arrowDown, dropDownArray: wingList),
           ),
         ],
       ),
@@ -130,20 +98,22 @@ class IssueFilterModalBottomSheet extends StatelessWidget {
 
   Expanded _selectedParamS(selectedParamList, selectedParamListDeleteItem) {
     return Expanded(
-        flex: 20,
+        flex: 1,
         child: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               for (var i in selectedParamList)
-                CustomElevatedButtonWithIcon(
-                    bgColor: APPColors.Main.white,
-                    onPressFunction: selectedParamListDeleteItem,
-                    textValue: i,
-                    textColor: APPColors.Main.black,
-                    iconColor: APPColors.Main.red,
-                    icon: Icons.clear),
+                i == ''
+                    ? Container()
+                    : CustomElevatedButtonWithIcon(
+                        bgColor: APPColors.Main.white,
+                        onPressFunction: selectedParamListDeleteItem,
+                        textValue: i,
+                        textColor: APPColors.Main.black,
+                        iconColor: APPColors.Main.red,
+                        icon: Icons.clear)
             ],
           ),
         ));
@@ -151,7 +121,7 @@ class IssueFilterModalBottomSheet extends StatelessWidget {
 
   Expanded _buttons(context, Function filterStartFunction) {
     return Expanded(
-      flex: 20,
+      flex: 1,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -170,7 +140,6 @@ class IssueFilterModalBottomSheet extends StatelessWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties
-        .add(DiagnosticsProperty<Function>('saveEffort', filterStartFunction));
+    properties.add(DiagnosticsProperty<Function>('saveEffort', filterStartFunction));
   }
 }

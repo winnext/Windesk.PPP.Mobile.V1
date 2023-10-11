@@ -3,19 +3,20 @@ import 'package:flutter/material.dart';
 import '../../constants/style/border_radius.dart';
 
 class TextFieldsInputWithActionAndController extends StatelessWidget {
-  const TextFieldsInputWithActionAndController({
-    super.key,
-    required this.labelText,
-    required this.actionIcon,
-    required this.actionFunction,
-    required this.textController,
-    this.hinText
-  });
+  const TextFieldsInputWithActionAndController(
+      {super.key,
+      required this.labelText,
+      required this.actionIcon,
+      required this.actionFunction,
+      required this.textController,
+      this.hinText,
+      this.readOnly});
   final Function actionFunction;
   final String labelText;
   final String? hinText;
   final IconData actionIcon;
   final TextEditingController textController;
+  final bool? readOnly;
 
   @override
   Widget build(BuildContext context) {
@@ -24,10 +25,10 @@ class TextFieldsInputWithActionAndController extends StatelessWidget {
         SizedBox(
           width: MediaQuery.of(context).size.width * 0.74,
           child: TextField(
+            readOnly: readOnly ?? false,
             controller: textController,
             decoration: InputDecoration(
-              border: OutlineInputBorder(
-                  borderRadius: CustomBorderRadius.textFieldBorderRadius),
+              border: OutlineInputBorder(borderRadius: CustomBorderRadius.textFieldBorderRadius),
               labelText: labelText,
               hintText: hinText ?? '',
             ),

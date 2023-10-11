@@ -604,8 +604,6 @@ class IssueSearchRoute extends _i27.PageRouteInfo<void> {
   static const _i27.PageInfo<void> page = _i27.PageInfo<void>(name);
 }
 
-
-
 /// generated route for
 /// [_i14.IssueSummaryScreen]
 class IssueSummaryScreen extends _i27.PageRouteInfo<IssueSummaryScreenArgs> {

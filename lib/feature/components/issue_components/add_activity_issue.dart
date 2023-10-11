@@ -65,6 +65,7 @@ class AddActivity extends StatelessWidget {
                               Padding(
                                 padding: const EdgeInsets.only(top: 8.0),
                                 child: TextFieldsInputWithActionAndController(
+                                    readOnly: true,
                                     textController: issueActionProvider.spaceCode,
                                     labelText: LocaleKeys.spaceCode,
                                     actionIcon: AppIcons.qr,
@@ -145,9 +146,8 @@ class AddActivity extends StatelessWidget {
           leftOnPressed: () {
             Navigator.pop(context);
           },
-          rightOnPressed: () {
+          rightOnPressed: () async {
             issueActionProvider.saveIssueActivity(issueCode, issueProvider);
-            issueProvider.setisFetch = true;
           }),
     );
   }

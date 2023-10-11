@@ -24,12 +24,11 @@ class DropDownInputFields extends StatelessWidget {
       isExpanded: true,
       value: dropDownArray.first,
       decoration: InputDecoration(
-        border: OutlineInputBorder(
-            borderRadius: CustomBorderRadius.textFieldBorderRadius,
-            borderSide: BorderSide(color: APPColors.Main.black, width: 4)),
-        labelText: labelText,
-        hintText: hintText
-      ),
+          contentPadding: const EdgeInsets.all(10),
+          border: OutlineInputBorder(
+              borderRadius: CustomBorderRadius.textFieldBorderRadius, borderSide: BorderSide(color: APPColors.Main.black, width: 4)),
+          labelText: labelText,
+          hintText: hintText ?? ''),
       icon: Icon(rightIcon),
       items: dropDownArray.map((String items) {
         return DropdownMenuItem(

@@ -20,20 +20,19 @@ class CustomElevatedButtonWithIcon extends StatelessWidget {
   final double? width;
   final double? height;
 
-
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: width,
-      height: height,
-      color: bgColor,
+        width: width,
+        height: height,
+        color: bgColor,
         child: ElevatedButton.icon(
-      onPressed: () => onPressFunction(),
-      icon: Icon(icon, color: iconColor), //icon data for elevated button
-      label: Text(
-        textValue,
-        style: TextStyle(color: textColor),
-      ), //label text
-    ));
+          onPressed: () => onPressFunction(textValue),
+          icon: Icon(icon, color: iconColor), //icon data for elevated button
+          label: Text(
+            textValue,
+            style: TextStyle(color: textColor),
+          ), //label text
+        ));
   }
 }

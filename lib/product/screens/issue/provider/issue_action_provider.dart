@@ -143,13 +143,13 @@ class IssueActionProvider extends ChangeNotifier {
   List<String> _getLiveSelectAsgGroupsName = [];
   List<String> get getLiveSelectAsgGroupsName => _getLiveSelectAsgGroupsName;
 
-  List<LiveSelectAsgUsersModel> _getLiveSelectAsgUsers = [];
+  final List<LiveSelectAsgUsersModel> _getLiveSelectAsgUsers = [];
   List<LiveSelectAsgUsersModel> get getLiveSelectAsgUsers => _getLiveSelectAsgUsers;
 
-  List<String> _getLiveSelectAsgUsersName = [];
+  final List<String> _getLiveSelectAsgUsersName = [];
   List<String> get getLiveSelectAsgUsersName => _getLiveSelectAsgUsersName;
 
-  List<IssueAvailableActivities> _selectedActivity = [];
+  final List<IssueAvailableActivities> _selectedActivity = [];
   List<IssueAvailableActivities> get selectedActivity => _selectedActivity;
 
   File? _image;

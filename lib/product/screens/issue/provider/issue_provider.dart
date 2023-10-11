@@ -1,8 +1,11 @@
 // ignore_for_file: prefer_final_fields
 
 import 'package:flutter/material.dart';
+import 'package:wm_ppp_4/feature/database/shared_manager.dart';
+import 'package:wm_ppp_4/feature/enums/shared_enums.dart';
 import 'package:wm_ppp_4/feature/models/issue_models/issue_activities_model.dart';
 import 'package:wm_ppp_4/feature/models/issue_models/issue_attachments_model.dart';
+import 'package:wm_ppp_4/feature/models/issue_models/issue_filter_model.dart';
 import 'package:wm_ppp_4/feature/models/issue_models/issue_summary_model.dart';
 import 'package:wm_ppp_4/feature/models/issue_models/issue_summary_time_model.dart';
 
@@ -18,8 +21,16 @@ class IssueProvider extends ChangeNotifier {
 
   bool _isFetch = false;
   bool get isFetch => _isFetch;
-  set setisFetch(bool isFetch) {
-    _isFetch = isFetch;
+  set setisFetch(bool value) {
+    _isFetch = false;
+    notifyListeners();
+  }
+
+  bool _isFetchFilter = false;
+  bool get isFetchFilter => _isFetchFilter;
+
+  void setFetch() {
+    _isFetch = false;
     notifyListeners();
   }
 
@@ -60,6 +71,16 @@ class IssueProvider extends ChangeNotifier {
   String _buildName = '';
   String get buildName => _buildName;
   set setbuildName(String buildName) {
+    if (buildName == '') {
+      _buildName = '';
+      _buildCode = '';
+      
+    }
+    for (int i = 0; i < _buildingFilterValues.length; i++) {
+      if (_buildingFilterValues[i].name == buildName) {
+        setbuildCode = _buildingFilterValues[i].code.toString();
+      }
+    }
     _buildName = buildName;
     notifyListeners();
   }
@@ -74,6 +95,11 @@ class IssueProvider extends ChangeNotifier {
   String _floorName = '';
   String get floorName => _floorName;
   set setfloorName(String floorName) {
+    for (int i = 0; i < _floorFilterValues.length; i++) {
+      if (_floorFilterValues[i].name == floorName) {
+        setfloorCode = _floorFilterValues[i].code.toString();
+      }
+    }
     _floorName = floorName;
     notifyListeners();
   }
@@ -85,17 +111,22 @@ class IssueProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  String _wingName = '';
+  String get wingName => _wingName;
+  set setwingName(String wingName) {
+    for (int i = 0; i < _wingFilterValues.length; i++) {
+      if (_wingFilterValues[i].name == wingName) {
+        setwingCode = _wingFilterValues[i].code.toString();
+      }
+    }
+    _wingName = wingName;
+    notifyListeners();
+  }
+
   String _wingCode = '';
   String get wingCode => _wingCode;
   set setwingCode(String wingCode) {
     _wingCode = wingCode;
-    notifyListeners();
-  }
-
-  String _wingName = '';
-  String get wingName => _wingName;
-  set setwingName(String wingName) {
-    _wingName = wingName;
     notifyListeners();
   }
 
@@ -140,6 +171,27 @@ class IssueProvider extends ChangeNotifier {
 
   List<IssueAttachmentsModel> _issueAttachmentList = [];
   List<IssueAttachmentsModel> get issueAttachmentList => _issueAttachmentList;
+
+  List<IssueFilterModel> _buildingFilterValues = [];
+  List<IssueFilterModel> get buildingFilterValues => _buildingFilterValues;
+
+  List<String> _buildingFilterNames = [];
+  List<String> get buildingFilterNames => _buildingFilterNames;
+
+  List<String> _selectedFilterList = [];
+  List<String> get selectedFilterList => _selectedFilterList;
+
+  List<IssueFilterModel> _floorFilterValues = [];
+  List<IssueFilterModel> get floorFilterValues => _floorFilterValues;
+
+  List<String> _floorFilterNames = [];
+  List<String> get floorFilterNames => _floorFilterNames;
+
+  List<IssueFilterModel> _wingFilterValues = [];
+  List<IssueFilterModel> get wingFilterValues => _wingFilterValues;
+
+  List<String> _wingFilterNames = [];
+  List<String> get wingFilterNames => _wingFilterNames;
 
   bool notificationController(ScrollNotification scrollInfo) {
     if (!loading && scrollInfo.metrics.pixels == scrollInfo.metrics.maxScrollExtent) {
@@ -190,13 +242,16 @@ class IssueProvider extends ChangeNotifier {
     final response = await _issueServiceRepository.getIssueList(queryParameters, issueListType);
     response.fold(
         (l) => {
+              _issueList.clear(),
               _issueList.addAll(l),
               _loading = false,
               l.length % 10 == 0 ? null : _totalRecordCount = true,
+              notifyListeners(),
             },
         (r) => {
               _loading = false,
             });
+
     notifyListeners();
   }
 
@@ -249,7 +304,6 @@ class IssueProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-
   void getIssueAttachment(String issuecode) async {
     _isFetchAttachment = true;
     _loading = true;
@@ -264,6 +318,72 @@ class IssueProvider extends ChangeNotifier {
         (r) => {
               _loading = false,
             });
+    notifyListeners();
+  }
+
+  void getFilterValues() async {
+    _isFetchFilter = true;
+    getSpaceBfwByType('BUILDING');
+    getSpaceBfwByType('FLOOR');
+    getSpaceBfwByType('WING');
+  }
+
+  void clearFilterCodes() async {
+    setbuildCode = '';
+    setfloorCode = '';
+    setwingCode = '';
+  }
+
+  void getSpaceBfwByType(String type) async {
+    String userToken = await SharedManager().getString(SharedEnum.deviceId);
+    _isFetch = true;
+    _loading = true;
+    notifyListeners();
+    final response = await _issueServiceRepository.getSpaceBfwByType(type, userToken);
+
+    if (type == 'BUILDING') {
+      response.fold(
+          (l) => {
+                _buildingFilterValues.addAll(l),
+                for (int i = 0; i < _buildingFilterValues.length; i++)
+                  {
+                    _buildingFilterNames.add(_buildingFilterValues[i].name.toString()),
+                  },
+                _loading = false,
+              },
+          (r) => {
+                _loading = false,
+              });
+    }
+    if (type == 'FLOOR') {
+      response.fold(
+          (l) => {
+                _floorFilterValues.addAll(l),
+                for (int i = 0; i < _floorFilterValues.length; i++)
+                  {
+                    _floorFilterNames.add(_floorFilterValues[i].name.toString()),
+                  },
+                _loading = false,
+              },
+          (r) => {
+                _loading = false,
+              });
+    }
+    if (type == 'WING') {
+      response.fold(
+          (l) => {
+                _wingFilterValues.addAll(l),
+                for (int i = 0; i < _wingFilterValues.length; i++)
+                  {
+                    _wingFilterNames.add(_wingFilterValues[i].name.toString()),
+                  },
+                _loading = false,
+              },
+          (r) => {
+                _loading = false,
+              });
+    }
+
     notifyListeners();
   }
 }

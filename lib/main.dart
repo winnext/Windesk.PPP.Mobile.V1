@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:wm_ppp_4/product/screens/issue/provider/issue_provider.dart';
 
 import 'feature/constants/other/app_strings.dart';
 import 'feature/global_providers/global_provider.dart';
@@ -14,7 +15,9 @@ void main() {
   FirebaseNotification.init();
   runApp(
     MultiProvider(
-      providers: [ChangeNotifierProvider<GlobalProvider>(create: (_) => GlobalProvider())],
+      providers: [
+        ChangeNotifierProvider<GlobalProvider>(create: (_) => GlobalProvider()),
+      ],
       child: MyApp(),
     ),
   );

@@ -1,6 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:wm_ppp_4/feature/components/model_bottom_sheet/issue_filter_modal_bottom_sheet.dart';
+import 'package:wm_ppp_4/feature/constants/other/app_icons.dart';
+import 'package:wm_ppp_4/feature/constants/other/colors.dart';
 import 'package:wm_ppp_4/feature/route/app_route.gr.dart';
 import 'package:wm_ppp_4/product/screens/issue/provider/issue_provider.dart';
 import '../../../../../feature/components/appbar/custom_main_appbar.dart';
@@ -22,12 +25,49 @@ class IssueListScreen extends StatelessWidget {
         create: (context) => IssueProvider(),
         child: Consumer<IssueProvider>(builder: (context, IssueProvider issueProvider, child) {
           issueProvider.isFetch ? null : issueProvider.getIssueList(1, issueModuleCode);
+          issueProvider.isFetchFilter ? null : issueProvider.getFilterValues();
           return Scaffold(
-            appBar: const CustomMainAppbar(
+            appBar: CustomMainAppbar(
               title: Text(
                 LocaleKeys.issueList,
                 style: TextStyle(color: Colors.black),
               ),
+              actions: [
+                IconButton(
+                  onPressed: () async {
+                    showModalBottomSheet(
+                      backgroundColor: Colors.transparent,
+                      context: context,
+                      builder: (context) => IssueFilterModalBottomSheet(
+                        stateList: ['sd,asd'],
+                        buildList: issueProvider.buildingFilterNames,
+                        floorList: issueProvider.floorFilterNames,
+                        wingList: issueProvider.wingFilterNames,
+                        selectStateFunction: (String state) {},
+                        selectBuildFunction: (build) {
+                          issueProvider.setbuildName = build;
+                        },
+                        selectFloorFunction: (floor) {
+                          issueProvider.setfloorName = floor;
+                        },
+                        selectWingFunction: (wing) {
+                          issueProvider.setwingName = wing;
+                        },
+                        filterStartFunction: () {
+                          issueProvider.getIssueList(1, issueModuleCode);
+                        },
+                        taskForMeFunction: () {},
+                        selectedParamList: [issueProvider.buildName, issueProvider.floorName, issueProvider.wingName],
+                        selectedParamListDeleteItem: (item) {
+                          issueProvider.buildName == item.toString() ? issueProvider.setbuildName = '' : null;
+                          issueProvider.getIssueList(1, issueModuleCode);
+                        },
+                      ),
+                    );
+                  },
+                  icon: Icon(AppIcons.filter, color: APPColors.Secondary.black),
+                ),
+              ],
               returnBack: true,
             ),
             body: Stack(children: [
@@ -38,9 +78,9 @@ class IssueListScreen extends StatelessWidget {
                     child: NotificationListener<ScrollNotification>(
                       onNotification: issueProvider.notificationController,
                       child: ListView.builder(
-                          itemCount: context.read<IssueProvider>().issueList.length,
+                          itemCount: issueProvider.issueList.length,
                           itemBuilder: (BuildContext context, int index) {
-                            IssueListModel issueListElement = context.read<IssueProvider>().issueList[index];
+                            IssueListModel issueListElement = issueProvider.issueList[index];
                             return CustomIssueListCard(
                                 code: issueListElement.code.toString(),
                                 statusCode: issueListElement.statuscode.toString(),

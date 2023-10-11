@@ -4,6 +4,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 import 'package:wm_ppp_4/feature/components/cards/custom_issue_activities_card.dart';
 import 'package:wm_ppp_4/feature/components/cards/custom_nodata_card.dart';
+import 'package:wm_ppp_4/feature/components/loading/custom_loading_indicator.dart';
 import 'package:wm_ppp_4/product/screens/issue/provider/issue_provider.dart';
 
 @RoutePage()
@@ -19,16 +20,16 @@ class IssueActivitiesScreen extends StatelessWidget {
       value: IssueProvider(),
       child: Consumer<IssueProvider>(
         builder: (context, value, child) {
-          SchedulerBinding.instance.addPostFrameCallback((_) {
+          SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
             value.isFetch ? null : value.getIssueActivities(issueCode);
           });
-          return value.issueActivities.isNotEmpty ? _activitiesBody(size, value) : const NoDataWidget();
+          return value.loading ? const CustomLoadingIndicator() : _activitiesBody(size, context);
         },
       ),
     );
   }
 
-  SizedBox _activitiesBody(Size size, IssueProvider issueProvider) {
+  SizedBox _activitiesBody(Size size, BuildContext context) {
     return SizedBox(
       width: size.width,
       height: size.height / 1.8,
@@ -36,10 +37,10 @@ class IssueActivitiesScreen extends StatelessWidget {
         children: [
           Expanded(
             child: ListView.builder(
-              itemCount: issueProvider.issueActivities.length + 1,
+              itemCount: context.watch<IssueProvider>().issueActivities.length + 1,
               itemBuilder: (context, index) {
-                if (index == issueProvider.issueActivities.length) return null;
-                final model = issueProvider.issueActivities[index];
+                if (index == context.watch<IssueProvider>().issueActivities.length) return null;
+                final model = context.watch<IssueProvider>().issueActivities[index];
                 return CustomIssueActivitiesCard(data: model);
               },
             ),

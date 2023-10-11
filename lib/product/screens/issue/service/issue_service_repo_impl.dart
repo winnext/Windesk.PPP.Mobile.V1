@@ -8,6 +8,7 @@ import 'package:wm_ppp_4/feature/models/issue_action_models/issue_live_select_as
 import 'package:wm_ppp_4/feature/models/issue_action_models/issue_operation_list_model.dart';
 import 'package:wm_ppp_4/feature/models/issue_models/issue_activities_model.dart';
 import 'package:wm_ppp_4/feature/models/issue_models/issue_attachments_model.dart';
+import 'package:wm_ppp_4/feature/models/issue_models/issue_filter_model.dart';
 import 'package:wm_ppp_4/feature/models/issue_models/issue_summary_model.dart';
 import 'package:wm_ppp_4/feature/models/issue_models/issue_summary_time_model.dart';
 import '../../../../feature/exceptions/custom_service_exceptions.dart';
@@ -374,6 +375,25 @@ class IssueServiceRepoImpml extends IssueServiceRepository {
     } catch (error) {
       super.logger.e(error.toString());
       return Right(CustomServiceException(message: CustomServiceMessages.changeCfg, statusCode: '500'));
+    }
+  }
+
+  @override
+  Future<Either<List<IssueFilterModel>, CustomServiceException>> getSpaceBfwByType(
+      String type, String userToken) async {
+    String url = '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=getSpaceBfwByType&type=$type';
+    List<IssueFilterModel> liveSelectAsgUsers;
+
+    try {
+      final response = await dio.get(url);
+      final data = response.data[ServiceResponseStatusEnums.records.rawText];
+
+      liveSelectAsgUsers = IssueFilterModel.fromJsonList(data);
+      super.logger.i(liveSelectAsgUsers);
+      return Left(liveSelectAsgUsers);
+    } catch (error) {
+      super.logger.e(error.toString());
+      return Right(CustomServiceException(message: CustomServiceMessages.loginError, statusCode: '400'));
     }
   }
 }
