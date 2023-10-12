@@ -216,11 +216,16 @@ class IssueActionProvider extends ChangeNotifier {
     scanBarcodeAndQr('space');
   }
 
+  void update() {
+    notifyListeners();
+  }
+
   void setSelectedActivityName(String activityName) {
     _selectedActivityName = activityName;
     clearAll();
     for (int i = 0; i < _availableActivities.length; i++) {
       if (_availableActivities[i].name == activityName) {
+        //print('aasdadsasdasdsdasad'+_availableActivities[i].minDescLength.toString());
         _isBarcodeSpace = _availableActivities[i].barcodeSpace == 'Y' ? true : false;
         _isadditionaltimeInput = _availableActivities[i].additionaltimeInput == 'Y' ? true : false;
         _minDescLength = _availableActivities[i].minDescLength != null ? true : false;
@@ -276,9 +281,9 @@ class IssueActionProvider extends ChangeNotifier {
     _loading = true;
 
     String userToken = await SharedManager().getString(SharedEnum.deviceId);
-    String userName = await SharedManager().getString(SharedEnum.userName);
+    String userCode = await SharedManager().getString(SharedEnum.userCode);
 
-    final response = await _issueServiceRepository.takeOverIssue(userToken, userName, issuecode);
+    final response = await _issueServiceRepository.takeOverIssue(userToken, userCode, issuecode);
     response.fold(
         (l) => {
               isSuccessTakeOver = true,
@@ -338,7 +343,7 @@ class IssueActionProvider extends ChangeNotifier {
     _loading = false;
     notifyListeners();
 
-    Future.delayed(const Duration(seconds: 2), () {
+    Future.delayed(const Duration(seconds: 1), () {
       isSuccessTakeOver = false;
       _errorAccur = false;
       notifyListeners();
@@ -347,11 +352,9 @@ class IssueActionProvider extends ChangeNotifier {
 
   void getAvailableActivities(String issuecode) async {
     String userToken = await SharedManager().getString(SharedEnum.deviceId);
-    final IssueProvider issueProvider;
     _loading = true;
     notifyListeners();
     final response = await _issueServiceRepository.getAvailableActivities(issuecode, userToken);
-
     _availableActivitiesName.clear();
     _availableActivities.clear();
     response.fold(
@@ -366,6 +369,7 @@ class IssueActionProvider extends ChangeNotifier {
         (r) => {
               _loading = false,
             });
+            
     _isFetchActivity = false;
     notifyListeners();
   }

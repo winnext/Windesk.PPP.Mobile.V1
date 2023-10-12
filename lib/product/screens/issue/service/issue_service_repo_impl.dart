@@ -379,8 +379,7 @@ class IssueServiceRepoImpml extends IssueServiceRepository {
   }
 
   @override
-  Future<Either<List<IssueFilterModel>, CustomServiceException>> getSpaceBfwByType(
-      String type, String userToken) async {
+  Future<Either<List<IssueFilterModel>, CustomServiceException>> getSpaceBfwByType(String type, String userToken) async {
     String url = '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=getSpaceBfwByType&type=$type';
     List<IssueFilterModel> liveSelectAsgUsers;
 

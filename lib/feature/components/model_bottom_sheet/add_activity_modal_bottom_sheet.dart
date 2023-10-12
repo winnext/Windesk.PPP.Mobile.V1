@@ -14,6 +14,7 @@ import 'package:wm_ppp_4/product/screens/issue/provider/issue_addphoto_provider.
 
 class IssueActionModal extends StatelessWidget {
   const IssueActionModal({super.key, required this.issueCode});
+  
   final String issueCode;
   @override
   Widget build(BuildContext context) {
@@ -27,11 +28,11 @@ class IssueActionModal extends StatelessWidget {
           builder: (context, IssueActionProvider issueProvider, IssueAddPhotoProvider issueAddPhotoProvider, child) {
             if (issueAddPhotoProvider.isSuccess || issueProvider.isSuccessTakeOver) {
               snackBar(context, LocaleKeys.processDone, 'success');
-              Navigator.of(context).pop();
+              Navigator.of(context).pop<bool>(true);
             }
             if (issueAddPhotoProvider.errorAccur || issueProvider.errorAccur) {
               snackBar(context, LocaleKeys.processCancell + issueProvider.errorMessage, 'error');
-              Navigator.of(context).pop();
+              Navigator.of(context).pop<bool>(false);
             }
             issueProvider.isFetch ? null : issueProvider.getIssueOperations(issueCode);
             return Center(
@@ -113,8 +114,8 @@ class IssueActionModal extends StatelessWidget {
       width: size.width / 1.09,
       child: Column(
         children: [
-          AddPhotoModalBottomSheet((File photoDile) {
-            issueAddPhotoProvider.setFile(photoDile);
+          AddPhotoModalBottomSheet((File photoFile) {
+            issueAddPhotoProvider.setFile(photoFile);
           }, (description) {
             issueAddPhotoProvider.setDesc(description);
           }, () {

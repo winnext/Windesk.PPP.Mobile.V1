@@ -20,6 +20,7 @@ class AuthServiceRepositoryImpl extends AuthServiceRepository {
     final String deviceId = await SharedManager().getString(SharedEnum.deviceId);
     final String deviceType = await SharedManager().getString(SharedEnum.deviceType);
     final String firebaseToken = await SharedManager().getString(SharedEnum.firebaseToken);
+    print('deviceId' + deviceId);
     @override
     String url =
         '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$deviceId&action=loginCheck&username=$username&password=$password&platform=$deviceType&version=3&mobileV2=true';

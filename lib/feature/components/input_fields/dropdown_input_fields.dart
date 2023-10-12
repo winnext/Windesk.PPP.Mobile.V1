@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../constants/other/colors.dart';
 import '../../constants/style/border_radius.dart';
 
-class DropDownInputFields extends StatelessWidget {
+class DropDownInputFields extends StatefulWidget {
   const DropDownInputFields({
     super.key,
     required this.labelText,
@@ -18,19 +18,26 @@ class DropDownInputFields extends StatelessWidget {
   final Function onChangedFunction;
   final IconData rightIcon;
   final List<String> dropDownArray;
+
+  @override
+  State<DropDownInputFields> createState() => _DropDownInputFieldsState();
+}
+
+class _DropDownInputFieldsState extends State<DropDownInputFields> {
   @override
   Widget build(BuildContext context) {
+    String? selectedItem;
     return DropdownButtonFormField(
       isExpanded: true,
-      value: dropDownArray.first,
+      value: selectedItem,
       decoration: InputDecoration(
           contentPadding: const EdgeInsets.all(10),
           border: OutlineInputBorder(
               borderRadius: CustomBorderRadius.textFieldBorderRadius, borderSide: BorderSide(color: APPColors.Main.black, width: 4)),
-          labelText: labelText,
-          hintText: hintText ?? ''),
-      icon: Icon(rightIcon),
-      items: dropDownArray.map((String items) {
+          labelText: widget.labelText,
+          hintText: widget.hintText ?? ''),
+      icon: Icon(widget.rightIcon),
+      items: widget.dropDownArray.map((String items) {
         return DropdownMenuItem(
           value: items,
           child: Text(
@@ -39,7 +46,7 @@ class DropDownInputFields extends StatelessWidget {
           ),
         );
       }).toList(),
-      onChanged: (newValue) => onChangedFunction(newValue),
+      onChanged: (newValue) => {widget.onChangedFunction(newValue), selectedItem = newValue, setState((){selectedItem;})},
     );
   }
 }

@@ -31,7 +31,6 @@ class AddJustPhotoModalBottomSheet extends StatelessWidget {
       ),
     );
   }
-
 }
 
 class _PhotoStack extends StatefulWidget {

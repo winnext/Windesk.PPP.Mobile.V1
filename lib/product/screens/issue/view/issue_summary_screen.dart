@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:wm_ppp_4/feature/components/loading/custom_loading_indicator.dart';
 import 'package:wm_ppp_4/feature/constants/other/colors.dart';
 import 'package:wm_ppp_4/feature/constants/other/time_functions.dart';
 import 'package:wm_ppp_4/feature/l10n/locale_keys.g.dart';
@@ -21,52 +22,54 @@ class IssueSummaryScreen extends StatelessWidget {
           builder: (context, IssueProvider issueProvider, child) {
             issueProvider.isFetch ? null : issueProvider.getIssueSummary(issueCode);
             issueProvider.isFetchSummary ? null : issueProvider.getIssueTimeInfo(issueCode);
-            return Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: SizedBox(
-                    width: size.width,
-                    height: size.height / 1.8,
-                    child: SingleChildScrollView(
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 0, left: 0, right: 0, bottom: 10),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [_responseWidget(issueProvider), _fixWidget(issueProvider)],
-                            ),
-                            issueSummaryRow(issueProvider.issueSummaryDetail.code, issueProvider.issueSummaryDetail.idate),
-                            issueSummaryRow(LocaleKeys.issueSituation, issueProvider.issueSummaryDetail.statusname.toString()),
-                            issueSummaryRow(LocaleKeys.description, issueProvider.issueSummaryDetail.description.toString()),
-                            issueSummaryRow(LocaleKeys.issueOwner, issueProvider.issueSummaryDetail.contactname.toString()),
-                            issueSummaryRow(LocaleKeys.space, issueProvider.issueSummaryDetail.locname.toString()),
-                            issueSummaryRow(LocaleKeys.spaceLoc, issueProvider.issueSummaryDetail.loctree.toString()),
-                            issueSummaryRow(LocaleKeys.callReason, issueProvider.issueSummaryDetail.title.toString()),
-                            issueSummaryRow(LocaleKeys.cfgInfo, issueProvider.issueSummaryDetail.cmdb.toString()),
-                            issueSummaryRow(LocaleKeys.openingDate, issueProvider.issueSummaryDetail.idate.toString()),
-                            issueSummaryRow(LocaleKeys.incallNumber, issueProvider.issueSummaryDetail.ani.toString()),
-                            issueSummaryRow(
-                                LocaleKeys.targetResponsed, TimeClass().timeRecover(issueProvider.issueSummaryDetail.targetRdate).toString()),
-                            issueSummaryRow(LocaleKeys.targetFixed, TimeClass().timeRecover(issueProvider.issueSummaryDetail.targetFdate).toString()),
-                            issueSummaryRow(LocaleKeys.hys, issueProvider.issueSummaryDetail.hys.toString()),
-                            issueSummaryRow(LocaleKeys.hds, issueProvider.issueSummaryDetail.hds.toString()),
-                            issueSummaryRow(LocaleKeys.assignmentGroup, issueProvider.issueSummaryDetail.assignmentgroupname.toString()),
-                            issueSummaryRow(LocaleKeys.assigneName, issueProvider.issueSummaryDetail.assigneename.toString()),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            );
-            
+            return issueProvider.loading ? CustomLoadingIndicator() : _summaryBody(size, issueProvider);
           },
         ));
+  }
+
+  Column _summaryBody(Size size, IssueProvider issueProvider) {
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: SizedBox(
+            width: size.width,
+            height: size.height / 1.8,
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 0, left: 0, right: 0, bottom: 10),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [_responseWidget(issueProvider), _fixWidget(issueProvider)],
+                    ),
+                    issueSummaryRow(issueProvider.issueSummaryDetail.code, issueProvider.issueSummaryDetail.idate),
+                    issueSummaryRow(LocaleKeys.issueSituation, issueProvider.issueSummaryDetail.statusname.toString()),
+                    issueSummaryRow(LocaleKeys.description, issueProvider.issueSummaryDetail.description.toString()),
+                    issueSummaryRow(LocaleKeys.issueOwner, issueProvider.issueSummaryDetail.contactname.toString()),
+                    issueSummaryRow(LocaleKeys.space, issueProvider.issueSummaryDetail.locname.toString()),
+                    issueSummaryRow(LocaleKeys.spaceLoc, issueProvider.issueSummaryDetail.loctree.toString()),
+                    issueSummaryRow(LocaleKeys.callReason, issueProvider.issueSummaryDetail.title.toString()),
+                    issueSummaryRow(LocaleKeys.cfgInfo, issueProvider.issueSummaryDetail.cmdb.toString()),
+                    issueSummaryRow(LocaleKeys.openingDate, issueProvider.issueSummaryDetail.idate.toString()),
+                    issueSummaryRow(LocaleKeys.incallNumber, issueProvider.issueSummaryDetail.ani.toString()),
+                    issueSummaryRow(LocaleKeys.targetResponsed, TimeClass().timeRecover(issueProvider.issueSummaryDetail.targetRdate).toString()),
+                    issueSummaryRow(LocaleKeys.targetFixed, TimeClass().timeRecover(issueProvider.issueSummaryDetail.targetFdate).toString()),
+                    issueSummaryRow(LocaleKeys.hys, issueProvider.issueSummaryDetail.hys.toString()),
+                    issueSummaryRow(LocaleKeys.hds, issueProvider.issueSummaryDetail.hds.toString()),
+                    issueSummaryRow(LocaleKeys.assignmentGroup, issueProvider.issueSummaryDetail.assignmentgroupname.toString()),
+                    issueSummaryRow(LocaleKeys.assigneName, issueProvider.issueSummaryDetail.assigneename.toString()),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
   }
 
   Column _fixWidget(IssueProvider issueProvider) {

@@ -74,7 +74,6 @@ class IssueProvider extends ChangeNotifier {
     if (buildName == '') {
       _buildName = '';
       _buildCode = '';
-      
     }
     for (int i = 0; i < _buildingFilterValues.length; i++) {
       if (_buildingFilterValues[i].name == buildName) {
@@ -268,6 +267,10 @@ class IssueProvider extends ChangeNotifier {
         (r) => {
               _loading = false,
             });
+    notifyListeners();
+  }
+
+  void update() {
     notifyListeners();
   }
 

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wm_ppp_4/feature/components/buttons/custom_half_buttons.dart';
@@ -33,11 +35,11 @@ class AddActivity extends StatelessWidget {
           issueActionProvider.isassigneeccType ? issueActionProvider.getLiveSelectAsgGroupsFunc(issueCode) : null;
           if (issueActionProvider.isSuccessEnterActivity) {
             snackBar(context, LocaleKeys.processDone, 'success');
-            Navigator.of(context).pop();
+            Navigator.of(context).pop<bool>(true);
           }
           if (issueActionProvider.errorAccur) {
             snackBar(context, LocaleKeys.processCancell, 'error');
-            Navigator.of(context).pop();
+            Navigator.of(context).pop<bool>(false);
           }
           return Container(
             height: MediaQuery.of(context).size.height * 0.5,
@@ -122,7 +124,9 @@ class AddActivity extends StatelessWidget {
                                   },
                                 ),
                               )),
-                          NullCheckWidget().conditionCheckWidget(issueActionProvider.mobilePhoto, AddJustPhotoModalBottomSheet(() {})),
+                          NullCheckWidget().conditionCheckWidget(issueActionProvider.mobilePhoto, AddJustPhotoModalBottomSheet((File path) {
+                            issueActionProvider.setFile(path);
+                          })),
                           _saveOrQuit(context, issueActionProvider, issueProvider)
                         ],
                       ),
