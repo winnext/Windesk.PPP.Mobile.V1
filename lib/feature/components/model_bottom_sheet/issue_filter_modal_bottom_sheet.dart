@@ -1,5 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:wm_ppp_4/product/screens/issue/provider/issue_filter_bottom_sheet_provider.dart';
 import '../buttons/custom_circular_with_text_button.dart';
 import '../buttons/custom_elevated_button_with_icon.dart';
 import '../../constants/other/colors.dart';
@@ -40,21 +42,34 @@ class IssueFilterModalBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _bodyWidget(context);
+    IssueFilterModalBottomSheetProvider provider = Provider.of<IssueFilterModalBottomSheetProvider>(context, listen: true);
+
+    return _bodyWidget(context, provider);
   }
 
-  _bodyWidget(BuildContext context) {
+  _bodyWidget(BuildContext context, IssueFilterModalBottomSheetProvider provider) {
     return Container(
       color: Colors.white,
-      height: MediaQuery.of(context).size.height * 0.75,
+      height: MediaQuery.of(context).size.height,
       width: context.width,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
         child: Column(
           children: [
-            _inputS(context, stateList, buildList, floorList, wingList, selectStateFunction, selectBuildFunction, selectFloorFunction,
-                selectWingFunction, taskForMeFunction),
-            _selectedParamS(selectedParamList, selectedParamListDeleteItem),
+            _inputS(
+              provider,
+              context,
+              stateList,
+              buildList,
+              floorList,
+              wingList,
+              selectStateFunction,
+              selectBuildFunction,
+              selectFloorFunction,
+              selectWingFunction,
+              taskForMeFunction,
+            ),
+            _selectedParamS(provider, selectedParamList, selectedParamListDeleteItem),
             _buttons(context, filterStartFunction),
           ],
         ),
@@ -62,61 +77,114 @@ class IssueFilterModalBottomSheet extends StatelessWidget {
     );
   }
 
-  Expanded _inputS(context, stateList, buildList, floorList, wingList, selectStateFunction, selectBuildFunction, selectFloorFunction,
-      selectWingFunction, taskForMeFunction) {
+  Expanded _inputS(
+    IssueFilterModalBottomSheetProvider provider,
+    context,
+    stateList,
+    buildList,
+    floorList,
+    wingList,
+    selectStateFunction,
+    selectBuildFunction,
+    selectFloorFunction,
+    selectWingFunction,
+    taskForMeFunction,
+  ) {
     return Expanded(
       flex: 5,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Expanded(
-              child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: CustomCircularWithTextButton(
-                bgColor: APPColors.Login.blue, onPressFunction: taskForMeFunction, textButton: AppStrings.taskForMe, textColor: APPColors.Main.white),
-          )),
-          Expanded(
-            child: DropDownInputFields(
-                labelText: AppStrings.state, onChangedFunction: selectStateFunction, rightIcon: AppIcons.arrowDown, dropDownArray: stateList),
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: CustomCircularWithTextButton(
+                bgColor: APPColors.Login.blue,
+                onPressFunction: taskForMeFunction,
+                textButton: AppStrings.taskForMe,
+                textColor: APPColors.Main.white,
+              ),
+            ),
           ),
           Expanded(
             child: DropDownInputFields(
-                labelText: AppStrings.build, onChangedFunction: selectBuildFunction, rightIcon: AppIcons.arrowDown, dropDownArray: buildList),
+              labelText: AppStrings.state,
+              onChangedFunction: (String val) {
+                selectStateFunction(val);
+              },
+              rightIcon: AppIcons.arrowDown,
+              dropDownArray: stateList,
+            ),
           ),
           Expanded(
             child: DropDownInputFields(
-                labelText: AppStrings.floor, onChangedFunction: selectFloorFunction, rightIcon: AppIcons.arrowDown, dropDownArray: floorList),
+              labelText: AppStrings.build,
+              onChangedFunction: (String val) {
+                selectBuildFunction(val);
+                provider.setChoosenBuilding(val);
+              },
+              rightIcon: AppIcons.arrowDown,
+              dropDownArray: buildList,
+            ),
           ),
           Expanded(
             child: DropDownInputFields(
-                labelText: AppStrings.wing, onChangedFunction: selectWingFunction, rightIcon: AppIcons.arrowDown, dropDownArray: wingList),
+              labelText: AppStrings.floor,
+              onChangedFunction: (String val) {
+                selectFloorFunction(val);
+                provider.setChoosenFloor(val);
+              },
+              rightIcon: AppIcons.arrowDown,
+              dropDownArray: floorList,
+            ),
+          ),
+          Expanded(
+            child: DropDownInputFields(
+              labelText: AppStrings.wing,
+              onChangedFunction: (String val) {
+                selectWingFunction(val);
+                provider.setChoosenWing(val);
+              },
+              rightIcon: AppIcons.arrowDown,
+              dropDownArray: wingList,
+            ),
           ),
         ],
       ),
     );
   }
 
-  Expanded _selectedParamS(selectedParamList, selectedParamListDeleteItem) {
+  Expanded _selectedParamS(IssueFilterModalBottomSheetProvider provider, selectedParamList, selectedParamListDeleteItem) {
     return Expanded(
-        flex: 1,
-        child: SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              for (var i in selectedParamList)
-                i == ''
-                    ? Container()
-                    : CustomElevatedButtonWithIcon(
-                        bgColor: APPColors.Main.white,
-                        onPressFunction: selectedParamListDeleteItem,
-                        textValue: i,
-                        textColor: APPColors.Main.black,
-                        iconColor: APPColors.Main.red,
-                        icon: Icons.clear)
-            ],
-          ),
-        ));
+      flex: 1,
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            for (var i in provider.tempChoosenFilterList)
+              i == ''
+                  ? Container()
+                  : Row(
+                      children: [
+                        CustomElevatedButtonWithIcon(
+                          bgColor: APPColors.Main.white,
+                          onPressFunction: (String x) {
+                            selectedParamListDeleteItem(i);
+                            provider.removeItemFromTempFilterList(i);
+                          },
+                          textValue: i,
+                          textColor: APPColors.Main.black,
+                          iconColor: APPColors.Main.red,
+                          icon: Icons.clear,
+                        ),
+                        const SizedBox(width: 10.0),
+                      ],
+                    )
+          ],
+        ),
+      ),
+    );
   }
 
   Expanded _buttons(context, Function filterStartFunction) {
@@ -126,12 +194,11 @@ class IssueFilterModalBottomSheet extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           CustomHalfButtons(
-              leftTitle: const Text(AppStrings.cancel),
-              rightTitle: const Text(AppStrings.save),
-              leftOnPressed: () {
-                Navigator.pop(context);
-              },
-              rightOnPressed: filterStartFunction)
+            leftTitle: const Text(AppStrings.cancel),
+            rightTitle: const Text(AppStrings.save),
+            leftOnPressed: () => Navigator.pop(context, false),
+            rightOnPressed: () => Navigator.pop(context, true),
+          )
         ],
       ),
     );

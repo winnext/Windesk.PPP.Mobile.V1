@@ -5,6 +5,7 @@ import 'package:wm_ppp_4/feature/components/model_bottom_sheet/issue_filter_moda
 import 'package:wm_ppp_4/feature/constants/other/app_icons.dart';
 import 'package:wm_ppp_4/feature/constants/other/colors.dart';
 import 'package:wm_ppp_4/feature/route/app_route.gr.dart';
+import 'package:wm_ppp_4/product/screens/issue/provider/issue_filter_bottom_sheet_provider.dart';
 import 'package:wm_ppp_4/product/screens/issue/provider/issue_provider.dart';
 import '../../../../../feature/components/appbar/custom_main_appbar.dart';
 import '../../../../../feature/components/cards/custom_issue_list_card.dart';
@@ -22,48 +23,45 @@ class IssueListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-        create: (context) => IssueProvider(),
+        create: (_) => IssueProvider(),
         child: Consumer<IssueProvider>(builder: (context, IssueProvider issueProvider, child) {
           issueProvider.isFetch ? null : issueProvider.getIssueList(1, issueModuleCode);
           issueProvider.isFetchFilter ? null : issueProvider.getFilterValues();
           return Scaffold(
             appBar: CustomMainAppbar(
-              title: const Text(
-                LocaleKeys.issueList,
-                style: TextStyle(color: Colors.black),
-              ),
+              title: const Text(LocaleKeys.issueList, style: TextStyle(color: Colors.black)),
               actions: [
                 IconButton(
                   onPressed: () async {
-                    showModalBottomSheet(
+                    IssueFilterModalBottomSheetProvider provider = Provider.of<IssueFilterModalBottomSheetProvider>(context, listen: false);
+
+                    final response = await showModalBottomSheet(
                       backgroundColor: Colors.transparent,
                       context: context,
                       builder: (context) => IssueFilterModalBottomSheet(
-                        stateList: ['sd,asd'],
+                        stateList: const ['sd,asd'],
                         buildList: issueProvider.buildingFilterNames,
                         floorList: issueProvider.floorFilterNames,
                         wingList: issueProvider.wingFilterNames,
                         selectStateFunction: (String state) {},
-                        selectBuildFunction: (build) {
-                          context.watch<IssueProvider>().setbuildName = build;
-                        },
-                        selectFloorFunction: (floor) {
-                          issueProvider.setfloorName = floor;
-                        },
-                        selectWingFunction: (wing) {
-                          issueProvider.setwingName = wing;
-                        },
+                        selectBuildFunction: issueProvider.setbuildName,
+                        selectFloorFunction: issueProvider.setfloorName,
+                        selectWingFunction: issueProvider.setwingName,
                         filterStartFunction: () {
                           issueProvider.getIssueList(1, issueModuleCode);
                         },
                         taskForMeFunction: () {},
-                        selectedParamList: [issueProvider.buildName, issueProvider.floorName, issueProvider.wingName],
-                        selectedParamListDeleteItem: (item) {
-                          issueProvider.buildName == item.toString() ? issueProvider.setbuildName = '' : null;
-                          issueProvider.getIssueList(1, issueModuleCode);
-                        },
+                        selectedParamList: const [],
+                        selectedParamListDeleteItem: (item) {},
                       ),
                     );
+                    if (response == true) {
+                      provider.deleteServiceCodes(issueProvider);
+                      provider.setChoosenFilterList();
+                      issueProvider.getIssueList(1, issueModuleCode);
+                    } else {
+                      provider.clearList();
+                    }
                   },
                   icon: Icon(AppIcons.filter, color: APPColors.Secondary.black),
                 ),

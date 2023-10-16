@@ -10,8 +10,8 @@ import 'package:wm_ppp_4/feature/l10n/locale_keys.g.dart';
 import 'package:wm_ppp_4/product/screens/issue/provider/issue_action_provider.dart';
 
 class ChangeCfgScreen extends StatelessWidget {
-  ChangeCfgScreen({super.key, required this.issueCode});
-  String issueCode;
+  const ChangeCfgScreen({super.key, required this.issueCode});
+  final String issueCode;
 
   @override
   Widget build(BuildContext context) {
@@ -22,15 +22,16 @@ class ChangeCfgScreen extends StatelessWidget {
       }),
     );
   }
+
   SingleChildScrollView _changeCfgBody(BuildContext context, IssueActionProvider issueActionProvider) {
-              if (issueActionProvider.isSuccessEnterActivity) {
-              snackBar(context, LocaleKeys.processDone, 'success');
-              Navigator.of(context).pop();
-            }
-            if (issueActionProvider.errorAccur) {
-              snackBar(context, LocaleKeys.processCancell, 'error');
-              Navigator.of(context).pop();
-            }
+    if (issueActionProvider.isSuccessEnterActivity) {
+      snackBar(context, LocaleKeys.processDone, 'success');
+      Navigator.of(context).pop();
+    }
+    if (issueActionProvider.errorAccur) {
+      snackBar(context, LocaleKeys.processCancell, 'error');
+      Navigator.of(context).pop();
+    }
     return SingleChildScrollView(
       child: Container(
         width: MediaQuery.of(context).size.width / 1.09,

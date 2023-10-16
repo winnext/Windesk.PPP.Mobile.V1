@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:wm_ppp_4/feature/components/snackBar/snackbar.dart';
-import 'package:wm_ppp_4/product/screens/issue/view/issue_detail_screen.dart';
 import 'package:wm_ppp_4/product/screens/work_order/work_order_detail/view/work_order_detail_screen.dart';
 
 import '../../../service/search_service_repo_impl.dart';

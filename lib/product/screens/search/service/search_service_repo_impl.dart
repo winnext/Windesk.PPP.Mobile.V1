@@ -24,7 +24,6 @@ class SearchServiceRepoImpml extends SearchServiceRepository {
             responseType: ResponseType.json,
           ));
 
-      final data = response.data['result'];
       super.logger.i(response);
       return Left(int.parse(response.data['count'].toString()));
     } catch (error) {

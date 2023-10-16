@@ -70,7 +70,7 @@ class IssueProvider extends ChangeNotifier {
 
   String _buildName = '';
   String get buildName => _buildName;
-  set setbuildName(String buildName) {
+  void setbuildName(String buildName) {
     if (buildName == '') {
       _buildName = '';
       _buildCode = '';
@@ -94,7 +94,7 @@ class IssueProvider extends ChangeNotifier {
 
   String _floorName = '';
   String get floorName => _floorName;
-  set setfloorName(String floorName) {
+  void setfloorName(String floorName) {
     for (int i = 0; i < _floorFilterValues.length; i++) {
       if (_floorFilterValues[i].name == floorName) {
         setfloorCode = _floorFilterValues[i].code.toString();
@@ -113,7 +113,7 @@ class IssueProvider extends ChangeNotifier {
 
   String _wingName = '';
   String get wingName => _wingName;
-  set setwingName(String wingName) {
+  void setwingName(String wingName) {
     for (int i = 0; i < _wingFilterValues.length; i++) {
       if (_wingFilterValues[i].name == wingName) {
         setwingCode = _wingFilterValues[i].code.toString();
@@ -121,6 +121,18 @@ class IssueProvider extends ChangeNotifier {
     }
     _wingName = wingName;
     notifyListeners();
+  }
+
+  void clearWingCode() {
+    _wingCode = '';
+  }
+
+  void clearFloorCode() {
+    _floorCode = '';
+  }
+
+  void clearBuildCode() {
+    _buildCode = '';
   }
 
   String _wingCode = '';
@@ -235,6 +247,8 @@ class IssueProvider extends ChangeNotifier {
       "wing": wingCode,
       "assignee": assigne,
     };
+    print("query: $queryParameters");
+
     _isFetch = true;
     _loading = true;
     _issueListType = issueListType;

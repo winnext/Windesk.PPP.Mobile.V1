@@ -38,10 +38,9 @@ class IssueDetailScreen extends StatelessWidget {
                   IssueFilesScreen(issueCode: issueCode),
                 ],
         ),
-        floatingActionButton: IssueActionButton(
+        floatingActionButton: CustomIssueActionButton(
           issueCode: issueCode,
         ),
-        
       ),
     );
   }
