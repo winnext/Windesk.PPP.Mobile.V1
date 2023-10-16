@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 import 'package:wm_ppp_4/feature/components/cards/custom_issue_activities_card.dart';
-import 'package:wm_ppp_4/feature/components/cards/custom_nodata_card.dart';
 import 'package:wm_ppp_4/feature/components/loading/custom_loading_indicator.dart';
 import 'package:wm_ppp_4/product/screens/issue/provider/issue_provider.dart';
 

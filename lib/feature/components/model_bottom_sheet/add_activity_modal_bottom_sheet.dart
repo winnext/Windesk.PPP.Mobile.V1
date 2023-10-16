@@ -14,7 +14,7 @@ import 'package:wm_ppp_4/product/screens/issue/provider/issue_addphoto_provider.
 
 class IssueActionModal extends StatelessWidget {
   const IssueActionModal({super.key, required this.issueCode});
-  
+
   final String issueCode;
   @override
   Widget build(BuildContext context) {
@@ -26,6 +26,7 @@ class IssueActionModal extends StatelessWidget {
         ],
         child: Consumer2<IssueActionProvider, IssueAddPhotoProvider>(
           builder: (context, IssueActionProvider issueProvider, IssueAddPhotoProvider issueAddPhotoProvider, child) {
+            issueProvider.isFetch ? null : issueProvider.getIssueOperations(issueCode);
             if (issueAddPhotoProvider.isSuccess || issueProvider.isSuccessTakeOver) {
               snackBar(context, LocaleKeys.processDone, 'success');
               Navigator.of(context).pop<bool>(true);
@@ -34,77 +35,80 @@ class IssueActionModal extends StatelessWidget {
               snackBar(context, LocaleKeys.processCancell + issueProvider.errorMessage, 'error');
               Navigator.of(context).pop<bool>(false);
             }
-            issueProvider.isFetch ? null : issueProvider.getIssueOperations(issueCode);
-            return Center(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    issueProvider.issueOperationList.isPhoto == true
-                        ? _operationWidget(
-                            size, issueProvider, LocaleKeys.addPhoto, issueProvider.isPhotoSectionOpen, issueProvider.setisPhotoSectionOpen)
-                        : Container(),
-                    issueProvider.isPhotoSectionOpen ? addPhotoBottomSheet(context, size, issueAddPhotoProvider) : Container(),
-                    issueProvider.issueOperationList.isActivity == true
-                        ? _operationWidget(
-                            size, issueProvider, LocaleKeys.addActivity, issueProvider.isActivitySectionOpen, issueProvider.setisActivitySectionOpen)
-                        : Container(),
-                    issueProvider.isActivitySectionOpen
-                        ? AddActivity(
-                            issueCode: issueCode,
-                          )
-                        : Container(),
-                    issueProvider.issueOperationList.isChangeCfg == true
-                        ? _operationWidget(
-                            size, issueProvider, LocaleKeys.changeCfg, issueProvider.isCfgSectionOpen, issueProvider.setisCfgSectionOpen)
-                        : Container(),
-                    issueProvider.isCfgSectionOpen
-                        ? ChangeCfgScreen(
-                            issueCode: issueCode,
-                          )
-                        : Container(),
-                    issueProvider.issueOperationList.isTakeOver == true
-                        ? _operationWidget(
-                            size, issueProvider, LocaleKeys.takeOver, issueProvider.isTakeOverSectionOpen, issueProvider.setisTakeOverSectionOpen)
-                        : Container(),
-                    issueProvider.isTakeOverSectionOpen
-                        ? NeedApprovalForIssueComponent(
-                            title: LocaleKeys.takeOver,
-                            explanation: LocaleKeys.sureAboutTakeOverIssue,
-                            onConfirm: () {
-                              issueProvider.takeOverIssue(issueCode);
-                            },
-                            confirmButtonText: LocaleKeys.okay)
-                        : Container(),
-                    issueProvider.issueOperationList.isPlannedCancel == true
-                        ? _operationWidget(size, issueProvider, LocaleKeys.plannedCancel, issueProvider.isPlannedCancelSectionOpen,
-                            issueProvider.setisPlannedSectionOpen)
-                        : Container(),
-                    issueProvider.isPlannedCancelSectionOpen ? 
-                    NeedApprovalForIssueComponent(
-                            title: LocaleKeys.plannedDateRequest,
-                            explanation: LocaleKeys.sureAboutPlannedCancel,
-                            onConfirm: () {
-                              issueProvider.cancelIssuePlanned(issueCode);
-                            },
-                            confirmButtonText: LocaleKeys.okay) : Container(),
-                    issueProvider.issueOperationList.isSparepart == true
-                        ? _operationWidget(size, issueProvider, LocaleKeys.sparepartNeed, issueProvider.isSparepartSectionOpen,
-                            issueProvider.setisSparepartSectionOpen)
-                        : Container(),
-                    issueProvider.isSparepartSectionOpen ?
-                        NeedApprovalForIssueComponent(
-                            title: LocaleKeys.requestForSparepart,
-                            explanation: LocaleKeys.sureAboutKeepProcess,
-                            onConfirm: () {
-                              issueProvider.createSparepartIssue(issueCode);
-                            },
-                            confirmButtonText: LocaleKeys.okay) : Container()
-                  ],
-                ),
-              ),
-            );
+            return _activityBody(issueProvider, size, context, issueAddPhotoProvider);
           },
         ));
+  }
+
+  Center _activityBody(IssueActionProvider issueProvider, Size size, BuildContext context, IssueAddPhotoProvider issueAddPhotoProvider) {
+    return Center(
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            issueProvider.issueOperationList.isPhoto == true
+                ? _operationWidget(size, issueProvider, LocaleKeys.addPhoto, issueProvider.isPhotoSectionOpen, issueProvider.setisPhotoSectionOpen)
+                : Container(),
+            issueProvider.isPhotoSectionOpen ? addPhotoBottomSheet(context, size, issueAddPhotoProvider) : Container(),
+            issueProvider.issueOperationList.isActivity == true
+                ? _operationWidget(
+                    size, issueProvider, LocaleKeys.addActivity, issueProvider.isActivitySectionOpen, issueProvider.setisActivitySectionOpen)
+                : Container(),
+            issueProvider.isActivitySectionOpen
+                ? AddActivity(
+                    issueCode: issueCode,
+                  )
+                : Container(),
+            issueProvider.issueOperationList.isChangeCfg == true
+                ? _operationWidget(size, issueProvider, LocaleKeys.changeCfg, issueProvider.isCfgSectionOpen, issueProvider.setisCfgSectionOpen)
+                : Container(),
+            issueProvider.isCfgSectionOpen
+                ? ChangeCfgScreen(
+                    issueCode: issueCode,
+                  )
+                : Container(),
+            issueProvider.issueOperationList.isTakeOver == true
+                ? _operationWidget(
+                    size, issueProvider, LocaleKeys.takeOver, issueProvider.isTakeOverSectionOpen, issueProvider.setisTakeOverSectionOpen)
+                : Container(),
+            issueProvider.isTakeOverSectionOpen
+                ? NeedApprovalForIssueComponent(
+                    title: LocaleKeys.takeOver,
+                    explanation: LocaleKeys.sureAboutTakeOverIssue,
+                    onConfirm: () {
+                      issueProvider.takeOverIssue(issueCode);
+                    },
+                    confirmButtonText: LocaleKeys.okay)
+                : Container(),
+            issueProvider.issueOperationList.isPlannedCancel == true
+                ? _operationWidget(
+                    size, issueProvider, LocaleKeys.plannedCancel, issueProvider.isPlannedCancelSectionOpen, issueProvider.setisPlannedSectionOpen)
+                : Container(),
+            issueProvider.isPlannedCancelSectionOpen
+                ? NeedApprovalForIssueComponent(
+                    title: LocaleKeys.plannedDateRequest,
+                    explanation: LocaleKeys.sureAboutPlannedCancel,
+                    onConfirm: () {
+                      issueProvider.cancelIssuePlanned(issueCode);
+                    },
+                    confirmButtonText: LocaleKeys.okay)
+                : Container(),
+            issueProvider.issueOperationList.isSparepart == true
+                ? _operationWidget(
+                    size, issueProvider, LocaleKeys.sparepartNeed, issueProvider.isSparepartSectionOpen, issueProvider.setisSparepartSectionOpen)
+                : Container(),
+            issueProvider.isSparepartSectionOpen
+                ? NeedApprovalForIssueComponent(
+                    title: LocaleKeys.requestForSparepart,
+                    explanation: LocaleKeys.sureAboutKeepProcess,
+                    onConfirm: () {
+                      issueProvider.createSparepartIssue(issueCode);
+                    },
+                    confirmButtonText: LocaleKeys.okay)
+                : Container()
+          ],
+        ),
+      ),
+    );
   }
 
   Container addPhotoBottomSheet(BuildContext context, Size size, IssueAddPhotoProvider issueAddPhotoProvider) {

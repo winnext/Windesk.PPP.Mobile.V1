@@ -49,6 +49,7 @@ class IssueAddPhotoProvider extends ChangeNotifier {
           if (l)
             {
               isSuccess = true,
+              
             }
           else
             {

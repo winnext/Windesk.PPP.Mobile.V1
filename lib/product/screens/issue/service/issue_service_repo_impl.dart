@@ -139,6 +139,7 @@ class IssueServiceRepoImpml extends IssueServiceRepository {
   @override
   Future<Either<List<IssueAvailableActivities>, CustomServiceException>> getAvailableActivities(String issueCode, String userToken) async {
     String url = '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=getAvailableActivities&issueCode=$issueCode&module=issue';
+    
     List<IssueAvailableActivities> issueAttachmentsModel;
 
     try {

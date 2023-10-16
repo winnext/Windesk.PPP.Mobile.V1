@@ -45,7 +45,7 @@ class IssueListScreen extends StatelessWidget {
                         wingList: issueProvider.wingFilterNames,
                         selectStateFunction: (String state) {},
                         selectBuildFunction: (build) {
-                          context.watch<IssueProvider>().setbuildName = build;
+                          issueProvider.setbuildName = build;
                         },
                         selectFloorFunction: (floor) {
                           issueProvider.setfloorName = floor;

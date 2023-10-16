@@ -43,7 +43,9 @@ class IssueActionProvider extends ChangeNotifier {
   bool _loading = false;
   bool get loading => _loading;
 
-  bool isSuccessTakeOver = false;
+  bool _isSuccessTakeOver = false;
+  bool get isSuccessTakeOver => _isSuccessTakeOver;
+
   bool isSuccessEnterActivity = false;
   bool isSuccessChangeCfg = false;
 
@@ -131,16 +133,16 @@ class IssueActionProvider extends ChangeNotifier {
   IssueOperationList _issueOperationList = const IssueOperationList();
   IssueOperationList get issueOperationList => _issueOperationList;
 
-  List<IssueAvailableActivities> _availableActivities = [];
+  final List<IssueAvailableActivities> _availableActivities = [];
   List<IssueAvailableActivities> get availableActivities => _availableActivities;
 
-  List<String> _availableActivitiesName = [];
+  final List<String> _availableActivitiesName = [];
   List<String> get availableActivitiesName => _availableActivitiesName;
 
-  List<LiveSelectAsgGroupsModel> _getLiveSelectAsgGroups = [];
+  final List<LiveSelectAsgGroupsModel> _getLiveSelectAsgGroups = [];
   List<LiveSelectAsgGroupsModel> get getLiveSelectAsgGroups => _getLiveSelectAsgGroups;
 
-  List<String> _getLiveSelectAsgGroupsName = [];
+  final List<String> _getLiveSelectAsgGroupsName = [];
   List<String> get getLiveSelectAsgGroupsName => _getLiveSelectAsgGroupsName;
 
   final List<LiveSelectAsgUsersModel> _getLiveSelectAsgUsers = [];
@@ -225,7 +227,6 @@ class IssueActionProvider extends ChangeNotifier {
     clearAll();
     for (int i = 0; i < _availableActivities.length; i++) {
       if (_availableActivities[i].name == activityName) {
-        //print('aasdadsasdasdsdasad'+_availableActivities[i].minDescLength.toString());
         _isBarcodeSpace = _availableActivities[i].barcodeSpace == 'Y' ? true : false;
         _isadditionaltimeInput = _availableActivities[i].additionaltimeInput == 'Y' ? true : false;
         _minDescLength = _availableActivities[i].minDescLength != null ? true : false;
@@ -279,14 +280,13 @@ class IssueActionProvider extends ChangeNotifier {
 
   void takeOverIssue(issuecode) async {
     _loading = true;
-
     String userToken = await SharedManager().getString(SharedEnum.deviceId);
     String userCode = await SharedManager().getString(SharedEnum.userCode);
 
     final response = await _issueServiceRepository.takeOverIssue(userToken, userCode, issuecode);
     response.fold(
         (l) => {
-              isSuccessTakeOver = true,
+              _isSuccessTakeOver = true,
             },
         (r) => {
               _errorAccur = true,
@@ -295,8 +295,8 @@ class IssueActionProvider extends ChangeNotifier {
     _loading = false;
     notifyListeners();
 
-    Future.delayed(const Duration(seconds: 2), () {
-      isSuccessTakeOver = false;
+    Future.delayed(const Duration(seconds: 10), () {
+      _isSuccessTakeOver = false;
       _errorAccur = false;
       notifyListeners();
     });
@@ -309,7 +309,7 @@ class IssueActionProvider extends ChangeNotifier {
     final response = await _issueServiceRepository.createSparepartIssue(userToken, issuecode);
     response.fold(
         (l) => {
-              isSuccessTakeOver = true,
+              _isSuccessTakeOver = true,
             },
         (r) => {
               _errorAccur = true,
@@ -319,7 +319,7 @@ class IssueActionProvider extends ChangeNotifier {
     notifyListeners();
 
     Future.delayed(const Duration(seconds: 2), () {
-      isSuccessTakeOver = false;
+      _isSuccessTakeOver = false;
       _errorAccur = false;
       notifyListeners();
     });
@@ -334,7 +334,7 @@ class IssueActionProvider extends ChangeNotifier {
     final response = await _issueServiceRepository.cancelIssuePlanned(userToken, userName, issuecode);
     response.fold(
         (l) => {
-              isSuccessTakeOver = true,
+              _isSuccessTakeOver = true,
             },
         (r) => {
               _errorAccur = true,
@@ -344,7 +344,7 @@ class IssueActionProvider extends ChangeNotifier {
     notifyListeners();
 
     Future.delayed(const Duration(seconds: 1), () {
-      isSuccessTakeOver = false;
+      _isSuccessTakeOver = false;
       _errorAccur = false;
       notifyListeners();
     });
@@ -355,6 +355,7 @@ class IssueActionProvider extends ChangeNotifier {
     _loading = true;
     notifyListeners();
     final response = await _issueServiceRepository.getAvailableActivities(issuecode, userToken);
+
     _availableActivitiesName.clear();
     _availableActivities.clear();
     response.fold(
@@ -369,8 +370,8 @@ class IssueActionProvider extends ChangeNotifier {
         (r) => {
               _loading = false,
             });
-            
     _isFetchActivity = false;
+
     notifyListeners();
   }
 
@@ -422,7 +423,7 @@ class IssueActionProvider extends ChangeNotifier {
         (r) => {
               _loading = false,
             });
-    _isFetchActivity = false;
+    //_isFetchActivity = false;
     _isassigneeccType = false;
     notifyListeners();
   }
@@ -490,7 +491,6 @@ class IssueActionProvider extends ChangeNotifier {
 
     notifyListeners();
     Future.delayed(const Duration(seconds: 2), () {
-      isSuccessTakeOver = false;
       isSuccessEnterActivity = false;
       _errorAccur = false;
       notifyListeners();
