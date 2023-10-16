@@ -22,7 +22,7 @@ class IssueSummaryScreen extends StatelessWidget {
           builder: (context, IssueProvider issueProvider, child) {
             issueProvider.isFetch ? null : issueProvider.getIssueSummary(issueCode);
             issueProvider.isFetchSummary ? null : issueProvider.getIssueTimeInfo(issueCode);
-            return issueProvider.loading ? CustomLoadingIndicator() : _summaryBody(size, issueProvider);
+            return issueProvider.loading ? const CustomLoadingIndicator() : _summaryBody(size, issueProvider);
           },
         ));
   }

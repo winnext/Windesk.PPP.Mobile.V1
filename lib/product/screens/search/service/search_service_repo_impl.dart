@@ -9,6 +9,437 @@ import '../../../../feature/database/shared_manager.dart';
 import '../../../../feature/enums/shared_enums.dart';
 
 class SearchServiceRepoImpml extends SearchServiceRepository {
+  Future mahalAraMahalDetayAnlikIsEmri(spaceCode) async {
+    final String userName =
+        await SharedManager().getString(SharedEnum.userCode);
+    String deviceId = await SharedManager().getString(SharedEnum.deviceId);
+    String url =
+        // ignore: prefer_interpolation_to_compose_strings
+        '${ServiceTools.baseUrlV1 + ServiceTools.tokenV1 + deviceId + '&action=getWorkorderFromCode&username=' + userName.toString() + '&spaceCode=' + spaceCode}&status=~Closed%2C~Cancelled&module=&entityCode=&type=reactive';
+
+    try {
+      BaseOptions options = BaseOptions(
+          baseUrl: url,
+          receiveDataWhenStatusError: true,
+          connectTimeout: const Duration(seconds: 60), // 60 seconds
+          receiveTimeout: const Duration(seconds: 60) // 60 seconds
+          );
+
+      Dio dio = Dio(options);
+      final response = await dio.get(url);
+
+      if (response.data['result'] == 'success') {
+        return response.data['records'];
+      } else {
+        return false;
+      }
+      // ignore: deprecated_member_use
+    } on DioError {
+      return 'Bağlantı Zaman Aşımına Uğradı Lütfen Ağınızı Kontrol Ediniz';
+    }
+  }
+
+  Future mahalAraMahalDetayBakimIsEmri(spaceCode) async {
+    final String userName =
+        await SharedManager().getString(SharedEnum.userCode);
+    String deviceId = await SharedManager().getString(SharedEnum.deviceId);
+    String url =
+        // ignore: prefer_interpolation_to_compose_strings
+        '${ServiceTools.baseUrlV1 + ServiceTools.tokenV1 + deviceId + '&action=getWorkorderFromCode&username=' + userName.toString() + '&spaceCode=' + spaceCode}&status=~Closed%2C~Cancelled&module=submaintenance&entityCode=&type=';
+
+    try {
+      BaseOptions options = BaseOptions(
+          baseUrl: url,
+          receiveDataWhenStatusError: true,
+          connectTimeout: const Duration(seconds: 60), // 60 seconds
+          receiveTimeout: const Duration(seconds: 60) // 60 seconds
+          );
+
+      Dio dio = Dio(options);
+      final response = await dio.get(url);
+
+      if (response.data['result'] == 'success') {
+        return response.data['records'];
+      } else {
+        return false;
+      }
+      // ignore: deprecated_member_use
+    } on DioError {
+      return 'Bağlantı Zaman Aşımına Uğradı Lütfen Ağınızı Kontrol Ediniz';
+    }
+  }
+
+  Future mahalAramaMahalDetaySlaApi(spaceCode) async {
+    final String userName =
+        await SharedManager().getString(SharedEnum.userCode);
+    String deviceId = await SharedManager().getString(SharedEnum.deviceId);
+
+    String url =
+        // ignore: prefer_interpolation_to_compose_strings
+        '${ServiceTools.baseUrlV1 + ServiceTools.tokenV1 + deviceId + '&action=getIssuesFromCode&username=' + userName.toString() + '&spaceCode=' + spaceCode}&parentStatus=openParentStatus&cmdbCode=';
+    try {
+      BaseOptions options = BaseOptions(
+          baseUrl: url,
+          receiveDataWhenStatusError: true,
+          connectTimeout: const Duration(seconds: 60), // 60 seconds
+          receiveTimeout: const Duration(seconds: 60) // 60 seconds
+          );
+
+      Dio dio = Dio(options);
+      final response = await dio.get(url);
+
+      if (response.data['result'] == 'success') {
+        return response.data['records'];
+      } else {
+        return false;
+      }
+      // ignore: deprecated_member_use
+    } on DioError {
+      return 'Bağlantı Zaman Aşımına Uğradı Lütfen Ağınızı Kontrol Ediniz';
+    }
+  }
+
+  Future mahalAramaMahalDetaySummaryApi(spaceCode) async {
+    final String userName =
+        await SharedManager().getString(SharedEnum.userCode);
+    String deviceId = await SharedManager().getString(SharedEnum.deviceId);
+    String url =
+        // ignore: prefer_interpolation_to_compose_strings
+        '$ServiceTools.baseUrlV1$ServiceTools.tokenV1$deviceId&action=getSpaceDetail&username=$userName&spaceCode=' +
+            spaceCode;
+    try {
+      BaseOptions options = BaseOptions(
+          baseUrl: url,
+          receiveDataWhenStatusError: true,
+          connectTimeout: const Duration(seconds: 60), // 60 seconds
+          receiveTimeout: const Duration(seconds: 60) // 60 seconds
+          );
+
+      Dio dio = Dio(options);
+      final response = await dio.get(url);
+
+      //print(response);
+      if (response.data['result'] == 'success') {
+        return response.data['detail'];
+      } else {
+        return false;
+      }
+      // ignore: deprecated_member_use
+    } on DioError {
+      return 'Bağlantı Zaman Aşımına Uğradı Lütfen Ağınızı Kontrol Ediniz';
+    }
+  }
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+
+  Future mahalAraVarlikDetayAnlikIsEmri(entityCode) async {
+    final String userName =
+        await SharedManager().getString(SharedEnum.userCode);
+    String deviceId = await SharedManager().getString(SharedEnum.deviceId);
+    String url =
+        // ignore: prefer_interpolation_to_compose_strings
+        '${ServiceTools.baseUrlV1 + ServiceTools.tokenV1 + deviceId + '&action=getWorkorderFromCode&username=' + userName.toString() + '&entityCode=' + entityCode}&status=~Closed%2C~Cancelled&module=&spaceCode=&type=reactive';
+
+    try {
+      BaseOptions options = BaseOptions(
+          baseUrl: url,
+          receiveDataWhenStatusError: true,
+          connectTimeout: const Duration(seconds: 60), // 60 seconds
+          receiveTimeout: const Duration(seconds: 60) // 60 seconds
+          );
+
+      Dio dio = Dio(options);
+      final response = await dio.get(url);
+
+      if (response.data['result'] == 'success') {
+        return response.data['records'];
+      } else {
+        return false;
+      }
+      // ignore: deprecated_member_use
+    } on DioError {
+      return 'Bağlantı Zaman Aşımına Uğradı Lütfen Ağınızı Kontrol Ediniz';
+    }
+  }
+
+  Future mahalAraVarlikDetayBakimIsEmri(spaceCode) async {
+    final String userName =
+        await SharedManager().getString(SharedEnum.userCode);
+    String deviceId = await SharedManager().getString(SharedEnum.deviceId);
+
+    String url =
+        // ignore: prefer_interpolation_to_compose_strings
+        '${ServiceTools.baseUrlV1 + ServiceTools.tokenV1 + deviceId + '&action=getWorkorderFromCode&username=' + userName.toString() + '&entityCode=' + spaceCode}&status=~Closed%2C~Cancelled&module=submaintenance&spaceCode=&type=';
+
+    try {
+      BaseOptions options = BaseOptions(
+          baseUrl: url,
+          receiveDataWhenStatusError: true,
+          connectTimeout: const Duration(seconds: 60), // 60 seconds
+          receiveTimeout: const Duration(seconds: 60) // 60 seconds
+          );
+
+      Dio dio = Dio(options);
+      final response = await dio.get(url);
+
+      if (response.data['result'] == 'success') {
+        return response.data['records'];
+      } else {
+        return false;
+      }
+      // ignore: deprecated_member_use
+    } on DioError {
+      return 'Bağlantı Zaman Aşımına Uğradı Lütfen Ağınızı Kontrol Ediniz';
+    }
+  }
+
+  Future mahalAramaVarlikDetaySlaApi(cmdbCode) async {
+    final String userName =
+        await SharedManager().getString(SharedEnum.userCode);
+    String deviceId = await SharedManager().getString(SharedEnum.deviceId);
+
+    String url =
+        // ignore: prefer_interpolation_to_compose_strings
+        '${ServiceTools.baseUrlV1 + ServiceTools.tokenV1 + deviceId + '&action=getIssuesFromCode&username=' + userName.toString() + '&cmdbCode=' + cmdbCode}&parentStatus=openParentStatus&spaceCode=';
+    try {
+      BaseOptions options = BaseOptions(
+          baseUrl: url,
+          receiveDataWhenStatusError: true,
+          connectTimeout: const Duration(seconds: 60), // 60 seconds
+          receiveTimeout: const Duration(seconds: 60) // 60 seconds
+          );
+
+      Dio dio = Dio(options);
+      final response = await dio.get(url);
+
+      if (response.data['result'] == 'success') {
+        return response.data['records'];
+      } else {
+        return false;
+      }
+      // ignore: deprecated_member_use
+    } on DioError {
+      return 'Bağlantı Zaman Aşımına Uğradı Lütfen Ağınızı Kontrol Ediniz';
+    }
+  }
+
+  Future mahalAramaVarlikDetaySummaryApi(caseNo) async {
+    final String userName =
+        await SharedManager().getString(SharedEnum.userCode);
+    String deviceId = await SharedManager().getString(SharedEnum.deviceId);
+    String url =
+        // ignore: prefer_interpolation_to_compose_strings
+        '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$deviceId&action=getEntityDetail&username=$userName&case_no=' +
+            caseNo;
+    try {
+      BaseOptions options = BaseOptions(
+          baseUrl: url,
+          receiveDataWhenStatusError: true,
+          connectTimeout: const Duration(seconds: 60), // 60 seconds
+          receiveTimeout: const Duration(seconds: 60) // 60 seconds
+          );
+
+      Dio dio = Dio(options);
+      final response = await dio.get(url);
+
+      if (response.data['result'] == 'success') {
+        return response.data['detail'];
+      } else {
+        return false;
+      }
+    // ignore: deprecated_member_use
+    } on DioError {
+      return 'Bağlantı Zaman Aşımına Uğradı Lütfen Ağınızı Kontrol Ediniz';
+    }
+  }
+
+  Future mahalAramaListesiApi(
+    mahalKodu,
+    mahalAdi,
+    binaKodu,
+    katKodu,
+    kanatKodu,
+    sinifKodu,
+    grupKodu,
+    dataSayisi,
+    sayfa,
+  ) async {
+    final String userName =
+        await SharedManager().getString(SharedEnum.userCode);
+    String deviceId = await SharedManager().getString(SharedEnum.deviceId);
+
+    int limitStart = dataSayisi * (sayfa - 1);
+    int limitEnd = dataSayisi * sayfa;
+
+    String mahalAramaListesiUrl =
+        '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$deviceId&action=getSpace&username=$userName&spaceCode=$mahalKodu&spaceName=$mahalAdi&buildingCode=$binaKodu&floorCode=$katKodu&blockCode=$kanatKodu&spaceClass=$sinifKodu&groupNo=$grupKodu&limitStart=$limitStart&limitEnd=$limitEnd';
+
+    try {
+      BaseOptions options = BaseOptions(
+          baseUrl: mahalAramaListesiUrl,
+          receiveDataWhenStatusError: true,
+          connectTimeout: const Duration(seconds: 60), // 60 seconds
+          receiveTimeout: const Duration(seconds: 60) // 60 seconds
+          );
+
+      Dio dio = Dio(options);
+      final response = await dio.get(mahalAramaListesiUrl);
+
+      //print(response);
+      if (response.data['result'] == 'success') {
+        return response.data['records'];
+      } else {
+        return [];
+      }
+      //print(response);
+    // ignore: deprecated_member_use
+    } on DioError {
+      return 'Bağlantı Zaman Aşımına Uğradı Lütfen Ağınızı Kontrol Ediniz';
+    }
+  }
+
+  Future mahalAramaKampus() async {
+    String deviceId = await SharedManager().getString(SharedEnum.deviceId);
+
+    String mahalAramaKampusUrl =
+        '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$deviceId&action=getBuildings';
+
+    try {
+      BaseOptions options = BaseOptions(
+          baseUrl: mahalAramaKampusUrl,
+          receiveDataWhenStatusError: true,
+          connectTimeout: const Duration(seconds: 60), // 60 seconds
+          receiveTimeout: const Duration(seconds: 60) // 60 seconds
+          );
+
+      Dio dio = Dio(options);
+      final response = await dio.get(mahalAramaKampusUrl);
+      if (response.data['result'] == 'success') {
+        return response.data['records'];
+      } else {
+        return false;
+      }
+    // ignore: deprecated_member_use
+    } on DioError {
+      return 'Bağlantı Zaman Aşımına Uğradı Lütfen Ağınızı Kontrol Ediniz';
+    }
+  }
+
+  Future mahalAramaBina(String buildingCode) async {
+    String deviceId = await SharedManager().getString(SharedEnum.deviceId);
+
+    String mahalAramaBinaUrl =
+        '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$deviceId&action=getFloors&buildingCode=$buildingCode';
+
+    try {
+      BaseOptions options = BaseOptions(
+          baseUrl: mahalAramaBinaUrl,
+          receiveDataWhenStatusError: true,
+          connectTimeout: const Duration(seconds: 60), // 60 seconds
+          receiveTimeout: const Duration(seconds: 60) // 60 seconds
+          );
+
+      Dio dio = Dio(options);
+      final response = await dio.get(mahalAramaBinaUrl);
+      //print(response.data['records'][0]);∂
+      if (response.data['result'] == 'success') {
+        return response.data['records'];
+      } else {
+        return false;
+      }
+    // ignore: deprecated_member_use
+    } on DioError {
+      return 'Bağlantı Zaman Aşımına Uğradı Lütfen Ağınızı Kontrol Ediniz';
+    }
+  }
+
+  Future mahalAramaKat(String floorCode) async {
+    String deviceId = await SharedManager().getString(SharedEnum.deviceId);
+
+    String mahalAramaBinaUrl =
+        '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$deviceId&action=getBlocks&floorCode=$floorCode';
+
+    try {
+      BaseOptions options = BaseOptions(
+          baseUrl: mahalAramaBinaUrl,
+          receiveDataWhenStatusError: true,
+          connectTimeout: const Duration(seconds: 60), // 60 seconds
+          receiveTimeout: const Duration(seconds: 60) // 60 seconds
+          );
+
+      Dio dio = Dio(options);
+      final response = await dio.get(mahalAramaBinaUrl);
+      //print(response.data['records']);
+      if (response.data['result'] == 'success') {
+        return response.data['records'];
+      } else {
+        return false;
+      }
+    // ignore: deprecated_member_use
+    } on DioError {
+      return 'Bağlantı Zaman Aşımına Uğradı Lütfen Ağınızı Kontrol Ediniz';
+    }
+  }
+
+  Future mahalAramaKanat(String blockCode) async {
+    String deviceId = await SharedManager().getString(SharedEnum.deviceId);
+
+    String mahalAramaBinaUrl =
+        '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$deviceId&action=getSpaces&blockCode=$blockCode';
+
+    try {
+      BaseOptions options = BaseOptions(
+          baseUrl: mahalAramaBinaUrl,
+          receiveDataWhenStatusError: true,
+          connectTimeout: const Duration(seconds: 60), // 60 seconds
+          receiveTimeout: const Duration(seconds: 60) // 60 seconds
+          );
+
+      Dio dio = Dio(options);
+      final response = await dio.get(mahalAramaBinaUrl);
+      if (response.data['result'] == 'success') {
+        return response.data['records'];
+      } else {
+        return false;
+      }
+    // ignore: deprecated_member_use
+    } on DioError {
+      return 'Bağlantı Zaman Aşımına Uğradı Lütfen Ağınızı Kontrol Ediniz';
+    }
+  }
+
+  Future mahalAramaGrup() async {
+    String deviceId = await SharedManager().getString(SharedEnum.deviceId);
+
+    String mahalAramaGrupUrl =
+        '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$deviceId&action=getGroups';
+
+    try {
+      BaseOptions options = BaseOptions(
+          baseUrl: mahalAramaGrupUrl,
+          receiveDataWhenStatusError: true,
+          connectTimeout: const Duration(seconds: 60), // 60 seconds
+          receiveTimeout: const Duration(seconds: 60) // 60 seconds
+          );
+
+      Dio dio = Dio(options);
+      final response = await dio.get(mahalAramaGrupUrl);
+
+      if (response.data['result'] == 'success') {
+        //print(response.data['records']);
+        return response.data['records'];
+      } else {
+        return false;
+      }
+    // ignore: deprecated_member_use
+    } on DioError {
+      return 'Bağlantı Zaman Aşımına Uğradı Lütfen Ağınızı Kontrol Ediniz';
+    }
+  }
+
   @override
   Future<Either<int, CustomServiceException>> checkIssueByAuth(
       String issueCode) async {
@@ -24,7 +455,6 @@ class SearchServiceRepoImpml extends SearchServiceRepository {
             responseType: ResponseType.json,
           ));
 
-      final data = response.data['result'];
       super.logger.i(response);
       return Left(int.parse(response.data['count'].toString()));
     } catch (error) {

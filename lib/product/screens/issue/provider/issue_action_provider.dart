@@ -131,16 +131,16 @@ class IssueActionProvider extends ChangeNotifier {
   IssueOperationList _issueOperationList = const IssueOperationList();
   IssueOperationList get issueOperationList => _issueOperationList;
 
-  List<IssueAvailableActivities> _availableActivities = [];
+  final List<IssueAvailableActivities> _availableActivities = [];
   List<IssueAvailableActivities> get availableActivities => _availableActivities;
 
-  List<String> _availableActivitiesName = [];
+  final List<String> _availableActivitiesName = [];
   List<String> get availableActivitiesName => _availableActivitiesName;
 
-  List<LiveSelectAsgGroupsModel> _getLiveSelectAsgGroups = [];
+  final List<LiveSelectAsgGroupsModel> _getLiveSelectAsgGroups = [];
   List<LiveSelectAsgGroupsModel> get getLiveSelectAsgGroups => _getLiveSelectAsgGroups;
 
-  List<String> _getLiveSelectAsgGroupsName = [];
+  final List<String> _getLiveSelectAsgGroupsName = [];
   List<String> get getLiveSelectAsgGroupsName => _getLiveSelectAsgGroupsName;
 
   final List<LiveSelectAsgUsersModel> _getLiveSelectAsgUsers = [];

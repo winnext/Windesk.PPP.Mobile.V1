@@ -4,9 +4,9 @@ import 'package:provider/provider.dart';
 import 'package:wm_ppp_4/feature/components/model_bottom_sheet/add_activity_modal_bottom_sheet.dart';
 import 'package:wm_ppp_4/feature/constants/other/colors.dart';
 import 'package:wm_ppp_4/feature/route/app_route.gr.dart';
-import 'package:wm_ppp_4/product/screens/issue/provider/issue_action_provider.dart';
 import 'package:wm_ppp_4/product/screens/issue/provider/issue_provider.dart';
 
+// ignore: must_be_immutable
 class IssueActionButton extends StatefulWidget {
   IssueActionButton({super.key, required this.issueCode});
 
@@ -31,6 +31,7 @@ class _IssueActionButtonState extends State<IssueActionButton> {
                 builder: (context) => IssueActionModal(issueCode: widget.issueCode),
               );
               if (result == true) {
+                // ignore: use_build_context_synchronously
                 context.router.popAndPush(IssueDetailScreen(issueCode: widget.issueCode));
               }
             },

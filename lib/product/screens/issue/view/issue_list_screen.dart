@@ -39,7 +39,7 @@ class IssueListScreen extends StatelessWidget {
                       backgroundColor: Colors.transparent,
                       context: context,
                       builder: (context) => IssueFilterModalBottomSheet(
-                        stateList: ['sd,asd'],
+                        stateList: const ['sd,asd'],
                         buildList: issueProvider.buildingFilterNames,
                         floorList: issueProvider.floorFilterNames,
                         wingList: issueProvider.wingFilterNames,
