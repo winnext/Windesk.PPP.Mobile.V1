@@ -9,6 +9,7 @@ import 'package:wm_ppp_4/feature/constants/other/colors.dart';
 import 'package:wm_ppp_4/feature/l10n/locale_keys.g.dart';
 import 'package:wm_ppp_4/product/screens/issue/provider/issue_action_provider.dart';
 
+// ignore: must_be_immutable
 class ChangeCfgScreen extends StatelessWidget {
   const ChangeCfgScreen({super.key, required this.issueCode});
   final String issueCode;

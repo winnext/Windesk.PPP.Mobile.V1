@@ -247,7 +247,6 @@ class IssueProvider extends ChangeNotifier {
       "wing": wingCode,
       "assignee": assigne,
     };
-    print("query: $queryParameters");
 
     _isFetch = true;
     _loading = true;

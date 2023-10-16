@@ -8,7 +8,6 @@ import 'package:wm_ppp_4/product/screens/issue/provider/issue_provider.dart';
 
 class CustomIssueActionButton extends StatefulWidget {
   const CustomIssueActionButton({super.key, required this.issueCode});
-
   final String issueCode;
 
   @override

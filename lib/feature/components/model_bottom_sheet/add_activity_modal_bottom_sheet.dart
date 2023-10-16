@@ -21,12 +21,16 @@ class IssueActionModal extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return MultiProvider(
         providers: [
-          ChangeNotifierProvider<IssueActionProvider>(create: (_) => IssueActionProvider()),
-          ChangeNotifierProvider<IssueAddPhotoProvider>(create: (_) => IssueAddPhotoProvider()),
+          ChangeNotifierProvider<IssueActionProvider>(
+              create: (_) => IssueActionProvider()),
+          ChangeNotifierProvider<IssueAddPhotoProvider>(
+              create: (_) => IssueAddPhotoProvider()),
         ],
         child: Consumer2<IssueActionProvider, IssueAddPhotoProvider>(
-          builder: (context, IssueActionProvider issueProvider, IssueAddPhotoProvider issueAddPhotoProvider, child) {
-            if (issueAddPhotoProvider.isSuccess || issueProvider.isSuccessTakeOver) {
+          builder: (context, IssueActionProvider issueProvider,
+              IssueAddPhotoProvider issueAddPhotoProvider, child) {
+            if (issueAddPhotoProvider.isSuccess ||
+                issueProvider.isSuccessTakeOver) {
               snackBar(context, LocaleKeys.processDone, 'success');
               Navigator.of(context).pop<bool>(true);
             }
@@ -34,19 +38,32 @@ class IssueActionModal extends StatelessWidget {
               snackBar(context, LocaleKeys.processCancell + issueProvider.errorMessage, 'error');
               Navigator.of(context).pop<bool>(false);
             }
-            issueProvider.isFetch ? null : issueProvider.getIssueOperations(issueCode);
+            issueProvider.isFetch
+                ? null
+                : issueProvider.getIssueOperations(issueCode);
             return Center(
               child: SingleChildScrollView(
                 child: Column(
                   children: [
                     issueProvider.issueOperationList.isPhoto == true
                         ? _operationWidget(
-                            size, issueProvider, LocaleKeys.addPhoto, issueProvider.isPhotoSectionOpen, issueProvider.setisPhotoSectionOpen)
+                            size,
+                            issueProvider,
+                            LocaleKeys.addPhoto,
+                            issueProvider.isPhotoSectionOpen,
+                            issueProvider.setisPhotoSectionOpen)
                         : Container(),
-                    issueProvider.isPhotoSectionOpen ? addPhotoBottomSheet(context, size, issueAddPhotoProvider) : Container(),
+                    issueProvider.isPhotoSectionOpen
+                        ? addPhotoBottomSheet(
+                            context, size, issueAddPhotoProvider)
+                        : Container(),
                     issueProvider.issueOperationList.isActivity == true
                         ? _operationWidget(
-                            size, issueProvider, LocaleKeys.addActivity, issueProvider.isActivitySectionOpen, issueProvider.setisActivitySectionOpen)
+                            size,
+                            issueProvider,
+                            LocaleKeys.addActivity,
+                            issueProvider.isActivitySectionOpen,
+                            issueProvider.setisActivitySectionOpen)
                         : Container(),
                     issueProvider.isActivitySectionOpen
                         ? AddActivity(
@@ -55,7 +72,11 @@ class IssueActionModal extends StatelessWidget {
                         : Container(),
                     issueProvider.issueOperationList.isChangeCfg == true
                         ? _operationWidget(
-                            size, issueProvider, LocaleKeys.changeCfg, issueProvider.isCfgSectionOpen, issueProvider.setisCfgSectionOpen)
+                            size,
+                            issueProvider,
+                            LocaleKeys.changeCfg,
+                            issueProvider.isCfgSectionOpen,
+                            issueProvider.setisCfgSectionOpen)
                         : Container(),
                     issueProvider.isCfgSectionOpen
                         ? ChangeCfgScreen(
@@ -64,7 +85,11 @@ class IssueActionModal extends StatelessWidget {
                         : Container(),
                     issueProvider.issueOperationList.isTakeOver == true
                         ? _operationWidget(
-                            size, issueProvider, LocaleKeys.takeOver, issueProvider.isTakeOverSectionOpen, issueProvider.setisTakeOverSectionOpen)
+                            size,
+                            issueProvider,
+                            LocaleKeys.takeOver,
+                            issueProvider.isTakeOverSectionOpen,
+                            issueProvider.setisTakeOverSectionOpen)
                         : Container(),
                     issueProvider.isTakeOverSectionOpen
                         ? NeedApprovalForIssueComponent(
@@ -76,7 +101,11 @@ class IssueActionModal extends StatelessWidget {
                             confirmButtonText: LocaleKeys.okay)
                         : Container(),
                     issueProvider.issueOperationList.isPlannedCancel == true
-                        ? _operationWidget(size, issueProvider, LocaleKeys.plannedCancel, issueProvider.isPlannedCancelSectionOpen,
+                        ? _operationWidget(
+                            size,
+                            issueProvider,
+                            LocaleKeys.plannedCancel,
+                            issueProvider.isPlannedCancelSectionOpen,
                             issueProvider.setisPlannedSectionOpen)
                         : Container(),
                     issueProvider.isPlannedCancelSectionOpen ? 
@@ -88,7 +117,11 @@ class IssueActionModal extends StatelessWidget {
                             },
                             confirmButtonText: LocaleKeys.okay) : Container(),
                     issueProvider.issueOperationList.isSparepart == true
-                        ? _operationWidget(size, issueProvider, LocaleKeys.sparepartNeed, issueProvider.isSparepartSectionOpen,
+                        ? _operationWidget(
+                            size,
+                            issueProvider,
+                            LocaleKeys.sparepartNeed,
+                            issueProvider.isSparepartSectionOpen,
                             issueProvider.setisSparepartSectionOpen)
                         : Container(),
                     issueProvider.isSparepartSectionOpen ?
@@ -107,7 +140,8 @@ class IssueActionModal extends StatelessWidget {
         ));
   }
 
-  Container addPhotoBottomSheet(BuildContext context, Size size, IssueAddPhotoProvider issueAddPhotoProvider) {
+  Container addPhotoBottomSheet(BuildContext context, Size size,
+      IssueAddPhotoProvider issueAddPhotoProvider) {
     return Container(
       height: MediaQuery.of(context).size.height * 0.5,
       color: APPColors.Main.white,
@@ -126,12 +160,16 @@ class IssueActionModal extends StatelessWidget {
     );
   }
 
-  SizedBox _operationWidget(Size size, IssueActionProvider issueProvider, String actionNamebool, isOpen, Function openCloseFunction) {
+  SizedBox _operationWidget(Size size, IssueActionProvider issueProvider,
+      String actionNamebool, isOpen, Function openCloseFunction) {
     return SizedBox(
       width: size.width / 1.09,
       child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-              shadowColor: APPColors.Main.black, elevation: 10, backgroundColor: isOpen ? APPColors.Main.white : APPColors.Modal.blue),
+              shadowColor: APPColors.Main.black,
+              elevation: 10,
+              backgroundColor:
+                  isOpen ? APPColors.Main.white : APPColors.Modal.blue),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -145,7 +183,9 @@ class IssueActionModal extends StatelessWidget {
                 ),
               ),
               Icon(
-                isOpen ? Icons.arrow_drop_up_rounded : Icons.arrow_drop_down_rounded,
+                isOpen
+                    ? Icons.arrow_drop_up_rounded
+                    : Icons.arrow_drop_down_rounded,
                 color: isOpen ? APPColors.Main.black : APPColors.Main.white,
               )
             ],
