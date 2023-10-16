@@ -13,6 +13,7 @@ class ServiceTools {
   // static const attachPath = "https://demo.signumtte.com/windesk";
   // static const attachPathLive = "http://10.32.12.42/windesktest/xreadattach.php?token=$tokenV1&id=";
   // static const facilityName = "İstanbul Finans Merkezi";
+
 //ESH PREPROD
   static const String baseUrlV1 =
       'http://10.126.12.21/esh3/app/webroot/integration/WindeskMobile.php?use_rest=1&wsusername=wdmobile&wspassword=wdsgnm1017_&token=';
@@ -23,6 +24,17 @@ class ServiceTools {
   static const attachPathLive = "http://10.126.12.21/esh3/xreadattach.php?token=$tokenV1&id=";
   static const facilityName = "Eskişehir Şehir Hastanesi";
   static const appName = "ESH";
+
+  //BESK PREPROD
+  // static const String baseUrlV1 =
+  //     'http://10.198.12.130/besk/app/webroot/integration/WindeskMobile.php?use_rest=1&wsusername=wdmobile&wspassword=wdsgnm1017_&token=';
+  // static const String baseUrlV2 = 'http://windeskmobiletest.prebesk.yerel';
+  // static const tokenV1 = 'wdbesktest!_';
+  // static const tokenV2 = 'besktest!';
+  // static const attachPath = "http://10.198.12.130/besk";
+  // static const attachPathLive = "http://10.198.12.130/besk/xreadattach.php?token=$tokenV1&id=";
+  // static const facilityName = "Bilkent Şehir Hastanesi";
+  // static const appName = "BESK";
 
   // GSH PREPROD
   // static const pppProject = "antep";

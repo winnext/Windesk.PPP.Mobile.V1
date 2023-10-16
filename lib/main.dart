@@ -17,6 +17,7 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider<GlobalProvider>(create: (_) => GlobalProvider()),
+        ChangeNotifierProvider<IssueProvider>(create: (_) => IssueProvider()),
       ],
       child: MyApp(),
     ),

@@ -28,7 +28,7 @@ class IssueListScreen extends StatelessWidget {
           issueProvider.isFetchFilter ? null : issueProvider.getFilterValues();
           return Scaffold(
             appBar: CustomMainAppbar(
-              title: Text(
+              title: const Text(
                 LocaleKeys.issueList,
                 style: TextStyle(color: Colors.black),
               ),
@@ -45,7 +45,7 @@ class IssueListScreen extends StatelessWidget {
                         wingList: issueProvider.wingFilterNames,
                         selectStateFunction: (String state) {},
                         selectBuildFunction: (build) {
-                          issueProvider.setbuildName = build;
+                          context.watch<IssueProvider>().setbuildName = build;
                         },
                         selectFloorFunction: (floor) {
                           issueProvider.setfloorName = floor;

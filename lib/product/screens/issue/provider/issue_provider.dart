@@ -74,6 +74,7 @@ class IssueProvider extends ChangeNotifier {
     if (buildName == '') {
       _buildName = '';
       _buildCode = '';
+      notifyListeners();
     }
     for (int i = 0; i < _buildingFilterValues.length; i++) {
       if (_buildingFilterValues[i].name == buildName) {

@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:wm_ppp_4/product/screens/issue/provider/issue_provider.dart';
 
 import 'global_providers/global_provider.dart';
 import 'log/log_manager.dart';
@@ -13,6 +14,7 @@ class Injection {
       ..registerLazySingleton<ServiceManager>(() => ServiceManager())
       ..registerSingleton<LogManager>(LogManager())
       ..registerSingleton<GlobalProvider>(GlobalProvider())
+      ..registerSingleton<IssueProvider>(IssueProvider())
 
       // services
       ..registerLazySingleton<WorkOrderServiceRepositoryImpl>(() => WorkOrderServiceRepositoryImpl());
