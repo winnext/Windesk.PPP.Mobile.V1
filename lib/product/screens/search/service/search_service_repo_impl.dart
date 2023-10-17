@@ -16,7 +16,7 @@ class SearchServiceRepoImpml extends SearchServiceRepository {
     String url =
         // ignore: prefer_interpolation_to_compose_strings
         '${ServiceTools.baseUrlV1 + ServiceTools.tokenV1 + deviceId + '&action=getWorkorderFromCode&username=' + userName.toString() + '&spaceCode=' + spaceCode}&status=~Closed%2C~Cancelled&module=&entityCode=&type=reactive';
-
+    print(url);
     try {
       BaseOptions options = BaseOptions(
           baseUrl: url,
@@ -46,7 +46,7 @@ class SearchServiceRepoImpml extends SearchServiceRepository {
     String url =
         // ignore: prefer_interpolation_to_compose_strings
         '${ServiceTools.baseUrlV1 + ServiceTools.tokenV1 + deviceId + '&action=getWorkorderFromCode&username=' + userName.toString() + '&spaceCode=' + spaceCode}&status=~Closed%2C~Cancelled&module=submaintenance&entityCode=&type=';
-
+    print(url);
     try {
       BaseOptions options = BaseOptions(
           baseUrl: url,
@@ -77,6 +77,7 @@ class SearchServiceRepoImpml extends SearchServiceRepository {
     String url =
         // ignore: prefer_interpolation_to_compose_strings
         '${ServiceTools.baseUrlV1 + ServiceTools.tokenV1 + deviceId + '&action=getIssuesFromCode&username=' + userName.toString() + '&spaceCode=' + spaceCode}&parentStatus=openParentStatus&cmdbCode=';
+    print(url);
     try {
       BaseOptions options = BaseOptions(
           baseUrl: url,
@@ -105,8 +106,15 @@ class SearchServiceRepoImpml extends SearchServiceRepository {
     String deviceId = await SharedManager().getString(SharedEnum.deviceId);
     String url =
         // ignore: prefer_interpolation_to_compose_strings
-        '$ServiceTools.baseUrlV1$ServiceTools.tokenV1$deviceId&action=getSpaceDetail&username=$userName&spaceCode=' +
+        ServiceTools.baseUrlV1 +
+            ServiceTools.tokenV1 +
+            deviceId +
+            '&action=getSpaceDetail' +
+            '&username=' +
+            userName +
+            '&spaceCode=' +
             spaceCode;
+    print(url);
     try {
       BaseOptions options = BaseOptions(
           baseUrl: url,
@@ -250,7 +258,7 @@ class SearchServiceRepoImpml extends SearchServiceRepository {
       } else {
         return false;
       }
-    // ignore: deprecated_member_use
+      // ignore: deprecated_member_use
     } on DioError {
       return 'Bağlantı Zaman Aşımına Uğradı Lütfen Ağınızı Kontrol Ediniz';
     }
@@ -295,7 +303,7 @@ class SearchServiceRepoImpml extends SearchServiceRepository {
         return [];
       }
       //print(response);
-    // ignore: deprecated_member_use
+      // ignore: deprecated_member_use
     } on DioError {
       return 'Bağlantı Zaman Aşımına Uğradı Lütfen Ağınızı Kontrol Ediniz';
     }
@@ -322,7 +330,7 @@ class SearchServiceRepoImpml extends SearchServiceRepository {
       } else {
         return false;
       }
-    // ignore: deprecated_member_use
+      // ignore: deprecated_member_use
     } on DioError {
       return 'Bağlantı Zaman Aşımına Uğradı Lütfen Ağınızı Kontrol Ediniz';
     }
@@ -350,7 +358,7 @@ class SearchServiceRepoImpml extends SearchServiceRepository {
       } else {
         return false;
       }
-    // ignore: deprecated_member_use
+      // ignore: deprecated_member_use
     } on DioError {
       return 'Bağlantı Zaman Aşımına Uğradı Lütfen Ağınızı Kontrol Ediniz';
     }
@@ -378,7 +386,7 @@ class SearchServiceRepoImpml extends SearchServiceRepository {
       } else {
         return false;
       }
-    // ignore: deprecated_member_use
+      // ignore: deprecated_member_use
     } on DioError {
       return 'Bağlantı Zaman Aşımına Uğradı Lütfen Ağınızı Kontrol Ediniz';
     }
@@ -405,7 +413,7 @@ class SearchServiceRepoImpml extends SearchServiceRepository {
       } else {
         return false;
       }
-    // ignore: deprecated_member_use
+      // ignore: deprecated_member_use
     } on DioError {
       return 'Bağlantı Zaman Aşımına Uğradı Lütfen Ağınızı Kontrol Ediniz';
     }
@@ -434,7 +442,7 @@ class SearchServiceRepoImpml extends SearchServiceRepository {
       } else {
         return false;
       }
-    // ignore: deprecated_member_use
+      // ignore: deprecated_member_use
     } on DioError {
       return 'Bağlantı Zaman Aşımına Uğradı Lütfen Ağınızı Kontrol Ediniz';
     }
