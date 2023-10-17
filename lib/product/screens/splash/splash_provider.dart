@@ -87,24 +87,25 @@ class SplashProvider extends ChangeNotifier {
     _getDeviceInformation();
     // _getFirebaseInformation();
 
-    final String userName = await SharedManager().getString(SharedEnum.userName);
+    final String userCode = await SharedManager().getString(SharedEnum.userCode);
+    final String deviceId = await SharedManager().getString(SharedEnum.deviceId);
 
-    if (userName.isNotEmpty) {
-      final String userToken = await SharedManager().getString(SharedEnum.userCode);
-      await _authService.checkAccessToken(userToken).then((value) {
-        value.fold((l) {
-          if (l.isTokenValid == true) {
-            _isUserAlreadyLoggedIn = true;
-          } else {
-            _isUserAlreadyLoggedIn = false;
-          }
-        }, (r) {
-          _isUserAlreadyLoggedIn = false;
-        });
-      });
+    if (userCode.isNotEmpty && deviceId.isNotEmpty) {
+      _isUserAlreadyLoggedIn = true;
+      // await _authService.checkAccessToken(userToken).then((value) {
+      //   value.fold((l) {
+      //     if (l.isTokenValid == true) {
+      //       _isUserAlreadyLoggedIn = true;
+      //     } else {
+      //       _isUserAlreadyLoggedIn = false;
+      //     }
+      //   }, (r) {
+      //     _isUserAlreadyLoggedIn = false;
+      //   });
+      // });
 
-      String userName = await SharedManager().getString(SharedEnum.userName);
-      context.read<GlobalProvider>().setUserName(userName);
+      // String userName = await SharedManager().getString(SharedEnum.userName);
+      // context.read<GlobalProvider>().setUserName(userName);
     } else {
       _isUserAlreadyLoggedIn = false;
     }

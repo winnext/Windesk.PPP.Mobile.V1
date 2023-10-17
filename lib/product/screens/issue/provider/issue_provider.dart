@@ -56,8 +56,18 @@ class IssueProvider extends ChangeNotifier {
 
   String _statusName = '';
   String get statusName => _statusName;
-  set setstatusName(String statusName) {
+  void setstatusName(String statusName) {
     _statusName = statusName;
+    if (statusName == '') {
+      _statusName = '';
+      _statusCode = '';
+      notifyListeners();
+    }
+    for (int i = 0; i < _issueStatusCodes.length; i++) {
+      if (_issueStatusCodes[i].name == statusName) {
+        setstatusCode = _issueStatusCodes[i].code.toString();
+      }
+    }
     notifyListeners();
   }
 
@@ -135,6 +145,10 @@ class IssueProvider extends ChangeNotifier {
     _buildCode = '';
   }
 
+  void clearStatusCode() {
+    _statusCode = '';
+  }
+
   String _wingCode = '';
   String get wingCode => _wingCode;
   set setwingCode(String wingCode) {
@@ -183,6 +197,12 @@ class IssueProvider extends ChangeNotifier {
 
   List<IssueAttachmentsModel> _issueAttachmentList = [];
   List<IssueAttachmentsModel> get issueAttachmentList => _issueAttachmentList;
+
+  List<IssueFilterModel> _issueStatusCodes = [];
+  List<IssueFilterModel> get issueStatusCodes => _issueStatusCodes;
+
+  List<String> _issueStatusNames = [];
+  List<String> get issueStatusNames => _issueStatusNames;
 
   List<IssueFilterModel> _buildingFilterValues = [];
   List<IssueFilterModel> get buildingFilterValues => _buildingFilterValues;
@@ -343,6 +363,7 @@ class IssueProvider extends ChangeNotifier {
     getSpaceBfwByType('BUILDING');
     getSpaceBfwByType('FLOOR');
     getSpaceBfwByType('WING');
+    getIssueOpenStatusCodes();
   }
 
   void clearFilterCodes() async {
@@ -400,6 +421,28 @@ class IssueProvider extends ChangeNotifier {
                 _loading = false,
               });
     }
+
+    notifyListeners();
+  }
+
+  void getIssueOpenStatusCodes() async {
+    String userToken = await SharedManager().getString(SharedEnum.deviceId);
+    _isFetch = true;
+    _loading = true;
+    notifyListeners();
+    final response = await _issueServiceRepository.getIssueOpenStatusCodes(userToken);
+    response.fold(
+        (l) => {
+              _issueStatusCodes.addAll(l),
+              for (int i = 0; i < _issueStatusCodes.length; i++)
+                {
+                  _issueStatusNames.add(_issueStatusCodes[i].name.toString()),
+                },
+              _loading = false,
+            },
+        (r) => {
+              _loading = false,
+            });
 
     notifyListeners();
   }

@@ -44,9 +44,7 @@ class AddActivity extends StatelessWidget {
             height: MediaQuery.of(context).size.height * 0.5,
             width: MediaQuery.of(context).size.width / 1.09,
             color: APPColors.Main.white,
-            child: issueActionProvider.loading
-                ? const CustomLoadingIndicator()
-                : SingleChildScrollView(
+            child: SingleChildScrollView(
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: Column(
@@ -57,7 +55,7 @@ class AddActivity extends StatelessWidget {
                               issueActionProvider.setSelectedActivityName(item.toString());
                             },
                             rightIcon: Icons.arrow_drop_down,
-                            dropDownArray: issueActionProvider.availableActivitiesName,
+                            dropDownArray: issueActionProvider.availableActivitiesName.isNotEmpty ?  issueActionProvider.availableActivitiesName : ['Aktivite bulunamadı.'],
                           ),
                           const Divider(thickness: 2),
                           Text('Bu aktivitenin girilmesi, talebin durumunu ${issueActionProvider.selectedActivityName} olarak değiştirecektir.'),

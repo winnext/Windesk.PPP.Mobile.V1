@@ -4,8 +4,10 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:wm_ppp_4/feature/components/snackBar/snackbar.dart';
 import 'package:wm_ppp_4/feature/database/shared_manager.dart';
 import 'package:wm_ppp_4/feature/enums/shared_enums.dart';
+import 'package:wm_ppp_4/feature/l10n/locale_keys.g.dart';
 import 'package:wm_ppp_4/product/screens/issue/service/issue_service_repo_impl.dart';
 
 class IssueAddPhotoProvider extends ChangeNotifier {
@@ -19,7 +21,9 @@ class IssueAddPhotoProvider extends ChangeNotifier {
   String get desc => _desc;
 
   bool isLoading = false;
-  bool isSuccess = false;
+  bool _isSuccess = false;
+  bool get isSuccess => _isSuccess;
+
   bool errorAccur = false;
 
   void setDesc(String val) {
@@ -32,7 +36,7 @@ class IssueAddPhotoProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void addImage(String issueCode) async {
+  void addImage(String issueCode, BuildContext context) async {
     if (image.toString() != '') {
       isLoading = true;
       notifyListeners();
@@ -48,11 +52,15 @@ class IssueAddPhotoProvider extends ChangeNotifier {
         (l) => {
           if (l)
             {
-              isSuccess = true,
+              _isSuccess = true,
+              snackBar(context, LocaleKeys.processDone, 'success'),
+              Navigator.of(context).pop<bool>(true),
             }
           else
             {
               errorAccur = true,
+              snackBar(context, LocaleKeys.processCancell , 'error'),
+              Navigator.of(context).pop<bool>(false),
             }
         },
         (r) => {
@@ -64,8 +72,9 @@ class IssueAddPhotoProvider extends ChangeNotifier {
     notifyListeners();
 
     Future.delayed(const Duration(seconds: 2), () {
-      isSuccess = false;
+      _isSuccess = false;
       errorAccur = false;
+      notifyListeners();
     });
   }
 }
