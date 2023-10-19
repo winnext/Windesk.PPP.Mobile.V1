@@ -393,13 +393,16 @@ class SpaceSearchProvider extends ChangeNotifier {
         await _searchServiceRepository.mahalAramaListesiApi(
             mahalKodu, mahalAdi, bina, kat, kanat, sinif, grup, data, sayfa);
     if (mahalAramaListesiSonuc.length > 0) {
+      print(mahalAramaListesiSonuc);
       setMahalAraListeArray = mahalAramaListesiSonuc;
+      notifyListeners();
     } else {
       //setMahalAraListeArray = [];
       snackBar(context, 'Sonuç Bulunamadı', 'info');
       Navigator.pop(context);
     }
     notifyListeners();
+    return mahalAramaListesiSonuc;
   }
 
 ///////////////////////////////////////////////////////////////

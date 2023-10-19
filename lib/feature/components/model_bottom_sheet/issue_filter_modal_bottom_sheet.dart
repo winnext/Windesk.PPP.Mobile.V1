@@ -111,6 +111,7 @@ class IssueFilterModalBottomSheet extends StatelessWidget {
               labelText: AppStrings.state,
               onChangedFunction: (String val) {
                 selectStateFunction(val);
+                provider.setChoosenStatus(val);
               },
               rightIcon: AppIcons.arrowDown,
               dropDownArray: stateList,

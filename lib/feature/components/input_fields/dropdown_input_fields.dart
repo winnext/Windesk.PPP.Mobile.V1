@@ -26,10 +26,10 @@ class DropDownInputFields extends StatefulWidget {
 class _DropDownInputFieldsState extends State<DropDownInputFields> {
   @override
   Widget build(BuildContext context) {
-    String? selectedItem;
+    String selectedValue = widget.dropDownArray.first;
     return DropdownButtonFormField(
       isExpanded: true,
-      value: selectedItem,
+      value: selectedValue,
       decoration: InputDecoration(
           contentPadding: const EdgeInsets.all(10),
           border: OutlineInputBorder(
@@ -46,7 +46,13 @@ class _DropDownInputFieldsState extends State<DropDownInputFields> {
           ),
         );
       }).toList(),
-      onChanged: (newValue) => {widget.onChangedFunction(newValue), selectedItem = newValue, setState((){selectedItem;})},
+      onChanged: (newValue) => {
+        widget.onChangedFunction(newValue),
+        setState(() {
+          selectedValue = newValue.toString();
+          print('selectedValue$selectedValue');
+        }),
+      },
     );
   }
 }

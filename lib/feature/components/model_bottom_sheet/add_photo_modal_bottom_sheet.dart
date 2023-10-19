@@ -12,7 +12,7 @@ class AddPhotoModalBottomSheet extends StatelessWidget {
   const AddPhotoModalBottomSheet(this.saveImageFunction, this.saveDescFunction, this.addPhotoFunction, this.hintDescText, {super.key});
   final Function saveImageFunction;
   final Function saveDescFunction;
-  final Function addPhotoFunction;
+  final VoidCallback addPhotoFunction;
 
   final String hintDescText;
   @override

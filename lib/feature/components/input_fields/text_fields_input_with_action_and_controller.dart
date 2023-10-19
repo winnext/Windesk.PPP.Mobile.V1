@@ -30,7 +30,6 @@ class TextFieldsInputWithActionAndController extends StatelessWidget {
             decoration: InputDecoration(
               border: OutlineInputBorder(borderRadius: CustomBorderRadius.textFieldBorderRadius),
               labelText: labelText,
-              hintText: hinText ?? '',
             ),
           ),
         ),

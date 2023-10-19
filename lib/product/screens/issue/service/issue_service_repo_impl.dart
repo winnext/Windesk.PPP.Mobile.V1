@@ -139,6 +139,7 @@ class IssueServiceRepoImpml extends IssueServiceRepository {
   @override
   Future<Either<List<IssueAvailableActivities>, CustomServiceException>> getAvailableActivities(String issueCode, String userToken) async {
     String url = '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=getAvailableActivities&issueCode=$issueCode&module=issue';
+    
     List<IssueAvailableActivities> issueAttachmentsModel;
 
     try {
@@ -381,6 +382,24 @@ class IssueServiceRepoImpml extends IssueServiceRepository {
   @override
   Future<Either<List<IssueFilterModel>, CustomServiceException>> getSpaceBfwByType(String type, String userToken) async {
     String url = '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=getSpaceBfwByType&type=$type';
+    List<IssueFilterModel> liveSelectAsgUsers;
+
+    try {
+      final response = await dio.get(url);
+      final data = response.data[ServiceResponseStatusEnums.records.rawText];
+
+      liveSelectAsgUsers = IssueFilterModel.fromJsonList(data);
+      super.logger.i(liveSelectAsgUsers);
+      return Left(liveSelectAsgUsers);
+    } catch (error) {
+      super.logger.e(error.toString());
+      return Right(CustomServiceException(message: CustomServiceMessages.loginError, statusCode: '400'));
+    }
+  }
+
+  @override
+  Future<Either<List<IssueFilterModel>, CustomServiceException>> getIssueOpenStatusCodes(String userToken) async {
+    String url = '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=getIssueOpenStatusCodes';
     List<IssueFilterModel> liveSelectAsgUsers;
 
     try {

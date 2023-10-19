@@ -6,7 +6,6 @@ import 'package:wm_ppp_4/feature/components/buttons/custom_half_buttons.dart';
 import 'package:wm_ppp_4/feature/components/input_fields/dropdown_input_fields.dart';
 import 'package:wm_ppp_4/feature/components/input_fields/text_fields_input.dart';
 import 'package:wm_ppp_4/feature/components/input_fields/text_fields_input_with_action_and_controller.dart';
-import 'package:wm_ppp_4/feature/components/loading/custom_loading_indicator.dart';
 import 'package:wm_ppp_4/feature/components/model_bottom_sheet/add_just_photo_modal_bottom_sheet.dart';
 import 'package:wm_ppp_4/feature/components/snackBar/snackbar.dart';
 import 'package:wm_ppp_4/feature/constants/functions/null_check_widget.dart';
@@ -44,9 +43,7 @@ class AddActivity extends StatelessWidget {
             height: MediaQuery.of(context).size.height * 0.5,
             width: MediaQuery.of(context).size.width / 1.09,
             color: APPColors.Main.white,
-            child: issueActionProvider.loading
-                ? const CustomLoadingIndicator()
-                : SingleChildScrollView(
+            child: SingleChildScrollView(
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: Column(
@@ -57,7 +54,7 @@ class AddActivity extends StatelessWidget {
                               issueActionProvider.setSelectedActivityName(item.toString());
                             },
                             rightIcon: Icons.arrow_drop_down,
-                            dropDownArray: issueActionProvider.availableActivitiesName,
+                            dropDownArray: issueActionProvider.availableActivitiesName.isNotEmpty ?  issueActionProvider.availableActivitiesName : ['Aktivite bulunamadı.'],
                           ),
                           const Divider(thickness: 2),
                           Text('Bu aktivitenin girilmesi, talebin durumunu ${issueActionProvider.selectedActivityName} olarak değiştirecektir.'),

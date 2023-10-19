@@ -4,9 +4,16 @@ import 'package:wm_ppp_4/product/screens/issue/provider/issue_provider.dart';
 class IssueFilterModalBottomSheetProvider extends ChangeNotifier {
   List<String> choosenFilterList = [];
   List<String> tempChoosenFilterList = [];
+  String choosenStatus = '';
   String choosenBuilding = '';
   String choosenFloor = '';
   String choosenWing = '';
+
+  void setChoosenStatus(String status) {
+    tempChoosenFilterList.add(status);
+    choosenStatus = status;
+    notifyListeners();
+  }
 
   void setChoosenBuilding(String building) {
     tempChoosenFilterList.add(building);
@@ -52,6 +59,9 @@ class IssueFilterModalBottomSheetProvider extends ChangeNotifier {
     }
 
     for (var item in differentItems) {
+      if (issueProvider.issueStatusNames.contains(item)) {
+        issueProvider.clearStatusCode();
+      }
       if (issueProvider.buildingFilterNames.contains(item)) {
         issueProvider.clearBuildCode();
       }

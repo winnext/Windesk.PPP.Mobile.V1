@@ -7,8 +7,6 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:provider/provider.dart';
-import 'package:wm_ppp_4/feature/global_providers/global_provider.dart';
 import 'package:wm_ppp_4/feature/service/global_services.dart/auth_service/auth_service_repository_impl.dart';
 
 import '../../../feature/database/shared_manager.dart';
@@ -87,24 +85,25 @@ class SplashProvider extends ChangeNotifier {
     _getDeviceInformation();
     // _getFirebaseInformation();
 
-    final String userName = await SharedManager().getString(SharedEnum.userName);
+    final String userCode = await SharedManager().getString(SharedEnum.userCode);
+    final String deviceId = await SharedManager().getString(SharedEnum.deviceId);
 
-    if (userName.isNotEmpty) {
-      final String userToken = await SharedManager().getString(SharedEnum.userCode);
-      await _authService.checkAccessToken(userToken).then((value) {
-        value.fold((l) {
-          if (l.isTokenValid == true) {
-            _isUserAlreadyLoggedIn = true;
-          } else {
-            _isUserAlreadyLoggedIn = false;
-          }
-        }, (r) {
-          _isUserAlreadyLoggedIn = false;
-        });
-      });
+    if (userCode.isNotEmpty && deviceId.isNotEmpty) {
+      _isUserAlreadyLoggedIn = true;
+      // await _authService.checkAccessToken(userToken).then((value) {
+      //   value.fold((l) {
+      //     if (l.isTokenValid == true) {
+      //       _isUserAlreadyLoggedIn = true;
+      //     } else {
+      //       _isUserAlreadyLoggedIn = false;
+      //     }
+      //   }, (r) {
+      //     _isUserAlreadyLoggedIn = false;
+      //   });
+      // });
 
-      String userName = await SharedManager().getString(SharedEnum.userName);
-      context.read<GlobalProvider>().setUserName(userName);
+      // String userName = await SharedManager().getString(SharedEnum.userName);
+      // context.read<GlobalProvider>().setUserName(userName);
     } else {
       _isUserAlreadyLoggedIn = false;
     }

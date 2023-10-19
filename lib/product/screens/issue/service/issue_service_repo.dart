@@ -50,6 +50,7 @@ abstract class IssueServiceRepository {
   Future<Either<bool, CustomServiceException>> changeCfg(
        String userToken, String issueCode, String cfgCode);
   Future<Either<List<IssueFilterModel>, CustomServiceException>> getSpaceBfwByType(String type,String userToken);
+  Future<Either<List<IssueFilterModel>, CustomServiceException>> getIssueOpenStatusCodes(String userToken);
 
 
 
