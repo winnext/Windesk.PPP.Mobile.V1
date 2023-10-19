@@ -26,7 +26,7 @@ class DropDownInputFields extends StatefulWidget {
 class _DropDownInputFieldsState extends State<DropDownInputFields> {
   @override
   Widget build(BuildContext context) {
-  String selectedValue = widget.dropDownArray.first;
+    String selectedValue = widget.dropDownArray.first;
     return DropdownButtonFormField(
       isExpanded: true,
       value: selectedValue,
@@ -50,7 +50,7 @@ class _DropDownInputFieldsState extends State<DropDownInputFields> {
         widget.onChangedFunction(newValue),
         setState(() {
           selectedValue = newValue.toString();
-          print('selectedValue' + selectedValue.toString());
+          print('selectedValue$selectedValue');
         }),
       },
     );

@@ -32,8 +32,7 @@ class SpaceSearchList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => SpaceSearchProvider(),
-      child: Consumer<SpaceSearchProvider>(
-          builder: (context2, SpaceSearchProvider searchProvider, child) {
+      child: Consumer<SpaceSearchProvider>(builder: (context2, SpaceSearchProvider searchProvider, child) {
         var data = liste;
         print('data');
         print(data);
@@ -43,41 +42,35 @@ class SpaceSearchList extends StatelessWidget {
         List<String> names = [];
 
         for (var element in data) {
-          codes.add(element['CODE'] != null ? element['CODE'] : '');
-          locTrees.add(element['LOCTREE'] != null ? element['LOCTREE'] : '');
-          names.add(element['NAME'] != null ? element['NAME'] : '');
+          codes.add(element['CODE'] ?? '');
+          locTrees.add(element['LOCTREE'] ?? '');
+          names.add(element['NAME'] ?? '');
         }
 
         loadData(sayfa) async {
-          print('SAYFAM  : ' + sayfa.toString());
-          data = await searchProvider.mahalAramaListesi(
-              context,
-              mahalKodu,
-              mahalAdi,
-              binaKodu,
-              katKodu,
-              kanatKodu,
-              sinifKodu,
-              grupKodu,
-              20,
-              sayfa);
+          print('SAYFAM  : $sayfa');
+          data = await searchProvider.mahalAramaListesi(context, mahalKodu, mahalAdi, binaKodu, katKodu, kanatKodu, sinifKodu, grupKodu, 20, sayfa);
           for (var element in data) {
-            codes.add(element['CODE'] != null ? element['CODE'] : '');
-            locTrees.add(element['LOCTREE'] != null ? element['LOCTREE'] : '');
-            names.add(element['NAME'] != null ? element['NAME'] : '');
+            codes.add(element['CODE'] ?? '');
+            locTrees.add(element['LOCTREE'] ?? '');
+            names.add(element['NAME'] ?? '');
           }
         }
 
         return Sizer(builder: (context, orientation, deviceType) {
-          return Container(
+          return SizedBox(
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
               child: Scaffold(
                 resizeToAvoidBottomInset: true,
                 appBar: const CustomMainAppbar(
-                    title: Text('Mahal Arama',style: TextStyle(color: Colors.black),), returnBack: true),
+                    title: Text(
+                      'Mahal Arama',
+                      style: TextStyle(color: Colors.black),
+                    ),
+                    returnBack: true),
                 body: Container(
-                  color: Color.fromARGB(255, 224, 224, 224),
+                  color: const Color.fromARGB(255, 224, 224, 224),
                   child: Center(
                       child: codes.length > 0
                           ? Padding(
@@ -89,25 +82,16 @@ class SpaceSearchList extends StatelessWidget {
                                       Center(
                                           child: GestureDetector(
                                         onTap: () async {
-                                          var summarySonuc = await apirepository
-                                              .mahalAramaMahalDetaySummaryApi(
-                                                  codes[i]);
-                                          var slaSonuc = await apirepository
-                                              .mahalAramaMahalDetaySlaApi(
-                                                  codes[i]);
-                                          var bakimIsEmri = await apirepository
-                                              .mahalAraMahalDetayBakimIsEmri(
-                                                  codes[i]);
-                                          var anlikIsEmri = await apirepository
-                                              .mahalAraMahalDetayAnlikIsEmri(
-                                                  codes[i]);
+                                          var summarySonuc = await apirepository.mahalAramaMahalDetaySummaryApi(codes[i]);
+                                          var slaSonuc = await apirepository.mahalAramaMahalDetaySlaApi(codes[i]);
+                                          var bakimIsEmri = await apirepository.mahalAraMahalDetayBakimIsEmri(codes[i]);
+                                          var anlikIsEmri = await apirepository.mahalAraMahalDetayAnlikIsEmri(codes[i]);
 
                                           // ignore: use_build_context_synchronously
                                           Navigator.push(
                                             context,
                                             MaterialPageRoute(
-                                              builder: (context) =>
-                                                  SpaceSearchDetail(
+                                              builder: (context) => SpaceSearchDetail(
                                                 code: codes[i],
                                                 name: names[i],
                                                 locTree: locTrees[i],
@@ -126,33 +110,25 @@ class SpaceSearchList extends StatelessWidget {
                                             height: 19.h,
                                             decoration: BoxDecoration(
                                               color: Colors.white,
-                                              borderRadius:
-                                                  BorderRadius.circular(15),
+                                              borderRadius: BorderRadius.circular(15),
                                             ),
                                             child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(9.0),
+                                              padding: const EdgeInsets.all(9.0),
                                               child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
                                                     codes[i],
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 25),
+                                                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
                                                   ),
                                                   Text(
                                                     names[i],
-                                                    style:
-                                                        TextStyle(fontSize: 19),
+                                                    style: const TextStyle(fontSize: 19),
                                                   ),
-                                                  Text(''),
+                                                  const Text(''),
                                                   Text(
                                                     locTrees[i],
-                                                    style:
-                                                        TextStyle(fontSize: 15),
+                                                    style: const TextStyle(fontSize: 15),
                                                   ),
                                                 ],
                                               ),
@@ -161,47 +137,30 @@ class SpaceSearchList extends StatelessWidget {
                                         ),
                                       )),
                                     Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
                                         Container(
-                                            margin: EdgeInsets.all(4),
+                                            margin: const EdgeInsets.all(4),
                                             child: ElevatedButton(
                                                 onPressed: () {
-                                                  if (int.parse(searchProvider
-                                                          .sayfa) >
-                                                      1) {
-                                                    searchProvider
-                                                        .setSayfa = (int.parse(
-                                                                searchProvider
-                                                                    .sayfa) -
-                                                            1)
-                                                        .toString();
-                                                    loadData(int.parse(
-                                                        searchProvider.sayfa));
+                                                  if (int.parse(searchProvider.sayfa) > 1) {
+                                                    searchProvider.setSayfa = (int.parse(searchProvider.sayfa) - 1).toString();
+                                                    loadData(int.parse(searchProvider.sayfa));
                                                   }
                                                 },
-                                                child: Text('<'))),
+                                                child: const Text('<'))),
                                         Container(
-                                            margin: EdgeInsets.all(4),
-                                            child: ElevatedButton(
-                                                onPressed: () {},
-                                                child: Text(
-                                                    searchProvider.sayfa))),
+                                            margin: const EdgeInsets.all(4),
+                                            child: ElevatedButton(onPressed: () {}, child: Text(searchProvider.sayfa))),
                                         Container(
-                                            margin: EdgeInsets.all(4),
+                                            margin: const EdgeInsets.all(4),
                                             child: ElevatedButton(
                                                 onPressed: () {
                                                   print(searchProvider.sayfa);
-                                                  searchProvider.setSayfa =
-                                                      (int.parse(searchProvider
-                                                                  .sayfa) +
-                                                              1)
-                                                          .toString();
-                                                  loadData(int.parse(
-                                                      searchProvider.sayfa));
+                                                  searchProvider.setSayfa = (int.parse(searchProvider.sayfa) + 1).toString();
+                                                  loadData(int.parse(searchProvider.sayfa));
                                                 },
-                                                child: Text('>'))),
+                                                child: const Text('>'))),
                                       ],
                                     )
                                   ],

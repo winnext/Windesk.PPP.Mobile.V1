@@ -7,8 +7,6 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:provider/provider.dart';
-import 'package:wm_ppp_4/feature/global_providers/global_provider.dart';
 import 'package:wm_ppp_4/feature/service/global_services.dart/auth_service/auth_service_repository_impl.dart';
 
 import '../../../feature/database/shared_manager.dart';

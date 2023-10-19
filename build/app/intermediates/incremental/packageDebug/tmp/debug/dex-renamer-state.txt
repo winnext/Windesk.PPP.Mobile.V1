@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+#Thu Oct 19 08:15:10 TRT 2023
+=======
+<<<<<<< HEAD
 #Mon Oct 16 13:20:41 TRT 2023
+>>>>>>> fb0eb4bb8b30eadc8a079803082de94c0d366ccd
 base.0=C\:\\Users\\mert7\\Desktop\\Flutter\\work\\Windesk.PPP.Mobile.V1\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
 base.1=C\:\\Users\\mert7\\Desktop\\Flutter\\work\\Windesk.PPP.Mobile.V1\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes2.dex
 base.2=C\:\\Users\\mert7\\Desktop\\Flutter\\work\\Windesk.PPP.Mobile.V1\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes3.dex

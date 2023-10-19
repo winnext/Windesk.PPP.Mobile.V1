@@ -6,7 +6,6 @@ import 'package:wm_ppp_4/feature/components/buttons/custom_half_buttons.dart';
 import 'package:wm_ppp_4/feature/components/input_fields/dropdown_input_fields.dart';
 import 'package:wm_ppp_4/feature/components/input_fields/text_fields_input.dart';
 import 'package:wm_ppp_4/feature/components/input_fields/text_fields_input_with_action_and_controller.dart';
-import 'package:wm_ppp_4/feature/components/loading/custom_loading_indicator.dart';
 import 'package:wm_ppp_4/feature/components/model_bottom_sheet/add_just_photo_modal_bottom_sheet.dart';
 import 'package:wm_ppp_4/feature/components/snackBar/snackbar.dart';
 import 'package:wm_ppp_4/feature/constants/functions/null_check_widget.dart';
