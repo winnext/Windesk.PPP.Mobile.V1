@@ -136,7 +136,12 @@ class _SpaceSearchPageState extends State<SpaceSearchPage> {
             width: MediaQuery.of(context).size.width,
             child: Scaffold(
                 resizeToAvoidBottomInset: true,
-                appBar: const CustomMainAppbar(title: Text('Mahal Arama'), returnBack: true),
+                appBar: const CustomMainAppbar(
+                    title: Text(
+                      'Mahal Arama',
+                      style: TextStyle(color: Colors.black),
+                    ),
+                    returnBack: true),
                 body: Center(
                     child: grup.isNotEmpty &&
                             kampus.isNotEmpty &&

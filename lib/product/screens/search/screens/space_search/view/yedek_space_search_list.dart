@@ -6,29 +6,25 @@ import 'package:wm_ppp_4/product/screens/search/screens/space_search/provider/sp
 import 'package:wm_ppp_4/product/screens/search/screens/space_search/view/space_search_detail.dart';
 import 'package:wm_ppp_4/product/screens/search/service/search_service_repo_impl.dart';
 
-class SpaceSearchList extends StatefulWidget {
-  const SpaceSearchList(
+class SpaceSearchList extends StatelessWidget {
+  SpaceSearchList(
       {super.key,
-      mahalKodu,
-      mahalAdi,
-      binaKodu,
-      katKodu,
-      kanatKodu,
-      sinifKodu,
-      grupKodu,
-      liste});
-
-  @override
-  State<SpaceSearchList> createState() => _SpaceSearchListState();
-}
-
-class _SpaceSearchListState extends State<SpaceSearchList> {
-  @override
-  void initState() {
-    // TODO: implement initState
-
-    super.initState();
-  }
+      required this.mahalKodu,
+      required this.mahalAdi,
+      required this.binaKodu,
+      required this.katKodu,
+      required this.kanatKodu,
+      required this.sinifKodu,
+      required this.grupKodu,
+      required this.liste});
+  final List liste;
+  final String mahalKodu;
+  final String mahalAdi;
+  final String binaKodu;
+  final String katKodu;
+  final String kanatKodu;
+  final String sinifKodu;
+  final String grupKodu;
 
   final SearchServiceRepoImpml apirepository = SearchServiceRepoImpml();
 
@@ -36,14 +32,13 @@ class _SpaceSearchListState extends State<SpaceSearchList> {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => SpaceSearchProvider(),
-      child: Consumer<SpaceSearchProvider>(builder: (context2, SpaceSearchProvider searchProvider, child) {
+      child: Consumer<SpaceSearchProvider>(
+          builder: (context2, SpaceSearchProvider searchProvider, child) {
         var data = liste;
-        print('data');
-        print(data);
 
-          List<String> codes = [];
-          List<String> locTrees = [];
-          List<String> names = [];
+        List<String> codes = [];
+        List<String> locTrees = [];
+        List<String> names = [];
 
         for (var element in data) {
           codes.add(element['CODE'] ?? '');
@@ -52,13 +47,31 @@ class _SpaceSearchListState extends State<SpaceSearchList> {
         }
 
         loadData(sayfa) async {
-          print('SAYFAM  : $sayfa');
-          data = await searchProvider.mahalAramaListesi(context, mahalKodu, mahalAdi, binaKodu, katKodu, kanatKodu, sinifKodu, grupKodu, 20, sayfa);
+          codes = [];
+          locTrees = [];
+          names = [];
+          data = await searchProvider.mahalAramaListesi(
+              context,
+              mahalKodu,
+              mahalAdi,
+              binaKodu,
+              katKodu,
+              kanatKodu,
+              sinifKodu,
+              grupKodu,
+              20,
+              sayfa);
+
           for (var element in data) {
             codes.add(element['CODE'] ?? '');
             locTrees.add(element['LOCTREE'] ?? '');
             names.add(element['NAME'] ?? '');
           }
+          print(codes);
+        }
+
+        print('İÇ');
+        print(codes);
 
         return Sizer(builder: (context, orientation, deviceType) {
           return SizedBox(
@@ -75,7 +88,7 @@ class _SpaceSearchListState extends State<SpaceSearchList> {
                 body: Container(
                   color: const Color.fromARGB(255, 224, 224, 224),
                   child: Center(
-                      child: codes.length > 0
+                      child: codes.isNotEmpty
                           ? Padding(
                               padding: const EdgeInsets.all(12.0),
                               child: SingleChildScrollView(
@@ -85,16 +98,25 @@ class _SpaceSearchListState extends State<SpaceSearchList> {
                                       Center(
                                           child: GestureDetector(
                                         onTap: () async {
-                                          var summarySonuc = await apirepository.mahalAramaMahalDetaySummaryApi(codes[i]);
-                                          var slaSonuc = await apirepository.mahalAramaMahalDetaySlaApi(codes[i]);
-                                          var bakimIsEmri = await apirepository.mahalAraMahalDetayBakimIsEmri(codes[i]);
-                                          var anlikIsEmri = await apirepository.mahalAraMahalDetayAnlikIsEmri(codes[i]);
+                                          var summarySonuc = await apirepository
+                                              .mahalAramaMahalDetaySummaryApi(
+                                                  codes[i]);
+                                          var slaSonuc = await apirepository
+                                              .mahalAramaMahalDetaySlaApi(
+                                                  codes[i]);
+                                          var bakimIsEmri = await apirepository
+                                              .mahalAraMahalDetayBakimIsEmri(
+                                                  codes[i]);
+                                          var anlikIsEmri = await apirepository
+                                              .mahalAraMahalDetayAnlikIsEmri(
+                                                  codes[i]);
 
                                           // ignore: use_build_context_synchronously
                                           Navigator.push(
                                             context,
                                             MaterialPageRoute(
-                                              builder: (context) => SpaceSearchDetail(
+                                              builder: (context) =>
+                                                  SpaceSearchDetail(
                                                 code: codes[i],
                                                 name: names[i],
                                                 locTree: locTrees[i],
@@ -113,25 +135,33 @@ class _SpaceSearchListState extends State<SpaceSearchList> {
                                             height: 19.h,
                                             decoration: BoxDecoration(
                                               color: Colors.white,
-                                              borderRadius: BorderRadius.circular(15),
+                                              borderRadius:
+                                                  BorderRadius.circular(15),
                                             ),
                                             child: Padding(
-                                              padding: const EdgeInsets.all(9.0),
+                                              padding:
+                                                  const EdgeInsets.all(9.0),
                                               child: Column(
-                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
                                                     codes[i],
-                                                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+                                                    style: const TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 25),
                                                   ),
                                                   Text(
                                                     names[i],
-                                                    style: const TextStyle(fontSize: 19),
+                                                    style: const TextStyle(
+                                                        fontSize: 19),
                                                   ),
                                                   const Text(''),
                                                   Text(
                                                     locTrees[i],
-                                                    style: const TextStyle(fontSize: 15),
+                                                    style: const TextStyle(
+                                                        fontSize: 15),
                                                   ),
                                                 ],
                                               ),
@@ -140,39 +170,58 @@ class _SpaceSearchListState extends State<SpaceSearchList> {
                                         ),
                                       )),
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         Container(
                                             margin: const EdgeInsets.all(4),
                                             child: ElevatedButton(
                                                 onPressed: () {
-                                                  if (int.parse(searchProvider.sayfa) > 1) {
-                                                    searchProvider.setSayfa = (int.parse(searchProvider.sayfa) - 1).toString();
-                                                    loadData(int.parse(searchProvider.sayfa));
+                                                  if (int.parse(searchProvider
+                                                          .sayfa) >
+                                                      1) {
+                                                    searchProvider
+                                                        .setSayfa = (int.parse(
+                                                                searchProvider
+                                                                    .sayfa) -
+                                                            1)
+                                                        .toString();
+                                                    loadData(int.parse(
+                                                        searchProvider.sayfa));
                                                   }
                                                 },
                                                 child: const Text('<'))),
                                         Container(
                                             margin: const EdgeInsets.all(4),
-                                            child: ElevatedButton(onPressed: () {}, child: Text(searchProvider.sayfa))),
+                                            child: ElevatedButton(
+                                                onPressed: () {},
+                                                child: Text(
+                                                    searchProvider.sayfa))),
                                         Container(
                                             margin: const EdgeInsets.all(4),
                                             child: ElevatedButton(
                                                 onPressed: () {
-                                                  print(searchProvider.sayfa);
-                                                  searchProvider.setSayfa = (int.parse(searchProvider.sayfa) + 1).toString();
-                                                  loadData(int.parse(searchProvider.sayfa));
+                                                  searchProvider.setSayfa =
+                                                      (int.parse(searchProvider
+                                                                  .sayfa) +
+                                                              1)
+                                                          .toString();
+
+                                                  loadData(int.parse(
+                                                      searchProvider.sayfa));
                                                 },
                                                 child: const Text('>'))),
                                       ],
                                     )
                                   ],
                                 ),
-                              )
-                            : null),
-                  ),
-                ));
-          });
-        }));
+                              ),
+                            )
+                          : null),
+                ),
+              ));
+        });
+      }),
+    );
   }
 }

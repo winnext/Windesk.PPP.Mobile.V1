@@ -16,7 +16,6 @@ class SearchServiceRepoImpml extends SearchServiceRepository {
     String url =
         // ignore: prefer_interpolation_to_compose_strings
         '${ServiceTools.baseUrlV1 + ServiceTools.tokenV1 + deviceId + '&action=getWorkorderFromCode&username=' + userName.toString() + '&spaceCode=' + spaceCode}&status=~Closed%2C~Cancelled&module=&entityCode=&type=reactive';
-    print(url);
     try {
       BaseOptions options = BaseOptions(
           baseUrl: url,
@@ -46,7 +45,6 @@ class SearchServiceRepoImpml extends SearchServiceRepository {
     String url =
         // ignore: prefer_interpolation_to_compose_strings
         '${ServiceTools.baseUrlV1 + ServiceTools.tokenV1 + deviceId + '&action=getWorkorderFromCode&username=' + userName.toString() + '&spaceCode=' + spaceCode}&status=~Closed%2C~Cancelled&module=submaintenance&entityCode=&type=';
-    print(url);
     try {
       BaseOptions options = BaseOptions(
           baseUrl: url,
@@ -77,7 +75,6 @@ class SearchServiceRepoImpml extends SearchServiceRepository {
     String url =
         // ignore: prefer_interpolation_to_compose_strings
         '${ServiceTools.baseUrlV1 + ServiceTools.tokenV1 + deviceId + '&action=getIssuesFromCode&username=' + userName.toString() + '&spaceCode=' + spaceCode}&parentStatus=openParentStatus&cmdbCode=';
-    print(url);
     try {
       BaseOptions options = BaseOptions(
           baseUrl: url,
@@ -114,7 +111,6 @@ class SearchServiceRepoImpml extends SearchServiceRepository {
             userName +
             '&spaceCode=' +
             spaceCode;
-    print(url);
     try {
       BaseOptions options = BaseOptions(
           baseUrl: url,

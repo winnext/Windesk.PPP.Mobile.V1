@@ -12,6 +12,7 @@ class SpaceSearchDetail extends StatefulWidget {
   final List sla;
   // ignore: non_constant_identifier_names
   final List bakim_is_emri;
+  // ignore: non_constant_identifier_names
   final List anlik_is_emri;
 
   const SpaceSearchDetail(
@@ -21,7 +22,9 @@ class SpaceSearchDetail extends StatefulWidget {
       required this.locTree,
       required this.summary,
       required this.sla,
+      // ignore: non_constant_identifier_names
       required this.bakim_is_emri,
+      // ignore: non_constant_identifier_names
       required this.anlik_is_emri});
 
   @override
@@ -33,10 +36,6 @@ class _SpaceSearchDetailState extends State<SpaceSearchDetail> {
   Widget build(BuildContext context) {
     print(widget.summary);
     const headerStyle = TextStyle(color: Color(0xffffffff), fontSize: 15, fontWeight: FontWeight.bold);
-
-    return Sizer(builder: (context, orientation, deviceType) {
-      return SizedBox(
-          height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           child: Scaffold(
             resizeToAvoidBottomInset: true,
@@ -100,6 +99,7 @@ class _SpaceSearchDetailState extends State<SpaceSearchDetail> {
                                               SizedBox(
                                                   width: 50.w,
                                                   child: Text(widget.summary['CLASS'] ?? 'Veri Yok',
+                                                 
                                                       style: const TextStyle(
                                                         color: Colors.white,
                                                       )))
@@ -112,6 +112,7 @@ class _SpaceSearchDetailState extends State<SpaceSearchDetail> {
                                                     color: Colors.white,
                                                   )),
                                               Text(widget.summary['EK18GROUP'] ?? 'Veri Yok',
+                                              
                                                   style: const TextStyle(
                                                     color: Colors.white,
                                                   ))
@@ -125,7 +126,9 @@ class _SpaceSearchDetailState extends State<SpaceSearchDetail> {
                                                   )),
                                               SizedBox(
                                                   width: 50.w,
+
                                                   child: Text(widget.summary['AREA'] ?? 'Veri Yok',
+
                                                       style: const TextStyle(
                                                         color: Colors.white,
                                                       )))
@@ -140,6 +143,7 @@ class _SpaceSearchDetailState extends State<SpaceSearchDetail> {
                                               SizedBox(
                                                   width: 50.w,
                                                   child: Text(widget.summary['TYPE'] ?? 'Veri Yok',
+                                                  
                                                       style: const TextStyle(
                                                         color: Colors.white,
                                                       )))
@@ -154,6 +158,7 @@ class _SpaceSearchDetailState extends State<SpaceSearchDetail> {
                                               SizedBox(
                                                   width: 50.w,
                                                   child: Text(widget.summary['TYPE2'] ?? 'Veri Yok',
+                                               
                                                       style: const TextStyle(
                                                         color: Colors.white,
                                                       )))
@@ -194,6 +199,7 @@ class _SpaceSearchDetailState extends State<SpaceSearchDetail> {
                                                             border: Border.all(color: Colors.black),
                                                             borderRadius: const BorderRadius.all(Radius.circular(12))),
                                                         alignment: Alignment.center,
+                                                            
                                                         child: Center(
                                                             child: ElevatedButton(
                                                           onPressed: () {
@@ -214,6 +220,7 @@ class _SpaceSearchDetailState extends State<SpaceSearchDetail> {
                                                         ))),
                                                   ),
                                                 widget.sla.isNotEmpty ? const Text('') : const Text(' Sonuç Bulunamadı ')
+                                              
                                               ],
                                             ),
                                           )),
@@ -221,6 +228,7 @@ class _SpaceSearchDetailState extends State<SpaceSearchDetail> {
                                           isOpen: false,
                                           leftIcon: const Icon(Icons.people, color: Colors.white),
                                           header: const Text('Bakım İş Emri', style: headerStyle),
+
                                           content: SingleChildScrollView(
                                             child: Column(
                                               mainAxisSize: MainAxisSize.min,
@@ -238,7 +246,6 @@ class _SpaceSearchDetailState extends State<SpaceSearchDetail> {
                                                         child: Center(
                                                             child: ElevatedButton(
                                                           onPressed: () {
-                                                            print('Routing wo detail page');
 
                                                             ///////////////////////////////////
                                                             ///  İŞ EMRİ SAYFASINA GİDECEK ///
@@ -251,11 +258,13 @@ class _SpaceSearchDetailState extends State<SpaceSearchDetail> {
                                                               Text(widget.bakim_is_emri[i]['WO_CODE'] + ' - ' + widget.bakim_is_emri[i]['WO_STATUS']),
                                                               Text(widget.bakim_is_emri[i]['WO_NAME']),
                                                               Text('Planlanan Bitiş Tarihi : ' + widget.bakim_is_emri[i]['PLANNED_ENDDATE']),
+
                                                             ],
                                                           ),
                                                         ))),
                                                   ),
                                                 widget.bakim_is_emri.isNotEmpty ? const Text('') : const Text(' Sonuç Bulunamadı ')
+
                                               ],
                                             ),
                                           )),
@@ -263,6 +272,7 @@ class _SpaceSearchDetailState extends State<SpaceSearchDetail> {
                                           isOpen: false,
                                           leftIcon: const Icon(Icons.flag, color: Colors.white),
                                           header: const Text('Anlık İş Emri', style: headerStyle),
+
                                           content: SingleChildScrollView(
                                             child: Column(
                                               mainAxisSize: MainAxisSize.min,
@@ -277,6 +287,7 @@ class _SpaceSearchDetailState extends State<SpaceSearchDetail> {
                                                             border: Border.all(color: Colors.black),
                                                             borderRadius: const BorderRadius.all(Radius.circular(12))),
                                                         alignment: Alignment.center,
+
                                                         child: Center(
                                                             child: ElevatedButton(
                                                           onPressed: () {
@@ -298,6 +309,7 @@ class _SpaceSearchDetailState extends State<SpaceSearchDetail> {
                                                         ))),
                                                   ),
                                                 widget.anlik_is_emri.isNotEmpty ? const Text('') : const Text(' Sonuç Bulunamadı ')
+
                                               ],
                                             ),
                                           )),
@@ -323,11 +335,13 @@ class _SpaceSearchDetailState extends State<SpaceSearchDetail> {
                                 Text(
                                   '${widget.code}-${widget.name}',
                                   style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18),
+
                                 ),
                                 const Text(''),
                                 Text(
                                   widget.locTree,
                                   style: const TextStyle(color: Colors.black, fontSize: 15),
+
                                 ),
                               ],
                             ),

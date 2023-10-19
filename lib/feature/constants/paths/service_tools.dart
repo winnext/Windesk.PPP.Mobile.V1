@@ -24,6 +24,7 @@ class ServiceTools {
   static const attachPathLive = "http://10.126.12.21/esh3/xreadattach.php?token=$tokenV1&id=";
   static const facilityName = "Eskişehir Şehir Hastanesi";
   static const appName = "ESH";
+  static const ipv4adress = '10.126.12.21';
 
   //BESK PREPROD
   // static const String baseUrlV1 =
