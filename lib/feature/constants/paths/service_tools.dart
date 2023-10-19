@@ -36,6 +36,17 @@ class ServiceTools {
   // static const facilityName = "Bilkent Şehir Hastanesi";
   // static const appName = "BESK";
 
+  //BESK PROD
+  // static const String baseUrlV1 =
+  //     'http://10.198.10.13/windesk/app/webroot/integration/WindeskMobile.php?use_rest=1&wsusername=wdmobile&wspassword=wdsgnm1017_&token=';
+  // static const String baseUrlV2 = 'http://windeskmobile.besk.yerel';
+  // static const tokenV1 = 'wdbeskprod!_';
+  // static const tokenV2 = 'beskprod!';
+  // static const attachPath = "http://10.198.10.13/windesk";
+  // static const attachPathLive = "http://10.198.10.13/windesk/xreadattach.php?token=$tokenV1&id=";
+  // static const facilityName = "Bilkent Şehir Hastanesi";
+  // static const appName = "BESK";
+
   // static const pppProject = "antep";
   // static const baseUrlV2 = 'http://wd-mobile-test.gaziantep.yerel';
   // static const tokenV1 = 'anteptest!_';

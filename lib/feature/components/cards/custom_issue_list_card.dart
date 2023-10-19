@@ -8,67 +8,22 @@ import 'package:wm_ppp_4/feature/constants/style/color_calculator.dart';
 import 'package:wm_ppp_4/feature/constants/style/custom_paddings.dart';
 import 'package:wm_ppp_4/feature/constants/style/font_sizes.dart';
 import 'package:wm_ppp_4/feature/mixins/custom_issue_list_card_mixin.dart';
-
+import 'package:wm_ppp_4/feature/models/issue_models/issue_list_model.dart';
 import '../../constants/functions/null_check_widget.dart';
 import '../../constants/other/time_functions.dart';
 
 class CustomIssueListCard extends StatefulWidget {
-  final String? code,
-      targetFDate,
-      targetRDate,
-      taskNo,
-      description,
-      sumdesc1,
-      statusName,
-      space,
-      location,
-      idate,
-      statusCode,
-      planedDate,
-      respondedIDate,
-      responseTimer,
-      fixedTimer,
-      fixedIDate,
-      timeInfoNow;
-
-  final Color? importanceLevelColor;
-  final VoidCallback? press;
-  final bool isIcon;
   final Function onPressed;
   final Function onPressedLong;
+  final IssueListModel issueListElement;
 
-  const CustomIssueListCard(
-      {Key? key,
-      this.code,
-      this.targetFDate,
-      this.targetRDate,
-      this.space,
-      this.taskNo,
-      this.description,
-      this.sumdesc1,
-      this.press,
-      this.importanceLevelColor,
-      this.statusName,
-      this.isIcon = false,
-      this.location,
-      this.idate,
-      this.statusCode,
-      this.planedDate,
-      required this.onPressed,
-      this.respondedIDate,
-      this.fixedTimer,
-      this.responseTimer,
-      this.fixedIDate,
-      this.timeInfoNow,
-      required this.onPressedLong})
-      : super(key: key);
+  const CustomIssueListCard({Key? key, required this.onPressed, required this.issueListElement, required this.onPressedLong}) : super(key: key);
 
   @override
   State<CustomIssueListCard> createState() => _CustomIssueListCardState();
 }
 
-class _CustomIssueListCardState extends State<CustomIssueListCard>
-    with CustomIssueListCardConstantsMixin, CustomIssueListCardStylesMixin {
+class _CustomIssueListCardState extends State<CustomIssueListCard> with CustomIssueListCardConstantsMixin, CustomIssueListCardStylesMixin {
   String dateNow = DateFormat("yyyyMMddhhmmss").format(DateTime.now());
   late final Timer _timer;
 
@@ -103,12 +58,12 @@ class _CustomIssueListCardState extends State<CustomIssueListCard>
     Size size = MediaQuery.of(context).size;
 
     return GestureDetector(
-      onTap: () => widget.onPressed(widget.code.toString()),
+      onTap: () => widget.onPressed(widget.issueListElement.code.toString()),
       onLongPress: () => widget.onPressedLong(),
       child: Padding(
         padding: CustomPaddings.pageNormal,
         child: Container(
-          width: size.width / 1.5,
+          width: size.width,
           decoration: containerDecoration,
           child: Padding(
             padding: containerPadding,
@@ -120,54 +75,58 @@ class _CustomIssueListCardState extends State<CustomIssueListCard>
                 codeWidget(size),
                 statusNameWidget(size),
                 NullCheckWidget().nullCheckWidget(
-                  widget.location.toString(),
+                  widget.issueListElement.location.toString(),
                   SizedBox(),
-                  issueListText(size, locationStr, widget.location.toString()),
+                  issueListText(size, locationStr, widget.issueListElement.location.toString()),
                 ),
                 NullCheckWidget().nullCheckWidget(
-                  widget.space.toString(),
+                  widget.issueListElement.space.toString(),
                   SizedBox(),
-                  issueListText(size, placeStr, widget.space.toString()),
+                  issueListText(size, placeStr, widget.issueListElement.space.toString()),
                 ),
                 NullCheckWidget().nullCheckWidget(
-                  widget.description.toString(),
+                  widget.issueListElement.description.toString(),
                   SizedBox(),
-                  issueListText(size, descriptionStr, widget.description.toString()),
+                  issueListText(size, descriptionStr, widget.issueListElement.description.toString()),
                 ),
                 NullCheckWidget().nullCheckWidget(
-                  widget.idate.toString(),
+                  widget.issueListElement.idate.toString(),
                   SizedBox(),
-                  issueListText(size, descriptionDateStr, widget.idate.toString()),
+                  issueListText(size, descriptionDateStr, widget.issueListElement.idate.toString()),
                 ),
-                widget.statusCode.toString() == statusCodeCheckTxt
-                    ? plannedlWidget(size, widget.planedDate.toString())
-                    : widget.responseTimer == zeroStr && widget.fixedTimer == zeroStr
+                widget.issueListElement.statuscode.toString() == statusCodeCheckTxt
+                    ? plannedlWidget(size, widget.issueListElement.planneddate.toString())
+                    : widget.issueListElement.response_timer == zeroStr && widget.issueListElement.fixed_timer == zeroStr
                         ? Column(
                             children: [
-                              happeningTimeWidget(size, happenedResponse, widget.respondedIDate.toString(), widget.targetRDate.toString()),
+                              happeningTimeWidget(size, happenedResponse, widget.issueListElement.responded_idate.toString(),
+                                  widget.issueListElement.target_rdate.toString()),
                               NullCheckWidget().nullCheckWidget(
-                                widget.fixedIDate.toString(),
-                                happeningTimeWidget(size, happenedDescriptionDaterError, numErrorStr, widget.targetFDate.toString()),
-                                happeningTimeWidget(size, happenedFix, widget.fixedIDate.toString(), widget.targetFDate.toString()),
+                                widget.issueListElement.fixed_idate.toString(),
+                                happeningTimeWidget(
+                                    size, happenedDescriptionDaterError, numErrorStr, widget.issueListElement.target_fdate.toString()),
+                                happeningTimeWidget(size, happenedFix, widget.issueListElement.fixed_idate.toString(),
+                                    widget.issueListElement.target_fdate.toString()),
                               ),
                             ],
                           )
-                        : widget.responseTimer == zeroStr && widget.fixedTimer == oneStr
+                        : widget.issueListElement.response_timer == zeroStr && widget.issueListElement.fixed_timer == oneStr
                             ? Column(
-                              children: [
-                                happeningTimeWidget(size, happenedResponse, widget.respondedIDate.toString(), widget.targetRDate.toString()),
-                                timerRecoverText(size, goalFix, widget.targetFDate.toString()),
-                                timerDifferenceText(size, remainDate, widget.targetFDate.toString()),
-                              ],
-                            )
+                                children: [
+                                  happeningTimeWidget(size, happenedResponse, widget.issueListElement.responded_idate.toString(),
+                                      widget.issueListElement.target_rdate.toString()),
+                                  timerRecoverText(size, goalFix, widget.issueListElement.target_fdate.toString()),
+                                  timerDifferenceText(size, remainDate, widget.issueListElement.target_fdate.toString()),
+                                ],
+                              )
                             : Column(
-                              children: [
-                                timerRecoverText(size, goalResponse, widget.targetRDate.toString()),
-                                timerDifferenceText(size, remainDate, widget.targetRDate.toString()),
-                                timerRecoverText(size, goalFix, widget.targetFDate.toString()),
-                                timerDifferenceText(size, remainDate, widget.targetFDate.toString()),
-                              ],
-                            ),
+                                children: [
+                                  timerRecoverText(size, goalResponse, widget.issueListElement.target_rdate.toString()),
+                                  timerDifferenceText(size, remainDate, widget.issueListElement.target_rdate.toString()),
+                                  timerRecoverText(size, goalFix, widget.issueListElement.target_fdate.toString()),
+                                  timerDifferenceText(size, remainDate, widget.issueListElement.target_fdate.toString()),
+                                ],
+                              ),
               ],
             ),
           ),
@@ -182,38 +141,28 @@ class _CustomIssueListCardState extends State<CustomIssueListCard>
         width: size.width,
         child: Padding(
           padding: CustomPaddings.onlyBottomLow,
-          child: Text('$datedCase ${TimeClass().timeRecover(plannedDate)}',
-              style: commonStyle),
+          child: Text('$datedCase ${TimeClass().timeRecover(plannedDate)}', style: commonStyle),
         ),
       ),
     );
   }
 
-  SizedBox happeningTimeWidget(
-      Size size, String header, String fixedDate, String targetDate) {
-    return SizedBox(
+  Container happeningTimeWidget(Size size, String header, String fixedDate, String targetDate) {
+    return Container(
       width: size.width,
+      decoration:
+          BoxDecoration(borderRadius: BorderRadius.circular(5), color: CustomColorCalculator().colorCalculatorBackground(fixedDate, targetDate)),
       child: Padding(
-        padding: const EdgeInsets.only(bottom: 0.0),
-        child: Container(
-          width: size.width,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              color: CustomColorCalculator()
-                  .colorCalculatorBackground(fixedDate, targetDate)),
-          child: Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: Text(
-              '$header ${TimeClass().timeRecover(fixedDate).toString()}',
-              maxLines: 1,
-              style: TextStyle(
-                fontSize: FontSizes.caption - 1,
-                letterSpacing: letterSpacing,
-                color: CustomColorCalculator()
-                    .colorCalculatorText(fixedDate, targetDate),
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+        padding: const EdgeInsets.all(5.0),
+        child: Text(
+          '$header ${TimeClass().timeRecover(fixedDate).toString()}',
+          maxLines: 1,
+          overflow: TextOverflow.fade,
+          style: TextStyle(
+            fontSize: FontSizes.caption - 1,
+            letterSpacing: letterSpacing,
+            color: CustomColorCalculator().colorCalculatorText(fixedDate, targetDate),
+            fontWeight: FontWeight.bold,
           ),
         ),
       ),
@@ -227,12 +176,14 @@ class _CustomIssueListCardState extends State<CustomIssueListCard>
         padding: CustomPaddings.topAndBottomLow,
         child: Text(
           key: Key(remainDateKey),
-          '$header ${TimeClass().timeDifference(targetTime)}',
-          maxLines: 1,
+          '$header${TimeClass().timeDifference(targetTime)}',
+          maxLines: 3,
+          overflow: TextOverflow.ellipsis,
+          textAlign: TextAlign.justify,
           style: TextStyle(
-            color: CustomColorCalculator()
-                .colorCalculator(dateNow.toString(), targetTime),
+            color: CustomColorCalculator().colorCalculator(dateNow.toString(), targetTime),
             fontSize: FontSizes.caption - 1,
+            letterSpacing: letterSpacing,
           ),
         ),
       ),
@@ -249,8 +200,7 @@ class _CustomIssueListCardState extends State<CustomIssueListCard>
           '$header ${TimeClass().timeRecover(targetTime)}',
           maxLines: 1,
           style: TextStyle(
-            color: CustomColorCalculator()
-                .colorCalculator(dateNow.toString(), targetTime),
+            color: CustomColorCalculator().colorCalculator(dateNow.toString(), targetTime),
             fontSize: FontSizes.caption - 1,
             letterSpacing: letterSpacing,
           ),
@@ -265,7 +215,7 @@ class _CustomIssueListCardState extends State<CustomIssueListCard>
         width: size.width / 1,
         child: Padding(
           padding: CustomPaddings.onlyBottomLow,
-          child: Text(widget.statusName.toString(), style: commonStyle),
+          child: Text(widget.issueListElement.statusname.toString(), style: commonStyle),
         ),
       ),
     );
@@ -278,14 +228,10 @@ class _CustomIssueListCardState extends State<CustomIssueListCard>
         child: Padding(
           padding: CustomPaddings.onlyTopLow,
           child: Text(
-            widget.code.toString(),
+            widget.issueListElement.code.toString(),
             softWrap: true,
             overflow: TextOverflow.ellipsis,
-            style: TextStyle(
-                color: Color(0xff025273),
-                fontSize: FontSizes.caption,
-                fontFamily: "Poppins",
-                fontWeight: FontWeight.bold),
+            style: TextStyle(color: Color(0xff025273), fontSize: FontSizes.caption, fontFamily: "Poppins", fontWeight: FontWeight.bold),
           ),
         ),
       ),
@@ -302,10 +248,7 @@ class _CustomIssueListCardState extends State<CustomIssueListCard>
               alignment: Alignment.centerLeft,
               child: Padding(
                 padding: CustomPaddings.onlyBottomLow,
-                child: Text(
-                    key: Key(issueListTextKey),
-                    '$header : $description',
-                    style: commonStyle),
+                child: Text(key: Key(issueListTextKey), '$header : $description', style: commonStyle),
               ),
             ),
             Divider(height: 5),
