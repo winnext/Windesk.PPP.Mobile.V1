@@ -34,8 +34,7 @@ class AddPersonalModalBottomSheet extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
         child: Column(
           children: [
-            _inputS(context, personalList, shiftList, selectPersonalFunction,
-                selectShiftFunction),
+            _inputS(context, personalList, shiftList, selectPersonalFunction, selectShiftFunction),
             _buttons(context, addPersonalFunction),
           ],
         ),
@@ -43,8 +42,7 @@ class AddPersonalModalBottomSheet extends StatelessWidget {
     );
   }
 
-  Expanded _inputS(context, personalList, shiftList, selectPersonalFunction,
-      selectShiftFunction) {
+  Expanded _inputS(context, personalList, shiftList, selectPersonalFunction, selectShiftFunction) {
     return Expanded(
       flex: 50,
       child: Column(
@@ -67,10 +65,7 @@ class AddPersonalModalBottomSheet extends StatelessWidget {
           ),
           Expanded(
             child: DropDownInputFields(
-                labelText: AppStrings.chooseShift,
-                onChangedFunction: selectShiftFunction,
-                rightIcon: AppIcons.arrowDown,
-                dropDownArray: shiftList),
+                labelText: AppStrings.chooseShift, onChangedFunction: selectShiftFunction, rightIcon: AppIcons.arrowDown, dropDownArray: shiftList),
           ),
         ],
       ),
@@ -98,7 +93,6 @@ class AddPersonalModalBottomSheet extends StatelessWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties
-        .add(DiagnosticsProperty<Function>('saveEffort', addPersonalFunction));
+    properties.add(DiagnosticsProperty<Function>('saveEffort', addPersonalFunction));
   }
 }

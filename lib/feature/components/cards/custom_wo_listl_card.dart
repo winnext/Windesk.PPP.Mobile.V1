@@ -10,7 +10,7 @@ import 'package:wm_ppp_4/feature/extensions/date_string_extension.dart';
 import '../../constants/other/app_strings.dart';
 import '../../constants/other/colors.dart';
 import '../../constants/style/box_decorations.dart';
-import '../../../../feature/l10n/locale_keys.g.dart';
+import '../../l10n/locale_keys.g.dart';
 import '../buttons/custom_half_buttons.dart';
 import '../dividers/custom_wo_summary_divider.dart';
 

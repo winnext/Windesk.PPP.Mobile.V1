@@ -15,9 +15,7 @@ class SearchScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: const CustomTabAppbar(title: AppStrings.searchTab),
-        body: Center(child: _bodyWidget(context)));
+    return Scaffold(appBar: const CustomTabAppbar(title: AppStrings.searchTab), body: Center(child: _bodyWidget(context)));
   }
 
   Widget _bodyWidget(context) {
@@ -25,36 +23,16 @@ class SearchScreen extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        rowIconButtonSection(
-            context,
-            LocaleKeys.issueSearchPage,
-            AppIcons.issueSearchIcon,
-            const IssueSearchRoute(),
-            LocaleKeys.assetSearchPage,
-            AppIcons.assetSearchIcon,
-            const AssetSearchRoute(),true),
-        rowIconButtonSection(
-            context,
-            LocaleKeys.spaceSearchPage,
-            AppIcons.spaceSearchIcon,
-            const SpaceSearchRoute(),
-            LocaleKeys.workOrderSearch,
-            AppIcons.woSearchIcon,
-            const WoSearchRoute(), 
-            ServiceTools.isWorkOrderExist),
+        rowIconButtonSection(context, LocaleKeys.issueSearchPage, AppIcons.issueSearchIcon, const IssueSearchRoute(), LocaleKeys.assetSearchPage,
+            AppIcons.assetSearchIcon, const AssetSearchRoute(), true),
+        rowIconButtonSection(context, LocaleKeys.spaceSearchPage, AppIcons.spaceSearchIcon, const SpaceSearchRoute(), LocaleKeys.workOrderSearch,
+            AppIcons.woSearchIcon, const WoSearchRoute(), ServiceTools.isWorkOrderExist),
       ],
     );
   }
 
-  Widget rowIconButtonSection(
-      BuildContext context,
-      String buttonTitle1,
-      IconData buttonIcon1,
-      PageRouteInfo<dynamic> navigateRouteName1,
-      String buttonTitle2,
-      IconData buttonIcon2,
-      PageRouteInfo<dynamic> navigateRouteName2,
-      bool secondButtonExist) {
+  Widget rowIconButtonSection(BuildContext context, String buttonTitle1, IconData buttonIcon1, PageRouteInfo<dynamic> navigateRouteName1,
+      String buttonTitle2, IconData buttonIcon2, PageRouteInfo<dynamic> navigateRouteName2, bool secondButtonExist) {
     return Expanded(
       child: Center(
         child: Row(
@@ -72,18 +50,20 @@ class SearchScreen extends StatelessWidget {
               isBadgeVisible: false,
               badgeCount: '0',
             ),
-            secondButtonExist ? CustomCircularHomeButton(
-              title: buttonTitle2,
-              icon: Icon(
-                buttonIcon2,
-                size: MediaQuery.of(context).size.width / 10,
-              ),
-              onPressed: () {
-                context.router.push(navigateRouteName2);
-              },
-              isBadgeVisible: false,
-              badgeCount: '0',
-            ):Container(),
+            secondButtonExist
+                ? CustomCircularHomeButton(
+                    title: buttonTitle2,
+                    icon: Icon(
+                      buttonIcon2,
+                      size: MediaQuery.of(context).size.width / 10,
+                    ),
+                    onPressed: () {
+                      context.router.push(navigateRouteName2);
+                    },
+                    isBadgeVisible: false,
+                    badgeCount: '0',
+                  )
+                : Container(),
           ],
         ),
       ),

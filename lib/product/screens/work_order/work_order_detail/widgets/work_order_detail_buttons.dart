@@ -3,6 +3,7 @@ import 'package:wm_ppp_4/feature/components/generic_bottom_sheet/base_bottom_she
 import 'package:wm_ppp_4/feature/components/worker_order_bottom_sheets/choose_add_document_type_sheet.dart';
 import 'package:wm_ppp_4/feature/constants/other/app_strings.dart';
 
+import '../../../../../feature/components/model_bottom_sheet/add_activity_modal_bottom_sheet.dart';
 import '../../../../../feature/constants/other/app_icons.dart';
 import '../../../../../feature/constants/other/colors.dart';
 import '../../../../../feature/constants/style/border_radius.dart';
@@ -42,7 +43,8 @@ class WorkOrderDetailButtons extends StatelessWidget {
               },
             ),
           ],
-        )
+        ),
+        workOrderCode[0] == 'm' ? IssueActionModal(issueCode: value.workOrderDetailsModel.modulecode) : Container()
       ],
     );
   }

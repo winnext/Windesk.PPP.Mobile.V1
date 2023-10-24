@@ -50,7 +50,6 @@ class _DropDownInputFieldsState extends State<DropDownInputFields> {
         widget.onChangedFunction(newValue),
         setState(() {
           selectedValue = newValue.toString();
-          print('selectedValue$selectedValue');
         }),
       },
     );

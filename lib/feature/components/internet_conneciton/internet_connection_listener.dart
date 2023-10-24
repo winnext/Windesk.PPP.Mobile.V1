@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:wm_ppp_4/feature/components/snackBar/snackbar.dart';
+import 'package:wm_ppp_4/feature/constants/paths/service_tools.dart';
 
 class InternetListenerClass {
   internetConnection(context) async {
@@ -14,7 +15,7 @@ class InternetListenerClass {
     InternetConnectionChecker().addresses = <AddressCheckOptions>[
       AddressCheckOptions(
         address: InternetAddress(
-          '1.1.1.1', //10.86.4.46 aeh
+          ServiceTools.ipv4adress, //10.86.4.46 aeh
           // 1.1.1.1 cihaz interneti
           type: InternetAddressType.IPv4,
         ),

@@ -20,8 +20,7 @@ class AssetSearchPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
         create: (context) => AssetSearchProvider(),
-        child: Consumer<AssetSearchProvider>(
-            builder: (context, AssetSearchProvider assetSearchProvider, child) {
+        child: Consumer<AssetSearchProvider>(builder: (context, AssetSearchProvider assetSearchProvider, child) {
           return Scaffold(
             appBar: const CustomTabAppbar(
               title: AppStrings.entitiySearch,
@@ -79,11 +78,9 @@ class AssetSearchPage extends StatelessWidget {
                                 assetSearchProvider.spaceCode.text,
                                 1);
                             // ignore: use_build_context_synchronously
-                            context.router.push(AssetSearchListRoute(
-                                assetSearchProviderx: assetSearchProvider));
+                            context.router.push(AssetSearchListRoute(assetSearchProviderx: assetSearchProvider));
                           } else {
-                            snackBar(context, "Lütfen en az bir alan doldurun.",
-                                'error');
+                            snackBar(context, "Lütfen en az bir alan doldurun.", 'error');
                           }
                         }),
                   ],

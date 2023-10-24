@@ -17,8 +17,7 @@ class WoSearchPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
         create: (context) => WoSearchProvider(),
-        child: Consumer<WoSearchProvider>(
-            builder: (context, WoSearchProvider woSearchProvider, child) {
+        child: Consumer<WoSearchProvider>(builder: (context, WoSearchProvider woSearchProvider, child) {
           return Scaffold(
             appBar: const CustomTabAppbar(
               title: AppStrings.workOrderSearch,

@@ -59,7 +59,7 @@ class IssueAddPhotoProvider extends ChangeNotifier {
           else
             {
               errorAccur = true,
-              snackBar(context, LocaleKeys.processCancell , 'error'),
+              snackBar(context, LocaleKeys.processCancell, 'error'),
               Navigator.of(context).pop<bool>(false),
             }
         },

@@ -17,8 +17,7 @@ class IssueSearchPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
         create: (context) => IssueSearchProvider(),
-        child: Consumer<IssueSearchProvider>(
-            builder: (context, IssueSearchProvider issueSearchProvider, child) {
+        child: Consumer<IssueSearchProvider>(builder: (context, IssueSearchProvider issueSearchProvider, child) {
           return Scaffold(
             appBar: const CustomTabAppbar(
               title: AppStrings.caseSlaSearch,
@@ -45,7 +44,6 @@ class IssueSearchPage extends StatelessWidget {
                         bgColor: APPColors.Login.blue,
                         onPressFunction: () {
                           issueSearchProvider.printSearchData(context);
-                          
                         },
                         textButton: 'Ara',
                         textColor: APPColors.Main.white),

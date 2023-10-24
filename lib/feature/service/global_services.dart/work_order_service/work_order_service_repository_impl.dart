@@ -570,7 +570,7 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
           final data = response.data;
 
           List<WorkOrderTracingListModel> tracingList = WorkOrderTracingListModel.fromJsonList(data['lists']);
-          super.logger.e(tracingList.toString());
+          super.logger.e(tracingList[18].toString());
 
           return Left(tracingList);
         } else {

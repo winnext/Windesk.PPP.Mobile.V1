@@ -40,14 +40,7 @@ class AddMaterialModalBottomSheet extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
         child: Column(
           children: [
-            _inputS(
-                context,
-                wareHouseList,
-                selectWareHouseFunction,
-                productList,
-                selectProductFunction,
-                unitList,
-                selectUnitFunction,
+            _inputS(context, wareHouseList, selectWareHouseFunction, productList, selectProductFunction, unitList, selectUnitFunction,
                 saveAmountFunction),
             _buttons(context, addMaterial),
           ],
@@ -56,8 +49,8 @@ class AddMaterialModalBottomSheet extends StatelessWidget {
     );
   }
 
-  Expanded _inputS(context, wareHouseList, selectWareHouseFunction, productList,
-      selectProductFunction, unitList, selectUnitFunction, saveAmountFunction) {
+  Expanded _inputS(
+      context, wareHouseList, selectWareHouseFunction, productList, selectProductFunction, unitList, selectUnitFunction, saveAmountFunction) {
     return Expanded(
       flex: 50,
       child: Column(
@@ -87,15 +80,9 @@ class AddMaterialModalBottomSheet extends StatelessWidget {
           ),
           Expanded(
             child: DropDownInputFields(
-                labelText: AppStrings.chooseUnit,
-                onChangedFunction: selectUnitFunction,
-                rightIcon: AppIcons.arrowDown,
-                dropDownArray: unitList),
+                labelText: AppStrings.chooseUnit, onChangedFunction: selectUnitFunction, rightIcon: AppIcons.arrowDown, dropDownArray: unitList),
           ),
-          Expanded(
-              child: TextFieldsInput(
-                  onChangedFunction: saveAmountFunction,
-                  labelText: AppStrings.enterAmount))
+          Expanded(child: TextFieldsInput(onChangedFunction: saveAmountFunction, labelText: AppStrings.enterAmount))
         ],
       ),
     );

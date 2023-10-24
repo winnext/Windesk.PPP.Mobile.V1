@@ -23,7 +23,6 @@ class AppRouter extends $AppRouter {
                 RedirectRoute(path: '', redirectTo: 'homeScreen'),
                 AutoRoute(
                     path: 'homeScreen', page: HomeScreen.page, initial: true),
-
                 // work order
                 AutoRoute(
                     path: 'workOrderListScreen',

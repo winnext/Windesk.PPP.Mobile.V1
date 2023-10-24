@@ -26,16 +26,7 @@ class AddEffortsModalBottomSheet extends StatelessWidget {
   }
 
   _bodyWidget(BuildContext context) {
-    final List<String> times = [
-      "Lütfen Süre Seçiniz",
-      "15 dk",
-      "30 dk",
-      "45 dk",
-      "1 sa",
-      "2 sa",
-      "6 sa",
-      "Serbest Seçim"
-    ];
+    final List<String> times = ["Lütfen Süre Seçiniz", "15 dk", "30 dk", "45 dk", "1 sa", "2 sa", "6 sa", "Serbest Seçim"];
     return SizedBox(
       height: MediaQuery.of(context).size.height * 0.6,
       width: context.width,
@@ -43,8 +34,7 @@ class AddEffortsModalBottomSheet extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
         child: Column(
           children: [
-            _inputS(context, saveTime, selectedTime, times, dayArray,
-                hoursArray, minuteArray),
+            _inputS(context, saveTime, selectedTime, times, dayArray, hoursArray, minuteArray),
             _buttons(context, addEffortFunction),
           ],
         ),
@@ -52,8 +42,7 @@ class AddEffortsModalBottomSheet extends StatelessWidget {
     );
   }
 
-  Expanded _inputS(context, Function saveTime, selectedTime, times, dayArray,
-      hoursArray, minuteArray) {
+  Expanded _inputS(context, Function saveTime, selectedTime, times, dayArray, hoursArray, minuteArray) {
     return Expanded(
       flex: 40,
       child: Column(
@@ -68,35 +57,22 @@ class AddEffortsModalBottomSheet extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: DropDownInputFields(
-                labelText: AppStrings.date,
-                onChangedFunction: saveTime,
-                rightIcon: AppIcons.arrowDown,
-                dropDownArray: times),
+            child: DropDownInputFields(labelText: AppStrings.date, onChangedFunction: saveTime, rightIcon: AppIcons.arrowDown, dropDownArray: times),
           ),
           Expanded(
             child: Row(
               children: [
                 Expanded(
                   child: DropDownInputFields(
-                      labelText: AppStrings.day,
-                      onChangedFunction: saveTime,
-                      rightIcon: AppIcons.arrowDown,
-                      dropDownArray: dayArray),
+                      labelText: AppStrings.day, onChangedFunction: saveTime, rightIcon: AppIcons.arrowDown, dropDownArray: dayArray),
                 ),
                 Expanded(
                   child: DropDownInputFields(
-                      labelText: AppStrings.hour,
-                      onChangedFunction: saveTime,
-                      rightIcon: AppIcons.arrowDown,
-                      dropDownArray: hoursArray),
+                      labelText: AppStrings.hour, onChangedFunction: saveTime, rightIcon: AppIcons.arrowDown, dropDownArray: hoursArray),
                 ),
                 Expanded(
                   child: DropDownInputFields(
-                      labelText: AppStrings.minute,
-                      onChangedFunction: saveTime,
-                      rightIcon: AppIcons.arrowDown,
-                      dropDownArray: minuteArray),
+                      labelText: AppStrings.minute, onChangedFunction: saveTime, rightIcon: AppIcons.arrowDown, dropDownArray: minuteArray),
                 ),
               ],
             ),
@@ -127,7 +103,6 @@ class AddEffortsModalBottomSheet extends StatelessWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties
-        .add(DiagnosticsProperty<Function>('saveEffort', addEffortFunction));
+    properties.add(DiagnosticsProperty<Function>('saveEffort', addEffortFunction));
   }
 }

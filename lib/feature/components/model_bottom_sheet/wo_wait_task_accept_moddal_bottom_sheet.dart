@@ -34,8 +34,7 @@ class WoWaitTaskAcceptModalBottomSheet extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               _inputS(textData),
-              _buttons(context, acceptModalAcceptFunction,
-                  acceptModalRejectFunction),
+              _buttons(context, acceptModalAcceptFunction, acceptModalRejectFunction),
             ],
           ),
         ),
@@ -46,10 +45,7 @@ class WoWaitTaskAcceptModalBottomSheet extends StatelessWidget {
   _inputS(textData) {
     return Text(
       textData,
-      style: TextStyle(
-          color: APPColors.Main.black,
-          fontWeight: FontWeight.bold,
-          fontSize: FontSizes.subtitle),
+      style: TextStyle(color: APPColors.Main.black, fontWeight: FontWeight.bold, fontSize: FontSizes.subtitle),
     );
   }
 
@@ -69,7 +65,6 @@ class WoWaitTaskAcceptModalBottomSheet extends StatelessWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(
-        DiagnosticsProperty<Function>('saveEffort', acceptModalAcceptFunction));
+    properties.add(DiagnosticsProperty<Function>('saveEffort', acceptModalAcceptFunction));
   }
 }

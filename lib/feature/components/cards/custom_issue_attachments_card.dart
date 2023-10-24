@@ -3,7 +3,7 @@ import 'package:url_launcher/link.dart';
 import 'package:wm_ppp_4/feature/components/cards/custom_activities_photo_card.dart';
 import 'package:wm_ppp_4/feature/constants/other/colors.dart';
 import 'package:wm_ppp_4/feature/constants/paths/service_tools.dart';
-import '../../../../feature/l10n/locale_keys.g.dart';
+import '../../l10n/locale_keys.g.dart';
 import 'package:wm_ppp_4/feature/models/issue_models/issue_attachments_model.dart';
 
 class CustomIssueAttachmentsCard extends StatelessWidget {

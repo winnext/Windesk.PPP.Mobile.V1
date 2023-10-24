@@ -25,6 +25,7 @@ class ServiceTools {
   static const facilityName = "Eskişehir Şehir Hastanesi";
   static const appName = "ESH";
   static const isWorkOrderExist = true;
+  static const ipv4adress = '10.126.12.21';
 
   //BESK PREPROD
   // static const String baseUrlV1 =

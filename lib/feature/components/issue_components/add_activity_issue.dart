@@ -123,9 +123,7 @@ class AddActivity extends StatelessWidget {
                             },
                           ),
                         )),
-                    NullCheckWidget().conditionCheckWidget(
-                        issueActionProvider.mobilePhoto,
-                        _addActivityPhoto(context, issueActionProvider)),
+                    NullCheckWidget().conditionCheckWidget(issueActionProvider.mobilePhoto, _addActivityPhoto(context, issueActionProvider)),
                     _saveOrQuit(context, issueActionProvider, issueProvider)
                   ],
                 ),
@@ -139,16 +137,16 @@ class AddActivity extends StatelessWidget {
 
   Container _addActivityPhoto(BuildContext context, IssueActionProvider issueActionProvider) {
     return Container(
-                        height: MediaQuery.of(context).size.height * 0.5,
-                        color: APPColors.Main.white,
-                        child: Column(
-                          children: [
-                            AddJustPhotoModalBottomSheet((File path) {
-                              issueActionProvider.setFile(path);
-                            }),
-                          ],
-                        ),
-                      );
+      height: MediaQuery.of(context).size.height * 0.5,
+      color: APPColors.Main.white,
+      child: Column(
+        children: [
+          AddJustPhotoModalBottomSheet((File path) {
+            issueActionProvider.setFile(path);
+          }),
+        ],
+      ),
+    );
   }
 
   Padding _saveOrQuit(BuildContext context, IssueActionProvider issueActionProvider, IssueProvider issueProvider) {

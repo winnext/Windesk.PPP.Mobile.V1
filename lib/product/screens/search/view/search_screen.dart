@@ -36,14 +36,8 @@ class SearchScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          rowIconButtonSection(
-              context,
-              LocaleKeys.issueSearch,
-              AppIcons.caseSLASearchIcon,
-              const IssueSearchRoute(),
-              LocaleKeys.entitySearchTitle,
-              AppIcons.entitySearchIcon,
-              const AssetSearchRoute()),
+          rowIconButtonSection(context, LocaleKeys.issueSearch, AppIcons.caseSLASearchIcon, const IssueSearchRoute(), LocaleKeys.entitySearchTitle,
+              AppIcons.entitySearchIcon, const AssetSearchRoute()),
           rowIconButtonSection(
               context,
               LocaleKeys.mahalSearchTitle,
@@ -59,14 +53,8 @@ class SearchScreen extends StatelessWidget {
     );
   }
 
-  Expanded rowIconButtonSection(
-      BuildContext context,
-      String buttonTitle1,
-      IconData buttonIcon1,
-      PageRouteInfo<dynamic> navigateRouteName1,
-      String buttonTitle2,
-      IconData buttonIcon2,
-      PageRouteInfo<dynamic> navigateRouteName2) {
+  Expanded rowIconButtonSection(BuildContext context, String buttonTitle1, IconData buttonIcon1, PageRouteInfo<dynamic> navigateRouteName1,
+      String buttonTitle2, IconData buttonIcon2, PageRouteInfo<dynamic> navigateRouteName2) {
     return Expanded(
       child: Center(
         child: Row(

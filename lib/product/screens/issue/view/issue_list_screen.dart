@@ -78,7 +78,7 @@ class IssueListScreen extends StatelessWidget {
                       itemBuilder: (BuildContext context, int index) {
                         IssueListModel issueListElement = issueProvider.issueList[index];
                         return CustomIssueListCard(
-                          issueListElement: issueListElement,
+                            issueListElement: issueListElement,
                             onPressed: (String woCode) {
                               context.router.push(IssueDetailScreen(issueCode: woCode));
                             },

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../../feature/l10n/locale_keys.g.dart';
+import '../../l10n/locale_keys.g.dart';
 
 class NoDataWidget extends StatelessWidget {
   const NoDataWidget({super.key});

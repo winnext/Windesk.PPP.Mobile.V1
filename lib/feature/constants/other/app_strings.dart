@@ -14,17 +14,17 @@ class AppStrings {
   static const String testTab = 'Test';
 
   // app circular home button strings
-  static const String caseSlaList = 'Talep Listesi';
-  static const String caseSlaSearch = 'Talep Arama';
+  static const String caseSlaList = 'Vaka-(SLA) Listesi';
+  static const String caseSlaSearch = 'Vaka-(SLA) Arama';
   static const String workOrderList = 'İş Emri Listesi';
   static const String workOrderSearch = 'İş Emri Arama';
   static const String newWorkOrder = 'Yeni İş Emri';
 
   //caseSlaSearch
-  static const String entitiySearch = 'Envanter Arama';
+  static const String entitiySearch = 'Varlık Arama';
   static const String spaceSearch = 'Mahal Arama';
 
-  static const String entitiyCode = 'Envanter Kodu';
+  static const String entitiyCode = 'Varlık Kodu';
   static const String serialNumber = 'Seri No';
   static const String rfid = 'RFID';
   static const String space = 'Mahal';
@@ -103,7 +103,7 @@ class AppStrings {
   static const build = 'Bina';
   static const floor = 'Kat';
   static const wing = 'Kanat';
-  static const taskForMe = 'Üzerime Atanan Talepler';
+  static const taskForMe = 'Üzerime Atanan Vakalar';
 
   static const logout = 'Çıkış Yap';
   static const title = 'Yardım Masası Uygulaması';
