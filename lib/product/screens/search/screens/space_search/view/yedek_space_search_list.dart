@@ -48,7 +48,7 @@ class SpaceSearchList extends StatelessWidget {
 
         loadData(sayfa) async {
           codes = [];
-          locTrees = [];
+          locTrees = [];  
           names = [];
           data = await searchProvider.mahalAramaListesi(
               context,

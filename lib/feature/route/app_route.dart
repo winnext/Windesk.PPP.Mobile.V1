@@ -39,10 +39,13 @@ class AppRouter extends $AppRouter {
                   transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
                 ),
 
-                // search work order
+                AutoRoute(path: 'issueSearchPage', page: IssueSearchRoute.page),
+                AutoRoute(path: 'assetSearchPage', page: AssetSearchRoute.page),
+                AutoRoute(path: 'woSearchPage', page: WoSearchRoute.page),
                 AutoRoute(
-                    path: 'searchWorkOrderScreen',
-                    page: SearchWorkOrderScreen.page),
+                    path: 'assetSearchListPage',
+                    page: AssetSearchListRoute.page),
+                AutoRoute(path: 'spaceSearchPage', page: SpaceSearchRoute.page),
 
                 // issue
                 AutoRoute(

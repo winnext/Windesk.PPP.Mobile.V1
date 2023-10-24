@@ -1,11 +1,13 @@
 import 'dart:io';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:wm_ppp_4/feature/constants/other/colors.dart';
 import 'package:wm_ppp_4/product/screens/new_order/new_order_provider.dart';
 
+@RoutePage()
 class NewOrderScreen extends StatefulWidget {
   const NewOrderScreen({super.key});
 
@@ -14,8 +16,6 @@ class NewOrderScreen extends StatefulWidget {
 }
 
 class _NewOrderScreenState extends State<NewOrderScreen> {
-
-
   @override
   void initState() {
     super.initState();
