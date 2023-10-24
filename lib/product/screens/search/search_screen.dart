@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:wm_ppp_4/feature/constants/paths/service_tools.dart';
 
 import '../../../feature/components/appbar/custom_tab_appbar.dart';
 import '../../../feature/components/buttons/custom_circular_home_button.dart';
@@ -31,7 +32,7 @@ class SearchScreen extends StatelessWidget {
             const IssueSearchRoute(),
             LocaleKeys.assetSearchPage,
             AppIcons.assetSearchIcon,
-            const AssetSearchRoute()),
+            const AssetSearchRoute(),true),
         rowIconButtonSection(
             context,
             LocaleKeys.spaceSearchPage,
@@ -39,7 +40,8 @@ class SearchScreen extends StatelessWidget {
             const SpaceSearchRoute(),
             LocaleKeys.workOrderSearch,
             AppIcons.woSearchIcon,
-            const WoSearchRoute()),
+            const WoSearchRoute(), 
+            ServiceTools.isWorkOrderExist),
       ],
     );
   }
@@ -51,7 +53,8 @@ class SearchScreen extends StatelessWidget {
       PageRouteInfo<dynamic> navigateRouteName1,
       String buttonTitle2,
       IconData buttonIcon2,
-      PageRouteInfo<dynamic> navigateRouteName2) {
+      PageRouteInfo<dynamic> navigateRouteName2,
+      bool secondButtonExist) {
     return Expanded(
       child: Center(
         child: Row(
@@ -69,7 +72,7 @@ class SearchScreen extends StatelessWidget {
               isBadgeVisible: false,
               badgeCount: '0',
             ),
-            CustomCircularHomeButton(
+            secondButtonExist ? CustomCircularHomeButton(
               title: buttonTitle2,
               icon: Icon(
                 buttonIcon2,
@@ -80,7 +83,7 @@ class SearchScreen extends StatelessWidget {
               },
               isBadgeVisible: false,
               badgeCount: '0',
-            ),
+            ):Container(),
           ],
         ),
       ),

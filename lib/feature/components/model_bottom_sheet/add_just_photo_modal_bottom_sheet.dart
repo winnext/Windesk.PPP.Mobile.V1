@@ -6,7 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import '../../constants/style/border_radius.dart';
 
 class AddJustPhotoModalBottomSheet extends StatelessWidget {
-  const AddJustPhotoModalBottomSheet(this.saveImageFunction,  {super.key});
+  const AddJustPhotoModalBottomSheet(this.saveImageFunction, {super.key});
   final Function saveImageFunction;
 
   @override
@@ -18,11 +18,10 @@ class AddJustPhotoModalBottomSheet extends StatelessWidget {
     return SizedBox(
       height: MediaQuery.of(context).size.height * 0.3,
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
+        padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 10.0),
         child: Column(
           children: [
             _PhotoStack(saveImageFunction: saveImageFunction),
-            const Spacer(flex: 10),
           ],
         ),
       ),
@@ -30,16 +29,10 @@ class AddJustPhotoModalBottomSheet extends StatelessWidget {
   }
 }
 
-class _PhotoStack extends StatefulWidget {
-  const _PhotoStack({required this.saveImageFunction});
+class _PhotoStack extends StatelessWidget {
+  _PhotoStack({required this.saveImageFunction});
   final Function saveImageFunction;
 
-  @override
-  State<_PhotoStack> createState() => _PhotoStackState();
-}
-
-class _PhotoStackState extends State<_PhotoStack> {
-  _PhotoStackState();
   File? _image;
 
   final ImagePicker _imagePicker = ImagePicker();
@@ -55,7 +48,7 @@ class _PhotoStackState extends State<_PhotoStack> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      flex: 50,
+      flex: 40,
       child: Stack(
         children: [
           Container(color: Colors.grey),
@@ -76,7 +69,7 @@ class _PhotoStackState extends State<_PhotoStack> {
                 ),
                 onPressed: () {
                   getImage().then((value) {
-                    widget.saveImageFunction(value);
+                    saveImageFunction(value);
                   });
                 },
                 child: const Icon(Icons.add, size: 36),

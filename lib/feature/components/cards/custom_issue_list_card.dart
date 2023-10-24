@@ -177,9 +177,8 @@ class _CustomIssueListCardState extends State<CustomIssueListCard> with CustomIs
         child: Text(
           key: Key(remainDateKey),
           '$header${TimeClass().timeDifference(targetTime)}',
-          maxLines: 3,
+          maxLines: 1,
           overflow: TextOverflow.ellipsis,
-          textAlign: TextAlign.justify,
           style: TextStyle(
             color: CustomColorCalculator().colorCalculator(dateNow.toString(), targetTime),
             fontSize: FontSizes.caption - 1,

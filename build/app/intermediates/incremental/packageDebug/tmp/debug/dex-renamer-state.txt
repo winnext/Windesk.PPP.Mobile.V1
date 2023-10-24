@@ -1,14 +1,4 @@
-<<<<<<< HEAD
-#Thu Oct 19 08:15:10 TRT 2023
-=======
-<<<<<<< HEAD
-#Mon Oct 16 13:20:41 TRT 2023
->>>>>>> fb0eb4bb8b30eadc8a079803082de94c0d366ccd
-base.0=C\:\\Users\\mert7\\Desktop\\Flutter\\work\\Windesk.PPP.Mobile.V1\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
-base.1=C\:\\Users\\mert7\\Desktop\\Flutter\\work\\Windesk.PPP.Mobile.V1\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes2.dex
-base.2=C\:\\Users\\mert7\\Desktop\\Flutter\\work\\Windesk.PPP.Mobile.V1\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes3.dex
-=======
-#Mon Oct 16 14:38:42 TRT 2023
+#Tue Oct 24 10:38:21 TRT 2023
 base.2=/Users/muratcan.yusufoglu/Desktop/Windesk.PPP.Mobile.V1/build/app/intermediates/dex/debug/mergeDexDebug/classes3.dex
 path.2=classes3.dex
 base.1=/Users/muratcan.yusufoglu/Desktop/Windesk.PPP.Mobile.V1/build/app/intermediates/dex/debug/mergeDexDebug/classes2.dex
@@ -17,10 +7,4 @@ base.0=/Users/muratcan.yusufoglu/Desktop/Windesk.PPP.Mobile.V1/build/app/interme
 renamed.2=classes3.dex
 renamed.1=classes2.dex
 renamed.0=classes.dex
->>>>>>> d5b445851fd83e750899565444bfcd0b5d75c073
 path.0=classes.dex
-path.1=classes2.dex
-path.2=classes3.dex
-renamed.0=classes.dex
-renamed.1=classes2.dex
-renamed.2=classes3.dex

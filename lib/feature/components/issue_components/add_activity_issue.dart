@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:wm_ppp_4/feature/components/buttons/custom_half_buttons.dart';
 import 'package:wm_ppp_4/feature/components/input_fields/dropdown_input_fields.dart';
@@ -44,94 +45,110 @@ class AddActivity extends StatelessWidget {
             width: MediaQuery.of(context).size.width / 1.09,
             color: APPColors.Main.white,
             child: SingleChildScrollView(
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Column(
-                        children: [
-                          DropDownInputFields(
-                            labelText: LocaleKeys.selectActivity,
-                            onChangedFunction: (item) {
-                              issueActionProvider.setSelectedActivityName(item.toString());
-                            },
-                            rightIcon: Icons.arrow_drop_down,
-                            dropDownArray: issueActionProvider.availableActivitiesName.isNotEmpty ?  issueActionProvider.availableActivitiesName : ['Aktivite bulunamadı.'],
-                          ),
-                          const Divider(thickness: 2),
-                          Text('Bu aktivitenin girilmesi, talebin durumunu ${issueActionProvider.selectedActivityName} olarak değiştirecektir.'),
-                          NullCheckWidget().conditionCheckWidget(
-                              issueActionProvider.isBarcodeSpace,
-                              Padding(
-                                padding: const EdgeInsets.only(top: 8.0),
-                                child: TextFieldsInputWithActionAndController(
-                                    readOnly: true,
-                                    textController: issueActionProvider.spaceCode,
-                                    labelText: LocaleKeys.spaceCode,
-                                    actionIcon: AppIcons.qr,
-                                    actionFunction: issueActionProvider.scanSpace),
-                              )),
-                          NullCheckWidget().conditionCheckWidget(
-                            issueActionProvider.isadditionaltimeInput,
-                            Padding(
-                              padding: const EdgeInsets.only(top: 8.0),
-                              child: TextFieldsInput(
-                                labelText: LocaleKeys.addMoreTime,
-                                onChangedFunction: (String time) {
-                                  issueActionProvider.setadditionaltimeInput(time);
-                                },
-                              ),
-                            ),
-                          ),
-                          //   //live select
-                          NullCheckWidget().conditionCheckWidget(
-                              issueActionProvider.getLiveSelectAsgGroupsName.isNotEmpty,
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: DropDownInputFields(
-                                  labelText: LocaleKeys.selectGroup,
-                                  onChangedFunction: (item) {
-                                    issueActionProvider.setSelectedAsgGroups(issueCode, item.toString());
-                                  },
-                                  rightIcon: Icons.arrow_drop_down,
-                                  dropDownArray: issueActionProvider.getLiveSelectAsgGroupsName,
-                                ),
-                              )),
-                          NullCheckWidget().conditionCheckWidget(
-                              issueActionProvider.getLiveSelectAsgGroupsName.isNotEmpty,
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: DropDownInputFields(
-                                  labelText: LocaleKeys.selectUser,
-                                  onChangedFunction: (item) {
-                                    issueActionProvider.setSelectedAsgUser(item.toString());
-                                  },
-                                  rightIcon: Icons.arrow_drop_down,
-                                  dropDownArray:
-                                      issueActionProvider.getLiveSelectAsgUsersName.isNotEmpty ? issueActionProvider.getLiveSelectAsgUsersName : [''],
-                                ),
-                              )),
-                          NullCheckWidget().conditionCheckWidget(
-                              issueActionProvider.minDescLength,
-                              Padding(
-                                padding: const EdgeInsets.only(top: 8.0),
-                                child: TextFieldsInput(
-                                  labelText: LocaleKeys.description,
-                                  onChangedFunction: (String text) {
-                                    issueActionProvider.setdescription(text);
-                                  },
-                                ),
-                              )),
-                          NullCheckWidget().conditionCheckWidget(issueActionProvider.mobilePhoto, AddJustPhotoModalBottomSheet((File path) {
-                            issueActionProvider.setFile(path);
-                          })),
-                          _saveOrQuit(context, issueActionProvider, issueProvider)
-                        ],
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Column(
+                  children: [
+                    DropDownInputFields(
+                      labelText: LocaleKeys.selectActivity,
+                      onChangedFunction: (item) {
+                        issueActionProvider.setSelectedActivityName(item.toString());
+                      },
+                      rightIcon: Icons.arrow_drop_down,
+                      dropDownArray: issueActionProvider.availableActivitiesName.isNotEmpty
+                          ? issueActionProvider.availableActivitiesName
+                          : ['Aktivite bulunamadı.'],
+                    ),
+                    const Divider(thickness: 2),
+                    Text('Bu aktivitenin girilmesi, talebin durumunu ${issueActionProvider.selectedActivityName} olarak değiştirecektir.'),
+                    NullCheckWidget().conditionCheckWidget(
+                        issueActionProvider.isBarcodeSpace,
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8.0),
+                          child: TextFieldsInputWithActionAndController(
+                              readOnly: true,
+                              textController: issueActionProvider.spaceCode,
+                              labelText: LocaleKeys.spaceCode,
+                              actionIcon: AppIcons.qr,
+                              actionFunction: issueActionProvider.scanSpace),
+                        )),
+                    NullCheckWidget().conditionCheckWidget(
+                      issueActionProvider.isadditionaltimeInput,
+                      Padding(
+                        padding: const EdgeInsets.only(top: 8.0),
+                        child: TextFieldsInput(
+                          labelText: LocaleKeys.addMoreTime,
+                          onChangedFunction: (String time) {
+                            issueActionProvider.setadditionaltimeInput(time);
+                          },
+                        ),
                       ),
                     ),
-                  ),
+                    //   //live select
+                    NullCheckWidget().conditionCheckWidget(
+                        issueActionProvider.getLiveSelectAsgGroupsName.isNotEmpty,
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: DropDownInputFields(
+                            labelText: LocaleKeys.selectGroup,
+                            onChangedFunction: (item) {
+                              issueActionProvider.setSelectedAsgGroups(issueCode, item.toString());
+                            },
+                            rightIcon: Icons.arrow_drop_down,
+                            dropDownArray: issueActionProvider.getLiveSelectAsgGroupsName,
+                          ),
+                        )),
+                    NullCheckWidget().conditionCheckWidget(
+                        issueActionProvider.getLiveSelectAsgGroupsName.isNotEmpty,
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: DropDownInputFields(
+                            labelText: LocaleKeys.selectUser,
+                            onChangedFunction: (item) {
+                              issueActionProvider.setSelectedAsgUser(item.toString());
+                            },
+                            rightIcon: Icons.arrow_drop_down,
+                            dropDownArray:
+                                issueActionProvider.getLiveSelectAsgUsersName.isNotEmpty ? issueActionProvider.getLiveSelectAsgUsersName : [''],
+                          ),
+                        )),
+                    NullCheckWidget().conditionCheckWidget(
+                        issueActionProvider.minDescLength,
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8.0),
+                          child: TextFieldsInput(
+                            labelText: LocaleKeys.description,
+                            onChangedFunction: (String text) {
+                              issueActionProvider.setdescription(text);
+                            },
+                          ),
+                        )),
+                    NullCheckWidget().conditionCheckWidget(
+                        issueActionProvider.mobilePhoto,
+                        _addActivityPhoto(context, issueActionProvider)),
+                    _saveOrQuit(context, issueActionProvider, issueProvider)
+                  ],
+                ),
+              ),
+            ),
           );
         },
       ),
     );
+  }
+
+  Container _addActivityPhoto(BuildContext context, IssueActionProvider issueActionProvider) {
+    return Container(
+                        height: MediaQuery.of(context).size.height * 0.5,
+                        color: APPColors.Main.white,
+                        child: Column(
+                          children: [
+                            AddJustPhotoModalBottomSheet((File path) {
+                              issueActionProvider.setFile(path);
+                            }),
+                          ],
+                        ),
+                      );
   }
 
   Padding _saveOrQuit(BuildContext context, IssueActionProvider issueActionProvider, IssueProvider issueProvider) {

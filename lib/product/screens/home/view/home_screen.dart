@@ -80,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           rowIconButtonSection(context, LocaleKeys.issueList, AppIcons.calendarMonth, const IssueTracingList(), LocaleKeys.issueSearch,
               AppIcons.attachment, const TestScreen()),
-          rowIconButtonSection(
+           ServiceTools.isWorkOrderExist ? rowIconButtonSection(
             context,
             LocaleKeys.workOrderList,
             AppIcons.contentPasteSearch,
@@ -88,7 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
             LocaleKeys.workOrderSearch,
             AppIcons.contentPasteOff,
             const SearchWorkOrderScreen(),
-          ),
+          ) : Container(),
         ],
       ),
     );

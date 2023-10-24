@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:wm_ppp_4/feature/constants/functions/null_check_widget.dart';
 import 'package:wm_ppp_4/feature/constants/other/time_functions.dart';
 import 'package:wm_ppp_4/feature/constants/style/custom_paddings.dart';
-import 'package:wm_ppp_4/feature/l10n/locale_keys.g.dart';
+import '../../../../feature/l10n/locale_keys.g.dart';
 
 import '../../constants/other/colors.dart';
 

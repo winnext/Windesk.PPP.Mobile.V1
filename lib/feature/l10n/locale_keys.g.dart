@@ -48,20 +48,20 @@ abstract class LocaleKeys {
   static const kayitSirasindaHataOlustu = 'kayitSirasindaHataOlustu';
   static const hataMesaji = 'hataMesaji';
   static const email = 'email';
-  static const vakalist = 'Vaka-(SLA) Listesi';
-  static const issueSearchPage = 'Vaka-(SLA) Arama';
-  static const assetSearchPage = 'Varlık Arama';
+  static const vakalist = 'Talep Listesi';
+  static const issueSearchPage = 'Talep Arama';
+  static const assetSearchPage = 'Envanter Arama';
   static const spaceSearchPage = 'Mahal Arama';
   static const woSearchPage = 'İş Emri Arama';
 
   //issue summary
-  static const String issueSituation = 'Vaka Durumu';
-  static const String issueOwner = 'Vaka Sahibi';
+  static const String issueSituation = 'Talep Durumu';
+  static const String issueOwner = 'Talep Sahibi';
   static const String explanation = 'Açıklama';
   static const String space = 'Mahal';
   static const String spaceLoc = 'Mahal Yeri';
   static const String callReason = 'Arama Nedeni';
-  static const String cfgInfo = 'Varlık Bilgisi';
+  static const String cfgInfo = 'Envanter Bilgisi';
   static const String openingDate = 'Açılma Tarihi';
   static const String incallNumber = 'Arayan Numara';
   static const String targetResponsedDate = 'Hedef Yanıtlama Tarihi';
@@ -74,7 +74,7 @@ abstract class LocaleKeys {
   static const String hds = 'HDS';
   static const String assignmentGroup = 'Atama Grubu';
   static const String assigneName = 'Atanan Kişi';
-  static const String plannedIssue = 'Randevulu Vakadır';
+  static const String plannedIssue = 'Randevulu Talepdır';
   static const String noInfo = 'Bilgi Yok';
   static const String noTimeInfo = 'Zaman Bilgisi Yok';
   static const String zeroStr = '0';
@@ -86,7 +86,7 @@ abstract class LocaleKeys {
   //issue activities
   static const String addPhoto = 'Fotoğraf Ekle';
   static const String addActivity = 'Aktivite Ekle';
-  static const String changeCfg = 'Varlık Değiştir';
+  static const String changeCfg = 'Envanter Değiştir';
   static const String takeOver = 'Üzerine Al';
   static const String plannedCancel = 'Randevu Talebi';
   static const String plannedDateRequest = 'Randevu İptal';
@@ -105,7 +105,7 @@ abstract class LocaleKeys {
   static const String addMoreTime = "Ek Süre (Gün)";
   static const String selectActivity = "Aktivite Seçiniz";
   static const String spaceCode = 'Mahal Kodu';
-  static const String entityCode = 'Varlık Kodu';
+  static const String entityCode = 'Envanter Kodu';
   static const String serialNumber = 'Seri No';
   static const String rfid = 'RFID';
   static const String requestForSparepart = 'Yedek Parça Talebi';
@@ -115,19 +115,19 @@ abstract class LocaleKeys {
 
 
   //home page titles
-  static const issueList = 'Vaka-(SLA) Listesi';
-  static const issueSearch = 'Vaka-(SLA) Arama';
+  static const issueList = 'Talep Listesi';
+  static const issueSearch = 'Talep Arama';
   static const workOrderList = 'İş Emri Listesi';
   static const workOrderSearch = 'İş Emri Arama';
 
   // page titles
   static const String searchTitle = 'Arama';
-  static const String caseSLASearchTitle = 'Vaka-(SLA) Arama';
-  static const String entitySearchTitle = 'Varlık Arama';
-  static const String entitySearchResultTitle = 'Varlık Arama Sonuçları';
-  static const String entityDetailtTitle = 'Varlık Detayı';
-  static const String entityListTitle = 'Varlık Listesi';
-  static const String entitySearchDetailtTitle = 'Varlık Arama Detayı';
+  static const String caseSLASearchTitle = 'Talep Arama';
+  static const String entitySearchTitle = 'Envanter Arama';
+  static const String entitySearchResultTitle = 'Envanter Arama Sonuçları';
+  static const String entityDetailtTitle = 'Envanter Detayı';
+  static const String entityListTitle = 'Envanter Listesi';
+  static const String entitySearchDetailtTitle = 'Envanter Arama Detayı';
   static const String mahalSearchTitle = 'Mahal Arama';
   static const String mahalSearchDetailtTitle = 'Mahal Detayı';
   static const String workOrderSearchTitle = 'İş Emri Arama';
@@ -138,7 +138,7 @@ abstract class LocaleKeys {
   static const String newNotif = 'Yeni Bildirim';
   static const String takePictureTitle = 'Fotoğraf Çek';
   static const String pictureTitle = 'Fotoğraf';
-  static const String caseIComplainedDetailTitle = 'Şikayet Ettiğim Vaka  Detay';
+  static const String caseIComplainedDetailTitle = 'Şikayet Ettiğim Talep  Detay';
 
   //woEmpty
   static const String noDescription = 'Açıklama Bulunamadı';
@@ -149,5 +149,5 @@ abstract class LocaleKeys {
   static const String noDate = 'Tarih Bulunamadı';
 
   //woSearch
-  static const String woSearch = 'Vaka Arama';
+  static const String woSearch = 'Talep Arama';
 }

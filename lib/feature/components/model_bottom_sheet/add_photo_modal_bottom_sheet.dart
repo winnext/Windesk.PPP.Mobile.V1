@@ -14,7 +14,7 @@ class AddPhotoModalBottomSheet extends StatelessWidget {
   final Function saveDescFunction;
   final VoidCallback addPhotoFunction;
 
-  final String hintDescText;
+  final String? hintDescText;
   @override
   Widget build(BuildContext context) {
     return _bodyWidget(context);

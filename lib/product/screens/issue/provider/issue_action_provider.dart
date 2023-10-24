@@ -431,7 +431,6 @@ class IssueActionProvider extends ChangeNotifier {
         (r) => {
               _loading = false,
             });
-    //_isFetchActivity = false;
     _isassigneeccType = false;
     notifyListeners();
   }

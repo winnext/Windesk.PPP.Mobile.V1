@@ -50,9 +50,14 @@ class IssueActionModal extends StatelessWidget {
                     size, issueProvider, LocaleKeys.addActivity, issueProvider.isActivitySectionOpen, issueProvider.setisActivitySectionOpen)
                 : Container(),
             issueProvider.isActivitySectionOpen
-                ? AddActivity(
-                    issueCode: issueCode,
-                  )
+                ? Container(
+                        height: MediaQuery.of(context).size.height * 0.5,
+      color: APPColors.Main.white,
+      width: size.width / 1.09,
+                  child: AddActivity(
+                      issueCode: issueCode,
+                    ),
+                )
                 : Container(),
             issueProvider.issueOperationList.isChangeCfg == true
                 ? _operationWidget(size, issueProvider, LocaleKeys.changeCfg, issueProvider.isCfgSectionOpen, issueProvider.setisCfgSectionOpen)

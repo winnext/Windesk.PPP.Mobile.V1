@@ -6,7 +6,7 @@ import 'package:wm_ppp_4/product/screens/issue/provider/issue_provider.dart';
 import '../../../../../feature/components/appbar/custom_main_appbar.dart';
 import '../../../../../feature/components/cards/custom_tracing_list_card.dart';
 import '../../../../../feature/components/loading/custom_loading_indicator.dart';
-import '../../../../../feature/l10n/locale_keys.g.dart';
+import '../../../../feature/l10n/locale_keys.g.dart';
 import '../../../../../feature/models/issue_models/issue_tracing_list_model.dart';
 
 @RoutePage()
