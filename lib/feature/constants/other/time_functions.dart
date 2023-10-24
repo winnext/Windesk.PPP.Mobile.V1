@@ -51,10 +51,8 @@ class TimeClass {
     date2 = timeRecover2(date2);
     DateTime t2 = DateTime.parse(date2);
     Duration date3 = date1.difference(t2);
-    String finalDuration = '''${date3.inDays} ${AppStrings.day} ${int.parse(date3.inHours.toString()) % 24} ${AppStrings.hour}
-         ${int.parse(date3.inMinutes.toString()) % 60} ${AppStrings.minute}.
-          ${int.parse(date3.inSeconds.toString()) % 60} ${AppStrings.second}. ''';
-
+    String finalDuration =
+        '''${date3.inDays} ${AppStrings.day} ${int.parse(date3.inHours.toString()) % 24} ${AppStrings.hour} ${int.parse(date3.inMinutes.toString()) % 60} ${AppStrings.minute} ${int.parse(date3.inSeconds.toString()) % 60} ${AppStrings.second} ''';
     return finalDuration;
   }
 

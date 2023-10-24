@@ -93,4 +93,19 @@ class ServiceTools {
   // static const attachPathLive = "http://10.32.12.42/windesktest/xreadattach.php?token=$tokenV1&id=";
   // static const facilityName = "Isparta Şehir Hastanesi";
   // static const appName = "ISH";
+  // static const isWorkOrderExist = true;
+  // static const ipv4adress = '10.32.12.42';
+
+  //ISH PROD
+  // static const String baseUrlV1 =
+  //     'http://10.32.12.22/windesk/app/webroot/integration/WindeskMobile.php?use_rest=1&wsusername=wdmobile&wspassword=wdsgnm1017_&token=';
+  // static const String baseUrlV2 = 'http://windeskmobile.ish.yerel';
+  // static const tokenV1 = 'wdishliveSqAS!_';
+  // static const tokenV2 = 'ishprod!';
+  // static const attachPath = "http://10.32.12.22/windesk";
+  // static const attachPathLive = "http://10.32.12.22/windesktest/xreadattach.php?token=$tokenV1&id=";
+  // static const facilityName = "Isparta Şehir Hastanesi";
+  // static const appName = "ISH";
+  // static const isWorkOrderExist = true;
+  // static const ipv4adress = '10.32.12.42';
 }

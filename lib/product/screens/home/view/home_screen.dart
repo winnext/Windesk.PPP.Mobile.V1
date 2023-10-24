@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wm_ppp_4/feature/constants/paths/asset_paths.dart';
 import 'package:wm_ppp_4/product/screens/home/service/home_service_repo_impl.dart';
-import 'package:wm_ppp_4/product/screens/search/screens/issue_search/view/issue_search_page.dart';
 
 import '../../../../feature/components/buttons/custom_circular_home_button.dart';
 import '../../../../feature/components/internet_conneciton/internet_connection_listener.dart';
@@ -53,7 +52,8 @@ class _HomeScreenState extends State<HomeScreen> {
             }
             if (homeProvider.isUserLogout) {
               snackBar(context, SnackbarStrings.logoutSuccess, 'success');
-              context.router.pushAndPopUntil(const LoginScreen(), predicate: (_) => false);
+              context.router.pushAndPopUntil(const LoginScreen(),
+                  predicate: (_) => false);
             }
           });
           return SafeArea(
@@ -64,7 +64,10 @@ class _HomeScreenState extends State<HomeScreen> {
               body: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[headerTextWidget(), homePageIcons(context)],
+                  children: <Widget>[
+                    headerTextWidget(),
+                    homePageIcons(context)
+                  ],
                 ),
               ),
             ),
@@ -79,26 +82,36 @@ class _HomeScreenState extends State<HomeScreen> {
       flex: 4,
       child: Column(
         children: [
-          rowIconButtonSection(context, LocaleKeys.issueList, AppIcons.calendarMonth, const IssueTracingList(), LocaleKeys.issueSearch,
-              AppIcons.attachment, const IssueSearchRoute()),
-          ServiceTools.isWorkOrderExist
-              ? rowIconButtonSection(
-                  context,
-                  LocaleKeys.workOrderList,
-                  AppIcons.contentPasteSearch,
-                  const WorkOrderMainScreen(),
-                  LocaleKeys.workOrderSearch,
-                  AppIcons.contentPasteOff,
-                  const WoSearchRoute(),
-                )
-              : Container(),
+          rowIconButtonSection(
+              context,
+              LocaleKeys.issueList,
+              AppIcons.calendarMonth,
+              const IssueTracingList(),
+              LocaleKeys.issueSearch,
+              AppIcons.attachment,
+              const IssueSearchRoute()),
+          rowIconButtonSection(
+            context,
+            LocaleKeys.workOrderList,
+            AppIcons.contentPasteSearch,
+            const WorkOrderMainScreen(),
+            LocaleKeys.workOrderSearch,
+            AppIcons.contentPasteOff,
+            const WoSearchRoute(),
+          ),
         ],
       ),
     );
   }
 
-  Expanded rowIconButtonSection(BuildContext context, String buttonTitle1, IconData buttonIcon1, PageRouteInfo<dynamic> navigateRouteName1,
-      String buttonTitle2, IconData buttonIcon2, PageRouteInfo<dynamic> navigateRouteName2) {
+  Expanded rowIconButtonSection(
+      BuildContext context,
+      String buttonTitle1,
+      IconData buttonIcon1,
+      PageRouteInfo<dynamic> navigateRouteName1,
+      String buttonTitle2,
+      IconData buttonIcon2,
+      PageRouteInfo<dynamic> navigateRouteName2) {
     return Expanded(
       child: Center(
         child: Row(
@@ -138,8 +151,10 @@ class _HomeScreenState extends State<HomeScreen> {
     return const Expanded(
       child: Column(
         children: [
-          Text(ServiceTools.facilityName, style: TextStyle(fontSize: 25, fontWeight: FontWeight.w400)),
-          Text(AppStrings.title, style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+          Text(ServiceTools.facilityName,
+              style: TextStyle(fontSize: 25, fontWeight: FontWeight.w400)),
+          Text(AppStrings.title,
+              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
         ],
       ),
     );
@@ -155,7 +170,8 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       actions: <Widget>[
         IconButton(
-          icon: Icon(AppIcons.powerSettingsOff, size: 35, color: APPColors.Main.black),
+          icon: Icon(AppIcons.powerSettingsOff,
+              size: 35, color: APPColors.Main.black),
           tooltip: AppStrings.logout,
           onPressed: () {
             provider.logOut();

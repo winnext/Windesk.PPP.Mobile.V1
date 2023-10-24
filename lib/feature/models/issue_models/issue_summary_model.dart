@@ -26,13 +26,13 @@ class IssueSummaryModel extends Equatable {
   final String? loctree;
   final String? description;
   final String? slacode;
-  final String? ani;
+  final dynamic ani;
   final dynamic cmdb;
   final String? targetFdate;
   final String? targetRdate;
   final String? parentstatus;
-  final String? hys;
-  final String? hds;
+  final dynamic hys;
+  final dynamic hds;
   final String? wrongredirect;
 
   const IssueSummaryModel({

@@ -21,7 +21,7 @@ class IssueDetailScreen extends StatelessWidget {
       initialIndex: 0,
       length: ServiceTools.appName == "antep" ? 4 : 3,
       child: Scaffold(
-        appBar: _issueSummaryAppbar(size, context),
+        appBar: _issueSummaryAppbar(size, context, issueCode),
         body: TabBarView(
           children: ServiceTools.appName == "antep"
               ? <Widget>[
@@ -46,10 +46,10 @@ class IssueDetailScreen extends StatelessWidget {
   }
 }
 
-AppBar _issueSummaryAppbar(Size size, BuildContext context) {
+AppBar _issueSummaryAppbar(Size size, BuildContext context, String issueCode) {
   return AppBar(
-    title: const Text(
-      'Vaka Listesi Detay',
+    title:  Text(
+      issueCode,
       style: TextStyle(color: Colors.black),
       textAlign: TextAlign.center,
     ),

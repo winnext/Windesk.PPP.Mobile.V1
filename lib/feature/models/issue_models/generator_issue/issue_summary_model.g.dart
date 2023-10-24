@@ -28,13 +28,13 @@ IssueSummaryModel _$IssueSummaryModelFromJson(Map<String, dynamic> json) => Issu
       loctree: json['LOCTREE'] as String?,
       description: json['DESCRIPTION'] as String?,
       slacode: json['SLACODE'] as String?,
-      ani: json['ANI'] as String?,
+      ani: json['ANI'] as dynamic,
       cmdb: json['CMDB'],
       targetFdate: json['TARGET_FDATE'] as String?,
       targetRdate: json['TARGET_RDATE'] as String?,
       parentstatus: json['PARENTSTATUS'] as String?,
-      hys: json['HYS'] as String?,
-      hds: json['HDS'] as String?,
+      hys: json['HYS'] as dynamic,
+      hds: json['HDS'] as dynamic,
       wrongredirect: json['WRONGREDIRECT'] as String?,
     );
 

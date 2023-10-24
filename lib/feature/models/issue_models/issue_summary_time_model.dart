@@ -9,9 +9,9 @@ class IssueSummaryTimeModel extends Equatable {
   final String? targetFdate;
   final String? targetRdate;
   final String? statuscode;
-  final String? respondedDate;
+  final dynamic respondedDate;
   final String? respondedTimer;
-  final String? fixedDate;
+  final dynamic fixedDate;
   final String? fixTimer;
   final dynamic planneddate;
 

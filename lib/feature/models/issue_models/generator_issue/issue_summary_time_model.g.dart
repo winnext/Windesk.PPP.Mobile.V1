@@ -6,13 +6,11 @@ part of '../issue_summary_time_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-IssueSummaryTimeModel _$IssueSummaryTimeModelFromJson(
-        Map<String, dynamic> json) =>
-    IssueSummaryTimeModel(
+IssueSummaryTimeModel _$IssueSummaryTimeModelFromJson(Map<String, dynamic> json) => IssueSummaryTimeModel(
       code: json['CODE'] as String?,
-      respondedDate: json['RESPONDED_DATE'] as String?,
+      respondedDate: json['RESPONDED_DATE'] as dynamic,
       respondedTimer: json['RESPONDED_TIMER'] as String?,
-      fixedDate: json['FIXED_DATE'] as String?,
+      fixedDate: json['FIXED_DATE'] as dynamic,
       fixTimer: json['FIX_TIMER'] as String?,
       statuscode: json['STATUS_CODE'] as String?,
       planneddate: json['PLANNED_DATE'],
@@ -20,9 +18,7 @@ IssueSummaryTimeModel _$IssueSummaryTimeModelFromJson(
       targetRdate: json['TARGET_RDATE'] as String?,
     );
 
-Map<String, dynamic> _$IssueSummaryTimeModelToJson(
-        IssueSummaryTimeModel instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$IssueSummaryTimeModelToJson(IssueSummaryTimeModel instance) => <String, dynamic>{
       'CODE': instance.code,
       'TARGET_FDATE': instance.targetFdate,
       'TARGET_RDATE': instance.targetRdate,

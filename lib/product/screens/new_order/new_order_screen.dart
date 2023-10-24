@@ -16,8 +16,6 @@ class NewOrderScreen extends StatefulWidget {
 }
 
 class _NewOrderScreenState extends State<NewOrderScreen> {
-
-
   @override
   void initState() {
     super.initState();
