@@ -9,20 +9,29 @@ import 'package:wm_ppp_4/product/screens/search/service/search_service_repo_impl
 class SpaceSearchList extends StatefulWidget {
   const SpaceSearchList(
       {super.key,
-      mahalKodu,
-      mahalAdi,
-      binaKodu,
-      katKodu,
-      kanatKodu,
-      sinifKodu,
-      grupKodu,
-      liste});
+      required this.mahalKodu,
+      required this.mahalAdi,
+      required this.binaKodu,
+      required this.katKodu,
+      required this.kanatKodu,
+      required this.sinifKodu,
+      required this.grupKodu,
+      required this.liste});
+  final String mahalKodu;
+  final String mahalAdi;
+  final String binaKodu;
+  final String katKodu;
+  final String kanatKodu;
+  final String sinifKodu;
+  final String grupKodu;
+  final List liste;
 
   @override
   State<SpaceSearchList> createState() => _SpaceSearchListState();
 }
 
 class _SpaceSearchListState extends State<SpaceSearchList> {
+  List listee = [];
   @override
   void initState() {
     // TODO: implement initState
@@ -36,14 +45,18 @@ class _SpaceSearchListState extends State<SpaceSearchList> {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => SpaceSearchProvider(),
-      child: Consumer<SpaceSearchProvider>(builder: (context2, SpaceSearchProvider searchProvider, child) {
-        var data = liste;
+      child: Consumer<SpaceSearchProvider>(
+          builder: (context, SpaceSearchProvider searchProvider, child) {
+        var data = listee;
         print('data');
         print(data);
+        if (data.isEmpty) {
+          data = widget.liste;
+        }
 
-          List<String> codes = [];
-          List<String> locTrees = [];
-          List<String> names = [];
+        List<String> codes = [];
+        List<String> locTrees = [];
+        List<String> names = [];
 
         for (var element in data) {
           codes.add(element['CODE'] ?? '');
@@ -52,13 +65,84 @@ class _SpaceSearchListState extends State<SpaceSearchList> {
         }
 
         loadData(sayfa) async {
-          print('SAYFAM  : $sayfa');
-          data = await searchProvider.mahalAramaListesi(context, mahalKodu, mahalAdi, binaKodu, katKodu, kanatKodu, sinifKodu, grupKodu, 20, sayfa);
-          for (var element in data) {
-            codes.add(element['CODE'] ?? '');
-            locTrees.add(element['LOCTREE'] ?? '');
-            names.add(element['NAME'] ?? '');
-          }
+          print('sayfa');
+          print(sayfa);
+          // List binaDatasi = searchProvider.mahalAraBinaArray;
+          // List<String> bina = searchProvider.mahalAraBinaArray[0];
+          // String dropdownvalueBina =
+          //     binaDatasi[0].indexOf(searchProvider.mahalAraBinaValue) != -1
+          //         ? searchProvider.mahalAraBinaValue
+          //         : bina[0];
+          // var secilenDegerBina =
+          //     binaDatasi[1][binaDatasi[0].indexOf(dropdownvalueBina)];
+
+          // List<String> kat = searchProvider.mahalAraKatArray[0];
+          // List katDatasi = searchProvider.mahalAraKatArray;
+          // String dropdownvalueKat =
+          //     katDatasi[0].indexOf(searchProvider.mahalAraKatValue) != -1
+          //         ? searchProvider.mahalAraKatValue
+          //         : kat[0];
+          // var secilenDegerKat =
+          //     katDatasi[1][katDatasi[0].indexOf(dropdownvalueKat)];
+
+          // List<String> kanat = searchProvider.mahalAraKanatArray[0];
+          // List kanatDatasi = searchProvider.mahalAraKanatArray;
+          // String dropdownvalueKanat =
+          //     kanatDatasi[0].indexOf(searchProvider.mahalAraKanatValue) != -1
+          //         ? searchProvider.mahalAraKanatValue
+          //         : kanat[0];
+          // var secilenDegerKanat =
+          //     kanatDatasi[1][kanatDatasi[0].indexOf(dropdownvalueKanat)];
+
+          // List<String> sinif = searchProvider.mahalAraSinifArray[0];
+          // List sinifDatasi = searchProvider.mahalAraSinifArray;
+          // String dropdownvalueSinif = searchProvider.mahalAraSinifValue;
+          // var secilenDegerSinif =
+          //     sinifDatasi[1][sinifDatasi[0].indexOf(dropdownvalueSinif)];
+
+          // List<String> grup = searchProvider.mahalAraGrupArray[0];
+          // List grupDatasi = searchProvider.mahalAraGrupArray;
+          // String dropdownvalueGrup = searchProvider.mahalAraGrupValue;
+          // var secilenDegerGrup =
+          //     grupDatasi[1][grupDatasi[0].indexOf(dropdownvalueGrup)];
+
+          // var mahalKodu = searchProvider.mahalAramaMahalKodu.text;
+          // var mahalAdi = searchProvider.mahalAramaMahalAdi.text;
+
+          // var binaKodum = searchProvider.mahalAraBinaArray[1]
+          //     [binaDatasi[0].indexOf(dropdownvalueBina)];
+          // var binaKodu = binaKodum != 'Bina' ? binaKodum : '';
+
+          // var katKodum = searchProvider.mahalAraKatArray[1]
+          //     [katDatasi[0].indexOf(dropdownvalueKat)];
+          // var katKodu = katKodum != 'Kat' ? katKodum : '';
+
+          // var kanatKodum = searchProvider.mahalAraKanatArray[1]
+          //     [kanatDatasi[0].indexOf(dropdownvalueKanat)];
+          // var kanatKodu = kanatKodum != 'Kanat' ? kanatKodum : '';
+
+          // var sinifKodum = searchProvider.mahalAraSinifArray[1]
+          //     [sinifDatasi[0].indexOf(dropdownvalueSinif)];
+          // var sinifKodu = sinifKodum != 'Sınıf' ? sinifKodum : '';
+
+          // var grupKodum = searchProvider.mahalAraGrupArray[1]
+          //     [grupDatasi[0].indexOf(dropdownvalueGrup)];
+          // var grupKodu = grupKodum != 'Grup' ? grupKodum : '';
+          var araList = await searchProvider.mahalAramaListesi(
+              context,
+              widget.mahalKodu,
+              widget.mahalAdi,
+              widget.binaKodu,
+              widget.katKodu,
+              widget.kanatKodu,
+              widget.sinifKodu,
+              widget.grupKodu,
+              20,
+              sayfa);
+          setState(() {
+            listee = araList;
+          });
+        }
 
         return Sizer(builder: (context, orientation, deviceType) {
           return SizedBox(
@@ -68,12 +152,12 @@ class _SpaceSearchListState extends State<SpaceSearchList> {
                 resizeToAvoidBottomInset: true,
                 appBar: const CustomMainAppbar(
                     title: Text(
-                      'Mahal Arama',
+                      'Mahal Arama Listesi',
                       style: TextStyle(color: Colors.black),
                     ),
                     returnBack: true),
                 body: Container(
-                  color: const Color.fromARGB(255, 224, 224, 224),
+                  color: Color.fromARGB(255, 224, 224, 224),
                   child: Center(
                       child: codes.length > 0
                           ? Padding(
@@ -85,16 +169,24 @@ class _SpaceSearchListState extends State<SpaceSearchList> {
                                       Center(
                                           child: GestureDetector(
                                         onTap: () async {
-                                          var summarySonuc = await apirepository.mahalAramaMahalDetaySummaryApi(codes[i]);
-                                          var slaSonuc = await apirepository.mahalAramaMahalDetaySlaApi(codes[i]);
-                                          var bakimIsEmri = await apirepository.mahalAraMahalDetayBakimIsEmri(codes[i]);
-                                          var anlikIsEmri = await apirepository.mahalAraMahalDetayAnlikIsEmri(codes[i]);
+                                          var summarySonuc = await apirepository
+                                              .mahalAramaMahalDetaySummaryApi(
+                                                  codes[i]);
+                                          var slaSonuc = await apirepository
+                                              .mahalAramaMahalDetaySlaApi(
+                                                  codes[i]);
+                                          var bakimIsEmri = await apirepository
+                                              .mahalAraMahalDetayBakimIsEmri(
+                                                  codes[i]);
+                                          var anlikIsEmri = await apirepository
+                                              .mahalAraMahalDetayAnlikIsEmri(
+                                                  codes[i]);
 
-                                          // ignore: use_build_context_synchronously
                                           Navigator.push(
                                             context,
                                             MaterialPageRoute(
-                                              builder: (context) => SpaceSearchDetail(
+                                              builder: (context) =>
+                                                  SpaceSearchDetail(
                                                 code: codes[i],
                                                 name: names[i],
                                                 locTree: locTrees[i],
@@ -113,25 +205,33 @@ class _SpaceSearchListState extends State<SpaceSearchList> {
                                             height: 19.h,
                                             decoration: BoxDecoration(
                                               color: Colors.white,
-                                              borderRadius: BorderRadius.circular(15),
+                                              borderRadius:
+                                                  BorderRadius.circular(15),
                                             ),
                                             child: Padding(
-                                              padding: const EdgeInsets.all(9.0),
+                                              padding:
+                                                  const EdgeInsets.all(9.0),
                                               child: Column(
-                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
                                                     codes[i],
-                                                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 25),
                                                   ),
                                                   Text(
                                                     names[i],
-                                                    style: const TextStyle(fontSize: 19),
+                                                    style:
+                                                        TextStyle(fontSize: 19),
                                                   ),
-                                                  const Text(''),
+                                                  Text(''),
                                                   Text(
                                                     locTrees[i],
-                                                    style: const TextStyle(fontSize: 15),
+                                                    style:
+                                                        TextStyle(fontSize: 15),
                                                   ),
                                                 ],
                                               ),
@@ -140,39 +240,57 @@ class _SpaceSearchListState extends State<SpaceSearchList> {
                                         ),
                                       )),
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         Container(
-                                            margin: const EdgeInsets.all(4),
+                                            margin: EdgeInsets.all(4),
                                             child: ElevatedButton(
                                                 onPressed: () {
-                                                  if (int.parse(searchProvider.sayfa) > 1) {
-                                                    searchProvider.setSayfa = (int.parse(searchProvider.sayfa) - 1).toString();
-                                                    loadData(int.parse(searchProvider.sayfa));
+                                                  if (int.parse(searchProvider
+                                                          .sayfa) >
+                                                      1) {
+                                                    searchProvider
+                                                        .setSayfa = (int.parse(
+                                                                searchProvider
+                                                                    .sayfa) -
+                                                            1)
+                                                        .toString();
+                                                    loadData(int.parse(
+                                                        searchProvider.sayfa));
                                                   }
                                                 },
-                                                child: const Text('<'))),
+                                                child: Text('<'))),
                                         Container(
-                                            margin: const EdgeInsets.all(4),
-                                            child: ElevatedButton(onPressed: () {}, child: Text(searchProvider.sayfa))),
+                                            margin: EdgeInsets.all(4),
+                                            child: ElevatedButton(
+                                                onPressed: () {},
+                                                child: Text(
+                                                    searchProvider.sayfa))),
                                         Container(
-                                            margin: const EdgeInsets.all(4),
+                                            margin: EdgeInsets.all(4),
                                             child: ElevatedButton(
                                                 onPressed: () {
-                                                  print(searchProvider.sayfa);
-                                                  searchProvider.setSayfa = (int.parse(searchProvider.sayfa) + 1).toString();
-                                                  loadData(int.parse(searchProvider.sayfa));
+                                                  searchProvider.setSayfa =
+                                                      (int.parse(searchProvider
+                                                                  .sayfa) +
+                                                              1)
+                                                          .toString();
+                                                  loadData(int.parse(
+                                                      searchProvider.sayfa));
                                                 },
-                                                child: const Text('>'))),
+                                                child: Text('>'))),
                                       ],
                                     )
                                   ],
                                 ),
-                              )
-                            : null),
-                  ),
-                ));
-          });
-        }));
+                              ),
+                            )
+                          : null),
+                ),
+              ));
+        });
+      }),
+    );
   }
 }

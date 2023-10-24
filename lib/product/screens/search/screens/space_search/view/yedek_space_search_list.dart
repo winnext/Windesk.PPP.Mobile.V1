@@ -67,11 +67,8 @@ class SpaceSearchList extends StatelessWidget {
             locTrees.add(element['LOCTREE'] ?? '');
             names.add(element['NAME'] ?? '');
           }
-          print(codes);
         }
 
-        print('İÇ');
-        print(codes);
 
         return Sizer(builder: (context, orientation, deviceType) {
           return SizedBox(

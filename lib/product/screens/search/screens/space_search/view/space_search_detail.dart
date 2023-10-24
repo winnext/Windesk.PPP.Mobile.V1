@@ -34,8 +34,12 @@ class SpaceSearchDetail extends StatefulWidget {
 class _SpaceSearchDetailState extends State<SpaceSearchDetail> {
   @override
   Widget build(BuildContext context) {
-    print(widget.summary);
-    const headerStyle = TextStyle(color: Color(0xffffffff), fontSize: 15, fontWeight: FontWeight.bold);
+    const headerStyle = TextStyle(
+        color: Color(0xffffffff), fontSize: 15, fontWeight: FontWeight.bold);
+
+    return Sizer(builder: (context, orientation, deviceType) {
+      return SizedBox(
+          height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           child: Scaffold(
             resizeToAvoidBottomInset: true,
@@ -67,11 +71,14 @@ class _SpaceSearchDetailState extends State<SpaceSearchDetail> {
                                 SizedBox(
                                   height: 35.h,
                                   child: Container(
-                                    decoration: BoxDecoration(border: Border.all(color: Colors.white)),
+                                    decoration: BoxDecoration(
+                                        border:
+                                            Border.all(color: Colors.white)),
                                     child: Padding(
                                       padding: const EdgeInsets.all(12.0),
                                       child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
                                         children: [
                                           Row(
                                             children: [
@@ -81,7 +88,9 @@ class _SpaceSearchDetailState extends State<SpaceSearchDetail> {
                                                   )),
                                               SizedBox(
                                                 width: 50.w,
-                                                child: Text(widget.summary['LOCTREE'] ?? 'Veri Yok',
+                                                child: Text(
+                                                    widget.summary['LOCTREE'] ??
+                                                        'Veri Yok',
                                                     maxLines: 6,
                                                     overflow: TextOverflow.clip,
                                                     style: const TextStyle(
@@ -98,8 +107,9 @@ class _SpaceSearchDetailState extends State<SpaceSearchDetail> {
                                                   )),
                                               SizedBox(
                                                   width: 50.w,
-                                                  child: Text(widget.summary['CLASS'] ?? 'Veri Yok',
-                                                 
+                                                  child: Text(
+                                                      widget.summary['CLASS'] ??
+                                                          'Veri Yok',
                                                       style: const TextStyle(
                                                         color: Colors.white,
                                                       )))
@@ -111,8 +121,9 @@ class _SpaceSearchDetailState extends State<SpaceSearchDetail> {
                                                   style: TextStyle(
                                                     color: Colors.white,
                                                   )),
-                                              Text(widget.summary['EK18GROUP'] ?? 'Veri Yok',
-                                              
+                                              Text(
+                                                  widget.summary['EK18GROUP'] ??
+                                                      'Veri Yok',
                                                   style: const TextStyle(
                                                     color: Colors.white,
                                                   ))
@@ -126,9 +137,9 @@ class _SpaceSearchDetailState extends State<SpaceSearchDetail> {
                                                   )),
                                               SizedBox(
                                                   width: 50.w,
-
-                                                  child: Text(widget.summary['AREA'] ?? 'Veri Yok',
-
+                                                  child: Text(
+                                                      widget.summary['AREA'] ??
+                                                          'Veri Yok',
                                                       style: const TextStyle(
                                                         color: Colors.white,
                                                       )))
@@ -142,8 +153,9 @@ class _SpaceSearchDetailState extends State<SpaceSearchDetail> {
                                                   )),
                                               SizedBox(
                                                   width: 50.w,
-                                                  child: Text(widget.summary['TYPE'] ?? 'Veri Yok',
-                                                  
+                                                  child: Text(
+                                                      widget.summary['TYPE'] ??
+                                                          'Veri Yok',
                                                       style: const TextStyle(
                                                         color: Colors.white,
                                                       )))
@@ -157,8 +169,9 @@ class _SpaceSearchDetailState extends State<SpaceSearchDetail> {
                                                   )),
                                               SizedBox(
                                                   width: 50.w,
-                                                  child: Text(widget.summary['TYPE2'] ?? 'Veri Yok',
-                                               
+                                                  child: Text(
+                                                      widget.summary['TYPE2'] ??
+                                                          'Veri Yok',
                                                       style: const TextStyle(
                                                         color: Colors.white,
                                                       )))
@@ -177,139 +190,226 @@ class _SpaceSearchDetailState extends State<SpaceSearchDetail> {
                                     headerBackgroundColor: Colors.black54,
                                     scaleWhenAnimating: true,
                                     openAndCloseAnimation: true,
-                                    headerPadding: const EdgeInsets.symmetric(vertical: 7, horizontal: 15),
-                                    sectionOpeningHapticFeedback: SectionHapticFeedback.heavy,
-                                    sectionClosingHapticFeedback: SectionHapticFeedback.light,
+                                    headerPadding: const EdgeInsets.symmetric(
+                                        vertical: 7, horizontal: 15),
+                                    sectionOpeningHapticFeedback:
+                                        SectionHapticFeedback.heavy,
+                                    sectionClosingHapticFeedback:
+                                        SectionHapticFeedback.light,
                                     children: [
                                       AccordionSection(
                                           isOpen: false,
-                                          leftIcon: const Icon(Icons.apps, color: Colors.white),
-                                          header: const Text('SLA', style: headerStyle),
+                                          leftIcon: const Icon(Icons.apps,
+                                              color: Colors.white),
+                                          header: const Text('SLA',
+                                              style: headerStyle),
                                           content: SingleChildScrollView(
                                             child: Column(
                                               mainAxisSize: MainAxisSize.min,
-                                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceAround,
                                               children: <Widget>[
-                                                for (int i = 0; i < widget.sla.length; i++)
+                                                for (int i = 0;
+                                                    i < widget.sla.length;
+                                                    i++)
                                                   Padding(
-                                                    padding: const EdgeInsets.all(8.0),
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
                                                     child: Container(
                                                         height: 10.h,
                                                         decoration: BoxDecoration(
-                                                            border: Border.all(color: Colors.black),
-                                                            borderRadius: const BorderRadius.all(Radius.circular(12))),
-                                                        alignment: Alignment.center,
-                                                            
+                                                            border: Border.all(
+                                                                color: Colors
+                                                                    .black),
+                                                            borderRadius:
+                                                                const BorderRadius
+                                                                    .all(
+                                                                    Radius.circular(
+                                                                        12))),
+                                                        alignment:
+                                                            Alignment.center,
                                                         child: Center(
-                                                            child: ElevatedButton(
+                                                            child:
+                                                                ElevatedButton(
                                                           onPressed: () {
-                                                            // print('Routing issue detail page');
-
-                                                            // final detailViewProvider = Provider.of<DetailViewProvider>(context, listen: false);
+                                                            // final detailViewProvider = Provider.of<SpaceSearchProvider>(context, listen: false);
 
                                                             // detailViewProvider.setIssueCode = widget.sla[i]['BM_CODE'];
                                                           },
                                                           child: Column(
-                                                            mainAxisAlignment: MainAxisAlignment.center,
-                                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
                                                             children: [
-                                                              Text(widget.sla[i]['BM_CODE'] + ' - ' + widget.sla[i]['BM_STATUSNAME']),
-                                                              Text(widget.sla[i]['TARGET_FDATE']),
+                                                              Text(widget.sla[i]
+                                                                      [
+                                                                      'BM_CODE'] +
+                                                                  ' - ' +
+                                                                  widget.sla[i][
+                                                                      'BM_STATUSNAME']),
+                                                              Text(widget.sla[i]
+                                                                  [
+                                                                  'TARGET_FDATE']),
                                                             ],
                                                           ),
                                                         ))),
                                                   ),
-                                                widget.sla.isNotEmpty ? const Text('') : const Text(' Sonuç Bulunamadı ')
-                                              
+                                                widget.sla.isNotEmpty
+                                                    ? const Text('')
+                                                    : const Text(
+                                                        ' Sonuç Bulunamadı ')
                                               ],
                                             ),
                                           )),
                                       AccordionSection(
                                           isOpen: false,
-                                          leftIcon: const Icon(Icons.people, color: Colors.white),
-                                          header: const Text('Bakım İş Emri', style: headerStyle),
-
+                                          leftIcon: const Icon(Icons.people,
+                                              color: Colors.white),
+                                          header: const Text('Bakım İş Emri',
+                                              style: headerStyle),
                                           content: SingleChildScrollView(
                                             child: Column(
                                               mainAxisSize: MainAxisSize.min,
-                                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceAround,
                                               children: <Widget>[
-                                                for (int i = 0; i < widget.bakim_is_emri.length; i++)
+                                                for (int i = 0;
+                                                    i <
+                                                        widget.bakim_is_emri
+                                                            .length;
+                                                    i++)
                                                   Padding(
-                                                    padding: const EdgeInsets.all(8.0),
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
                                                     child: Container(
                                                         height: 10.h,
                                                         decoration: BoxDecoration(
-                                                            border: Border.all(color: Colors.black),
-                                                            borderRadius: const BorderRadius.all(Radius.circular(12))),
-                                                        alignment: Alignment.center,
+                                                            border: Border.all(
+                                                                color: Colors
+                                                                    .black),
+                                                            borderRadius:
+                                                                const BorderRadius
+                                                                    .all(
+                                                                    Radius.circular(
+                                                                        12))),
+                                                        alignment:
+                                                            Alignment.center,
                                                         child: Center(
-                                                            child: ElevatedButton(
+                                                            child:
+                                                                ElevatedButton(
                                                           onPressed: () {
-
                                                             ///////////////////////////////////
                                                             ///  İŞ EMRİ SAYFASINA GİDECEK ///
                                                             //////////////////////////////////
                                                           },
                                                           child: Column(
-                                                            mainAxisAlignment: MainAxisAlignment.center,
-                                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
                                                             children: [
-                                                              Text(widget.bakim_is_emri[i]['WO_CODE'] + ' - ' + widget.bakim_is_emri[i]['WO_STATUS']),
-                                                              Text(widget.bakim_is_emri[i]['WO_NAME']),
-                                                              Text('Planlanan Bitiş Tarihi : ' + widget.bakim_is_emri[i]['PLANNED_ENDDATE']),
-
+                                                              Text(widget.bakim_is_emri[
+                                                                          i][
+                                                                      'WO_CODE'] +
+                                                                  ' - ' +
+                                                                  widget.bakim_is_emri[
+                                                                          i][
+                                                                      'WO_STATUS']),
+                                                              Text(widget
+                                                                      .bakim_is_emri[
+                                                                  i]['WO_NAME']),
+                                                              // ignore: prefer_interpolation_to_compose_strings
+                                                              Text('Planlanan Bitiş Tarihi : ' +
+                                                                  widget.bakim_is_emri[
+                                                                          i][
+                                                                      'PLANNED_ENDDATE']),
                                                             ],
                                                           ),
                                                         ))),
                                                   ),
-                                                widget.bakim_is_emri.isNotEmpty ? const Text('') : const Text(' Sonuç Bulunamadı ')
-
+                                                widget.bakim_is_emri.isNotEmpty
+                                                    ? const Text('')
+                                                    : const Text(
+                                                        ' Sonuç Bulunamadı ')
                                               ],
                                             ),
                                           )),
                                       AccordionSection(
                                           isOpen: false,
-                                          leftIcon: const Icon(Icons.flag, color: Colors.white),
-                                          header: const Text('Anlık İş Emri', style: headerStyle),
-
+                                          leftIcon: const Icon(Icons.flag,
+                                              color: Colors.white),
+                                          header: const Text('Anlık İş Emri',
+                                              style: headerStyle),
                                           content: SingleChildScrollView(
                                             child: Column(
                                               mainAxisSize: MainAxisSize.min,
-                                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceAround,
                                               children: <Widget>[
-                                                for (int i = 0; i < widget.anlik_is_emri.length; i++)
+                                                for (int i = 0;
+                                                    i <
+                                                        widget.anlik_is_emri
+                                                            .length;
+                                                    i++)
                                                   Padding(
-                                                    padding: const EdgeInsets.all(8.0),
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
                                                     child: Container(
                                                         height: 10.h,
                                                         decoration: BoxDecoration(
-                                                            border: Border.all(color: Colors.black),
-                                                            borderRadius: const BorderRadius.all(Radius.circular(12))),
-                                                        alignment: Alignment.center,
-
+                                                            border: Border.all(
+                                                                color: Colors
+                                                                    .black),
+                                                            borderRadius:
+                                                                const BorderRadius
+                                                                    .all(
+                                                                    Radius.circular(
+                                                                        12))),
+                                                        alignment:
+                                                            Alignment.center,
                                                         child: Center(
-                                                            child: ElevatedButton(
+                                                            child:
+                                                                ElevatedButton(
                                                           onPressed: () {
-                                                            print('Routing anlik is emri detail page');
-
                                                             // final detailViewProvider =
                                                             //     Provider.of<DetailViewProvider>(context, listen: false);
 
                                                             //     detailViewProvider.setIssueCode = widget.anlik_is_emri[i]['BM_CODE'];
                                                           },
                                                           child: Column(
-                                                            mainAxisAlignment: MainAxisAlignment.center,
-                                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
                                                             children: [
-                                                              Text(widget.anlik_is_emri[i]['WO_CODE'] + ' - ' + widget.anlik_is_emri[i]['WO_STATUS']),
-                                                              Text(widget.anlik_is_emri[i]['WO_NAME']),
+                                                              Text(widget.anlik_is_emri[
+                                                                          i][
+                                                                      'WO_CODE'] +
+                                                                  ' - ' +
+                                                                  widget.anlik_is_emri[
+                                                                          i][
+                                                                      'WO_STATUS']),
+                                                              Text(widget
+                                                                      .anlik_is_emri[
+                                                                  i]['WO_NAME']),
                                                             ],
                                                           ),
                                                         ))),
                                                   ),
-                                                widget.anlik_is_emri.isNotEmpty ? const Text('') : const Text(' Sonuç Bulunamadı ')
-
+                                                widget.anlik_is_emri.isNotEmpty
+                                                    ? const Text('')
+                                                    : const Text(
+                                                        ' Sonuç Bulunamadı ')
                                               ],
                                             ),
                                           )),
@@ -334,14 +434,16 @@ class _SpaceSearchDetailState extends State<SpaceSearchDetail> {
                               children: [
                                 Text(
                                   '${widget.code}-${widget.name}',
-                                  style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18),
-
+                                  style: const TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18),
                                 ),
                                 const Text(''),
                                 Text(
                                   widget.locTree,
-                                  style: const TextStyle(color: Colors.black, fontSize: 15),
-
+                                  style: const TextStyle(
+                                      color: Colors.black, fontSize: 15),
                                 ),
                               ],
                             ),
