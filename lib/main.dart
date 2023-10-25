@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:wm_ppp_4/product/screens/issue/provider/issue_filter_bottom_sheet_provider.dart';
 import 'package:wm_ppp_4/product/screens/issue/provider/issue_provider.dart';
@@ -14,12 +15,15 @@ void main() {
 
   Injection().initInstances();
   FirebaseNotification.init();
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider<GlobalProvider>(create: (_) => GlobalProvider()),
         ChangeNotifierProvider<IssueProvider>(create: (_) => IssueProvider()),
-        ChangeNotifierProvider<IssueFilterModalBottomSheetProvider>(create: (_) => IssueFilterModalBottomSheetProvider()),
+        ChangeNotifierProvider<IssueFilterModalBottomSheetProvider>(
+            create: (_) => IssueFilterModalBottomSheetProvider()),
       ],
       child: MyApp(),
     ),

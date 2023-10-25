@@ -1,9 +1,11 @@
 // ignore_for_file: non_constant_identifier_names, prefer_is_empty, avoid_print
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:wm_ppp_4/feature/components/snackBar/snackbar.dart';
+import 'package:wm_ppp_4/feature/route/app_route.gr.dart';
 import 'package:wm_ppp_4/product/screens/new_order/new_order_repo.dart';
 
 class NewOrderProvider extends ChangeNotifier {
@@ -198,7 +200,7 @@ class NewOrderProvider extends ChangeNotifier {
 ///////////// WO Create /////////////////////
 ////////////////////////////////////////////
 
-  showAlertDialog(BuildContext context, title, metin) {
+  showAlertDialog(BuildContext context, title, metin, woCode) {
     // set up the buttons
     showDialog(
       context: context,
@@ -212,7 +214,8 @@ class NewOrderProvider extends ChangeNotifier {
           ),
           ElevatedButton(
             child: const Text("Detayı Gör"),
-            onPressed: () => print('ROUTING WO DETAİL PAGE'),
+            onPressed: () => context.router
+                .push(WorkOrderDetailScreen(workorderCode: woCode)),
           ),
         ],
       ),
@@ -286,7 +289,7 @@ class NewOrderProvider extends ChangeNotifier {
         clear = 1;
         setVarlik = '';
         showAlertDialog(context, 'İş Emri Başarıyla Oluşturuldu',
-            woCreateSonuc[1]['uyari']);
+            woCreateSonuc[1]['uyari'], woCreateSonuc[1]['code']);
       }
     } else {
       snackBar(context, 'İş Emri tipi, tanımı ve mahali zorunludur', 'hata');

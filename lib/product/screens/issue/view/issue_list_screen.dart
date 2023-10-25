@@ -24,25 +24,40 @@ class IssueListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
         create: (_) => IssueProvider(),
-        child: Consumer<IssueProvider>(builder: (context, IssueProvider issueProvider, child) {
-          issueProvider.isFetch ? null : issueProvider.getIssueList(1, issueModuleCode);
+        child: Consumer<IssueProvider>(
+            builder: (context, IssueProvider issueProvider, child) {
+          issueProvider.isFetch
+              ? null
+              : issueProvider.getIssueList(1, issueModuleCode);
           issueProvider.isFetchFilter ? null : issueProvider.getFilterValues();
           return Scaffold(
             appBar: CustomMainAppbar(
-              title: const Text(LocaleKeys.issueList, style: TextStyle(color: Colors.black)),
+              title: const Text(LocaleKeys.issueList,
+                  style: TextStyle(color: Colors.black)),
               actions: [
                 IconButton(
                   onPressed: () async {
-                    IssueFilterModalBottomSheetProvider provider = Provider.of<IssueFilterModalBottomSheetProvider>(context, listen: false);
+                    IssueFilterModalBottomSheetProvider provider =
+                        Provider.of<IssueFilterModalBottomSheetProvider>(
+                            context,
+                            listen: false);
 
                     final response = await showModalBottomSheet(
                       backgroundColor: Colors.transparent,
                       context: context,
                       builder: (context) => IssueFilterModalBottomSheet(
-                        stateList: issueProvider.issueStatusNames.isEmpty ? [''] : issueProvider.issueStatusNames,
-                        buildList: issueProvider.buildingFilterNames.isEmpty ? [''] : issueProvider.buildingFilterNames,
-                        floorList: issueProvider.floorFilterNames.isEmpty ? [''] : issueProvider.floorFilterNames,
-                        wingList: issueProvider.wingFilterNames.isEmpty ? [''] : issueProvider.wingFilterNames,
+                        stateList: issueProvider.issueStatusNames.isEmpty
+                            ? ['']
+                            : issueProvider.issueStatusNames,
+                        buildList: issueProvider.buildingFilterNames.isEmpty
+                            ? ['']
+                            : issueProvider.buildingFilterNames,
+                        floorList: issueProvider.floorFilterNames.isEmpty
+                            ? ['']
+                            : issueProvider.floorFilterNames,
+                        wingList: issueProvider.wingFilterNames.isEmpty
+                            ? ['']
+                            : issueProvider.wingFilterNames,
                         selectStateFunction: issueProvider.setstatusName,
                         selectBuildFunction: issueProvider.setbuildName,
                         selectFloorFunction: issueProvider.setfloorName,
@@ -76,17 +91,21 @@ class IssueListScreen extends StatelessWidget {
                   child: ListView.builder(
                       itemCount: issueProvider.issueList.length,
                       itemBuilder: (BuildContext context, int index) {
-                        IssueListModel issueListElement = issueProvider.issueList[index];
+                        IssueListModel issueListElement =
+                            issueProvider.issueList[index];
                         return CustomIssueListCard(
                             issueListElement: issueListElement,
                             onPressed: (String woCode) {
-                              context.router.push(IssueDetailScreen(issueCode: woCode));
+                              context.router
+                                  .push(IssueDetailScreen(issueCode: woCode));
                             },
                             onPressedLong: () {});
                       }),
                 ),
               ),
-              issueProvider.loading ? const CustomLoadingIndicator() : const SizedBox()
+              issueProvider.loading
+                  ? const CustomLoadingIndicator()
+                  : const SizedBox()
             ]),
           );
         }));

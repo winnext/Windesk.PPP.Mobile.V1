@@ -50,7 +50,7 @@ AppBar _issueSummaryAppbar(Size size, BuildContext context, String issueCode) {
   return AppBar(
     title:  Text(
       issueCode,
-      style: TextStyle(color: Colors.black),
+      style: const TextStyle(color: Colors.black),
       textAlign: TextAlign.center,
     ),
     backgroundColor: APPColors.Main.white,

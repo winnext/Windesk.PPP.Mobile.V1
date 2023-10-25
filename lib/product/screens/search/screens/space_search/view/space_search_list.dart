@@ -48,8 +48,6 @@ class _SpaceSearchListState extends State<SpaceSearchList> {
       child: Consumer<SpaceSearchProvider>(
           builder: (context, SpaceSearchProvider searchProvider, child) {
         var data = listee;
-        print('data');
-        print(data);
         if (data.isEmpty) {
           data = widget.liste;
         }
@@ -65,8 +63,6 @@ class _SpaceSearchListState extends State<SpaceSearchList> {
         }
 
         loadData(sayfa) async {
-          print('sayfa');
-          print(sayfa);
           // List binaDatasi = searchProvider.mahalAraBinaArray;
           // List<String> bina = searchProvider.mahalAraBinaArray[0];
           // String dropdownvalueBina =
@@ -157,9 +153,9 @@ class _SpaceSearchListState extends State<SpaceSearchList> {
                     ),
                     returnBack: true),
                 body: Container(
-                  color: Color.fromARGB(255, 224, 224, 224),
+                  color: const Color.fromARGB(255, 224, 224, 224),
                   child: Center(
-                      child: codes.length > 0
+                      child: codes.isNotEmpty
                           ? Padding(
                               padding: const EdgeInsets.all(12.0),
                               child: SingleChildScrollView(
@@ -182,6 +178,7 @@ class _SpaceSearchListState extends State<SpaceSearchList> {
                                               .mahalAraMahalDetayAnlikIsEmri(
                                                   codes[i]);
 
+                                          // ignore: use_build_context_synchronously
                                           Navigator.push(
                                             context,
                                             MaterialPageRoute(
@@ -217,21 +214,21 @@ class _SpaceSearchListState extends State<SpaceSearchList> {
                                                 children: [
                                                   Text(
                                                     codes[i],
-                                                    style: TextStyle(
+                                                    style: const TextStyle(
                                                         fontWeight:
                                                             FontWeight.bold,
                                                         fontSize: 25),
                                                   ),
                                                   Text(
                                                     names[i],
-                                                    style:
-                                                        TextStyle(fontSize: 19),
+                                                    style: const TextStyle(
+                                                        fontSize: 19),
                                                   ),
-                                                  Text(''),
+                                                  const Text(''),
                                                   Text(
                                                     locTrees[i],
-                                                    style:
-                                                        TextStyle(fontSize: 15),
+                                                    style: const TextStyle(
+                                                        fontSize: 15),
                                                   ),
                                                 ],
                                               ),
@@ -244,7 +241,7 @@ class _SpaceSearchListState extends State<SpaceSearchList> {
                                           MainAxisAlignment.center,
                                       children: [
                                         Container(
-                                            margin: EdgeInsets.all(4),
+                                            margin: const EdgeInsets.all(4),
                                             child: ElevatedButton(
                                                 onPressed: () {
                                                   if (int.parse(searchProvider
@@ -260,15 +257,15 @@ class _SpaceSearchListState extends State<SpaceSearchList> {
                                                         searchProvider.sayfa));
                                                   }
                                                 },
-                                                child: Text('<'))),
+                                                child: const Text('<'))),
                                         Container(
-                                            margin: EdgeInsets.all(4),
+                                            margin: const EdgeInsets.all(4),
                                             child: ElevatedButton(
                                                 onPressed: () {},
                                                 child: Text(
                                                     searchProvider.sayfa))),
                                         Container(
-                                            margin: EdgeInsets.all(4),
+                                            margin: const EdgeInsets.all(4),
                                             child: ElevatedButton(
                                                 onPressed: () {
                                                   searchProvider.setSayfa =
@@ -279,7 +276,7 @@ class _SpaceSearchListState extends State<SpaceSearchList> {
                                                   loadData(int.parse(
                                                       searchProvider.sayfa));
                                                 },
-                                                child: Text('>'))),
+                                                child: const Text('>'))),
                                       ],
                                     )
                                   ],

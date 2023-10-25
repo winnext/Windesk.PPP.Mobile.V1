@@ -29,6 +29,7 @@ class AddJustPhotoModalBottomSheet extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class _PhotoStack extends StatelessWidget {
   _PhotoStack({required this.saveImageFunction});
   final Function saveImageFunction;
