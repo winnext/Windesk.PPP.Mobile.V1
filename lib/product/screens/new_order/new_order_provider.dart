@@ -156,7 +156,8 @@ class NewOrderProvider extends ChangeNotifier {
       'Görev İş Emri',
       'İç Denetim',
       'İzleme İş Emirleri',
-      'Anlık Görev'
+      'Anlık Görev',
+      'Arıza İş Emri'
     ],
     [
       'accidental',
@@ -170,7 +171,8 @@ class NewOrderProvider extends ChangeNotifier {
       'task_workorder',
       'internal_audit',
       'watchingWorkorder'
-          'reactive'
+          'reactive',
+      'arizi_workorder'
     ]
   ];
 
