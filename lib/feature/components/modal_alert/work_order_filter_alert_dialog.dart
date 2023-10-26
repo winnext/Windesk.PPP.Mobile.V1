@@ -72,7 +72,7 @@ class WorkOrderFilterAlertDialog {
     return showDialog(
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog.adaptive(
+        return AlertDialog(
           backgroundColor: APPColors.Modal.blue,
           shape: RoundedRectangleBorder(borderRadius: CustomBorderRadius.mediumBorderRadius),
           title: titleWidget(),

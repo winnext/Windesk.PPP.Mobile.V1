@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wm_ppp_4/feature/components/buttons/custom_issue_action_button.dart';
 import 'package:wm_ppp_4/feature/components/generic_bottom_sheet/base_bottom_sheet.dart';
 import 'package:wm_ppp_4/feature/components/worker_order_bottom_sheets/choose_add_document_type_sheet.dart';
 import 'package:wm_ppp_4/feature/constants/other/app_strings.dart';
@@ -44,7 +45,7 @@ class WorkOrderDetailButtons extends StatelessWidget {
             ),
           ],
         ),
-        workOrderCode[0] == 'm' ? IssueActionModal(issueCode: value.workOrderDetailsModel.modulecode) : Container()
+        workOrderCode[0] == 'M' ? CustomIssueActionButton(issueCode: value.workOrderDetailsModel.modulecode, workOrderCode: workOrderCode,isWorkOrder: true,) : Container()
       ],
     );
   }

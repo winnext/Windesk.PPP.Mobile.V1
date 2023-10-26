@@ -1,7 +1,5 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:wm_ppp_4/feature/components/buttons/custom_half_buttons.dart';
 import 'package:wm_ppp_4/feature/components/input_fields/dropdown_input_fields.dart';
@@ -112,8 +110,6 @@ class AddActivity extends StatelessWidget {
                                 issueActionProvider.getLiveSelectAsgUsersName.isNotEmpty ? issueActionProvider.getLiveSelectAsgUsersName : [''],
                           ),
                         )),
-                    NullCheckWidget().conditionCheckWidget(
-                        issueActionProvider.minDescLength,
                         Padding(
                           padding: const EdgeInsets.only(top: 8.0),
                           child: TextFieldsInput(
@@ -122,7 +118,7 @@ class AddActivity extends StatelessWidget {
                               issueActionProvider.setdescription(text);
                             },
                           ),
-                        )),
+                        ),
                     NullCheckWidget().conditionCheckWidget(issueActionProvider.mobilePhoto, _addActivityPhoto(context, issueActionProvider)),
                     _saveOrQuit(context, issueActionProvider, issueProvider)
                   ],

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:wm_ppp_4/feature/database/shared_manager.dart';
+import 'package:wm_ppp_4/feature/enums/shared_enums.dart';
 import 'package:wm_ppp_4/product/screens/issue/provider/issue_provider.dart';
 
 class IssueFilterModalBottomSheetProvider extends ChangeNotifier {
@@ -8,6 +11,19 @@ class IssueFilterModalBottomSheetProvider extends ChangeNotifier {
   String choosenBuilding = '';
   String choosenFloor = '';
   String choosenWing = '';
+  String assigneName = '';
+
+  void setAssigneStatus() async {
+    String userToken = await SharedManager().getString(SharedEnum.userCode);
+    if (assigneName == '') {
+      assigneName = userToken;
+      tempChoosenFilterList.add(userToken);
+    } else {
+      assigneName = '';
+      tempChoosenFilterList.remove(userToken);
+    }
+    notifyListeners();
+  }
 
   void setChoosenStatus(String status) {
     tempChoosenFilterList.add(status);
@@ -70,6 +86,11 @@ class IssueFilterModalBottomSheetProvider extends ChangeNotifier {
       }
       if (issueProvider.wingFilterNames.contains(item)) {
         issueProvider.clearWingCode();
+      }
+      if (issueProvider.assigne == item) {
+        issueProvider.clearAssigneName();
+        assigneName = '';
+        notifyListeners();
       }
     }
   }

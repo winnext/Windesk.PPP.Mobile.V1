@@ -78,7 +78,7 @@ class IssueSummaryScreen extends StatelessWidget {
           ? upTimeBar(issueProvider, LocaleKeys.targetFixedDate, issueProvider.issueSummaryTimeInfo.fixTimer.toString(),
               issueProvider.issueSummaryTimeInfo.targetFdate.toString(), issueProvider.issueSummaryTimeInfo.fixedDate.toString())
           : upTimeBar(issueProvider, LocaleKeys.fixedDate, issueProvider.issueSummaryTimeInfo.fixTimer.toString(),
-              issueProvider.issueSummaryTimeInfo.targetFdate.toString(), issueProvider.issueSummaryTimeInfo.fixedDate.toString())
+              issueProvider.issueSummaryTimeInfo.fixedDate.toString(), issueProvider.issueSummaryTimeInfo.fixedDate.toString())
     ]);
   }
 
@@ -101,12 +101,12 @@ class IssueSummaryScreen extends StatelessWidget {
                 ? upTimeBar(issueProvider, LocaleKeys.targetResponsedDate, issueProvider.issueSummaryTimeInfo.respondedTimer.toString(),
                     issueProvider.issueSummaryTimeInfo.targetRdate.toString(), issueProvider.issueSummaryTimeInfo.respondedDate.toString())
                 : upTimeBar(issueProvider, LocaleKeys.responsedDate, issueProvider.issueSummaryTimeInfo.respondedTimer.toString(),
-                    issueProvider.issueSummaryTimeInfo.targetRdate.toString(), issueProvider.issueSummaryTimeInfo.respondedDate.toString())
+                    issueProvider.issueSummaryTimeInfo.respondedDate.toString(), issueProvider.issueSummaryTimeInfo.respondedDate.toString())
       ],
     );
   }
 
-  Container upTimeBar(IssueProvider issueProvider, String title, String respondedTimer, String targetDate, String fixedDate) {
+  Container upTimeBar(IssueProvider issueProvider, String title, String respondedTimer, String targetDate, String fixedDate, ) {
     return Container(
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(3)),
       padding: const EdgeInsets.all(3),

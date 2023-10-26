@@ -9,6 +9,7 @@ import 'package:wm_ppp_4/feature/models/issue_action_models/issue_operation_list
 import 'package:wm_ppp_4/feature/models/issue_models/issue_activities_model.dart';
 import 'package:wm_ppp_4/feature/models/issue_models/issue_attachments_model.dart';
 import 'package:wm_ppp_4/feature/models/issue_models/issue_filter_model.dart';
+import 'package:wm_ppp_4/feature/models/issue_models/issue_filter_status_model.dart';
 import 'package:wm_ppp_4/feature/models/issue_models/issue_summary_model.dart';
 import 'package:wm_ppp_4/feature/models/issue_models/issue_summary_time_model.dart';
 import '../../../../feature/exceptions/custom_service_exceptions.dart';
@@ -139,7 +140,7 @@ class IssueServiceRepoImpml extends IssueServiceRepository {
   @override
   Future<Either<List<IssueAvailableActivities>, CustomServiceException>> getAvailableActivities(String issueCode, String userToken) async {
     String url = '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=getAvailableActivities&issueCode=$issueCode&module=issue';
-    
+
     List<IssueAvailableActivities> issueAttachmentsModel;
 
     try {
@@ -398,17 +399,16 @@ class IssueServiceRepoImpml extends IssueServiceRepository {
   }
 
   @override
-  Future<Either<List<IssueFilterModel>, CustomServiceException>> getIssueOpenStatusCodes(String userToken) async {
+  Future<Either<List<IssueFilterStatusModel>, CustomServiceException>> getIssueOpenStatusCodes(String userToken) async {
     String url = '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=getIssueOpenStatusCodes';
-    List<IssueFilterModel> liveSelectAsgUsers;
-
+    List<IssueFilterStatusModel> openStatusCodes;
     try {
       final response = await dio.get(url);
       final data = response.data[ServiceResponseStatusEnums.records.rawText];
 
-      liveSelectAsgUsers = IssueFilterModel.fromJsonList(data);
-      super.logger.i(liveSelectAsgUsers);
-      return Left(liveSelectAsgUsers);
+      openStatusCodes = IssueFilterStatusModel.fromJsonList(data);
+      super.logger.i(openStatusCodes);
+      return Left(openStatusCodes);
     } catch (error) {
       super.logger.e(error.toString());
       return Right(CustomServiceException(message: CustomServiceMessages.loginError, statusCode: '400'));

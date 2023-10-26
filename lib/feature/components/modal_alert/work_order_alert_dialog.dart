@@ -7,7 +7,7 @@ class WorkOrderAlertDialog {
     return showDialog(
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog.adaptive(
+        return AlertDialog(
           shape: RoundedRectangleBorder(borderRadius: CustomBorderRadius.mediumBorderRadius),
           title: Text(title),
           content: Text(subtitle),

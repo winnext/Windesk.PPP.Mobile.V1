@@ -29,6 +29,7 @@ class WorkOrderProvider extends ChangeNotifier {
 
       final String userName = await SharedManager().getString(SharedEnum.userCode);
 
+      print('username' + userName);
       await workSpaceService.getWorkOrderTracingList(userName).then((value) {
         value.fold(
           (l) => {

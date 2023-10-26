@@ -99,8 +99,11 @@ class IssueFilterModalBottomSheet extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(10.0),
               child: CustomCircularWithTextButton(
-                bgColor: APPColors.Login.blue,
-                onPressFunction: taskForMeFunction,
+                bgColor: provider.assigneName == '' ? APPColors.Login.blue : APPColors.Secondary.grey,
+                onPressFunction: () {
+                  taskForMeFunction();
+                  provider.setAssigneStatus();
+                },
                 textButton: AppStrings.taskForMe,
                 textColor: APPColors.Main.white,
               ),

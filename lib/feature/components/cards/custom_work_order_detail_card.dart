@@ -80,7 +80,7 @@ class CustomWorkOrderDetailCard extends StatelessWidget {
     return const TextStyle(
       fontWeight: FontWeight.w400,
       fontSize: 14,
-      overflow: TextOverflow.ellipsis,
+      //overflow: TextOverflow.ellipsis,
     );
   }
 }

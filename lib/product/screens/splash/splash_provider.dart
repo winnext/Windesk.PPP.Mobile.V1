@@ -12,7 +12,6 @@ import '../../../feature/database/shared_manager.dart';
 import '../../../feature/enums/shared_enums.dart';
 
 class SplashProvider extends ChangeNotifier {
-
   String? deviceModel;
   String? deviceVersion;
 
@@ -50,6 +49,7 @@ class SplashProvider extends ChangeNotifier {
 
     // sets device information to shared preferences.
     if (deviceId != null && deviceOS != null && deviceModel != null) {
+      print('deviceId' + deviceId);
       await SharedManager().setString(SharedEnum.deviceId, deviceId);
       await SharedManager().setString(SharedEnum.deviceModel, deviceModel);
       await SharedManager().setString(SharedEnum.deviceType, deviceOS);

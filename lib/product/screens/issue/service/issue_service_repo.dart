@@ -7,6 +7,7 @@ import 'package:wm_ppp_4/feature/models/issue_action_models/issue_operation_list
 import 'package:wm_ppp_4/feature/models/issue_models/issue_activities_model.dart';
 import 'package:wm_ppp_4/feature/models/issue_models/issue_attachments_model.dart';
 import 'package:wm_ppp_4/feature/models/issue_models/issue_filter_model.dart';
+import 'package:wm_ppp_4/feature/models/issue_models/issue_filter_status_model.dart';
 import 'package:wm_ppp_4/feature/models/issue_models/issue_summary_model.dart';
 import 'package:wm_ppp_4/feature/models/issue_models/issue_summary_time_model.dart';
 import '../../../../feature/models/issue_models/issue_tracing_list_model.dart';
@@ -50,7 +51,7 @@ abstract class IssueServiceRepository {
   Future<Either<bool, CustomServiceException>> changeCfg(
        String userToken, String issueCode, String cfgCode);
   Future<Either<List<IssueFilterModel>, CustomServiceException>> getSpaceBfwByType(String type,String userToken);
-  Future<Either<List<IssueFilterModel>, CustomServiceException>> getIssueOpenStatusCodes(String userToken);
+  Future<Either<List<IssueFilterStatusModel>, CustomServiceException>> getIssueOpenStatusCodes(String userToken);
 
 
 

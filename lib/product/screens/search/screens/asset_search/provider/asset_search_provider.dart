@@ -7,13 +7,10 @@ import '../../../service/search_service_repo_impl.dart';
 
 class AssetSearchProvider extends ChangeNotifier {
   // ignore: unused_field
-  final SearchServiceRepoImpml _searchServiceRepository =
-      SearchServiceRepoImpml();
+  final SearchServiceRepoImpml _searchServiceRepository = SearchServiceRepoImpml();
   List<WorkOrderAssetSearchList> _assetSearchListPageModel = [];
-  List<WorkOrderAssetSearchList> get assetSearchListPageModel =>
-      _assetSearchListPageModel;
-  set setAssetSearchListPageModel(
-      List<WorkOrderAssetSearchList> assetSearchListPageModel) {
+  List<WorkOrderAssetSearchList> get assetSearchListPageModel => _assetSearchListPageModel;
+  set setAssetSearchListPageModel(List<WorkOrderAssetSearchList> assetSearchListPageModel) {
     _assetSearchListPageModel = assetSearchListPageModel;
     notifyListeners();
   }
@@ -59,7 +56,7 @@ class AssetSearchProvider extends ChangeNotifier {
   }
 
   final _spaceCode = TextEditingController();
-  
+
   TextEditingController get spaceCode => _spaceCode;
 
   set setSpaceCode(String spaceCode) {
@@ -98,8 +95,7 @@ class AssetSearchProvider extends ChangeNotifier {
     String barcodeScanRes;
 
     try {
-      barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
-          '#ff6666', 'İptal', true, ScanMode.BARCODE);
+      barcodeScanRes = await FlutterBarcodeScanner.scanBarcode('#ff6666', 'İptal', true, ScanMode.BARCODE);
     } on PlatformException {
       barcodeScanRes = 'Failed to get platform version.';
     }
@@ -146,21 +142,11 @@ class AssetSearchProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  getAssetSearchList(context, entityCode, seriNo, rfid, typeCode, brandCode,
-      modelCode, locCode, currentPage) async {
+  getAssetSearchList(context, entityCode, seriNo, rfid, typeCode, brandCode, modelCode, locCode, currentPage) async {
     num limitStart = 20 * (currentPage - 1);
     num limitEnd = 20 * currentPage;
     final response = await _searchServiceRepository.assetSearchList(
-        entityCode,
-        seriNo,
-        rfid,
-        typeCode,
-        brandCode,
-        modelCode,
-        locCode,
-        limitStart.toString(),
-        limitEnd.toString());
-    response.fold((l) => {setAssetSearchListPageModel = l, notifyListeners()},
-        (r) => setAssetSearchListPageModel = []);
+        entityCode, seriNo, rfid, typeCode, brandCode, modelCode, locCode, limitStart.toString(), limitEnd.toString());
+    response.fold((l) => {setAssetSearchListPageModel = l, notifyListeners()}, (r) => setAssetSearchListPageModel = []);
   }
 }

@@ -553,7 +553,6 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
   @override
   Future<Either<List<WorkOrderTracingListModel>, CustomServiceException>> getWorkOrderTracingList(String xuserCode) async {
     String url = '${ServiceTools.baseUrlV2}/list/module/workorder';
-
     try {
       final response = await super.dio.get(
             url,
@@ -570,7 +569,7 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
           final data = response.data;
 
           List<WorkOrderTracingListModel> tracingList = WorkOrderTracingListModel.fromJsonList(data['lists']);
-          super.logger.e(tracingList[18].toString());
+          //super.logger.e(tracingList[18].toString());
 
           return Left(tracingList);
         } else {

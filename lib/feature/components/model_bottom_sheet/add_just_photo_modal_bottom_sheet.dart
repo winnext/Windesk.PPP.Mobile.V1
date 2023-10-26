@@ -8,6 +8,7 @@ import '../../constants/style/border_radius.dart';
 class AddJustPhotoModalBottomSheet extends StatelessWidget {
   const AddJustPhotoModalBottomSheet(this.saveImageFunction, {super.key});
   final Function saveImageFunction;
+  
 
   @override
   Widget build(BuildContext context) {

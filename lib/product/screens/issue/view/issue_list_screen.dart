@@ -50,7 +50,7 @@ class IssueListScreen extends StatelessWidget {
                         filterStartFunction: () {
                           issueProvider.getIssueList(1, issueModuleCode);
                         },
-                        taskForMeFunction: () {},
+                        taskForMeFunction: issueProvider.setassigne,
                         selectedParamList: const [],
                         selectedParamListDeleteItem: (item) {},
                       ),
@@ -69,10 +69,13 @@ class IssueListScreen extends StatelessWidget {
               returnBack: true,
             ),
             body: Stack(children: [
-              Expanded(
-                flex: 1,
-                child: NotificationListener<ScrollNotification>(
-                  onNotification: issueProvider.notificationController,
+              NotificationListener<ScrollNotification>(
+                onNotification: issueProvider.notificationController,
+                child: RefreshIndicator(
+                  onRefresh: () async{
+                    issueProvider.getIssueList(1, issueModuleCode);
+                  },
+                  strokeWidth: 4.0,
                   child: ListView.builder(
                       itemCount: issueProvider.issueList.length,
                       itemBuilder: (BuildContext context, int index) {

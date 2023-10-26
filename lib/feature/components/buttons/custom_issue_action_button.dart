@@ -7,9 +7,10 @@ import 'package:wm_ppp_4/feature/route/app_route.gr.dart';
 import 'package:wm_ppp_4/product/screens/issue/provider/issue_provider.dart';
 
 class CustomIssueActionButton extends StatefulWidget {
-  const CustomIssueActionButton({super.key, required this.issueCode});
+  const CustomIssueActionButton({super.key, required this.issueCode, this.isWorkOrder, this.workOrderCode});
   final String issueCode;
-
+  final String? workOrderCode;
+  final bool? isWorkOrder;
   @override
   State<CustomIssueActionButton> createState() => _CustomIssueActionButtonState();
 }
@@ -30,7 +31,11 @@ class _CustomIssueActionButtonState extends State<CustomIssueActionButton> {
               );
               if (result == true) {
                 // ignore: use_build_context_synchronously
-                context.router.popAndPush(IssueDetailScreen(issueCode: widget.issueCode));
+                if (widget.isWorkOrder == true) {
+                  context.router.popAndPush(WorkOrderDetailScreen(workorderCode: widget.workOrderCode ?? ''));
+                } else {
+                  context.router.popAndPush(IssueDetailScreen(issueCode: widget.issueCode));
+                }
               }
             },
             backgroundColor: APPColors.Modal.red,

@@ -25,13 +25,13 @@ class ChangeCfgScreen extends StatelessWidget {
   }
 
   SingleChildScrollView _changeCfgBody(BuildContext context, IssueActionProvider issueActionProvider) {
-    if (issueActionProvider.isSuccessEnterActivity) {
+    if (issueActionProvider.isSuccessChangeCfg) {
       snackBar(context, LocaleKeys.processDone, 'success');
-      Navigator.of(context).pop();
+      Navigator.of(context).pop<bool>(true);
     }
     if (issueActionProvider.errorAccur) {
       snackBar(context, LocaleKeys.processCancell, 'error');
-      Navigator.of(context).pop();
+      Navigator.of(context).pop<bool>(false);
     }
     return SingleChildScrollView(
       child: Container(
@@ -63,14 +63,14 @@ class ChangeCfgScreen extends StatelessWidget {
                 actionIcon: AppIcons.qr,
                 actionFunction: issueActionProvider.scanRfid),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextFieldsInputWithActionAndController(
-                textController: issueActionProvider.spaceCode,
-                labelText: LocaleKeys.spaceCode,
-                actionIcon: AppIcons.qr,
-                actionFunction: issueActionProvider.scanSpace),
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.all(8.0),
+          //   child: TextFieldsInputWithActionAndController(
+          //       textController: issueActionProvider.spaceCode,
+          //       labelText: LocaleKeys.spaceCode,
+          //       actionIcon: AppIcons.qr,
+          //       actionFunction: issueActionProvider.scanSpace),
+          // ),
           _saveOrQuit(context, issueActionProvider)
         ]),
       ),

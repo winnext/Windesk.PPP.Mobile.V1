@@ -6,6 +6,7 @@ import 'package:wm_ppp_4/feature/enums/shared_enums.dart';
 import 'package:wm_ppp_4/feature/models/issue_models/issue_activities_model.dart';
 import 'package:wm_ppp_4/feature/models/issue_models/issue_attachments_model.dart';
 import 'package:wm_ppp_4/feature/models/issue_models/issue_filter_model.dart';
+import 'package:wm_ppp_4/feature/models/issue_models/issue_filter_status_model.dart';
 import 'package:wm_ppp_4/feature/models/issue_models/issue_summary_model.dart';
 import 'package:wm_ppp_4/feature/models/issue_models/issue_summary_time_model.dart';
 
@@ -149,6 +150,10 @@ class IssueProvider extends ChangeNotifier {
     _statusCode = '';
   }
 
+  void clearAssigneName() {
+    _assigne = '';
+  }
+
   String _wingCode = '';
   String get wingCode => _wingCode;
   set setwingCode(String wingCode) {
@@ -158,8 +163,14 @@ class IssueProvider extends ChangeNotifier {
 
   String _assigne = '';
   String get assigne => _assigne;
-  set setassigne(String assigne) {
-    _assigne = assigne;
+  void setassigne() async {
+    String userToken = await SharedManager().getString(SharedEnum.userCode);
+    print('object' + userToken);
+    if (_assigne == '') {
+      _assigne = userToken;
+    } else {
+      _assigne = '';
+    }
     notifyListeners();
   }
 
@@ -198,8 +209,8 @@ class IssueProvider extends ChangeNotifier {
   List<IssueAttachmentsModel> _issueAttachmentList = [];
   List<IssueAttachmentsModel> get issueAttachmentList => _issueAttachmentList;
 
-  List<IssueFilterModel> _issueStatusCodes = [];
-  List<IssueFilterModel> get issueStatusCodes => _issueStatusCodes;
+  List<IssueFilterStatusModel> _issueStatusCodes = [];
+  List<IssueFilterStatusModel> get issueStatusCodes => _issueStatusCodes;
 
   List<String> _issueStatusNames = [];
   List<String> get issueStatusNames => _issueStatusNames;

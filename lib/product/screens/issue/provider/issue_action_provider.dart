@@ -108,25 +108,20 @@ class IssueActionProvider extends ChangeNotifier {
   final _serialNumber = TextEditingController();
 
   TextEditingController get serialNumber => _serialNumber;
-
   set setSerialNumber(String serialNumber) {
     _serialNumber.text = serialNumber;
     notifyListeners();
   }
 
   final _rfidCode = TextEditingController();
-
   TextEditingController get rfidCode => _rfidCode;
-
   set setRfidCode(String rfidCode) {
     _rfidCode.text = rfidCode;
     notifyListeners();
   }
 
   final _spaceCode = TextEditingController();
-
   TextEditingController get spaceCode => _spaceCode;
-
   set setSpaceCode(String spaceCode) {
     _spaceCode.text = spaceCode;
     notifyListeners();
@@ -397,15 +392,21 @@ class IssueActionProvider extends ChangeNotifier {
     setSpaceCode = '';
 
     if (barcodeScanRes != '-1') {
+      String barcode = barcodeScanRes.toString();
       _barcodeScenRes = barcodeScenRes;
+      if (barcode.contains("=")) {
+        List barcodeScenResSplit = barcode.split("=");
+        barcode = barcodeScenResSplit[1].toString();
+        _barcodeScenRes = barcode;
+      }
       if (state == 'entitiy') {
-        setEntityCode = barcodeScanRes;
+        setEntityCode = barcode;
       } else if (state == 'serialNumber') {
-        setSerialNumber = barcodeScanRes;
+        setSerialNumber = barcode;
       } else if (state == 'rfid') {
-        setRfidCode = barcodeScanRes;
+        setRfidCode = barcode;
       } else if (state == 'space') {
-        setSpaceCode = barcodeScanRes;
+        setSpaceCode = barcode;
       }
     }
     notifyListeners();
@@ -508,8 +509,12 @@ class IssueActionProvider extends ChangeNotifier {
     _loading = true;
 
     String userToken = await SharedManager().getString(SharedEnum.deviceId);
+    _barcodeScenRes = serialNumber.text.isNotEmpty ? serialNumber.text : _barcodeScenRes;
+    _barcodeScenRes = entityCode.text.isNotEmpty ? entityCode.text : _barcodeScenRes;
+    _barcodeScenRes = rfidCode.text.isNotEmpty ? rfidCode.text : _barcodeScenRes;
 
     final response = await _issueServiceRepository.changeCfg(userToken, issuecode, barcodeScenRes);
+
     response.fold(
         (l) => {
               isSuccessChangeCfg = true,
