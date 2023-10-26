@@ -91,7 +91,7 @@ class _SpaceSearchListState extends State<SpaceSearchList> {
           //     kanatDatasi[1][kanatDatasi[0].indexOf(dropdownvalueKanat)];
 
           // List<String> sinif = searchProvider.mahalAraSinifArray[0];
-          // List sinifDatasi = searchProvider.mahalAraSinifArray;
+          // List sinifDatasi = searchProvider.mahalAraSinifArray;ƒset
           // String dropdownvalueSinif = searchProvider.mahalAraSinifValue;
           // var secilenDegerSinif =
           //     sinifDatasi[1][sinifDatasi[0].indexOf(dropdownvalueSinif)];

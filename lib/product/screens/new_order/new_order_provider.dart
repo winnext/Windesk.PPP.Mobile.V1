@@ -1,11 +1,20 @@
 // ignore_for_file: non_constant_identifier_names, prefer_is_empty, avoid_print
 
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:wm_ppp_4/feature/components/snackBar/snackbar.dart';
+import 'package:wm_ppp_4/feature/database/shared_manager.dart';
+import 'package:wm_ppp_4/feature/enums/shared_enums.dart';
+import 'package:wm_ppp_4/feature/injection.dart';
 import 'package:wm_ppp_4/feature/route/app_route.gr.dart';
+import 'package:wm_ppp_4/feature/service/global_services.dart/work_order_service/work_order_service_repository.dart';
+import 'package:wm_ppp_4/feature/service/global_services.dart/work_order_service/work_order_service_repository_impl.dart';
 import 'package:wm_ppp_4/product/screens/new_order/new_order_repo.dart';
 
 class NewOrderProvider extends ChangeNotifier {
@@ -38,7 +47,13 @@ class NewOrderProvider extends ChangeNotifier {
     _arayan_num.text = arayan_num;
     notifyListeners();
   }
+//File? _image;
+  //File? get image => _image;
 
+  // void setFile(File file) {
+  //   _image = file;
+  //   notifyListeners();
+  // }
   final List _photos = [];
   List get photos => _photos;
 
@@ -199,6 +214,8 @@ class NewOrderProvider extends ChangeNotifier {
 //////////////////////////////////////////////
 ///////////// WO Create /////////////////////
 ////////////////////////////////////////////
+  ///
+  ///
 
   showAlertDialog(BuildContext context, title, metin, woCode) {
     // set up the buttons
@@ -288,8 +305,39 @@ class NewOrderProvider extends ChangeNotifier {
 
         clear = 1;
         setVarlik = '';
-        showAlertDialog(context, 'İş Emri Başarıyla Oluşturuldu',
-            woCreateSonuc[1]['uyari'], woCreateSonuc[1]['code']);
+
+        if (image != null) {
+          isLoading = true;
+          notifyListeners();
+
+          Uint8List imagebytes = await image!.readAsBytes(); //convert to bytes
+          String base64string =
+              base64.encode(imagebytes); //convert bytes to base64 string
+
+          String userToken =
+              await SharedManager().getString(SharedEnum.deviceId);
+          String userName =
+              await SharedManager().getString(SharedEnum.userName);
+          final response = await _service.addWorkOrderAttachment(userToken,
+              userName, woCreateSonuc[1]['code'], base64string, desc);
+
+          response.fold(
+            (l) => {
+              if (l)
+                {
+                  isSuccess = true,
+                  showAlertDialog(context, 'İş Emri Başarıyla Oluşturuldu',
+                      woCreateSonuc[1]['uyari'], woCreateSonuc[1]['code'])
+                }
+              else
+                {errorAccur = true, snackBar(context, woCreateSonuc[1], 'hata')}
+            },
+            (r) => {
+              errorAccur = true,
+              snackBar(context, woCreateSonuc[1], 'hata')
+            },
+          );
+        }
       }
     } else {
       snackBar(context, 'İş Emri tipi, tanımı ve mahali zorunludur', 'hata');
@@ -347,6 +395,68 @@ class NewOrderProvider extends ChangeNotifier {
     // setState to update our non-existent appearance.
     if (barcodeScanRes != '-1') {
       setMahal = barcodeScanRes;
+    }
+  }
+
+  final WorkOrderServiceRepository _service =
+      Injection.getIt.get<WorkOrderServiceRepositoryImpl>();
+  final ImagePicker picker = ImagePicker();
+
+  File? image;
+  String desc = '';
+  bool isLoading = false;
+  bool isSuccess = false;
+  bool errorAccur = false;
+
+  void addImage(String workOrderCode) async {
+    if (image != null) {
+      isLoading = true;
+      notifyListeners();
+
+      Uint8List imagebytes = await image!.readAsBytes(); //convert to bytes
+      String base64string =
+          base64.encode(imagebytes); //convert bytes to base64 string
+
+      String userToken = await SharedManager().getString(SharedEnum.deviceId);
+      String userName = await SharedManager().getString(SharedEnum.userName);
+      final response = await _service.addWorkOrderAttachment(
+          userToken, userName, workOrderCode, base64string, desc);
+
+      response.fold(
+        (l) => {
+          if (l)
+            {
+              isSuccess = true,
+            }
+          else
+            {
+              errorAccur = true,
+            }
+        },
+        (r) => {
+          errorAccur = true,
+        },
+      );
+    }
+    isLoading = false;
+    notifyListeners();
+
+    Future.delayed(const Duration(seconds: 2), () {
+      isSuccess = false;
+      errorAccur = false;
+    });
+  }
+
+  void setDesc(String val) {
+    desc = val;
+  }
+
+  Future<void> getImageFromCamera() async {
+    final pickedFile = await picker.pickImage(source: ImageSource.camera);
+
+    if (pickedFile != null) {
+      image = File(pickedFile.path);
+      notifyListeners();
     }
   }
 }

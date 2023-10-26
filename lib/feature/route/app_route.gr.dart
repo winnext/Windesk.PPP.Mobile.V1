@@ -192,7 +192,7 @@ abstract class $AppRouter extends _i27.RootStackRouter {
     NewOrderScreen.name: (routeData) {
       return _i27.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i17.NewOrderScreen(),
+        child: const _i17.NewOrderScreen(photos: [], b64s: [],),
       );
     },
     SearchScreen.name: (routeData) {

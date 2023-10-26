@@ -4,18 +4,28 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
+import 'package:wm_ppp_4/feature/components/generic_bottom_sheet/base_bottom_sheet.dart';
+import 'package:wm_ppp_4/feature/components/model_bottom_sheet/add_just_photo_modal_bottom_sheet.dart';
+import 'package:wm_ppp_4/feature/components/model_bottom_sheet/add_photo_modal_bottom_sheet.dart';
+import 'package:wm_ppp_4/feature/components/worker_order_bottom_sheets/image_bottom_sheet.dart';
+import 'package:wm_ppp_4/feature/components/worker_order_bottom_sheets/image_bottom_sheet2.dart';
 import 'package:wm_ppp_4/feature/constants/other/colors.dart';
 import 'package:wm_ppp_4/product/screens/new_order/new_order_provider.dart';
+import 'package:camera/camera.dart';
+import 'package:wm_ppp_4/product/screens/new_order/take_picture_wo.dart';
 
 @RoutePage()
 class NewOrderScreen extends StatefulWidget {
-  const NewOrderScreen({super.key});
-
+  const NewOrderScreen({super.key, required this.photos, required this.b64s});
+  final List photos;
+  final List b64s;
   @override
   State<NewOrderScreen> createState() => _NewOrderScreenState();
 }
 
 class _NewOrderScreenState extends State<NewOrderScreen> {
+  List photoss = [];
+  List b64ss = [];
   @override
   void initState() {
     super.initState();
@@ -27,9 +37,13 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
         create: (context) => NewOrderProvider(),
         child: Consumer<NewOrderProvider>(
             builder: (context, NewOrderProvider woProvider, child) {
+          b64ss = widget.b64s;
+          photoss = widget.photos;
+
           woProvider.woCreateHizmetListeArray.isEmpty
               ? woProvider.woCreateHizmetListesi()
               : null;
+
           // final woProvider =
           //     Provider.of<NewOrderProvider>(context, listen: true);
           // nProvider.clear = 1;
@@ -45,21 +59,21 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
 
           // ignore: no_leading_underscores_for_local_identifiers
           dynamic _showModal(BuildContext context) async {
-            // show the modal dialog and pass some data to it
-            // WidgetsFlutterBinding.ensureInitialized();
+            WidgetsFlutterBinding.ensureInitialized();
 
-            // // Obtain a list of the available cameras on the device.
-            // final cameras = await availableCameras();
+            // Obtain a list of the available cameras on the device.
+            final cameras = await availableCameras();
 
-            // // Get a specific camera from the list of available cameras.
-            // final firstCamera = cameras.first;
-            // final results = await Navigator.of(context).push(new MaterialPageRoute<dynamic>(builder: (BuildContext context) {
-            //   return new TakePictureScreen(
-            //     camera: firstCamera,
-            //     sayfa: 'Yeni İş Emri',
-            //   );
-            // }));
-            // print the data returned by the modal if any
+            // Get a specific camera from the list of available cameras.
+            final firstCamera = cameras.first;
+            // ignore: use_build_context_synchronously
+            await Navigator.of(context).push(
+                MaterialPageRoute<dynamic>(builder: (BuildContext context) {
+              return TakePictureScreen(
+                camera: firstCamera,
+                sayfa: 'Yeni İş Emri',
+              );
+            }));
           }
 
           List<String> hizmet = woProvider.woCreateHizmetListeArray[0];
@@ -302,7 +316,7 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
                             },
                           ),
                         ),
-                        woProvider.photos.isNotEmpty
+                        photoss.isNotEmpty
                             ? Center(
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
@@ -322,6 +336,10 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
                                               onPressed: () {
                                                 woProvider.deletePhotos = 0;
                                                 woProvider.deleteB64 = 0;
+                                                setState(() {
+                                                  b64ss = [];
+                                                  photoss = [];
+                                                });
                                               },
                                               child:
                                                   Icon(size: 5.w, Icons.delete),
@@ -329,7 +347,7 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
                                             SizedBox(
                                               height: 13.h,
                                               child:
-                                                  Image.file(File(photos[0])),
+                                                  Image.file(File(photoss[0])),
                                             )
                                           ],
                                         ),
@@ -356,9 +374,11 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
                                         ),
                                       ),
                                       onPressed: () {
-                                        photos.isNotEmpty
-                                            ? woProvider.clear = 1
-                                            : _showModal(context);
+                                        BaseBottomSheet.show(
+                                            context,
+                                            ImageBottomSheet2(
+                                                workOrderCode: 'WO00001',
+                                                clearContext: context));
                                       },
                                       child: photos.isNotEmpty
                                           ? (const Text('Vazgeç'))

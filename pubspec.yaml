@@ -81,6 +81,7 @@ dependencies:
   flutter_sizer: ^1.0.5
   sizer: ^2.0.15
   device_info_plus: ^9.1.0
+  camera: ^0.10.5+5
 
 dev_dependencies:
   flutter_test:
