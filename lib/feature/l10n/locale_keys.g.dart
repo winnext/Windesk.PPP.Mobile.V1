@@ -68,8 +68,8 @@ abstract class LocaleKeys {
   static const String targetFixedDate = 'Hedef Düzeltme Tarihi';
   static const String responsedDate = 'Yanıtlama Tarihi';
   static const String fixedDate = 'Düzeltme Tarihi';
-  static const String targetFixed = 'Hedef Yanıtlama';
-  static const String targetResponsed = 'Hedef Düzeltme';
+  static const String targetFixed = 'Hedef Düzeltme';
+  static const String targetResponsed = 'Hedef Yanıtlama';
   static const String hys = 'HYS';
   static const String hds = 'HDS';
   static const String assignmentGroup = 'Atama Grubu';

@@ -24,13 +24,14 @@ class CustomIssueListCard extends StatefulWidget {
 }
 
 class _CustomIssueListCardState extends State<CustomIssueListCard> with CustomIssueListCardConstantsMixin, CustomIssueListCardStylesMixin {
-  String dateNow = DateFormat("yyyyMMddhhmmss").format(DateTime.now());
+  String dateNow = DateFormat("yyyyMMddHHmmss").format(DateTime.now());
+  //formatı pm am şeklinde düzeltilmeli
   late final Timer _timer;
 
   void changeTime() {
     if (mounted) {
       setState(() {
-        dateNow = DateFormat("yyyyMMddhhmmss").format(DateTime.now());
+        dateNow = DateFormat("yyyyMMddHHmmss").format(DateTime.now());
       });
     }
   }

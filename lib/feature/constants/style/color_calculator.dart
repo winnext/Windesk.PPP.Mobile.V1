@@ -14,6 +14,7 @@ class CustomColorCalculator {
   }
 
   Color colorCalculatorBackground(String numberone, String numbertwo) {
+
     if (int.parse(numberone) - int.parse(numbertwo) < 0) {
       return APPColors.Main.green;
     } else {

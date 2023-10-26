@@ -35,13 +35,16 @@ class TimeClass {
     final String finalTime;
     final timeZone =
         '${timeInfo.toString().substring(0, 4)}-${timeInfo.toString().substring(4, 6)}-${timeInfo.toString().substring(6, 8)}T${timeInfo.toString().substring(8, 10)}:${timeInfo.toString().substring(10, 12)}:${timeInfo.toString().substring(12, 14)}';
+    print('timeZoneeee' + ' ::: ' + timeZone.toString());
 
     if (timeZone.toString().contains(".")) {
       DateTime dateTime = DateFormat(yMDTHMSFormat).parse(timeZone.toString());
       finalTime = DateFormat(dMYHMSFormat).format(dateTime);
+
     } else {
       DateTime dateTime = DateFormat(yMDTHMSFormat).parse(timeZone.toString());
       finalTime = DateFormat(yMDHMSSF).format(dateTime);
+
     }
     return finalTime;
   }
@@ -51,6 +54,7 @@ class TimeClass {
     date2 = timeRecover2(date2);
     DateTime t2 = DateTime.parse(date2);
     Duration date3 = date1.difference(t2);
+    print('---' + date1.toString() + '---' + t2.toString() + '---' + date3.toString());
     String finalDuration =
         '''${date3.inDays} ${AppStrings.day} ${int.parse(date3.inHours.toString()) % 24} ${AppStrings.hour} ${int.parse(date3.inMinutes.toString()) % 60} ${AppStrings.minute} ${int.parse(date3.inSeconds.toString()) % 60} ${AppStrings.second} ''';
     return finalDuration;
