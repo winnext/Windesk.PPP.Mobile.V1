@@ -11,7 +11,8 @@ class CustomIssueActionButton extends StatefulWidget {
   final String issueCode;
 
   @override
-  State<CustomIssueActionButton> createState() => _CustomIssueActionButtonState();
+  State<CustomIssueActionButton> createState() =>
+      _CustomIssueActionButtonState();
 }
 
 class _CustomIssueActionButtonState extends State<CustomIssueActionButton> {
@@ -19,18 +20,34 @@ class _CustomIssueActionButtonState extends State<CustomIssueActionButton> {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
         create: (context) => IssueProvider(),
-        child: Consumer<IssueProvider>(builder: (context, IssueProvider issueProvider, child) {
+        child: Consumer<IssueProvider>(
+            builder: (context, IssueProvider issueProvider, child) {
           return FloatingActionButton(
             onPressed: () async {
               final result = await showModalBottomSheet(
                 isScrollControlled: true,
                 backgroundColor: Colors.transparent,
                 context: context,
-                builder: (context) => IssueActionModal(issueCode: widget.issueCode),
+                builder: (context) => Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                        child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.red, // Background color
+                            ),
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: Icon(Icons.close))),
+                    IssueActionModal(issueCode: widget.issueCode),
+                  ],
+                ),
               );
               if (result == true) {
                 // ignore: use_build_context_synchronously
-                context.router.popAndPush(IssueDetailScreen(issueCode: widget.issueCode));
+                context.router
+                    .popAndPush(IssueDetailScreen(issueCode: widget.issueCode));
               }
             },
             backgroundColor: APPColors.Modal.red,
