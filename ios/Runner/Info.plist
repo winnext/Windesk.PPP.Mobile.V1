@@ -27,9 +27,13 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppleMusicUsageDescription</key>
-	<string></string>
+	<string>Kamera işlemlerinin yapılabilmesi için izin vermeniz gerekmektedir.</string>
 	<key>NSCameraUsageDescription</key>
-	<string></string>
+	<string>Kamera işlemlerinin yapılabilmesi için izin vermeniz gerekmektedir.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Kamera işlemlerinin yapılabilmesi için izin vermeniz gerekmektedir.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Kamera işlemlerinin yapılabilmesi için izin vermeniz gerekmektedir.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UIBackgroundModes</key>
