@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wm_ppp_4/product/screens/new_order/new_order_provider.dart';
 import '../snackBar/snackbar.dart';
-import '../../../product/screens/work_order/work_order_detail/provider/work_order_detail_accordion_provider.dart';
-
-import '../../../product/screens/work_order/work_order_detail/provider/work_order_image_sheet_provider.dart';
 import '../../constants/other/app_icons.dart';
 import '../../constants/other/app_strings.dart';
 import '../../constants/other/colors.dart';

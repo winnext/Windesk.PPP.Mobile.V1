@@ -144,7 +144,7 @@ class DetailListWidget extends StatelessWidget {
                                 )
                               : respondedTimer == LocaleKeys.oneStr
                                   ? timeBarWidget(LocaleKeys.targetResponsedDate, targetRDate, respondedTimer, respondedDate, targetRDate)
-                                  : timeBarWidget(LocaleKeys.targetResponsed, respondedDate, respondedTimer, fixedDate, targetFDate)
+                                  : timeBarWidget(LocaleKeys.targetResponsed, respondedDate, respondedTimer, respondedDate, targetRDate)
                         ],
                       ),
                       Column(children: [

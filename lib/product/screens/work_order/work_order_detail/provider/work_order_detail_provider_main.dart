@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:wm_ppp_4/feature/database/shared_manager.dart';
 import 'package:wm_ppp_4/feature/enums/shared_enums.dart';
 import 'package:wm_ppp_4/feature/injection.dart';
+import 'package:wm_ppp_4/feature/models/issue_models/issue_summary_time_model.dart';
 import 'package:wm_ppp_4/feature/models/work_order_models/work_order_change_state_model.dart';
 import 'package:wm_ppp_4/feature/models/work_order_models/work_order_details_model.dart';
 import 'package:wm_ppp_4/feature/service/global_services.dart/work_order_service/work_order_service_repository_impl.dart';
@@ -14,6 +15,14 @@ class WorkOrderDetailMainProvider extends ChangeNotifier {
   bool isStartEnable = false;
   bool isEndEnable = false;
   bool changedWorkOrderStatus = false;
+  
+  bool _loading = false;
+  bool get loading => _loading;
+  bool _isFetchSummary = true;
+  bool get isFetchSummary => _isFetchSummary;
+  
+  IssueSummaryTimeModel _issueSummaryTimeInfo = const IssueSummaryTimeModel();
+  IssueSummaryTimeModel get issueSummaryTimeInfo => _issueSummaryTimeInfo;
 
   WorkOrderDetailsModel workOrderDetailsModel = const WorkOrderDetailsModel();
   WorkOrderChangeStateModel changeStateModel = const WorkOrderChangeStateModel();
@@ -74,6 +83,24 @@ class WorkOrderDetailMainProvider extends ChangeNotifier {
     if (changedWorkOrderStatus) {
       getWorkOrderWithoutPermission(workOrderCode);
     }
+  }
+
+  void getIssueTimeInfo(String issuecode) async {
+    String userCode = await SharedManager().getString(SharedEnum.userCode);
+
+    _isFetchSummary = false;
+    _loading = true;
+    notifyListeners();
+    final response = await _service.getIssueTimeInfo(issuecode,userCode);
+    response.fold(
+        (l) => {
+              _issueSummaryTimeInfo = l,
+              _loading = false,
+
+            },
+        (r) => {
+            });
+    notifyListeners();
   }
 
   void _setStartEndActivity() {

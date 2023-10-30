@@ -5,14 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:wm_ppp_4/feature/components/generic_bottom_sheet/base_bottom_sheet.dart';
-import 'package:wm_ppp_4/feature/components/model_bottom_sheet/add_just_photo_modal_bottom_sheet.dart';
-import 'package:wm_ppp_4/feature/components/model_bottom_sheet/add_photo_modal_bottom_sheet.dart';
-import 'package:wm_ppp_4/feature/components/worker_order_bottom_sheets/image_bottom_sheet.dart';
 import 'package:wm_ppp_4/feature/components/worker_order_bottom_sheets/image_bottom_sheet2.dart';
 import 'package:wm_ppp_4/feature/constants/other/colors.dart';
 import 'package:wm_ppp_4/product/screens/new_order/new_order_provider.dart';
-import 'package:camera/camera.dart';
-import 'package:wm_ppp_4/product/screens/new_order/take_picture_wo.dart';
 
 @RoutePage()
 class NewOrderScreen extends StatefulWidget {
@@ -62,18 +57,18 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
             WidgetsFlutterBinding.ensureInitialized();
 
             // Obtain a list of the available cameras on the device.
-            final cameras = await availableCameras();
+            //final cameras = await availableCameras();
 
             // Get a specific camera from the list of available cameras.
-            final firstCamera = cameras.first;
+            //final firstCamera = cameras.first;
             // ignore: use_build_context_synchronously
-            await Navigator.of(context).push(
-                MaterialPageRoute<dynamic>(builder: (BuildContext context) {
-              return TakePictureScreen(
-                camera: firstCamera,
-                sayfa: 'Yeni İş Emri',
-              );
-            }));
+            // await Navigator.of(context).push(
+            //     MaterialPageRoute<dynamic>(builder: (BuildContext context) {
+            //   return TakePictureScreen(
+            //     camera: firstCamera,
+            //     sayfa: 'Yeni İş Emri',
+            //   );
+            // }));
           }
 
           List<String> hizmet = woProvider.woCreateHizmetListeArray[0];

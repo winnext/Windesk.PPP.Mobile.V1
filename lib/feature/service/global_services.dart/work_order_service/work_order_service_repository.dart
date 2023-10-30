@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:wm_ppp_4/feature/enums/building_type_enums.dart';
+import 'package:wm_ppp_4/feature/models/issue_models/issue_summary_time_model.dart';
 import '../../../models/work_order_models/work_order_buildings_and_floors_model.dart';
 import '../../../models/work_order_models/work_order_change_state_model.dart';
 import '../../../models/work_order_models/work_order_list_model.dart';
@@ -105,4 +106,7 @@ abstract class WorkOrderServiceRepository {
   );
 
   Future<Either<bool, CustomServiceException>> getWorkOrderDetailsByCode(String userToken, String workOrderCode, String userName);
+  
+  Future<Either<IssueSummaryTimeModel, CustomServiceException>> getIssueTimeInfo(String issueCode, String userCode);
+
 }

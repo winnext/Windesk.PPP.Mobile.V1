@@ -9,7 +9,7 @@ import 'colors.dart';
 class TimeClass {
   final String yMDTHMSFormat = 'yyyy-MM-ddTHH:mm:ss';
   final String dMYHMSFormat = 'dd/MM/yyyy HH:mm:ss';
-  final String yMDHSFormat = 'yyyyMMddhhmmss';
+  final String yMDHSFormat = 'yyyyMMddHHmmss';
   final String yMDHMSSF = 'yyyy-MM-dd hh:mm:ss.SSSSSS';
 
   String timeRecover(timeInfo) {
@@ -35,16 +35,13 @@ class TimeClass {
     final String finalTime;
     final timeZone =
         '${timeInfo.toString().substring(0, 4)}-${timeInfo.toString().substring(4, 6)}-${timeInfo.toString().substring(6, 8)}T${timeInfo.toString().substring(8, 10)}:${timeInfo.toString().substring(10, 12)}:${timeInfo.toString().substring(12, 14)}';
-    print('timeZoneeee' + ' ::: ' + timeZone.toString());
 
     if (timeZone.toString().contains(".")) {
       DateTime dateTime = DateFormat(yMDTHMSFormat).parse(timeZone.toString());
       finalTime = DateFormat(dMYHMSFormat).format(dateTime);
-
     } else {
       DateTime dateTime = DateFormat(yMDTHMSFormat).parse(timeZone.toString());
-      finalTime = DateFormat(yMDHMSSF).format(dateTime);
-
+      finalTime = dateTime.toString();
     }
     return finalTime;
   }
@@ -53,9 +50,11 @@ class TimeClass {
     final date1 = DateTime.now();
     date2 = timeRecover2(date2);
     DateTime t2 = DateTime.parse(date2);
-    Duration date3 = date1.difference(t2);
-    print('---' + date1.toString() + '---' + t2.toString() + '---' + date3.toString());
-    //zaman dönüşümü hatası
+    String dateNow = DateFormat(yMDHSFormat).format(date1);
+    String dateNow2 = DateFormat(yMDHSFormat).format(t2);
+    bool isPassDate = int.parse(dateNow.toString()) - int.parse(dateNow2.toString()) > 0 ? true : false;
+    print(int.parse(dateNow.toString()) - int.parse(dateNow2.toString()) > 0);
+    Duration date3 = isPassDate ? date1.difference(t2) : t2.difference(date1);
     String finalDuration =
         '''${date3.inDays} ${AppStrings.day} ${int.parse(date3.inHours.toString()) % 24} ${AppStrings.hour} ${int.parse(date3.inMinutes.toString()) % 60} ${AppStrings.minute} ${int.parse(date3.inSeconds.toString()) % 60} ${AppStrings.second} ''';
     return finalDuration;
@@ -65,7 +64,7 @@ class TimeClass {
     String dateNow = DateFormat(yMDHSFormat).format(DateTime.now());
     final TextStyle conditionOfTextStyle;
     if (timer == "0") {
-      conditionOfTextStyle = int.parse(fixedDate.toString()) - int.parse(targetDate.toString()) < 0
+      conditionOfTextStyle = int.parse(targetDate.toString()) - int.parse(fixedDate.toString()) > 0
           ? TextStyle(
               color: APPColors.Main.white, backgroundColor: APPColors.Main.green, fontSize: FontSizes.caption - 1, fontWeight: FontWeight.bold)
           : TextStyle(color: APPColors.Main.white, backgroundColor: APPColors.Main.red, fontSize: FontSizes.caption - 1, fontWeight: FontWeight.bold);

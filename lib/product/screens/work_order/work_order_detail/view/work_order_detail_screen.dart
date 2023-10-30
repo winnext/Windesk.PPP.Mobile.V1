@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 import 'package:wm_ppp_4/feature/components/snackBar/snackbar.dart';
+import 'package:wm_ppp_4/feature/constants/other/time_functions.dart';
+import 'package:wm_ppp_4/feature/l10n/locale_keys_gsh.g.dart';
 import '../widgets/accordions/documants_accordion.dart';
 import '../widgets/accordions/materials_accordion.dart';
 import '../widgets/accordions/person_accordion.dart';
@@ -41,6 +43,7 @@ class WorkOrderDetailScreen extends StatelessWidget {
               if (value.changedWorkOrderStatus) {
                 snackBar(context, value.changeStateModel.message != null ? value.changeStateModel.message! : AppStrings.stateChanged, 'success');
               }
+              workorderCode[0] == 'M' ? (value.isFetchSummary ? value.getIssueTimeInfo(value.workOrderDetailsModel.modulecode) : null) : null;
             });
             return value.initState ? _initBody(value) : _successBody(context, value, workorderCode);
           },
@@ -58,6 +61,7 @@ class WorkOrderDetailScreen extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
+            workorderCode[0] == 'M' ? _timeBar(value) : Container(),
             CustomWorkOrderDetailCard(data: value.workOrderDetailsModel),
             const SizedBox(height: 16),
             WorkOrderDetailButtons(value: value, workOrderCode: workorderCode, clearContext: context),
@@ -76,6 +80,16 @@ class WorkOrderDetailScreen extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  Padding _timeBar(WorkOrderDetailMainProvider value) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [_responseWidget(value), _fixWidget(value)],
+            ),
     );
   }
 
@@ -106,4 +120,60 @@ class WorkOrderDetailScreen extends StatelessWidget {
       content: content,
     );
   }
+
+
+  Column _responseWidget(WorkOrderDetailMainProvider woDetailProvider) {
+    return Column(
+      children: [
+        woDetailProvider.issueSummaryTimeInfo.planneddate == LocaleKeys.oPlanned
+            ? Container(
+                decoration: BoxDecoration(color: APPColors.NewNotifi.blue, borderRadius: BorderRadius.circular(3)),
+                padding: const EdgeInsets.all(3),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    const Text(LocaleKeys.plannedIssue),
+                    Text(woDetailProvider.issueSummaryTimeInfo.planneddate),
+                  ],
+                ),
+              )
+            : woDetailProvider.issueSummaryTimeInfo.respondedTimer == LocaleKeys.oneStr
+                ? upTimeBar(woDetailProvider, LocaleKeys.targetResponsedDate, woDetailProvider.issueSummaryTimeInfo.respondedTimer.toString(),
+                    woDetailProvider.issueSummaryTimeInfo.targetRdate.toString(), woDetailProvider.issueSummaryTimeInfo.respondedDate.toString())
+                : upTimeBar(woDetailProvider, LocaleKeys.responsedDate, woDetailProvider.issueSummaryTimeInfo.respondedTimer.toString(),
+                    woDetailProvider.issueSummaryTimeInfo.respondedDate.toString(), woDetailProvider.issueSummaryTimeInfo.respondedDate.toString())
+      ],
+    );
+  }
+
+  Column _fixWidget(WorkOrderDetailMainProvider woDetailProvider) {
+    return Column(children: [
+      woDetailProvider.issueSummaryTimeInfo.fixTimer == LocaleKeys.oneStr
+          ? upTimeBar(woDetailProvider, LocaleKeys.targetFixedDate, woDetailProvider.issueSummaryTimeInfo.fixTimer.toString(),
+              woDetailProvider.issueSummaryTimeInfo.targetFdate.toString(), woDetailProvider.issueSummaryTimeInfo.fixedDate.toString())
+          : upTimeBar(woDetailProvider, LocaleKeys.fixedDate, woDetailProvider.issueSummaryTimeInfo.fixTimer.toString(),
+              woDetailProvider.issueSummaryTimeInfo.fixedDate.toString(), woDetailProvider.issueSummaryTimeInfo.fixedDate.toString())
+    ]);
+  }
+
+  Container upTimeBar(WorkOrderDetailMainProvider woDetailProvider, String title, String respondedTimer, String targetDate, String fixedDate, ) {
+    return Container(
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(3)),
+      padding: const EdgeInsets.all(3),
+      margin: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Text(title),
+          targetDate == ''
+              ? const Text('')
+              : Text(
+                  TimeClass().timeRecover(targetDate),
+                  style: TimeClass().fixStyle(respondedTimer, targetDate, fixedDate),
+                ),
+        ],
+      ),
+    );
+  }
+
 }

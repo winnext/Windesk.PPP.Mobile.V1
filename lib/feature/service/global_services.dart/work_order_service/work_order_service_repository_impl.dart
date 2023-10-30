@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:wm_ppp_4/feature/enums/building_type_enums.dart';
+import 'package:wm_ppp_4/feature/models/issue_models/issue_summary_time_model.dart';
 import 'package:wm_ppp_4/feature/models/work_order_models/work_order_buildings_and_floors_model.dart';
 import 'package:wm_ppp_4/feature/models/work_order_models/work_order_change_state_model.dart';
 import 'package:wm_ppp_4/feature/models/work_order_models/work_order_status_model.dart';
@@ -193,8 +194,6 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
       getWorkOrderDetails(String userCode, String workOrderCode) async {
     WorkOrderDetailsModel workOrderDeatails;
     String url = '${ServiceTools.baseUrlV2}/workorder/detail/$workOrderCode';
-    print(url);
-    print(ServiceTools.tokenV2);
     try {
       final response = await super.dio.get(url,
           options: Options(
@@ -857,6 +856,23 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
       return Right(CustomServiceException(
           message: CustomServiceMessages.workOrderAddPersonalError,
           statusCode: '500'));
+    }
+  }
+
+  @override
+  Future<Either<IssueSummaryTimeModel, CustomServiceException>> getIssueTimeInfo(String issueCode, String userCode) async {
+    String url = '${ServiceTools.baseUrlV2}/issue/$issueCode/summary';
+
+    try {
+      final response = await dio.get(url, options: Options(headers: {"xusercode": userCode, "xtoken": ServiceTools.tokenV2}));
+      final data = response.data[ServiceResponseStatusEnums.detail.rawText];
+
+      IssueSummaryTimeModel issueSummaryTimeInfo = IssueSummaryTimeModel.fromJson(data);
+      super.logger.i(issueSummaryTimeInfo);
+      return Left(issueSummaryTimeInfo);
+    } catch (error) {
+      super.logger.e(error.toString());
+      return Right(CustomServiceException(message: CustomServiceMessages.loginError, statusCode: '400'));
     }
   }
 }
