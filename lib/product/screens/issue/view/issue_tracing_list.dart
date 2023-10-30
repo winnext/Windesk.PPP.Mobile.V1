@@ -22,11 +22,15 @@ class _IssueTracingListState extends State<IssueTracingList> {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
         create: (context) => IssueProvider(),
-        child: Consumer<IssueProvider>(builder: (context, IssueProvider issueProvider, child) {
+        child: Consumer<IssueProvider>(
+            builder: (context, IssueProvider issueProvider, child) {
           issueProvider.isFetch ? null : issueProvider.getIssueTracingList();
           return Scaffold(
               appBar: const CustomMainAppbar(
-                title: Text(LocaleKeys.vakalist),
+                title: Text(
+                  LocaleKeys.vakalist,
+                  style: TextStyle(color: Colors.black),
+                ),
                 returnBack: true,
               ),
               body: issueProvider.loading
@@ -38,7 +42,8 @@ class _IssueTracingListState extends State<IssueTracingList> {
                           child: ListView.builder(
                               itemCount: issueProvider.tracingList.length,
                               itemBuilder: (BuildContext context, int index) {
-                                IssueTracingListModel tracingListElement = issueProvider.tracingList[index];
+                                IssueTracingListModel tracingListElement =
+                                    issueProvider.tracingList[index];
                                 return CustomTracingList(
                                   title: tracingListElement.name.toString(),
                                   count: tracingListElement.count.toString(),

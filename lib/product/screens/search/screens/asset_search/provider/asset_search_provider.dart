@@ -97,7 +97,7 @@ class AssetSearchProvider extends ChangeNotifier {
     try {
       barcodeScanRes = await FlutterBarcodeScanner.scanBarcode('#ff6666', 'İptal', true, ScanMode.BARCODE);
     } on PlatformException {
-      barcodeScanRes = 'Failed to get platform version.';
+      barcodeScanRes = 'Failed to get platform version.'; 
     }
     if (barcodeScanRes != '-1') {
       if (state == 'entitiy') {

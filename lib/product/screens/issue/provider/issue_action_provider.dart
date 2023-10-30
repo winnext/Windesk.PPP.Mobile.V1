@@ -54,7 +54,7 @@ class IssueActionProvider extends ChangeNotifier {
   bool _errorAccur = false;
   bool get errorAccur => _errorAccur;
 
-  String _selectedActivityName = '';
+  String _selectedActivityName = 'Seçiniz';
   String get selectedActivityName => _selectedActivityName;
 
   String _additionaltimeInput = '';
@@ -376,6 +376,7 @@ class IssueActionProvider extends ChangeNotifier {
 
     _availableActivitiesName.clear();
     _availableActivities.clear();
+    _availableActivitiesName.insert(0, 'Seçiniz');
     response.fold(
         (l) => {
               _availableActivities.addAll(l),
@@ -530,11 +531,15 @@ class IssueActionProvider extends ChangeNotifier {
     _loading = true;
 
     String userToken = await SharedManager().getString(SharedEnum.deviceId);
-    _barcodeScenRes = serialNumber.text.isNotEmpty ? serialNumber.text : _barcodeScenRes;
-    _barcodeScenRes = entityCode.text.isNotEmpty ? entityCode.text : _barcodeScenRes;
-    _barcodeScenRes = rfidCode.text.isNotEmpty ? rfidCode.text : _barcodeScenRes;
+    _barcodeScenRes =
+        serialNumber.text.isNotEmpty ? serialNumber.text : _barcodeScenRes;
+    _barcodeScenRes =
+        entityCode.text.isNotEmpty ? entityCode.text : _barcodeScenRes;
+    _barcodeScenRes =
+        rfidCode.text.isNotEmpty ? rfidCode.text : _barcodeScenRes;
 
-    final response = await _issueServiceRepository.changeCfg(userToken, issuecode, barcodeScenRes);
+    final response = await _issueServiceRepository.changeCfg(
+        userToken, issuecode, barcodeScenRes);
 
     response.fold(
         (l) => {
