@@ -160,6 +160,7 @@ class _SpaceSearchListState extends State<SpaceSearchList> {
                               padding: const EdgeInsets.all(12.0),
                               child: SingleChildScrollView(
                                 child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     for (int i = 0; i < codes.length; i++)
                                       Center(
