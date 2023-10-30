@@ -53,7 +53,6 @@ class TimeClass {
     String dateNow = DateFormat(yMDHSFormat).format(date1);
     String dateNow2 = DateFormat(yMDHSFormat).format(t2);
     bool isPassDate = int.parse(dateNow.toString()) - int.parse(dateNow2.toString()) > 0 ? true : false;
-    print(int.parse(dateNow.toString()) - int.parse(dateNow2.toString()) > 0);
     Duration date3 = isPassDate ? date1.difference(t2) : t2.difference(date1);
     String finalDuration =
         '''${date3.inDays} ${AppStrings.day} ${int.parse(date3.inHours.toString()) % 24} ${AppStrings.hour} ${int.parse(date3.inMinutes.toString()) % 60} ${AppStrings.minute} ${int.parse(date3.inSeconds.toString()) % 60} ${AppStrings.second} ''';

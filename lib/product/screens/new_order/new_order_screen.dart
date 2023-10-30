@@ -11,9 +11,9 @@ import 'package:wm_ppp_4/product/screens/new_order/new_order_provider.dart';
 
 @RoutePage()
 class NewOrderScreen extends StatefulWidget {
-  const NewOrderScreen({super.key, required this.photos, required this.b64s});
-  final List photos;
-  final List b64s;
+  const NewOrderScreen({super.key, this.photos,  this.b64s});
+  final List? photos;
+  final List? b64s;
   @override
   State<NewOrderScreen> createState() => _NewOrderScreenState();
 }
@@ -32,8 +32,8 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
         create: (context) => NewOrderProvider(),
         child: Consumer<NewOrderProvider>(
             builder: (context, NewOrderProvider woProvider, child) {
-          b64ss = widget.b64s;
-          photoss = widget.photos;
+          b64ss = widget.b64s ?? [''];
+          photoss = widget.photos ?? [''];
 
           woProvider.woCreateHizmetListeArray.isEmpty
               ? woProvider.woCreateHizmetListesi()

@@ -7,6 +7,8 @@ import 'package:wm_ppp_4/feature/components/input_fields/text_fields_input.dart'
 import 'package:wm_ppp_4/feature/components/input_fields/text_fields_input_with_action_and_controller.dart';
 import 'package:wm_ppp_4/feature/components/model_bottom_sheet/add_just_photo_modal_bottom_sheet.dart';
 import 'package:wm_ppp_4/feature/components/snackBar/snackbar.dart';
+import 'package:wm_ppp_4/feature/components/worker_order_bottom_sheets/choose_add_photo_sheet.dart';
+import 'package:wm_ppp_4/feature/components/worker_order_bottom_sheets/image_bottom_sheet_issue_activity.dart';
 import 'package:wm_ppp_4/feature/constants/functions/null_check_widget.dart';
 import 'package:wm_ppp_4/feature/constants/other/app_icons.dart';
 import 'package:wm_ppp_4/feature/constants/other/app_strings.dart';
@@ -119,7 +121,7 @@ class AddActivity extends StatelessWidget {
                             },
                           ),
                         ),
-                    NullCheckWidget().conditionCheckWidget(issueActionProvider.mobilePhoto, _addActivityPhoto(context, issueActionProvider)),
+                    NullCheckWidget().conditionCheckWidget(issueActionProvider.mobilePhoto, ImageBottomSheetIssueActivity(issueCode:issueCode, clearContext: context,)),
                     _saveOrQuit(context, issueActionProvider, issueProvider)
                   ],
                 ),
@@ -158,7 +160,7 @@ class AddActivity extends StatelessWidget {
             Navigator.pop(context);
           },
           rightOnPressed: () async {
-            issueActionProvider.saveIssueActivity(issueCode, issueProvider);
+            issueActionProvider.saveIssueActivity(issueCode);
           }),
     );
   }

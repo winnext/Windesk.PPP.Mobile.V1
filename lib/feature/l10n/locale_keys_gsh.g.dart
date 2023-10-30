@@ -97,6 +97,7 @@ abstract class LocaleKeys {
   static const String photoAddedError = "Fotoğraf Ekleme Başarısız";
   static const String sureAboutTakeOverIssue = "Bu vakayı üzerinize almak istediğinizden emin misiniz?";
   static const String okay = "Tamam";
+  static const String cancel = "İptal";
   static const String processDone = "İşlem başarılı şekilde gerçekleşti";
   static const String processCancell = "İşlem gerçekleştirilirken bir hata oluştu.";
   static const String state = "Durum";

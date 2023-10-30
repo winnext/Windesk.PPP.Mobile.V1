@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:wm_ppp_4/feature/components/snackBar/snackbar.dart';
 import 'package:wm_ppp_4/feature/database/shared_manager.dart';
 import 'package:wm_ppp_4/feature/enums/shared_enums.dart';
@@ -17,6 +18,7 @@ import 'package:wm_ppp_4/product/screens/issue/service/issue_service_repo_impl.d
 
 class IssueActionProvider extends ChangeNotifier {
   final IssueServiceRepoImpml _issueServiceRepository = IssueServiceRepoImpml();
+  final ImagePicker picker = ImagePicker();
 
   bool _isFetch = false;
   bool get isFetch => _isFetch;
@@ -62,6 +64,11 @@ class IssueActionProvider extends ChangeNotifier {
 
   String _description = '';
   String get description => _description;
+  void setDescription(String description) {
+    _description = description;
+    notifyListeners();
+  }
+
 
   String _selectedAsgGroupName = '';
   String get selectedAsgGroupName => _selectedAsgGroupName;
@@ -481,7 +488,7 @@ class IssueActionProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void saveIssueActivity(String issuecode, IssueProvider issueProvider) async {
+  void saveIssueActivity(String issuecode) async {
     _loading = true;
 
     String userToken = await SharedManager().getString(SharedEnum.deviceId);
@@ -553,7 +560,24 @@ class IssueActionProvider extends ChangeNotifier {
       notifyListeners();
     });
   }
+  
+  Future<void> getImageFromCamera() async {
+    final pickedFile = await picker.pickImage(source: ImageSource.camera);
 
+    if (pickedFile != null) {
+      _image = File(pickedFile.path);
+      notifyListeners();
+    }
+  }
+
+  Future<void> getImageFromGalery() async {
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      _image = File(pickedFile.path);
+      notifyListeners();
+    }
+  }
+  
   void clearAll() {
     getLiveSelectAsgGroupsName.clear();
     getLiveSelectAsgGroups.clear();

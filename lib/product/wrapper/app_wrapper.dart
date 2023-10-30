@@ -14,9 +14,10 @@ class AppWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AutoTabsRouter.pageView(
-      routes: const [
+      routes: [
         HomeScreen(),
-        ServiceTools.isWorkOrderExist ? NewOrderScreen() : IssueSearchRoute(),
+        NewOrderScreen(),
+        //ServiceTools.isWorkOrderExist ? NewOrderScreen() : IssueSearchRoute(),
         SearchScreen(),
         TestScreen(),
       ],

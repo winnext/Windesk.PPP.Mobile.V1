@@ -190,9 +190,15 @@ abstract class $AppRouter extends _i27.RootStackRouter {
       );
     },
     NewOrderScreen.name: (routeData) {
+      final args = routeData.argsAs<NewOrderScreenArgs>(
+          orElse: () => const NewOrderScreenArgs());
       return _i27.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i17.NewOrderScreen(photos: [], b64s: [],),
+        child: _i17.NewOrderScreen(
+          key: args.key,
+          photos: args.photos,
+          b64s: args.b64s,
+        ),
       );
     },
     SearchScreen.name: (routeData) {
@@ -672,16 +678,45 @@ class LoginScreen extends _i27.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i17.NewOrderScreen]
-class NewOrderScreen extends _i27.PageRouteInfo<void> {
-  const NewOrderScreen({List<_i27.PageRouteInfo>? children})
-      : super(
+class NewOrderScreen extends _i27.PageRouteInfo<NewOrderScreenArgs> {
+  NewOrderScreen({
+    _i28.Key? key,
+    List<dynamic>? photos,
+    List<dynamic>? b64s,
+    List<_i27.PageRouteInfo>? children,
+  }) : super(
           NewOrderScreen.name,
+          args: NewOrderScreenArgs(
+            key: key,
+            photos: photos,
+            b64s: b64s,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'NewOrderScreen';
 
-  static const _i27.PageInfo<void> page = _i27.PageInfo<void>(name);
+  static const _i27.PageInfo<NewOrderScreenArgs> page =
+      _i27.PageInfo<NewOrderScreenArgs>(name);
+}
+
+class NewOrderScreenArgs {
+  const NewOrderScreenArgs({
+    this.key,
+    this.photos,
+    this.b64s,
+  });
+
+  final _i28.Key? key;
+
+  final List<dynamic>? photos;
+
+  final List<dynamic>? b64s;
+
+  @override
+  String toString() {
+    return 'NewOrderScreenArgs{key: $key, photos: $photos, b64s: $b64s}';
+  }
 }
 
 /// generated route for
