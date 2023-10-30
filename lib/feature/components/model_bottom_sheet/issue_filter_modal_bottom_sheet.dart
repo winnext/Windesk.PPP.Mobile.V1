@@ -42,12 +42,14 @@ class IssueFilterModalBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    IssueFilterModalBottomSheetProvider provider = Provider.of<IssueFilterModalBottomSheetProvider>(context, listen: true);
+    IssueFilterModalBottomSheetProvider provider =
+        Provider.of<IssueFilterModalBottomSheetProvider>(context, listen: true);
 
     return _bodyWidget(context, provider);
   }
 
-  _bodyWidget(BuildContext context, IssueFilterModalBottomSheetProvider provider) {
+  _bodyWidget(
+      BuildContext context, IssueFilterModalBottomSheetProvider provider) {
     return Container(
       color: Colors.white,
       height: MediaQuery.of(context).size.height,
@@ -69,7 +71,8 @@ class IssueFilterModalBottomSheet extends StatelessWidget {
               selectWingFunction,
               taskForMeFunction,
             ),
-            _selectedParamS(provider, selectedParamList, selectedParamListDeleteItem),
+            _selectedParamS(
+                provider, selectedParamList, selectedParamListDeleteItem),
             _buttons(context, filterStartFunction),
           ],
         ),
@@ -99,7 +102,9 @@ class IssueFilterModalBottomSheet extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(10.0),
               child: CustomCircularWithTextButton(
-                bgColor: provider.assigneName == '' ? APPColors.Login.blue : APPColors.Secondary.grey,
+                bgColor: provider.assigneName == ''
+                    ? APPColors.Login.blue
+                    : APPColors.Secondary.grey,
                 onPressFunction: () {
                   taskForMeFunction();
                   provider.setAssigneStatus();
@@ -158,7 +163,8 @@ class IssueFilterModalBottomSheet extends StatelessWidget {
     );
   }
 
-  Expanded _selectedParamS(IssueFilterModalBottomSheetProvider provider, selectedParamList, selectedParamListDeleteItem) {
+  Expanded _selectedParamS(IssueFilterModalBottomSheetProvider provider,
+      selectedParamList, selectedParamListDeleteItem) {
     return Expanded(
       flex: 1,
       child: SingleChildScrollView(
@@ -167,7 +173,7 @@ class IssueFilterModalBottomSheet extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             for (var i in provider.tempChoosenFilterList)
-              i == ''
+              i == '' || i == 'Seçiniz'
                   ? Container()
                   : Row(
                       children: [
@@ -211,6 +217,7 @@ class IssueFilterModalBottomSheet extends StatelessWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Function>('saveEffort', filterStartFunction));
+    properties
+        .add(DiagnosticsProperty<Function>('saveEffort', filterStartFunction));
   }
 }
