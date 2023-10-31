@@ -52,7 +52,11 @@ class CustomServiceMessages {
   // issue page
   static const String takeOverIssue = 'Error while take over ıssue';
   static const String changeCfg = 'İlgili koda karşılık alan bulunamadı';
-  
+
+  //issueActivity
+  static const String activityCodeCannotEmpty = 'Aktivite kodu boş olamaz.';
+  static const String activityDocumentCannotEmptyError ='DOCUMENT_MUST_BE_ADDED';
+  static const String activityDocumentCannotEmptyErrorMessage ='Fotoğraf alanı boş bırakılamaz. Fotoğraf eklenmelidir.';
 
 
 }

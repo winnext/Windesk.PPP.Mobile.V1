@@ -347,6 +347,12 @@ class IssueServiceRepoImpml extends IssueServiceRepository {
         super.logger.i(result.toString());
         return Left(result);
       } else {
+        if (response.data[ServiceResponseStatusEnums.resultCode.rawText] == '-129') {
+          return Right(CustomServiceException(message: CustomServiceMessages.activityCodeCannotEmpty, statusCode: response.statusCode.toString()));
+        }
+        if (response.data[ServiceResponseStatusEnums.info.rawText] == CustomServiceMessages.activityDocumentCannotEmptyError) {
+          return Right(CustomServiceException(message: CustomServiceMessages.activityDocumentCannotEmptyErrorMessage, statusCode: response.statusCode.toString()));
+        }
         return Right(CustomServiceException(message: CustomServiceMessages.workOrderAddImageError, statusCode: response.statusCode.toString()));
       }
     } catch (error) {

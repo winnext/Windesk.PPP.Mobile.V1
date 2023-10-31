@@ -33,7 +33,8 @@ class _DropDownInputFieldsState extends State<DropDownInputFields> {
       decoration: InputDecoration(
           contentPadding: const EdgeInsets.all(10),
           border: OutlineInputBorder(
-              borderRadius: CustomBorderRadius.textFieldBorderRadius, borderSide: BorderSide(color: APPColors.Main.black, width: 4)),
+              borderRadius: CustomBorderRadius.textFieldBorderRadius,
+              borderSide: BorderSide(color: APPColors.Main.black, width: 4)),
           labelText: widget.labelText,
           hintText: widget.hintText ?? ''),
       icon: Icon(widget.rightIcon),

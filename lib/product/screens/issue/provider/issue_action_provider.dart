@@ -56,7 +56,7 @@ class IssueActionProvider extends ChangeNotifier {
   bool _errorAccur = false;
   bool get errorAccur => _errorAccur;
 
-  String _selectedActivityName = '';
+  String _selectedActivityName = 'Seçiniz';
   String get selectedActivityName => _selectedActivityName;
 
   String _additionaltimeInput = '';
@@ -68,7 +68,6 @@ class IssueActionProvider extends ChangeNotifier {
     _description = description;
     notifyListeners();
   }
-
 
   String _selectedAsgGroupName = '';
   String get selectedAsgGroupName => _selectedAsgGroupName;
@@ -138,22 +137,19 @@ class IssueActionProvider extends ChangeNotifier {
   IssueOperationList get issueOperationList => _issueOperationList;
 
   final List<IssueAvailableActivities> _availableActivities = [];
-  List<IssueAvailableActivities> get availableActivities =>
-      _availableActivities;
+  List<IssueAvailableActivities> get availableActivities => _availableActivities;
 
   final List<String> _availableActivitiesName = [];
   List<String> get availableActivitiesName => _availableActivitiesName;
 
   final List<LiveSelectAsgGroupsModel> _getLiveSelectAsgGroups = [];
-  List<LiveSelectAsgGroupsModel> get getLiveSelectAsgGroups =>
-      _getLiveSelectAsgGroups;
+  List<LiveSelectAsgGroupsModel> get getLiveSelectAsgGroups => _getLiveSelectAsgGroups;
 
   final List<String> _getLiveSelectAsgGroupsName = [];
   List<String> get getLiveSelectAsgGroupsName => _getLiveSelectAsgGroupsName;
 
   final List<LiveSelectAsgUsersModel> _getLiveSelectAsgUsers = [];
-  List<LiveSelectAsgUsersModel> get getLiveSelectAsgUsers =>
-      _getLiveSelectAsgUsers;
+  List<LiveSelectAsgUsersModel> get getLiveSelectAsgUsers => _getLiveSelectAsgUsers;
 
   final List<String> _getLiveSelectAsgUsersName = [];
   List<String> get getLiveSelectAsgUsersName => _getLiveSelectAsgUsersName;
@@ -234,19 +230,13 @@ class IssueActionProvider extends ChangeNotifier {
     clearAll();
     for (int i = 0; i < _availableActivities.length; i++) {
       if (_availableActivities[i].name == activityName) {
-        _isBarcodeSpace =
-            _availableActivities[i].barcodeSpace == 'Y' ? true : false;
-        _isadditionaltimeInput =
-            _availableActivities[i].additionaltimeInput == 'Y' ? true : false;
-        _minDescLength =
-            _availableActivities[i].minDescLength != null ? true : false;
-        _mobilePhoto =
-            _availableActivities[i].mobilePhoto == 'Y' ? true : false;
-        _isassigneeccType =
-            _availableActivities[i].assigneeccType == 'LIVESELECT'
-                ? true
-                : false;
+        _isBarcodeSpace = _availableActivities[i].barcodeSpace == 'Y' ? true : false;
+        _isadditionaltimeInput = _availableActivities[i].additionaltimeInput == 'Y' ? true : false;
+        _minDescLength = _availableActivities[i].minDescLength != null ? true : false;
+        _mobilePhoto = _availableActivities[i].mobilePhoto == 'Y' ? true : false;
+        _isassigneeccType = _availableActivities[i].assigneeccType == 'LIVESELECT' ? true : false;
         _selectedActivityCode = _availableActivities[i].code.toString();
+        print('------' + selectedActivityCode);
       }
     }
     notifyListeners();
@@ -280,8 +270,7 @@ class IssueActionProvider extends ChangeNotifier {
     _isFetch = true;
     _loading = true;
     notifyListeners();
-    final response =
-        await _issueServiceRepository.getIssueOperations(issuecode);
+    final response = await _issueServiceRepository.getIssueOperations(issuecode);
     response.fold(
         (l) => {
               _issueOperationList = l,
@@ -298,8 +287,7 @@ class IssueActionProvider extends ChangeNotifier {
     String userToken = await SharedManager().getString(SharedEnum.deviceId);
     String userCode = await SharedManager().getString(SharedEnum.userCode);
 
-    final response = await _issueServiceRepository.takeOverIssue(
-        userToken, userCode, issuecode);
+    final response = await _issueServiceRepository.takeOverIssue(userToken, userCode, issuecode);
     response.fold(
         (l) => {
               snackBar(context, LocaleKeys.processDone, 'success'),
@@ -324,8 +312,7 @@ class IssueActionProvider extends ChangeNotifier {
     _loading = true;
     String userToken = await SharedManager().getString(SharedEnum.deviceId);
 
-    final response = await _issueServiceRepository.createSparepartIssue(
-        userToken, issuecode);
+    final response = await _issueServiceRepository.createSparepartIssue(userToken, issuecode);
     response.fold(
         (l) => {
               snackBar(context, LocaleKeys.processDone, 'success'),
@@ -352,8 +339,7 @@ class IssueActionProvider extends ChangeNotifier {
     String userToken = await SharedManager().getString(SharedEnum.deviceId);
     String userName = await SharedManager().getString(SharedEnum.userName);
 
-    final response = await _issueServiceRepository.cancelIssuePlanned(
-        userToken, userName, issuecode);
+    final response = await _issueServiceRepository.cancelIssuePlanned(userToken, userName, issuecode);
     response.fold(
         (l) => {
               snackBar(context, LocaleKeys.processDone, 'success'),
@@ -378,18 +364,17 @@ class IssueActionProvider extends ChangeNotifier {
     String userToken = await SharedManager().getString(SharedEnum.deviceId);
     _loading = true;
     notifyListeners();
-    final response = await _issueServiceRepository.getAvailableActivities(
-        issuecode, userToken);
+    final response = await _issueServiceRepository.getAvailableActivities(issuecode, userToken);
 
     _availableActivitiesName.clear();
     _availableActivities.clear();
+    _availableActivitiesName.insert(0, 'Seçiniz');
     response.fold(
         (l) => {
               _availableActivities.addAll(l),
               for (int i = 0; i < _availableActivities.length; i++)
                 {
-                  _availableActivitiesName
-                      .add(_availableActivities[i].name.toString()),
+                  _availableActivitiesName.add(_availableActivities[i].name.toString()),
                 },
               _loading = false,
             },
@@ -405,8 +390,7 @@ class IssueActionProvider extends ChangeNotifier {
     String barcodeScanRes;
 
     try {
-      barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
-          '#ff6666', 'İptal', true, ScanMode.BARCODE);
+      barcodeScanRes = await FlutterBarcodeScanner.scanBarcode('#ff6666', 'İptal', true, ScanMode.BARCODE);
     } on PlatformException {
       barcodeScanRes = 'Failed to get platform version.';
     }
@@ -440,8 +424,7 @@ class IssueActionProvider extends ChangeNotifier {
     String userToken = await SharedManager().getString(SharedEnum.deviceId);
     _loading = true;
     notifyListeners();
-    final response = await _issueServiceRepository.getLiveSelectAsgGroups(
-        issuecode, userToken);
+    final response = await _issueServiceRepository.getLiveSelectAsgGroups(issuecode, userToken);
 
     _getLiveSelectAsgGroupsName.clear();
     _getLiveSelectAsgGroups.clear();
@@ -450,8 +433,7 @@ class IssueActionProvider extends ChangeNotifier {
               _getLiveSelectAsgGroups.addAll(l),
               for (int i = 0; i < _getLiveSelectAsgGroups.length; i++)
                 {
-                  _getLiveSelectAsgGroupsName
-                      .add(_getLiveSelectAsgGroups[i].name.toString()),
+                  _getLiveSelectAsgGroupsName.add(_getLiveSelectAsgGroups[i].name.toString()),
                 },
               _loading = false,
             },
@@ -466,8 +448,7 @@ class IssueActionProvider extends ChangeNotifier {
     String userToken = await SharedManager().getString(SharedEnum.deviceId);
     _loading = true;
     notifyListeners();
-    final response = await _issueServiceRepository.getLiveSelectAsgUser(
-        issuecode, userToken, groupCode);
+    final response = await _issueServiceRepository.getLiveSelectAsgUser(issuecode, userToken, groupCode);
 
     _getLiveSelectAsgUsersName.clear();
     _getLiveSelectAsgUsers.clear();
@@ -476,8 +457,7 @@ class IssueActionProvider extends ChangeNotifier {
               _getLiveSelectAsgUsers.addAll(l),
               for (int i = 0; i < _getLiveSelectAsgUsers.length; i++)
                 {
-                  _getLiveSelectAsgUsersName
-                      .add(_getLiveSelectAsgUsers[i].fullname.toString()),
+                  _getLiveSelectAsgUsersName.add(_getLiveSelectAsgUsers[i].fullname.toString()),
                 },
               _loading = false,
             },
@@ -488,9 +468,8 @@ class IssueActionProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void saveIssueActivity(String issuecode) async {
+  void saveIssueActivity(String issuecode, String activityCode, String spacec) async {
     _loading = true;
-
     String userToken = await SharedManager().getString(SharedEnum.deviceId);
     String userCode = await SharedManager().getString(SharedEnum.userCode);
 
@@ -506,7 +485,7 @@ class IssueActionProvider extends ChangeNotifier {
       userToken,
       selectedAsgGroupCode,
       userCode,
-      selectedActivityCode,
+      activityCode != '' ? activityCode: selectedActivityCode,
       description,
       spaceCode.text,
       selectedAsgUserCode,
@@ -520,6 +499,7 @@ class IssueActionProvider extends ChangeNotifier {
               _loading = false,
             },
         (r) => {
+              _errorMessage = r.message,
               _loading = false,
               _errorAccur = true,
             });
@@ -560,7 +540,7 @@ class IssueActionProvider extends ChangeNotifier {
       notifyListeners();
     });
   }
-  
+
   Future<void> getImageFromCamera() async {
     final pickedFile = await picker.pickImage(source: ImageSource.camera);
 
@@ -577,7 +557,7 @@ class IssueActionProvider extends ChangeNotifier {
       notifyListeners();
     }
   }
-  
+
   void clearAll() {
     getLiveSelectAsgGroupsName.clear();
     getLiveSelectAsgGroups.clear();

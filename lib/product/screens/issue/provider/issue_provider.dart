@@ -212,13 +212,13 @@ class IssueProvider extends ChangeNotifier {
   List<IssueFilterStatusModel> _issueStatusCodes = [];
   List<IssueFilterStatusModel> get issueStatusCodes => _issueStatusCodes;
 
-  List<String> _issueStatusNames = [];
+  List<String> _issueStatusNames = ['Seçiniz'];
   List<String> get issueStatusNames => _issueStatusNames;
 
   List<IssueFilterModel> _buildingFilterValues = [];
   List<IssueFilterModel> get buildingFilterValues => _buildingFilterValues;
 
-  List<String> _buildingFilterNames = [];
+  List<String> _buildingFilterNames = ['Seçiniz'];
   List<String> get buildingFilterNames => _buildingFilterNames;
 
   List<String> _selectedFilterList = [];
@@ -227,17 +227,18 @@ class IssueProvider extends ChangeNotifier {
   List<IssueFilterModel> _floorFilterValues = [];
   List<IssueFilterModel> get floorFilterValues => _floorFilterValues;
 
-  List<String> _floorFilterNames = [];
+  List<String> _floorFilterNames = ['Seçiniz'];
   List<String> get floorFilterNames => _floorFilterNames;
 
   List<IssueFilterModel> _wingFilterValues = [];
   List<IssueFilterModel> get wingFilterValues => _wingFilterValues;
 
-  List<String> _wingFilterNames = [];
+  List<String> _wingFilterNames = ['Seçiniz'];
   List<String> get wingFilterNames => _wingFilterNames;
 
   bool notificationController(ScrollNotification scrollInfo) {
-    if (!loading && scrollInfo.metrics.pixels == scrollInfo.metrics.maxScrollExtent) {
+    if (!loading &&
+        scrollInfo.metrics.pixels == scrollInfo.metrics.maxScrollExtent) {
       if (_totalRecordCount == true) {
         return false;
       }
@@ -283,7 +284,8 @@ class IssueProvider extends ChangeNotifier {
     _loading = true;
     _issueListType = issueListType;
     notifyListeners();
-    final response = await _issueServiceRepository.getIssueList(queryParameters, issueListType);
+    final response = await _issueServiceRepository.getIssueList(
+        queryParameters, issueListType);
     response.fold(
         (l) => {
               _issueList.clear(),
@@ -340,7 +342,8 @@ class IssueProvider extends ChangeNotifier {
     _loading = true;
     _issueActivities.clear();
     notifyListeners();
-    final response = await _issueServiceRepository.getIssueActivities(issuecode);
+    final response =
+        await _issueServiceRepository.getIssueActivities(issuecode);
     response.fold(
         (l) => {
               _issueActivities.addAll(l),
@@ -356,7 +359,8 @@ class IssueProvider extends ChangeNotifier {
     _isFetchAttachment = true;
     _loading = true;
     notifyListeners();
-    final response = await _issueServiceRepository.getIssueAttachment(issuecode);
+    final response =
+        await _issueServiceRepository.getIssueAttachment(issuecode);
 
     response.fold(
         (l) => {
@@ -388,7 +392,8 @@ class IssueProvider extends ChangeNotifier {
     _isFetch = true;
     _loading = true;
     notifyListeners();
-    final response = await _issueServiceRepository.getSpaceBfwByType(type, userToken);
+    final response =
+        await _issueServiceRepository.getSpaceBfwByType(type, userToken);
 
     if (type == 'BUILDING') {
       response.fold(
@@ -396,7 +401,8 @@ class IssueProvider extends ChangeNotifier {
                 _buildingFilterValues.addAll(l),
                 for (int i = 0; i < _buildingFilterValues.length; i++)
                   {
-                    _buildingFilterNames.add(_buildingFilterValues[i].name.toString()),
+                    _buildingFilterNames
+                        .add(_buildingFilterValues[i].name.toString()),
                   },
                 _loading = false,
               },
@@ -410,7 +416,8 @@ class IssueProvider extends ChangeNotifier {
                 _floorFilterValues.addAll(l),
                 for (int i = 0; i < _floorFilterValues.length; i++)
                   {
-                    _floorFilterNames.add(_floorFilterValues[i].name.toString()),
+                    _floorFilterNames
+                        .add(_floorFilterValues[i].name.toString()),
                   },
                 _loading = false,
               },
@@ -441,7 +448,8 @@ class IssueProvider extends ChangeNotifier {
     _isFetch = true;
     _loading = true;
     notifyListeners();
-    final response = await _issueServiceRepository.getIssueOpenStatusCodes(userToken);
+    final response =
+        await _issueServiceRepository.getIssueOpenStatusCodes(userToken);
     response.fold(
         (l) => {
               _issueStatusCodes.addAll(l),

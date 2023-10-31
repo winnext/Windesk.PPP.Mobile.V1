@@ -1,4 +1,4 @@
-enum ServiceResponseStatusEnums { result, records, detail, statusCode, success }
+enum ServiceResponseStatusEnums { result, records, detail, statusCode, success, resultCode,info }
 
 extension ServiceResponseStatusExtension on ServiceResponseStatusEnums {
   String get rawText {
@@ -11,6 +11,10 @@ extension ServiceResponseStatusExtension on ServiceResponseStatusEnums {
         return 'detail';
       case ServiceResponseStatusEnums.success:
         return 'success';
+      case ServiceResponseStatusEnums.resultCode:
+        return 'resultcode';
+      case ServiceResponseStatusEnums.info:
+        return 'info';
       case ServiceResponseStatusEnums.statusCode:
         return '200';
       default:
