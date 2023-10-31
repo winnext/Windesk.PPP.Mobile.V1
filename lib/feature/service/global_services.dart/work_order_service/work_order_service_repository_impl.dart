@@ -409,7 +409,7 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
 
     String url =
         '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=addWorkorderEffort&workordercode=$workOrderCode&username=$userName&module=workorder&workperiod=$workPeriod&startdate=1&type=PREDICTED&description=test';
-
+    print(url);
     try {
       final response = await super.dio.get(url);
       super.logger.e(response.toString());
@@ -699,7 +699,8 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
             ServiceStatusEnums.success.rawText) {
           final data = response.data;
 
-          List<WorkOrderTracingListModel> tracingList = WorkOrderTracingListModel.fromJsonList(data['lists']);
+          List<WorkOrderTracingListModel> tracingList =
+              WorkOrderTracingListModel.fromJsonList(data['lists']);
           //super.logger.e(tracingList[18].toString());
 
           return Left(tracingList);
@@ -860,19 +861,26 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
   }
 
   @override
-  Future<Either<IssueSummaryTimeModel, CustomServiceException>> getIssueTimeInfo(String issueCode, String userCode) async {
+  Future<Either<IssueSummaryTimeModel, CustomServiceException>>
+      getIssueTimeInfo(String issueCode, String userCode) async {
     String url = '${ServiceTools.baseUrlV2}/issue/$issueCode/summary';
 
     try {
-      final response = await dio.get(url, options: Options(headers: {"xusercode": userCode, "xtoken": ServiceTools.tokenV2}));
+      final response = await dio.get(url,
+          options: Options(headers: {
+            "xusercode": userCode,
+            "xtoken": ServiceTools.tokenV2
+          }));
       final data = response.data[ServiceResponseStatusEnums.detail.rawText];
 
-      IssueSummaryTimeModel issueSummaryTimeInfo = IssueSummaryTimeModel.fromJson(data);
+      IssueSummaryTimeModel issueSummaryTimeInfo =
+          IssueSummaryTimeModel.fromJson(data);
       super.logger.i(issueSummaryTimeInfo);
       return Left(issueSummaryTimeInfo);
     } catch (error) {
       super.logger.e(error.toString());
-      return Right(CustomServiceException(message: CustomServiceMessages.loginError, statusCode: '400'));
+      return Right(CustomServiceException(
+          message: CustomServiceMessages.loginError, statusCode: '400'));
     }
   }
 }

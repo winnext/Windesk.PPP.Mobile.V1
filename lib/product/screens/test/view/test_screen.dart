@@ -108,13 +108,13 @@ class _TestScreenState extends State<TestScreen> {
             child: Text(AppStrings.appVersion +
                 context.read<TestProvider>().appVersion.toString()),
           ),
-          Expanded(
+          Expanded( 
             flex: 4,
             child: Padding(
               padding: const EdgeInsets.all(10.0),
               child: Column(
                 children: [
-                  Text(
+                  const Text(
                     AppStrings.connectionTime,
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),

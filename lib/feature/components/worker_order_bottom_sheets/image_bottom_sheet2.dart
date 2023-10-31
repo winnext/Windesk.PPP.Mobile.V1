@@ -47,8 +47,8 @@ class ImageBottomSheet2 extends StatelessWidget {
     );
   }
 
-  Widget _body(BuildContext context, NewOrderProvider value) {
-    return value.isLoading
+  Widget _body(BuildContext context, NewOrderProvider woProvider) {
+    return woProvider.isLoading
         ? const Center(child: CircularProgressIndicator())
         : Column(
             children: [
@@ -58,8 +58,9 @@ class ImageBottomSheet2 extends StatelessWidget {
                     height: context.height * 0.3,
                     decoration: BoxDecoration(
                         shape: BoxShape.rectangle, color: APPColors.Main.grey),
-                    child:
-                        value.image != null ? Image.file(value.image!) : null,
+                    child: woProvider.image != null
+                        ? Image.file(woProvider.image!)
+                        : null,
                   ),
                   Positioned(
                     bottom: 0,
@@ -72,7 +73,7 @@ class ImageBottomSheet2 extends StatelessWidget {
                             backgroundColor: APPColors.Main.black,
                             child: const Icon(AppIcons.camera),
                             onPressed: () async {
-                              await value.getImageFromCamera();
+                              await woProvider.getImageFromCamera();
                             },
                           ),
                           const SizedBox(width: 12),
@@ -84,7 +85,7 @@ class ImageBottomSheet2 extends StatelessWidget {
               ),
               const SizedBox(height: 24),
               TextFieldsInputUnderline(
-                onChanged: value.setDesc,
+                onChanged: woProvider.setDesc,
                 hintText: AppStrings.enterDescription,
               ),
               const SizedBox(height: 24),
@@ -92,7 +93,7 @@ class ImageBottomSheet2 extends StatelessWidget {
                 leftTitle: const Text('Vazgeç'),
                 rightTitle: const Text('İş Emri Oluştur '),
                 leftOnPressed: () => Navigator.of(context).pop(),
-                rightOnPressed: () => value.woCreate(context),
+                rightOnPressed: () => woProvider.woCreate(context),
               )
             ],
           );

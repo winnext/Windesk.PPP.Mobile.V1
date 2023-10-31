@@ -3,7 +3,6 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
@@ -12,10 +11,10 @@ import 'package:wm_ppp_4/feature/components/snackBar/snackbar.dart';
 import 'package:wm_ppp_4/feature/database/shared_manager.dart';
 import 'package:wm_ppp_4/feature/enums/shared_enums.dart';
 import 'package:wm_ppp_4/feature/injection.dart';
-import 'package:wm_ppp_4/feature/route/app_route.gr.dart';
 import 'package:wm_ppp_4/feature/service/global_services.dart/work_order_service/work_order_service_repository.dart';
 import 'package:wm_ppp_4/feature/service/global_services.dart/work_order_service/work_order_service_repository_impl.dart';
 import 'package:wm_ppp_4/product/screens/new_order/new_order_repo.dart';
+import 'package:wm_ppp_4/product/screens/work_order/work_order_detail/view/work_order_detail_screen.dart';
 
 class NewOrderProvider extends ChangeNotifier {
   final apirepository = NewOrderRepo();
@@ -145,6 +144,7 @@ class NewOrderProvider extends ChangeNotifier {
 
   List _woCreateIsEmriAdiListeArray = [
     [
+      'Seçiniz',
       'Teknik Onarım',
       'Teknik Periyodik Bakım',
       'Tıbbi Cihaz Kalibrasyonu',
@@ -160,6 +160,7 @@ class NewOrderProvider extends ChangeNotifier {
       'Arıza İş Emri'
     ],
     [
+      'Seçiniz',
       'accidental',
       'planned',
       'calibration',
@@ -232,10 +233,18 @@ class NewOrderProvider extends ChangeNotifier {
             onPressed: () => Navigator.pop(alertContext),
           ),
           ElevatedButton(
-            child: const Text("Detayı Gör"),
-            onPressed: () => context.router
-                .push(WorkOrderDetailScreen(workorderCode: woCode)),
-          ),
+              child: const Text("Detayı Gör"),
+              onPressed: () => {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              WorkOrderDetailScreen(workorderCode: woCode)),
+                    )
+
+                    // context.router
+                    //     .push(WorkOrderDetailScreen(workorderCode: woCode))
+                  }),
         ],
       ),
     );
@@ -271,7 +280,11 @@ class NewOrderProvider extends ChangeNotifier {
     print('image  : ');
     print(image);
 
-    if (woSpace != '' && woService != '' && woName != '') {
+    if (woSpace != '' &&
+        woService != '' &&
+        woService != 'Hizmet' &&
+        woName != 'Seçiniz' &&
+        woName != '') {
       woService = woCreateHizmetListeArray[1]
           [woCreateHizmetListeArray[0].indexOf(woService)];
       woName = woCreateIsEmriAdiListeArray[1]
@@ -308,7 +321,7 @@ class NewOrderProvider extends ChangeNotifier {
         clear = 1;
         setVarlik = '';
 
-        if (image != null) {
+        if (image.length != 0) {
           isLoading = true;
           notifyListeners();
 
@@ -339,6 +352,9 @@ class NewOrderProvider extends ChangeNotifier {
               snackBar(context, woCreateSonuc[1], 'hata')
             },
           );
+        } else {
+          showAlertDialog(context, 'İş Emri Başarıyla Oluşturuldu',
+              woCreateSonuc[1]['uyari'], woCreateSonuc[1]['code']);
         }
       }
     } else {

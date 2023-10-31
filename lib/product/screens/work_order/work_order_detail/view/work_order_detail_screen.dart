@@ -34,25 +34,40 @@ class WorkOrderDetailScreen extends StatelessWidget {
       appBar: _appbar(context, workorderCode),
       body: MultiProvider(
         providers: [
-          ChangeNotifierProvider(create: (context) => WorkOrderDetailMainProvider()),
-          ChangeNotifierProvider(create: (context) => WorkOrderDetailAccordionProvider()),
+          ChangeNotifierProvider(
+              create: (context) => WorkOrderDetailMainProvider()),
+          ChangeNotifierProvider(
+              create: (context) => WorkOrderDetailAccordionProvider()),
         ],
         child: Consumer<WorkOrderDetailMainProvider>(
           builder: (context, value, child) {
             SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
               if (value.changedWorkOrderStatus) {
-                snackBar(context, value.changeStateModel.message != null ? value.changeStateModel.message! : AppStrings.stateChanged, 'success');
+                snackBar(
+                    context,
+                    value.changeStateModel.message != null
+                        ? value.changeStateModel.message!
+                        : AppStrings.stateChanged,
+                    'success');
               }
-              workorderCode[0] == 'M' ? (value.isFetchSummary ? value.getIssueTimeInfo(value.workOrderDetailsModel.modulecode) : null) : null;
+              workorderCode[0] == 'M'
+                  ? (value.isFetchSummary
+                      ? value.getIssueTimeInfo(
+                          value.workOrderDetailsModel.modulecode)
+                      : null)
+                  : null;
             });
-            return value.initState ? _initBody(value) : _successBody(context, value, workorderCode);
+            return value.initState
+                ? _initBody(value)
+                : _successBody(context, value, workorderCode);
           },
         ),
       ),
     );
   }
 
-  Widget _successBody(BuildContext context, WorkOrderDetailMainProvider value, String workOrderCode) {
+  Widget _successBody(BuildContext context, WorkOrderDetailMainProvider value,
+      String workOrderCode) {
     return RefreshIndicator(
       onRefresh: () async {
         value.getWorkOrderWithoutPermission(workOrderCode);
@@ -64,16 +79,32 @@ class WorkOrderDetailScreen extends StatelessWidget {
             workorderCode[0] == 'M' ? _timeBar(value) : Container(),
             CustomWorkOrderDetailCard(data: value.workOrderDetailsModel),
             const SizedBox(height: 16),
-            WorkOrderDetailButtons(value: value, workOrderCode: workorderCode, clearContext: context),
+            WorkOrderDetailButtons(
+                value: value,
+                workOrderCode: workorderCode,
+                clearContext: context),
             const SizedBox(height: 32),
             !value.isStartEnable
                 ? BaseAccordion(
                     list: [
-                      _accordionSection(AppStrings.efforts, EffortAccordion(workOrderCode: workorderCode), AppIcons.efforts),
-                      _accordionSection(AppStrings.materials, MaterialAccordion(workOrderCode: workorderCode), AppIcons.warehouse),
-                      _accordionSection(AppStrings.workers, PersonAccordion(workOrderCode: workorderCode), AppIcons.people),
-                      _accordionSection(AppStrings.documants, DocumantsAccordion(workOrderCode: workorderCode), AppIcons.documantScanner),
-                      _accordionSection(AppStrings.order, const SizedBox(), AppIcons.order),
+                      _accordionSection(
+                          AppStrings.efforts,
+                          EffortAccordion(workOrderCode: workorderCode),
+                          AppIcons.efforts),
+                      _accordionSection(
+                          AppStrings.materials,
+                          MaterialAccordion(workOrderCode: workorderCode),
+                          AppIcons.warehouse),
+                      _accordionSection(
+                          AppStrings.workers,
+                          PersonAccordion(workOrderCode: workorderCode),
+                          AppIcons.people),
+                      _accordionSection(
+                          AppStrings.documants,
+                          DocumantsAccordion(workOrderCode: workorderCode),
+                          AppIcons.documantScanner),
+                      _accordionSection(
+                          AppStrings.order, const SizedBox(), AppIcons.order),
                     ],
                   )
                 : const SizedBox()
@@ -87,9 +118,9 @@ class WorkOrderDetailScreen extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [_responseWidget(value), _fixWidget(value)],
-            ),
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [_responseWidget(value), _fixWidget(value)],
+      ),
     );
   }
 
@@ -100,15 +131,19 @@ class WorkOrderDetailScreen extends StatelessWidget {
 
   CustomMainAppbar _appbar(BuildContext context, String workorderID) {
     return CustomMainAppbar(
-      title: Text(workorderID, style: TextStyle(color: APPColors.Secondary.black, fontSize: 16)),
+      title: Text(workorderID,
+          style: TextStyle(color: APPColors.Secondary.black, fontSize: 16)),
       returnBack: true,
       elevation: 4,
-      popFunction: () {},
+      popFunction: () {
+        Navigator.pop(context);
+      },
       actions: const [],
     );
   }
 
-  AccordionSection _accordionSection(String title, Widget content, IconData icon) {
+  AccordionSection _accordionSection(
+      String title, Widget content, IconData icon) {
     return AccordionSection(
       isOpen: false,
       headerBackgroundColor: APPColors.Accent.black,
@@ -116,18 +151,20 @@ class WorkOrderDetailScreen extends StatelessWidget {
       leftIcon: Icon(icon, color: APPColors.Main.white),
       contentBorderColor: APPColors.Accent.black,
       onOpenSection: () {},
-      header: Text(title, style: TextStyle(color: APPColors.Main.white, letterSpacing: 1.5)),
+      header: Text(title,
+          style: TextStyle(color: APPColors.Main.white, letterSpacing: 1.5)),
       content: content,
     );
   }
-
 
   Column _responseWidget(WorkOrderDetailMainProvider woDetailProvider) {
     return Column(
       children: [
         woDetailProvider.issueSummaryTimeInfo.planneddate == LocaleKeys.oPlanned
             ? Container(
-                decoration: BoxDecoration(color: APPColors.NewNotifi.blue, borderRadius: BorderRadius.circular(3)),
+                decoration: BoxDecoration(
+                    color: APPColors.NewNotifi.blue,
+                    borderRadius: BorderRadius.circular(3)),
                 padding: const EdgeInsets.all(3),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -137,11 +174,26 @@ class WorkOrderDetailScreen extends StatelessWidget {
                   ],
                 ),
               )
-            : woDetailProvider.issueSummaryTimeInfo.respondedTimer == LocaleKeys.oneStr
-                ? upTimeBar(woDetailProvider, LocaleKeys.targetResponsedDate, woDetailProvider.issueSummaryTimeInfo.respondedTimer.toString(),
-                    woDetailProvider.issueSummaryTimeInfo.targetRdate.toString(), woDetailProvider.issueSummaryTimeInfo.respondedDate.toString())
-                : upTimeBar(woDetailProvider, LocaleKeys.responsedDate, woDetailProvider.issueSummaryTimeInfo.respondedTimer.toString(),
-                    woDetailProvider.issueSummaryTimeInfo.respondedDate.toString(), woDetailProvider.issueSummaryTimeInfo.respondedDate.toString())
+            : woDetailProvider.issueSummaryTimeInfo.respondedTimer ==
+                    LocaleKeys.oneStr
+                ? upTimeBar(
+                    woDetailProvider,
+                    LocaleKeys.targetResponsedDate,
+                    woDetailProvider.issueSummaryTimeInfo.respondedTimer
+                        .toString(),
+                    woDetailProvider.issueSummaryTimeInfo.targetRdate
+                        .toString(),
+                    woDetailProvider.issueSummaryTimeInfo.respondedDate
+                        .toString())
+                : upTimeBar(
+                    woDetailProvider,
+                    LocaleKeys.responsedDate,
+                    woDetailProvider.issueSummaryTimeInfo.respondedTimer
+                        .toString(),
+                    woDetailProvider.issueSummaryTimeInfo.respondedDate
+                        .toString(),
+                    woDetailProvider.issueSummaryTimeInfo.respondedDate
+                        .toString())
       ],
     );
   }
@@ -149,14 +201,28 @@ class WorkOrderDetailScreen extends StatelessWidget {
   Column _fixWidget(WorkOrderDetailMainProvider woDetailProvider) {
     return Column(children: [
       woDetailProvider.issueSummaryTimeInfo.fixTimer == LocaleKeys.oneStr
-          ? upTimeBar(woDetailProvider, LocaleKeys.targetFixedDate, woDetailProvider.issueSummaryTimeInfo.fixTimer.toString(),
-              woDetailProvider.issueSummaryTimeInfo.targetFdate.toString(), woDetailProvider.issueSummaryTimeInfo.fixedDate.toString())
-          : upTimeBar(woDetailProvider, LocaleKeys.fixedDate, woDetailProvider.issueSummaryTimeInfo.fixTimer.toString(),
-              woDetailProvider.issueSummaryTimeInfo.fixedDate.toString(), woDetailProvider.issueSummaryTimeInfo.fixedDate.toString())
+          ? upTimeBar(
+              woDetailProvider,
+              LocaleKeys.targetFixedDate,
+              woDetailProvider.issueSummaryTimeInfo.fixTimer.toString(),
+              woDetailProvider.issueSummaryTimeInfo.targetFdate.toString(),
+              woDetailProvider.issueSummaryTimeInfo.fixedDate.toString())
+          : upTimeBar(
+              woDetailProvider,
+              LocaleKeys.fixedDate,
+              woDetailProvider.issueSummaryTimeInfo.fixTimer.toString(),
+              woDetailProvider.issueSummaryTimeInfo.fixedDate.toString(),
+              woDetailProvider.issueSummaryTimeInfo.fixedDate.toString())
     ]);
   }
 
-  Container upTimeBar(WorkOrderDetailMainProvider woDetailProvider, String title, String respondedTimer, String targetDate, String fixedDate, ) {
+  Container upTimeBar(
+    WorkOrderDetailMainProvider woDetailProvider,
+    String title,
+    String respondedTimer,
+    String targetDate,
+    String fixedDate,
+  ) {
     return Container(
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(3)),
       padding: const EdgeInsets.all(3),
@@ -169,11 +235,11 @@ class WorkOrderDetailScreen extends StatelessWidget {
               ? const Text('')
               : Text(
                   TimeClass().timeRecover(targetDate),
-                  style: TimeClass().fixStyle(respondedTimer, targetDate, fixedDate),
+                  style: TimeClass()
+                      .fixStyle(respondedTimer, targetDate, fixedDate),
                 ),
         ],
       ),
     );
   }
-
 }

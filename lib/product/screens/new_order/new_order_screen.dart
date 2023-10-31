@@ -360,25 +360,44 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
                                   SizedBox(
                                     width: 30.w,
                                     child: ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: APPColors.Login.red,
-                                        shape: const RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.only(
-                                              topLeft: Radius.circular(20),
-                                              bottomLeft: Radius.circular(20)),
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: APPColors.Login.red,
+                                          shape: const RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.only(
+                                                topLeft: Radius.circular(20),
+                                                bottomLeft:
+                                                    Radius.circular(20)),
+                                          ),
                                         ),
-                                      ),
-                                      onPressed: () {
-                                        BaseBottomSheet.show(
-                                            context,
-                                            ImageBottomSheet2(
-                                                workOrderCode: 'WO00001',
-                                                clearContext: context));
-                                      },
-                                      child: photos.isNotEmpty
-                                          ? (const Text('Vazgeç'))
-                                          : (const Icon(Icons.add_a_photo)),
-                                    ),
+                                        onPressed: () {
+                                          // BaseBottomSheet.show(
+                                          //     context,
+                                          //     ImageBottomSheet2(
+                                          //         workOrderCode: 'WO00001',
+                                          //         clearContext: context));
+                                          woProvider.setMahal = '';
+                                          woProvider.setAciklama = '';
+                                          woProvider.setWoCreateHizmetValue =
+                                              woProvider
+                                                      .woCreateHizmetListeArray[
+                                                  0][0];
+                                          woProvider
+                                                  .setWoCreateIsEmriAdiListeValue =
+                                              woProvider
+                                                      .woCreateIsEmriAdiListeArray[
+                                                  0][0];
+                                          woProvider
+                                                  .setwoCreateOncelikListeValue =
+                                              woProvider
+                                                      .woCreateOncelikListeArray[
+                                                  0][0];
+
+                                          woProvider.clear = 1;
+                                          woProvider.setVarlik = '';
+                                        },
+                                        child: photos.isNotEmpty
+                                            ? (const Text('Vazgeç'))
+                                            : (const Text('Vazgeç'))),
                                   ),
                                   SizedBox(
                                     width: 30.w,
