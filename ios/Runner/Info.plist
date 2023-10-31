@@ -34,6 +34,8 @@
 	<string>Kamera işlemlerinin yapılabilmesi için izin vermeniz gerekmektedir.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Kamera işlemlerinin yapılabilmesi için izin vermeniz gerekmektedir.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Kamera işlemlerinin yapılabilmesi için izin vermeniz gerekmektedir.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UIBackgroundModes</key>

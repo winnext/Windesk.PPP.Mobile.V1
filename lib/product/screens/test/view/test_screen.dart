@@ -114,12 +114,9 @@ class _TestScreenState extends State<TestScreen> {
               padding: const EdgeInsets.all(10.0),
               child: Column(
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.all(12.0),
-                    child: Text(
-                      AppStrings.connectionTime,
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
+                  Text(
+                    AppStrings.connectionTime,
+                    style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   Text(AppStrings.serverTime + testProvider.serverTime),
                   Text(AppStrings.phoneTime + testProvider.phoneTime),

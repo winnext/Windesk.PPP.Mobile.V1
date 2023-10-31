@@ -40,6 +40,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
       routerConfig: _appRouter.config(),
       title: AppStrings.appName,
+      debugShowCheckedModeBanner: false,
     );
   }
 }
