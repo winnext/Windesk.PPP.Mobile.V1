@@ -17,7 +17,8 @@ class WoSearchPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
         create: (context) => WoSearchProvider(),
-        child: Consumer<WoSearchProvider>(builder: (context, WoSearchProvider woSearchProvider, child) {
+        child: Consumer<WoSearchProvider>(
+            builder: (context, WoSearchProvider woSearchProvider, child) {
           return Scaffold(
             appBar: const CustomTabAppbar(
               title: AppStrings.workOrderSearch,
@@ -36,8 +37,9 @@ class WoSearchPage extends StatelessWidget {
                         },
                         labelText: 'İş Emri No'),
                   ),
-                  const Divider(),
-                  const Divider(),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height / 10,
+                  ),
                   SizedBox(
                     width: MediaQuery.of(context).size.width / 3,
                     child: CustomCircularWithTextButton(

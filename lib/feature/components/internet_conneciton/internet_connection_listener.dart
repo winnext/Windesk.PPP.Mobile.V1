@@ -3,6 +3,7 @@
 import 'dart:io';
 
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:vibration/vibration.dart';
 import 'package:wm_ppp_4/feature/components/snackBar/snackbar.dart';
 import 'package:wm_ppp_4/feature/constants/paths/service_tools.dart';
 
@@ -29,6 +30,7 @@ class InternetListenerClass {
           print('Data connection is available.');
           if (durum != 1) {
             snackBar(context, 'İnternet bağlantısı sağlandı. ', 'success');
+            Vibration.vibrate(duration: 500);
           }
           break;
         case InternetConnectionStatus.disconnected:
@@ -38,6 +40,8 @@ class InternetListenerClass {
               context,
               'İnternet bağlantısı bulunamadı. Lütfen kontrol ediniz.',
               'error');
+          Vibration.vibrate(duration: 500);
+
           break;
       }
     });

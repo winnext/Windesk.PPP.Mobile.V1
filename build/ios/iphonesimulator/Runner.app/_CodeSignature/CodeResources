@@ -18,7 +18,7 @@
 		</data>
 		<key>Assets.car</key>
 		<data>
-		+KeqfNJd4kOY5jA/HVXz9/ugKVc=
+		aKPRTS8HVYZQBoaIIquQyrWgU9k=
 		</data>
 		<key>Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib</key>
 		<data>
@@ -46,7 +46,7 @@
 		</data>
 		<key>Frameworks/App.framework/App</key>
 		<data>
-		P32nqiuCfhdDMbmqDPrnCHFaR9E=
+		Z74d7k3wUP+4qOOJnnyzbyr8Ru0=
 		</data>
 		<key>Frameworks/App.framework/Info.plist</key>
 		<data>
@@ -54,7 +54,7 @@
 		</data>
 		<key>Frameworks/App.framework/_CodeSignature/CodeResources</key>
 		<data>
-		q+YUgeGRlMKWd+nQ1hO0x5bsNug=
+		Ac76F5gnQTP6BD2bg9wH8lyxXQo=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.bin</key>
 		<data>
@@ -70,7 +70,7 @@
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/NOTICES.Z</key>
 		<data>
-		qEIBtqDDq88K200Khm7KhSQQjE4=
+		nOKtCTpaV0SDhgZp+ewlBAb/btc=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/assets/images/ardgrup_logo.png</key>
 		<data>
@@ -110,7 +110,7 @@
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/kernel_blob.bin</key>
 		<data>
-		0OMse85AkRRfdONjef5+Mz+m5KE=
+		7hzh7G5huMjqBDYQR6EsnPDNsUA=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
 		<data>
@@ -126,11 +126,11 @@
 		</data>
 		<key>Frameworks/DKImagePickerController.framework/DKImagePickerController</key>
 		<data>
-		jdrChyPbzkVHoOzzc3Ok4KepKrY=
+		QkNCphwzAVqlYoO5KyJOZB0u82I=
 		</data>
 		<key>Frameworks/DKImagePickerController.framework/DKImagePickerController.bundle/Assets.car</key>
 		<data>
-		Zh8rwbzCysjMAP9h8ysQ1+370g0=
+		+GFvGgEwFchwP9sDLWkVA3WtOu0=
 		</data>
 		<key>Frameworks/DKImagePickerController.framework/DKImagePickerController.bundle/Base.lproj/DKImagePickerController.strings</key>
 		<dict>
@@ -322,15 +322,15 @@
 		</data>
 		<key>Frameworks/DKImagePickerController.framework/_CodeSignature/CodeResources</key>
 		<data>
-		wHegKMoes5QIffEnHMBciSv93AQ=
+		XhGjon3QWlFHb8bZCdPRUmJ7wwE=
 		</data>
 		<key>Frameworks/DKPhotoGallery.framework/DKPhotoGallery</key>
 		<data>
-		7S4mSGKLl9lWfCEVXjJOhl12Kmo=
+		X7GMF/2KSvd+lL/Q/o9/tBCYvo0=
 		</data>
 		<key>Frameworks/DKPhotoGallery.framework/DKPhotoGallery.bundle/Assets.car</key>
 		<data>
-		5QpaPlsc+SFBap5a2xrCswSSurk=
+		KpcLSBaSzMnPpMnuZ5P/I+c7Ufw=
 		</data>
 		<key>Frameworks/DKPhotoGallery.framework/DKPhotoGallery.bundle/Base.lproj/DKPhotoGallery.strings</key>
 		<dict>
@@ -369,7 +369,7 @@
 		</data>
 		<key>Frameworks/DKPhotoGallery.framework/_CodeSignature/CodeResources</key>
 		<data>
-		GlPr8FRy4cN2y+XK7hzT/AilHM0=
+		8UqJFdu/bajyczujiI22JrYorg0=
 		</data>
 		<key>Frameworks/FBLPromises.framework/FBLPromises</key>
 		<data>
@@ -695,6 +695,18 @@
 		<data>
 		YZqpIftcQDXIlu9PVB3OXJob7kg=
 		</data>
+		<key>Frameworks/vibration.framework/Info.plist</key>
+		<data>
+		Q33uj1spwx3SES5laGTSczHz0ac=
+		</data>
+		<key>Frameworks/vibration.framework/_CodeSignature/CodeResources</key>
+		<data>
+		n3YKmGwPNpqs/hrRkp49kgYWg/s=
+		</data>
+		<key>Frameworks/vibration.framework/vibration</key>
+		<data>
+		Hk8UjxX+ofUMvuk1ybH3SKnACoo=
+		</data>
 		<key>GoogleService-Info.plist</key>
 		<data>
 		/33hEUcqEO1/wEf6FkfSpVXc3uk=
@@ -735,7 +747,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			LkxxKMAFKxXFcwTLhoOFzJy2FLxJEGIj8gMs0m65P7Y=
+			HUuttp9A5/tgVJ0x1L3lPzhV89MLiOAbnO+Kb8mODpE=
 			</data>
 		</dict>
 		<key>Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib</key>
@@ -784,7 +796,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			tJ8gfORcbzatQ50YxVqxOHnboyXMHc0BT1y9tJTq+gQ=
+			3Qijs2QePP9/7BD8w94HHGAUwhAIr2kPESyAYpKhnb0=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/Info.plist</key>
@@ -798,7 +810,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			X+FJRzpdO0pCuIrJiLCPjANkOCgCFq1plpXjjb5LXDY=
+			H9fKcewVTFR/WIRrbqFz/JZonKbVcWOJkbMQtCavO84=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.bin</key>
@@ -826,7 +838,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			irZjR/UlpOUZRDKRTII/3g5v3hkQWJyhI9azf0nZl8A=
+			GR7ejX+Ux3T8DhnHJbcOjKk3Z1p9b6lC788OfjGxJbw=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/assets/images/ardgrup_logo.png</key>
@@ -896,7 +908,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			LJTcd8o7QEdYIutR0HNosHWefNuuDsXoN0jyK0k/aLA=
+			chcDYKjg3JI0vCcIA8GCL7QxDDnAO1h6uq4ddb/Cc7U=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
@@ -924,14 +936,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			ayDuo/7EMQfuOMJ6omdXNP1OBv97gVyGr2pvuJDoELA=
+			1qBJeEWrkSvn17+NQPThAQ61UjG2NqhbOxR8iiG7Cac=
 			</data>
 		</dict>
 		<key>Frameworks/DKImagePickerController.framework/DKImagePickerController.bundle/Assets.car</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			YGzumYrJtNFdXyOypdbF8T0YJ76jOxBXGHYR+QLuvyE=
+			x7L2wBqRc8y9mAKDZA30NTP5JE8iQLuOxdfcte1X47w=
 			</data>
 		</dict>
 		<key>Frameworks/DKImagePickerController.framework/DKImagePickerController.bundle/Base.lproj/DKImagePickerController.strings</key>
@@ -1132,21 +1144,21 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			qK7uangGKXbJDD4EX7VCLC7MooBZaEKu9t8j9xkoyGk=
+			HdGOkjptcxNnvzomik5OD3Ta/uM6sge2eBuKLu/Rdpg=
 			</data>
 		</dict>
 		<key>Frameworks/DKPhotoGallery.framework/DKPhotoGallery</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			R5M1cQF3MnnO6FTjYpWTnXU3gm50Bpgm5CiD92Lmjpg=
+			BE/9O0b11f/ApdDrMQx+SZJQp6lV+8/Nr9Z57gjevNo=
 			</data>
 		</dict>
 		<key>Frameworks/DKPhotoGallery.framework/DKPhotoGallery.bundle/Assets.car</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			SVGStrNfwH6JbxDcYRRxufA9HP3noj/BdzR6WwskSE8=
+			degkNoa5TJz9e1eBYme7CIFQsq3V8T/k8TiTBa5RWcs=
 			</data>
 		</dict>
 		<key>Frameworks/DKPhotoGallery.framework/DKPhotoGallery.bundle/Base.lproj/DKPhotoGallery.strings</key>
@@ -1194,7 +1206,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			NCibzeR2HY+Kx5IAtQnrWVRmy/m4CI1jQoHamB4ghwM=
+			vuODci2nZkrgsMFSxQmQZIslQqJp711z1KamGnImzpA=
 			</data>
 		</dict>
 		<key>Frameworks/FBLPromises.framework/FBLPromises</key>
@@ -1762,6 +1774,27 @@
 			<key>hash2</key>
 			<data>
 			xFCTOvHH3yDkzMMvKdDeGn6U4QWeWRCnEPu0atiu4zw=
+			</data>
+		</dict>
+		<key>Frameworks/vibration.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			Z3RA2YWjR8aZ8kTITYEjZr8c4S816NI2HunF4DmFKlE=
+			</data>
+		</dict>
+		<key>Frameworks/vibration.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			PbTCazYttFYXa3+D9F39vReYSRWoMEEoo4ceT+8G4Z8=
+			</data>
+		</dict>
+		<key>Frameworks/vibration.framework/vibration</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			MOud9vbiQhIjmSgNSRmU1T6UidYOCmrkwHtdQo/6JOI=
 			</data>
 		</dict>
 		<key>GoogleService-Info.plist</key>
