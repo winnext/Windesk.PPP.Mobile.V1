@@ -51,10 +51,15 @@ class IssueActionProvider extends ChangeNotifier {
   bool get isSuccessTakeOver => _isSuccessTakeOver;
 
   bool isSuccessEnterActivity = false;
+  bool isSuccessEnterActivityForFixed = false;
+
   bool isSuccessChangeCfg = false;
 
   bool _errorAccur = false;
   bool get errorAccur => _errorAccur;
+
+  bool _errorAccurForFixed = false;
+  bool get errorAccurForFixed => _errorAccurForFixed;
 
   String _selectedActivityName = 'Seçiniz';
   String get selectedActivityName => _selectedActivityName;
@@ -468,7 +473,7 @@ class IssueActionProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void saveIssueActivity(String issuecode, String activityCode, String spacec) async {
+  void saveIssueActivity(String issuecode) async {
     _loading = true;
     String userToken = await SharedManager().getString(SharedEnum.deviceId);
     String userCode = await SharedManager().getString(SharedEnum.userCode);
@@ -485,7 +490,7 @@ class IssueActionProvider extends ChangeNotifier {
       userToken,
       selectedAsgGroupCode,
       userCode,
-      activityCode != '' ? activityCode: selectedActivityCode,
+      selectedActivityCode,
       description,
       spaceCode.text,
       selectedAsgUserCode,
@@ -509,6 +514,51 @@ class IssueActionProvider extends ChangeNotifier {
     Future.delayed(const Duration(seconds: 2), () {
       isSuccessEnterActivity = false;
       _errorAccur = false;
+      notifyListeners();
+    });
+  }
+
+  void saveIssueActivityForFixed(String issuecode, String activityCode) async {
+    _loading = true;
+    String userToken = await SharedManager().getString(SharedEnum.deviceId);
+    String userCode = await SharedManager().getString(SharedEnum.userCode);
+
+    Uint8List? imagebytes = await image?.readAsBytes(); //convert to bytes
+    String base64string = '';
+    if (imagebytes != null) {
+      base64string = base64.encode(imagebytes); //convert bytes to base64 string
+    }
+    notifyListeners();
+
+    final response = await _issueServiceRepository.saveIssueActivity(
+      issuecode,
+      userToken,
+      selectedAsgGroupCode,
+      userCode,
+      activityCode,
+      description,
+      spaceCode.text,
+      selectedAsgUserCode,
+      additionaltimeInput,
+      'issue',
+      base64string,
+    );
+    response.fold(
+        (l) => {
+              isSuccessEnterActivityForFixed = true,
+              _loading = false,
+            },
+        (r) => {
+              _errorMessage = r.message,
+              _loading = false,
+              _errorAccurForFixed = true,
+            });
+    _isFetchActivity = false;
+
+    notifyListeners();
+    Future.delayed(const Duration(seconds: 2), () {
+      isSuccessEnterActivityForFixed = false;
+      _errorAccurForFixed = false;
       notifyListeners();
     });
   }

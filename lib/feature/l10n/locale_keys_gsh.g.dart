@@ -86,6 +86,7 @@ abstract class LocaleKeys {
   //issue activities
   static const String addPhoto = 'Fotoğraf Ekle';
   static const String addActivity = 'Aktivite Ekle';
+  static const String send = 'Gönder';
   static const String changeCfg = 'Envanter Değiştir';
   static const String takeOver = 'Üzerine Al';
   static const String plannedCancel = 'Randevu Talebi';
