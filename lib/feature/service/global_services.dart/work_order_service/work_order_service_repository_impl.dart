@@ -445,9 +445,8 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
     bool result = false;
     String url =
         '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=addAttachment&username=$userName&moduleName=workorder&issueCode=$workOrderCode';
-
-    FormData formData =
-        FormData.fromMap({"base64string": image, 'description': desc});
+    print(url);
+    FormData formData = FormData.fromMap({"base64string": image});
     try {
       final response = await super.dio.post(url, data: formData);
       super.logger.e(response.toString());
@@ -455,7 +454,7 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
       if (response.data[ServiceResponseStatusEnums.result.rawText] ==
           ServiceStatusEnums.success.rawText) {
         result = true;
-
+        print(response.data);
         super.logger.e(result.toString());
 
         return Left(result);

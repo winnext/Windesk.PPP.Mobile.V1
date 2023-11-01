@@ -83,9 +83,11 @@ class SplashProvider extends ChangeNotifier {
     _getDeviceInformation();
     // _getFirebaseInformation();
 
-    final String userCode = await SharedManager().getString(SharedEnum.userCode);
-    final String deviceId = await SharedManager().getString(SharedEnum.deviceId);
-
+    final String userCode =
+        await SharedManager().getString(SharedEnum.userCode);
+    final String deviceId =
+        await SharedManager().getString(SharedEnum.deviceId);
+    print(userCode);
     if (userCode.isNotEmpty && deviceId.isNotEmpty) {
       _isUserAlreadyLoggedIn = true;
       // await _authService.checkAccessToken(userToken).then((value) {

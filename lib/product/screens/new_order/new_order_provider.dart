@@ -331,10 +331,10 @@ class NewOrderProvider extends ChangeNotifier {
 
           String userToken =
               await SharedManager().getString(SharedEnum.deviceId);
-          String userName =
-              await SharedManager().getString(SharedEnum.userName);
+          String userCode =
+              await SharedManager().getString(SharedEnum.userCode);
           final response = await _service.addWorkOrderAttachment(userToken,
-              userName, woCreateSonuc[1]['code'], base64string, desc);
+              userCode, woCreateSonuc[1]['code'], base64string, desc);
 
           response.fold(
             (l) => {
@@ -436,9 +436,9 @@ class NewOrderProvider extends ChangeNotifier {
           base64.encode(imagebytes); //convert bytes to base64 string
 
       String userToken = await SharedManager().getString(SharedEnum.deviceId);
-      String userName = await SharedManager().getString(SharedEnum.userName);
+      String userCode = await SharedManager().getString(SharedEnum.userCode);
       final response = await _service.addWorkOrderAttachment(
-          userToken, userName, workOrderCode, base64string, desc);
+          userToken, userCode, workOrderCode, base64string, desc);
 
       response.fold(
         (l) => {

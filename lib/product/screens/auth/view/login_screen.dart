@@ -78,6 +78,7 @@ class _LoginScreenBodyState extends State<_LoginScreenBody> {
     Future.delayed(const Duration(milliseconds: 1000), () {
       _isChecked = widget.provider.isLoginInfoSave;
       _isChecked == true ? {controllerUserName.text = widget.provider.userCode, controllerPassword.text = widget.provider.password} : null;
+    
     });
   }
 

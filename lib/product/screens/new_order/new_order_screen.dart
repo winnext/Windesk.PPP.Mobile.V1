@@ -11,7 +11,7 @@ import 'package:wm_ppp_4/product/screens/new_order/new_order_provider.dart';
 
 @RoutePage()
 class NewOrderScreen extends StatefulWidget {
-  const NewOrderScreen({super.key, this.photos,  this.b64s});
+  const NewOrderScreen({super.key, this.photos, this.b64s});
   final List? photos;
   final List? b64s;
   @override
@@ -311,45 +311,46 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
                             },
                           ),
                         ),
-                        photoss.isNotEmpty
-                            ? Center(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: SizedBox(
-                                      height: 25.h,
-                                      width: 50.w,
-                                      child: Card(
-                                        child: Column(
-                                          children: [
-                                            ElevatedButton(
-                                              style: ElevatedButton.styleFrom(
-                                                foregroundColor: Colors.white,
-                                                backgroundColor: Colors.red,
-                                                fixedSize: Size(
-                                                    15.w, 2.h), // foreground
-                                              ),
-                                              onPressed: () {
-                                                woProvider.deletePhotos = 0;
-                                                woProvider.deleteB64 = 0;
-                                                setState(() {
-                                                  b64ss = [];
-                                                  photoss = [];
-                                                });
-                                              },
-                                              child:
-                                                  Icon(size: 5.w, Icons.delete),
-                                            ),
-                                            SizedBox(
-                                              height: 13.h,
-                                              child:
-                                                  Image.file(File(photoss[0])),
-                                            )
-                                          ],
-                                        ),
-                                      )),
-                                ),
-                              )
-                            : const Text(''),
+                        const Text(''),
+                        // photoss.isNotEmpty
+                        //     ? Center(
+                        //         child: Padding(
+                        //           padding: const EdgeInsets.all(8.0),
+                        //           child: SizedBox(
+                        //               height: 25.h,
+                        //               width: 50.w,
+                        //               child: Card(
+                        //                 child: Column(
+                        //                   children: [
+                        //                     ElevatedButton(
+                        //                       style: ElevatedButton.styleFrom(
+                        //                         foregroundColor: Colors.white,
+                        //                         backgroundColor: Colors.red,
+                        //                         fixedSize: Size(
+                        //                             15.w, 2.h), // foreground
+                        //                       ),
+                        //                       onPressed: () {
+                        //                         woProvider.deletePhotos = 0;
+                        //                         woProvider.deleteB64 = 0;
+                        //                         setState(() {
+                        //                           b64ss = [];
+                        //                           photoss = [];
+                        //                         });
+                        //                       },
+                        //                       child:
+                        //                           Icon(size: 5.w, Icons.delete),
+                        //                     ),
+                        //                     SizedBox(
+                        //                       height: 13.h,
+                        //                       child:
+                        //                           Image.file(File(photoss[0])),
+                        //                     )
+                        //                   ],
+                        //                 ),
+                        //               )),
+                        //         ),
+                        //       )
+                        //     : const Text(''),
                         Padding(
                           padding: const EdgeInsets.only(bottom: 10),
                           child: SizedBox(
