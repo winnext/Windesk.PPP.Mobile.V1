@@ -152,6 +152,7 @@ abstract class $AppRouter extends _i27.RootStackRouter {
         child: _i11.IssueListScreen(
           key: args.key,
           issueModuleCode: args.issueModuleCode,
+          issueModuleName: args.issueModuleName,
         ),
       );
     },
@@ -550,12 +551,14 @@ class IssueListScreen extends _i27.PageRouteInfo<IssueListScreenArgs> {
   IssueListScreen({
     _i28.Key? key,
     required String issueModuleCode,
+    required String issueModuleName,
     List<_i27.PageRouteInfo>? children,
   }) : super(
           IssueListScreen.name,
           args: IssueListScreenArgs(
             key: key,
             issueModuleCode: issueModuleCode,
+            issueModuleName: issueModuleName,
           ),
           initialChildren: children,
         );
@@ -570,15 +573,18 @@ class IssueListScreenArgs {
   const IssueListScreenArgs({
     this.key,
     required this.issueModuleCode,
+    required this.issueModuleName,
   });
 
   final _i28.Key? key;
 
   final String issueModuleCode;
 
+  final String issueModuleName;
+
   @override
   String toString() {
-    return 'IssueListScreenArgs{key: $key, issueModuleCode: $issueModuleCode}';
+    return 'IssueListScreenArgs{key: $key, issueModuleCode: $issueModuleCode, issueModuleName: $issueModuleName}';
   }
 }
 

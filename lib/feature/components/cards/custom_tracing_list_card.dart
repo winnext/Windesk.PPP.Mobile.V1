@@ -22,7 +22,7 @@ class CustomTracingList extends StatelessWidget {
           if (isWorkOrder) {
             count.toString() == '0' ? null : context.router.push(WorkOrderListScreen(workOrderCode: code, workOrderName: title));
           } else {
-            count.toString() == '0' ? null : context.router.push(IssueListScreen(issueModuleCode: code));
+            count.toString() == '0' ? null : context.router.push(IssueListScreen(issueModuleCode: code, issueModuleName: title));
           }
         },
         child: Padding(

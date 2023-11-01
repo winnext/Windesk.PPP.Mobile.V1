@@ -25,8 +25,7 @@ class ServiceTools {
   static const tokenV1 = 'wdeshtest!_';
   static const tokenV2 = 'eshtest!';
   static const attachPath = "http://10.126.12.21/esh3";
-  static const attachPathLive =
-      "http://10.126.12.21/esh3/xreadattach.php?token=$tokenV1&id=";
+  static const attachPathLive = "http://10.126.12.21/esh3/xreadattach.php?token=$tokenV1&id=";
   static const facilityName = "Eskişehir Şehir Hastanesi";
   static const appName = "ESH";
   static const isWorkOrderExist = true;
@@ -45,6 +44,19 @@ class ServiceTools {
   // static const isWorkOrderExist = true;
   // static const ipv4adress = '10.126.12.141';
 
+  //BESK SANDBOX
+  // static const String baseUrlV1 =
+  //     'http://sandbox.intranet.signumtte.com/besk/app/webroot/integration/WindeskMobile.php?use_rest=1&wsusername=wdmobile&wspassword=wdsgnm1017_&token=';
+  // static const String baseUrlV2 = 'http://windeskmobile.signumtte.com';
+  // static const tokenV1 = 'wdbesktest!_';
+  // static const tokenV2 = 'besktest!';
+  // static const attachPath = "http://sandbox.intranet.signumtte.com/besk";
+  // static const attachPathLive = "http://sandbox.intranet.signumtte.com/besk/xreadattach.php?token=$tokenV1&id=";
+  // static const facilityName = "Bilkent Şehir Hastanesi";
+  // static const appName = "BESK";
+  // static const ipv4adress = '1.1.1.1';
+  // static const isWorkOrderExist = true;
+
   //BESK PREPROD
   // static const String baseUrlV1 =
   //     'http://10.198.12.130/besk/app/webroot/integration/WindeskMobile.php?use_rest=1&wsusername=wdmobile&wspassword=wdsgnm1017_&token=';
@@ -55,6 +67,8 @@ class ServiceTools {
   // static const attachPathLive = "http://10.198.12.130/besk/xreadattach.php?token=$tokenV1&id=";
   // static const facilityName = "Bilkent Şehir Hastanesi";
   // static const appName = "BESK";
+  // static const ipv4adress = '1.1.1.1';
+  // static const isWorkOrderExist = true;
 
   //BESK PROD
   // static const String baseUrlV1 =
@@ -113,6 +127,7 @@ class ServiceTools {
   // static const facilityName = "Isparta Şehir Hastanesi";
   // static const appName = "ISH";
   // static const ipv4adress = '1.1.1.1';
+  // static const isWorkOrderExist = true;
 
   //ISH PROD
   // static const String baseUrlV1 =

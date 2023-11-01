@@ -7,17 +7,12 @@ import 'package:wm_ppp_4/feature/route/app_route.gr.dart';
 import 'package:wm_ppp_4/product/screens/issue/provider/issue_provider.dart';
 
 class CustomIssueActionButton extends StatefulWidget {
-  const CustomIssueActionButton(
-      {super.key,
-      required this.issueCode,
-      this.isWorkOrder,
-      this.workOrderCode});
+  const CustomIssueActionButton({super.key, required this.issueCode, this.isWorkOrder, this.workOrderCode});
   final String issueCode;
   final String? workOrderCode;
   final bool? isWorkOrder;
   @override
-  State<CustomIssueActionButton> createState() =>
-      _CustomIssueActionButtonState();
+  State<CustomIssueActionButton> createState() => _CustomIssueActionButtonState();
 }
 
 class _CustomIssueActionButtonState extends State<CustomIssueActionButton> {
@@ -25,8 +20,7 @@ class _CustomIssueActionButtonState extends State<CustomIssueActionButton> {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
         create: (context) => IssueProvider(),
-        child: Consumer<IssueProvider>(
-            builder: (context, IssueProvider issueProvider, child) {
+        child: Consumer<IssueProvider>(builder: (context, IssueProvider issueProvider, child) {
           return FloatingActionButton(
             onPressed: () async {
               final result = await showModalBottomSheet(
@@ -52,11 +46,9 @@ class _CustomIssueActionButtonState extends State<CustomIssueActionButton> {
               if (result == true) {
                 // ignore: use_build_context_synchronously
                 if (widget.isWorkOrder == true) {
-                  context.router.popAndPush(WorkOrderDetailScreen(
-                      workorderCode: widget.workOrderCode ?? ''));
+                  context.router.popAndPush(WorkOrderDetailScreen(workorderCode: widget.workOrderCode ?? ''));
                 } else {
-                  context.router.popAndPush(
-                      IssueDetailScreen(issueCode: widget.issueCode));
+                  context.router.popAndPush(IssueDetailScreen(issueCode: widget.issueCode));
                 }
               }
             },

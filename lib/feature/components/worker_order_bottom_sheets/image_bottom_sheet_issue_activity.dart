@@ -4,7 +4,6 @@ import 'package:wm_ppp_4/feature/components/input_fields/text_fields_input_with_
 import 'package:wm_ppp_4/feature/l10n/locale_keys_gsh.g.dart';
 import 'package:wm_ppp_4/product/screens/issue/provider/issue_action_provider.dart';
 import '../snackBar/snackbar.dart';
-import '../../../product/screens/work_order/work_order_detail/provider/work_order_detail_accordion_provider.dart';
 import '../../constants/other/app_icons.dart';
 import '../../constants/other/app_strings.dart';
 import '../../constants/other/colors.dart';
@@ -33,22 +32,13 @@ class ImageBottomSheetIssueActivity extends StatelessWidget {
           create: (context) => IssueActionProvider(),
           child: Consumer<IssueActionProvider>(
             builder: (context, IssueActionProvider value, child) {
-              if (value.isSuccessEnterActivity) {
-                snackBar(context, LocaleKeys.processDone, 'success');
+              if (value.isSuccessEnterActivityForFixed) {
                 Navigator.of(context).pop<bool>(true);
+                snackBar(context, LocaleKeys.processDone, 'success');
               }
-              if (value.errorAccur) {
+              if (value.errorAccurForFixed) {
+                Navigator.of(context).pop<bool>(true);
                 snackBar(context, value.errorMessage, 'error');
-                Navigator.of(context).pop<bool>(false);
-              }
-              if (value.isSuccessEnterActivity) {
-                snackBar(context, LocaleKeys.processDone, 'success');
-                dontUseCleanFun != null
-                    ? dontUseCleanFun!
-                        ? null
-                        : clearContext.read<WorkOrderDetailAccordionProvider>().clearDocumantStates()
-                    : clearContext.read<WorkOrderDetailAccordionProvider>().clearDocumantStates();
-                Navigator.of(context).pop<bool>(true);
               }
               return _body(context, value);
             },
@@ -74,6 +64,13 @@ class ImageBottomSheetIssueActivity extends StatelessWidget {
                           actionFunction: value.scanSpace),
                     )
                   : Container(),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextFieldsInputUnderline(
+                  onChanged: value.setDescription,
+                  hintText: AppStrings.enterDescription,
+                ),
+              ),
               Stack(
                 children: [
                   Container(
@@ -95,21 +92,11 @@ class ImageBottomSheetIssueActivity extends StatelessWidget {
                               await value.getImageFromCamera();
                             },
                           ),
-                          const SizedBox(width: 12),
-                          FloatingActionButton(
-                            backgroundColor: APPColors.Main.black,
-                            child: const Icon(AppIcons.galery),
-                            onPressed: () async => await value.getImageFromGalery(),
-                          ),
                         ],
                       ),
                     ),
                   ),
                 ],
-              ),
-              TextFieldsInputUnderline(
-                onChanged: value.setDescription,
-                hintText: AppStrings.enterDescription,
               ),
               const SizedBox(height: 24),
               CustomHalfButtons(
@@ -117,9 +104,9 @@ class ImageBottomSheetIssueActivity extends StatelessWidget {
                   LocaleKeys.cancel,
                   style: TextStyle(color: Colors.white),
                 ),
-                rightTitle: const Text(LocaleKeys.addActivity, style: TextStyle(color: Colors.white)),
+                rightTitle: const Text(LocaleKeys.send, style: TextStyle(color: Colors.white)),
                 leftOnPressed: () => Navigator.of(context).pop(),
-                rightOnPressed: () => value.saveIssueActivity(issueCode, activityCode, value.spaceCode.text),
+                rightOnPressed: () => value.saveIssueActivityForFixed(issueCode, activityCode),
               )
             ],
           );
