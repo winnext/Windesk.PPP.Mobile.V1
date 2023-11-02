@@ -326,6 +326,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "flutter_fgbg",
+      "rootUri": "file:///Users/signumtte/.pub-cache/hosted/pub.dev/flutter_fgbg-0.3.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "flutter_lints",
       "rootUri": "file:///Users/signumtte/.pub-cache/hosted/pub.dev/flutter_lints-2.0.3",
       "packageUri": "lib/",
@@ -992,7 +998,7 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2023-11-02T10:53:54.246464Z",
+  "generated": "2023-11-02T11:45:30.131775Z",
   "generator": "pub",
   "generatorVersion": "3.1.0"
 }

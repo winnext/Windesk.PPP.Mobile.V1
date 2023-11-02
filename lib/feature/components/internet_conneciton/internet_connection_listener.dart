@@ -2,8 +2,6 @@
 
 import 'dart:io';
 
-import 'package:hive/hive.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
@@ -11,8 +9,6 @@ import 'package:vibration/vibration.dart';
 import 'package:wm_ppp_4/feature/components/snackBar/snackbar.dart';
 import 'package:wm_ppp_4/feature/constants/paths/service_tools.dart';
 import 'package:wm_ppp_4/feature/elastic_log/elastic_log.dart';
-import 'package:wm_ppp_4/feature/service/local_db/db.dart';
-import 'package:path_provider/path_provider.dart' as path_provider;
 
 class InternetListenerClass {
   checkCache() async {
@@ -42,8 +38,7 @@ class InternetListenerClass {
       ElasticLog().sendLog(
           item['logLevel'], item['title'], item['message'], item['activity']);
       //ElasticLog().sendLog(item['data']);
-      await database
-          .rawDelete('DELETE FROM cache WHERE id = ?', ['$item["id"]']);
+      await database.rawDelete('DELETE FROM cache WHERE id = ?', [item["id"]]);
     }
 
     print('GİRDİ5');
@@ -70,9 +65,14 @@ class InternetListenerClass {
         case InternetConnectionStatus.connected:
           print('Data connection is available.');
           if (durum != 1) {
+            var now = DateTime.now();
+
             checkCache();
-            ElasticLog().sendLog('error', 'NetworkReConnected - ',
-                'İnternete yeniden bağlanıldı.', 'networkReConnected - ');
+            ElasticLog().sendLog(
+                'error',
+                'NetworkReConnected ',
+                'İnternete yeniden bağlanıldı. - $now',
+                'networkReConnected - $now');
             snackBar(context, 'İnternet bağlantısı sağlandı. ', 'success');
             Vibration.vibrate(duration: 500);
           }
@@ -81,8 +81,8 @@ class InternetListenerClass {
           print('You are disconnected from the internet.');
           durum = 0;
 
-          ElasticLog().sendLog('error', 'NetworkDisconnected - ',
-              'İnternet bağlantısı kesildi.', 'networkDisconnected - ');
+          ElasticLog().sendLog('error', 'NetworkDisconnected',
+              'İnternet bağlantısı kesildi.', 'networkDisconnected');
           snackBar(
               context,
               'İnternet bağlantısı bulunamadı. Lütfen kontrol ediniz.',

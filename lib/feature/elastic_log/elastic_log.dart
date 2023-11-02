@@ -60,7 +60,7 @@ class ElasticLog {
       },
       "app_version": appVersion,
       "connected_ssid": "unknown",
-      "current_activity": "$activity" + ' - ' + now.toString(),
+      "current_activity": "$activity",
       "device": {
         "brand": deviceModel,
         "id": deviceID,
@@ -70,8 +70,8 @@ class ElasticLog {
         "os_version": osVersion
       },
       "log_level": logLevel,
-      "log_message": message + ' - ' + now.toString(),
-      "native_message": message + ' - ' + now.toString(),
+      "log_message": message,
+      "native_message": message,
       "username": userCode
     };
 
@@ -94,8 +94,9 @@ class ElasticLog {
     } on DioError catch (e) {
       print('notsuccess');
       print(e);
-
-      storeData(logLevel, title, message, activity);
+      if (message == 'İnternet bağlantısı kesildi.') {
+        storeData(logLevel, title, message + now.toString(), activity);
+      }
 
       return 'notsuccess';
     }

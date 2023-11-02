@@ -47,7 +47,7 @@ class ServiceTools {
   static const appName = "ESH";
   static const isWorkOrderExist = true;
   static const ipv4adress = '10.126.12.141';
-  static const environment = 'preprod';
+  static const environment = 'prod';
   static const loggerUrl = 'http://windeskmobile.eskisehir.yerel/mobilelog';
 
   //BESK SANDBOX
