@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wm_ppp_4/feature/elastic_log/elastic_log.dart';
 import 'service/test_service_repo_impl.dart';
 
 import '../../../feature/database/shared_manager.dart';
@@ -79,8 +80,15 @@ class TestProvider extends ChangeNotifier {
     String token = await SharedManager().getString(SharedEnum.deviceId);
     var getServerTimeResult = await testServices.getServerTime(token);
     getServerTimeResult.fold(
-      (l) => {setServerTime = l},
-      (r) => null,
+      (l) => {
+        setServerTime = l,
+        ElasticLog().sendLog('info', 'ServerTimeSuccess',
+            'Sunucu saati başarıyla çekildi.', 'serverTimeSuccess'),
+      },
+      (r) => {
+        ElasticLog().sendLog('error', 'ServerTimeFail',
+            'Sunucu saati alınamadı.', 'serverTimeFail'),
+      },
     );
   }
 
@@ -104,7 +112,16 @@ class TestProvider extends ChangeNotifier {
     notifyListeners();
     var accesTestResult = await testServices.accessTestWindesk();
     accesTestResult.fold(
-        (l) => {setAccessTestV1 = 'true'}, (r) => setAccessTestV1 = 'false');
+        (l) => {
+              ElasticLog().sendLog('info', 'V1TestSuccess',
+                  'Windesk erişimi başarılı', 'v1TestSuccess'),
+              setAccessTestV1 = 'true'
+            },
+        (r) => {
+              setAccessTestV1 = 'false',
+              ElasticLog().sendLog('error', 'V1TestFail',
+                  'Windesk erişimi başarısız.', 'v1TestFail'),
+            });
     notifyListeners();
   }
 
@@ -114,7 +131,16 @@ class TestProvider extends ChangeNotifier {
 
     var accesTestResult = await testServices.accessTestMobileService();
     accesTestResult.fold(
-        (l) => {setAccessTestV2 = 'true'}, (r) => setAccessTestV2 = 'false');
+        (l) => {
+              ElasticLog().sendLog('info', 'V2TestSuccess',
+                  'Mobil servis erişimi başarılı', 'v2TestSuccess'),
+              setAccessTestV2 = 'true'
+            },
+        (r) => {
+              setAccessTestV2 = 'false',
+              ElasticLog().sendLog('error', 'V2TestFail',
+                  'Mobil servis erişimi başarısız.', 'v2TestFail'),
+            });
 
     notifyListeners();
   }

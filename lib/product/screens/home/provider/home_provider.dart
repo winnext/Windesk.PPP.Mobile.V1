@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:wm_ppp_4/feature/elastic_log/elastic_log.dart';
 import 'package:wm_ppp_4/feature/enums/shared_enums.dart';
 import 'package:wm_ppp_4/feature/exceptions/custom_service_exceptions.dart';
 import 'package:wm_ppp_4/feature/service/global_services.dart/auth_service/auth_service_repository.dart';
@@ -53,6 +54,8 @@ class HomeProvider extends ChangeNotifier {
       final response = await _authServiceRepository.logout(userCode);
       response.fold(
         (l) => {
+          ElasticLog().sendLog('info', 'LogoutSuccess',
+              'Kullanıcı başarı bir şekilde çıkış yaptı.', 'logoutSuccess'),
           prefs.remove('userCode'),
           SharedManager().clearAll(),
           _isUserLogout = true,
@@ -62,6 +65,11 @@ class HomeProvider extends ChangeNotifier {
           }),
         },
         (r) => {
+          ElasticLog().sendLog(
+              'error',
+              'LogoutError',
+              'Bağlantı zaman aşımına uğradı. Kullanıcı çıkış yapamadı.',
+              'logoutError'),
           _isUserLogout = false,
           _logoutError = true,
           notifyListeners(),

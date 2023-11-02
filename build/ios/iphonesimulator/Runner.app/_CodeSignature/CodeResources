@@ -50,11 +50,15 @@
 		</data>
 		<key>Frameworks/App.framework/App</key>
 		<data>
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 		EaYo7f+6sr2ih3tHF4waSUKsJkk=
 =======
 		00QXl2wHh0uvnYPXejEzvjmVrxc=
 >>>>>>> f2b7798b90b29ee0cce19b423220d31d6e4a41a6
+=======
+		gM/xX/Uh9t3/634qNxVyxl8Kb6Y=
+>>>>>>> Stashed changes
 		</data>
 		<key>Frameworks/App.framework/Info.plist</key>
 		<data>
@@ -62,11 +66,15 @@
 		</data>
 		<key>Frameworks/App.framework/_CodeSignature/CodeResources</key>
 		<data>
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 		ynVwWcudssxGQKRUochhidgP8J4=
 =======
 		PhI03OoBC9xsrytSGJ3Dwpayatw=
 >>>>>>> f2b7798b90b29ee0cce19b423220d31d6e4a41a6
+=======
+		3gFHdNmYCf2IdZPTFHjczdXog6o=
+>>>>>>> Stashed changes
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.bin</key>
 		<data>
@@ -82,7 +90,7 @@
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/NOTICES.Z</key>
 		<data>
-		nOKtCTpaV0SDhgZp+ewlBAb/btc=
+		L2HgjtL9qq5Y7a1z5JnZrg8sC1Q=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/assets/images/ardgrup_logo.png</key>
 		<data>
@@ -123,6 +131,7 @@
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/kernel_blob.bin</key>
 		<data>
+<<<<<<< Updated upstream
 		GNsIIrkT9V7pDNMgUi2cw/ZHCrY=
 =======
 		sZcG/IyIY4Zj14zcVkLxBjLthFs=
@@ -131,6 +140,9 @@
 		<data>
 		FR2R69dOA8juJdsgsoL/OIeHKWQ=
 >>>>>>> f2b7798b90b29ee0cce19b423220d31d6e4a41a6
+=======
+		QJPcxnhNbbkQpAAQKKmsE+X0fmQ=
+>>>>>>> Stashed changes
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
 		<data>
@@ -426,6 +438,18 @@
 		<key>Frameworks/FBLPromises.framework/_CodeSignature/CodeResources</key>
 		<data>
 		JUIj8Qsn6F3NpC1ZBfa/DK1OtLc=
+		</data>
+		<key>Frameworks/FMDB.framework/FMDB</key>
+		<data>
+		2ZIArM5lKFfnYCY+vVN43zfDm6Y=
+		</data>
+		<key>Frameworks/FMDB.framework/Info.plist</key>
+		<data>
+		s/31daNNSyFOPi26aAptbhLkCWg=
+		</data>
+		<key>Frameworks/FMDB.framework/_CodeSignature/CodeResources</key>
+		<data>
+		wqlBoI8HO1EFMWhvcbhCivOVj8g=
 		</data>
 		<key>Frameworks/FirebaseCore.framework/FirebaseCore</key>
 		<data>
@@ -735,6 +759,18 @@
 		<data>
 		iGpGXZBzhBwTm4BQYkpNYN+W21s=
 		</data>
+		<key>Frameworks/path_provider_foundation.framework/Info.plist</key>
+		<data>
+		cAuEaMuJPCTj3P/aXQoaTTKHObE=
+		</data>
+		<key>Frameworks/path_provider_foundation.framework/_CodeSignature/CodeResources</key>
+		<data>
+		KXnZonKozEOFQ5x1Vk9t5JWMk7U=
+		</data>
+		<key>Frameworks/path_provider_foundation.framework/path_provider_foundation</key>
+		<data>
+		2A1KkCnKdSflGSUHlsTOoSwQQTs=
+		</data>
 		<key>Frameworks/shared_preferences_foundation.framework/Info.plist</key>
 		<data>
 		yOg5j6Bl8Z5DFzTurGu6wmsgr5M=
@@ -746,6 +782,18 @@
 		<key>Frameworks/shared_preferences_foundation.framework/shared_preferences_foundation</key>
 		<data>
 		m8ApDlwH7NgAoPk2RMVzEMc3pWA=
+		</data>
+		<key>Frameworks/sqflite.framework/Info.plist</key>
+		<data>
+		6de/F+ZTHk0xaLflgtu9cNs0O8g=
+		</data>
+		<key>Frameworks/sqflite.framework/_CodeSignature/CodeResources</key>
+		<data>
+		7jC/GMu9Rlsp2qz0M0p/g7DQELI=
+		</data>
+		<key>Frameworks/sqflite.framework/sqflite</key>
+		<data>
+		qtCyn6cQvoufit0pjtr/uPhJ0YQ=
 		</data>
 		<key>Frameworks/url_launcher_ios.framework/Info.plist</key>
 		<data>
@@ -872,11 +920,15 @@
 		<dict>
 			<key>hash2</key>
 			<data>
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 			VwR2fVRwmR/IN/D1OpKlqlmXf5+M8gux1uPmG8KMezw=
 =======
 			pPcjrKeVakoPN+sMZ1aSOSNBcAdUBmeGfz50r5ox42c=
 >>>>>>> f2b7798b90b29ee0cce19b423220d31d6e4a41a6
+=======
+			qTsbp47AzvyMdwp0Piw4Qe/VRG0tSvjfg/W5X13oEog=
+>>>>>>> Stashed changes
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/Info.plist</key>
@@ -890,11 +942,15 @@
 		<dict>
 			<key>hash2</key>
 			<data>
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 			WqEQEsVQgFwvjKr41Q/lPi5Vkv3rRc1JeGQDM2b/LCY=
 =======
 			CkJ730MqTxmikdpzyOEL461xzYBBbpNarZjrpS+XfXI=
 >>>>>>> f2b7798b90b29ee0cce19b423220d31d6e4a41a6
+=======
+			M+0Xu6sAcw99RYMwI+9LhyR7qoQ124e2/KY7pspyxfI=
+>>>>>>> Stashed changes
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.bin</key>
@@ -922,7 +978,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			GR7ejX+Ux3T8DhnHJbcOjKk3Z1p9b6lC788OfjGxJbw=
+			73SM0R0knAJTXdBz5AVP00jVyICnn0ANhq3sb3Hm4HI=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/assets/images/ardgrup_logo.png</key>
@@ -996,11 +1052,15 @@
 		<dict>
 			<key>hash2</key>
 			<data>
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 			o7xdvPsfZW9GlI8EJJ5LmTJp5CsJZ4TjkkkBFF387Lo=
 =======
 			2jnxy0ux5uKaZ8IoNxb49+h7YnG87l3nfNUNYy9LwyE=
 >>>>>>> f2b7798b90b29ee0cce19b423220d31d6e4a41a6
+=======
+			pTw5Mr8pcH+pAtREKvaxPPLrm8hPR1lz/dnyqZeUago=
+>>>>>>> Stashed changes
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
@@ -1344,6 +1404,27 @@
 			<key>hash2</key>
 			<data>
 			+eAjT80kBHcO+WNLLRLC6pR6Y840/prUoFN5VqE4d4k=
+			</data>
+		</dict>
+		<key>Frameworks/FMDB.framework/FMDB</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			kWXtsQO3bxBRQd6vdZDakWLQX3GVevFPjQAa47FBp6Q=
+			</data>
+		</dict>
+		<key>Frameworks/FMDB.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			ULKUjiHLfhgyU2jMO3JY+3SATZB7YRTiSmmFFGPLQ1U=
+			</data>
+		</dict>
+		<key>Frameworks/FMDB.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			D759G1AgCcKyJ1byYFgzBI9/tBwQliqEUbzAtE5KNKc=
 			</data>
 		</dict>
 		<key>Frameworks/FirebaseCore.framework/FirebaseCore</key>
@@ -1917,6 +1998,27 @@
 			TZaDNcz3IYoh1Wj64/sEGDCrJVaVv2tN/Y2kPeorp5s=
 			</data>
 		</dict>
+		<key>Frameworks/path_provider_foundation.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			XREd4nUqO/cUsg677tTKXAfMUJqSh7Rm2a7X1H10l1U=
+			</data>
+		</dict>
+		<key>Frameworks/path_provider_foundation.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			xechCeIL+IKGRrgJpjGtuz0E2fmtl8y/+zuZnwJCmMM=
+			</data>
+		</dict>
+		<key>Frameworks/path_provider_foundation.framework/path_provider_foundation</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			C/sPzv65myxvRDr2SMy7jeTXhsuTZqrYX0k7sCZggPI=
+			</data>
+		</dict>
 		<key>Frameworks/shared_preferences_foundation.framework/Info.plist</key>
 		<dict>
 			<key>hash2</key>
@@ -1936,6 +2038,27 @@
 			<key>hash2</key>
 			<data>
 			44cVl5eD7irdy/8niZIbeczn9AK/fkKkpMXViH6NRJo=
+			</data>
+		</dict>
+		<key>Frameworks/sqflite.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			7QbBqSkBDGMr/Dv6xQxR94A9kbhmH0q2Cuy9jqHaFb0=
+			</data>
+		</dict>
+		<key>Frameworks/sqflite.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			oIERt5UGbFGNcSDtlVft05+GNnLINlCPCy7LWznJymk=
+			</data>
+		</dict>
+		<key>Frameworks/sqflite.framework/sqflite</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			ctTXvKLxo8+Xu+MR/oPtOdjygEVhD+/AbgHt9pnAAZo=
 			</data>
 		</dict>
 		<key>Frameworks/url_launcher_ios.framework/Info.plist</key>

@@ -6,6 +6,7 @@ import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:get_ip_address/get_ip_address.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import '../../../feature/database/shared_manager.dart';
@@ -32,6 +33,7 @@ class SplashProvider extends ChangeNotifier {
 
     // Gets device information from Android and iOS devices sparingly.
     String appVersion = packageInfo.version;
+    String osVersion = Platform.operatingSystemVersion;
 
     if (Platform.isAndroid) {
       AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
@@ -49,11 +51,24 @@ class SplashProvider extends ChangeNotifier {
 
     // sets device information to shared preferences.
     if (deviceId != null && deviceOS != null && deviceModel != null) {
-      print('deviceId' + deviceId);
+      print('deviceId : ' + deviceId);
+      var ipAddress = IpAddress(type: RequestType.json);
+
+      /// Get the IpAddress based on requestType.
+      dynamic data = await ipAddress.getIpAddress();
+
+      print('deviceModel : ' + deviceModel);
+      print('deviceOS : ' + deviceOS);
+      print('appVersion : ' + appVersion);
+      print('osVersion : ' + osVersion);
+
+      print(data['ip']);
       await SharedManager().setString(SharedEnum.deviceId, deviceId);
       await SharedManager().setString(SharedEnum.deviceModel, deviceModel);
       await SharedManager().setString(SharedEnum.deviceType, deviceOS);
       await SharedManager().setString(SharedEnum.appVersion, appVersion);
+      await SharedManager().setString(SharedEnum.ipAdress, data['ip']);
+      await SharedManager().setString(SharedEnum.osVersion, osVersion);
     }
   }
 

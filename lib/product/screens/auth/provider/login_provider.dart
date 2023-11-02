@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wm_ppp_4/feature/elastic_log/elastic_log.dart';
 import '../../../../feature/components/snackBar/snackbar.dart';
 import '../../../../feature/database/shared_manager.dart';
 import '../../../../feature/enums/shared_enums.dart';
@@ -53,6 +54,8 @@ class LoginProvider extends ChangeNotifier {
             _isLoginSuccess = false;
             notifyListeners();
           });
+          ElasticLog().sendLog('info', 'LoginSuccess',
+              'Kullanıcı başarıyla giriş yaptı', 'loginSuccess');
         } else {
           _loading = false;
           _isLoginSuccess = false;
@@ -64,6 +67,8 @@ class LoginProvider extends ChangeNotifier {
           });
         }
       }, (error) {
+        ElasticLog().sendLog('error', 'LoginError',
+            'Bağlantı zaman aşımına uğradı', 'loginerror');
         _isLoginSuccess = false;
         _isErrorActive = true;
         _loading = false;

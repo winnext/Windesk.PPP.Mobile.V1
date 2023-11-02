@@ -17,6 +17,14 @@ void snackBar(BuildContext context, String message, String type) async {
         message: message,
       ),
     );
+  } else if (type == 'connectionError') {
+    showTopSnackBar(
+      Overlay.of(context),
+      CustomSnackBar.error(
+        message: message,
+      ),
+      displayDuration: const Duration(seconds: 500),
+    );
   } else if (type == 'error') {
     showTopSnackBar(
       Overlay.of(context),
@@ -25,7 +33,7 @@ void snackBar(BuildContext context, String message, String type) async {
       ),
       displayDuration: const Duration(seconds: 2),
     );
-  }else if (type == 'true') {
+  } else if (type == 'true') {
     showTopSnackBar(
         Overlay.of(context),
         CustomSnackBar.success(
