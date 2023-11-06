@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_final_fields
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:wm_ppp_4/feature/database/shared_manager.dart';
 import 'package:wm_ppp_4/feature/enums/shared_enums.dart';
@@ -27,11 +29,57 @@ class IssueProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  IssueProvider() {
+    _getUsercode();
+    timer = Timer.periodic(
+        const Duration(seconds: 1), (Timer t) => getCurrentTime());
+  }
+
   bool _isFetchFilter = false;
   bool get isFetchFilter => _isFetchFilter;
 
   void setFetch() {
     _isFetch = false;
+    notifyListeners();
+  }
+
+  late final Timer timer;
+  String currentTimeText = '';
+  String title = '';
+  var secondText = 60;
+  String issueModuleCode = '';
+  void getCurrentTime() {
+    currentTimeText = DateTime.now().toString().substring(0, 19);
+    secondText = secondText - 1;
+    if (secondText == 0) {
+      secondText = 60;
+      _loading = true;
+      getIssueList(1, issueModuleCode);
+      Future.delayed(const Duration(milliseconds: 1000), () {
+        _loading = false;
+      });
+    }
+    notifyListeners();
+  }
+
+  void setIssueModuleCode(val) {
+    issueModuleCode = val;
+    notifyListeners();
+  }
+
+  void setSecond() {
+    secondText = 60;
+    notifyListeners();
+  }
+
+  void closeTimer() {
+    timer.cancel();
+  }
+
+  void _getUsercode() async {
+    await SharedManager()
+        .getString(SharedEnum.userCode)
+        .then((value) => title = value);
     notifyListeners();
   }
 

@@ -65,7 +65,7 @@ class IssueSummaryScreen extends StatelessWidget {
                         issueProvider.issueSummaryDetail.description
                             .toString()),
                     issueSummaryRow(LocaleKeys.issueOwner,
-                        issueProvider.issueSummaryDetail.contactname  ),
+                        issueProvider.issueSummaryDetail.contactname),
                     issueSummaryRow(LocaleKeys.space,
                         issueProvider.issueSummaryDetail.locname),
                     issueSummaryRow(LocaleKeys.spaceLoc,

@@ -185,7 +185,7 @@ class IssueServiceRepoImpml extends IssueServiceRepository {
       getAvailableActivities(String issueCode, String userToken) async {
     String url =
         '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=getAvailableActivities&issueCode=$issueCode&module=issue';
-
+    print(url);
     List<IssueAvailableActivities> issueAttachmentsModel;
 
     try {

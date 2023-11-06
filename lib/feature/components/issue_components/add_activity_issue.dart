@@ -38,11 +38,16 @@ class AddActivity extends StatelessWidget {
               ? issueActionProvider.getLiveSelectAsgGroupsFunc(issueCode)
               : null;
           if (issueActionProvider.isSuccessEnterActivity) {
-            snackBar(context,  LocaleKeys.processDone, 'success');
+            snackBar(context, LocaleKeys.processDone, 'success');
             Navigator.of(context).pop<bool>(true);
           }
           if (issueActionProvider.errorAccur) {
-            snackBar(context,issueActionProvider.errorMessage != ''? issueActionProvider.errorMessage: LocaleKeys.processCancell, 'error');
+            snackBar(
+                context,
+                issueActionProvider.errorMessage != ''
+                    ? issueActionProvider.errorMessage
+                    : LocaleKeys.processCancell,
+                'error');
             Navigator.of(context).pop<bool>(false);
           }
           return Container(
@@ -73,22 +78,27 @@ class AddActivity extends StatelessWidget {
                             child: Column(
                               children: [
                                 Text(
-                                    'Bu aktivitenin girilmesi, talebin durumunu ${issueActionProvider.selectedActivityName} olarak değiştirecektir.'),
+                                    'Talebin durumunu ${issueActionProvider.selectedActivityName} olarak değişecektir.'),
                                 NullCheckWidget().conditionCheckWidget(
                                     issueActionProvider.isBarcodeSpace,
-                                    !issueActionProvider.mobilePhoto ? Padding(
-                                      padding: const EdgeInsets.only(top: 8.0),
-                                      child:
-                                          TextFieldsInputWithActionAndController(
-                                              //readOnly: true,
-                                              textController:
-                                                  issueActionProvider.spaceCode,
-                                              labelText: LocaleKeys.spaceCode,
-                                              actionIcon: AppIcons.qr,
-                                              actionFunction:
-                                                  issueActionProvider
-                                                      .scanSpace),
-                                    ): Container()),
+                                    !issueActionProvider.mobilePhoto
+                                        ? Padding(
+                                            padding:
+                                                const EdgeInsets.only(top: 8.0),
+                                            child:
+                                                TextFieldsInputWithActionAndController(
+                                                    //readOnly: true,
+                                                    textController:
+                                                        issueActionProvider
+                                                            .spaceCode,
+                                                    labelText:
+                                                        LocaleKeys.spaceCode,
+                                                    actionIcon: AppIcons.qr,
+                                                    actionFunction:
+                                                        issueActionProvider
+                                                            .scanSpace),
+                                          )
+                                        : Container()),
                                 NullCheckWidget().conditionCheckWidget(
                                   issueActionProvider.isadditionaltimeInput,
                                   Padding(
@@ -141,18 +151,34 @@ class AddActivity extends StatelessWidget {
                                             : [''],
                                       ),
                                     )),
-                                NullCheckWidget().conditionCheckWidget(!issueActionProvider.mobilePhoto, Padding(
-                                  padding: const EdgeInsets.only(top: 8.0),
-                                  child: TextFieldsInput(
-                                    labelText: LocaleKeys.description,
-                                    onChangedFunction: (String text) {
-                                      issueActionProvider.setdescription(text);
-                                    },
+                                NullCheckWidget().conditionCheckWidget(
+                                  !issueActionProvider.mobilePhoto,
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 8.0),
+                                    child: TextFieldsInput(
+                                      labelText: LocaleKeys.description,
+                                      onChangedFunction: (String text) {
+                                        issueActionProvider
+                                            .setdescription(text);
+                                      },
+                                    ),
                                   ),
-                                ),),
-                            NullCheckWidget().conditionCheckWidget(issueActionProvider.mobilePhoto, ImageBottomSheetIssueActivity(issueCode:issueCode,activityCode: issueActionProvider.selectedActivityCode, spaceCode: issueActionProvider.isBarcodeSpace, clearContext: context,)),
-                            NullCheckWidget().conditionCheckWidget(!issueActionProvider.mobilePhoto, _saveOrQuit(
-                                    context, issueActionProvider, issueProvider),),
+                                ),
+                                NullCheckWidget().conditionCheckWidget(
+                                    issueActionProvider.mobilePhoto,
+                                    ImageBottomSheetIssueActivity(
+                                      issueCode: issueCode,
+                                      activityCode: issueActionProvider
+                                          .selectedActivityCode,
+                                      spaceCode:
+                                          issueActionProvider.isBarcodeSpace,
+                                      clearContext: context,
+                                    )),
+                                NullCheckWidget().conditionCheckWidget(
+                                  !issueActionProvider.mobilePhoto,
+                                  _saveOrQuit(context, issueActionProvider,
+                                      issueProvider),
+                                ),
                               ],
                             ),
                           )
@@ -196,7 +222,7 @@ class AddActivity extends StatelessWidget {
           leftOnPressed: () {
             Navigator.pop(context);
           },
-          rightOnPressed: ()  {
+          rightOnPressed: () {
             issueActionProvider.saveIssueActivity(issueCode);
           }),
     );
