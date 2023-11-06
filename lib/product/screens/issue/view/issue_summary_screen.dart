@@ -144,7 +144,7 @@ class IssueSummaryScreen extends StatelessWidget {
             Expanded(
               flex: 3,
               child: Text(
-                description ?? '-',
+                description == 'null' ? '-' : description,
                 style: TextStyle(color: APPColors.Secondary.black, fontSize: 14, fontWeight: FontWeight.w400),
               ),
             ),

@@ -1,7 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wm_ppp_4/feature/components/input_fields/text_fields_input_with_action_and_controller.dart';
 import 'package:wm_ppp_4/feature/l10n/locale_keys_gsh.g.dart';
+import 'package:wm_ppp_4/feature/route/app_route.gr.dart';
 import 'package:wm_ppp_4/product/screens/issue/provider/issue_action_provider.dart';
 import '../snackBar/snackbar.dart';
 import '../../constants/other/app_icons.dart';
@@ -33,10 +35,12 @@ class ImageBottomSheetIssueActivity extends StatelessWidget {
           child: Consumer<IssueActionProvider>(
             builder: (context, IssueActionProvider value, child) {
               if (value.isSuccessEnterActivityForFixed) {
+                context.router.pop();
                 Navigator.of(context).pop<bool>(true);
                 snackBar(context, LocaleKeys.processDone, 'success');
               }
               if (value.errorAccurForFixed) {
+                context.router.pop();
                 Navigator.of(context).pop<bool>(true);
                 snackBar(context, value.errorMessage, 'error');
               }

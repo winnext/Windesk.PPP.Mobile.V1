@@ -61,6 +61,9 @@ class IssueActionProvider extends ChangeNotifier {
   bool _errorAccurForFixed = false;
   bool get errorAccurForFixed => _errorAccurForFixed;
 
+  bool _quickFixExist = false;
+  bool get quickFixExist => _quickFixExist;
+
   String _selectedActivityName = 'Seçiniz';
   String get selectedActivityName => _selectedActivityName;
 
@@ -241,7 +244,6 @@ class IssueActionProvider extends ChangeNotifier {
         _mobilePhoto = _availableActivities[i].mobilePhoto == 'Y' ? true : false;
         _isassigneeccType = _availableActivities[i].assigneeccType == 'LIVESELECT' ? true : false;
         _selectedActivityCode = _availableActivities[i].code.toString();
-        print('------' + selectedActivityCode);
       }
     }
     notifyListeners();
@@ -276,6 +278,8 @@ class IssueActionProvider extends ChangeNotifier {
     _loading = true;
     notifyListeners();
     final response = await _issueServiceRepository.getIssueOperations(issuecode);
+    final responseActivities = getAvailableActivitiesForQuickFix(issuecode);
+
     response.fold(
         (l) => {
               _issueOperationList = l,
@@ -391,7 +395,32 @@ class IssueActionProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void scanBarcodeAndQr(state) async {
+  void getAvailableActivitiesForQuickFix(String issuecode) async {
+    String userToken = await SharedManager().getString(SharedEnum.deviceId);
+    _loading = true;
+    notifyListeners();
+    _quickFixExist = false;
+    final response = await _issueServiceRepository.getAvailableActivities(issuecode, userToken);
+
+    response.fold(
+        (l) => {
+              for (int i = 0; i < _availableActivities.length; i++)
+                {
+                  if (_availableActivities[i].acttypecode == 'QUICKFIXED')
+                    {
+                      _quickFixExist = true,
+                    }
+                },
+              _loading = false,
+            },
+        (r) => {
+              _loading = false,
+            });
+
+    notifyListeners();
+  }
+
+  void  scanBarcodeAndQr(state) async {
     String barcodeScanRes;
 
     try {

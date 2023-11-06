@@ -353,11 +353,11 @@ class IssueServiceRepoImpml extends IssueServiceRepository {
         if (response.data[ServiceResponseStatusEnums.info.rawText] == CustomServiceMessages.activityDocumentCannotEmptyError) {
           return Right(CustomServiceException(message: CustomServiceMessages.activityDocumentCannotEmptyErrorMessage, statusCode: response.statusCode.toString()));
         }
-        return Right(CustomServiceException(message: CustomServiceMessages.workOrderAddImageError, statusCode: response.statusCode.toString()));
+        return Right(CustomServiceException(message: CustomServiceMessages.activityError, statusCode: response.statusCode.toString()));
       }
     } catch (error) {
       super.logger.e(error.toString());
-      return Right(CustomServiceException(message: CustomServiceMessages.workOrderAddImageError, statusCode: '500'));
+      return Right(CustomServiceException(message: CustomServiceMessages.activityErrorForCatch, statusCode: '500'));
     }
   }
 
