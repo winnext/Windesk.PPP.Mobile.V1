@@ -64,14 +64,12 @@ class IssueSummaryScreen extends StatelessWidget {
                         LocaleKeys.description,
                         issueProvider.issueSummaryDetail.description
                             .toString()),
-                    issueSummaryRow(
-                        LocaleKeys.issueOwner,
-                        issueProvider.issueSummaryDetail.contactname
-                            .toString()),
+                    issueSummaryRow(LocaleKeys.issueOwner,
+                        issueProvider.issueSummaryDetail.contactname  ),
                     issueSummaryRow(LocaleKeys.space,
-                        issueProvider.issueSummaryDetail.locname.toString()),
+                        issueProvider.issueSummaryDetail.locname),
                     issueSummaryRow(LocaleKeys.spaceLoc,
-                        issueProvider.issueSummaryDetail.loctree.toString()),
+                        issueProvider.issueSummaryDetail.loctree),
                     issueSummaryRow(LocaleKeys.callReason,
                         issueProvider.issueSummaryDetail.title.toString()),
                     issueSummaryRow(
@@ -82,7 +80,7 @@ class IssueSummaryScreen extends StatelessWidget {
                     issueSummaryRow(LocaleKeys.openingDate,
                         issueProvider.issueSummaryDetail.idate.toString()),
                     issueSummaryRow(LocaleKeys.incallNumber,
-                        issueProvider.issueSummaryDetail.ani.toString()),
+                        issueProvider.issueSummaryDetail.ani),
                     issueSummaryRow(
                         LocaleKeys.targetResponsed,
                         issueProvider.issueSummaryDetail.targetRdate != null
@@ -111,10 +109,8 @@ class IssueSummaryScreen extends StatelessWidget {
                         LocaleKeys.assignmentGroup,
                         issueProvider.issueSummaryDetail.assignmentgroupname
                             .toString()),
-                    issueSummaryRow(
-                        LocaleKeys.assigneName,
-                        issueProvider.issueSummaryDetail.assigneename
-                            .toString()),
+                    issueSummaryRow(LocaleKeys.assigneName,
+                        issueProvider.issueSummaryDetail.assigneename),
                   ],
                 ),
               ),
