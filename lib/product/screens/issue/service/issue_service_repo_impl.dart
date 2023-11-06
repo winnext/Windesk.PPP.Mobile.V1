@@ -351,7 +351,8 @@ class IssueServiceRepoImpml extends IssueServiceRepository {
           return Right(CustomServiceException(message: CustomServiceMessages.activityCodeCannotEmpty, statusCode: response.statusCode.toString()));
         }
         if (response.data[ServiceResponseStatusEnums.info.rawText] == CustomServiceMessages.activityDocumentCannotEmptyError) {
-          return Right(CustomServiceException(message: CustomServiceMessages.activityDocumentCannotEmptyErrorMessage, statusCode: response.statusCode.toString()));
+          return Right(CustomServiceException(
+              message: CustomServiceMessages.activityDocumentCannotEmptyErrorMessage, statusCode: response.statusCode.toString()));
         }
         return Right(CustomServiceException(message: CustomServiceMessages.activityError, statusCode: response.statusCode.toString()));
       }

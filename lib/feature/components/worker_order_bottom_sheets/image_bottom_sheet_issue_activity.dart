@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wm_ppp_4/feature/components/input_fields/text_fields_input_with_action_and_controller.dart';
-import 'package:wm_ppp_4/feature/l10n/locale_keys_gsh.g.dart';
+import 'package:wm_ppp_4/feature/l10n/locale_keys.g.dart';
 import 'package:wm_ppp_4/feature/route/app_route.gr.dart';
 import 'package:wm_ppp_4/product/screens/issue/provider/issue_action_provider.dart';
 import '../snackBar/snackbar.dart';
@@ -104,14 +104,19 @@ class ImageBottomSheetIssueActivity extends StatelessWidget {
               ),
               const SizedBox(height: 24),
               CustomHalfButtons(
-                leftTitle: const Text(
-                  LocaleKeys.cancel,
-                  style: TextStyle(color: Colors.white),
-                ),
-                rightTitle: const Text(LocaleKeys.send, style: TextStyle(color: Colors.white)),
-                leftOnPressed: () => Navigator.of(context).pop(),
-                rightOnPressed: () => value.saveIssueActivityForFixed(issueCode, activityCode),
-              )
+                  leftTitle: const Text(
+                    LocaleKeys.cancel,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  rightTitle: const Text(LocaleKeys.send, style: TextStyle(color: Colors.white)),
+                  leftOnPressed: () => Navigator.of(context).pop(),
+                  rightOnPressed: () {
+                    if (value.description.length >= 20) {
+                      value.saveIssueActivityForFixed(issueCode, activityCode);
+                    } else {
+                      snackBar(context, LocaleKeys.descriptionLength, 'error');
+                    }
+                  })
             ],
           );
   }
