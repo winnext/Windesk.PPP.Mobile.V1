@@ -14,7 +14,7 @@ import '../../../feature/enums/shared_enums.dart';
 
 class SplashProvider extends ChangeNotifier {
   String? deviceModel;
-  String? deviceVersion;
+  String? deviceVersion;  
 
   late Timer _timer;
   bool _isSplashFinished = false;
