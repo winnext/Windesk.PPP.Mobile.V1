@@ -122,14 +122,23 @@ class IssueSummaryScreen extends StatelessWidget {
   }
 
   Column _fixWidget(IssueProvider issueProvider) {
+    print('FIX TIMER : ');
+    print(issueProvider.issueSummaryTimeInfo.fixedDate);
+
     return Column(children: [
       issueProvider.issueSummaryTimeInfo.fixTimer == LocaleKeys.zeroStr
           ? upTimeBar(
               issueProvider,
               LocaleKeys.fixedDate,
-              issueProvider.issueSummaryTimeInfo.fixTimer.toString(),
-              issueProvider.issueSummaryTimeInfo.targetFdate.toString(),
-              issueProvider.issueSummaryTimeInfo.fixedDate.toString())
+              issueProvider.issueSummaryTimeInfo.fixTimer != null
+                  ? issueProvider.issueSummaryTimeInfo.fixTimer.toString()
+                  : '0',
+              issueProvider.issueSummaryTimeInfo.targetFdate != null
+                  ? issueProvider.issueSummaryTimeInfo.targetFdate.toString()
+                  : '0',
+              issueProvider.issueSummaryTimeInfo.fixedDate != null
+                  ? issueProvider.issueSummaryTimeInfo.fixedDate.toString()
+                  : '0000000000000000')
           : upTimeBar(
               issueProvider,
               LocaleKeys.targetFixedDate,
@@ -146,7 +155,7 @@ class IssueSummaryScreen extends StatelessWidget {
   Column _responseWidget(IssueProvider issueProvider) {
     return Column(
       children: [
-        issueProvider.issueSummaryTimeInfo.planneddate == LocaleKeys.oPlanned
+        issueProvider.issueSummaryTimeInfo.statuscode == LocaleKeys.oPlanned
             ? Container(
                 decoration: BoxDecoration(
                     color: APPColors.NewNotifi.blue,
