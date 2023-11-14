@@ -116,8 +116,11 @@ class _CustomIssueListCardState extends State<CustomIssueListCard>
                               happeningTimeWidget(
                                   size,
                                   happenedResponse,
-                                  widget.issueListElement.responded_idate
-                                      .toString(),
+                                  widget.issueListElement.responded_idate !=
+                                          null
+                                      ? widget.issueListElement.responded_idate
+                                          .toString()
+                                      : numErrorStr,
                                   widget.issueListElement.target_rdate != null
                                       ? widget.issueListElement.target_rdate
                                           .toString()

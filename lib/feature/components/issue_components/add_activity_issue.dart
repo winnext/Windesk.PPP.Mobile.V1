@@ -39,7 +39,8 @@ class AddActivity extends StatelessWidget {
               : null;
           if (issueActionProvider.isSuccessEnterActivity) {
             snackBar(context, LocaleKeys.processDone, 'success');
-            Navigator.of(context).pop<bool>(true);
+            //Navigator.of(context).pop<bool>(true);
+            Navigator.pop(context);
           }
           if (issueActionProvider.errorAccur) {
             snackBar(
