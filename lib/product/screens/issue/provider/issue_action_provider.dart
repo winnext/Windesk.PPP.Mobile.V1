@@ -13,7 +13,6 @@ import 'package:wm_ppp_4/feature/models/issue_action_models/issue_available_acti
 import 'package:wm_ppp_4/feature/models/issue_action_models/issue_live_select_asg_groups_model.dart';
 import 'package:wm_ppp_4/feature/models/issue_action_models/issue_live_select_asg_users_model.dart';
 import 'package:wm_ppp_4/feature/models/issue_action_models/issue_operation_list_model.dart';
-import 'package:wm_ppp_4/product/screens/issue/provider/issue_provider.dart';
 import 'package:wm_ppp_4/product/screens/issue/service/issue_service_repo_impl.dart';
 
 class IssueActionProvider extends ChangeNotifier {
@@ -60,6 +59,9 @@ class IssueActionProvider extends ChangeNotifier {
 
   bool _errorAccurForFixed = false;
   bool get errorAccurForFixed => _errorAccurForFixed;
+
+  bool _quickFixExist = false;
+  bool get quickFixExist => _quickFixExist;
 
   String _selectedActivityName = 'Seçiniz';
   String get selectedActivityName => _selectedActivityName;
@@ -251,7 +253,6 @@ class IssueActionProvider extends ChangeNotifier {
                 ? true
                 : false;
         _selectedActivityCode = _availableActivities[i].code.toString();
-        print('------' + selectedActivityCode);
       }
     }
     notifyListeners();
@@ -285,8 +286,9 @@ class IssueActionProvider extends ChangeNotifier {
     _isFetch = true;
     _loading = true;
     notifyListeners();
-    final response =
-        await _issueServiceRepository.getIssueOperations(issuecode);
+    final response = await _issueServiceRepository.getIssueOperations(issuecode);
+    //final responseActivities = getAvailableActivitiesForQuickFix(issuecode);
+
     response.fold(
         (l) => {
               _issueOperationList = l,
@@ -410,7 +412,32 @@ class IssueActionProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void scanBarcodeAndQr(state) async {
+  void getAvailableActivitiesForQuickFix(String issuecode) async {
+    String userToken = await SharedManager().getString(SharedEnum.deviceId);
+    _loading = true;
+    notifyListeners();
+    _quickFixExist = false;
+    final response = await _issueServiceRepository.getAvailableActivities(issuecode, userToken);
+
+    response.fold(
+        (l) => {
+              for (int i = 0; i < _availableActivities.length; i++)
+                {
+                  if (_availableActivities[i].acttypecode == 'QUICKFIXED')
+                    {
+                      _quickFixExist = true,
+                    }
+                },
+              _loading = false,
+            },
+        (r) => {
+              _loading = false,
+            });
+
+    notifyListeners();
+  }
+
+  void  scanBarcodeAndQr(state) async {
     String barcodeScanRes;
 
     try {

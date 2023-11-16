@@ -213,7 +213,6 @@ class IssueProvider extends ChangeNotifier {
   String get assigne => _assigne;
   void setassigne() async {
     String userToken = await SharedManager().getString(SharedEnum.userCode);
-    print('object' + userToken);
     if (_assigne == '') {
       _assigne = userToken;
     } else {

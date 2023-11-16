@@ -5,7 +5,6 @@ import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wm_ppp_4/feature/constants/paths/asset_paths.dart';
-import 'package:wm_ppp_4/feature/elastic_log/elastic_log.dart';
 import 'package:wm_ppp_4/product/screens/home/service/home_service_repo_impl.dart';
 
 import '../../../../feature/components/buttons/custom_circular_home_button.dart';

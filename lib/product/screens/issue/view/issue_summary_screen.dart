@@ -122,9 +122,6 @@ class IssueSummaryScreen extends StatelessWidget {
   }
 
   Column _fixWidget(IssueProvider issueProvider) {
-    print('FIX TIMER : ');
-    print(issueProvider.issueSummaryTimeInfo.fixedDate);
-
     return Column(children: [
       issueProvider.issueSummaryTimeInfo.fixTimer == LocaleKeys.zeroStr
           ? upTimeBar(
@@ -183,9 +180,9 @@ class IssueSummaryScreen extends StatelessWidget {
                     LocaleKeys.targetResponsedDate,
                     issueProvider.issueSummaryTimeInfo.respondedTimer
                         .toString(),
-                    issueProvider.issueSummaryTimeInfo.targetRdate.toString() ??
+                    issueProvider.issueSummaryTimeInfo.targetRdate?.toString() ??
                         '',
-                    issueProvider.issueSummaryTimeInfo.targetRdate.toString() ??
+                    issueProvider.issueSummaryTimeInfo.targetRdate?.toString() ??
                         '')
       ],
     );
@@ -198,9 +195,8 @@ class IssueSummaryScreen extends StatelessWidget {
     String targetDate,
     String fixedDate,
   ) {
-    targetDate == null ||
+    targetDate == 'null' ||
             targetDate == '' ||
-            targetDate == 'null' ||
             targetDate == ' '
         ? targetDate = '0000000000000000'
         : null;
@@ -216,15 +212,15 @@ class IssueSummaryScreen extends StatelessWidget {
           targetDate == '0000000000000000'
               ? Text(
                   TimeClass().timeRecover(respondedTimer == LocaleKeys.zeroStr
-                      ? fixedDate ?? ''
-                      : targetDate ?? ''),
+                      ? fixedDate
+                      : targetDate),
                 )
               : Text(
                   TimeClass().timeRecover(respondedTimer == LocaleKeys.zeroStr
-                      ? fixedDate ?? ''
-                      : targetDate ?? ''),
+                      ? fixedDate
+                      : targetDate),
                   style: TimeClass().fixStyle(respondedTimer,
-                      targetDate == null ? '0' : targetDate, fixedDate),
+                      targetDate == 'null' ? '0' : targetDate, fixedDate),
                 )
         ],
       ),
@@ -251,11 +247,8 @@ class IssueSummaryScreen extends StatelessWidget {
             Expanded(
               flex: 3,
               child: Text(
-                description ?? '-',
-                style: TextStyle(
-                    color: APPColors.Secondary.black,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400),
+                description == 'null' ? '-' : description,
+                style: TextStyle(color: APPColors.Secondary.black, fontSize: 14, fontWeight: FontWeight.w400),
               ),
             ),
           ],

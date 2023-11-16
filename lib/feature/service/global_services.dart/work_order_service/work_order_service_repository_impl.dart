@@ -409,7 +409,6 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
 
     String url =
         '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=addWorkorderEffort&workordercode=$workOrderCode&username=$userName&module=workorder&workperiod=$workPeriod&startdate=1&type=PREDICTED&description=test';
-    print(url);
     try {
       final response = await super.dio.get(url);
       super.logger.e(response.toString());
@@ -445,7 +444,6 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
     bool result = false;
     String url =
         '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=addAttachment&username=$userName&moduleName=workorder&issueCode=$workOrderCode';
-    print(url);
     FormData formData = FormData.fromMap({"base64string": image});
     try {
       final response = await super.dio.post(url, data: formData);
@@ -454,7 +452,6 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
       if (response.data[ServiceResponseStatusEnums.result.rawText] ==
           ServiceStatusEnums.success.rawText) {
         result = true;
-        print(response.data);
         super.logger.e(result.toString());
 
         return Left(result);

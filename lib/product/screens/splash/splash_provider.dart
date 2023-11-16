@@ -51,18 +51,9 @@ class SplashProvider extends ChangeNotifier {
 
     // sets device information to shared preferences.
     if (deviceId != null && deviceOS != null && deviceModel != null) {
-      print('deviceId : ' + deviceId);
       var ipAddress = IpAddress(type: RequestType.json);
-
       /// Get the IpAddress based on requestType.
       dynamic data = await ipAddress.getIpAddress();
-
-      print('deviceModel : ' + deviceModel);
-      print('deviceOS : ' + deviceOS);
-      print('appVersion : ' + appVersion);
-      print('osVersion : ' + osVersion);
-
-      print(data['ip']);
       await SharedManager().setString(SharedEnum.deviceId, deviceId);
       await SharedManager().setString(SharedEnum.deviceModel, deviceModel);
       await SharedManager().setString(SharedEnum.deviceType, deviceOS);
@@ -102,7 +93,6 @@ class SplashProvider extends ChangeNotifier {
         await SharedManager().getString(SharedEnum.userCode);
     final String deviceId =
         await SharedManager().getString(SharedEnum.deviceId);
-    print(userCode);
     if (userCode.isNotEmpty && deviceId.isNotEmpty) {
       _isUserAlreadyLoggedIn = true;
       // await _authService.checkAccessToken(userToken).then((value) {

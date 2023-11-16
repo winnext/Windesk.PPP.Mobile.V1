@@ -23,7 +23,6 @@ class ElasticLog {
       int id1 = await txn.rawInsert(
           'INSERT INTO cache(loglevel,title,message,activity) VALUES(?, ?, ?, ?)',
           [logLevel, title, message, activity]);
-      print('inserted1: $id1');
     });
   }
 
@@ -38,10 +37,6 @@ class ElasticLog {
     var appVersion = await SharedManager().getString(SharedEnum.appVersion);
     var osVersion = await SharedManager().getString(SharedEnum.osVersion);
     var userCode = await SharedManager().getString(SharedEnum.userCode);
-    print('deviceModel : ' + deviceModel);
-    print('deviceOS : ' + deviceOS);
-    print('appVersion : ' + appVersion);
-    print('osVersion : ' + osVersion);
 
     var logData = {
       "GLOBAL": {
@@ -87,13 +82,10 @@ class ElasticLog {
         url,
         data: logData,
       );
-      print('ELASTIC : ');
-      print(logData);
+
       return response.data;
       // ignore: deprecated_member_use
     } on DioError catch (e) {
-      print('notsuccess');
-      print(e);
       if (message == 'İnternet bağlantısı kesildi.') {
         storeData(logLevel, title, message + now.toString(), activity);
       }

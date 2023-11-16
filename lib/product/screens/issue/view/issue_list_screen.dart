@@ -38,7 +38,7 @@ class IssueListScreen extends StatelessWidget {
           return Scaffold(
             appBar: CustomMainAppbar(
               title:
-                  Text(issueModuleName, style: TextStyle(color: Colors.black)),
+                  Text(issueModuleName, style: const TextStyle(color: Colors.black)),
               actions: [
                 IconButton(
                   onPressed: () async {

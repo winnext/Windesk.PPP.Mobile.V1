@@ -17,10 +17,7 @@ class CustomWorkOrderDetailCard extends StatelessWidget {
   final String _noDescriptionText = 'Açıklama girilmemiş.';
   final String _noNameText = 'İsim girilmemiş.';
   final String _noLocationText = 'Konum bilgisi girilmemiş.';
-  final String _noBarcodeLabel = 'Barkod bilgisi girilmemiş.';
-
   final String _locationLabel = 'Mahal Adresi';
-  final String _deviceBarcodeLabel = 'Cihaz Barkod No';
 
   @override
   Widget build(BuildContext context) {

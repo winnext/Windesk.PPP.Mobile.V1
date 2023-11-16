@@ -1,11 +1,7 @@
-import 'dart:io';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
-import 'package:wm_ppp_4/feature/components/generic_bottom_sheet/base_bottom_sheet.dart';
-import 'package:wm_ppp_4/feature/components/worker_order_bottom_sheets/image_bottom_sheet2.dart';
 import 'package:wm_ppp_4/feature/constants/other/colors.dart';
 import 'package:wm_ppp_4/product/screens/new_order/new_order_provider.dart';
 
@@ -53,23 +49,6 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
           // load(woProvider);
 
           // ignore: no_leading_underscores_for_local_identifiers
-          dynamic _showModal(BuildContext context) async {
-            WidgetsFlutterBinding.ensureInitialized();
-
-            // Obtain a list of the available cameras on the device.
-            //final cameras = await availableCameras();
-
-            // Get a specific camera from the list of available cameras.
-            //final firstCamera = cameras.first;
-            // ignore: use_build_context_synchronously
-            // await Navigator.of(context).push(
-            //     MaterialPageRoute<dynamic>(builder: (BuildContext context) {
-            //   return TakePictureScreen(
-            //     camera: firstCamera,
-            //     sayfa: 'Yeni İş Emri',
-            //   );
-            // }));
-          }
 
           List<String> hizmet = woProvider.woCreateHizmetListeArray[0];
           List hizmetDatasi = woProvider.woCreateHizmetListeArray;

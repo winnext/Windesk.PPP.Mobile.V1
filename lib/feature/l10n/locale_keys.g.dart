@@ -110,6 +110,9 @@ abstract class LocaleKeys {
   static const String rfid = 'RFID';
   static const String requestForSparepart = 'Yedek Parça Talebi';
   static const String sureAboutKeepProcess = 'Bu işleme devam etmek istediğinize emin misiniz?';
+  static const String descriptionLength = '20 karakter veya daha uzun açıklama girilmelidir.';
+  static const String send = 'Gönder';
+  static const String cancel = "İptal";
 
 
 

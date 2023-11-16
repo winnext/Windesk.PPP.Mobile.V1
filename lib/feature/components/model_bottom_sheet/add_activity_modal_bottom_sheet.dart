@@ -44,6 +44,9 @@ class IssueActionModal extends StatelessWidget {
             issueProvider.issueOperationList.isPhoto == true
                 ? _operationWidget(size, issueProvider, LocaleKeys.addPhoto, issueProvider.isPhotoSectionOpen, issueProvider.setisPhotoSectionOpen)
                 : Container(),
+            issueProvider.quickFixExist == true
+                ? _operationWidget(size, issueProvider, LocaleKeys.addPhoto, issueProvider.isPhotoSectionOpen, issueProvider.setisPhotoSectionOpen)
+                : Container(),
             issueProvider.isPhotoSectionOpen ? addPhotoBottomSheet(context, size, issueAddPhotoProvider) : Container(),
             issueProvider.issueOperationList.isActivity == true
                 ? _operationWidget(

@@ -38,7 +38,7 @@ class _CustomIssueActionButtonState extends State<CustomIssueActionButton> {
                             onPressed: () {
                               Navigator.pop(context);
                             },
-                            child: Icon(Icons.close))),
+                            child: const Icon(Icons.close))),
                     IssueActionModal(issueCode: widget.issueCode),
                   ],
                 ),
@@ -46,8 +46,10 @@ class _CustomIssueActionButtonState extends State<CustomIssueActionButton> {
               if (result == true) {
                 // ignore: use_build_context_synchronously
                 if (widget.isWorkOrder == true) {
+                  // ignore: use_build_context_synchronously
                   context.router.popAndPush(WorkOrderDetailScreen(workorderCode: widget.workOrderCode ?? ''));
                 } else {
+                  // ignore: use_build_context_synchronously
                   context.router.popAndPush(IssueDetailScreen(issueCode: widget.issueCode));
                 }
               }
