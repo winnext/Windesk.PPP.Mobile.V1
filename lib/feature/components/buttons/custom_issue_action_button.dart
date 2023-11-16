@@ -38,7 +38,7 @@ class _CustomIssueActionButtonState extends State<CustomIssueActionButton> {
                             onPressed: () {
                               Navigator.pop(context);
                             },
-                            child: Icon(Icons.close))),
+                            child: const Icon(Icons.close))),
                     IssueActionModal(issueCode: widget.issueCode),
                   ],
                 ),

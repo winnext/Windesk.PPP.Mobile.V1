@@ -338,8 +338,11 @@ class IssueServiceRepoImpml extends IssueServiceRepository {
         '&description=$description';
 
     FormData formData = FormData.fromMap({"base64string": image});
+
     try {
-      final response = await super.dio.post(url, data: formData);
+      final response = await super
+          .dio
+          .post(url, data: {'base64string': image, 'description': description}, options: Options(contentType: Headers.formUrlEncodedContentType));
       super.logger.i(response.toString());
 
       if (response.data[ServiceResponseStatusEnums.success.rawText] == true) {
