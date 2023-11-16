@@ -23,7 +23,7 @@ class TextFieldsInputWithActionAndController extends StatelessWidget {
     return Row(
       children: <Widget>[
         SizedBox(
-          width: MediaQuery.of(context).size.width * 0.80,
+          width: MediaQuery.of(context).size.width * 0.60,
           child: TextField(
             readOnly: readOnly ?? false,
             controller: textController,

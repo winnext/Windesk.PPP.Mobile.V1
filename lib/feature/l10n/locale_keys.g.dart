@@ -74,7 +74,7 @@ abstract class LocaleKeys {
   static const String hds = 'HDS';
   static const String assignmentGroup = 'Atama Grubu';
   static const String assigneName = 'Atanan Kişi';
-  static const String plannedIssue = 'Randevulu Vakadır';
+  static const String plannedIssue = 'Randevulu Vakadır : ';
   static const String noInfo = 'Bilgi Yok';
   static const String noTimeInfo = 'Zaman Bilgisi Yok';
   static const String zeroStr = '0';

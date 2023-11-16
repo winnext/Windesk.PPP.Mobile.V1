@@ -310,8 +310,7 @@ class IssueActionProvider extends ChangeNotifier {
     response.fold(
         (l) => {
               snackBar(context, LocaleKeys.processDone, 'success'),
-              //Navigator.of(context).pop<bool>(true),
-              Navigator.pop(context)
+              Navigator.of(context).pop<bool>(true),
             },
         (r) => {
               snackBar(context, LocaleKeys.processCancell, 'error'),
@@ -337,8 +336,7 @@ class IssueActionProvider extends ChangeNotifier {
     response.fold(
         (l) => {
               snackBar(context, LocaleKeys.processDone, 'success'),
-              //Navigator.of(context).pop<bool>(true),
-              Navigator.pop(context)
+              Navigator.of(context).pop<bool>(true),
             },
         (r) => {
               snackBar(context, LocaleKeys.processCancell, 'error'),
@@ -366,8 +364,7 @@ class IssueActionProvider extends ChangeNotifier {
     response.fold(
         (l) => {
               snackBar(context, LocaleKeys.processDone, 'success'),
-             // Navigator.of(context).pop<bool>(true),
-             Navigator.pop(context)
+             Navigator.of(context).pop<bool>(true),
             },
         (r) => {
               snackBar(context, LocaleKeys.processCancell, 'error'),

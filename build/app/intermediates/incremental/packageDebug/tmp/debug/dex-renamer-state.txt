@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-#Thu Nov 02 16:56:21 TRT 2023
-base.2=/Users/signumtte/Desktop/Windesk.PPP.Mobile.V1/build/app/intermediates/dex/debug/mergeDexDebug/classes3.dex
-=======
-#Mon Nov 06 15:35:11 TRT 2023
+#Thu Nov 16 16:44:07 TRT 2023
 base.2=/Users/muratcan.yusufoglu/Desktop/Windesk.PPP.Mobile.V1/build/app/intermediates/dex/debug/mergeDexDebug/classes3.dex
->>>>>>> 2763892f7824dbca4a7c8cfbc489f49a8a4a65ff
 path.2=classes3.dex
 base.1=/Users/muratcan.yusufoglu/Desktop/Windesk.PPP.Mobile.V1/build/app/intermediates/dex/debug/mergeDexDebug/classes2.dex
 path.1=classes2.dex
