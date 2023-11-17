@@ -336,7 +336,7 @@ class IssueProvider extends ChangeNotifier {
     response.fold(
         (l) => {
               _issueList.clear(),
-              _issueList.addAll(l),
+              _issueList.addAll(l.reversed),
               _loading = false,
               l.length % 10 == 0 ? null : _totalRecordCount = true,
               notifyListeners(),
