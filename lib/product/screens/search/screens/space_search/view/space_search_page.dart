@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:wm_ppp_4/feature/components/appbar/custom_main_appbar.dart';
+import 'package:wm_ppp_4/feature/components/loading/custom_loading_indicator.dart';
 import 'package:wm_ppp_4/feature/components/snackBar/snackbar.dart';
 import 'package:wm_ppp_4/feature/constants/other/colors.dart';
 import 'package:wm_ppp_4/product/screens/search/screens/space_search/provider/space_search_provider.dart';
@@ -19,25 +20,37 @@ class SpaceSearchPage extends StatefulWidget {
 class _SpaceSearchPageState extends State<SpaceSearchPage> {
   final globalKey = GlobalKey();
   cek(context) async {
-    final searchProvider = Provider.of<SpaceSearchProvider>(context, listen: false);
+    final searchProvider =
+        Provider.of<SpaceSearchProvider>(context, listen: false);
 
     await searchProvider.mahalAramaKampusFetchData();
     List<String> kampus = searchProvider.mahalAraKampusArray[0];
     List kampusDatasi = searchProvider.mahalAraKampusArray;
-    String dropdownvalueKampus = kampusDatasi[0].indexOf(searchProvider.mahalAraKampusValue) != -1 ? searchProvider.mahalAraKampusValue : kampus[0];
-    var secilenDegerKampus = kampusDatasi[1][kampusDatasi[0].indexOf(dropdownvalueKampus)];
+    String dropdownvalueKampus =
+        kampusDatasi[0].indexOf(searchProvider.mahalAraKampusValue) != -1
+            ? searchProvider.mahalAraKampusValue
+            : kampus[0];
+    var secilenDegerKampus =
+        kampusDatasi[1][kampusDatasi[0].indexOf(dropdownvalueKampus)];
 
     await searchProvider.mahalAramaBinaFetchData(secilenDegerKampus);
     List binaDatasi = searchProvider.mahalAraBinaArray;
     List<String> bina = searchProvider.mahalAraBinaArray[0];
-    String dropdownvalueBina = binaDatasi[0].indexOf(searchProvider.mahalAraBinaValue) != -1 ? searchProvider.mahalAraBinaValue : bina[0];
-    var secilenDegerBina = binaDatasi[1][binaDatasi[0].indexOf(dropdownvalueBina)];
+    String dropdownvalueBina =
+        binaDatasi[0].indexOf(searchProvider.mahalAraBinaValue) != -1
+            ? searchProvider.mahalAraBinaValue
+            : bina[0];
+    var secilenDegerBina =
+        binaDatasi[1][binaDatasi[0].indexOf(dropdownvalueBina)];
 
     await searchProvider.mahalAramaKatFetchData(secilenDegerBina);
     List<String> kat = searchProvider.mahalAraKatArray[0];
     List katDatasi = searchProvider.mahalAraKatArray;
 
-    String dropdownvalueKat = katDatasi[0].indexOf(searchProvider.mahalAraKatValue) != -1 ? searchProvider.mahalAraKatValue : kat[0];
+    String dropdownvalueKat =
+        katDatasi[0].indexOf(searchProvider.mahalAraKatValue) != -1
+            ? searchProvider.mahalAraKatValue
+            : kat[0];
 
     var secilenDegerKat = katDatasi[1][katDatasi[0].indexOf(dropdownvalueKat)];
 
@@ -55,21 +68,30 @@ class _SpaceSearchPageState extends State<SpaceSearchPage> {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => SpaceSearchProvider(),
-      child: Consumer<SpaceSearchProvider>(builder: (context, SpaceSearchProvider spaceSearchProvider, child) {
+      child: Consumer<SpaceSearchProvider>(
+          builder: (context, SpaceSearchProvider spaceSearchProvider, child) {
         //spaceSearchProvider.mahalAramaKampusFetchData();
-        spaceSearchProvider.mahalAraKampusArray.isNotEmpty ? null : cek(context);
+        spaceSearchProvider.mahalAraKampusArray.isNotEmpty
+            ? null
+            : cek(context);
         //print(_scrollController);
         ///////////////////////////////////////////////////////
         //////////////////////////////        ///////////////////////
         ///////////////////////       KAMPUS     ////////////////////////
         //////////////////////////           ///////////////////////
         //////////////////////////////////////////////////////////
-        List<String> kampus = spaceSearchProvider.mahalAraKampusArray[0];
+        List<String> kampus =
+            spaceSearchProvider.mahalAraKampusArray[0].length > 0
+                ? spaceSearchProvider.mahalAraKampusArray[0]
+                : ['Kampüs'];
         //print(spaceSearchProvider.mahalAraKampusArray);
         List kampusDatasi = spaceSearchProvider.mahalAraKampusArray;
 
         String dropdownvalueKampus =
-            kampusDatasi[0].indexOf(spaceSearchProvider.mahalAraKampusValue) != -1 ? spaceSearchProvider.mahalAraKampusValue : kampus[0];
+            kampusDatasi[0].indexOf(spaceSearchProvider.mahalAraKampusValue) !=
+                    -1
+                ? spaceSearchProvider.mahalAraKampusValue
+                : kampus[0];
 
         //spaceSearchProvider.mahalAramaBinaFetchData(secilen_deger_kampus);
         //print(spaceSearchProvider.mahalAraBinaArray);
@@ -83,7 +105,9 @@ class _SpaceSearchPageState extends State<SpaceSearchPage> {
         List<String> bina = spaceSearchProvider.mahalAraBinaArray[0];
 
         String dropdownvalueBina =
-            binaDatasi[0].indexOf(spaceSearchProvider.mahalAraBinaValue) != -1 ? spaceSearchProvider.mahalAraBinaValue : bina[0];
+            binaDatasi[0].indexOf(spaceSearchProvider.mahalAraBinaValue) != -1
+                ? spaceSearchProvider.mahalAraBinaValue
+                : bina[0];
 
         //print(spaceSearchProvider.mahalAraKatArray[0]);
 
@@ -96,7 +120,10 @@ class _SpaceSearchPageState extends State<SpaceSearchPage> {
         List<String> kat = spaceSearchProvider.mahalAraKatArray[0];
         List katDatasi = spaceSearchProvider.mahalAraKatArray;
 
-        String? dropdownvalueKat = katDatasi[0].indexOf(spaceSearchProvider.mahalAraKatValue) != -1 ? spaceSearchProvider.mahalAraKatValue : kat[0];
+        String? dropdownvalueKat =
+            katDatasi[0].indexOf(spaceSearchProvider.mahalAraKatValue) != -1
+                ? spaceSearchProvider.mahalAraKatValue
+                : kat[0];
 
         ///////////////////////////////////////////////////////
         //////////////////////////////        ///////////////////////
@@ -108,7 +135,9 @@ class _SpaceSearchPageState extends State<SpaceSearchPage> {
         List kanatDatasi = spaceSearchProvider.mahalAraKanatArray;
 
         String dropdownvalueKanat =
-            kanatDatasi[0].indexOf(spaceSearchProvider.mahalAraKanatValue) != -1 ? spaceSearchProvider.mahalAraKanatValue : kanat[0];
+            kanatDatasi[0].indexOf(spaceSearchProvider.mahalAraKanatValue) != -1
+                ? spaceSearchProvider.mahalAraKanatValue
+                : kanat[0];
 
         ///////////////////////////////////////////////////////
         //////////////////////////////        ///////////////////////
@@ -164,27 +193,37 @@ class _SpaceSearchPageState extends State<SpaceSearchPage> {
                                       alignment: Alignment.centerRight,
                                       children: <Widget>[
                                         TextField(
-                                          controller: spaceSearchProvider.mahalAramaMahalKodu,
+                                          controller: spaceSearchProvider
+                                              .mahalAramaMahalKodu,
                                           decoration: InputDecoration(
                                             border: OutlineInputBorder(
-                                              borderRadius: BorderRadius.circular(12.0),
+                                              borderRadius:
+                                                  BorderRadius.circular(12.0),
                                             ),
                                             labelText: 'Mahal Kodu',
                                           ),
                                           onChanged: (inputValue) {
                                             //print(spaceSearchProvider.varliKodu.text);
-                                            if (spaceSearchProvider.varliKodu.text == '') {
-                                              spaceSearchProvider.setVakaButonVisible = false;
+                                            if (spaceSearchProvider
+                                                    .varliKodu.text ==
+                                                '') {
+                                              spaceSearchProvider
+                                                  .setVakaButonVisible = false;
                                             } else {
-                                              spaceSearchProvider.setVakaButonVisible = true;
+                                              spaceSearchProvider
+                                                  .setVakaButonVisible = true;
                                             }
                                           },
                                         ),
                                         IconButton(
-                                          icon: const Icon(Icons.qr_code_scanner),
+                                          icon:
+                                              const Icon(Icons.qr_code_scanner),
                                           onPressed: () {
-                                            spaceSearchProvider.scanBarcodeNormal('setMahalAramaMahalKodu');
-                                            FocusScope.of(context).requestFocus(FocusNode());
+                                            spaceSearchProvider
+                                                .scanBarcodeNormal(
+                                                    'setMahalAramaMahalKodu');
+                                            FocusScope.of(context)
+                                                .requestFocus(FocusNode());
                                             // Your codes...
                                           },
                                         ),
@@ -194,19 +233,24 @@ class _SpaceSearchPageState extends State<SpaceSearchPage> {
                                   Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: TextField(
-                                      controller: spaceSearchProvider.mahalAramaMahalAdi,
+                                      controller: spaceSearchProvider
+                                          .mahalAramaMahalAdi,
                                       decoration: InputDecoration(
                                         border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(12.0),
+                                          borderRadius:
+                                              BorderRadius.circular(12.0),
                                         ),
                                         labelText: 'Mahal Adı',
                                       ),
                                       onChanged: (inputValue) {
                                         //print(spaceSearchProvider.vakaNo.text);
-                                        if (spaceSearchProvider.vakaNo.text == '') {
-                                          spaceSearchProvider.setVakaButonVisible = false;
+                                        if (spaceSearchProvider.vakaNo.text ==
+                                            '') {
+                                          spaceSearchProvider
+                                              .setVakaButonVisible = false;
                                         } else {
-                                          spaceSearchProvider.setVakaButonVisible = true;
+                                          spaceSearchProvider
+                                              .setVakaButonVisible = true;
                                         }
                                       },
                                     ),
@@ -220,13 +264,15 @@ class _SpaceSearchPageState extends State<SpaceSearchPage> {
                                       value: dropdownvalueKampus,
                                       decoration: InputDecoration(
                                         border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(12.0),
+                                          borderRadius:
+                                              BorderRadius.circular(12.0),
                                         ),
                                         labelText: 'Kampüs',
                                       ),
 
                                       // Down Arrow Icon
-                                      icon: const Icon(Icons.keyboard_arrow_down),
+                                      icon:
+                                          const Icon(Icons.keyboard_arrow_down),
 
                                       // Array list of items
                                       items: kampus.map((String items) {
@@ -241,7 +287,8 @@ class _SpaceSearchPageState extends State<SpaceSearchPage> {
                                         setState(() {
                                           dropdownvalueKampus = newValue!;
                                         });
-                                        spaceSearchProvider.setmahalAraKampusValue = newValue!;
+                                        spaceSearchProvider
+                                            .setmahalAraKampusValue = newValue!;
                                         cek(context);
                                       },
                                     ),
@@ -256,13 +303,15 @@ class _SpaceSearchPageState extends State<SpaceSearchPage> {
                                             value: dropdownvalueBina,
                                             decoration: InputDecoration(
                                               border: OutlineInputBorder(
-                                                borderRadius: BorderRadius.circular(12.0),
+                                                borderRadius:
+                                                    BorderRadius.circular(12.0),
                                               ),
                                               labelText: 'Bina',
                                             ),
 
                                             // Down Arrow Icon
-                                            icon: const Icon(Icons.keyboard_arrow_down),
+                                            icon: const Icon(
+                                                Icons.keyboard_arrow_down),
 
                                             // Array list of items
                                             items: bina.map((String items) {
@@ -277,7 +326,9 @@ class _SpaceSearchPageState extends State<SpaceSearchPage> {
                                               setState(() {
                                                 dropdownvalueBina = newValue!;
                                               });
-                                              spaceSearchProvider.setmahalAraBinaValue = newValue!;
+                                              spaceSearchProvider
+                                                      .setmahalAraBinaValue =
+                                                  newValue!;
 
                                               cek(context);
                                             },
@@ -294,13 +345,15 @@ class _SpaceSearchPageState extends State<SpaceSearchPage> {
                                             value: dropdownvalueKat,
                                             decoration: InputDecoration(
                                               border: OutlineInputBorder(
-                                                borderRadius: BorderRadius.circular(12.0),
+                                                borderRadius:
+                                                    BorderRadius.circular(12.0),
                                               ),
                                               labelText: 'Kat',
                                             ),
 
                                             // Down Arrow Icon
-                                            icon: const Icon(Icons.keyboard_arrow_down),
+                                            icon: const Icon(
+                                                Icons.keyboard_arrow_down),
 
                                             // Array list of items
                                             items: kat.map((String items) {
@@ -314,7 +367,9 @@ class _SpaceSearchPageState extends State<SpaceSearchPage> {
                                             onChanged: (String? newValue) {
                                               setState(() {
                                                 dropdownvalueKat = newValue;
-                                                spaceSearchProvider.setMahalAraKatValue = newValue!;
+                                                spaceSearchProvider
+                                                        .setMahalAraKatValue =
+                                                    newValue!;
                                               });
                                               cek(context);
                                             },
@@ -331,13 +386,15 @@ class _SpaceSearchPageState extends State<SpaceSearchPage> {
                                             value: dropdownvalueKanat,
                                             decoration: InputDecoration(
                                               border: OutlineInputBorder(
-                                                borderRadius: BorderRadius.circular(12.0),
+                                                borderRadius:
+                                                    BorderRadius.circular(12.0),
                                               ),
                                               labelText: 'Kanat',
                                             ),
 
                                             // Down Arrow Icon
-                                            icon: const Icon(Icons.keyboard_arrow_down),
+                                            icon: const Icon(
+                                                Icons.keyboard_arrow_down),
 
                                             // Array list of items
                                             items: kanat.map((String items) {
@@ -352,7 +409,9 @@ class _SpaceSearchPageState extends State<SpaceSearchPage> {
                                               setState(() {
                                                 dropdownvalueKanat = newValue!;
                                               });
-                                              spaceSearchProvider.setMahalAraKanatValue = newValue!;
+                                              spaceSearchProvider
+                                                      .setMahalAraKanatValue =
+                                                  newValue!;
                                               cek(context);
                                             },
                                           ),
@@ -367,13 +426,15 @@ class _SpaceSearchPageState extends State<SpaceSearchPage> {
                                       value: dropdownvalueSinif,
                                       decoration: InputDecoration(
                                         border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(12.0),
+                                          borderRadius:
+                                              BorderRadius.circular(12.0),
                                         ),
                                         labelText: 'Sınıf',
                                       ),
 
                                       // Down Arrow Icon
-                                      icon: const Icon(Icons.keyboard_arrow_down),
+                                      icon:
+                                          const Icon(Icons.keyboard_arrow_down),
 
                                       // Array list of items
                                       items: sinif.map((String items) {
@@ -388,7 +449,8 @@ class _SpaceSearchPageState extends State<SpaceSearchPage> {
                                         setState(() {
                                           dropdownvalueSinif = newValue!;
                                         });
-                                        spaceSearchProvider.setMahalAraSinifValue = newValue!;
+                                        spaceSearchProvider
+                                            .setMahalAraSinifValue = newValue!;
                                       },
                                     ),
                                   ),
@@ -401,13 +463,15 @@ class _SpaceSearchPageState extends State<SpaceSearchPage> {
                                       value: dropdownvalueGrup,
                                       decoration: InputDecoration(
                                         border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(12.0),
+                                          borderRadius:
+                                              BorderRadius.circular(12.0),
                                         ),
                                         labelText: 'Grup',
                                       ),
 
                                       // Down Arrow Icon
-                                      icon: const Icon(Icons.keyboard_arrow_down),
+                                      icon:
+                                          const Icon(Icons.keyboard_arrow_down),
 
                                       // Array list of items
                                       items: grup.map((String items) {
@@ -422,12 +486,17 @@ class _SpaceSearchPageState extends State<SpaceSearchPage> {
                                         setState(() {
                                           dropdownvalueGrup = newValue!;
                                         });
-                                        spaceSearchProvider.setMahalAraGrupValue = newValue!;
+                                        spaceSearchProvider
+                                            .setMahalAraGrupValue = newValue!;
                                       },
                                     ),
                                   ),
-                                  spaceSearchProvider.mahalAramaMahalKodu.text != '' ||
-                                          spaceSearchProvider.mahalAramaMahalAdi.text != '' ||
+                                  spaceSearchProvider
+                                                  .mahalAramaMahalKodu.text !=
+                                              '' ||
+                                          spaceSearchProvider
+                                                  .mahalAramaMahalAdi.text !=
+                                              '' ||
                                           dropdownvalueKampus != 'Kampüs' ||
                                           dropdownvalueBina != 'Bina' ||
                                           dropdownvalueKat != 'Kat' ||
@@ -444,18 +513,34 @@ class _SpaceSearchPageState extends State<SpaceSearchPage> {
                                                 // ignore: deprecated_member_use
                                                 primary: APPColors.Main.red,
                                                 shape: RoundedRectangleBorder(
-                                                  borderRadius: BorderRadius.circular(20), // <-- Radius
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          20), // <-- Radius
                                                 ),
                                               ),
                                               onPressed: () {
-                                                spaceSearchProvider.setmahalAraKampusValue = 'Kampüs';
-                                                spaceSearchProvider.setmahalAraBinaValue = 'Bina';
-                                                spaceSearchProvider.setMahalAraKatValue = 'Kat';
-                                                spaceSearchProvider.setMahalAraKanatValue = 'Kanat';
-                                                spaceSearchProvider.setMahalAraSinifValue = 'Sınıf';
-                                                spaceSearchProvider.setMahalAraGrupValue = 'Grup';
-                                                spaceSearchProvider.setMahalAramaMahalAdi = '';
-                                                spaceSearchProvider.setMahalAramaMahalKodu = '';
+                                                spaceSearchProvider
+                                                        .setmahalAraKampusValue =
+                                                    'Kampüs';
+                                                spaceSearchProvider
+                                                        .setmahalAraBinaValue =
+                                                    'Bina';
+                                                spaceSearchProvider
+                                                        .setMahalAraKatValue =
+                                                    'Kat';
+                                                spaceSearchProvider
+                                                        .setMahalAraKanatValue =
+                                                    'Kanat';
+                                                spaceSearchProvider
+                                                        .setMahalAraSinifValue =
+                                                    'Sınıf';
+                                                spaceSearchProvider
+                                                        .setMahalAraGrupValue =
+                                                    'Grup';
+                                                spaceSearchProvider
+                                                    .setMahalAramaMahalAdi = '';
+                                                spaceSearchProvider
+                                                    .setMahalAramaMahalKodu = '';
                                               },
                                               child: const Text('Temizle'),
                                             ),
@@ -472,81 +557,158 @@ class _SpaceSearchPageState extends State<SpaceSearchPage> {
                                           // ignore: deprecated_member_use
                                           primary: APPColors.Login.blue,
                                           shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(20), // <-- Radius
+                                            borderRadius: BorderRadius.circular(
+                                                20), // <-- Radius
                                           ),
                                         ),
                                         onPressed: () async {
-                                          List binaDatasi = spaceSearchProvider.mahalAraBinaArray;
-                                          List<String> bina = spaceSearchProvider.mahalAraBinaArray[0];
-                                          String dropdownvalueBina = binaDatasi[0].indexOf(spaceSearchProvider.mahalAraBinaValue) != -1
-                                              ? spaceSearchProvider.mahalAraBinaValue
+                                          List binaDatasi = spaceSearchProvider
+                                              .mahalAraBinaArray;
+                                          List<String> bina =
+                                              spaceSearchProvider
+                                                  .mahalAraBinaArray[0];
+                                          String dropdownvalueBina = binaDatasi[
+                                                          0]
+                                                      .indexOf(spaceSearchProvider
+                                                          .mahalAraBinaValue) !=
+                                                  -1
+                                              ? spaceSearchProvider
+                                                  .mahalAraBinaValue
                                               : bina[0];
 
-                                          List<String> kat = spaceSearchProvider.mahalAraKatArray[0];
-                                          List katDatasi = spaceSearchProvider.mahalAraKatArray;
-                                          String dropdownvalueKat = katDatasi[0].indexOf(spaceSearchProvider.mahalAraKatValue) != -1
-                                              ? spaceSearchProvider.mahalAraKatValue
+                                          List<String> kat = spaceSearchProvider
+                                              .mahalAraKatArray[0];
+                                          List katDatasi = spaceSearchProvider
+                                              .mahalAraKatArray;
+                                          String dropdownvalueKat = katDatasi[0]
+                                                      .indexOf(spaceSearchProvider
+                                                          .mahalAraKatValue) !=
+                                                  -1
+                                              ? spaceSearchProvider
+                                                  .mahalAraKatValue
                                               : kat[0];
 
-                                          List<String> kanat = spaceSearchProvider.mahalAraKanatArray[0];
-                                          List kanatDatasi = spaceSearchProvider.mahalAraKanatArray;
-                                          String dropdownvalueKanat = kanatDatasi[0].indexOf(spaceSearchProvider.mahalAraKanatValue) != -1
-                                              ? spaceSearchProvider.mahalAraKanatValue
-                                              : kanat[0];
+                                          List<String> kanat =
+                                              spaceSearchProvider
+                                                  .mahalAraKanatArray[0];
+                                          List kanatDatasi = spaceSearchProvider
+                                              .mahalAraKanatArray;
+                                          String
+                                              dropdownvalueKanat =
+                                              kanatDatasi[0].indexOf(
+                                                          spaceSearchProvider
+                                                              .mahalAraKanatValue) !=
+                                                      -1
+                                                  ? spaceSearchProvider
+                                                      .mahalAraKanatValue
+                                                  : kanat[0];
 
-                                          List sinifDatasi = spaceSearchProvider.mahalAraSinifArray;
-                                          String dropdownvalueSinif = spaceSearchProvider.mahalAraSinifValue;
+                                          List sinifDatasi = spaceSearchProvider
+                                              .mahalAraSinifArray;
+                                          String dropdownvalueSinif =
+                                              spaceSearchProvider
+                                                  .mahalAraSinifValue;
 
-                                          List grupDatasi = spaceSearchProvider.mahalAraGrupArray;
-                                          String dropdownvalueGrup = spaceSearchProvider.mahalAraGrupValue;
+                                          List grupDatasi = spaceSearchProvider
+                                              .mahalAraGrupArray;
+                                          String dropdownvalueGrup =
+                                              spaceSearchProvider
+                                                  .mahalAraGrupValue;
 
-                                          var mahalKodu = spaceSearchProvider.mahalAramaMahalKodu.text;
-                                          var mahalAdi = spaceSearchProvider.mahalAramaMahalAdi.text;
+                                          var mahalKodu = spaceSearchProvider
+                                              .mahalAramaMahalKodu.text;
+                                          var mahalAdi = spaceSearchProvider
+                                              .mahalAramaMahalAdi.text;
 
-                                          var binaKodum = spaceSearchProvider.mahalAraBinaArray[1][binaDatasi[0].indexOf(dropdownvalueBina)];
-                                          var binaKodu = binaKodum != 'Bina' ? binaKodum : '';
+                                          var binaKodum = spaceSearchProvider
+                                                  .mahalAraBinaArray[1][
+                                              binaDatasi[0]
+                                                  .indexOf(dropdownvalueBina)];
+                                          var binaKodu = binaKodum != 'Bina'
+                                              ? binaKodum
+                                              : '';
 
-                                          var katKodum = spaceSearchProvider.mahalAraKatArray[1][katDatasi[0].indexOf(dropdownvalueKat)];
-                                          var katKodu = katKodum != 'Kat' ? katKodum : '';
+                                          var katKodum = spaceSearchProvider
+                                                  .mahalAraKatArray[1][
+                                              katDatasi[0]
+                                                  .indexOf(dropdownvalueKat)];
+                                          var katKodu =
+                                              katKodum != 'Kat' ? katKodum : '';
 
-                                          var kanatKodum = spaceSearchProvider.mahalAraKanatArray[1][kanatDatasi[0].indexOf(dropdownvalueKanat)];
-                                          var kanatKodu = kanatKodum != 'Kanat' ? kanatKodum : '';
+                                          var kanatKodum = spaceSearchProvider
+                                                  .mahalAraKanatArray[1][
+                                              kanatDatasi[0]
+                                                  .indexOf(dropdownvalueKanat)];
+                                          var kanatKodu = kanatKodum != 'Kanat'
+                                              ? kanatKodum
+                                              : '';
 
-                                          var sinifKodum = spaceSearchProvider.mahalAraSinifArray[1][sinifDatasi[0].indexOf(dropdownvalueSinif)];
-                                          var sinifKodu = sinifKodum != 'Sınıf' ? sinifKodum : '';
+                                          var sinifKodum = spaceSearchProvider
+                                                  .mahalAraSinifArray[1][
+                                              sinifDatasi[0]
+                                                  .indexOf(dropdownvalueSinif)];
+                                          var sinifKodu = sinifKodum != 'Sınıf'
+                                              ? sinifKodum
+                                              : '';
 
-                                          var grupKodum = spaceSearchProvider.mahalAraGrupArray[1][grupDatasi[0].indexOf(dropdownvalueGrup)];
-                                          var grupKodu = grupKodum != 'Grup' ? grupKodum : '';
+                                          var grupKodum = spaceSearchProvider
+                                                  .mahalAraGrupArray[1][
+                                              grupDatasi[0]
+                                                  .indexOf(dropdownvalueGrup)];
+                                          var grupKodu = grupKodum != 'Grup'
+                                              ? grupKodum
+                                              : '';
 
                                           // var kat = dropdownvalueKat != 'Kat' ? dropdownvalueKat : '';
                                           // var kanat = dropdownvalueKanat != 'Kanat' ? dropdownvalueKanat : '';
                                           // var sinif = dropdownvalueSinif != 'Sınıf' ? dropdownvalueSinif : '';
                                           //var grup = dropdownvalueGrup != 'Grup' ? dropdownvalueGrup : '';
-                                          if (spaceSearchProvider.mahalAramaMahalKodu.text == '' &&
-                                              spaceSearchProvider.mahalAramaMahalAdi.text == '' &&
+                                          if (spaceSearchProvider
+                                                      .mahalAramaMahalKodu
+                                                      .text ==
+                                                  '' &&
+                                              spaceSearchProvider
+                                                      .mahalAramaMahalAdi
+                                                      .text ==
+                                                  '' &&
                                               dropdownvalueKampus == 'Kampüs' &&
                                               dropdownvalueBina == 'Bina' &&
                                               dropdownvalueKat == 'Kat' &&
                                               dropdownvalueKanat == 'Kanat') {
-                                            snackBar(context, 'Arama yaparken en az bir kriter seçilmelidir', 'info');
+                                            snackBar(
+                                                context,
+                                                'Arama yaparken en az bir kriter seçilmelidir',
+                                                'info');
                                           } else {
                                             spaceSearchProvider.setSayfa = '1';
-                                            List liste = await spaceSearchProvider.mahalAramaListesi(
-                                                context, mahalKodu, mahalAdi, binaKodu, katKodu, kanatKodu, sinifKodu, grupKodu, 20, 1);
+                                            List liste =
+                                                await spaceSearchProvider
+                                                    .mahalAramaListesi(
+                                                        context,
+                                                        mahalKodu,
+                                                        mahalAdi,
+                                                        binaKodu,
+                                                        katKodu,
+                                                        kanatKodu,
+                                                        sinifKodu,
+                                                        grupKodu,
+                                                        20,
+                                                        1);
                                             //push button
                                             // ignore: use_build_context_synchronously
                                             Navigator.push(
                                               context,
                                               MaterialPageRoute(
-                                                  builder: (context) => SpaceSearchList(
-                                                      mahalKodu: mahalKodu,
-                                                      mahalAdi: mahalAdi,
-                                                      binaKodu: binaKodu,
-                                                      katKodu: katKodu,
-                                                      kanatKodu: kanatKodu,
-                                                      sinifKodu: sinifKodu,
-                                                      grupKodu: grupKodu,
-                                                      liste: liste)),
+                                                  builder: (context) =>
+                                                      SpaceSearchList(
+                                                          mahalKodu: mahalKodu,
+                                                          mahalAdi: mahalAdi,
+                                                          binaKodu: binaKodu,
+                                                          katKodu: katKodu,
+                                                          kanatKodu: kanatKodu,
+                                                          sinifKodu: sinifKodu,
+                                                          grupKodu: grupKodu,
+                                                          liste: liste)),
                                             );
                                           }
                                         },
@@ -558,7 +720,7 @@ class _SpaceSearchPageState extends State<SpaceSearchPage> {
                               ),
                             ),
                           )
-                        : const Text('data'))),
+                        : const CustomLoadingIndicator())),
           );
         });
       }),

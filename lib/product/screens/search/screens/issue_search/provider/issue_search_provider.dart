@@ -5,7 +5,8 @@ import 'package:wm_ppp_4/product/screens/issue/view/issue_detail_screen.dart';
 import '../../../service/search_service_repo_impl.dart';
 
 class IssueSearchProvider extends ChangeNotifier {
-  final SearchServiceRepoImpml _searchServiceRepository = SearchServiceRepoImpml();
+  final SearchServiceRepoImpml _searchServiceRepository =
+      SearchServiceRepoImpml();
 
   String _searchIssueCode = '';
   String get searchIssueCode => _searchIssueCode;
@@ -14,8 +15,16 @@ class IssueSearchProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  bool _dataUpdate = false;
+  bool get dataUpdate => _dataUpdate;
+  set setDataUpdate(bool dataUpdate) {
+    _dataUpdate = dataUpdate;
+    notifyListeners();
+  }
+
   printSearchData(context) async {
-    final response = await _searchServiceRepository.checkIssueByAuth(searchIssueCode);
+    final response =
+        await _searchServiceRepository.checkIssueByAuth(searchIssueCode);
     // ignore: avoid_print
     response.fold(
         (l) => {
@@ -29,7 +38,12 @@ class IssueSearchProvider extends ChangeNotifier {
                   )
                 }
               else
-                {snackBar(context, "Girdiğiniz vaka numarası hatalı veya vakayı görmeye yetkiniz yoktur.", 'error')}
+                {
+                  snackBar(
+                      context,
+                      "Girdiğiniz vaka numarası hatalı veya vakayı görmeye yetkiniz yoktur.",
+                      'error')
+                }
             },
         // ignore: avoid_print
         (r) => {print('error')});

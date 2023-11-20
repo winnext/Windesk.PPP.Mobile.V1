@@ -19,6 +19,8 @@ class IssueSearchPage extends StatelessWidget {
         create: (context) => IssueSearchProvider(),
         child: Consumer<IssueSearchProvider>(
             builder: (context, IssueSearchProvider issueSearchProvider, child) {
+        
+
           return Scaffold(
             appBar: const CustomTabAppbar(
               title: AppStrings.caseSlaSearch,

@@ -14,10 +14,12 @@ import 'package:wm_ppp_4/feature/models/issue_action_models/issue_live_select_as
 import 'package:wm_ppp_4/feature/models/issue_action_models/issue_live_select_asg_users_model.dart';
 import 'package:wm_ppp_4/feature/models/issue_action_models/issue_operation_list_model.dart';
 import 'package:wm_ppp_4/product/screens/issue/service/issue_service_repo_impl.dart';
+import 'package:wm_ppp_4/product/screens/search/screens/issue_search/provider/issue_search_provider.dart';
 
 class IssueActionProvider extends ChangeNotifier {
   final IssueServiceRepoImpml _issueServiceRepository = IssueServiceRepoImpml();
   final ImagePicker picker = ImagePicker();
+    IssueSearchProvider issueSearchProvider = IssueSearchProvider();
 
   bool _isFetch = false;
   bool get isFetch => _isFetch;
@@ -304,15 +306,16 @@ class IssueActionProvider extends ChangeNotifier {
     _loading = true;
     String userToken = await SharedManager().getString(SharedEnum.deviceId);
     String userCode = await SharedManager().getString(SharedEnum.userCode);
-
     final response = await _issueServiceRepository.takeOverIssue(
         userToken, userCode, issuecode);
     response.fold(
         (l) => {
+          
               snackBar(context, LocaleKeys.processDone, 'success'),
               Navigator.of(context).pop<bool>(true),
             },
         (r) => {
+          issueSearchProvider.setDataUpdate = true,
               snackBar(context, LocaleKeys.processCancell, 'error'),
               Navigator.of(context).pop<bool>(false),
             });
