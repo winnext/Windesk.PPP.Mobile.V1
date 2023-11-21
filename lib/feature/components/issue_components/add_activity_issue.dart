@@ -119,9 +119,12 @@ class AddActivity extends StatelessWidget {
                                       child: DropDownInputFields(
                                         labelText: LocaleKeys.selectGroup,
                                         onChangedFunction: (item) {
+                                          print('ITEM ITEM : ' + item);
+
                                           issueActionProvider
                                               .setSelectedAsgGroups(
                                                   issueCode, item.toString());
+                                          
                                         },
                                         rightIcon: Icons.arrow_drop_down,
                                         dropDownArray: issueActionProvider
@@ -132,23 +135,30 @@ class AddActivity extends StatelessWidget {
                                     issueActionProvider
                                         .getLiveSelectAsgGroupsName.isNotEmpty,
                                     Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: DropDownInputFields(
-                                        labelText: LocaleKeys.selectUser,
-                                        onChangedFunction: (item) {
-                                          issueActionProvider
-                                              .setSelectedAsgUser(
-                                                  item.toString());
-                                        },
-                                        rightIcon: Icons.arrow_drop_down,
-                                        dropDownArray: issueActionProvider
-                                                .getLiveSelectAsgUsersName
-                                                .isNotEmpty
-                                            ? issueActionProvider
-                                                .getLiveSelectAsgUsersName
-                                            : [''],
-                                      ),
-                                    )),
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: issueActionProvider
+                                                    .selectedAsgGroupName !=
+                                                LocaleKeys.selectGroup
+                                            ? DropDownInputFields(
+                                                labelText:
+                                                    LocaleKeys.selectUser,
+                                                onChangedFunction: (item) {
+                                                  print(
+                                                      'ITEMIM : ITEM ' + item);
+                                                  issueActionProvider
+                                                      .setSelectedAsgUser(
+                                                          item.toString());
+                                                },
+                                                rightIcon:
+                                                    Icons.arrow_drop_down,
+                                                dropDownArray: issueActionProvider
+                                                        .getLiveSelectAsgUsersName
+                                                        .isNotEmpty
+                                                    ? issueActionProvider
+                                                        .getLiveSelectAsgUsersName
+                                                    : ['Kullanıcı Seçiniz'],
+                                              )
+                                            : null)),
                                 NullCheckWidget().conditionCheckWidget(
                                   !issueActionProvider.mobilePhoto,
                                   Padding(

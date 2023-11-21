@@ -19,7 +19,7 @@ import 'package:wm_ppp_4/product/screens/search/screens/issue_search/provider/is
 class IssueActionProvider extends ChangeNotifier {
   final IssueServiceRepoImpml _issueServiceRepository = IssueServiceRepoImpml();
   final ImagePicker picker = ImagePicker();
-    IssueSearchProvider issueSearchProvider = IssueSearchProvider();
+  IssueSearchProvider issueSearchProvider = IssueSearchProvider();
 
   bool _isFetch = false;
   bool get isFetch => _isFetch;
@@ -78,7 +78,7 @@ class IssueActionProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  String _selectedAsgGroupName = '';
+  String _selectedAsgGroupName = 'Grup Seçiniz';
   String get selectedAsgGroupName => _selectedAsgGroupName;
 
   String _selectedAsgGroupCode = '';
@@ -86,6 +86,10 @@ class IssueActionProvider extends ChangeNotifier {
 
   String _selectedAsgUserCode = '';
   String get selectedAsgUserCode => _selectedAsgUserCode;
+  void setSelectedAsgUserCode(String selectedAsgUserCode) {
+    _selectedAsgUserCode = selectedAsgUserCode;
+    notifyListeners();
+  }
 
   String _selectedActivityCode = '';
   String get selectedActivityCode => _selectedActivityCode;
@@ -163,8 +167,12 @@ class IssueActionProvider extends ChangeNotifier {
   List<LiveSelectAsgUsersModel> get getLiveSelectAsgUsers =>
       _getLiveSelectAsgUsers;
 
-  final List<String> _getLiveSelectAsgUsersName = [];
+  List<String> _getLiveSelectAsgUsersName = ['Kullanıcı Seçiniz'];
   List<String> get getLiveSelectAsgUsersName => _getLiveSelectAsgUsersName;
+  void setLiveSelectSelectAsgUserName(List<String> getLiveSelectAsgUsersName) {
+    _getLiveSelectAsgUsersName = getLiveSelectAsgUsersName;
+    notifyListeners();
+  }
 
   final List<IssueAvailableActivities> _selectedActivity = [];
   List<IssueAvailableActivities> get selectedActivity => _selectedActivity;
@@ -288,7 +296,8 @@ class IssueActionProvider extends ChangeNotifier {
     _isFetch = true;
     _loading = true;
     notifyListeners();
-    final response = await _issueServiceRepository.getIssueOperations(issuecode);
+    final response =
+        await _issueServiceRepository.getIssueOperations(issuecode);
     //final responseActivities = getAvailableActivitiesForQuickFix(issuecode);
 
     response.fold(
@@ -310,12 +319,11 @@ class IssueActionProvider extends ChangeNotifier {
         userToken, userCode, issuecode);
     response.fold(
         (l) => {
-          
               snackBar(context, LocaleKeys.processDone, 'success'),
               Navigator.of(context).pop<bool>(true),
             },
         (r) => {
-          issueSearchProvider.setDataUpdate = true,
+              issueSearchProvider.setDataUpdate = true,
               snackBar(context, LocaleKeys.processCancell, 'error'),
               Navigator.of(context).pop<bool>(false),
             });
@@ -367,7 +375,7 @@ class IssueActionProvider extends ChangeNotifier {
     response.fold(
         (l) => {
               snackBar(context, LocaleKeys.processDone, 'success'),
-             Navigator.of(context).pop<bool>(true),
+              Navigator.of(context).pop<bool>(true),
             },
         (r) => {
               snackBar(context, LocaleKeys.processCancell, 'error'),
@@ -417,7 +425,8 @@ class IssueActionProvider extends ChangeNotifier {
     _loading = true;
     notifyListeners();
     _quickFixExist = false;
-    final response = await _issueServiceRepository.getAvailableActivities(issuecode, userToken);
+    final response = await _issueServiceRepository.getAvailableActivities(
+        issuecode, userToken);
 
     response.fold(
         (l) => {
@@ -437,7 +446,7 @@ class IssueActionProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void  scanBarcodeAndQr(state) async {
+  void scanBarcodeAndQr(state) async {
     String barcodeScanRes;
 
     try {
@@ -481,6 +490,7 @@ class IssueActionProvider extends ChangeNotifier {
 
     _getLiveSelectAsgGroupsName.clear();
     _getLiveSelectAsgGroups.clear();
+    _getLiveSelectAsgGroupsName.add('Grup Seçiniz');
     response.fold(
         (l) => {
               _getLiveSelectAsgGroups.addAll(l),
@@ -507,6 +517,7 @@ class IssueActionProvider extends ChangeNotifier {
 
     _getLiveSelectAsgUsersName.clear();
     _getLiveSelectAsgUsers.clear();
+    _getLiveSelectAsgUsersName.add('Kullanıcı Seçiniz');
     response.fold(
         (l) => {
               _getLiveSelectAsgUsers.addAll(l),
