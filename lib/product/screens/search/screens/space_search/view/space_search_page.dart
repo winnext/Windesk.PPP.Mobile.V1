@@ -22,7 +22,7 @@ class _SpaceSearchPageState extends State<SpaceSearchPage> {
   cek(context) async {
     final searchProvider =
         Provider.of<SpaceSearchProvider>(context, listen: false);
-
+    searchProvider.setLoading = true;
     await searchProvider.mahalAramaKampusFetchData();
     List<String> kampus = searchProvider.mahalAraKampusArray[0];
     List kampusDatasi = searchProvider.mahalAraKampusArray;
@@ -57,6 +57,7 @@ class _SpaceSearchPageState extends State<SpaceSearchPage> {
     await searchProvider.mahalAramaKanatFetchData(secilenDegerKat);
     await searchProvider.mahalAramaSinifFetchData('');
     await searchProvider.mahalAramaGrupFetchData();
+    searchProvider.setLoading = false;
   }
 
   @override
@@ -80,18 +81,20 @@ class _SpaceSearchPageState extends State<SpaceSearchPage> {
         ///////////////////////       KAMPUS     ////////////////////////
         //////////////////////////           ///////////////////////
         //////////////////////////////////////////////////////////
-        List<String> kampus =
-            spaceSearchProvider.mahalAraKampusArray[0].length > 0
-                ? spaceSearchProvider.mahalAraKampusArray[0]
-                : ['Kampüs'];
+        ///
+        List<String> kampus = spaceSearchProvider.mahalAraKampusArray.isNotEmpty
+            ? spaceSearchProvider.mahalAraKampusArray[0]
+            : ['Kampüs'];
         //print(spaceSearchProvider.mahalAraKampusArray);
         List kampusDatasi = spaceSearchProvider.mahalAraKampusArray;
 
-        String dropdownvalueKampus =
-            kampusDatasi[0].indexOf(spaceSearchProvider.mahalAraKampusValue) !=
+        String dropdownvalueKampus = !spaceSearchProvider.loading
+            ? kampusDatasi[0]
+                        .indexOf(spaceSearchProvider.mahalAraKampusValue) !=
                     -1
                 ? spaceSearchProvider.mahalAraKampusValue
-                : kampus[0];
+                : kampus[0]
+            : 'Kampüs';
 
         //spaceSearchProvider.mahalAramaBinaFetchData(secilen_deger_kampus);
         //print(spaceSearchProvider.mahalAraBinaArray);
@@ -102,15 +105,15 @@ class _SpaceSearchPageState extends State<SpaceSearchPage> {
         //////////////////////////           ///////////////////////
         //////////////////////////////////////////////////////////
         List binaDatasi = spaceSearchProvider.mahalAraBinaArray;
-        List<String> bina = spaceSearchProvider.mahalAraBinaArray[0].length > 0
+        List<String> bina = spaceSearchProvider.mahalAraBinaArray.isNotEmpty
             ? spaceSearchProvider.mahalAraBinaArray[0]
             : ['Bina'];
 
-        String dropdownvalueBina =
-            binaDatasi[0].indexOf(spaceSearchProvider.mahalAraBinaValue) != -1
+        String dropdownvalueBina = !spaceSearchProvider.loading
+            ? binaDatasi[0].indexOf(spaceSearchProvider.mahalAraBinaValue) != -1
                 ? spaceSearchProvider.mahalAraBinaValue
-                : bina[0];
-
+                : bina[0]
+            : 'Bina';
         //print(spaceSearchProvider.mahalAraKatArray[0]);
 
         ///////////////////////////////////////////////////////
@@ -119,16 +122,17 @@ class _SpaceSearchPageState extends State<SpaceSearchPage> {
         //////////////////////////           ///////////////////////
         //////////////////////////////////////////////////////////
 
-        List<String> kat = spaceSearchProvider.mahalAraKatArray[0].length > 0
+        List<String> kat = spaceSearchProvider.mahalAraKatArray.isNotEmpty
             ? spaceSearchProvider.mahalAraKatArray[0]
             : ['Kat'];
         ;
         List katDatasi = spaceSearchProvider.mahalAraKatArray;
 
-        String? dropdownvalueKat =
-            katDatasi[0].indexOf(spaceSearchProvider.mahalAraKatValue) != -1
+        String? dropdownvalueKat = !spaceSearchProvider.loading
+            ? katDatasi[0].indexOf(spaceSearchProvider.mahalAraKatValue) != -1
                 ? spaceSearchProvider.mahalAraKatValue
-                : kat[0];
+                : kat[0]
+            : 'Kat';
 
         ///////////////////////////////////////////////////////
         //////////////////////////////        ///////////////////////
@@ -136,13 +140,17 @@ class _SpaceSearchPageState extends State<SpaceSearchPage> {
         //////////////////////////           ///////////////////////
         //////////////////////////////////////////////////////////
 
-        List<String> kanat = spaceSearchProvider.mahalAraKanatArray[0];
+        List<String> kanat = spaceSearchProvider.mahalAraKanatArray.isNotEmpty
+            ? spaceSearchProvider.mahalAraKanatArray[0]
+            : ['Kanat'];
         List kanatDatasi = spaceSearchProvider.mahalAraKanatArray;
 
-        String dropdownvalueKanat =
-            kanatDatasi[0].indexOf(spaceSearchProvider.mahalAraKanatValue) != -1
+        String dropdownvalueKanat = !spaceSearchProvider.loading
+            ? kanatDatasi[0].indexOf(spaceSearchProvider.mahalAraKanatValue) !=
+                    -1
                 ? spaceSearchProvider.mahalAraKanatValue
-                : kanat[0];
+                : kanat[0]
+            : 'Kanat';
 
         ///////////////////////////////////////////////////////
         //////////////////////////////        ///////////////////////
@@ -151,12 +159,13 @@ class _SpaceSearchPageState extends State<SpaceSearchPage> {
         //////////////////////////////////////////////////////////
 
         //spaceSearchProvider.mahalAramaSinifFetchData(secilen_deger_kanat);
-        List<String> sinif =
-            spaceSearchProvider.mahalAraSinifArray[0].length > 0
-                ? spaceSearchProvider.mahalAraSinifArray[0]
-                : ['Sınıf'];
+        List<String> sinif = spaceSearchProvider.mahalAraSinifArray.isNotEmpty
+            ? spaceSearchProvider.mahalAraSinifArray[0]
+            : ['Sınıf'];
 
-        String dropdownvalueSinif = spaceSearchProvider.mahalAraSinifValue;
+        String dropdownvalueSinif = !spaceSearchProvider.loading
+            ? spaceSearchProvider.mahalAraSinifValue
+            : 'Sınıf';
 
         ///////////////////////////////////////////////////////
         //////////////////////////////        ///////////////////////
@@ -165,11 +174,13 @@ class _SpaceSearchPageState extends State<SpaceSearchPage> {
         //////////////////////////////////////////////////////////
 
         //spaceSearchProvider.mahalAramaSinifFetchData(secilen_deger_kanat);
-        List<String> grup = spaceSearchProvider.mahalAraGrupArray[0].length > 0
+        List<String> grup = spaceSearchProvider.mahalAraGrupArray.isNotEmpty
             ? spaceSearchProvider.mahalAraGrupArray[0]
             : ['Grup'];
 
-        String dropdownvalueGrup = spaceSearchProvider.mahalAraGrupValue;
+        String dropdownvalueGrup = !spaceSearchProvider.loading
+            ? spaceSearchProvider.mahalAraGrupValue
+            : 'Grup';
 
         return Sizer(builder: (context, orientation, deviceType) {
           return SizedBox(
@@ -184,13 +195,7 @@ class _SpaceSearchPageState extends State<SpaceSearchPage> {
                     ),
                     returnBack: true),
                 body: Center(
-                    child: grup.isNotEmpty &&
-                            kampus.isNotEmpty &&
-                            bina.isNotEmpty &&
-                            kat.isNotEmpty &&
-                            kanat.isNotEmpty &&
-                            sinif.isNotEmpty &&
-                            grup.isNotEmpty
+                    child: !spaceSearchProvider.loading
                         ? SingleChildScrollView(
                             child: SizedBox(
                               width: 85.w,
