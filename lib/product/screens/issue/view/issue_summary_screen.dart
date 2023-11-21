@@ -41,7 +41,7 @@ class IssueSummaryScreen extends StatelessWidget {
           child: SizedBox(
             width: size.width,
             height: size.height / 1.8,
-            child: SingleChildScrollView(
+            child: SingleChildScrollView( 
               child: Padding(
                 padding: const EdgeInsets.only(
                     top: 0, left: 0, right: 0, bottom: 10),

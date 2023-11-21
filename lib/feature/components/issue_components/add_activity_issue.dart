@@ -36,13 +36,8 @@ class AddActivity extends StatelessWidget {
               ? issueActionProvider.getLiveSelectAsgGroupsFunc(issueCode)
               : null;
           if (issueActionProvider.isSuccessEnterActivity) {
-            issueProvider.setisFetch = false;
-            issueProvider.setisFetchSummary = false;
-            issueProvider.getIssueSummary(issueCode);
-            issueProvider.getIssueTimeInfo(issueCode);
             snackBar(context, LocaleKeys.processDone, 'success');
-            //Navigator.of(context).pop<bool>(true);
-            Navigator.of(context).pop();
+            Navigator.of(context).pop<bool>(true);
           }
           if (issueActionProvider.errorAccur) {
             snackBar(

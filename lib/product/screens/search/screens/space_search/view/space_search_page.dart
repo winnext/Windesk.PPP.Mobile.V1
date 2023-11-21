@@ -102,7 +102,9 @@ class _SpaceSearchPageState extends State<SpaceSearchPage> {
         //////////////////////////           ///////////////////////
         //////////////////////////////////////////////////////////
         List binaDatasi = spaceSearchProvider.mahalAraBinaArray;
-        List<String> bina = spaceSearchProvider.mahalAraBinaArray[0];
+        List<String> bina = spaceSearchProvider.mahalAraBinaArray[0].length > 0
+            ? spaceSearchProvider.mahalAraBinaArray[0]
+            : ['Bina'];
 
         String dropdownvalueBina =
             binaDatasi[0].indexOf(spaceSearchProvider.mahalAraBinaValue) != -1
@@ -117,7 +119,10 @@ class _SpaceSearchPageState extends State<SpaceSearchPage> {
         //////////////////////////           ///////////////////////
         //////////////////////////////////////////////////////////
 
-        List<String> kat = spaceSearchProvider.mahalAraKatArray[0];
+        List<String> kat = spaceSearchProvider.mahalAraKatArray[0].length > 0
+            ? spaceSearchProvider.mahalAraKatArray[0]
+            : ['Kat'];
+        ;
         List katDatasi = spaceSearchProvider.mahalAraKatArray;
 
         String? dropdownvalueKat =
@@ -146,7 +151,10 @@ class _SpaceSearchPageState extends State<SpaceSearchPage> {
         //////////////////////////////////////////////////////////
 
         //spaceSearchProvider.mahalAramaSinifFetchData(secilen_deger_kanat);
-        List<String> sinif = spaceSearchProvider.mahalAraSinifArray[0];
+        List<String> sinif =
+            spaceSearchProvider.mahalAraSinifArray[0].length > 0
+                ? spaceSearchProvider.mahalAraSinifArray[0]
+                : ['Sınıf'];
 
         String dropdownvalueSinif = spaceSearchProvider.mahalAraSinifValue;
 
@@ -157,7 +165,9 @@ class _SpaceSearchPageState extends State<SpaceSearchPage> {
         //////////////////////////////////////////////////////////
 
         //spaceSearchProvider.mahalAramaSinifFetchData(secilen_deger_kanat);
-        List<String> grup = spaceSearchProvider.mahalAraGrupArray[0];
+        List<String> grup = spaceSearchProvider.mahalAraGrupArray[0].length > 0
+            ? spaceSearchProvider.mahalAraGrupArray[0]
+            : ['Grup'];
 
         String dropdownvalueGrup = spaceSearchProvider.mahalAraGrupValue;
 

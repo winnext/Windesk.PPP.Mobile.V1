@@ -30,12 +30,18 @@ class IssueSearchProvider extends ChangeNotifier {
         (l) => {
               if (l > 0)
                 {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            IssueDetailScreen(issueCode: searchIssueCode)),
-                  )
+                  // context.router.popAndPush(
+                  //     IssueDetailScreen(issueCode: searchIssueCode)),
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              IssueDetailScreen(issueCode: searchIssueCode)),
+                    )
+
+                  // Navigator.of(context).popAndPushNamed(
+                  //   'IssueDetailScreen',
+                  // )
                 }
               else
                 {
