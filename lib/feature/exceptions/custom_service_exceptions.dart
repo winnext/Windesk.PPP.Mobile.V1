@@ -59,6 +59,7 @@ class CustomServiceMessages {
   static const String activityDocumentCannotEmptyError ='DOCUMENT_MUST_BE_ADDED';
   static const String activityDocumentCannotEmptyErrorMessage ='Fotoğraf alanı boş bırakılamaz. Fotoğraf eklenmelidir.';
   static const String activityErrorForCatch = 'Aktivite girilirken hata oluştu.';
+  static const String assigneeContactCodeExceed = 'Talep başkasının üzerinde olduğu için aktivite eklenemez';
 
-
+//ASSIGNEECONTACTCODE_EXCEED
 }

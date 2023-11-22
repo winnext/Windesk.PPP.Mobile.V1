@@ -229,19 +229,18 @@ class IssueServiceRepoImpml extends IssueServiceRepository {
   @override
   Future<Either<bool, CustomServiceException>> addIssueAttachmentMethod(
     String userToken,
-    String userName,
+    String userCode,
     String issueCode,
     String image,
     String desc,
   ) async {
     bool result = false;
     String url =
-        '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=addAttachment&issueCode=$issueCode&username=$userName&moduleName=issue';
+        '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=addAttachment&issueCode=$issueCode&username=$userCode&moduleName=issue';
+    print('addAttach photo : ' + url);
 
     FormData formData =
         FormData.fromMap({'description': desc, 'base64string': image});
-
-    log(formData as String);
 
     try {
       final response = await super.dio.post(url,
@@ -422,13 +421,13 @@ class IssueServiceRepoImpml extends IssueServiceRepository {
         '&description=$description';
 
     //FormData formData = FormData.fromMap({"base64string": image});
-
+    print('saveIssueActivity URL : ' + url);
     try {
       final response = await super.dio.post(url,
           data: {'base64string': image, 'description': description},
           options: Options(contentType: Headers.formUrlEncodedContentType));
       super.logger.i(response.toString());
-
+      print(response.data);
       if (response.data[ServiceResponseStatusEnums.success.rawText] == true) {
         result = true;
         super.logger.i(result.toString());
@@ -438,6 +437,12 @@ class IssueServiceRepoImpml extends IssueServiceRepository {
             '-129') {
           return Right(CustomServiceException(
               message: CustomServiceMessages.activityCodeCannotEmpty,
+              statusCode: response.statusCode.toString()));
+        }
+        if (response.data[ServiceResponseStatusEnums.info.rawText] ==
+            CustomServiceMessages.assigneeContactCodeExceed) {
+          return Right(CustomServiceException(
+              message: CustomServiceMessages.assigneeContactCodeExceed,
               statusCode: response.statusCode.toString()));
         }
         if (response.data[ServiceResponseStatusEnums.info.rawText] ==
