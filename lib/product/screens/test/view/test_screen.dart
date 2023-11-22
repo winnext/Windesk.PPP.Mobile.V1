@@ -2,6 +2,10 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
+import 'package:wm_ppp_4/feature/components/snackBar/snackbar.dart';
+import 'package:wm_ppp_4/feature/constants/other/snackbar_strings.dart';
+import 'package:wm_ppp_4/feature/route/app_route.gr.dart';
+import 'package:wm_ppp_4/product/screens/home/provider/home_provider.dart';
 import '../../../../feature/components/appbar/custom_tab_appbar.dart';
 import '../../../../feature/constants/other/app_strings.dart';
 import '../../../../feature/constants/other/colors.dart';
@@ -26,13 +30,29 @@ class _TestScreenState extends State<TestScreen> {
   @override
   Widget build(BuildContext context) {
     
-    return ChangeNotifierProvider(
-      create: (_) => TestProvider(),
-      child: Consumer<TestProvider>(
-          builder: (context, TestProvider testProvider, child) {
+    return MultiProvider(
+      providers: [
+          ChangeNotifierProvider(create: (context) => HomeProvider()),
+        ChangeNotifierProvider(create: (context) => TestProvider()),
+      ],
+      child: Consumer2<TestProvider,HomeProvider>(
+          builder: (context, TestProvider testProvider, HomeProvider homeProvider, child) {
         testProvider.getInfoLoad == false
             ? testProvider.getTestScreenInfo()
             : null;
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+            if (homeProvider.logoutError) {
+              snackBar(context, SnackbarStrings.logoutError, 'error');
+            }
+            if (homeProvider.isUserLogout) {
+              snackBar(context, SnackbarStrings.logoutSuccess, 'success');
+              context.router.pushAndPopUntil(const LoginScreen(),
+                  predicate: (_) => false);
+            }
+            if(testProvider.invalidDeviceId){
+              homeProvider.logOut();
+            }
+          });
         return Scaffold(
           appBar: const CustomTabAppbar(title: AppStrings.testTab),
           body: Center(child: _bodyWidget(context, testProvider)),
@@ -196,7 +216,7 @@ SizedBox buttonTest(BuildContext context, String buttonText,
         controller: controllerButton,
         onPressed: () {
           controllerButton.success();
-          testProvider.accessTestV1Function();
+          testProvider.accessTestV1Function(context);
           testProvider.accessTestV2Function();
 
           controllerButton.reset();

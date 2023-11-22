@@ -125,7 +125,7 @@ class _SpaceSearchPageState extends State<SpaceSearchPage> {
         List<String> kat = spaceSearchProvider.mahalAraKatArray.isNotEmpty
             ? spaceSearchProvider.mahalAraKatArray[0]
             : ['Kat'];
-        ;
+
         List katDatasi = spaceSearchProvider.mahalAraKatArray;
 
         String? dropdownvalueKat = !spaceSearchProvider.loading

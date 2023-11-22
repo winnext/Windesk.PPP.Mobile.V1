@@ -119,7 +119,6 @@ class AddActivity extends StatelessWidget {
                                       child: DropDownInputFields(
                                         labelText: LocaleKeys.selectGroup,
                                         onChangedFunction: (item) {
-                                          print('ITEM ITEM : ' + item);
 
                                           issueActionProvider
                                               .setSelectedAsgGroups(
@@ -143,8 +142,6 @@ class AddActivity extends StatelessWidget {
                                                 labelText:
                                                     LocaleKeys.selectUser,
                                                 onChangedFunction: (item) {
-                                                  print(
-                                                      'ITEMIM : ITEM ' + item);
                                                   issueActionProvider
                                                       .setSelectedAsgUser(
                                                           item.toString());

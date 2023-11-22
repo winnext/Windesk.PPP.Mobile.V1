@@ -4,6 +4,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 import 'package:wm_ppp_4/feature/components/appbar/custom_main_appbar.dart';
 import 'package:wm_ppp_4/feature/components/loading/custom_loading_indicator.dart';
+import 'package:wm_ppp_4/feature/constants/functions/invalid_device_id_check.dart';
 import 'package:wm_ppp_4/feature/constants/other/app_strings.dart';
 import 'package:wm_ppp_4/product/screens/work_order/provider/work_order_provider.dart';
 
@@ -27,6 +28,7 @@ class _Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    InvalidDeviceId().check(context);
     return ChangeNotifierProvider(
       create: (context) => WorkOrderProvider(),
       child: Consumer(builder: (context, WorkOrderProvider workOrderProvider, child) {

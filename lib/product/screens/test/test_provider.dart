@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wm_ppp_4/feature/components/snackBar/snackbar.dart';
 import 'package:wm_ppp_4/feature/elastic_log/elastic_log.dart';
 import 'service/test_service_repo_impl.dart';
 
@@ -76,14 +77,27 @@ class TestProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void getServerTime() async {
+  bool _invalidDeviceId = false;
+  get invalidDeviceId => _invalidDeviceId;
+
+  void getServerTime(context) async {
     String token = await SharedManager().getString(SharedEnum.deviceId);
     var getServerTimeResult = await testServices.getServerTime(token);
     getServerTimeResult.fold(
       (l) => {
-        setServerTime = l,
-        ElasticLog().sendLog('info', 'ServerTimeSuccess',
-            'Sunucu saati başarıyla çekildi.', 'serverTimeSuccess'),
+       
+        if (l == 'Invalid device Id')
+          {
+            snackBar(context, 'Oturumunuz sonlandırıldı.', 'error'),
+          
+            _invalidDeviceId = true,
+          }
+        else
+          {
+            setServerTime = l,
+            ElasticLog().sendLog('info', 'ServerTimeSuccess',
+                'Sunucu saati başarıyla çekildi.', 'serverTimeSuccess'),
+          }
       },
       (r) => {
         ElasticLog().sendLog('error', 'ServerTimeFail',
@@ -105,8 +119,8 @@ class TestProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void accessTestV1Function() async {
-    getServerTime();
+  void accessTestV1Function(context) async {
+    getServerTime(context);
     getPhoneTime();
     setAccessTestV1 = 'loading';
     notifyListeners();

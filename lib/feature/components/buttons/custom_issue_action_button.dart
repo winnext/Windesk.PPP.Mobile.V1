@@ -33,7 +33,7 @@ class _CustomIssueActionButtonState extends State<CustomIssueActionButton> {
                     SizedBox(
                         child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              primary: Colors.red, // Background color
+                              backgroundColor: Colors.red, // Background color
                             ),
                             onPressed: () {
                               Navigator.pop(context);

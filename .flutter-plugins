@@ -25,6 +25,7 @@ path_provider_android=/Users/signumtte/.pub-cache/hosted/pub.dev/path_provider_a
 path_provider_foundation=/Users/signumtte/.pub-cache/hosted/pub.dev/path_provider_foundation-2.3.1/
 path_provider_linux=/Users/signumtte/.pub-cache/hosted/pub.dev/path_provider_linux-2.2.1/
 path_provider_windows=/Users/signumtte/.pub-cache/hosted/pub.dev/path_provider_windows-2.2.1/
+restart_app=/Users/signumtte/.pub-cache/hosted/pub.dev/restart_app-1.2.1/
 shared_preferences=/Users/signumtte/.pub-cache/hosted/pub.dev/shared_preferences-2.2.2/
 shared_preferences_android=/Users/signumtte/.pub-cache/hosted/pub.dev/shared_preferences_android-2.2.1/
 shared_preferences_foundation=/Users/signumtte/.pub-cache/hosted/pub.dev/shared_preferences_foundation-2.3.4/
