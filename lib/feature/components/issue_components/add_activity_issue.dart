@@ -76,7 +76,7 @@ class AddActivity extends StatelessWidget {
                             child: Column(
                               children: [
                                 Text(
-                                    'Talebin durumunu ${issueActionProvider.selectedActivityName} olarak değişecektir.'),
+                                    'Talebin durumunu ${issueActionProvider.selectedActivityNextStateName} olarak değişecektir.'),
                                 NullCheckWidget().conditionCheckWidget(
                                     issueActionProvider.isBarcodeSpace,
                                     !issueActionProvider.mobilePhoto
@@ -119,11 +119,9 @@ class AddActivity extends StatelessWidget {
                                       child: DropDownInputFields(
                                         labelText: LocaleKeys.selectGroup,
                                         onChangedFunction: (item) {
-
                                           issueActionProvider
                                               .setSelectedAsgGroups(
                                                   issueCode, item.toString());
-                                          
                                         },
                                         rightIcon: Icons.arrow_drop_down,
                                         dropDownArray: issueActionProvider

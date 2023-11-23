@@ -68,6 +68,13 @@ class IssueActionProvider extends ChangeNotifier {
   String _selectedActivityName = 'Seçiniz';
   String get selectedActivityName => _selectedActivityName;
 
+  String _selectedActivityNextStateName = '';
+  String get selectedActivityNextStateName => _selectedActivityNextStateName;
+  void setSelectedActivityNextStateName(String selectedActivityNextStateName) {
+    _selectedActivityNextStateName = selectedActivityNextStateName;
+    notifyListeners();
+  }
+
   String _additionaltimeInput = '';
   String get additionaltimeInput => _additionaltimeInput;
 
@@ -248,6 +255,24 @@ class IssueActionProvider extends ChangeNotifier {
   void setSelectedActivityName(String activityName) {
     _selectedActivityName = activityName;
     clearAll();
+    if (activityName == 'Görevlendirme Yapıldı' ||
+        activityName == 'Yanıtlandı') {
+      setSelectedActivityNextStateName('Yanıtlandı');
+    } else if (activityName == 'Düzeltildi') {
+      setSelectedActivityNextStateName('Düzeltildi');
+    } else if (activityName == 'Hatalı Yönlendirme Olarak Onaylandı') {
+      setSelectedActivityNextStateName('Yeniden Yönlendirme Bekliyor');
+    } else if (activityName == 'Kapsam Dışı') {
+      setSelectedActivityNextStateName('Kapsam Dışı');
+    } else if (activityName == 'Reddet') {
+      setSelectedActivityNextStateName('Ret Onayı Bekliyor');
+    } else if (activityName == 'İşlemsiz Kapatma Onayı') {
+      setSelectedActivityNextStateName('İşlemsiz Kapatıldı');
+    } else if (activityName == 'Mücbir Sebep Nedeniyle Tamamlanamadı') {
+      setSelectedActivityNextStateName('Mücbir Sebep');
+    } else {
+      setSelectedActivityNextStateName(activityName);
+    }
     for (int i = 0; i < _availableActivities.length; i++) {
       if (_availableActivities[i].name == activityName) {
         _isBarcodeSpace =

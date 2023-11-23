@@ -48,6 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Consumer<HomeProvider>(
         builder: (context, HomeProvider homeProvider, child) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
+            homeProvider.getAnnouncement();
             if (homeProvider.logoutError) {
               snackBar(context, SnackbarStrings.logoutError, 'error');
             }

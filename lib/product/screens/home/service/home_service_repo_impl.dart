@@ -45,13 +45,17 @@ class HomeServiceRepositoryImpl extends HomeServiceRepository {
   @override
   Future<Either<List<AnnouncementModel>, CustomServiceException>>
       getAnnouncements() async {
+    print('girdi');
     List<AnnouncementModel> announcements = [];
     String deviceId = await SharedManager().getString(SharedEnum.deviceId);
+    String userCode = await SharedManager().getString(SharedEnum.userCode);
+
     String url =
-        '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$deviceId&action=getAnnouncements&username=';
+        '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$deviceId&action=getAnnouncements&username=$userCode';
 
     try {
       final response = await super.dio.get(url);
+      super.logger.e(response.toString());
 
       if (response.data[ServiceResponseStatusEnums.result.rawText] ==
           ServiceStatusEnums.success.rawText) {
