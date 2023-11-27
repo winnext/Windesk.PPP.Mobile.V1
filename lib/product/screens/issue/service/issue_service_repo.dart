@@ -52,7 +52,4 @@ abstract class IssueServiceRepository {
        String userToken, String issueCode, String cfgCode);
   Future<Either<List<IssueFilterModel>, CustomServiceException>> getSpaceBfwByType(String type,String userToken);
   Future<Either<List<IssueFilterStatusModel>, CustomServiceException>> getIssueOpenStatusCodes(String userToken);
-
-
-
 }

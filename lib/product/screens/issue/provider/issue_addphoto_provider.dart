@@ -56,8 +56,7 @@ class IssueAddPhotoProvider extends ChangeNotifier {
             {
               _isSuccess = true,
               snackBar(context, LocaleKeys.processDone, 'success'),
-              //Navigator.of(context).pop<bool>(true),
-              Navigator.pop(context)
+              Navigator.of(context).pop<bool>(true),
             }
           else
             {

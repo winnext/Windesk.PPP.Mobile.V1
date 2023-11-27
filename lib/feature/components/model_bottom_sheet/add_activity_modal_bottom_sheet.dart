@@ -27,6 +27,7 @@ class IssueActionModal extends StatelessWidget {
         child: Consumer2<IssueActionProvider, IssueAddPhotoProvider>(
           builder: (context, IssueActionProvider issueProvider, IssueAddPhotoProvider issueAddPhotoProvider, child) {
             issueProvider.isFetch ? null : issueProvider.getIssueOperations(issueCode);
+            issueProvider.isFetchQuickFix ? null : issueProvider.getAvailableActivitiesForQuickFix(issueCode);
             if (issueAddPhotoProvider.errorAccur || issueProvider.errorAccur) {
               snackBar(context, LocaleKeys.processCancell + issueProvider.errorMessage, 'error');
               Navigator.of(context).pop<bool>(false);
