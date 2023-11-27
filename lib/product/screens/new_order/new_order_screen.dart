@@ -436,7 +436,7 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
                               ),
                             ),
                           )
-                        : CustomLoadingIndicator()));
+                        : const CustomLoadingIndicator()));
           });
         }));
   }

@@ -17,7 +17,6 @@ class HomeServiceRepositoryImpl extends HomeServiceRepository {
   Future<Either<bool, CustomServiceException>> logout(String userName) async {
     bool result = false;
     String deviceId = await SharedManager().getString(SharedEnum.deviceId);
-    print('device' + deviceId.toString());
     String url = '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$deviceId&action=logout&username=$userName';
 
     try {
@@ -41,7 +40,6 @@ class HomeServiceRepositoryImpl extends HomeServiceRepository {
   Future<Either<List<AnnouncementModel>, CustomServiceException>> getAnnouncements() async {
     List<AnnouncementModel> announcements = [];
     String deviceId = await SharedManager().getString(SharedEnum.deviceId);
-    print('deviceId ' + deviceId);
 
     String url = '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$deviceId&action=getAnnouncements&username=';
 

@@ -19,7 +19,7 @@ class InvalidDeviceId {
           {
             snackBar(context, 'Oturumunuz sonlandırıldı.', 'error'),
             homeProvider.logOut(),
-            Timer(Duration(seconds: 1), () {
+            Timer(const Duration(seconds: 1), () {
               Restart.restartApp();
             })
           }
