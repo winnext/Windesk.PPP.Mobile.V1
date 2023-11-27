@@ -17,20 +17,50 @@ class SearchScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     InvalidDeviceId().check(context);
     return WillPopScope(
-        child: Scaffold(
-          appBar: const CustomTabAppbar(title: AppStrings.searchTab),
-          body: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                const Expanded(child: SizedBox()),
-                searchPageIcons(context),
-              ],
-            ),
+      child: Scaffold(
+        appBar: const CustomTabAppbar(title: AppStrings.searchTab),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              const Expanded(child: SizedBox()),
+              searchPageIcons(context),
+            ],
           ),
         ),
-        onWillPop: () async => false);
+      ),
+      onWillPop: () async {
+        final shouldPop = await showDialog<bool>(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: const Text('Çıkış'),
+              content: const Text(
+                  'Uygulamadan çıkış yapılacak, devam etmek istiyor musunuz?'),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context, true);
+                  },
+                  child: const Text('Evet'),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context, false);
+                  },
+                  child: const Text(
+                    'Hayır',
+                    style: TextStyle(color: Colors.red),
+                  ),
+                ),
+              ],
+            );
+          },
+        );
+        return shouldPop!;
+      },
+    );
   }
 
   Expanded searchPageIcons(BuildContext context) {

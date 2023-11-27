@@ -21,32 +21,64 @@ class SearchScreen extends StatelessWidget {
   }
 
   Widget _bodyWidget(context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        SizedBox(
-          height: MediaQuery.of(context).size.height / 8,
-        ),
-        rowIconButtonSection(
-            context,
-            LocaleKeys.issueSearchPage,
-            AppIcons.issueSearchIcon,
-            const IssueSearchRoute(),
-            LocaleKeys.assetSearchPage,
-            AppIcons.assetSearchIcon,
-            const AssetSearchRoute(),
-            true),
-        rowIconButtonSection(
-            context,
-            LocaleKeys.spaceSearchPage,
-            AppIcons.spaceSearchIcon,
-            const SpaceSearchRoute(),
-            LocaleKeys.workOrderSearch,
-            AppIcons.woSearchIcon,
-            const WoSearchRoute(),
-            ServiceTools.isWorkOrderExist),
-      ],
+    return WillPopScope(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(
+            height: MediaQuery.of(context).size.height / 8,
+          ),
+          rowIconButtonSection(
+              context,
+              LocaleKeys.issueSearchPage,
+              AppIcons.issueSearchIcon,
+              const IssueSearchRoute(),
+              LocaleKeys.assetSearchPage,
+              AppIcons.assetSearchIcon,
+              const AssetSearchRoute(),
+              true),
+          rowIconButtonSection(
+              context,
+              LocaleKeys.spaceSearchPage,
+              AppIcons.spaceSearchIcon,
+              const SpaceSearchRoute(),
+              LocaleKeys.workOrderSearch,
+              AppIcons.woSearchIcon,
+              const WoSearchRoute(),
+              ServiceTools.isWorkOrderExist),
+        ],
+      ),
+      onWillPop: () async {
+        final shouldPop = await showDialog<bool>(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: const Text('Çıkış'),
+              content: const Text(
+                  'Uygulamadan çıkış yapılacak, devam etmek istiyor musunuz?'),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context, true);
+                  },
+                  child: const Text('Evet'),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context, false);
+                  },
+                  child: const Text(
+                    'Hayır',
+                    style: TextStyle(color: Colors.red),
+                  ),
+                ),
+              ],
+            );
+          },
+        );
+        return shouldPop!;
+      },
     );
   }
 

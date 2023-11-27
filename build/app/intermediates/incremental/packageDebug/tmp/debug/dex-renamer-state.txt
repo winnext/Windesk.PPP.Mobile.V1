@@ -1,10 +1,5 @@
-<<<<<<< Updated upstream
-#Mon Nov 27 11:03:07 TRT 2023
-base.2=/Users/muratcan.yusufoglu/Desktop/Windesk.PPP.Mobile.V1/build/app/intermediates/dex/debug/mergeDexDebug/classes3.dex
-=======
-#Mon Nov 27 13:58:24 TRT 2023
+#Mon Nov 27 14:08:23 TRT 2023
 base.2=/Users/signumtte/Desktop/Windesk.PPP.Mobile.V1/build/app/intermediates/dex/debug/mergeDexDebug/classes3.dex
->>>>>>> Stashed changes
 path.2=classes3.dex
 base.1=/Users/signumtte/Desktop/Windesk.PPP.Mobile.V1/build/app/intermediates/dex/debug/mergeDexDebug/classes2.dex
 path.1=classes2.dex

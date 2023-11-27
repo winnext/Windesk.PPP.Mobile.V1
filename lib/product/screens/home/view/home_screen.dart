@@ -58,21 +58,53 @@ class _HomeScreenState extends State<HomeScreen> {
                   predicate: (_) => false);
             }
           });
-          return SafeArea(
-            child: Scaffold(
-              key: _scaffoldKey,
-              appBar: appBarWidget(context, homeProvider),
-              backgroundColor: APPColors.Main.white,
-              body: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    headerTextWidget(),
-                    homePageIcons(context)
-                  ],
+          return WillPopScope(
+            child: SafeArea(
+              child: Scaffold(
+                key: _scaffoldKey,
+                appBar: appBarWidget(context, homeProvider),
+                backgroundColor: APPColors.Main.white,
+                body: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      headerTextWidget(),
+                      homePageIcons(context)
+                    ],
+                  ),
                 ),
               ),
             ),
+            onWillPop: () async {
+              final shouldPop = await showDialog<bool>(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: const Text('Çıkış'),
+                    content: const Text(
+                        'Uygulamadan çıkış yapılacak, devam etmek istiyor musunuz?'),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context, true);
+                        },
+                        child: const Text('Evet'),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context, false);
+                        },
+                        child: const Text(
+                          'Hayır',
+                          style: TextStyle(color: Colors.red),
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              );
+              return shouldPop!;
+            },
           );
         },
       ),
