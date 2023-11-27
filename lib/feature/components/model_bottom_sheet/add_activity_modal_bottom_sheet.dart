@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wm_ppp_4/feature/components/issue_components/add_activity_issue.dart';
+import 'package:wm_ppp_4/feature/components/issue_components/add_quick_fix_issue.dart';
 import 'package:wm_ppp_4/feature/components/issue_components/change_cfg_issue.dart';
 import 'package:wm_ppp_4/feature/components/issue_components/take_over_issue.dart';
 import 'package:wm_ppp_4/feature/components/model_bottom_sheet/add_photo_modal_bottom_sheet.dart';
@@ -27,7 +28,6 @@ class IssueActionModal extends StatelessWidget {
         child: Consumer2<IssueActionProvider, IssueAddPhotoProvider>(
           builder: (context, IssueActionProvider issueProvider, IssueAddPhotoProvider issueAddPhotoProvider, child) {
             issueProvider.isFetch ? null : issueProvider.getIssueOperations(issueCode);
-            issueProvider.isFetchQuickFix ? null : issueProvider.getAvailableActivitiesForQuickFix(issueCode);
             if (issueAddPhotoProvider.errorAccur || issueProvider.errorAccur) {
               snackBar(context, LocaleKeys.processCancell + issueProvider.errorMessage, 'error');
               Navigator.of(context).pop<bool>(false);
@@ -45,10 +45,11 @@ class IssueActionModal extends StatelessWidget {
             issueProvider.issueOperationList.isPhoto == true
                 ? _operationWidget(size, issueProvider, LocaleKeys.addPhoto, issueProvider.isPhotoSectionOpen, issueProvider.setisPhotoSectionOpen)
                 : Container(),
-            issueProvider.quickFixExist == true
-                ? _operationWidget(size, issueProvider, LocaleKeys.addPhoto, issueProvider.isPhotoSectionOpen, issueProvider.setisPhotoSectionOpen)
-                : Container(),
             issueProvider.isPhotoSectionOpen ? addPhotoBottomSheet(context, size, issueAddPhotoProvider) : Container(),
+            issueProvider.quickFixExist == true
+                ? _operationWidget(size, issueProvider, LocaleKeys.quickFix, issueProvider.isQuickFixOpen, issueProvider.setisQuickFixOpen)
+                : Container(),
+            issueProvider.isQuickFixOpen ? AddQuickFix(issueCode: issueCode) : Container(),
             issueProvider.issueOperationList.isActivity == true
                 ? _operationWidget(
                     size, issueProvider, LocaleKeys.addActivity, issueProvider.isActivitySectionOpen, issueProvider.setisActivitySectionOpen)

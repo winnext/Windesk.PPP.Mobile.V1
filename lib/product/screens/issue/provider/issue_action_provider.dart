@@ -33,6 +33,9 @@ class IssueActionProvider extends ChangeNotifier {
   bool _isPhotoSectionOpen = false;
   bool get isPhotoSectionOpen => _isPhotoSectionOpen;
 
+  bool _isQuickFixOpen = false;
+  bool get isQuickFixOpen => _isQuickFixOpen;
+
   bool _isActivitySectionOpen = false;
   bool get isActivitySectionOpen => _isActivitySectionOpen;
 
@@ -141,6 +144,7 @@ class IssueActionProvider extends ChangeNotifier {
     _serialNumber.text = serialNumber;
     notifyListeners();
   }
+  
 
   final _rfidCode = TextEditingController();
   TextEditingController get rfidCode => _rfidCode;
@@ -153,6 +157,20 @@ class IssueActionProvider extends ChangeNotifier {
   TextEditingController get spaceCode => _spaceCode;
   set setSpaceCode(String spaceCode) {
     _spaceCode.text = spaceCode;
+    notifyListeners();
+  }
+  
+  final _patientBarcode = TextEditingController();
+  TextEditingController get patientBarcode => _patientBarcode;
+  set setPatientBarcode(String patientBarcode) {
+    _patientBarcode.text = patientBarcode;
+    notifyListeners();
+  }
+
+  final _sampleBarcode = TextEditingController();
+  TextEditingController get sampleBarcode => _sampleBarcode;
+  set setSampleBarcode(String sampleBarcode) {
+    _sampleBarcode.text = sampleBarcode;
     notifyListeners();
   }
 
@@ -194,6 +212,11 @@ class IssueActionProvider extends ChangeNotifier {
 
   void setisPhotoSectionOpen(bool photoSection) {
     _isPhotoSectionOpen = photoSection;
+    notifyListeners();
+  }
+
+  void setisQuickFixOpen(bool quickFixOpen) {
+    _isQuickFixOpen = quickFixOpen;
     notifyListeners();
   }
 
@@ -247,6 +270,14 @@ class IssueActionProvider extends ChangeNotifier {
   void scanSpace() async {
     scanBarcodeAndQr('space');
   }
+  
+  void scanPatientBarcode() async {
+    scanBarcodeAndQr('patient');
+  }
+  
+  void scanSampleBarcode() async {
+    scanBarcodeAndQr('sample');
+  }
 
   void update() {
     notifyListeners();
@@ -255,8 +286,7 @@ class IssueActionProvider extends ChangeNotifier {
   void setSelectedActivityName(String activityName) {
     _selectedActivityName = activityName;
     clearAll();
-    if (activityName == 'Görevlendirme Yapıldı' ||
-        activityName == 'Yanıtlandı') {
+    if (activityName == 'Görevlendirme Yapıldı' || activityName == 'Yanıtlandı') {
       setSelectedActivityNextStateName('Yanıtlandı');
     } else if (activityName == 'Düzeltildi') {
       setSelectedActivityNextStateName('Düzeltildi');
@@ -422,6 +452,12 @@ class IssueActionProvider extends ChangeNotifier {
               for (int i = 0; i < _availableActivities.length; i++)
                 {
                   _availableActivitiesName.add(_availableActivities[i].name.toString()),
+                  print('quick' + ' ' + _availableActivities[i].acttypecode.toString()),
+                  if (_availableActivities[i].acttypecode == 'QUICKFIXED')
+                    {
+                      print('quickfixed'),
+                      _quickFixExist = true,
+                    }
                 },
               _loading = false,
             },
@@ -434,23 +470,21 @@ class IssueActionProvider extends ChangeNotifier {
   }
 
   void getAvailableActivitiesForQuickFix(String issuecode) async {
-    print('quickfixed123');
-    _isFetchQuickFix = true;
     String userToken = await SharedManager().getString(SharedEnum.deviceId);
     _loading = true;
     notifyListeners();
     _quickFixExist = false;
-    final response = await _issueServiceRepository.getAvailableActivities(
-        issuecode, userToken);
-
+    final response = await _issueServiceRepository.getAvailableActivities(issuecode, userToken);
+    _availableActivitiesName.clear();
+    _availableActivities.clear();
+    _availableActivitiesName.insert(0, 'Seçiniz');
     response.fold(
         (l) => {
+              _availableActivities.addAll(l),
               for (int i = 0; i < _availableActivities.length; i++)
                 {
-                  print('quickfixed -- ${_availableActivities[i].acttypecode}'),
                   if (_availableActivities[i].acttypecode == 'QUICKFIXED')
                     {
-                      print('quickfixed'),
                       _quickFixExist = true,
                     }
                 },
@@ -459,7 +493,9 @@ class IssueActionProvider extends ChangeNotifier {
         (r) => {
               _loading = false,
             });
-
+    _isFetchQuickFix = true;
+    _availableActivitiesName.clear();
+    _availableActivities.clear();
     notifyListeners();
   }
 
@@ -492,6 +528,12 @@ class IssueActionProvider extends ChangeNotifier {
         setRfidCode = barcode;
       } else if (state == 'space') {
         setSpaceCode = barcode;
+      }
+      else if (state == 'patient') {
+        setPatientBarcode = barcode;
+      }
+       else if (state == 'sample') {
+        setSampleBarcode = barcode;
       }
     }
     notifyListeners();

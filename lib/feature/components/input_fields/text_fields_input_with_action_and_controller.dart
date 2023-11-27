@@ -20,28 +20,31 @@ class TextFieldsInputWithActionAndController extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: <Widget>[
-        SizedBox(
-          width: MediaQuery.of(context).size.width * 0.80,
-          child: TextField(
-            readOnly: readOnly ?? false,
-            controller: textController,
-            decoration: InputDecoration(
-              border: OutlineInputBorder(
-                  borderRadius: CustomBorderRadius.textFieldBorderRadius),
-              labelText: labelText,
+    return Padding(
+      padding: const EdgeInsets.all(4.0),
+      child: Row(
+        children: <Widget>[
+          SizedBox(
+            width: MediaQuery.of(context).size.width * 0.72,
+            child: TextField(
+              readOnly: readOnly ?? false,
+              controller: textController,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                    borderRadius: CustomBorderRadius.textFieldBorderRadius),
+                labelText: labelText,
+              ),
             ),
           ),
-        ),
-        SizedBox(
-          width: MediaQuery.of(context).size.width * 0.12,
-          child: IconButton(
-            icon: Icon(actionIcon),
-            onPressed: () => actionFunction(),
+          SizedBox(
+            width: MediaQuery.of(context).size.width * 0.12,
+            child: IconButton(
+              icon: Icon(actionIcon),
+              onPressed: () => actionFunction(),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
