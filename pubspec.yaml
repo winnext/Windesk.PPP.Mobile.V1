@@ -90,6 +90,7 @@ dependencies:
   path_provider: ^2.1.1
   path: ^1.8.3
   flutter_fgbg: ^0.3.0
+  restart_app: ^1.2.1
 
 dev_dependencies:
   flutter_test:

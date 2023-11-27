@@ -26,6 +26,14 @@ class NewOrderProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  bool _loading = false;
+  bool get loading => _loading;
+
+  set setLoading(bool loading) {
+    _loading = loading;
+    notifyListeners();
+  }
+
   final _aciklama = TextEditingController();
   TextEditingController get aciklama => _aciklama;
   set setAciklama(String aciklama) {
@@ -118,6 +126,8 @@ class NewOrderProvider extends ChangeNotifier {
   }
 
   woCreateHizmetListesi() async {
+        setLoading = true;
+
     List<String> name = ['Hizmet'];
     List<String> code = ['Hizmet'];
 
@@ -135,6 +145,7 @@ class NewOrderProvider extends ChangeNotifier {
     setCreateWoHizmetListeArray = [name] + [code];
     setWoCreateHizmetValue =
         woCreateHizmetValue != '' ? woCreateHizmetValue : name[0];
+        setLoading = false;
     notifyListeners();
   }
 

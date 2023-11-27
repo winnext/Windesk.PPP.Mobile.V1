@@ -698,6 +698,12 @@
       "languageVersion": "2.18"
     },
     {
+      "name": "restart_app",
+      "rootUri": "file:///Users/muratcan.yusufoglu/.pub-cache/hosted/pub.dev/restart_app-1.2.1",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
       "name": "rounded_loading_button",
       "rootUri": "file:///Users/muratcan.yusufoglu/.pub-cache/hosted/pub.dev/rounded_loading_button-2.1.0",
       "packageUri": "lib/",
@@ -998,7 +1004,7 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2023-11-16T08:33:18.285053Z",
+  "generated": "2023-11-27T07:48:48.935372Z",
   "generator": "pub",
   "generatorVersion": "3.1.5"
 }

@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wm_ppp_4/feature/components/model_bottom_sheet/issue_filter_modal_bottom_sheet.dart';
+import 'package:wm_ppp_4/feature/constants/functions/invalid_device_id_check.dart';
 import 'package:wm_ppp_4/feature/constants/other/app_icons.dart';
 import 'package:wm_ppp_4/feature/constants/other/colors.dart';
 import 'package:wm_ppp_4/feature/extensions/context_extension.dart';
@@ -26,6 +27,7 @@ class IssueListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    InvalidDeviceId().check(context);
     return ChangeNotifierProvider(
         create: (_) => IssueProvider(),
         child: Consumer<IssueProvider>(

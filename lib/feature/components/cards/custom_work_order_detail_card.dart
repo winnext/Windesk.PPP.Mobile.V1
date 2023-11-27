@@ -25,7 +25,8 @@ class CustomWorkOrderDetailCard extends StatelessWidget {
       padding: CustomPaddings.pageNormal,
       child: Card(
         elevation: _elevation,
-        shape: RoundedRectangleBorder(borderRadius: CustomBorderRadius.mediumBorderRadius),
+        shape: RoundedRectangleBorder(
+            borderRadius: CustomBorderRadius.mediumBorderRadius),
         child: SizedBox(
           width: context.width,
           child: Padding(
@@ -36,7 +37,8 @@ class CustomWorkOrderDetailCard extends StatelessWidget {
               children: [
                 Text(data.name ?? _noNameText, style: _boldStyle()),
                 const SizedBox(height: 4),
-                Text(data.description ?? _noDescriptionText, style: _lowStyle()),
+                Text(data.description ?? _noDescriptionText,
+                    style: _lowStyle()),
                 const SizedBox(height: 16),
                 _ColumnRow(
                   iconData: AppIcons.location,
@@ -56,7 +58,7 @@ class CustomWorkOrderDetailCard extends StatelessWidget {
                 const SizedBox(height: 16),
                 _ColumnRow(
                   iconData: AppIcons.building,
-                  title: data.modulecode,
+                  title: data.modulecode ?? 'Modül kod bilgisi bulunmuyor',
                   content: '',
                   boldStyle: _boldStyle,
                   lowStyle: _lowStyle,
@@ -65,10 +67,11 @@ class CustomWorkOrderDetailCard extends StatelessWidget {
                 _ColumnRow(
                   iconData: AppIcons.clock,
                   title: '',
-                  content: "${data.plannedStartdate} -> ${data.plannedEnddate}",
+                  content:
+                      "${data.plannedStartdate ?? 'Başlangıç tarihi bilgisi bulunmuyor'} -> ${data.plannedEnddate ?? 'Bitiş tarihi bilgisi bulunmuyor'}",
                   boldStyle: _boldStyle,
                   lowStyle: _lowStyle,
-                ),
+                )
               ],
             ),
           ),
@@ -91,7 +94,12 @@ class CustomWorkOrderDetailCard extends StatelessWidget {
 }
 
 class _ColumnRow extends StatelessWidget {
-  const _ColumnRow({required this.iconData, required this.title, required this.content, required this.boldStyle, required this.lowStyle});
+  const _ColumnRow(
+      {required this.iconData,
+      required this.title,
+      required this.content,
+      required this.boldStyle,
+      required this.lowStyle});
 
   final IconData iconData;
   final String title;
@@ -105,7 +113,8 @@ class _ColumnRow extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Icon(iconData, color: APPColors.Main.black, size: FontSizes.titleXLarge),
+        Icon(iconData,
+            color: APPColors.Main.black, size: FontSizes.titleXLarge),
         SizedBox(width: context.width * 0.035),
         Flexible(
           child: Column(

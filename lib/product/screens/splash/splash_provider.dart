@@ -14,7 +14,7 @@ import '../../../feature/enums/shared_enums.dart';
 
 class SplashProvider extends ChangeNotifier {
   String? deviceModel;
-  String? deviceVersion;  
+  String? deviceVersion;
 
   late Timer _timer;
   bool _isSplashFinished = false;
@@ -52,6 +52,7 @@ class SplashProvider extends ChangeNotifier {
     // sets device information to shared preferences.
     if (deviceId != null && deviceOS != null && deviceModel != null) {
       var ipAddress = IpAddress(type: RequestType.json);
+
       /// Get the IpAddress based on requestType.
       dynamic data = await ipAddress.getIpAddress();
       await SharedManager().setString(SharedEnum.deviceId, deviceId);
@@ -66,6 +67,7 @@ class SplashProvider extends ChangeNotifier {
   void _getFirebaseInformation() async {
     FirebaseMessaging messaging = FirebaseMessaging.instance;
     String? firebaseToken = await messaging.getToken();
+
     if (firebaseToken == null) return;
     await SharedManager().setString(SharedEnum.firebaseToken, firebaseToken);
   }
@@ -87,7 +89,7 @@ class SplashProvider extends ChangeNotifier {
   void checkUserAlreadyLoggedIn(BuildContext context) async {
     await SharedManager().initInstances();
     _getDeviceInformation();
-    // _getFirebaseInformation();
+    _getFirebaseInformation();
 
     final String userCode =
         await SharedManager().getString(SharedEnum.userCode);

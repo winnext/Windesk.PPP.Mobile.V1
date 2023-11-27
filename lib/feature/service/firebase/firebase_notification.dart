@@ -17,6 +17,9 @@ class FirebaseNotification {
         FlutterLocalNotificationsPlugin();
     final onNotifications = BehaviorSubject<String?>();
     FirebaseMessaging messaging = FirebaseMessaging.instance;
+    String? firebaseToken = await messaging.getToken();
+    print('TOKEN : ');
+    print(firebaseToken);
 
     FirebaseMessaging.onBackgroundMessage(
       (message) => LocalNotification.showNotification(

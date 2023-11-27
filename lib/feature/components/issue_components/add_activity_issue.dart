@@ -22,19 +22,30 @@ class AddActivity extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<IssueActionProvider>.value(value: IssueActionProvider()),
+        ChangeNotifierProvider<IssueActionProvider>.value(
+            value: IssueActionProvider()),
         ChangeNotifierProvider<IssueProvider>.value(value: IssueProvider()),
       ],
       child: Consumer2<IssueActionProvider, IssueProvider>(
-        builder: (context, IssueActionProvider issueActionProvider, IssueProvider issueProvider, child) {
-          issueActionProvider.isFetchActivity ? issueActionProvider.getAvailableActivities(issueCode) : null;
-          issueActionProvider.isassigneeccType ? issueActionProvider.getLiveSelectAsgGroupsFunc(issueCode) : null;
+        builder: (context, IssueActionProvider issueActionProvider,
+            IssueProvider issueProvider, child) {
+          issueActionProvider.isFetchActivity
+              ? issueActionProvider.getAvailableActivities(issueCode)
+              : null;
+          issueActionProvider.isassigneeccType
+              ? issueActionProvider.getLiveSelectAsgGroupsFunc(issueCode)
+              : null;
           if (issueActionProvider.isSuccessEnterActivity) {
             snackBar(context, LocaleKeys.processDone, 'success');
             Navigator.of(context).pop<bool>(true);
           }
           if (issueActionProvider.errorAccur) {
-            snackBar(context, issueActionProvider.errorMessage != '' ? issueActionProvider.errorMessage : LocaleKeys.processCancell, 'error');
+            snackBar(
+                context,
+                issueActionProvider.errorMessage != ''
+                    ? issueActionProvider.errorMessage
+                    : LocaleKeys.processCancell,
+                'error');
             Navigator.of(context).pop<bool>(false);
           }
           return Container(
@@ -49,12 +60,14 @@ class AddActivity extends StatelessWidget {
                     DropDownInputFields(
                       labelText: LocaleKeys.selectActivity,
                       onChangedFunction: (item) {
-                        issueActionProvider.setSelectedActivityName(item.toString());
+                        issueActionProvider
+                            .setSelectedActivityName(item.toString());
                       },
                       rightIcon: Icons.arrow_drop_down,
-                      dropDownArray: issueActionProvider.availableActivitiesName.isNotEmpty
-                          ? issueActionProvider.availableActivitiesName
-                          : ['Aktivite bulunamadı.'],
+                      dropDownArray:
+                          issueActionProvider.availableActivitiesName.isNotEmpty
+                              ? issueActionProvider.availableActivitiesName
+                              : ['Aktivite bulunamadı.'],
                     ),
                     const Divider(thickness: 2),
                     issueActionProvider.selectedActivityName != 'Seçiniz'
@@ -63,18 +76,25 @@ class AddActivity extends StatelessWidget {
                             child: Column(
                               children: [
                                 Text(
-                                    'Talebin durumunu ${issueActionProvider.selectedActivityName} olarak değişecektir.'),
+                                    'Talebin durumunu ${issueActionProvider.selectedActivityNextStateName} olarak değişecektir.'),
                                 NullCheckWidget().conditionCheckWidget(
                                     issueActionProvider.isBarcodeSpace,
                                     !issueActionProvider.mobilePhoto
                                         ? Padding(
-                                            padding: const EdgeInsets.only(top: 8.0),
-                                            child: TextFieldsInputWithActionAndController(
-                                                //readOnly: true,
-                                                textController: issueActionProvider.spaceCode,
-                                                labelText: LocaleKeys.spaceCode,
-                                                actionIcon: AppIcons.qr,
-                                                actionFunction: issueActionProvider.scanSpace),
+                                            padding:
+                                                const EdgeInsets.only(top: 8.0),
+                                            child:
+                                                TextFieldsInputWithActionAndController(
+                                                    //readOnly: true,
+                                                    textController:
+                                                        issueActionProvider
+                                                            .spaceCode,
+                                                    labelText:
+                                                        LocaleKeys.spaceCode,
+                                                    actionIcon: AppIcons.qr,
+                                                    actionFunction:
+                                                        issueActionProvider
+                                                            .scanSpace),
                                           )
                                         : Container()),
                                 NullCheckWidget().conditionCheckWidget(
@@ -84,40 +104,56 @@ class AddActivity extends StatelessWidget {
                                     child: TextFieldsInput(
                                       labelText: LocaleKeys.addMoreTime,
                                       onChangedFunction: (String time) {
-                                        issueActionProvider.setadditionaltimeInput(time);
+                                        issueActionProvider
+                                            .setadditionaltimeInput(time);
                                       },
                                     ),
                                   ),
                                 ),
                                 //   //live select
                                 NullCheckWidget().conditionCheckWidget(
-                                    issueActionProvider.getLiveSelectAsgGroupsName.isNotEmpty,
+                                    issueActionProvider
+                                        .getLiveSelectAsgGroupsName.isNotEmpty,
                                     Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: DropDownInputFields(
                                         labelText: LocaleKeys.selectGroup,
                                         onChangedFunction: (item) {
-                                          issueActionProvider.setSelectedAsgGroups(issueCode, item.toString());
+                                          issueActionProvider
+                                              .setSelectedAsgGroups(
+                                                  issueCode, item.toString());
                                         },
                                         rightIcon: Icons.arrow_drop_down,
-                                        dropDownArray: issueActionProvider.getLiveSelectAsgGroupsName,
+                                        dropDownArray: issueActionProvider
+                                            .getLiveSelectAsgGroupsName,
                                       ),
                                     )),
                                 NullCheckWidget().conditionCheckWidget(
-                                    issueActionProvider.getLiveSelectAsgGroupsName.isNotEmpty,
+                                    issueActionProvider
+                                        .getLiveSelectAsgGroupsName.isNotEmpty,
                                     Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: DropDownInputFields(
-                                        labelText: LocaleKeys.selectUser,
-                                        onChangedFunction: (item) {
-                                          issueActionProvider.setSelectedAsgUser(item.toString());
-                                        },
-                                        rightIcon: Icons.arrow_drop_down,
-                                        dropDownArray: issueActionProvider.getLiveSelectAsgUsersName.isNotEmpty
-                                            ? issueActionProvider.getLiveSelectAsgUsersName
-                                            : [''],
-                                      ),
-                                    )),
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: issueActionProvider
+                                                    .selectedAsgGroupName !=
+                                                LocaleKeys.selectGroup
+                                            ? DropDownInputFields(
+                                                labelText:
+                                                    LocaleKeys.selectUser,
+                                                onChangedFunction: (item) {
+                                                  issueActionProvider
+                                                      .setSelectedAsgUser(
+                                                          item.toString());
+                                                },
+                                                rightIcon:
+                                                    Icons.arrow_drop_down,
+                                                dropDownArray: issueActionProvider
+                                                        .getLiveSelectAsgUsersName
+                                                        .isNotEmpty
+                                                    ? issueActionProvider
+                                                        .getLiveSelectAsgUsersName
+                                                    : ['Kullanıcı Seçiniz'],
+                                              )
+                                            : null)),
                                 NullCheckWidget().conditionCheckWidget(
                                   !issueActionProvider.mobilePhoto,
                                   Padding(
@@ -125,7 +161,8 @@ class AddActivity extends StatelessWidget {
                                     child: TextFieldsInput(
                                       labelText: LocaleKeys.description,
                                       onChangedFunction: (String text) {
-                                        issueActionProvider.setdescription(text);
+                                        issueActionProvider
+                                            .setdescription(text);
                                       },
                                     ),
                                   ),
@@ -134,18 +171,22 @@ class AddActivity extends StatelessWidget {
                                     issueActionProvider.mobilePhoto,
                                     ImageBottomSheetIssueActivity(
                                       issueCode: issueCode,
-                                      activityCode: issueActionProvider.selectedActivityCode,
-                                      spaceCode: issueActionProvider.isBarcodeSpace,
+                                      activityCode: issueActionProvider
+                                          .selectedActivityCode,
+                                      spaceCode:
+                                          issueActionProvider.isBarcodeSpace,
                                       clearContext: context,
                                     )),
                                 NullCheckWidget().conditionCheckWidget(
                                   !issueActionProvider.mobilePhoto,
-                                  _saveOrQuit(context, issueActionProvider, issueProvider),
+                                  _saveOrQuit(context, issueActionProvider,
+                                      issueProvider),
                                 ),
                               ],
                             ),
                           )
-                        : const Text('İşlem yapabilmek için lütfen aktivite seçiniz.')
+                        : const Text(
+                            'İşlem yapabilmek için lütfen aktivite seçiniz.')
                   ],
                 ),
               ),
@@ -156,7 +197,8 @@ class AddActivity extends StatelessWidget {
     );
   }
 
-  Padding _saveOrQuit(BuildContext context, IssueActionProvider issueActionProvider, IssueProvider issueProvider) {
+  Padding _saveOrQuit(BuildContext context,
+      IssueActionProvider issueActionProvider, IssueProvider issueProvider) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: CustomHalfButtons(
@@ -164,7 +206,8 @@ class AddActivity extends StatelessWidget {
             AppStrings.cancel,
             style: TextStyle(color: Colors.white),
           ),
-          rightTitle: const Text(AppStrings.save, style: TextStyle(color: Colors.white)),
+          rightTitle: const Text(AppStrings.save,
+              style: TextStyle(color: Colors.white)),
           leftOnPressed: () {
             Navigator.pop(context);
           },

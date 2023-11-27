@@ -93,6 +93,9 @@ class TestServiceRepositoryImpl extends TestServiceRepository {
         super.logger.e(result);
 
         return Left(response.data['records']);
+      } else if (response.data[ServiceResponseStatusEnums.result.rawText] ==
+          'Invalid Device Id') {
+        return const Left('Invalid device Id');
       } else {
         return Right(CustomServiceException(
             message: CustomServiceMessages.getServerTimeError,

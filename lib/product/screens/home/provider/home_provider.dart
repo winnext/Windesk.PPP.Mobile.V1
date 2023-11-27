@@ -39,7 +39,7 @@ class HomeProvider extends ChangeNotifier {
     final result = HomeServiceRepositoryImpl().getAnnouncements();
     if (result is CustomServiceException) {
     } else {
-      announcementList.addAll(result as List<AnnouncementModel>);
+      announcementList.addAll(result as Iterable<AnnouncementModel>);
     }
     settotalAnnoucementCount = announcementList.length;
     notifyListeners();

@@ -20,9 +20,6 @@ class ElasticLog {
 
 // Insert some records in a transaction
     await database.transaction((txn) async {
-      int id1 = await txn.rawInsert(
-          'INSERT INTO cache(loglevel,title,message,activity) VALUES(?, ?, ?, ?)',
-          [logLevel, title, message, activity]);
     });
   }
 
@@ -85,7 +82,7 @@ class ElasticLog {
 
       return response.data;
       // ignore: deprecated_member_use
-    } on DioError catch (e) {
+    } on DioError {
       if (message == 'İnternet bağlantısı kesildi.') {
         storeData(logLevel, title, message + now.toString(), activity);
       }

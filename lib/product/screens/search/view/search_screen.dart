@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:wm_ppp_4/feature/constants/functions/invalid_device_id_check.dart';
 
 import '../../../../feature/components/appbar/custom_tab_appbar.dart';
 import '../../../../feature/components/buttons/custom_circular_home_button.dart';
@@ -14,6 +15,7 @@ class SearchScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    InvalidDeviceId().check(context);
     return Scaffold(
       appBar: const CustomTabAppbar(title: AppStrings.searchTab),
       body: Center(

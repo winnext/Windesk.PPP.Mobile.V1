@@ -3,6 +3,7 @@ import 'package:accordion/controllers.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:wm_ppp_4/feature/components/appbar/custom_main_appbar.dart';
+import 'package:wm_ppp_4/feature/constants/functions/invalid_device_id_check.dart';
 
 class SpaceSearchDetail extends StatefulWidget {
   final String code;
@@ -34,6 +35,8 @@ class SpaceSearchDetail extends StatefulWidget {
 class _SpaceSearchDetailState extends State<SpaceSearchDetail> {
   @override
   Widget build(BuildContext context) {
+        InvalidDeviceId().check(context);
+
     const headerStyle = TextStyle(
         color: Color(0xffffffff), fontSize: 15, fontWeight: FontWeight.bold);
 

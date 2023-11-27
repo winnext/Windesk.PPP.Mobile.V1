@@ -14,10 +14,12 @@ import 'package:wm_ppp_4/feature/models/issue_action_models/issue_live_select_as
 import 'package:wm_ppp_4/feature/models/issue_action_models/issue_live_select_asg_users_model.dart';
 import 'package:wm_ppp_4/feature/models/issue_action_models/issue_operation_list_model.dart';
 import 'package:wm_ppp_4/product/screens/issue/service/issue_service_repo_impl.dart';
+import 'package:wm_ppp_4/product/screens/search/screens/issue_search/provider/issue_search_provider.dart';
 
 class IssueActionProvider extends ChangeNotifier {
   final IssueServiceRepoImpml _issueServiceRepository = IssueServiceRepoImpml();
   final ImagePicker picker = ImagePicker();
+  IssueSearchProvider issueSearchProvider = IssueSearchProvider();
 
   bool _isFetch = false;
   bool get isFetch => _isFetch;
@@ -69,6 +71,13 @@ class IssueActionProvider extends ChangeNotifier {
   String _selectedActivityName = 'Seçiniz';
   String get selectedActivityName => _selectedActivityName;
 
+  String _selectedActivityNextStateName = '';
+  String get selectedActivityNextStateName => _selectedActivityNextStateName;
+  void setSelectedActivityNextStateName(String selectedActivityNextStateName) {
+    _selectedActivityNextStateName = selectedActivityNextStateName;
+    notifyListeners();
+  }
+
   String _additionaltimeInput = '';
   String get additionaltimeInput => _additionaltimeInput;
 
@@ -79,7 +88,7 @@ class IssueActionProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  String _selectedAsgGroupName = '';
+  String _selectedAsgGroupName = 'Grup Seçiniz';
   String get selectedAsgGroupName => _selectedAsgGroupName;
 
   String _selectedAsgGroupCode = '';
@@ -87,6 +96,10 @@ class IssueActionProvider extends ChangeNotifier {
 
   String _selectedAsgUserCode = '';
   String get selectedAsgUserCode => _selectedAsgUserCode;
+  void setSelectedAsgUserCode(String selectedAsgUserCode) {
+    _selectedAsgUserCode = selectedAsgUserCode;
+    notifyListeners();
+  }
 
   String _selectedActivityCode = '';
   String get selectedActivityCode => _selectedActivityCode;
@@ -161,8 +174,12 @@ class IssueActionProvider extends ChangeNotifier {
   final List<LiveSelectAsgUsersModel> _getLiveSelectAsgUsers = [];
   List<LiveSelectAsgUsersModel> get getLiveSelectAsgUsers => _getLiveSelectAsgUsers;
 
-  final List<String> _getLiveSelectAsgUsersName = [];
+  List<String> _getLiveSelectAsgUsersName = ['Kullanıcı Seçiniz'];
   List<String> get getLiveSelectAsgUsersName => _getLiveSelectAsgUsersName;
+  void setLiveSelectSelectAsgUserName(List<String> getLiveSelectAsgUsersName) {
+    _getLiveSelectAsgUsersName = getLiveSelectAsgUsersName;
+    notifyListeners();
+  }
 
   final List<IssueAvailableActivities> _selectedActivity = [];
   List<IssueAvailableActivities> get selectedActivity => _selectedActivity;
@@ -238,6 +255,24 @@ class IssueActionProvider extends ChangeNotifier {
   void setSelectedActivityName(String activityName) {
     _selectedActivityName = activityName;
     clearAll();
+    if (activityName == 'Görevlendirme Yapıldı' ||
+        activityName == 'Yanıtlandı') {
+      setSelectedActivityNextStateName('Yanıtlandı');
+    } else if (activityName == 'Düzeltildi') {
+      setSelectedActivityNextStateName('Düzeltildi');
+    } else if (activityName == 'Hatalı Yönlendirme Olarak Onaylandı') {
+      setSelectedActivityNextStateName('Yeniden Yönlendirme Bekliyor');
+    } else if (activityName == 'Kapsam Dışı') {
+      setSelectedActivityNextStateName('Kapsam Dışı');
+    } else if (activityName == 'Reddet') {
+      setSelectedActivityNextStateName('Ret Onayı Bekliyor');
+    } else if (activityName == 'İşlemsiz Kapatma Onayı') {
+      setSelectedActivityNextStateName('İşlemsiz Kapatıldı');
+    } else if (activityName == 'Mücbir Sebep Nedeniyle Tamamlanamadı') {
+      setSelectedActivityNextStateName('Mücbir Sebep');
+    } else {
+      setSelectedActivityNextStateName(activityName);
+    }
     for (int i = 0; i < _availableActivities.length; i++) {
       if (_availableActivities[i].name == activityName) {
         _isBarcodeSpace = _availableActivities[i].barcodeSpace == 'Y' ? true : false;
@@ -305,6 +340,7 @@ class IssueActionProvider extends ChangeNotifier {
               Navigator.of(context).pop<bool>(true),
             },
         (r) => {
+              issueSearchProvider.setDataUpdate = true,
               snackBar(context, LocaleKeys.processCancell, 'error'),
               Navigator.of(context).pop<bool>(false),
             });
@@ -404,7 +440,8 @@ class IssueActionProvider extends ChangeNotifier {
     _loading = true;
     notifyListeners();
     _quickFixExist = false;
-    final response = await _issueServiceRepository.getAvailableActivities(issuecode, userToken);
+    final response = await _issueServiceRepository.getAvailableActivities(
+        issuecode, userToken);
 
     response.fold(
         (l) => {
@@ -468,6 +505,7 @@ class IssueActionProvider extends ChangeNotifier {
 
     _getLiveSelectAsgGroupsName.clear();
     _getLiveSelectAsgGroups.clear();
+    _getLiveSelectAsgGroupsName.add('Grup Seçiniz');
     response.fold(
         (l) => {
               _getLiveSelectAsgGroups.addAll(l),
@@ -492,6 +530,7 @@ class IssueActionProvider extends ChangeNotifier {
 
     _getLiveSelectAsgUsersName.clear();
     _getLiveSelectAsgUsers.clear();
+    _getLiveSelectAsgUsersName.add('Kullanıcı Seçiniz');
     response.fold(
         (l) => {
               _getLiveSelectAsgUsers.addAll(l),

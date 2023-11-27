@@ -85,7 +85,10 @@ class IssueProvider extends ChangeNotifier {
 
   bool _isFetchSummary = false;
   bool get isFetchSummary => _isFetchSummary;
-
+set setisFetchSummary(bool value) {
+    _isFetchSummary = false;
+    notifyListeners();
+  }
   bool _isFetchAttachment = false;
   bool get isFetchAttachment => _isFetchAttachment;
 

@@ -20,6 +20,7 @@ import '../../../../feature/constants/paths/service_tools.dart';
 import '../../../../feature/database/shared_manager.dart';
 import '../../../../feature/enums/shared_enums.dart';
 import '../../../../feature/models/issue_models/issue_list_model.dart';
+import 'dart:developer';
 
 class IssueServiceRepoImpml extends IssueServiceRepository {
   @override
@@ -228,19 +229,23 @@ class IssueServiceRepoImpml extends IssueServiceRepository {
   @override
   Future<Either<bool, CustomServiceException>> addIssueAttachmentMethod(
     String userToken,
-    String userName,
+    String userCode,
     String issueCode,
     String image,
     String desc,
   ) async {
     bool result = false;
     String url =
-        '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=addAttachment&issueCode=$issueCode&username=$userName&moduleName=issue';
+        '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=addAttachment&issueCode=$issueCode&username=$userCode&moduleName=issue';
+    print('addAttach photo : ' + url);
 
     FormData formData =
-        FormData.fromMap({"base64string": image, 'description': desc});
+        FormData.fromMap({'description': desc, 'base64string': image});
+
     try {
-      final response = await super.dio.post(url, data: formData);
+      final response = await super.dio.post(url,
+          data: formData,
+          options: Options(headers: {'Content-Type': 'multipart/form-data'}));
       super.logger.i(response.toString());
 
       if (response.data[ServiceResponseStatusEnums.result.rawText] ==
@@ -416,13 +421,13 @@ class IssueServiceRepoImpml extends IssueServiceRepository {
         '&description=$description';
 
     //FormData formData = FormData.fromMap({"base64string": image});
-
+    print('saveIssueActivity URL : ' + url);
     try {
-      final response = await super
-          .dio
-          .post(url, data: {'base64string': image, 'description': description}, options: Options(contentType: Headers.formUrlEncodedContentType));
+      final response = await super.dio.post(url,
+          data: {'base64string': image, 'description': description},
+          options: Options(contentType: Headers.formUrlEncodedContentType));
       super.logger.i(response.toString());
-
+      print(response.data);
       if (response.data[ServiceResponseStatusEnums.success.rawText] == true) {
         result = true;
         super.logger.i(result.toString());
@@ -434,15 +439,28 @@ class IssueServiceRepoImpml extends IssueServiceRepository {
               message: CustomServiceMessages.activityCodeCannotEmpty,
               statusCode: response.statusCode.toString()));
         }
-        if (response.data[ServiceResponseStatusEnums.info.rawText] == CustomServiceMessages.activityDocumentCannotEmptyError) {
+        if (response.data[ServiceResponseStatusEnums.info.rawText] ==
+            CustomServiceMessages.assigneeContactCodeExceed) {
           return Right(CustomServiceException(
-              message: CustomServiceMessages.activityDocumentCannotEmptyErrorMessage, statusCode: response.statusCode.toString()));
+              message: CustomServiceMessages.assigneeContactCodeExceed,
+              statusCode: response.statusCode.toString()));
         }
-        return Right(CustomServiceException(message: CustomServiceMessages.activityError, statusCode: response.statusCode.toString()));
+        if (response.data[ServiceResponseStatusEnums.info.rawText] ==
+            CustomServiceMessages.activityDocumentCannotEmptyError) {
+          return Right(CustomServiceException(
+              message:
+                  CustomServiceMessages.activityDocumentCannotEmptyErrorMessage,
+              statusCode: response.statusCode.toString()));
+        }
+        return Right(CustomServiceException(
+            message: CustomServiceMessages.activityError,
+            statusCode: response.statusCode.toString()));
       }
     } catch (error) {
       super.logger.e(error.toString());
-      return Right(CustomServiceException(message: CustomServiceMessages.activityErrorForCatch, statusCode: '500'));
+      return Right(CustomServiceException(
+          message: CustomServiceMessages.activityErrorForCatch,
+          statusCode: '500'));
     }
   }
 
@@ -483,7 +501,7 @@ class IssueServiceRepoImpml extends IssueServiceRepository {
     String url =
         '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=getSpaceBfwByType&type=$type';
     List<IssueFilterModel> liveSelectAsgUsers;
-    
+
     try {
       final response = await dio.get(url);
       final data = response.data[ServiceResponseStatusEnums.records.rawText];

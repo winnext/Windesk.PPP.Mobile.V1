@@ -6,6 +6,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 import 'package:wm_ppp_4/feature/components/cards/custom_workorder_list_card.dart';
 import 'package:wm_ppp_4/feature/components/modal_alert/work_order_filter_alert_dialog.dart';
+import 'package:wm_ppp_4/feature/constants/functions/invalid_device_id_check.dart';
 import 'package:wm_ppp_4/feature/constants/style/border_radius.dart';
 import 'package:wm_ppp_4/feature/models/work_order_models/work_order_filter_model.dart';
 import 'package:wm_ppp_4/feature/route/app_route.gr.dart';
@@ -27,6 +28,7 @@ class WorkOrderListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    InvalidDeviceId().check(context);
     return ChangeNotifierProvider(
       create: (context) => WorkOrderListProvider(),
       child: Consumer<WorkOrderListProvider>(

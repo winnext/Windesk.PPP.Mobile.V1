@@ -44,11 +44,12 @@ class IssueAddPhotoProvider extends ChangeNotifier {
       Uint8List imagebytes = await image.readAsBytes(); //convert to bytes
       String base64string =
           base64.encode(imagebytes); //convert bytes to base64 string
+ 
 
       String userToken = await SharedManager().getString(SharedEnum.deviceId);
-      String userName = await SharedManager().getString(SharedEnum.userName);
+      String userCode = await SharedManager().getString(SharedEnum.userCode);
       final response = await _issueServiceRepository.addIssueAttachmentMethod(
-          userToken, userName, issueCode, base64string, desc);
+          userToken, userCode, issueCode, base64string, desc);
 
       response.fold(
         (l) => {

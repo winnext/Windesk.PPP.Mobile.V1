@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wm_ppp_4/feature/components/buttons/custom_circular_with_text_button.dart';
 import 'package:wm_ppp_4/feature/components/input_fields/text_fields_input.dart';
+import 'package:wm_ppp_4/feature/constants/functions/invalid_device_id_check.dart';
 import 'package:wm_ppp_4/feature/constants/other/colors.dart';
 import 'package:wm_ppp_4/product/screens/search/screens/issue_search/provider/issue_search_provider.dart';
 
@@ -15,10 +16,13 @@ class IssueSearchPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    InvalidDeviceId().check(context);
     return ChangeNotifierProvider(
         create: (context) => IssueSearchProvider(),
         child: Consumer<IssueSearchProvider>(
             builder: (context, IssueSearchProvider issueSearchProvider, child) {
+        
+
           return Scaffold(
             appBar: const CustomTabAppbar(
               title: AppStrings.caseSlaSearch,

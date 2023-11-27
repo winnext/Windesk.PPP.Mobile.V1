@@ -18,6 +18,14 @@ class SpaceSearchProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  bool _loading = false;
+  bool get loading => _loading;
+
+  set setLoading(bool loading) {
+    _loading = loading;
+    notifyListeners();
+  }
+
   final _vakaNo = TextEditingController();
 
   TextEditingController get vakaNo => _vakaNo;

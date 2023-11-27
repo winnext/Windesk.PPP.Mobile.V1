@@ -30,6 +30,7 @@ class SpaceSearchList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return ChangeNotifierProvider(
       create: (context) => SpaceSearchProvider(),
       child: Consumer<SpaceSearchProvider>(
