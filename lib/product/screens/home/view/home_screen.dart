@@ -42,13 +42,13 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     InternetListenerClass().internetConnection(context);
-    InvalidDeviceId().check(context);
+    //InvalidDeviceId().check(context);
     return ChangeNotifierProvider(
       create: (context) => HomeProvider(),
       child: Consumer<HomeProvider>(
         builder: (context, HomeProvider homeProvider, child) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
-            homeProvider.getAnnouncement();
+            //homeProvider.getAnnouncement();
             if (homeProvider.logoutError) {
               snackBar(context, SnackbarStrings.logoutError, 'error');
             }
@@ -58,53 +58,21 @@ class _HomeScreenState extends State<HomeScreen> {
                   predicate: (_) => false);
             }
           });
-          return WillPopScope(
-            child: SafeArea(
-              child: Scaffold(
-                key: _scaffoldKey,
-                appBar: appBarWidget(context, homeProvider),
-                backgroundColor: APPColors.Main.white,
-                body: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      headerTextWidget(),
-                      homePageIcons(context)
-                    ],
-                  ),
+          return SafeArea(
+            child: Scaffold(
+              key: _scaffoldKey,
+              appBar: appBarWidget(context, homeProvider),
+              backgroundColor: APPColors.Main.white,
+              body: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    headerTextWidget(),
+                    homePageIcons(context)
+                  ],
                 ),
               ),
             ),
-            onWillPop: () async {
-              final shouldPop = await showDialog<bool>(
-                context: context,
-                builder: (context) {
-                  return AlertDialog(
-                    title: const Text('Çıkış'),
-                    content: const Text(
-                        'Uygulamadan çıkış yapılacak, devam etmek istiyor musunuz?'),
-                    actions: [
-                      TextButton(
-                        onPressed: () {
-                          Navigator.pop(context, true);
-                        },
-                        child: const Text('Evet'),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.pop(context, false);
-                        },
-                        child: const Text(
-                          'Hayır',
-                          style: TextStyle(color: Colors.red),
-                        ),
-                      ),
-                    ],
-                  );
-                },
-              );
-              return shouldPop!;
-            },
           );
         },
       ),

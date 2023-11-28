@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:wm_ppp_4/feature/components/snackBar/snackbar.dart';
+import 'package:wm_ppp_4/feature/constants/functions/invalid_device_id_check.dart';
 import 'package:wm_ppp_4/feature/constants/other/snackbar_strings.dart';
 import 'package:wm_ppp_4/feature/route/app_route.gr.dart';
 import 'package:wm_ppp_4/product/screens/home/provider/home_provider.dart';
@@ -39,19 +40,7 @@ class _TestScreenState extends State<TestScreen> {
         testProvider.getInfoLoad == false
             ? testProvider.getTestScreenInfo()
             : null;
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          if (homeProvider.logoutError) {
-            snackBar(context, SnackbarStrings.logoutError, 'error');
-          }
-          if (homeProvider.isUserLogout) {
-            snackBar(context, SnackbarStrings.logoutSuccess, 'success');
-            context.router
-                .pushAndPopUntil(const LoginScreen(), predicate: (_) => false);
-          }
-          if (testProvider.invalidDeviceId) {
-            homeProvider.logOut();
-          }
-        });
+        InvalidDeviceId().check(context);
         return WillPopScope(
           child: Scaffold(
             appBar: const CustomTabAppbar(title: AppStrings.testTab),

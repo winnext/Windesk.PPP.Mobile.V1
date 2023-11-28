@@ -17,6 +17,10 @@ class HomeProvider extends ChangeNotifier {
       AuthServiceRepositoryImpl();
   bool _isUserLogout = false;
   bool get isUserLogout => _isUserLogout;
+  set setIsUserLogout(bool isUserLogout) {
+    _isUserLogout = isUserLogout;
+    notifyListeners();
+  }
 
   bool _logoutError = false;
   bool get logoutError => _logoutError;
@@ -58,11 +62,12 @@ class HomeProvider extends ChangeNotifier {
               'Kullanıcı başarı bir şekilde çıkış yaptı.', 'logoutSuccess'),
           prefs.remove('userCode'),
           SharedManager().clearAll(),
-          _isUserLogout = true,
+          setIsUserLogout = true,
           notifyListeners(),
-          Future.delayed(const Duration(seconds: 1), () {
-            _isUserLogout = false;
-          }),
+          // Future.delayed(const Duration(seconds: 1), () {
+          //   _isUserLogout = false;
+          // }),
+          // notifyListeners(),
         },
         (r) => {
           ElasticLog().sendLog(
