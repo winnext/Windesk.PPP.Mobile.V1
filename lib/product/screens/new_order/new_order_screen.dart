@@ -95,348 +95,387 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
                   : oncelik[0];
 
           return Sizer(builder: (context, orientation, deviceType) {
-            return Scaffold(
-                resizeToAvoidBottomInset: true,
-                appBar: AppBar(
-                  backgroundColor: Colors.white,
-                  title: const Text(
-                    'Yeni İş Emri',
-                    style: TextStyle(color: Colors.black),
+            return WillPopScope(
+              child: Scaffold(
+                  resizeToAvoidBottomInset: true,
+                  appBar: AppBar(
+                    backgroundColor: Colors.white,
+                    title: const Text(
+                      'Yeni İş Emri',
+                      style: TextStyle(color: Colors.black),
+                    ),
+                    centerTitle: true,
+                    actions: const [],
                   ),
-                  centerTitle: true,
-                  actions: const [],
-                ),
-                body: Center(
-                    child: !woProvider.loading
-                        ? SingleChildScrollView(
-                            child: SizedBox(
-                              width: 85.w,
-                              child: Column(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Stack(
-                                      alignment: Alignment.centerRight,
-                                      children: <Widget>[
-                                        TextField(
-                                          controller: woProvider.mahal,
-                                          decoration: InputDecoration(
-                                            border: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(12.0),
+                  body: Center(
+                      child: !woProvider.loading
+                          ? SingleChildScrollView(
+                              child: SizedBox(
+                                width: 85.w,
+                                child: Column(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Stack(
+                                        alignment: Alignment.centerRight,
+                                        children: <Widget>[
+                                          TextField(
+                                            controller: woProvider.mahal,
+                                            decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(12.0),
+                                              ),
+                                              labelText: 'Mahal',
                                             ),
-                                            labelText: 'Mahal',
+                                            onChanged: (inputValue) {},
                                           ),
-                                          onChanged: (inputValue) {},
-                                        ),
-                                        IconButton(
-                                          icon:
-                                              const Icon(Icons.qr_code_scanner),
-                                          onPressed: () {
-                                            woProvider.scanBarcodeNormal();
-                                            FocusScope.of(context)
-                                                .requestFocus(FocusNode());
-                                            // Your codes...
-                                          },
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: DropdownButtonFormField(
-                                      isExpanded: true,
-
-                                      // Initial Value
-                                      value: dropdownvalueHizmet,
-                                      decoration: InputDecoration(
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(12.0),
-                                        ),
-                                        labelText: 'Hizmet',
+                                          IconButton(
+                                            icon: const Icon(
+                                                Icons.qr_code_scanner),
+                                            onPressed: () {
+                                              woProvider.scanBarcodeNormal();
+                                              FocusScope.of(context)
+                                                  .requestFocus(FocusNode());
+                                              // Your codes...
+                                            },
+                                          ),
+                                        ],
                                       ),
-
-                                      // Down Arrow Icon
-                                      icon:
-                                          const Icon(Icons.keyboard_arrow_down),
-
-                                      // Array list of items
-                                      items: hizmet.map((String items) {
-                                        return DropdownMenuItem(
-                                          value: items,
-                                          child: Text(items),
-                                        );
-                                      }).toList(),
-                                      // After selecting the desired option,it will
-                                      // change button value to selected value
-                                      onChanged: (newValue) {
-                                        // setState(() {
-                                        //   dropdownvalueBina = newValue!;
-                                        // });
-                                        woProvider.setWoCreateHizmetValue =
-                                            newValue!;
-
-                                        // cek();
-                                      },
                                     ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: DropdownButtonFormField(
-                                      isExpanded: true,
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: DropdownButtonFormField(
+                                        isExpanded: true,
 
-                                      // Initial Value
-                                      value: dropdownvalueIsEmriAdi,
-                                      decoration: InputDecoration(
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(12.0),
+                                        // Initial Value
+                                        value: dropdownvalueHizmet,
+                                        decoration: InputDecoration(
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(12.0),
+                                          ),
+                                          labelText: 'Hizmet',
                                         ),
-                                        labelText: 'İş Emri Adı',
+
+                                        // Down Arrow Icon
+                                        icon: const Icon(
+                                            Icons.keyboard_arrow_down),
+
+                                        // Array list of items
+                                        items: hizmet.map((String items) {
+                                          return DropdownMenuItem(
+                                            value: items,
+                                            child: Text(items),
+                                          );
+                                        }).toList(),
+                                        // After selecting the desired option,it will
+                                        // change button value to selected value
+                                        onChanged: (newValue) {
+                                          // setState(() {
+                                          //   dropdownvalueBina = newValue!;
+                                          // });
+                                          woProvider.setWoCreateHizmetValue =
+                                              newValue!;
+
+                                          // cek();
+                                        },
                                       ),
-
-                                      // Down Arrow Icon
-                                      icon:
-                                          const Icon(Icons.keyboard_arrow_down),
-
-                                      // Array list of items
-                                      items: isEmriAdi.map((String items) {
-                                        return DropdownMenuItem(
-                                          value: items,
-                                          child: Text(items),
-                                        );
-                                      }).toList(),
-                                      // After selecting the desired option,it will
-                                      // change button value to selected value
-                                      onChanged: (newValue) {
-                                        // setState(() {
-                                        //   dropdownvalueBina = newValue!;
-                                        // });
-                                        woProvider
-                                                .setWoCreateIsEmriAdiListeValue =
-                                            newValue!;
-
-                                        // cek();
-                                      },
                                     ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: TextField(
-                                      controller: woProvider.aciklama,
-                                      decoration: InputDecoration(
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(12.0),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: DropdownButtonFormField(
+                                        isExpanded: true,
+
+                                        // Initial Value
+                                        value: dropdownvalueIsEmriAdi,
+                                        decoration: InputDecoration(
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(12.0),
+                                          ),
+                                          labelText: 'İş Emri Adı',
                                         ),
-                                        labelText: 'Açıklama',
+
+                                        // Down Arrow Icon
+                                        icon: const Icon(
+                                            Icons.keyboard_arrow_down),
+
+                                        // Array list of items
+                                        items: isEmriAdi.map((String items) {
+                                          return DropdownMenuItem(
+                                            value: items,
+                                            child: Text(items),
+                                          );
+                                        }).toList(),
+                                        // After selecting the desired option,it will
+                                        // change button value to selected value
+                                        onChanged: (newValue) {
+                                          // setState(() {
+                                          //   dropdownvalueBina = newValue!;
+                                          // });
+                                          woProvider
+                                                  .setWoCreateIsEmriAdiListeValue =
+                                              newValue!;
+
+                                          // cek();
+                                        },
                                       ),
-                                      onChanged: (inputValue) {
-                                        //print(searchProvider.vakaNo.text);
-                                        // if(searchProvider.vakaNo.text == ''){
-                                        //   vakaNo = 0;
-
-                                        //   searchProvider.setVakaButonVisible = false;
-
-                                        // } else{
-                                        //   vakaNo =  1;
-                                        //               searchProvider.setVakaButonVisible = true;
-
-                                        //   }
-                                      },
                                     ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: DropdownButtonFormField(
-                                      isExpanded: true,
-
-                                      // Initial Value
-                                      value: dropdownvalueOncelik,
-                                      decoration: InputDecoration(
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(12.0),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: TextField(
+                                        controller: woProvider.aciklama,
+                                        decoration: InputDecoration(
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(12.0),
+                                          ),
+                                          labelText: 'Açıklama',
                                         ),
-                                        labelText: 'Öncelik',
+                                        onChanged: (inputValue) {
+                                          //print(searchProvider.vakaNo.text);
+                                          // if(searchProvider.vakaNo.text == ''){
+                                          //   vakaNo = 0;
+
+                                          //   searchProvider.setVakaButonVisible = false;
+
+                                          // } else{
+                                          //   vakaNo =  1;
+                                          //               searchProvider.setVakaButonVisible = true;
+
+                                          //   }
+                                        },
                                       ),
-
-                                      // Down Arrow Icon
-                                      icon:
-                                          const Icon(Icons.keyboard_arrow_down),
-
-                                      // Array list of items
-                                      items: oncelik.map((String items) {
-                                        return DropdownMenuItem(
-                                          value: items,
-                                          child: Text(items),
-                                        );
-                                      }).toList(),
-                                      // After selecting the desired option,it will
-                                      // change button value to selected value
-                                      onChanged: (newValue) {
-                                        woProvider
-                                                .setwoCreateOncelikListeValue =
-                                            newValue!;
-
-                                        // cek();
-                                      },
                                     ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: TextField(
-                                      controller: woProvider.varlik,
-                                      decoration: InputDecoration(
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(12.0),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: DropdownButtonFormField(
+                                        isExpanded: true,
+
+                                        // Initial Value
+                                        value: dropdownvalueOncelik,
+                                        decoration: InputDecoration(
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(12.0),
+                                          ),
+                                          labelText: 'Öncelik',
                                         ),
-                                        labelText: 'Varlık',
+
+                                        // Down Arrow Icon
+                                        icon: const Icon(
+                                            Icons.keyboard_arrow_down),
+
+                                        // Array list of items
+                                        items: oncelik.map((String items) {
+                                          return DropdownMenuItem(
+                                            value: items,
+                                            child: Text(items),
+                                          );
+                                        }).toList(),
+                                        // After selecting the desired option,it will
+                                        // change button value to selected value
+                                        onChanged: (newValue) {
+                                          woProvider
+                                                  .setwoCreateOncelikListeValue =
+                                              newValue!;
+
+                                          // cek();
+                                        },
                                       ),
-                                      onChanged: (inputValue) {
-                                        //print(searchProvider.vakaNo.text);
-                                        // if(searchProvider.vakaNo.text == ''){
-                                        //   vakaNo = 0;
-
-                                        //   searchProvider.setVakaButonVisible = false;
-
-                                        // } else{
-                                        //   vakaNo =  1;
-                                        //               searchProvider.setVakaButonVisible = true;
-
-                                        //   }
-                                      },
                                     ),
-                                  ),
-                                  const Text(''),
-                                  // photoss.isNotEmpty
-                                  //     ? Center(
-                                  //         child: Padding(
-                                  //           padding: const EdgeInsets.all(8.0),
-                                  //           child: SizedBox(
-                                  //               height: 25.h,
-                                  //               width: 50.w,
-                                  //               child: Card(
-                                  //                 child: Column(
-                                  //                   children: [
-                                  //                     ElevatedButton(
-                                  //                       style: ElevatedButton.styleFrom(
-                                  //                         foregroundColor: Colors.white,
-                                  //                         backgroundColor: Colors.red,
-                                  //                         fixedSize: Size(
-                                  //                             15.w, 2.h), // foreground
-                                  //                       ),
-                                  //                       onPressed: () {
-                                  //                         woProvider.deletePhotos = 0;
-                                  //                         woProvider.deleteB64 = 0;
-                                  //                         setState(() {
-                                  //                           b64ss = [];
-                                  //                           photoss = [];
-                                  //                         });
-                                  //                       },
-                                  //                       child:
-                                  //                           Icon(size: 5.w, Icons.delete),
-                                  //                     ),
-                                  //                     SizedBox(
-                                  //                       height: 13.h,
-                                  //                       child:
-                                  //                           Image.file(File(photoss[0])),
-                                  //                     )
-                                  //                   ],
-                                  //                 ),
-                                  //               )),
-                                  //         ),
-                                  //       )
-                                  //     : const Text(''),
-                                  Padding(
-                                    padding: const EdgeInsets.only(bottom: 10),
-                                    child: SizedBox(
-                                        width: 60.w,
-                                        height: 5.h,
-                                        child: Row(
-                                          children: [
-                                            SizedBox(
-                                              width: 30.w,
-                                              child: ElevatedButton(
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: TextField(
+                                        controller: woProvider.varlik,
+                                        decoration: InputDecoration(
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(12.0),
+                                          ),
+                                          labelText: 'Varlık',
+                                        ),
+                                        onChanged: (inputValue) {
+                                          //print(searchProvider.vakaNo.text);
+                                          // if(searchProvider.vakaNo.text == ''){
+                                          //   vakaNo = 0;
+
+                                          //   searchProvider.setVakaButonVisible = false;
+
+                                          // } else{
+                                          //   vakaNo =  1;
+                                          //               searchProvider.setVakaButonVisible = true;
+
+                                          //   }
+                                        },
+                                      ),
+                                    ),
+                                    const Text(''),
+                                    // photoss.isNotEmpty
+                                    //     ? Center(
+                                    //         child: Padding(
+                                    //           padding: const EdgeInsets.all(8.0),
+                                    //           child: SizedBox(
+                                    //               height: 25.h,
+                                    //               width: 50.w,
+                                    //               child: Card(
+                                    //                 child: Column(
+                                    //                   children: [
+                                    //                     ElevatedButton(
+                                    //                       style: ElevatedButton.styleFrom(
+                                    //                         foregroundColor: Colors.white,
+                                    //                         backgroundColor: Colors.red,
+                                    //                         fixedSize: Size(
+                                    //                             15.w, 2.h), // foreground
+                                    //                       ),
+                                    //                       onPressed: () {
+                                    //                         woProvider.deletePhotos = 0;
+                                    //                         woProvider.deleteB64 = 0;
+                                    //                         setState(() {
+                                    //                           b64ss = [];
+                                    //                           photoss = [];
+                                    //                         });
+                                    //                       },
+                                    //                       child:
+                                    //                           Icon(size: 5.w, Icons.delete),
+                                    //                     ),
+                                    //                     SizedBox(
+                                    //                       height: 13.h,
+                                    //                       child:
+                                    //                           Image.file(File(photoss[0])),
+                                    //                     )
+                                    //                   ],
+                                    //                 ),
+                                    //               )),
+                                    //         ),
+                                    //       )
+                                    //     : const Text(''),
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(bottom: 10),
+                                      child: SizedBox(
+                                          width: 60.w,
+                                          height: 5.h,
+                                          child: Row(
+                                            children: [
+                                              SizedBox(
+                                                width: 30.w,
+                                                child: ElevatedButton(
+                                                    style: ElevatedButton
+                                                        .styleFrom(
+                                                      backgroundColor:
+                                                          APPColors.Login.red,
+                                                      shape:
+                                                          const RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius.only(
+                                                                topLeft: Radius
+                                                                    .circular(
+                                                                        20),
+                                                                bottomLeft: Radius
+                                                                    .circular(
+                                                                        20)),
+                                                      ),
+                                                    ),
+                                                    onPressed: () {
+                                                      // BaseBottomSheet.show(
+                                                      //     context,
+                                                      //     ImageBottomSheet2(
+                                                      //         workOrderCode: 'WO00001',
+                                                      //         clearContext: context));
+                                                      woProvider.setMahal = '';
+                                                      woProvider.setAciklama =
+                                                          '';
+                                                      woProvider
+                                                              .setWoCreateHizmetValue =
+                                                          woProvider
+                                                                  .woCreateHizmetListeArray[
+                                                              0][0];
+                                                      woProvider
+                                                              .setWoCreateIsEmriAdiListeValue =
+                                                          woProvider
+                                                                  .woCreateIsEmriAdiListeArray[
+                                                              0][0];
+                                                      woProvider
+                                                              .setwoCreateOncelikListeValue =
+                                                          woProvider
+                                                                  .woCreateOncelikListeArray[
+                                                              0][0];
+
+                                                      woProvider.clear = 1;
+                                                      woProvider.setVarlik = '';
+                                                    },
+                                                    child: photos.isNotEmpty
+                                                        ? (const Text('Vazgeç'))
+                                                        : (const Text(
+                                                            'Vazgeç'))),
+                                              ),
+                                              SizedBox(
+                                                width: 30.w,
+                                                child: ElevatedButton(
                                                   style:
                                                       ElevatedButton.styleFrom(
                                                     backgroundColor:
-                                                        APPColors.Login.red,
+                                                        APPColors.Login.blue,
                                                     shape:
                                                         const RoundedRectangleBorder(
                                                       borderRadius:
                                                           BorderRadius.only(
-                                                              topLeft: Radius
+                                                              topRight: Radius
                                                                   .circular(20),
-                                                              bottomLeft: Radius
-                                                                  .circular(
-                                                                      20)),
+                                                              bottomRight:
+                                                                  Radius
+                                                                      .circular(
+                                                                          20)),
                                                     ),
                                                   ),
                                                   onPressed: () {
-                                                    // BaseBottomSheet.show(
-                                                    //     context,
-                                                    //     ImageBottomSheet2(
-                                                    //         workOrderCode: 'WO00001',
-                                                    //         clearContext: context));
-                                                    woProvider.setMahal = '';
-                                                    woProvider.setAciklama = '';
                                                     woProvider
-                                                            .setWoCreateHizmetValue =
-                                                        woProvider
-                                                                .woCreateHizmetListeArray[
-                                                            0][0];
-                                                    woProvider
-                                                            .setWoCreateIsEmriAdiListeValue =
-                                                        woProvider
-                                                                .woCreateIsEmriAdiListeArray[
-                                                            0][0];
-                                                    woProvider
-                                                            .setwoCreateOncelikListeValue =
-                                                        woProvider
-                                                                .woCreateOncelikListeArray[
-                                                            0][0];
-
-                                                    woProvider.clear = 1;
-                                                    woProvider.setVarlik = '';
+                                                        .woCreate(context);
                                                   },
-                                                  child: photos.isNotEmpty
-                                                      ? (const Text('Vazgeç'))
-                                                      : (const Text('Vazgeç'))),
-                                            ),
-                                            SizedBox(
-                                              width: 30.w,
-                                              child: ElevatedButton(
-                                                style: ElevatedButton.styleFrom(
-                                                  backgroundColor:
-                                                      APPColors.Login.blue,
-                                                  shape:
-                                                      const RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.only(
-                                                            topRight: Radius
-                                                                .circular(20),
-                                                            bottomRight:
-                                                                Radius.circular(
-                                                                    20)),
-                                                  ),
+                                                  child: const Text('Oluştur'),
                                                 ),
-                                                onPressed: () {
-                                                  woProvider.woCreate(context);
-                                                },
-                                                child: const Text('Oluştur'),
                                               ),
-                                            ),
-                                          ],
-                                        )),
-                                  ),
-                                ],
+                                            ],
+                                          )),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          )
-                        : CustomLoadingIndicator()));
+                            )
+                          : const CustomLoadingIndicator())),
+              onWillPop: () async {
+                final shouldPop = await showDialog<bool>(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: const Text('Çıkış'),
+                      content: const Text(
+                          'Uygulamadan çıkış yapılacak, devam etmek istiyor musunuz?'),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pop(context, true);
+                          },
+                          child: const Text('Evet'),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pop(context, false);
+                          },
+                          child: const Text(
+                            'Hayır',
+                            style: TextStyle(color: Colors.red),
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                );
+                return shouldPop!;
+              },
+            );
           });
         }));
   }

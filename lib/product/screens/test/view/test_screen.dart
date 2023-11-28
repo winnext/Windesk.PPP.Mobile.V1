@@ -29,33 +29,64 @@ class _TestScreenState extends State<TestScreen> {
 
   @override
   Widget build(BuildContext context) {
-    
     return MultiProvider(
       providers: [
-          ChangeNotifierProvider(create: (context) => HomeProvider()),
+        ChangeNotifierProvider(create: (context) => HomeProvider()),
         ChangeNotifierProvider(create: (context) => TestProvider()),
       ],
-      child: Consumer2<TestProvider,HomeProvider>(
-          builder: (context, TestProvider testProvider, HomeProvider homeProvider, child) {
+      child: Consumer2<TestProvider, HomeProvider>(builder: (context,
+          TestProvider testProvider, HomeProvider homeProvider, child) {
         testProvider.getInfoLoad == false
             ? testProvider.getTestScreenInfo()
             : null;
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-            if (homeProvider.logoutError) {
-              snackBar(context, SnackbarStrings.logoutError, 'error');
-            }
-            if (homeProvider.isUserLogout) {
-              snackBar(context, SnackbarStrings.logoutSuccess, 'success');
-              context.router.pushAndPopUntil(const LoginScreen(),
-                  predicate: (_) => false);
-            }
-            if(testProvider.invalidDeviceId){
-              homeProvider.logOut();
-            }
-          });
-        return Scaffold(
-          appBar: const CustomTabAppbar(title: AppStrings.testTab),
-          body: Center(child: _bodyWidget(context, testProvider)),
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (homeProvider.logoutError) {
+            snackBar(context, SnackbarStrings.logoutError, 'error');
+          }
+          if (homeProvider.isUserLogout) {
+            snackBar(context, SnackbarStrings.logoutSuccess, 'success');
+            context.router
+                .pushAndPopUntil(const LoginScreen(), predicate: (_) => false);
+          }
+          if (testProvider.invalidDeviceId) {
+            homeProvider.logOut();
+          }
+        });
+        return WillPopScope(
+          child: Scaffold(
+            appBar: const CustomTabAppbar(title: AppStrings.testTab),
+            body: Center(child: _bodyWidget(context, testProvider)),
+          ),
+          onWillPop: () async {
+            final shouldPop = await showDialog<bool>(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  title: const Text('Çıkış'),
+                  content: const Text(
+                      'Uygulamadan çıkış yapılacak, devam etmek istiyor musunuz?'),
+                  actions: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pop(context, true);
+                      },
+                      child: const Text('Evet'),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pop(context, false);
+                      },
+                      child: const Text(
+                        'Hayır',
+                        style: TextStyle(color: Colors.red),
+                      ),
+                    ),
+                  ],
+                );
+              },
+            );
+            return shouldPop!;
+          },
         );
       }),
     );
@@ -129,7 +160,7 @@ class _TestScreenState extends State<TestScreen> {
             child: Text(AppStrings.appVersion +
                 context.read<TestProvider>().appVersion.toString()),
           ),
-          Expanded( 
+          Expanded(
             flex: 4,
             child: Padding(
               padding: const EdgeInsets.all(10.0),

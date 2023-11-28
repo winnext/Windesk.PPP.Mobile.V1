@@ -16,18 +16,50 @@ class SearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     InvalidDeviceId().check(context);
-    return Scaffold(
-      appBar: const CustomTabAppbar(title: AppStrings.searchTab),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            const Expanded(child: SizedBox()),
-            searchPageIcons(context),
-          ],
+    return WillPopScope(
+      child: Scaffold(
+        appBar: const CustomTabAppbar(title: AppStrings.searchTab),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              const Expanded(child: SizedBox()),
+              searchPageIcons(context),
+            ],
+          ),
         ),
       ),
+      onWillPop: () async {
+        final shouldPop = await showDialog<bool>(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: const Text('Çıkış'),
+              content: const Text(
+                  'Uygulamadan çıkış yapılacak, devam etmek istiyor musunuz?'),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context, true);
+                  },
+                  child: const Text('Evet'),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context, false);
+                  },
+                  child: const Text(
+                    'Hayır',
+                    style: TextStyle(color: Colors.red),
+                  ),
+                ),
+              ],
+            );
+          },
+        );
+        return shouldPop!;
+      },
     );
   }
 
@@ -38,8 +70,14 @@ class SearchScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          rowIconButtonSection(context, LocaleKeys.issueSearch, AppIcons.caseSLASearchIcon, const IssueSearchRoute(), LocaleKeys.entitySearchTitle,
-              AppIcons.entitySearchIcon, const AssetSearchRoute()),
+          rowIconButtonSection(
+              context,
+              LocaleKeys.issueSearch,
+              AppIcons.caseSLASearchIcon,
+              const IssueSearchRoute(),
+              LocaleKeys.entitySearchTitle,
+              AppIcons.entitySearchIcon,
+              const AssetSearchRoute()),
           rowIconButtonSection(
               context,
               LocaleKeys.mahalSearchTitle,
@@ -55,8 +93,14 @@ class SearchScreen extends StatelessWidget {
     );
   }
 
-  Expanded rowIconButtonSection(BuildContext context, String buttonTitle1, IconData buttonIcon1, PageRouteInfo<dynamic> navigateRouteName1,
-      String buttonTitle2, IconData buttonIcon2, PageRouteInfo<dynamic> navigateRouteName2) {
+  Expanded rowIconButtonSection(
+      BuildContext context,
+      String buttonTitle1,
+      IconData buttonIcon1,
+      PageRouteInfo<dynamic> navigateRouteName1,
+      String buttonTitle2,
+      IconData buttonIcon2,
+      PageRouteInfo<dynamic> navigateRouteName2) {
     return Expanded(
       child: Center(
         child: Row(

@@ -20,7 +20,6 @@ import '../../../../feature/constants/paths/service_tools.dart';
 import '../../../../feature/database/shared_manager.dart';
 import '../../../../feature/enums/shared_enums.dart';
 import '../../../../feature/models/issue_models/issue_list_model.dart';
-import 'dart:developer';
 
 class IssueServiceRepoImpml extends IssueServiceRepository {
   @override
@@ -229,15 +228,14 @@ class IssueServiceRepoImpml extends IssueServiceRepository {
   @override
   Future<Either<bool, CustomServiceException>> addIssueAttachmentMethod(
     String userToken,
-    String userCode,
+    String userName,
     String issueCode,
     String image,
     String desc,
   ) async {
     bool result = false;
     String url =
-        '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=addAttachment&issueCode=$issueCode&username=$userCode&moduleName=issue';
-    print('addAttach photo : ' + url);
+        '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=addAttachment&issueCode=$issueCode&username=$userName&moduleName=issue';
 
     FormData formData =
         FormData.fromMap({'description': desc, 'base64string': image});
