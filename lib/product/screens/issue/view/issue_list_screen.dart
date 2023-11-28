@@ -101,7 +101,8 @@ class IssueListScreen extends StatelessWidget {
                         child: RefreshIndicator(
                           onRefresh: () async {
                             issueProvider.getIssueList(1, issueModuleCode);
-                            context.read<IssueProvider>().setSecond();
+                            //geri alınacak
+                            //context.read<IssueProvider>().setSecond();
                           },
                           strokeWidth: 4.0,
                           child: ListView.builder(

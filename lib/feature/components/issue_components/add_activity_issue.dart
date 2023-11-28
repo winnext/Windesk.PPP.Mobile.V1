@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:freeze/freeze.dart';
 import 'package:provider/provider.dart';
 import 'package:wm_ppp_4/feature/components/buttons/custom_half_buttons.dart';
 import 'package:wm_ppp_4/feature/components/input_fields/dropdown_input_fields.dart';
@@ -29,7 +30,7 @@ class AddActivity extends StatelessWidget {
       child: Consumer2<IssueActionProvider, IssueProvider>(
         builder: (context, IssueActionProvider issueActionProvider,
             IssueProvider issueProvider, child) {
-          issueActionProvider.isFetchActivity
+          issueActionProvider.isFetchActivity && issueActionProvider.image == null
               ? issueActionProvider.getAvailableActivities(issueCode)
               : null;
           issueActionProvider.isassigneeccType
@@ -168,15 +169,16 @@ class AddActivity extends StatelessWidget {
                                   ),
                                 ),
                                 NullCheckWidget().conditionCheckWidget(
-                                    issueActionProvider.mobilePhoto,
+                                    issueActionProvider.mobilePhoto,                               
                                     ImageBottomSheetIssueActivity(
-                                      issueCode: issueCode,
-                                      activityCode: issueActionProvider
-                                          .selectedActivityCode,
-                                      spaceCode:
-                                          issueActionProvider.isBarcodeSpace,
-                                      clearContext: context,
-                                    )),
+                                        issueCode: issueCode,
+                                        activityCode: issueActionProvider
+                                            .selectedActivityCode,
+                                        spaceCode:
+                                            issueActionProvider.isBarcodeSpace,
+                                        clearContext: context,
+                                      ),
+                                    ),
                                 NullCheckWidget().conditionCheckWidget(
                                   !issueActionProvider.mobilePhoto,
                                   _saveOrQuit(context, issueActionProvider,

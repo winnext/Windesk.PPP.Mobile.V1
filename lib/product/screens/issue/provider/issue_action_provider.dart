@@ -144,7 +144,6 @@ class IssueActionProvider extends ChangeNotifier {
     _serialNumber.text = serialNumber;
     notifyListeners();
   }
-  
 
   final _rfidCode = TextEditingController();
   TextEditingController get rfidCode => _rfidCode;
@@ -159,7 +158,7 @@ class IssueActionProvider extends ChangeNotifier {
     _spaceCode.text = spaceCode;
     notifyListeners();
   }
-  
+
   final _patientBarcode = TextEditingController();
   TextEditingController get patientBarcode => _patientBarcode;
   set setPatientBarcode(String patientBarcode) {
@@ -270,11 +269,11 @@ class IssueActionProvider extends ChangeNotifier {
   void scanSpace() async {
     scanBarcodeAndQr('space');
   }
-  
+
   void scanPatientBarcode() async {
     scanBarcodeAndQr('patient');
   }
-  
+
   void scanSampleBarcode() async {
     scanBarcodeAndQr('sample');
   }
@@ -438,6 +437,7 @@ class IssueActionProvider extends ChangeNotifier {
   }
 
   void getAvailableActivities(String issuecode) async {
+    print('pickedddddd');
     String userToken = await SharedManager().getString(SharedEnum.deviceId);
     _loading = true;
     notifyListeners();
@@ -452,10 +452,8 @@ class IssueActionProvider extends ChangeNotifier {
               for (int i = 0; i < _availableActivities.length; i++)
                 {
                   _availableActivitiesName.add(_availableActivities[i].name.toString()),
-                  print('quick' + ' ' + _availableActivities[i].acttypecode.toString()),
                   if (_availableActivities[i].acttypecode == 'QUICKFIXED')
                     {
-                      print('quickfixed'),
                       _quickFixExist = true,
                     }
                 },
@@ -528,11 +526,9 @@ class IssueActionProvider extends ChangeNotifier {
         setRfidCode = barcode;
       } else if (state == 'space') {
         setSpaceCode = barcode;
-      }
-      else if (state == 'patient') {
+      } else if (state == 'patient') {
         setPatientBarcode = barcode;
-      }
-       else if (state == 'sample') {
+      } else if (state == 'sample') {
         setSampleBarcode = barcode;
       }
     }
@@ -601,19 +597,8 @@ class IssueActionProvider extends ChangeNotifier {
     }
     notifyListeners();
 
-    final response = await _issueServiceRepository.saveIssueActivity(
-      issuecode,
-      userToken,
-      selectedAsgGroupCode,
-      userCode,
-      selectedActivityCode,
-      description,
-      spaceCode.text,
-      selectedAsgUserCode,
-      additionaltimeInput,
-      'issue',
-      base64string,
-    );
+    final response = await _issueServiceRepository.saveIssueActivity(issuecode, userToken, selectedAsgGroupCode, userCode, selectedActivityCode,
+        description, spaceCode.text, selectedAsgUserCode, additionaltimeInput, 'issue', base64string, '', '');
     response.fold(
         (l) => {
               isSuccessEnterActivity = true,
@@ -646,19 +631,8 @@ class IssueActionProvider extends ChangeNotifier {
     }
     notifyListeners();
 
-    final response = await _issueServiceRepository.saveIssueActivity(
-      issuecode,
-      userToken,
-      selectedAsgGroupCode,
-      userCode,
-      activityCode,
-      description,
-      spaceCode.text,
-      selectedAsgUserCode,
-      additionaltimeInput,
-      'issue',
-      base64string,
-    );
+    final response = await _issueServiceRepository.saveIssueActivity(issuecode, userToken, selectedAsgGroupCode, userCode, activityCode, description,
+        spaceCode.text, selectedAsgUserCode, additionaltimeInput, 'issue', base64string, patientBarcode.text, sampleBarcode.text);
     response.fold(
         (l) => {
               isSuccessEnterActivityForFixed = true,
@@ -708,8 +682,8 @@ class IssueActionProvider extends ChangeNotifier {
   }
 
   Future<void> getImageFromCamera() async {
+    _image = null;
     final pickedFile = await picker.pickImage(source: ImageSource.camera);
-
     if (pickedFile != null) {
       _image = File(pickedFile.path);
       notifyListeners();

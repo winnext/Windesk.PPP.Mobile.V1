@@ -65,6 +65,14 @@ class CustomWorkOrderDetailCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 _ColumnRow(
+                  iconData: AppIcons.personal,
+                  title: data.iuser ?? 'Kullanıcı bilgisi bulunmuyor',
+                  content: '',
+                  boldStyle: _boldStyle,
+                  lowStyle: _lowStyle,
+                ),
+                const SizedBox(height: 16),
+                _ColumnRow(
                   iconData: AppIcons.clock,
                   title: '',
                   content:

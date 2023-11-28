@@ -29,11 +29,12 @@ class IssueProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  IssueProvider() {
-    _getUsercode();
-    timer = Timer.periodic(
-        const Duration(seconds: 1), (Timer t) => getCurrentTime());
-  }
+  //geri alınacak
+  // IssueProvider() {
+  //   _getUsercode();
+  //   timer = Timer.periodic(
+  //       const Duration(seconds: 1), (Timer t) => getCurrentTime());
+  // }
 
   bool _isFetchFilter = false;
   bool get isFetchFilter => _isFetchFilter;
@@ -48,19 +49,20 @@ class IssueProvider extends ChangeNotifier {
   String title = '';
   var secondText = 60;
   String issueModuleCode = '';
-  void getCurrentTime() {
-    currentTimeText = DateTime.now().toString().substring(0, 19);
-    secondText = secondText - 1;
-    if (secondText == 0) {
-      secondText = 60;
-      _loading = true;
-      getIssueList(1, issueModuleCode);
-      Future.delayed(const Duration(milliseconds: 1000), () {
-        _loading = false;
-      });
-    }
-    notifyListeners();
-  }
+  //geri alınacak
+  // void getCurrentTime() {
+  //   currentTimeText = DateTime.now().toString().substring(0, 19);
+  //   secondText = secondText - 1;
+  //   if (secondText == 0) {
+  //     secondText = 60;
+  //     _loading = true;
+  //     getIssueList(1, issueModuleCode);
+  //     Future.delayed(const Duration(milliseconds: 1000), () {
+  //       _loading = false;
+  //     });
+  //   }
+  //   notifyListeners();
+  // }
 
   void setIssueModuleCode(val) {
     issueModuleCode = val;

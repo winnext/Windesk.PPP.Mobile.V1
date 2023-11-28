@@ -412,22 +412,21 @@ class IssueServiceRepoImpml extends IssueServiceRepository {
     additionalTime,
     module,
     image,
+    patientNo,
+    sampleNo
   ) async {
     bool result = false;
     String url =
         '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=addActivity&issueCode=$issueCode&username=$username&activityCode=$activityCode&locationCode=$locationCode&asgGroupCode=$asgGroupCode&asgUserCode=$asgUserCode&additionalTime=$additionalTime&module=issue&from_mobile=1&cardNo='
-        '&patientNo='
-        '&sampleNo='
+        '&patientNo=$patientNo'
+        '&sampleNo=$sampleNo'
         '&description=$description';
-
     //FormData formData = FormData.fromMap({"base64string": image});
-    print('saveIssueActivity URL : ' + url);
     try {
       final response = await super.dio.post(url,
           data: {'base64string': image, 'description': description},
           options: Options(contentType: Headers.formUrlEncodedContentType));
       super.logger.i(response.toString());
-      print(response.data);
       if (response.data[ServiceResponseStatusEnums.success.rawText] == true) {
         result = true;
         super.logger.i(result.toString());

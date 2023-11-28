@@ -25,13 +25,12 @@ class TextFieldsInputWithActionAndController extends StatelessWidget {
       child: Row(
         children: <Widget>[
           SizedBox(
-            width: MediaQuery.of(context).size.width * 0.72,
+            width: MediaQuery.of(context).size.width * 0.6,
             child: TextField(
               readOnly: readOnly ?? false,
               controller: textController,
               decoration: InputDecoration(
-                border: OutlineInputBorder(
-                    borderRadius: CustomBorderRadius.textFieldBorderRadius),
+                border: OutlineInputBorder(borderRadius: CustomBorderRadius.textFieldBorderRadius),
                 labelText: labelText,
               ),
             ),
