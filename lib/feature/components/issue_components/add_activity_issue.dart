@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:freeze/freeze.dart';
 import 'package:provider/provider.dart';
 import 'package:wm_ppp_4/feature/components/buttons/custom_half_buttons.dart';
 import 'package:wm_ppp_4/feature/components/input_fields/dropdown_input_fields.dart';
@@ -17,8 +16,10 @@ import 'package:wm_ppp_4/product/screens/issue/provider/issue_provider.dart';
 
 // ignore: must_be_immutable
 class AddActivity extends StatelessWidget {
-  const AddActivity({super.key, required this.issueCode});
+  const AddActivity(
+      {super.key, required this.issueCode, required this.issueProviderxx});
   final String issueCode;
+  final IssueProvider issueProviderxx;
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -30,7 +31,8 @@ class AddActivity extends StatelessWidget {
       child: Consumer2<IssueActionProvider, IssueProvider>(
         builder: (context, IssueActionProvider issueActionProvider,
             IssueProvider issueProvider, child) {
-          issueActionProvider.isFetchActivity && issueActionProvider.image == null
+          issueActionProvider.isFetchActivity &&
+                  issueActionProvider.image == null
               ? issueActionProvider.getAvailableActivities(issueCode)
               : null;
           issueActionProvider.isassigneeccType
@@ -38,7 +40,12 @@ class AddActivity extends StatelessWidget {
               : null;
           if (issueActionProvider.isSuccessEnterActivity) {
             snackBar(context, LocaleKeys.processDone, 'success');
+            //issueProvider.setisFetch = false;
             Navigator.of(context).pop<bool>(true);
+
+            issueProviderxx.setisFetch = false;
+            issueProviderxx.setisFetchSummary = false;
+            //context.router.popAndPush(IssueDetailScreen(issueCode: issueCode));
           }
           if (issueActionProvider.errorAccur) {
             snackBar(
@@ -169,16 +176,16 @@ class AddActivity extends StatelessWidget {
                                   ),
                                 ),
                                 NullCheckWidget().conditionCheckWidget(
-                                    issueActionProvider.mobilePhoto,                               
-                                    ImageBottomSheetIssueActivity(
-                                        issueCode: issueCode,
-                                        activityCode: issueActionProvider
-                                            .selectedActivityCode,
-                                        spaceCode:
-                                            issueActionProvider.isBarcodeSpace,
-                                        clearContext: context,
-                                      ),
-                                    ),
+                                  issueActionProvider.mobilePhoto,
+                                  ImageBottomSheetIssueActivity(
+                                    issueCode: issueCode,
+                                    activityCode: issueActionProvider
+                                        .selectedActivityCode,
+                                    spaceCode:
+                                        issueActionProvider.isBarcodeSpace,
+                                    clearContext: context,
+                                  ),
+                                ),
                                 NullCheckWidget().conditionCheckWidget(
                                   !issueActionProvider.mobilePhoto,
                                   _saveOrQuit(context, issueActionProvider,

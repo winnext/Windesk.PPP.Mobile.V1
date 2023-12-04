@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wm_ppp_4/feature/components/snackBar/snackbar.dart';
+import 'package:wm_ppp_4/product/screens/issue/provider/issue_provider.dart';
 import 'package:wm_ppp_4/product/screens/issue/view/issue_detail_screen.dart';
 
 import '../../../service/search_service_repo_impl.dart';
@@ -26,18 +27,21 @@ class IssueSearchProvider extends ChangeNotifier {
     final response =
         await _searchServiceRepository.checkIssueByAuth(searchIssueCode);
     // ignore: avoid_print
+    IssueProvider issueProvider = IssueProvider();
+
     response.fold(
         (l) => {
               if (l > 0)
                 {
                   // context.router.popAndPush(
                   //     IssueDetailScreen(issueCode: searchIssueCode)),
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              IssueDetailScreen(issueCode: searchIssueCode)),
-                    )
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => IssueDetailScreen(
+                              issueCode: searchIssueCode,
+                            )),
+                  )
 
                   // Navigator.of(context).popAndPushNamed(
                   //   'IssueDetailScreen',

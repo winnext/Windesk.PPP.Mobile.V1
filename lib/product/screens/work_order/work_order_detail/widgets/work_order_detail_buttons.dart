@@ -3,6 +3,7 @@ import 'package:wm_ppp_4/feature/components/buttons/custom_issue_action_button.d
 import 'package:wm_ppp_4/feature/components/generic_bottom_sheet/base_bottom_sheet.dart';
 import 'package:wm_ppp_4/feature/components/worker_order_bottom_sheets/choose_add_document_type_sheet.dart';
 import 'package:wm_ppp_4/feature/constants/other/app_strings.dart';
+import 'package:wm_ppp_4/product/screens/issue/provider/issue_provider.dart';
 
 import '../../../../../feature/constants/other/app_icons.dart';
 import '../../../../../feature/constants/other/colors.dart';
@@ -10,7 +11,11 @@ import '../../../../../feature/constants/style/border_radius.dart';
 import '../provider/work_order_detail_provider_main.dart';
 
 class WorkOrderDetailButtons extends StatelessWidget {
-  const WorkOrderDetailButtons({super.key, required this.value, required this.workOrderCode, required this.clearContext});
+  const WorkOrderDetailButtons(
+      {super.key,
+      required this.value,
+      required this.workOrderCode,
+      required this.clearContext});
 
   final String workOrderCode;
   final BuildContext clearContext;
@@ -18,6 +23,7 @@ class WorkOrderDetailButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    IssueProvider issueProvider = IssueProvider();
     return Column(
       children: [
         !value.isStartEnable ? _cameraButton(context) : const SizedBox(),
@@ -44,7 +50,14 @@ class WorkOrderDetailButtons extends StatelessWidget {
             ),
           ],
         ),
-        workOrderCode[0] == 'M' ? CustomIssueActionButton(issueCode: value.workOrderDetailsModel.modulecode, workOrderCode: workOrderCode,isWorkOrder: true,) : Container()
+        workOrderCode[0] == 'M'
+            ? CustomIssueActionButton(
+                issueCode: value.workOrderDetailsModel.modulecode,
+                workOrderCode: workOrderCode,
+                isWorkOrder: true,
+                issueProvider: issueProvider,
+              )
+            : Container()
       ],
     );
   }
@@ -53,29 +66,38 @@ class WorkOrderDetailButtons extends StatelessWidget {
     double size = 50;
     return InkWell(
       onTap: () {
-        BaseBottomSheet.show(context, ChooseAddDocumanyTypeSheet(workOrderCode: workOrderCode));
+        BaseBottomSheet.show(
+            context, ChooseAddDocumanyTypeSheet(workOrderCode: workOrderCode));
       },
       child: Container(
         height: size,
         width: size,
-        decoration: BoxDecoration(borderRadius: CustomBorderRadius.circularBorderRadius, color: APPColors.Main.black),
+        decoration: BoxDecoration(
+            borderRadius: CustomBorderRadius.circularBorderRadius,
+            color: APPColors.Main.black),
         child: Icon(AppIcons.camera, color: APPColors.Main.white),
       ),
     );
   }
 
-  Widget _elevatedButton(Color color, String text, bool isActive, Function onPressed) {
+  Widget _elevatedButton(
+      Color color, String text, bool isActive, Function onPressed) {
     double size = 100;
     return SizedBox(
       width: size,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           backgroundColor: color,
-          shape: RoundedRectangleBorder(borderRadius: CustomBorderRadius.mediumBorderRadius),
+          shape: RoundedRectangleBorder(
+              borderRadius: CustomBorderRadius.mediumBorderRadius),
           disabledBackgroundColor: APPColors.Main.grey,
         ),
         onPressed: isActive ? () => onPressed() : null,
-        child: Text(text, style: TextStyle(color: APPColors.Main.white, fontSize: 14, fontWeight: FontWeight.w400)),
+        child: Text(text,
+            style: TextStyle(
+                color: APPColors.Main.white,
+                fontSize: 14,
+                fontWeight: FontWeight.w400)),
       ),
     );
   }
