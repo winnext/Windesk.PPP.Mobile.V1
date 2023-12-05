@@ -11,12 +11,10 @@ class CustomIssueActionButton extends StatefulWidget {
       {super.key,
       required this.issueCode,
       this.isWorkOrder,
-      this.workOrderCode,
-      required this.issueProvider});
+      this.workOrderCode});
   final String issueCode;
   final String? workOrderCode;
   final bool? isWorkOrder;
-  final IssueProvider issueProvider;
   @override
   State<CustomIssueActionButton> createState() =>
       _CustomIssueActionButtonState();
@@ -47,21 +45,22 @@ class _CustomIssueActionButtonState extends State<CustomIssueActionButton> {
                               Navigator.pop(context);
                             },
                             child: const Icon(Icons.close))),
-                    IssueActionModal(
-                        issueProviderx: widget.issueProvider,
-                        issueCode: widget.issueCode),
+                    IssueActionModal(issueCode: widget.issueCode),
                   ],
                 ),
               );
               if (result == true) {
                 // ignore: use_build_context_synchronously
+                print('BURADAAA');
                 if (widget.isWorkOrder == true) {
                   // ignore: use_build_context_synchronously
                   context.router.popAndPush(WorkOrderDetailScreen(
                       workorderCode: widget.workOrderCode ?? ''));
                 } else {
                   // ignore: use_build_context_synchronously
-                  //context.router.popAndPush(IssueDetailScreen(issueCode: widget.issueCode));
+                  context.router.popAndPush(
+                      IssueDetailScreen(issueCode: widget.issueCode));
+                  
                 }
               }
             },

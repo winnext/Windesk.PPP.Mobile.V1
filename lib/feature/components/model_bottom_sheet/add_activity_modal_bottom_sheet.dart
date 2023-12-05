@@ -12,11 +12,10 @@ import 'package:wm_ppp_4/feature/constants/other/colors.dart';
 import 'package:wm_ppp_4/feature/l10n/locale_keys.g.dart';
 import 'package:wm_ppp_4/product/screens/issue/provider/issue_action_provider.dart';
 import 'package:wm_ppp_4/product/screens/issue/provider/issue_addphoto_provider.dart';
-import 'package:wm_ppp_4/product/screens/issue/provider/issue_provider.dart';
 
 class IssueActionModal extends StatelessWidget {
-  const IssueActionModal({super.key, required this.issueCode, required this.issueProviderx});
-  final IssueProvider issueProviderx;
+  const IssueActionModal({super.key, required this.issueCode});
+
   final String issueCode;
   @override
   Widget build(BuildContext context) {
@@ -61,7 +60,7 @@ class IssueActionModal extends StatelessWidget {
                     color: APPColors.Main.white,
                     width: size.width / 1.09,
                     child: AddActivity(
-                      issueCode: issueCode, issueProviderxx: issueProviderx,
+                      issueCode: issueCode,
                     ),
                   )
                 : Container(),

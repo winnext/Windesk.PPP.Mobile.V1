@@ -88,6 +88,8 @@ class AppRouter extends $AppRouter {
                     page: SearchScreen.page,
                     initial: true),
                 AutoRoute(path: 'issueSearchPage', page: IssueSearchRoute.page),
+                AutoRoute(
+                    path: 'issueDetailScreen', page: IssueDetailScreen.page),
                 AutoRoute(path: 'assetSearchPage', page: AssetSearchRoute.page),
                 AutoRoute(path: 'woSearchPage', page: WoSearchRoute.page),
                 AutoRoute(

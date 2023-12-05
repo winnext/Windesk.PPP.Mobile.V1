@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:wm_ppp_4/feature/components/snackBar/snackbar.dart';
-import 'package:wm_ppp_4/product/screens/issue/provider/issue_provider.dart';
 import 'package:wm_ppp_4/product/screens/issue/view/issue_detail_screen.dart';
 
 import '../../../service/search_service_repo_impl.dart';
@@ -16,10 +15,12 @@ class IssueSearchProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool _dataUpdate = false;
-  bool get dataUpdate => _dataUpdate;
-  set setDataUpdate(bool dataUpdate) {
-    _dataUpdate = dataUpdate;
+
+
+  bool _issueUpdateData = false;
+  bool get issueUpdateData => _issueUpdateData;
+  set setIssueUpdateData(bool issueUpdateData) {
+    _issueUpdateData = issueUpdateData;
     notifyListeners();
   }
 
@@ -27,21 +28,12 @@ class IssueSearchProvider extends ChangeNotifier {
     final response =
         await _searchServiceRepository.checkIssueByAuth(searchIssueCode);
     // ignore: avoid_print
-    IssueProvider issueProvider = IssueProvider();
-
+    var result;
     response.fold(
         (l) => {
               if (l > 0)
                 {
-                  // context.router.popAndPush(
-                  //     IssueDetailScreen(issueCode: searchIssueCode)),
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => IssueDetailScreen(
-                              issueCode: searchIssueCode,
-                            )),
-                  )
+                  setIssueUpdateData = true,
 
                   // Navigator.of(context).popAndPushNamed(
                   //   'IssueDetailScreen',

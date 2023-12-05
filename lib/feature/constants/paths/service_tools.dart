@@ -26,7 +26,8 @@ class ServiceTools {
   static const tokenV2 = 'eshtest!';
   static const attachPath = "http://10.126.12.21/esh3";
   static const loggerUrl = 'http://windeskmobiletest.eskisehir.yerel/mobilelog';
-  static const attachPathLive = "http://10.126.12.21/esh3/xreadattach.php?token=$tokenV1&id=";
+  static const attachPathLive =
+      "http://10.126.12.21/esh3/xreadattach.php?token=$tokenV1&id=";
   static const facilityName = "Eskişehir Şehir Hastanesi";
   static const appName = "ESH";
   static const isWorkOrderExist = true;

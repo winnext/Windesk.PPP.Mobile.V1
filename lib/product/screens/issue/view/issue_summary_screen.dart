@@ -9,9 +9,8 @@ import 'package:wm_ppp_4/product/screens/issue/provider/issue_provider.dart';
 
 @RoutePage()
 class IssueSummaryScreen extends StatelessWidget {
-  const IssueSummaryScreen({super.key, required this.issueCode, required this.issueProvider});
+  const IssueSummaryScreen({super.key, required this.issueCode});
   final String issueCode;
-  final IssueProvider issueProvider;
 
   @override
   Widget build(BuildContext context) {
@@ -21,21 +20,20 @@ class IssueSummaryScreen extends StatelessWidget {
         create: (context) => IssueProvider(),
         child: Consumer<IssueProvider>(
           builder: (context, IssueProvider issueProvider, child) {
-            context.watch<IssueProvider>().isFetch
+            issueProvider.isFetch
                 ? null
                 : issueProvider.getIssueSummary(issueCode);
-            context.watch<IssueProvider>().isFetchSummary
+            issueProvider.isFetchSummary
                 ? null
                 : issueProvider.getIssueTimeInfo(issueCode);
             return issueProvider.loading
                 ? const CustomLoadingIndicator()
-                : _summaryBody(context, size, issueProvider);
+                : _summaryBody(size, issueProvider);
           },
         ));
   }
 
-  Column _summaryBody(
-      BuildContext context, Size size, IssueProvider issueProvider) {
+  Column _summaryBody(Size size, IssueProvider issueProvider) {
     return Column(
       children: [
         Padding(
@@ -43,7 +41,7 @@ class IssueSummaryScreen extends StatelessWidget {
           child: SizedBox(
             width: size.width,
             height: size.height / 1.8,
-            child: SingleChildScrollView(
+            child: SingleChildScrollView( 
               child: Padding(
                 padding: const EdgeInsets.only(
                     top: 0, left: 0, right: 0, bottom: 10),
@@ -60,13 +58,8 @@ class IssueSummaryScreen extends StatelessWidget {
                     ),
                     issueSummaryRow(issueProvider.issueSummaryDetail.code,
                         issueProvider.issueSummaryDetail.idate.toString()),
-                    issueSummaryRow(
-                        LocaleKeys.issueSituation,
-                        context
-                            .watch<IssueProvider>()
-                            .issueSummaryDetail
-                            .statusname
-                            .toString()),
+                    issueSummaryRow(LocaleKeys.issueSituation,
+                        issueProvider.issueSummaryDetail.statusname.toString()),
                     issueSummaryRow(
                         LocaleKeys.description,
                         issueProvider.issueSummaryDetail.description

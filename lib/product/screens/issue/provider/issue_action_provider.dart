@@ -288,7 +288,8 @@ class IssueActionProvider extends ChangeNotifier {
   void setSelectedActivityName(String activityName) {
     _selectedActivityName = activityName;
     clearAll();
-    if (activityName == 'Görevlendirme Yapıldı' || activityName == 'Yanıtlandı') {
+    if (activityName == 'Görevlendirme Yapıldı' ||
+        activityName == 'Yanıtlandı') {
       setSelectedActivityNextStateName('Yanıtlandı');
     } else if (activityName == 'Düzeltildi') {
       setSelectedActivityNextStateName('Düzeltildi');
@@ -378,10 +379,9 @@ class IssueActionProvider extends ChangeNotifier {
     response.fold(
         (l) => {
               snackBar(context, LocaleKeys.processDone, 'success'),
-              Navigator.of(context).pop<bool>(true),
+              Navigator.pop(context, true),
             },
         (r) => {
-              issueSearchProvider.setDataUpdate = true,
               snackBar(context, LocaleKeys.processCancell, 'error'),
               Navigator.of(context).pop<bool>(false),
             });
@@ -466,7 +466,8 @@ class IssueActionProvider extends ChangeNotifier {
               _availableActivities.addAll(l),
               for (int i = 0; i < _availableActivities.length; i++)
                 {
-                  _availableActivitiesName.add(_availableActivities[i].name.toString()),
+                  _availableActivitiesName
+                      .add(_availableActivities[i].name.toString()),
                   if (_availableActivities[i].acttypecode == 'QUICKFIXED')
                     {
                       _quickFixExist = true,
@@ -487,7 +488,8 @@ class IssueActionProvider extends ChangeNotifier {
     _loading = true;
     notifyListeners();
     _quickFixExist = false;
-    final response = await _issueServiceRepository.getAvailableActivities(issuecode, userToken);
+    final response = await _issueServiceRepository.getAvailableActivities(
+        issuecode, userToken);
     _availableActivitiesName.clear();
     _availableActivities.clear();
     _availableActivitiesName.insert(0, 'Seçiniz');
@@ -617,8 +619,20 @@ class IssueActionProvider extends ChangeNotifier {
     }
     notifyListeners();
 
-    final response = await _issueServiceRepository.saveIssueActivity(issuecode, userToken, selectedAsgGroupCode, userCode, selectedActivityCode,
-        description, spaceCode.text, selectedAsgUserCode, additionaltimeInput, 'issue', base64string, '', '');
+    final response = await _issueServiceRepository.saveIssueActivity(
+        issuecode,
+        userToken,
+        selectedAsgGroupCode,
+        userCode,
+        selectedActivityCode,
+        description,
+        spaceCode.text,
+        selectedAsgUserCode,
+        additionaltimeInput,
+        'issue',
+        base64string,
+        '',
+        '');
     response.fold(
         (l) => {
               isSuccessEnterActivity = true,
@@ -651,8 +665,20 @@ class IssueActionProvider extends ChangeNotifier {
     }
     notifyListeners();
 
-    final response = await _issueServiceRepository.saveIssueActivity(issuecode, userToken, selectedAsgGroupCode, userCode, activityCode, description,
-        spaceCode.text, selectedAsgUserCode, additionaltimeInput, 'issue', base64string, patientBarcode.text, sampleBarcode.text);
+    final response = await _issueServiceRepository.saveIssueActivity(
+        issuecode,
+        userToken,
+        selectedAsgGroupCode,
+        userCode,
+        activityCode,
+        description,
+        spaceCode.text,
+        selectedAsgUserCode,
+        additionaltimeInput,
+        'issue',
+        base64string,
+        patientBarcode.text,
+        sampleBarcode.text);
     response.fold(
         (l) => {
               isSuccessEnterActivityForFixed = true,

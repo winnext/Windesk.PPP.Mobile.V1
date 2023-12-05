@@ -16,7 +16,6 @@ import 'package:wm_ppp_4/feature/route/empty_router.dart' as _i5;
 import 'package:wm_ppp_4/feature/route/empty_search_router.dart' as _i6;
 import 'package:wm_ppp_4/product/screens/auth/view/login_screen.dart' as _i16;
 import 'package:wm_ppp_4/product/screens/home/view/home_screen.dart' as _i7;
-import 'package:wm_ppp_4/product/screens/issue/provider/issue_provider.dart';
 import 'package:wm_ppp_4/product/screens/issue/view/issue_activities_screen.dart'
     as _i8;
 import 'package:wm_ppp_4/product/screens/issue/view/issue_detail_screen.dart'
@@ -176,7 +175,6 @@ abstract class $AppRouter extends _i27.RootStackRouter {
         child: _i14.IssueSummaryScreen(
           key: args.key,
           issueCode: args.issueCode,
-          issueProvider: args.issueProvider,
         ),
       );
     },
@@ -478,11 +476,12 @@ class IssueDetailScreen extends _i27.PageRouteInfo<IssueDetailScreenArgs> {
     _i28.Key? key,
     required String issueCode,
     List<_i27.PageRouteInfo>? children,
-    required IssueProvider issueProvider,
   }) : super(
           IssueDetailScreen.name,
           args: IssueDetailScreenArgs(
-              key: key, issueCode: issueCode, issueProvider: issueProvider),
+            key: key,
+            issueCode: issueCode,
+          ),
           initialChildren: children,
         );
 
@@ -496,13 +495,11 @@ class IssueDetailScreenArgs {
   const IssueDetailScreenArgs({
     this.key,
     required this.issueCode,
-    required this.issueProvider,
   });
 
   final _i28.Key? key;
 
   final String issueCode;
-  final IssueProvider issueProvider;
 
   @override
   String toString() {
@@ -625,14 +622,12 @@ class IssueSummaryScreen extends _i27.PageRouteInfo<IssueSummaryScreenArgs> {
   IssueSummaryScreen({
     _i28.Key? key,
     required String issueCode,
-    required IssueProvider issueProvider,
     List<_i27.PageRouteInfo>? children,
   }) : super(
           IssueSummaryScreen.name,
           args: IssueSummaryScreenArgs(
             key: key,
             issueCode: issueCode,
-            issueProvider: issueProvider,
           ),
           initialChildren: children,
         );
@@ -647,13 +642,11 @@ class IssueSummaryScreenArgs {
   const IssueSummaryScreenArgs({
     this.key,
     required this.issueCode,
-    required this.issueProvider,
   });
 
   final _i28.Key? key;
 
   final String issueCode;
-  final IssueProvider issueProvider;
 
   @override
   String toString() {

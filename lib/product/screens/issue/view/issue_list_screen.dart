@@ -39,8 +39,8 @@ class IssueListScreen extends StatelessWidget {
           issueProvider.setIssueModuleCode(issueModuleCode);
           return Scaffold(
             appBar: CustomMainAppbar(
-              title: Text(issueModuleName,
-                  style: const TextStyle(color: Colors.black)),
+              title:
+                  Text(issueModuleName, style: const TextStyle(color: Colors.black)),
               actions: [
                 IconButton(
                   onPressed: () async {
@@ -113,9 +113,8 @@ class IssueListScreen extends StatelessWidget {
                                 return CustomIssueListCard(
                                     issueListElement: issueListElement,
                                     onPressed: (String woCode) {
-                                      context.router.push(IssueDetailScreen(
-                                          issueCode: woCode,
-                                          issueProvider: issueProvider));
+                                      context.router.push(
+                                          IssueDetailScreen(issueCode: woCode));
                                     },
                                     onPressedLong: () {});
                               }),
