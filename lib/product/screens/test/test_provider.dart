@@ -68,12 +68,24 @@ class TestProvider extends ChangeNotifier {
   set setPhoneTime(String phoneTime) {
     _phoneTime = phoneTime;
   }
+    String _userName = '';
+  get userName => _userName;
+  set setUserName(String userName) {
+    _userName = userName;
+  }
+    String _userCode = '';
+  get userCode => _userCode;
+  set setUserCode(String userCode) {
+    _userCode = userCode;
+  }
 
   void getTestScreenInfo() async {
     setGetInfoLoad = true;
     setDeviceModel = await SharedManager().getString(SharedEnum.deviceModel);
     setDeviceOS = await SharedManager().getString(SharedEnum.deviceType);
     setAppVersion = await SharedManager().getString(SharedEnum.appVersion);
+    setUserName = await SharedManager().getString(SharedEnum.userName);
+    setUserCode = await SharedManager().getString(SharedEnum.userCode);
     notifyListeners();
   }
 
