@@ -9,7 +9,9 @@ import '../../../../feature/models/home_page_models/announcement_model.dart';
 import '../provider/home_provider.dart';
 
 class AnnouncementList extends StatelessWidget {
-  const AnnouncementList({Key? key}) : super(key: key);
+  const AnnouncementList({Key? key, required this.homeProvider2})
+      : super(key: key);
+  final HomeProvider homeProvider2;
   @override
   Widget build(BuildContext context) {
     int l = -1;
@@ -17,7 +19,8 @@ class AnnouncementList extends StatelessWidget {
 
     return ChangeNotifierProvider(
       create: (context) => HomeProvider(),
-      child: Consumer<HomeProvider>(builder: (context, HomeProvider homeProvider, child) {
+      child: Consumer<HomeProvider>(
+          builder: (context, HomeProvider homeProvider, child) {
         return WillPopScope(
           onWillPop: () async {
             return false;
@@ -32,22 +35,25 @@ class AnnouncementList extends StatelessWidget {
                     onTap: () {
                       Navigator.pop(context);
                     }),
-                context.read<HomeProvider>().announcementList.isNotEmpty
+                homeProvider2.announcementList.isNotEmpty
                     ? Expanded(
                         child: NotificationListener<ScrollNotification>(
                         child: ListView.builder(
-                            itemCount: context.read<HomeProvider>().totalAnnoucementCount,
+                            itemCount: homeProvider2.totalAnnoucementCount,
                             itemBuilder: (BuildContext context, int i) {
                               l++;
                               if (l == 5) {
                                 l = 0;
                               }
-                              AnnouncementModel listElements = context.read<HomeProvider>().announcementList[i];
-                              bool? isLink = listElements.announcement?.contains('http');
+                              AnnouncementModel listElements =
+                                  homeProvider2.announcementList[i];
+                              bool? isLink =
+                                  listElements.announcement?.contains('http');
                               return GestureDetector(
                                 onTap: () {},
                                 child: Padding(
-                                  padding: const EdgeInsets.fromLTRB(20, 5, 20, 10),
+                                  padding:
+                                      const EdgeInsets.fromLTRB(20, 5, 20, 10),
                                   child: Container(
                                     decoration: BoxDecoration(
                                       color: APPColors.Main.white,
@@ -62,33 +68,46 @@ class AnnouncementList extends StatelessWidget {
                                     ),
                                     child: SizedBox(
                                       child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
                                         children: [
                                           Text(
                                             listElements.name.toString(),
                                             maxLines: 1,
                                             textAlign: TextAlign.left,
-                                            style: TextStyle(fontSize: 18, color: APPColors.Accent.blue),
+                                            style: TextStyle(
+                                                fontSize: 18,
+                                                color: APPColors.Accent.blue),
                                           ),
                                           Padding(
                                             padding: const EdgeInsets.all(6.0),
                                             child: isLink == true
                                                 ? Link(
-                                                    uri: Uri.parse(listElements.announcement.toString()),
+                                                    uri: Uri.parse(listElements
+                                                        .announcement
+                                                        .toString()),
                                                     target: LinkTarget.blank,
-                                                    builder: (BuildContext ctx, FollowLink? openLink) {
+                                                    builder: (BuildContext ctx,
+                                                        FollowLink? openLink) {
                                                       return TextButton.icon(
                                                         onPressed: openLink,
-                                                        label: const Text('Ankete Git : '),
-                                                        icon: const Icon(Icons.read_more),
+                                                        label: const Text(
+                                                            'Ankete Git : '),
+                                                        icon: const Icon(
+                                                            Icons.read_more),
                                                       );
                                                     },
                                                   )
                                                 : Text(
-                                                    listElements.announcement.toString(),
+                                                    listElements.announcement
+                                                        .toString(),
                                                     textAlign: TextAlign.left,
-                                                    style: TextStyle(fontSize: 15, color: APPColors.Secondary.black),
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        color: APPColors
+                                                            .Secondary.black),
                                                   ),
                                           )
                                         ],
@@ -100,7 +119,8 @@ class AnnouncementList extends StatelessWidget {
                             }),
                       ))
                     : Padding(
-                        padding: EdgeInsets.only(top: MediaQuery.of(context).size.height / 2.5),
+                        padding: EdgeInsets.only(
+                            top: MediaQuery.of(context).size.height / 2.5),
                         child: const Center(child: AramaSonucBos()),
                       ),
               ],

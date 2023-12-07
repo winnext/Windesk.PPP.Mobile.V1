@@ -36,6 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     HomeServiceRepositoryImpl homeService = HomeServiceRepositoryImpl();
     homeService.getAnnouncements();
+
     super.initState();
   }
 
@@ -48,7 +49,9 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Consumer<HomeProvider>(
         builder: (context, HomeProvider homeProvider, child) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
-            //homeProvider.getAnnouncement();
+            if (!homeProvider.fetchedAnn) {
+              homeProvider.getAnnouncement();
+            }
             if (homeProvider.logoutError) {
               snackBar(context, SnackbarStrings.logoutError, 'error');
             }
@@ -183,11 +186,11 @@ class _HomeScreenState extends State<HomeScreen> {
       centerTitle: true,
       elevation: 0.0,
       backgroundColor: APPColors.Main.white,
-      leading: announcementBuilder(),
+      leading: announcementBuilder(provider),
     );
   }
 
-  Builder announcementBuilder() {
+  Builder announcementBuilder(provider) {
     return Builder(
       builder: (BuildContext context) {
         return badges.Badge(
@@ -210,7 +213,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       backgroundColor: Colors.transparent,
                       elevation: 10,
                       context: context,
-                      builder: (context) => const AnnouncementList())
+                      builder: (context) => AnnouncementList(
+                            homeProvider2: provider,
+                          ))
                   : null;
             },
           ),

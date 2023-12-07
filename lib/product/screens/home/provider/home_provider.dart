@@ -21,7 +21,12 @@ class HomeProvider extends ChangeNotifier {
     _isUserLogout = isUserLogout;
     notifyListeners();
   }
-
+  bool _fetchedAnn = false;
+  bool get fetchedAnn => _fetchedAnn;
+  set setFetchedAnn(bool fetchedAnn){
+    _fetchedAnn =  fetchedAnn;
+    notifyListeners();
+  }
   bool _logoutError = false;
   bool get logoutError => _logoutError;
 
@@ -39,14 +44,19 @@ class HomeProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void getAnnouncement() {
-    final result = HomeServiceRepositoryImpl().getAnnouncements();
-    if (result is CustomServiceException) {
-    } else {
-      announcementList.addAll(result as Iterable<AnnouncementModel>);
-    }
+  void getAnnouncement() async {
+    setFetchedAnn = true;
+    final result = await HomeServiceRepositoryImpl().getAnnouncements();
+    result.fold((l) => announcementList.addAll(l), (r) => null);
     settotalAnnoucementCount = announcementList.length;
     notifyListeners();
+
+    // if (result is CustomServiceException) {
+    // } else {
+    //   announcementList.addAll(result as List<AnnouncementModel>);
+    // }
+    // settotalAnnoucementCount = announcementList.length;
+    // notifyListeners();
   }
 
   void logOut() async {
