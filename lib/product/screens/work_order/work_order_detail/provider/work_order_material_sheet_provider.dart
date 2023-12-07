@@ -9,7 +9,8 @@ import '../../../../../feature/service/global_services.dart/work_order_service/w
 import '../../../../../feature/service/global_services.dart/work_order_service/work_order_service_repository_impl.dart';
 
 class WorkOrderMaterialSheetProvider extends ChangeNotifier {
-  final WorkOrderServiceRepository _service = Injection.getIt.get<WorkOrderServiceRepositoryImpl>();
+  final WorkOrderServiceRepository _service =
+      Injection.getIt.get<WorkOrderServiceRepositoryImpl>();
   bool init = true;
   bool isLoading = false;
   bool showProduct = false;
@@ -26,13 +27,13 @@ class WorkOrderMaterialSheetProvider extends ChangeNotifier {
   String choosenAmount = '';
 
   List<WorkOrderStores> stores = [];
-  List<String> storeNames = [];
+  List<String> storeNames = ['Seçiniz'];
 
   List<WorkOrderStoreProductModel> storeProducts = [];
-  List<String> storeProductNames = [];
+  List<String> storeProductNames = ['Seçiniz'];
 
   List<WorkOrderStoreProductPackageInfoModel> productPackageInfo = [];
-  List<String> productPackageNames = [];
+  List<String> productPackageNames = ['Seçiniz'];
 
   void setChoosenAmount(String val) => choosenAmount = val;
 
@@ -119,7 +120,8 @@ class WorkOrderMaterialSheetProvider extends ChangeNotifier {
       }
     }
     if (storeCode.isNotEmpty) {
-      final response = await _service.getWorkOrderStoreProducts(userToken, storeCode);
+      final response =
+          await _service.getWorkOrderStoreProducts(userToken, storeCode);
 
       response.fold(
         (l) => {
@@ -149,7 +151,8 @@ class WorkOrderMaterialSheetProvider extends ChangeNotifier {
     }
 
     if (productCode.isNotEmpty) {
-      final response = await _service.getWorkOrderStoreProductPackageInfo(userToken, productCode);
+      final response = await _service.getWorkOrderStoreProductPackageInfo(
+          userToken, productCode);
 
       response.fold(
         (l) => {
@@ -167,14 +170,18 @@ class WorkOrderMaterialSheetProvider extends ChangeNotifier {
 
   void _filterProductPackageInfos() {
     for (var packageInfo in productPackageInfo) {
-      if (!productPackageNames.contains(packageInfo.amount) || packageInfo.amount != null) productPackageNames.add(packageInfo.amount ?? '');
+      if (!productPackageNames.contains(packageInfo.amount) ||
+          packageInfo.amount != null)
+        productPackageNames.add(packageInfo.amount ?? '');
     }
     notifyListeners();
   }
 
   void _filterStoreProductNames() {
     for (var product in storeProducts) {
-      if (!storeProductNames.contains(product.name) || product.name != null || product.name != '') storeProductNames.add(product.name ?? '');
+      if (!storeProductNames.contains(product.name) ||
+          product.name != null ||
+          product.name != '') storeProductNames.add(product.name ?? '');
     }
     notifyListeners();
   }
