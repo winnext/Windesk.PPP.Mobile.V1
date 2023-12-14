@@ -109,10 +109,10 @@ class NewOrderProvider extends ChangeNotifier {
 //////////////////////////////////////////////
 ///////////// Hizmet ////////////////////////
 ////////////////////////////////////////////
-  List _woCreateHizmetListeArray = [];
+  List<List<String>> _woCreateHizmetListeArray = [];
 
-  List get woCreateHizmetListeArray => _woCreateHizmetListeArray;
-  set setCreateWoHizmetListeArray(List woCreateHizmetListeArray) {
+  List<List<String>> get woCreateHizmetListeArray => _woCreateHizmetListeArray;
+  set setCreateWoHizmetListeArray(List<List<String>> woCreateHizmetListeArray) {
     _woCreateHizmetListeArray = woCreateHizmetListeArray;
     notifyListeners();
   }
@@ -126,7 +126,7 @@ class NewOrderProvider extends ChangeNotifier {
   }
 
   woCreateHizmetListesi() async {
-        setLoading = true;
+    setLoading = true;
 
     List<String> name = ['Hizmet'];
     List<String> code = ['Hizmet'];
@@ -145,7 +145,7 @@ class NewOrderProvider extends ChangeNotifier {
     setCreateWoHizmetListeArray = [name] + [code];
     setWoCreateHizmetValue =
         woCreateHizmetValue != '' ? woCreateHizmetValue : name[0];
-        setLoading = false;
+    setLoading = false;
     notifyListeners();
   }
 
@@ -153,7 +153,7 @@ class NewOrderProvider extends ChangeNotifier {
 ///////////// İş Emri Adı ////////////////////////
 ////////////////////////////////////////////
 
-  List _woCreateIsEmriAdiListeArray = [
+  List<List<String>> _woCreateIsEmriAdiListeArray = [
     [
       'Seçiniz',
       'Teknik Onarım',
@@ -188,8 +188,10 @@ class NewOrderProvider extends ChangeNotifier {
     ]
   ];
 
-  List get woCreateIsEmriAdiListeArray => _woCreateIsEmriAdiListeArray;
-  set setWoCreateIsEmriAdiListeArray(List woCreateIsEmriAdiListeArray) {
+  List<List<String>> get woCreateIsEmriAdiListeArray =>
+      _woCreateIsEmriAdiListeArray;
+  set setWoCreateIsEmriAdiListeArray(
+      List<List<String>> woCreateIsEmriAdiListeArray) {
     _woCreateIsEmriAdiListeArray = woCreateIsEmriAdiListeArray;
     notifyListeners();
   }
@@ -206,13 +208,15 @@ class NewOrderProvider extends ChangeNotifier {
 ///////////// Öncelik ////////////////////////
 ////////////////////////////////////////////
 
-  List _woCreateOncelikListeArray = [
+  List<List<String>> _woCreateOncelikListeArray = [
     ['Normal', 'Öncelikli', 'Acil'],
     ['0', '1', '2']
   ];
 
-  List get woCreateOncelikListeArray => _woCreateOncelikListeArray;
-  set setwoCreateOncelikListeArray(List woCreateOncelikListeArray) {
+  List<List<String>> get woCreateOncelikListeArray =>
+      _woCreateOncelikListeArray;
+  set setwoCreateOncelikListeArray(
+      List<List<String>> woCreateOncelikListeArray) {
     _woCreateOncelikListeArray = woCreateOncelikListeArray;
     notifyListeners();
   }
@@ -487,5 +491,51 @@ class NewOrderProvider extends ChangeNotifier {
       image = File(pickedFile.path);
       notifyListeners();
     }
+  }
+
+  initFunc() async {
+    print('giriyor');
+    List<String> hizmet = woCreateHizmetListeArray.isNotEmpty
+        ? woCreateHizmetListeArray[0]
+        : ['Hizmet'];
+    List hizmetDatasi = woCreateHizmetListeArray;
+
+    String dropdownvalueHizmet = !loading
+        ? hizmetDatasi[0].indexOf(woCreateHizmetValue) != -1
+            ? woCreateHizmetValue
+            : hizmet[0]
+        : 'Hizmet';
+    setWoCreateHizmetValue = dropdownvalueHizmet;
+
+//////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////
+//////////////////////  İş Emri Adı     /////////////////////////
+/////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+
+    List<String> isEmriAdi = woCreateIsEmriAdiListeArray[0];
+    List<List<String>> isEmriAdiDatasi = woCreateIsEmriAdiListeArray;
+
+    String dropdownvalueIsEmriAdi =
+        isEmriAdiDatasi[0].contains(woCreateIsEmriAdiListeValue)
+            ? woCreateIsEmriAdiListeValue
+            : isEmriAdi[0];
+    setWoCreateIsEmriAdiListeValue = dropdownvalueIsEmriAdi;
+
+//////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////
+//////////////////////  Öncelik     /////////////////////////
+/////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+
+    List<String> oncelik = woCreateOncelikListeArray[0];
+    List oncelikDatasi = woCreateOncelikListeArray;
+
+    String dropdownvalueOncelik =
+        oncelikDatasi[0].indexOf(woCreateOncelikListeValue) != -1
+            ? woCreateOncelikListeValue
+            : oncelik[0];
+    setwoCreateOncelikListeValue = dropdownvalueOncelik;
+    notifyListeners();
   }
 }

@@ -5,7 +5,9 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:wm_ppp_4/feature/database/shared_manager.dart';
 import 'package:wm_ppp_4/feature/elastic_log/elastic_log.dart';
+import 'package:wm_ppp_4/feature/enums/shared_enums.dart';
 
 import 'local_notification.dart';
 
@@ -20,6 +22,8 @@ class FirebaseNotification {
     String? firebaseToken = await messaging.getToken();
     print('TOKEN : ');
     print(firebaseToken);
+    SharedManager()
+        .setString(SharedEnum.firebaseToken, firebaseToken.toString());
 
     FirebaseMessaging.onBackgroundMessage(
       (message) => LocalNotification.showNotification(

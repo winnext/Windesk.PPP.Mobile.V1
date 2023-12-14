@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:wm_ppp_4/feature/components/loading/custom_loading_indicator.dart';
@@ -35,12 +34,9 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
           b64ss = widget.b64s ?? [''];
           photoss = widget.photos ?? [''];
 
-          Future.delayed(Duration.zero, () async {
-            if (woProvider.woCreateHizmetListeArray.isEmpty) {
-              woProvider.woCreateHizmetListesi();
-              woProvider.initFunc();
-            }
-          });
+          woProvider.woCreateHizmetListeArray.isEmpty
+              ? woProvider.woCreateHizmetListesi()
+              : null;
 
           // final woProvider =
           //     Provider.of<NewOrderProvider>(context, listen: true);
@@ -57,46 +53,46 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
 
           // ignore: no_leading_underscores_for_local_identifiers
 
-//           List<String> hizmet = woProvider.woCreateHizmetListeArray.isNotEmpty
-//               ? woProvider.woCreateHizmetListeArray[0]
-//               : ['Hizmet'];
-//           List hizmetDatasi = woProvider.woCreateHizmetListeArray;
+          List<String> hizmet = woProvider.woCreateHizmetListeArray.isNotEmpty
+              ? woProvider.woCreateHizmetListeArray[0]
+              : ['Hizmet'];
+          List hizmetDatasi = woProvider.woCreateHizmetListeArray;
 
-//           String dropdownvalueHizmet = !woProvider.loading
-//               ? hizmetDatasi[0].indexOf(woProvider.woCreateHizmetValue) != -1
-//                   ? woProvider.woCreateHizmetValue
-//                   : hizmet[0]
-//               : 'Hizmet';
+          String dropdownvalueHizmet = !woProvider.loading
+              ? hizmetDatasi[0].indexOf(woProvider.woCreateHizmetValue) != -1
+                  ? woProvider.woCreateHizmetValue
+                  : hizmet[0]
+              : 'Hizmet';
 
-// //////////////////////////////////////////////////////////////
-// /////////////////////////////////////////////////////////////////
-// //////////////////////  İş Emri Adı     /////////////////////////
-// /////////////////////////////////////////////////////////////////
-// ////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////
+//////////////////////  İş Emri Adı     /////////////////////////
+/////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
 
-//           List<String> isEmriAdi = woProvider.woCreateIsEmriAdiListeArray[0];
-//           List isEmriAdiDatasi = woProvider.woCreateIsEmriAdiListeArray;
+          List<String> isEmriAdi = woProvider.woCreateIsEmriAdiListeArray[0];
+          List isEmriAdiDatasi = woProvider.woCreateIsEmriAdiListeArray;
 
-//           String dropdownvalueIsEmriAdi = isEmriAdiDatasi[0]
-//                       .indexOf(woProvider.woCreateIsEmriAdiListeValue) !=
-//                   -1
-//               ? woProvider.woCreateIsEmriAdiListeValue
-//               : isEmriAdi[0];
+          String dropdownvalueIsEmriAdi = isEmriAdiDatasi[0]
+                      .indexOf(woProvider.woCreateIsEmriAdiListeValue) !=
+                  -1
+              ? woProvider.woCreateIsEmriAdiListeValue
+              : isEmriAdi[0];
 
-// //////////////////////////////////////////////////////////////
-// /////////////////////////////////////////////////////////////////
-// //////////////////////  Öncelik     /////////////////////////
-// /////////////////////////////////////////////////////////////////
-// ////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////
+//////////////////////  Öncelik     /////////////////////////
+/////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
 
-//           List<String> oncelik = woProvider.woCreateOncelikListeArray[0];
-//           List oncelikDatasi = woProvider.woCreateOncelikListeArray;
+          List<String> oncelik = woProvider.woCreateOncelikListeArray[0];
+          List oncelikDatasi = woProvider.woCreateOncelikListeArray;
 
-//           String dropdownvalueOncelik =
-//               oncelikDatasi[0].indexOf(woProvider.woCreateOncelikListeValue) !=
-//                       -1
-//                   ? woProvider.woCreateOncelikListeValue
-//                   : oncelik[0];
+          String dropdownvalueOncelik =
+              oncelikDatasi[0].indexOf(woProvider.woCreateOncelikListeValue) !=
+                      -1
+                  ? woProvider.woCreateOncelikListeValue
+                  : oncelik[0];
 
           return Sizer(builder: (context, orientation, deviceType) {
             return WillPopScope(
@@ -153,7 +149,7 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
                                         isExpanded: true,
 
                                         // Initial Value
-                                        value: woProvider.woCreateHizmetValue,
+                                        value: dropdownvalueHizmet,
                                         decoration: InputDecoration(
                                           border: OutlineInputBorder(
                                             borderRadius:
@@ -167,9 +163,7 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
                                             Icons.keyboard_arrow_down),
 
                                         // Array list of items
-                                        items: woProvider
-                                            .woCreateHizmetListeArray[0]
-                                            .map((String items) {
+                                        items: hizmet.map((String items) {
                                           return DropdownMenuItem(
                                             value: items,
                                             child: Text(items),
@@ -194,8 +188,7 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
                                         isExpanded: true,
 
                                         // Initial Value
-                                        value: woProvider
-                                            .woCreateIsEmriAdiListeValue,
+                                        value: dropdownvalueIsEmriAdi,
                                         decoration: InputDecoration(
                                           border: OutlineInputBorder(
                                             borderRadius:
@@ -209,9 +202,7 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
                                             Icons.keyboard_arrow_down),
 
                                         // Array list of items
-                                        items: woProvider
-                                            .woCreateIsEmriAdiListeArray[0]
-                                            .map((String items) {
+                                        items: isEmriAdi.map((String items) {
                                           return DropdownMenuItem(
                                             value: items,
                                             child: Text(items),
@@ -263,8 +254,7 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
                                         isExpanded: true,
 
                                         // Initial Value
-                                        value: woProvider
-                                            .woCreateOncelikListeValue,
+                                        value: dropdownvalueOncelik,
                                         decoration: InputDecoration(
                                           border: OutlineInputBorder(
                                             borderRadius:
@@ -278,9 +268,7 @@ class _NewOrderScreenState extends State<NewOrderScreen> {
                                             Icons.keyboard_arrow_down),
 
                                         // Array list of items
-                                        items: woProvider
-                                            .woCreateOncelikListeArray[0]
-                                            .map((String items) {
+                                        items: oncelik.map((String items) {
                                           return DropdownMenuItem(
                                             value: items,
                                             child: Text(items),
