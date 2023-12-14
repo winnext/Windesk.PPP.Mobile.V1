@@ -2,6 +2,11 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
+import 'package:wm_ppp_4/feature/components/snackBar/snackbar.dart';
+import 'package:wm_ppp_4/feature/constants/functions/invalid_device_id_check.dart';
+import 'package:wm_ppp_4/feature/constants/other/snackbar_strings.dart';
+import 'package:wm_ppp_4/feature/route/app_route.gr.dart';
+import 'package:wm_ppp_4/product/screens/home/provider/home_provider.dart';
 import '../../../../feature/components/appbar/custom_tab_appbar.dart';
 import '../../../../feature/constants/other/app_strings.dart';
 import '../../../../feature/constants/other/colors.dart';
@@ -25,16 +30,52 @@ class _TestScreenState extends State<TestScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => TestProvider(),
-      child: Consumer<TestProvider>(
-          builder: (context, TestProvider testProvider, child) {
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => HomeProvider()),
+        ChangeNotifierProvider(create: (context) => TestProvider()),
+      ],
+      child: Consumer2<TestProvider, HomeProvider>(builder: (context,
+          TestProvider testProvider, HomeProvider homeProvider, child) {
         testProvider.getInfoLoad == false
             ? testProvider.getTestScreenInfo()
             : null;
-        return Scaffold(
-          appBar: const CustomTabAppbar(title: AppStrings.testTab),
-          body: Center(child: _bodyWidget(context, testProvider)),
+        InvalidDeviceId().check(context);
+        return WillPopScope(
+          child: Scaffold(
+            appBar: const CustomTabAppbar(title: AppStrings.testTab),
+            body: Center(child: _bodyWidget(context, testProvider)),
+          ),
+          onWillPop: () async {
+            final shouldPop = await showDialog<bool>(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  title: const Text('Çıkış'),
+                  content: const Text(
+                      'Uygulamadan çıkış yapılacak, devam etmek istiyor musunuz?'),
+                  actions: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pop(context, true);
+                      },
+                      child: const Text('Evet'),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pop(context, false);
+                      },
+                      child: const Text(
+                        'Hayır',
+                        style: TextStyle(color: Colors.red),
+                      ),
+                    ),
+                  ],
+                );
+              },
+            );
+            return shouldPop!;
+          },
         );
       }),
     );
@@ -75,7 +116,8 @@ class _TestScreenState extends State<TestScreen> {
               AppStrings.windeskHelp,
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
-            Text(context.read<GlobalProvider>().userName),
+            Text(context.read<TestProvider>().userName.toString()),
+            Text(context.read<TestProvider>().userCode.toString()),
           ],
         ),
       ),
@@ -114,7 +156,7 @@ class _TestScreenState extends State<TestScreen> {
               padding: const EdgeInsets.all(10.0),
               child: Column(
                 children: [
-                  Text(
+                  const Text(
                     AppStrings.connectionTime,
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
@@ -195,7 +237,7 @@ SizedBox buttonTest(BuildContext context, String buttonText,
         controller: controllerButton,
         onPressed: () {
           controllerButton.success();
-          testProvider.accessTestV1Function();
+          testProvider.accessTestV1Function(context);
           testProvider.accessTestV2Function();
 
           controllerButton.reset();

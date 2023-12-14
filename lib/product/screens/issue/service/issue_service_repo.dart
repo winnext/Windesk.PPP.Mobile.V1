@@ -47,12 +47,9 @@ abstract class IssueServiceRepository {
     String asgUserCode,
     String additionalTime,
     String module,
-    String image,);
+    String image,String patientNo, String sampleNo);
   Future<Either<bool, CustomServiceException>> changeCfg(
        String userToken, String issueCode, String cfgCode);
   Future<Either<List<IssueFilterModel>, CustomServiceException>> getSpaceBfwByType(String type,String userToken);
   Future<Either<List<IssueFilterStatusModel>, CustomServiceException>> getIssueOpenStatusCodes(String userToken);
-
-
-
 }

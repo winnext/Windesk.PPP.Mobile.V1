@@ -2,6 +2,7 @@ import 'package:animated_widgets/animated_widgets.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:wm_ppp_4/feature/elastic_log/elastic_log.dart';
 
 import '../../../feature/constants/paths/asset_paths.dart';
 import '../../../feature/extensions/context_extension.dart';
@@ -36,7 +37,11 @@ class SplashScreen extends StatelessWidget {
         .setDeviceVersion(context.read<SplashProvider>().getDeviceVersion());
     context.watch<SplashProvider>().isSplashFinished
         ? context.watch<SplashProvider>().isUserAlreadyLoggedIn
-            ? context.router.replace(const HomeScreen())
+            ? {
+                context.router.replace(const HomeScreen()),
+                ElasticLog().sendLog('info', 'UserNavigateHomeScreen',
+                    'Kullanıcı uygulamayı açtı', 'userNavigateHomeScreen')
+              }
             : context.router.replace(const LoginScreen())
         : const SizedBox();
   }

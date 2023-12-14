@@ -19,6 +19,7 @@ class CustomIssueActivitiesCard extends StatelessWidget {
               Text(data.idate.toString()),
             ],
           ),
+          Text(data.description.toString()),
           Padding(
             padding: const EdgeInsets.only(bottom: 10),
             child: Row(

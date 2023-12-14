@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wm_ppp_4/feature/components/buttons/custom_circular_with_text_button.dart';
 import 'package:wm_ppp_4/feature/components/input_fields/text_fields_input.dart';
+import 'package:wm_ppp_4/feature/constants/functions/invalid_device_id_check.dart';
 import 'package:wm_ppp_4/feature/constants/other/colors.dart';
 import 'package:wm_ppp_4/product/screens/search/screens/wo_search/provider/wo_search_provider.dart';
 
@@ -15,6 +16,7 @@ class WoSearchPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    InvalidDeviceId().check(context);
     return ChangeNotifierProvider(
         create: (context) => WoSearchProvider(),
         child: Consumer<WoSearchProvider>(

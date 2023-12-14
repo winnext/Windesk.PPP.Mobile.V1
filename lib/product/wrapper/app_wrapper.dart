@@ -15,11 +15,11 @@ class AppWrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     return AutoTabsRouter.pageView(
       routes: [
-        HomeScreen(),
+        const HomeScreen(),
         NewOrderScreen(),
         //ServiceTools.isWorkOrderExist ? NewOrderScreen() : IssueSearchRoute(),
-        SearchScreen(),
-        TestScreen(),
+        const SearchScreen(),
+        const TestScreen(),
       ],
       physics: const NeverScrollableScrollPhysics(),
       builder: (context, child, _) {

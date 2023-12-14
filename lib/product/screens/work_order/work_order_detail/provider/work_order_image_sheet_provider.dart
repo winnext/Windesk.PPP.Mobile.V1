@@ -29,8 +29,8 @@ class WorkOrderImageSheetProvider extends ChangeNotifier {
       String base64string = base64.encode(imagebytes); //convert bytes to base64 string
 
       String userToken = await SharedManager().getString(SharedEnum.deviceId);
-      String userName = await SharedManager().getString(SharedEnum.userName);
-      final response = await _service.addWorkOrderAttachment(userToken, userName, workOrderCode, base64string, desc);
+      String userCode = await SharedManager().getString(SharedEnum.userCode);
+      final response = await _service.addWorkOrderAttachment(userToken, userCode, workOrderCode, base64string, desc);
 
       response.fold(
         (l) => {

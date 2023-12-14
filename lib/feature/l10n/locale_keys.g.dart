@@ -74,7 +74,7 @@ abstract class LocaleKeys {
   static const String hds = 'HDS';
   static const String assignmentGroup = 'Atama Grubu';
   static const String assigneName = 'Atanan Kişi';
-  static const String plannedIssue = 'Randevulu Vakadır';
+  static const String plannedIssue = 'Randevulu Vakadır : ';
   static const String noInfo = 'Bilgi Yok';
   static const String noTimeInfo = 'Zaman Bilgisi Yok';
   static const String zeroStr = '0';
@@ -101,7 +101,7 @@ abstract class LocaleKeys {
   static const String processCancell = "İşlem gerçekleştirilirken bir hata oluştu.";
   static const String state = "Durum";
   static const String selectGroup = "Grup Seçiniz";
-  static const String selectUser = "User Seçiniz";
+  static const String selectUser = "Kullanıcı Seçiniz";
   static const String addMoreTime = "Ek Süre (Gün)";
   static const String selectActivity = "Aktivite Seçiniz";
   static const String spaceCode = 'Mahal Kodu';
@@ -110,9 +110,17 @@ abstract class LocaleKeys {
   static const String rfid = 'RFID';
   static const String requestForSparepart = 'Yedek Parça Talebi';
   static const String sureAboutKeepProcess = 'Bu işleme devam etmek istediğinize emin misiniz?';
+  static const String descriptionLength = '20 karakter veya daha uzun açıklama girilmelidir.';
+  static const String send = 'Gönder';
+  static const String cancel = "İptal";
 
-
-
+  //issue quick fix
+  static const String quickFix = "Hızlı Düzeltme";
+  static const String quickFixDescription =
+      "Bu vakada talep edilen hizmet/sorun ile ilgili işlem tamamlanmıştır. Mahal barkodu, Hasta Bilekliği veya Numune Barkod'u okutularak düzeltme işlemi gerçekleştirilmiştir.";
+  static const String spaceBarcode = 'Mahal Barkodu';
+  static const String patientBarcode = 'Hasta Bilekliği';
+  static const String sampleBarcode = 'Numune Barkodu';
 
   //home page titles
   static const issueList = 'Vaka-(SLA) Listesi';

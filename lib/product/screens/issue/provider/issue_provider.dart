@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_final_fields
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:wm_ppp_4/feature/database/shared_manager.dart';
 import 'package:wm_ppp_4/feature/enums/shared_enums.dart';
@@ -27,6 +29,13 @@ class IssueProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  //geri alınacak
+  // IssueProvider() {
+  //   _getUsercode();
+  //   timer = Timer.periodic(
+  //       const Duration(seconds: 1), (Timer t) => getCurrentTime());
+  // }
+
   bool _isFetchFilter = false;
   bool get isFetchFilter => _isFetchFilter;
 
@@ -35,9 +44,53 @@ class IssueProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  late final Timer timer;
+  String currentTimeText = '';
+  String title = '';
+  var secondText = 60;
+  String issueModuleCode = '';
+  //geri alınacak
+  // void getCurrentTime() {
+  //   currentTimeText = DateTime.now().toString().substring(0, 19);
+  //   secondText = secondText - 1;
+  //   if (secondText == 0) {
+  //     secondText = 60;
+  //     _loading = true;
+  //     getIssueList(1, issueModuleCode);
+  //     Future.delayed(const Duration(milliseconds: 1000), () {
+  //       _loading = false;
+  //     });
+  //   }
+  //   notifyListeners();
+  // }
+
+  void setIssueModuleCode(val) {
+    issueModuleCode = val;
+    notifyListeners();
+  }
+
+  void setSecond() {
+    secondText = 60;
+    notifyListeners();
+  }
+
+  void closeTimer() {
+    timer.cancel();
+  }
+
+  void _getUsercode() async {
+    await SharedManager()
+        .getString(SharedEnum.userCode)
+        .then((value) => title = value);
+    notifyListeners();
+  }
+
   bool _isFetchSummary = false;
   bool get isFetchSummary => _isFetchSummary;
-
+set setisFetchSummary(bool value) {
+    _isFetchSummary = false;
+    notifyListeners();
+  }
   bool _isFetchAttachment = false;
   bool get isFetchAttachment => _isFetchAttachment;
 
@@ -165,7 +218,6 @@ class IssueProvider extends ChangeNotifier {
   String get assigne => _assigne;
   void setassigne() async {
     String userToken = await SharedManager().getString(SharedEnum.userCode);
-    print('object' + userToken);
     if (_assigne == '') {
       _assigne = userToken;
     } else {

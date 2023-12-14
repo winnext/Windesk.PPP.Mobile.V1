@@ -36,7 +36,9 @@ class CustomIssueAttachmentsCard extends StatelessWidget {
                       width: size.width / 2.5,
                       child: Text('${data.dispfilename} ${data.id}'),
                     ),
-                    Text(data.idate.toString())
+                    Text(data.name != null
+                        ? data.name.toString()
+                        : 'Açıklama bulunmuyor.')
                   ],
                 ),
                 Padding(

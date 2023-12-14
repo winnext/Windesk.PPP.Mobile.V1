@@ -13,7 +13,7 @@ class TimeClass {
   final String yMDHMSSF = 'yyyy-MM-dd hh:mm:ss.SSSSSS';
 
   String timeRecover(timeInfo) {
-    if (timeInfo == '') {
+    if (timeInfo == '' || timeInfo == 'null' || timeInfo == '0') {
       return 'Bilgi Yok';
     }
     final String finalTime;

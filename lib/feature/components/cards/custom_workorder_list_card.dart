@@ -42,7 +42,9 @@ class CustomWorkorderListCard extends StatelessWidget {
               const Divider(thickness: 1),
               _CardRow(
                 leftTitle: _locationTxt,
-                rightTitle: model.modulelocation.toString(),
+                rightTitle: model.modulelocation != null
+                    ? model.modulelocation.toString()
+                    : '-',
                 isBold: false,
               ),
             ],
@@ -54,7 +56,10 @@ class CustomWorkorderListCard extends StatelessWidget {
 }
 
 class _CardRow extends StatelessWidget {
-  const _CardRow({required this.leftTitle, required this.rightTitle, required this.isBold});
+  const _CardRow(
+      {required this.leftTitle,
+      required this.rightTitle,
+      required this.isBold});
 
   final String leftTitle;
   final String rightTitle;
@@ -69,7 +74,8 @@ class _CardRow extends StatelessWidget {
           flex: 60,
           child: Text(
             leftTitle,
-            style: isBold ? _boldTextStyle(context) : _notBoldTextStyle(context),
+            style:
+                isBold ? _boldTextStyle(context) : _notBoldTextStyle(context),
             maxLines: 2,
           ),
         ),
@@ -77,7 +83,8 @@ class _CardRow extends StatelessWidget {
           flex: 40,
           child: Text(
             rightTitle,
-            style: isBold ? _boldTextStyle(context) : _notBoldTextStyle(context),
+            style:
+                isBold ? _boldTextStyle(context) : _notBoldTextStyle(context),
             maxLines: isBold ? 1 : 2,
             textAlign: TextAlign.end,
           ),
@@ -91,6 +98,9 @@ class _CardRow extends StatelessWidget {
   }
 
   TextStyle _boldTextStyle(BuildContext context) {
-    return TextStyle(color: APPColors.Secondary.black, fontSize: 16, fontWeight: FontWeight.bold);
+    return TextStyle(
+        color: APPColors.Secondary.black,
+        fontSize: 16,
+        fontWeight: FontWeight.bold);
   }
 }

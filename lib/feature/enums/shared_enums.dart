@@ -9,4 +9,6 @@ enum SharedEnum {
   userName,
   userPassword,
   isLoginInfoSave,
+  ipAdress,
+  osVersion
 }

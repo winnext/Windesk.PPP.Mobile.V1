@@ -3,11 +3,47 @@
 import 'dart:io';
 
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:path/path.dart';
+import 'package:sqflite/sqflite.dart';
 import 'package:vibration/vibration.dart';
 import 'package:wm_ppp_4/feature/components/snackBar/snackbar.dart';
 import 'package:wm_ppp_4/feature/constants/paths/service_tools.dart';
+import 'package:wm_ppp_4/feature/elastic_log/elastic_log.dart';
 
 class InternetListenerClass {
+  checkCache() async {
+    print('GİRDİ');
+    // Get a location using getDatabasesPath
+    var databasesPath = await getDatabasesPath();
+    String path = join(databasesPath, 'cache.db');
+
+    print('GİRDİ2');
+
+// open the database
+    Database database = await openDatabase(path, version: 1,
+        onCreate: (Database db, int version) async {
+      // When creating the db, create the table
+    });
+
+    print('GİRDİ3');
+
+    List<Map> list = await database.rawQuery('SELECT * FROM cache');
+    print(list);
+    // list.map((e) async {
+    //   print(e);
+    //   await ElasticLog().sendLogWithData(e);
+    // });
+    for (var item in list) {
+      print(item);
+      ElasticLog().sendLog(
+          item['logLevel'], item['title'], item['message'], item['activity']);
+      //ElasticLog().sendLog(item['data']);
+      await database.rawDelete('DELETE FROM cache WHERE id = ?', [item["id"]]);
+    }
+
+    print('GİRDİ5');
+  }
+
   internetConnection(context) async {
     // Simple check to see if we have internet
 
@@ -29,6 +65,14 @@ class InternetListenerClass {
         case InternetConnectionStatus.connected:
           print('Data connection is available.');
           if (durum != 1) {
+            var now = DateTime.now();
+
+            checkCache();
+            ElasticLog().sendLog(
+                'error',
+                'NetworkReConnected ',
+                'İnternete yeniden bağlanıldı. - $now',
+                'networkReConnected - $now');
             snackBar(context, 'İnternet bağlantısı sağlandı. ', 'success');
             Vibration.vibrate(duration: 500);
           }
@@ -36,10 +80,13 @@ class InternetListenerClass {
         case InternetConnectionStatus.disconnected:
           print('You are disconnected from the internet.');
           durum = 0;
+
+          ElasticLog().sendLog('error', 'NetworkDisconnected',
+              'İnternet bağlantısı kesildi.', 'networkDisconnected');
           snackBar(
               context,
               'İnternet bağlantısı bulunamadı. Lütfen kontrol ediniz.',
-              'error');
+              'connectionError');
           Vibration.vibrate(duration: 500);
 
           break;

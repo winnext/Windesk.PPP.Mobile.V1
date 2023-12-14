@@ -3,7 +3,6 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
@@ -12,10 +11,10 @@ import 'package:wm_ppp_4/feature/components/snackBar/snackbar.dart';
 import 'package:wm_ppp_4/feature/database/shared_manager.dart';
 import 'package:wm_ppp_4/feature/enums/shared_enums.dart';
 import 'package:wm_ppp_4/feature/injection.dart';
-import 'package:wm_ppp_4/feature/route/app_route.gr.dart';
 import 'package:wm_ppp_4/feature/service/global_services.dart/work_order_service/work_order_service_repository.dart';
 import 'package:wm_ppp_4/feature/service/global_services.dart/work_order_service/work_order_service_repository_impl.dart';
 import 'package:wm_ppp_4/product/screens/new_order/new_order_repo.dart';
+import 'package:wm_ppp_4/product/screens/work_order/work_order_detail/view/work_order_detail_screen.dart';
 
 class NewOrderProvider extends ChangeNotifier {
   final apirepository = NewOrderRepo();
@@ -24,6 +23,14 @@ class NewOrderProvider extends ChangeNotifier {
   TextEditingController get mahal => _mahal;
   set setMahal(String mahal) {
     _mahal.text = mahal;
+    notifyListeners();
+  }
+
+  bool _loading = false;
+  bool get loading => _loading;
+
+  set setLoading(bool loading) {
+    _loading = loading;
     notifyListeners();
   }
 
@@ -102,10 +109,10 @@ class NewOrderProvider extends ChangeNotifier {
 //////////////////////////////////////////////
 ///////////// Hizmet ////////////////////////
 ////////////////////////////////////////////
-  List _woCreateHizmetListeArray = [];
+  List<List<String>> _woCreateHizmetListeArray = [];
 
-  List get woCreateHizmetListeArray => _woCreateHizmetListeArray;
-  set setCreateWoHizmetListeArray(List woCreateHizmetListeArray) {
+  List<List<String>> get woCreateHizmetListeArray => _woCreateHizmetListeArray;
+  set setCreateWoHizmetListeArray(List<List<String>> woCreateHizmetListeArray) {
     _woCreateHizmetListeArray = woCreateHizmetListeArray;
     notifyListeners();
   }
@@ -119,6 +126,8 @@ class NewOrderProvider extends ChangeNotifier {
   }
 
   woCreateHizmetListesi() async {
+    setLoading = true;
+
     List<String> name = ['Hizmet'];
     List<String> code = ['Hizmet'];
 
@@ -136,6 +145,7 @@ class NewOrderProvider extends ChangeNotifier {
     setCreateWoHizmetListeArray = [name] + [code];
     setWoCreateHizmetValue =
         woCreateHizmetValue != '' ? woCreateHizmetValue : name[0];
+    setLoading = false;
     notifyListeners();
   }
 
@@ -143,8 +153,9 @@ class NewOrderProvider extends ChangeNotifier {
 ///////////// İş Emri Adı ////////////////////////
 ////////////////////////////////////////////
 
-  List _woCreateIsEmriAdiListeArray = [
+  List<List<String>> _woCreateIsEmriAdiListeArray = [
     [
+      'Seçiniz',
       'Teknik Onarım',
       'Teknik Periyodik Bakım',
       'Tıbbi Cihaz Kalibrasyonu',
@@ -160,6 +171,7 @@ class NewOrderProvider extends ChangeNotifier {
       'Arıza İş Emri'
     ],
     [
+      'Seçiniz',
       'accidental',
       'planned',
       'calibration',
@@ -176,8 +188,10 @@ class NewOrderProvider extends ChangeNotifier {
     ]
   ];
 
-  List get woCreateIsEmriAdiListeArray => _woCreateIsEmriAdiListeArray;
-  set setWoCreateIsEmriAdiListeArray(List woCreateIsEmriAdiListeArray) {
+  List<List<String>> get woCreateIsEmriAdiListeArray =>
+      _woCreateIsEmriAdiListeArray;
+  set setWoCreateIsEmriAdiListeArray(
+      List<List<String>> woCreateIsEmriAdiListeArray) {
     _woCreateIsEmriAdiListeArray = woCreateIsEmriAdiListeArray;
     notifyListeners();
   }
@@ -194,13 +208,15 @@ class NewOrderProvider extends ChangeNotifier {
 ///////////// Öncelik ////////////////////////
 ////////////////////////////////////////////
 
-  List _woCreateOncelikListeArray = [
+  List<List<String>> _woCreateOncelikListeArray = [
     ['Normal', 'Öncelikli', 'Acil'],
     ['0', '1', '2']
   ];
 
-  List get woCreateOncelikListeArray => _woCreateOncelikListeArray;
-  set setwoCreateOncelikListeArray(List woCreateOncelikListeArray) {
+  List<List<String>> get woCreateOncelikListeArray =>
+      _woCreateOncelikListeArray;
+  set setwoCreateOncelikListeArray(
+      List<List<String>> woCreateOncelikListeArray) {
     _woCreateOncelikListeArray = woCreateOncelikListeArray;
     notifyListeners();
   }
@@ -232,10 +248,18 @@ class NewOrderProvider extends ChangeNotifier {
             onPressed: () => Navigator.pop(alertContext),
           ),
           ElevatedButton(
-            child: const Text("Detayı Gör"),
-            onPressed: () => context.router
-                .push(WorkOrderDetailScreen(workorderCode: woCode)),
-          ),
+              child: const Text("Detayı Gör"),
+              onPressed: () => {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              WorkOrderDetailScreen(workorderCode: woCode)),
+                    )
+
+                    // context.router
+                    //     .push(WorkOrderDetailScreen(workorderCode: woCode))
+                  }),
         ],
       ),
     );
@@ -271,7 +295,11 @@ class NewOrderProvider extends ChangeNotifier {
     print('image  : ');
     print(image);
 
-    if (woSpace != '' && woService != '' && woName != '') {
+    if (woSpace != '' &&
+        woService != '' &&
+        woService != 'Hizmet' &&
+        woName != 'Seçiniz' &&
+        woName != '') {
       woService = woCreateHizmetListeArray[1]
           [woCreateHizmetListeArray[0].indexOf(woService)];
       woName = woCreateIsEmriAdiListeArray[1]
@@ -308,7 +336,7 @@ class NewOrderProvider extends ChangeNotifier {
         clear = 1;
         setVarlik = '';
 
-        if (image != null) {
+        if (image.length != 0) {
           isLoading = true;
           notifyListeners();
 
@@ -318,10 +346,10 @@ class NewOrderProvider extends ChangeNotifier {
 
           String userToken =
               await SharedManager().getString(SharedEnum.deviceId);
-          String userName =
-              await SharedManager().getString(SharedEnum.userName);
+          String userCode =
+              await SharedManager().getString(SharedEnum.userCode);
           final response = await _service.addWorkOrderAttachment(userToken,
-              userName, woCreateSonuc[1]['code'], base64string, desc);
+              userCode, woCreateSonuc[1]['code'], base64string, desc);
 
           response.fold(
             (l) => {
@@ -339,6 +367,9 @@ class NewOrderProvider extends ChangeNotifier {
               snackBar(context, woCreateSonuc[1], 'hata')
             },
           );
+        } else {
+          showAlertDialog(context, 'İş Emri Başarıyla Oluşturuldu',
+              woCreateSonuc[1]['uyari'], woCreateSonuc[1]['code']);
         }
       }
     } else {
@@ -420,9 +451,9 @@ class NewOrderProvider extends ChangeNotifier {
           base64.encode(imagebytes); //convert bytes to base64 string
 
       String userToken = await SharedManager().getString(SharedEnum.deviceId);
-      String userName = await SharedManager().getString(SharedEnum.userName);
+      String userCode = await SharedManager().getString(SharedEnum.userCode);
       final response = await _service.addWorkOrderAttachment(
-          userToken, userName, workOrderCode, base64string, desc);
+          userToken, userCode, workOrderCode, base64string, desc);
 
       response.fold(
         (l) => {
@@ -460,5 +491,51 @@ class NewOrderProvider extends ChangeNotifier {
       image = File(pickedFile.path);
       notifyListeners();
     }
+  }
+
+  initFunc() async {
+    print('giriyor');
+    List<String> hizmet = woCreateHizmetListeArray.isNotEmpty
+        ? woCreateHizmetListeArray[0]
+        : ['Hizmet'];
+    List hizmetDatasi = woCreateHizmetListeArray;
+
+    String dropdownvalueHizmet = !loading
+        ? hizmetDatasi[0].indexOf(woCreateHizmetValue) != -1
+            ? woCreateHizmetValue
+            : hizmet[0]
+        : 'Hizmet';
+    setWoCreateHizmetValue = dropdownvalueHizmet;
+
+//////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////
+//////////////////////  İş Emri Adı     /////////////////////////
+/////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+
+    List<String> isEmriAdi = woCreateIsEmriAdiListeArray[0];
+    List<List<String>> isEmriAdiDatasi = woCreateIsEmriAdiListeArray;
+
+    String dropdownvalueIsEmriAdi =
+        isEmriAdiDatasi[0].contains(woCreateIsEmriAdiListeValue)
+            ? woCreateIsEmriAdiListeValue
+            : isEmriAdi[0];
+    setWoCreateIsEmriAdiListeValue = dropdownvalueIsEmriAdi;
+
+//////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////
+//////////////////////  Öncelik     /////////////////////////
+/////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+
+    List<String> oncelik = woCreateOncelikListeArray[0];
+    List oncelikDatasi = woCreateOncelikListeArray;
+
+    String dropdownvalueOncelik =
+        oncelikDatasi[0].indexOf(woCreateOncelikListeValue) != -1
+            ? woCreateOncelikListeValue
+            : oncelik[0];
+    setwoCreateOncelikListeValue = dropdownvalueOncelik;
+    notifyListeners();
   }
 }

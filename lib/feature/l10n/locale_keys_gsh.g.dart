@@ -91,19 +91,22 @@ abstract class LocaleKeys {
   static const String takeOver = 'Üzerine Al';
   static const String plannedCancel = 'Randevu Talebi';
   static const String plannedDateRequest = 'Randevu İptal';
-  static const String sureAboutPlannedCancel = 'Bu talebin randevusunu iptal etmek istediğinize emin misiniz?';
+  static const String sureAboutPlannedCancel =
+      'Bu talebin randevusunu iptal etmek istediğinize emin misiniz?';
   static const String sparepartNeed = 'Yedek Parça Gerekiyor';
   static const String addDescription = "Açıklama Giriniz";
   static const String photoAdded = "Fotoğraf Eklendi";
   static const String photoAddedError = "Fotoğraf Ekleme Başarısız";
-  static const String sureAboutTakeOverIssue = "Bu vakayı üzerinize almak istediğinizden emin misiniz?";
+  static const String sureAboutTakeOverIssue =
+      "Bu vakayı üzerinize almak istediğinizden emin misiniz?";
   static const String okay = "Tamam";
   static const String cancel = "İptal";
   static const String processDone = "İşlem başarılı şekilde gerçekleşti";
-  static const String processCancell = "İşlem gerçekleştirilirken bir hata oluştu.";
+  static const String processCancell =
+      "İşlem gerçekleştirilirken bir hata oluştu.";
   static const String state = "Durum";
   static const String selectGroup = "Grup Seçiniz";
-  static const String selectUser = "User Seçiniz";
+  static const String selectUser = "Kullanıcı Seçiniz";
   static const String addMoreTime = "Ek Süre (Gün)";
   static const String selectActivity = "Aktivite Seçiniz";
   static const String spaceCode = 'Mahal Kodu';
@@ -111,10 +114,8 @@ abstract class LocaleKeys {
   static const String serialNumber = 'Seri No';
   static const String rfid = 'RFID';
   static const String requestForSparepart = 'Yedek Parça Talebi';
-  static const String sureAboutKeepProcess = 'Bu işleme devam etmek istediğinize emin misiniz?';
-
-
-
+  static const String sureAboutKeepProcess =
+      'Bu işleme devam etmek istediğinize emin misiniz?';
 
   //home page titles
   static const issueList = 'Talep Listesi';
@@ -133,14 +134,16 @@ abstract class LocaleKeys {
   static const String mahalSearchTitle = 'Mahal Arama';
   static const String mahalSearchDetailtTitle = 'Mahal Detayı';
   static const String workOrderSearchTitle = 'İş Emri Arama';
-  static const String myAppointmentRequestsDetailTitle = 'Randevulu Taleplerim Detay';
+  static const String myAppointmentRequestsDetailTitle =
+      'Randevulu Taleplerim Detay';
   static const String myAppointmentRequestsTitle = 'Randevulu Taleplerim';
   static const String myOpenRequests = 'Açık Taleplerim';
   static const String myOpenRequestsDetail = 'Açık Taleplerim Detay';
   static const String newNotif = 'Yeni Bildirim';
   static const String takePictureTitle = 'Fotoğraf Çek';
   static const String pictureTitle = 'Fotoğraf';
-  static const String caseIComplainedDetailTitle = 'Şikayet Ettiğim Talep  Detay';
+  static const String caseIComplainedDetailTitle =
+      'Şikayet Ettiğim Talep  Detay';
 
   //woEmpty
   static const String noDescription = 'Açıklama Bulunamadı';

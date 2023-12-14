@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:wm_ppp_4/feature/components/appbar/custom_main_appbar.dart';
+import 'package:wm_ppp_4/feature/constants/functions/invalid_device_id_check.dart';
 import 'package:wm_ppp_4/product/screens/search/screens/space_search/provider/space_search_provider.dart';
 import 'package:wm_ppp_4/product/screens/search/screens/space_search/view/space_search_detail.dart';
 import 'package:wm_ppp_4/product/screens/search/service/search_service_repo_impl.dart';
@@ -34,7 +35,6 @@ class _SpaceSearchListState extends State<SpaceSearchList> {
   List listee = [];
   @override
   void initState() {
-    // TODO: implement initState
 
     super.initState();
   }
@@ -43,6 +43,7 @@ class _SpaceSearchListState extends State<SpaceSearchList> {
 
   @override
   Widget build(BuildContext context) {
+    InvalidDeviceId().check(context);
     return ChangeNotifierProvider(
       create: (context) => SpaceSearchProvider(),
       child: Consumer<SpaceSearchProvider>(

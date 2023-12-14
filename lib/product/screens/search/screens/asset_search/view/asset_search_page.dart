@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wm_ppp_4/feature/components/snackBar/snackbar.dart';
+import 'package:wm_ppp_4/feature/constants/functions/invalid_device_id_check.dart';
 import 'package:wm_ppp_4/feature/route/app_route.gr.dart';
 
 import '../../../../../../feature/components/appbar/custom_tab_appbar.dart';
@@ -18,9 +19,11 @@ class AssetSearchPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    InvalidDeviceId().check(context);
     return ChangeNotifierProvider(
         create: (context) => AssetSearchProvider(),
-        child: Consumer<AssetSearchProvider>(builder: (context, AssetSearchProvider assetSearchProvider, child) {
+        child: Consumer<AssetSearchProvider>(
+            builder: (context, AssetSearchProvider assetSearchProvider, child) {
           return Scaffold(
             appBar: const CustomTabAppbar(
               title: AppStrings.entitiySearch,
@@ -31,6 +34,7 @@ class AssetSearchPage extends StatelessWidget {
                 padding: CustomPaddings.pageNormal,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     TextFieldsInputWithActionAndController(
                         textController: assetSearchProvider.entityCode,
@@ -78,9 +82,11 @@ class AssetSearchPage extends StatelessWidget {
                                 assetSearchProvider.spaceCode.text,
                                 1);
                             // ignore: use_build_context_synchronously
-                            context.router.push(AssetSearchListRoute(assetSearchProviderx: assetSearchProvider));
+                            context.router.push(AssetSearchListRoute(
+                                assetSearchProviderx: assetSearchProvider));
                           } else {
-                            snackBar(context, "Lütfen en az bir alan doldurun.", 'error');
+                            snackBar(context, "Lütfen en az bir alan doldurun.",
+                                'error');
                           }
                         }),
                   ],

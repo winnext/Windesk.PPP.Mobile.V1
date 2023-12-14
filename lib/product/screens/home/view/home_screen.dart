@@ -4,6 +4,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:wm_ppp_4/feature/constants/functions/invalid_device_id_check.dart';
 import 'package:wm_ppp_4/feature/constants/paths/asset_paths.dart';
 import 'package:wm_ppp_4/product/screens/home/service/home_service_repo_impl.dart';
 
@@ -35,18 +36,22 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     HomeServiceRepositoryImpl homeService = HomeServiceRepositoryImpl();
     homeService.getAnnouncements();
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     InternetListenerClass().internetConnection(context);
-
+    //InvalidDeviceId().check(context);
     return ChangeNotifierProvider(
       create: (context) => HomeProvider(),
       child: Consumer<HomeProvider>(
         builder: (context, HomeProvider homeProvider, child) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
+            if (!homeProvider.fetchedAnn) {
+              homeProvider.getAnnouncement();
+            }
             if (homeProvider.logoutError) {
               snackBar(context, SnackbarStrings.logoutError, 'error');
             }
@@ -181,11 +186,11 @@ class _HomeScreenState extends State<HomeScreen> {
       centerTitle: true,
       elevation: 0.0,
       backgroundColor: APPColors.Main.white,
-      leading: announcementBuilder(),
+      leading: announcementBuilder(provider),
     );
   }
 
-  Builder announcementBuilder() {
+  Builder announcementBuilder(provider) {
     return Builder(
       builder: (BuildContext context) {
         return badges.Badge(
@@ -208,7 +213,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       backgroundColor: Colors.transparent,
                       elevation: 10,
                       context: context,
-                      builder: (context) => const AnnouncementList())
+                      builder: (context) => AnnouncementList(
+                            homeProvider2: provider,
+                          ))
                   : null;
             },
           ),

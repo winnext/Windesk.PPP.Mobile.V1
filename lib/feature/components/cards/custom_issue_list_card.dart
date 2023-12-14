@@ -17,13 +17,19 @@ class CustomIssueListCard extends StatefulWidget {
   final Function onPressedLong;
   final IssueListModel issueListElement;
 
-  const CustomIssueListCard({Key? key, required this.onPressed, required this.issueListElement, required this.onPressedLong}) : super(key: key);
+  const CustomIssueListCard(
+      {Key? key,
+      required this.onPressed,
+      required this.issueListElement,
+      required this.onPressedLong})
+      : super(key: key);
 
   @override
   State<CustomIssueListCard> createState() => _CustomIssueListCardState();
 }
 
-class _CustomIssueListCardState extends State<CustomIssueListCard> with CustomIssueListCardConstantsMixin, CustomIssueListCardStylesMixin {
+class _CustomIssueListCardState extends State<CustomIssueListCard>
+    with CustomIssueListCardConstantsMixin, CustomIssueListCardStylesMixin {
   String dateNow = DateFormat("yyyyMMddHHmmss").format(DateTime.now());
   //formatı pm am şeklinde düzeltilmeli
   late final Timer _timer;
@@ -78,54 +84,137 @@ class _CustomIssueListCardState extends State<CustomIssueListCard> with CustomIs
                 NullCheckWidget().nullCheckWidget(
                   widget.issueListElement.location.toString(),
                   SizedBox(),
-                  issueListText(size, locationStr, widget.issueListElement.location.toString()),
+                  issueListText(size, locationStr,
+                      widget.issueListElement.location.toString()),
                 ),
                 NullCheckWidget().nullCheckWidget(
                   widget.issueListElement.space.toString(),
                   SizedBox(),
-                  issueListText(size, placeStr, widget.issueListElement.space.toString()),
+                  issueListText(
+                      size, placeStr, widget.issueListElement.space.toString()),
                 ),
                 NullCheckWidget().nullCheckWidget(
                   widget.issueListElement.description.toString(),
                   SizedBox(),
-                  issueListText(size, descriptionStr, widget.issueListElement.description.toString()),
+                  issueListText(size, descriptionStr,
+                      widget.issueListElement.description.toString()),
                 ),
                 NullCheckWidget().nullCheckWidget(
                   widget.issueListElement.idate.toString(),
                   SizedBox(),
-                  issueListText(size, descriptionDateStr, widget.issueListElement.idate.toString()),
+                  issueListText(size, descriptionDateStr,
+                      widget.issueListElement.idate.toString()),
                 ),
-                widget.issueListElement.statuscode.toString() == statusCodeCheckTxt
-                    ? plannedlWidget(size, widget.issueListElement.planneddate.toString())
-                    : widget.issueListElement.response_timer == zeroStr && widget.issueListElement.fixed_timer == zeroStr
+                widget.issueListElement.statuscode.toString() ==
+                        statusCodeCheckTxt
+                    ? plannedlWidget(
+                        size, widget.issueListElement.planneddate.toString())
+                    : widget.issueListElement.response_timer == zeroStr &&
+                            widget.issueListElement.fixed_timer == zeroStr
                         ? Column(
                             children: [
-                              happeningTimeWidget(size, happenedResponse, widget.issueListElement.responded_idate.toString(),
-                                  widget.issueListElement.target_rdate.toString()),
+                              happeningTimeWidget(
+                                  size,
+                                  happenedResponse,
+                                  widget.issueListElement.responded_idate !=
+                                          null
+                                      ? widget.issueListElement.responded_idate
+                                          .toString()
+                                      : numErrorStr,
+                                  widget.issueListElement.target_rdate != null
+                                      ? widget.issueListElement.target_rdate
+                                          .toString()
+                                      : numErrorStr),
                               NullCheckWidget().nullCheckWidget(
                                 widget.issueListElement.fixed_idate.toString(),
                                 happeningTimeWidget(
-                                    size, happenedDescriptionDaterError, numErrorStr, widget.issueListElement.target_fdate.toString()),
-                                happeningTimeWidget(size, happenedFix, widget.issueListElement.fixed_idate.toString(),
-                                    widget.issueListElement.target_fdate.toString()),
+                                    size,
+                                    happenedDescriptionDaterError,
+                                    numErrorStr,
+                                    widget.issueListElement.target_fdate != null
+                                        ? widget.issueListElement.target_fdate
+                                            .toString()
+                                        : numErrorStr),
+                                happeningTimeWidget(
+                                    size,
+                                    happenedFix,
+                                    widget.issueListElement.fixed_idate != null
+                                        ? widget.issueListElement.fixed_idate
+                                            .toString()
+                                        : numErrorStr,
+                                    widget.issueListElement.target_fdate != null
+                                        ? widget.issueListElement.target_fdate
+                                            .toString()
+                                        : numErrorStr),
                               ),
                             ],
                           )
-                        : widget.issueListElement.response_timer == zeroStr && widget.issueListElement.fixed_timer == oneStr
+                        : widget.issueListElement.response_timer == zeroStr &&
+                                widget.issueListElement.fixed_timer == oneStr
                             ? Column(
                                 children: [
-                                  happeningTimeWidget(size, happenedResponse, widget.issueListElement.responded_idate.toString(),
-                                      widget.issueListElement.target_rdate.toString()),
-                                  timerRecoverText(size, goalFix, widget.issueListElement.target_fdate.toString()),
-                                  timerDifferenceText(size, remainDate, widget.issueListElement.target_fdate.toString()),
+                                  happeningTimeWidget(
+                                      size,
+                                      happenedResponse,
+                                      widget.issueListElement.responded_idate
+                                          .toString(),
+                                      widget.issueListElement.target_rdate !=
+                                              null
+                                          ? widget.issueListElement.target_rdate
+                                              .toString()
+                                          : numErrorStr),
+                                  timerRecoverText(
+                                      size,
+                                      goalFix,
+                                      widget.issueListElement.target_fdate !=
+                                              null
+                                          ? widget.issueListElement.target_fdate
+                                              .toString()
+                                          : numErrorStr),
+                                  timerDifferenceText(
+                                      size,
+                                      remainDate,
+                                      widget.issueListElement.target_fdate !=
+                                              null
+                                          ? widget.issueListElement.target_fdate
+                                              .toString()
+                                          : numErrorStr),
                                 ],
                               )
                             : Column(
                                 children: [
-                                  timerRecoverText(size, goalResponse, widget.issueListElement.target_rdate.toString()),
-                                  timerDifferenceText(size, remainDate, widget.issueListElement.target_rdate.toString()),
-                                  timerRecoverText(size, goalFix, widget.issueListElement.target_fdate.toString()),
-                                  timerDifferenceText(size, remainDate, widget.issueListElement.target_fdate.toString()),
+                                  timerRecoverText(
+                                      size,
+                                      goalResponse,
+                                      widget.issueListElement.target_rdate !=
+                                              null
+                                          ? widget.issueListElement.target_rdate
+                                              .toString()
+                                          : numErrorStr),
+                                  timerDifferenceText(
+                                      size,
+                                      remainDate,
+                                      widget.issueListElement.target_rdate !=
+                                              null
+                                          ? widget.issueListElement.target_rdate
+                                              .toString()
+                                          : numErrorStr),
+                                  timerRecoverText(
+                                      size,
+                                      goalFix,
+                                      widget.issueListElement.target_fdate !=
+                                              null
+                                          ? widget.issueListElement.target_fdate
+                                              .toString()
+                                          : numErrorStr),
+                                  timerDifferenceText(
+                                      size,
+                                      remainDate,
+                                      widget.issueListElement.target_fdate !=
+                                              null
+                                          ? widget.issueListElement.target_fdate
+                                              .toString()
+                                          : numErrorStr),
                                 ],
                               ),
               ],
@@ -142,17 +231,21 @@ class _CustomIssueListCardState extends State<CustomIssueListCard> with CustomIs
         width: size.width,
         child: Padding(
           padding: CustomPaddings.onlyBottomLow,
-          child: Text('$datedCase ${TimeClass().timeRecover(plannedDate)}', style: commonStyle),
+          child: Text('$datedCase ${TimeClass().timeRecover(plannedDate)}',
+              style: commonStyle),
         ),
       ),
     );
   }
 
-  Container happeningTimeWidget(Size size, String header, String fixedDate, String targetDate) {
+  Container happeningTimeWidget(
+      Size size, String header, String fixedDate, String targetDate) {
     return Container(
       width: size.width,
-      decoration:
-          BoxDecoration(borderRadius: BorderRadius.circular(5), color: CustomColorCalculator().colorCalculatorBackground(fixedDate, targetDate)),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(5),
+          color: CustomColorCalculator()
+              .colorCalculatorBackground(fixedDate, targetDate)),
       child: Padding(
         padding: const EdgeInsets.all(5.0),
         child: Text(
@@ -162,7 +255,8 @@ class _CustomIssueListCardState extends State<CustomIssueListCard> with CustomIs
           style: TextStyle(
             fontSize: FontSizes.caption - 1,
             letterSpacing: letterSpacing,
-            color: CustomColorCalculator().colorCalculatorText(fixedDate, targetDate),
+            color: CustomColorCalculator()
+                .colorCalculatorText(fixedDate, targetDate),
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -181,7 +275,8 @@ class _CustomIssueListCardState extends State<CustomIssueListCard> with CustomIs
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
-            color: CustomColorCalculator().colorCalculator(dateNow.toString(), targetTime),
+            color: CustomColorCalculator()
+                .colorCalculator(dateNow.toString(), targetTime),
             fontSize: FontSizes.caption - 1,
             letterSpacing: letterSpacing,
           ),
@@ -200,7 +295,8 @@ class _CustomIssueListCardState extends State<CustomIssueListCard> with CustomIs
           '$header ${TimeClass().timeRecover(targetTime)}',
           maxLines: 1,
           style: TextStyle(
-            color: CustomColorCalculator().colorCalculator(dateNow.toString(), targetTime),
+            color: CustomColorCalculator()
+                .colorCalculator(dateNow.toString(), targetTime),
             fontSize: FontSizes.caption - 1,
             letterSpacing: letterSpacing,
           ),
@@ -215,7 +311,8 @@ class _CustomIssueListCardState extends State<CustomIssueListCard> with CustomIs
         width: size.width / 1,
         child: Padding(
           padding: CustomPaddings.onlyBottomLow,
-          child: Text(widget.issueListElement.statusname.toString(), style: commonStyle),
+          child: Text(widget.issueListElement.statusname.toString(),
+              style: commonStyle),
         ),
       ),
     );
@@ -231,7 +328,11 @@ class _CustomIssueListCardState extends State<CustomIssueListCard> with CustomIs
             widget.issueListElement.code.toString(),
             softWrap: true,
             overflow: TextOverflow.ellipsis,
-            style: TextStyle(color: Color(0xff025273), fontSize: FontSizes.caption, fontFamily: "Poppins", fontWeight: FontWeight.bold),
+            style: TextStyle(
+                color: Color(0xff025273),
+                fontSize: FontSizes.caption,
+                fontFamily: "Poppins",
+                fontWeight: FontWeight.bold),
           ),
         ),
       ),
@@ -248,7 +349,10 @@ class _CustomIssueListCardState extends State<CustomIssueListCard> with CustomIs
               alignment: Alignment.centerLeft,
               child: Padding(
                 padding: CustomPaddings.onlyBottomLow,
-                child: Text(key: Key(issueListTextKey), '$header : $description', style: commonStyle),
+                child: Text(
+                    key: Key(issueListTextKey),
+                    '$header : $description',
+                    style: commonStyle),
               ),
             ),
             Divider(height: 5),

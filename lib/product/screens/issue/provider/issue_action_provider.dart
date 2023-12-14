@@ -13,12 +13,13 @@ import 'package:wm_ppp_4/feature/models/issue_action_models/issue_available_acti
 import 'package:wm_ppp_4/feature/models/issue_action_models/issue_live_select_asg_groups_model.dart';
 import 'package:wm_ppp_4/feature/models/issue_action_models/issue_live_select_asg_users_model.dart';
 import 'package:wm_ppp_4/feature/models/issue_action_models/issue_operation_list_model.dart';
-import 'package:wm_ppp_4/product/screens/issue/provider/issue_provider.dart';
 import 'package:wm_ppp_4/product/screens/issue/service/issue_service_repo_impl.dart';
+import 'package:wm_ppp_4/product/screens/search/screens/issue_search/provider/issue_search_provider.dart';
 
 class IssueActionProvider extends ChangeNotifier {
   final IssueServiceRepoImpml _issueServiceRepository = IssueServiceRepoImpml();
   final ImagePicker picker = ImagePicker();
+  IssueSearchProvider issueSearchProvider = IssueSearchProvider();
 
   bool _isFetch = false;
   bool get isFetch => _isFetch;
@@ -26,8 +27,14 @@ class IssueActionProvider extends ChangeNotifier {
   bool _isFetchActivity = true;
   bool get isFetchActivity => _isFetchActivity;
 
+  bool _isFetchQuickFix = false;
+  bool get isFetchQuickFix => _isFetchQuickFix;
+
   bool _isPhotoSectionOpen = false;
   bool get isPhotoSectionOpen => _isPhotoSectionOpen;
+
+  bool _isQuickFixOpen = false;
+  bool get isQuickFixOpen => _isQuickFixOpen;
 
   bool _isActivitySectionOpen = false;
   bool get isActivitySectionOpen => _isActivitySectionOpen;
@@ -61,8 +68,18 @@ class IssueActionProvider extends ChangeNotifier {
   bool _errorAccurForFixed = false;
   bool get errorAccurForFixed => _errorAccurForFixed;
 
+  bool _quickFixExist = false;
+  bool get quickFixExist => _quickFixExist;
+
   String _selectedActivityName = 'Seçiniz';
   String get selectedActivityName => _selectedActivityName;
+
+  String _selectedActivityNextStateName = '';
+  String get selectedActivityNextStateName => _selectedActivityNextStateName;
+  void setSelectedActivityNextStateName(String selectedActivityNextStateName) {
+    _selectedActivityNextStateName = selectedActivityNextStateName;
+    notifyListeners();
+  }
 
   String _additionaltimeInput = '';
   String get additionaltimeInput => _additionaltimeInput;
@@ -74,7 +91,7 @@ class IssueActionProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  String _selectedAsgGroupName = '';
+  String _selectedAsgGroupName = 'Grup Seçiniz';
   String get selectedAsgGroupName => _selectedAsgGroupName;
 
   String _selectedAsgGroupCode = '';
@@ -82,6 +99,10 @@ class IssueActionProvider extends ChangeNotifier {
 
   String _selectedAsgUserCode = '';
   String get selectedAsgUserCode => _selectedAsgUserCode;
+  void setSelectedAsgUserCode(String selectedAsgUserCode) {
+    _selectedAsgUserCode = selectedAsgUserCode;
+    notifyListeners();
+  }
 
   String _selectedActivityCode = '';
   String get selectedActivityCode => _selectedActivityCode;
@@ -138,26 +159,47 @@ class IssueActionProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  final _patientBarcode = TextEditingController();
+  TextEditingController get patientBarcode => _patientBarcode;
+  set setPatientBarcode(String patientBarcode) {
+    _patientBarcode.text = patientBarcode;
+    notifyListeners();
+  }
+
+  final _sampleBarcode = TextEditingController();
+  TextEditingController get sampleBarcode => _sampleBarcode;
+  set setSampleBarcode(String sampleBarcode) {
+    _sampleBarcode.text = sampleBarcode;
+    notifyListeners();
+  }
+
   IssueOperationList _issueOperationList = const IssueOperationList();
   IssueOperationList get issueOperationList => _issueOperationList;
 
   final List<IssueAvailableActivities> _availableActivities = [];
-  List<IssueAvailableActivities> get availableActivities => _availableActivities;
+  List<IssueAvailableActivities> get availableActivities =>
+      _availableActivities;
 
   final List<String> _availableActivitiesName = [];
   List<String> get availableActivitiesName => _availableActivitiesName;
 
   final List<LiveSelectAsgGroupsModel> _getLiveSelectAsgGroups = [];
-  List<LiveSelectAsgGroupsModel> get getLiveSelectAsgGroups => _getLiveSelectAsgGroups;
+  List<LiveSelectAsgGroupsModel> get getLiveSelectAsgGroups =>
+      _getLiveSelectAsgGroups;
 
   final List<String> _getLiveSelectAsgGroupsName = [];
   List<String> get getLiveSelectAsgGroupsName => _getLiveSelectAsgGroupsName;
 
   final List<LiveSelectAsgUsersModel> _getLiveSelectAsgUsers = [];
-  List<LiveSelectAsgUsersModel> get getLiveSelectAsgUsers => _getLiveSelectAsgUsers;
+  List<LiveSelectAsgUsersModel> get getLiveSelectAsgUsers =>
+      _getLiveSelectAsgUsers;
 
-  final List<String> _getLiveSelectAsgUsersName = [];
+  List<String> _getLiveSelectAsgUsersName = ['Kullanıcı Seçiniz'];
   List<String> get getLiveSelectAsgUsersName => _getLiveSelectAsgUsersName;
+  void setLiveSelectSelectAsgUserName(List<String> getLiveSelectAsgUsersName) {
+    _getLiveSelectAsgUsersName = getLiveSelectAsgUsersName;
+    notifyListeners();
+  }
 
   final List<IssueAvailableActivities> _selectedActivity = [];
   List<IssueAvailableActivities> get selectedActivity => _selectedActivity;
@@ -172,6 +214,11 @@ class IssueActionProvider extends ChangeNotifier {
 
   void setisPhotoSectionOpen(bool photoSection) {
     _isPhotoSectionOpen = photoSection;
+    notifyListeners();
+  }
+
+  void setisQuickFixOpen(bool quickFixOpen) {
+    _isQuickFixOpen = quickFixOpen;
     notifyListeners();
   }
 
@@ -226,6 +273,14 @@ class IssueActionProvider extends ChangeNotifier {
     scanBarcodeAndQr('space');
   }
 
+  void scanPatientBarcode() async {
+    scanBarcodeAndQr('patient');
+  }
+
+  void scanSampleBarcode() async {
+    scanBarcodeAndQr('sample');
+  }
+
   void update() {
     notifyListeners();
   }
@@ -233,15 +288,39 @@ class IssueActionProvider extends ChangeNotifier {
   void setSelectedActivityName(String activityName) {
     _selectedActivityName = activityName;
     clearAll();
+    if (activityName == 'Görevlendirme Yapıldı' ||
+        activityName == 'Yanıtlandı') {
+      setSelectedActivityNextStateName('Yanıtlandı');
+    } else if (activityName == 'Düzeltildi') {
+      setSelectedActivityNextStateName('Düzeltildi');
+    } else if (activityName == 'Hatalı Yönlendirme Olarak Onaylandı') {
+      setSelectedActivityNextStateName('Yeniden Yönlendirme Bekliyor');
+    } else if (activityName == 'Kapsam Dışı') {
+      setSelectedActivityNextStateName('Kapsam Dışı');
+    } else if (activityName == 'Reddet') {
+      setSelectedActivityNextStateName('Ret Onayı Bekliyor');
+    } else if (activityName == 'İşlemsiz Kapatma Onayı') {
+      setSelectedActivityNextStateName('İşlemsiz Kapatıldı');
+    } else if (activityName == 'Mücbir Sebep Nedeniyle Tamamlanamadı') {
+      setSelectedActivityNextStateName('Mücbir Sebep');
+    } else {
+      setSelectedActivityNextStateName(activityName);
+    }
     for (int i = 0; i < _availableActivities.length; i++) {
       if (_availableActivities[i].name == activityName) {
-        _isBarcodeSpace = _availableActivities[i].barcodeSpace == 'Y' ? true : false;
-        _isadditionaltimeInput = _availableActivities[i].additionaltimeInput == 'Y' ? true : false;
-        _minDescLength = _availableActivities[i].minDescLength != null ? true : false;
-        _mobilePhoto = _availableActivities[i].mobilePhoto == 'Y' ? true : false;
-        _isassigneeccType = _availableActivities[i].assigneeccType == 'LIVESELECT' ? true : false;
+        _isBarcodeSpace =
+            _availableActivities[i].barcodeSpace == 'Y' ? true : false;
+        _isadditionaltimeInput =
+            _availableActivities[i].additionaltimeInput == 'Y' ? true : false;
+        _minDescLength =
+            _availableActivities[i].minDescLength != null ? true : false;
+        _mobilePhoto =
+            _availableActivities[i].mobilePhoto == 'Y' ? true : false;
+        _isassigneeccType =
+            _availableActivities[i].assigneeccType == 'LIVESELECT'
+                ? true
+                : false;
         _selectedActivityCode = _availableActivities[i].code.toString();
-        print('------' + selectedActivityCode);
       }
     }
     notifyListeners();
@@ -275,7 +354,10 @@ class IssueActionProvider extends ChangeNotifier {
     _isFetch = true;
     _loading = true;
     notifyListeners();
-    final response = await _issueServiceRepository.getIssueOperations(issuecode);
+    getAvailableActivitiesForQuickFix(issuecode);
+    final response =
+        await _issueServiceRepository.getIssueOperations(issuecode);
+
     response.fold(
         (l) => {
               _issueOperationList = l,
@@ -292,11 +374,12 @@ class IssueActionProvider extends ChangeNotifier {
     String userToken = await SharedManager().getString(SharedEnum.deviceId);
     String userCode = await SharedManager().getString(SharedEnum.userCode);
 
-    final response = await _issueServiceRepository.takeOverIssue(userToken, userCode, issuecode);
+    final response = await _issueServiceRepository.takeOverIssue(
+        userToken, userCode, issuecode);
     response.fold(
         (l) => {
               snackBar(context, LocaleKeys.processDone, 'success'),
-              Navigator.of(context).pop<bool>(true),
+              Navigator.pop(context, true),
             },
         (r) => {
               snackBar(context, LocaleKeys.processCancell, 'error'),
@@ -317,7 +400,8 @@ class IssueActionProvider extends ChangeNotifier {
     _loading = true;
     String userToken = await SharedManager().getString(SharedEnum.deviceId);
 
-    final response = await _issueServiceRepository.createSparepartIssue(userToken, issuecode);
+    final response = await _issueServiceRepository.createSparepartIssue(
+        userToken, issuecode);
     response.fold(
         (l) => {
               snackBar(context, LocaleKeys.processDone, 'success'),
@@ -344,7 +428,8 @@ class IssueActionProvider extends ChangeNotifier {
     String userToken = await SharedManager().getString(SharedEnum.deviceId);
     String userName = await SharedManager().getString(SharedEnum.userName);
 
-    final response = await _issueServiceRepository.cancelIssuePlanned(userToken, userName, issuecode);
+    final response = await _issueServiceRepository.cancelIssuePlanned(
+        userToken, userName, issuecode);
     response.fold(
         (l) => {
               snackBar(context, LocaleKeys.processDone, 'success'),
@@ -366,10 +451,12 @@ class IssueActionProvider extends ChangeNotifier {
   }
 
   void getAvailableActivities(String issuecode) async {
+    print('pickedddddd');
     String userToken = await SharedManager().getString(SharedEnum.deviceId);
     _loading = true;
     notifyListeners();
-    final response = await _issueServiceRepository.getAvailableActivities(issuecode, userToken);
+    final response = await _issueServiceRepository.getAvailableActivities(
+        issuecode, userToken);
 
     _availableActivitiesName.clear();
     _availableActivities.clear();
@@ -379,7 +466,12 @@ class IssueActionProvider extends ChangeNotifier {
               _availableActivities.addAll(l),
               for (int i = 0; i < _availableActivities.length; i++)
                 {
-                  _availableActivitiesName.add(_availableActivities[i].name.toString()),
+                  _availableActivitiesName
+                      .add(_availableActivities[i].name.toString()),
+                  if (_availableActivities[i].acttypecode == 'QUICKFIXED')
+                    {
+                      _quickFixExist = true,
+                    }
                 },
               _loading = false,
             },
@@ -391,11 +483,43 @@ class IssueActionProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void getAvailableActivitiesForQuickFix(String issuecode) async {
+    String userToken = await SharedManager().getString(SharedEnum.deviceId);
+    _loading = true;
+    notifyListeners();
+    _quickFixExist = false;
+    final response = await _issueServiceRepository.getAvailableActivities(
+        issuecode, userToken);
+    _availableActivitiesName.clear();
+    _availableActivities.clear();
+    _availableActivitiesName.insert(0, 'Seçiniz');
+    response.fold(
+        (l) => {
+              _availableActivities.addAll(l),
+              for (int i = 0; i < _availableActivities.length; i++)
+                {
+                  if (_availableActivities[i].acttypecode == 'QUICKFIXED')
+                    {
+                      _quickFixExist = true,
+                    }
+                },
+              _loading = false,
+            },
+        (r) => {
+              _loading = false,
+            });
+    _isFetchQuickFix = true;
+    _availableActivitiesName.clear();
+    _availableActivities.clear();
+    notifyListeners();
+  }
+
   void scanBarcodeAndQr(state) async {
     String barcodeScanRes;
 
     try {
-      barcodeScanRes = await FlutterBarcodeScanner.scanBarcode('#ff6666', 'İptal', true, ScanMode.BARCODE);
+      barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
+          '#ff6666', 'İptal', true, ScanMode.BARCODE);
     } on PlatformException {
       barcodeScanRes = 'Failed to get platform version.';
     }
@@ -420,6 +544,10 @@ class IssueActionProvider extends ChangeNotifier {
         setRfidCode = barcode;
       } else if (state == 'space') {
         setSpaceCode = barcode;
+      } else if (state == 'patient') {
+        setPatientBarcode = barcode;
+      } else if (state == 'sample') {
+        setSampleBarcode = barcode;
       }
     }
     notifyListeners();
@@ -429,16 +557,19 @@ class IssueActionProvider extends ChangeNotifier {
     String userToken = await SharedManager().getString(SharedEnum.deviceId);
     _loading = true;
     notifyListeners();
-    final response = await _issueServiceRepository.getLiveSelectAsgGroups(issuecode, userToken);
+    final response = await _issueServiceRepository.getLiveSelectAsgGroups(
+        issuecode, userToken);
 
     _getLiveSelectAsgGroupsName.clear();
     _getLiveSelectAsgGroups.clear();
+    _getLiveSelectAsgGroupsName.add('Grup Seçiniz');
     response.fold(
         (l) => {
               _getLiveSelectAsgGroups.addAll(l),
               for (int i = 0; i < _getLiveSelectAsgGroups.length; i++)
                 {
-                  _getLiveSelectAsgGroupsName.add(_getLiveSelectAsgGroups[i].name.toString()),
+                  _getLiveSelectAsgGroupsName
+                      .add(_getLiveSelectAsgGroups[i].name.toString()),
                 },
               _loading = false,
             },
@@ -453,16 +584,19 @@ class IssueActionProvider extends ChangeNotifier {
     String userToken = await SharedManager().getString(SharedEnum.deviceId);
     _loading = true;
     notifyListeners();
-    final response = await _issueServiceRepository.getLiveSelectAsgUser(issuecode, userToken, groupCode);
+    final response = await _issueServiceRepository.getLiveSelectAsgUser(
+        issuecode, userToken, groupCode);
 
     _getLiveSelectAsgUsersName.clear();
     _getLiveSelectAsgUsers.clear();
+    _getLiveSelectAsgUsersName.add('Kullanıcı Seçiniz');
     response.fold(
         (l) => {
               _getLiveSelectAsgUsers.addAll(l),
               for (int i = 0; i < _getLiveSelectAsgUsers.length; i++)
                 {
-                  _getLiveSelectAsgUsersName.add(_getLiveSelectAsgUsers[i].fullname.toString()),
+                  _getLiveSelectAsgUsersName
+                      .add(_getLiveSelectAsgUsers[i].fullname.toString()),
                 },
               _loading = false,
             },
@@ -486,18 +620,19 @@ class IssueActionProvider extends ChangeNotifier {
     notifyListeners();
 
     final response = await _issueServiceRepository.saveIssueActivity(
-      issuecode,
-      userToken,
-      selectedAsgGroupCode,
-      userCode,
-      selectedActivityCode,
-      description,
-      spaceCode.text,
-      selectedAsgUserCode,
-      additionaltimeInput,
-      'issue',
-      base64string,
-    );
+        issuecode,
+        userToken,
+        selectedAsgGroupCode,
+        userCode,
+        selectedActivityCode,
+        description,
+        spaceCode.text,
+        selectedAsgUserCode,
+        additionaltimeInput,
+        'issue',
+        base64string,
+        '',
+        '');
     response.fold(
         (l) => {
               isSuccessEnterActivity = true,
@@ -531,18 +666,19 @@ class IssueActionProvider extends ChangeNotifier {
     notifyListeners();
 
     final response = await _issueServiceRepository.saveIssueActivity(
-      issuecode,
-      userToken,
-      selectedAsgGroupCode,
-      userCode,
-      activityCode,
-      description,
-      spaceCode.text,
-      selectedAsgUserCode,
-      additionaltimeInput,
-      'issue',
-      base64string,
-    );
+        issuecode,
+        userToken,
+        selectedAsgGroupCode,
+        userCode,
+        activityCode,
+        description,
+        spaceCode.text,
+        selectedAsgUserCode,
+        additionaltimeInput,
+        'issue',
+        base64string,
+        patientBarcode.text,
+        sampleBarcode.text);
     response.fold(
         (l) => {
               isSuccessEnterActivityForFixed = true,
@@ -567,11 +703,15 @@ class IssueActionProvider extends ChangeNotifier {
     _loading = true;
 
     String userToken = await SharedManager().getString(SharedEnum.deviceId);
-    _barcodeScenRes = serialNumber.text.isNotEmpty ? serialNumber.text : _barcodeScenRes;
-    _barcodeScenRes = entityCode.text.isNotEmpty ? entityCode.text : _barcodeScenRes;
-    _barcodeScenRes = rfidCode.text.isNotEmpty ? rfidCode.text : _barcodeScenRes;
+    _barcodeScenRes =
+        serialNumber.text.isNotEmpty ? serialNumber.text : _barcodeScenRes;
+    _barcodeScenRes =
+        entityCode.text.isNotEmpty ? entityCode.text : _barcodeScenRes;
+    _barcodeScenRes =
+        rfidCode.text.isNotEmpty ? rfidCode.text : _barcodeScenRes;
 
-    final response = await _issueServiceRepository.changeCfg(userToken, issuecode, barcodeScenRes);
+    final response = await _issueServiceRepository.changeCfg(
+        userToken, issuecode, barcodeScenRes);
 
     response.fold(
         (l) => {
@@ -592,8 +732,8 @@ class IssueActionProvider extends ChangeNotifier {
   }
 
   Future<void> getImageFromCamera() async {
+    _image = null;
     final pickedFile = await picker.pickImage(source: ImageSource.camera);
-
     if (pickedFile != null) {
       _image = File(pickedFile.path);
       notifyListeners();

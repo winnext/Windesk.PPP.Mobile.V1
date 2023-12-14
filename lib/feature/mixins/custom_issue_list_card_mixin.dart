@@ -16,6 +16,7 @@ mixin CustomIssueListCardConstantsMixin<T extends CustomIssueListCard> {
   final String happenedDescription = 'Gerçekleşen Açıklama';
   final String happenedDescriptionDaterError = 'Düzeltme tarihine ulaşılamadı : ';
   final String numErrorStr = '5000000000000000';
+  final  numError = 5000000000000000;
   final String happenedFix = 'Gerçekleşen Düzeltme';
   final String happenedResponse = 'Gerçekleşen Yanıtlama: ';
   final String goalResponse = 'Hedef Yanıtlama';

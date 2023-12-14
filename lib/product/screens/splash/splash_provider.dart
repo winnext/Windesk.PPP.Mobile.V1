@@ -6,6 +6,7 @@ import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:get_ip_address/get_ip_address.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import '../../../feature/database/shared_manager.dart';
@@ -32,6 +33,7 @@ class SplashProvider extends ChangeNotifier {
 
     // Gets device information from Android and iOS devices sparingly.
     String appVersion = packageInfo.version;
+    String osVersion = Platform.operatingSystemVersion;
 
     if (Platform.isAndroid) {
       AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
@@ -49,17 +51,23 @@ class SplashProvider extends ChangeNotifier {
 
     // sets device information to shared preferences.
     if (deviceId != null && deviceOS != null && deviceModel != null) {
-      print('deviceId' + deviceId);
+      var ipAddress = IpAddress(type: RequestType.json);
+
+      /// Get the IpAddress based on requestType.
+      dynamic data = await ipAddress.getIpAddress();
       await SharedManager().setString(SharedEnum.deviceId, deviceId);
       await SharedManager().setString(SharedEnum.deviceModel, deviceModel);
       await SharedManager().setString(SharedEnum.deviceType, deviceOS);
       await SharedManager().setString(SharedEnum.appVersion, appVersion);
+      await SharedManager().setString(SharedEnum.ipAdress, data['ip']);
+      await SharedManager().setString(SharedEnum.osVersion, osVersion);
     }
   }
 
   void _getFirebaseInformation() async {
     FirebaseMessaging messaging = FirebaseMessaging.instance;
     String? firebaseToken = await messaging.getToken();
+
     if (firebaseToken == null) return;
     await SharedManager().setString(SharedEnum.firebaseToken, firebaseToken);
   }
@@ -81,11 +89,12 @@ class SplashProvider extends ChangeNotifier {
   void checkUserAlreadyLoggedIn(BuildContext context) async {
     await SharedManager().initInstances();
     _getDeviceInformation();
-    // _getFirebaseInformation();
+    _getFirebaseInformation();
 
-    final String userCode = await SharedManager().getString(SharedEnum.userCode);
-    final String deviceId = await SharedManager().getString(SharedEnum.deviceId);
-
+    final String userCode =
+        await SharedManager().getString(SharedEnum.userCode);
+    final String deviceId =
+        await SharedManager().getString(SharedEnum.deviceId);
     if (userCode.isNotEmpty && deviceId.isNotEmpty) {
       _isUserAlreadyLoggedIn = true;
       // await _authService.checkAccessToken(userToken).then((value) {

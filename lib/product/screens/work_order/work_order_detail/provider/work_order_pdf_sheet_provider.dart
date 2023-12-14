@@ -12,7 +12,8 @@ import '../../../../../feature/service/global_services.dart/work_order_service/w
 import '../../../../../feature/service/global_services.dart/work_order_service/work_order_service_repository_impl.dart';
 
 class WorkOrderPdfSheetProvider extends ChangeNotifier {
-  final WorkOrderServiceRepository _service = Injection.getIt.get<WorkOrderServiceRepositoryImpl>();
+  final WorkOrderServiceRepository _service =
+      Injection.getIt.get<WorkOrderServiceRepositoryImpl>();
   File? doc;
 
   bool isLoading = false;
@@ -26,12 +27,14 @@ class WorkOrderPdfSheetProvider extends ChangeNotifier {
       notifyListeners();
 
       String userToken = await SharedManager().getString(SharedEnum.deviceId);
-      String userName = await SharedManager().getString(SharedEnum.userCode);
+      String userCode = await SharedManager().getString(SharedEnum.userCode);
 
       Uint8List imagebytes = await doc!.readAsBytes(); //convert to bytes
-      String base64string = base64.encode(imagebytes); //convert bytes to base64 string
+      String base64string =
+          base64.encode(imagebytes); //convert bytes to base64 string
 
-      final response = await _service.addWorkOrderAttachment(userToken, userName, workOrderCode, base64string, desc);
+      final response = await _service.addWorkOrderAttachment(
+          userToken, userCode, workOrderCode, base64string, desc);
 
       response.fold(
         (l) => {

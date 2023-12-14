@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:wm_ppp_4/feature/components/snackBar/snackbar.dart';
+import 'package:wm_ppp_4/feature/elastic_log/elastic_log.dart';
 import 'service/test_service_repo_impl.dart';
 
 import '../../../feature/database/shared_manager.dart';
@@ -66,21 +68,53 @@ class TestProvider extends ChangeNotifier {
   set setPhoneTime(String phoneTime) {
     _phoneTime = phoneTime;
   }
+    String _userName = '';
+  get userName => _userName;
+  set setUserName(String userName) {
+    _userName = userName;
+  }
+    String _userCode = '';
+  get userCode => _userCode;
+  set setUserCode(String userCode) {
+    _userCode = userCode;
+  }
 
   void getTestScreenInfo() async {
     setGetInfoLoad = true;
     setDeviceModel = await SharedManager().getString(SharedEnum.deviceModel);
     setDeviceOS = await SharedManager().getString(SharedEnum.deviceType);
     setAppVersion = await SharedManager().getString(SharedEnum.appVersion);
+    setUserName = await SharedManager().getString(SharedEnum.userName);
+    setUserCode = await SharedManager().getString(SharedEnum.userCode);
     notifyListeners();
   }
 
-  void getServerTime() async {
+  bool _invalidDeviceId = false;
+  get invalidDeviceId => _invalidDeviceId;
+
+  void getServerTime(context) async {
     String token = await SharedManager().getString(SharedEnum.deviceId);
     var getServerTimeResult = await testServices.getServerTime(token);
     getServerTimeResult.fold(
-      (l) => {setServerTime = l},
-      (r) => null,
+      (l) => {
+       
+        if (l == 'Invalid device Id')
+          {
+            snackBar(context, 'Oturumunuz sonlandırıldı.', 'error'),
+          
+            _invalidDeviceId = true,
+          }
+        else
+          {
+            setServerTime = l,
+            ElasticLog().sendLog('info', 'ServerTimeSuccess',
+                'Sunucu saati başarıyla çekildi.', 'serverTimeSuccess'),
+          }
+      },
+      (r) => {
+        ElasticLog().sendLog('error', 'ServerTimeFail',
+            'Sunucu saati alınamadı.', 'serverTimeFail'),
+      },
     );
   }
 
@@ -97,14 +131,23 @@ class TestProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void accessTestV1Function() async {
-    getServerTime();
+  void accessTestV1Function(context) async {
+    getServerTime(context);
     getPhoneTime();
     setAccessTestV1 = 'loading';
     notifyListeners();
     var accesTestResult = await testServices.accessTestWindesk();
     accesTestResult.fold(
-        (l) => {setAccessTestV1 = 'true'}, (r) => setAccessTestV1 = 'false');
+        (l) => {
+              ElasticLog().sendLog('info', 'V1TestSuccess',
+                  'Windesk erişimi başarılı', 'v1TestSuccess'),
+              setAccessTestV1 = 'true'
+            },
+        (r) => {
+              setAccessTestV1 = 'false',
+              ElasticLog().sendLog('error', 'V1TestFail',
+                  'Windesk erişimi başarısız.', 'v1TestFail'),
+            });
     notifyListeners();
   }
 
@@ -114,7 +157,16 @@ class TestProvider extends ChangeNotifier {
 
     var accesTestResult = await testServices.accessTestMobileService();
     accesTestResult.fold(
-        (l) => {setAccessTestV2 = 'true'}, (r) => setAccessTestV2 = 'false');
+        (l) => {
+              ElasticLog().sendLog('info', 'V2TestSuccess',
+                  'Mobil servis erişimi başarılı', 'v2TestSuccess'),
+              setAccessTestV2 = 'true'
+            },
+        (r) => {
+              setAccessTestV2 = 'false',
+              ElasticLog().sendLog('error', 'V2TestFail',
+                  'Mobil servis erişimi başarısız.', 'v2TestFail'),
+            });
 
     notifyListeners();
   }
