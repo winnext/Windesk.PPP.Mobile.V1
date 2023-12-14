@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:wm_ppp_4/feature/elastic_log/elastic_log.dart';
 import 'package:wm_ppp_4/feature/enums/service_response_status_enums.dart';
 import 'package:wm_ppp_4/feature/enums/service_status_enums.dart';
 import 'package:wm_ppp_4/feature/models/issue_action_models/issue_available_activities_model.dart';
@@ -44,6 +45,9 @@ class IssueServiceRepoImpml extends IssueServiceRepository {
       return Left(tracingList);
     } catch (error) {
       super.logger.e(error.toString());
+      ElasticLog().sendLog('warning', 'Tracing List Fail', error.toString(),
+          'tracing List Fail');
+
       return Right(CustomServiceException(
           message: CustomServiceMessages.loginError, statusCode: '400'));
     }
@@ -68,8 +72,12 @@ class IssueServiceRepoImpml extends IssueServiceRepository {
       final data = response.data['records'];
       issueList = IssueListModel.fromJsonList(data);
       super.logger.i(issueList);
+      // ElasticLog().sendLog(
+      //     'warning', 'Issue List Response', issueList, 'Issue List Response');
       return Left(issueList);
     } catch (error) {
+      // ElasticLog().sendLog(
+      //     'warning', 'Issue List Fail', error.toString(), 'Issue List Fail');
       super.logger.e(error.toString());
       return Right(CustomServiceException(
           message: CustomServiceMessages.loginError, statusCode: '400'));
@@ -399,20 +407,19 @@ class IssueServiceRepoImpml extends IssueServiceRepository {
 
   @override
   Future<Either<bool, CustomServiceException>> saveIssueActivity(
-    issueCode,
-    userToken,
-    asgGroupCode,
-    username,
-    activityCode,
-    description,
-    locationCode,
-    asgUserCode,
-    additionalTime,
-    module,
-    image,
-    patientNo,
-    sampleNo
-  ) async {
+      issueCode,
+      userToken,
+      asgGroupCode,
+      username,
+      activityCode,
+      description,
+      locationCode,
+      asgUserCode,
+      additionalTime,
+      module,
+      image,
+      patientNo,
+      sampleNo) async {
     bool result = false;
     String url =
         '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$userToken&action=addActivity&issueCode=$issueCode&username=$username&activityCode=$activityCode&locationCode=$locationCode&asgGroupCode=$asgGroupCode&asgUserCode=$asgUserCode&additionalTime=$additionalTime&module=issue&from_mobile=1&cardNo='

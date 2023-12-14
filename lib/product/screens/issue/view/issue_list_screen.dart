@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 import 'package:wm_ppp_4/feature/components/model_bottom_sheet/issue_filter_modal_bottom_sheet.dart';
 import 'package:wm_ppp_4/feature/constants/functions/invalid_device_id_check.dart';
@@ -32,15 +33,20 @@ class IssueListScreen extends StatelessWidget {
         create: (_) => IssueProvider(),
         child: Consumer<IssueProvider>(
             builder: (context, IssueProvider issueProvider, child) {
-          issueProvider.isFetch
-              ? null
-              : issueProvider.getIssueList(1, issueModuleCode);
-          issueProvider.isFetchFilter ? null : issueProvider.getFilterValues();
-          issueProvider.setIssueModuleCode(issueModuleCode);
+          SchedulerBinding.instance.addPostFrameCallback((_) {
+            issueProvider.isFetch
+                ? null
+                : issueProvider.getIssueList(1, issueModuleCode);
+            issueProvider.isFetchFilter
+                ? null
+                : issueProvider.getFilterValues();
+            //issueProvider.setIssueModuleCode(issueModuleCode);
+          });
+
           return Scaffold(
             appBar: CustomMainAppbar(
-              title:
-                  Text(issueModuleName, style: const TextStyle(color: Colors.black)),
+              title: Text(issueModuleName,
+                  style: const TextStyle(color: Colors.black)),
               actions: [
                 IconButton(
                   onPressed: () async {
@@ -113,17 +119,15 @@ class IssueListScreen extends StatelessWidget {
                                 return CustomIssueListCard(
                                     issueListElement: issueListElement,
                                     onPressed: (String woCode) {
-                                      context.router.push(
-                                          IssueDetailScreen(issueCode: woCode));
+                                      context.router.push(IssueDetailScreen(
+                                        issueCode: woCode,
+                                      ));
                                     },
                                     onPressedLong: () {});
                               }),
                         ),
                       ),
                     ),
-                    issueProvider.loading
-                        ? const CustomLoadingIndicator()
-                        : const SizedBox()
                   ]),
           );
         }));
@@ -135,33 +139,30 @@ class _TitleAndTimer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      flex: 8,
-      child: Column(
-        children: [
-          Container(
-            width: context.width,
-            decoration: BoxDecoration(color: APPColors.Main.blue),
-            child: Padding(
-              padding: const EdgeInsets.all(8),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(context.read<IssueProvider>().title,
-                      style: TextStyle(
-                          color: APPColors.Secondary.white, letterSpacing: 1)),
-                  Text(context.read<IssueProvider>().secondText.toString(),
-                      style: TextStyle(
-                          color: APPColors.Secondary.white, letterSpacing: 1)),
-                  Text(context.watch<IssueProvider>().currentTimeText,
-                      style: TextStyle(
-                          color: APPColors.Secondary.white, letterSpacing: 1)),
-                ],
-              ),
+    return Column(
+      children: [
+        Container(
+          width: context.width,
+          decoration: BoxDecoration(color: APPColors.Main.blue),
+          child: Padding(
+            padding: const EdgeInsets.all(8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(context.read<IssueProvider>().title,
+                    style: TextStyle(
+                        color: APPColors.Secondary.white, letterSpacing: 1)),
+                Text(context.read<IssueProvider>().secondText.toString(),
+                    style: TextStyle(
+                        color: APPColors.Secondary.white, letterSpacing: 1)),
+                Text(context.watch<IssueProvider>().currentTimeText,
+                    style: TextStyle(
+                        color: APPColors.Secondary.white, letterSpacing: 1)),
+              ],
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
