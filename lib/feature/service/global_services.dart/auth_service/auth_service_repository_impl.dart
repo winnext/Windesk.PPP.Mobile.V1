@@ -27,6 +27,7 @@ class AuthServiceRepositoryImpl extends AuthServiceRepository {
     @override
     String url =
         '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$deviceId&action=loginCheck&username=$username&password=$password&platform=$deviceType&version=3&mobileV2=true';
+    print('url'+url);
     try {
       final response = await super.dio.get(
             url,
