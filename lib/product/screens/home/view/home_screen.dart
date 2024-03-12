@@ -1,10 +1,11 @@
 // ignore_for_file: unrelated_type_equality_checks
 
+import 'dart:developer';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wm_ppp_4/feature/constants/functions/invalid_device_id_check.dart';
 import 'package:wm_ppp_4/feature/constants/paths/asset_paths.dart';
 import 'package:wm_ppp_4/product/screens/home/service/home_service_repo_impl.dart';
 
@@ -104,6 +105,22 @@ class _HomeScreenState extends State<HomeScreen> {
             AppIcons.contentPasteOff,
             const WoSearchRoute(),
           ),
+          ServiceTools.appName == 'BESK' || ServiceTools.appName == 'ISH'
+              ? Expanded(
+                  child: CustomCircularHomeButton(
+                    title: LocaleKeys.newNotif,
+                    icon: Icon(
+                      AppIcons.contentPasteSearch,
+                      size: MediaQuery.of(context).size.width / 10,
+                    ),
+                    onPressed: () {
+                      context.router.push(NewNotifRoute());
+                    },
+                    isBadgeVisible: false,
+                    badgeCount: '0',
+                  ),
+                )
+              : Text('')
         ],
       ),
     );

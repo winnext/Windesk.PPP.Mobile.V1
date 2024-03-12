@@ -526,7 +526,7 @@ class _SpaceSearchPageState extends State<SpaceSearchPage> {
                                             child: ElevatedButton(
                                               style: ElevatedButton.styleFrom(
                                                 // ignore: deprecated_member_use
-                                                primary: APPColors.Main.red,
+                                                //primary: APPColors.Main.red,
                                                 shape: RoundedRectangleBorder(
                                                   borderRadius:
                                                       BorderRadius.circular(
@@ -570,7 +570,7 @@ class _SpaceSearchPageState extends State<SpaceSearchPage> {
                                       child: ElevatedButton(
                                         style: ElevatedButton.styleFrom(
                                           // ignore: deprecated_member_use
-                                          primary: APPColors.Login.blue,
+                                          //primary: APPColors.Login.blue,
                                           shape: RoundedRectangleBorder(
                                             borderRadius: BorderRadius.circular(
                                                 20), // <-- Radius

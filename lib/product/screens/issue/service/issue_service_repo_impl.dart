@@ -34,6 +34,14 @@ class IssueServiceRepoImpml extends IssueServiceRepository {
     String url = '${ServiceTools.baseUrlV2}/list/module/issue';
 
     try {
+      BaseOptions options = BaseOptions(
+          baseUrl: url,
+          receiveDataWhenStatusError: true,
+          connectTimeout: const Duration(seconds: 60), // 60 seconds
+          receiveTimeout: const Duration(seconds: 60) // 60 seconds
+          );
+
+      Dio dio = Dio(options);
       final response = await dio.get(url,
           options: Options(headers: {
             "xusercode": userCode,
@@ -62,6 +70,15 @@ class IssueServiceRepoImpml extends IssueServiceRepository {
         await SharedManager().getString(SharedEnum.userCode);
 
     String url = '${ServiceTools.baseUrlV2}/list/$issueListType/issue';
+    print('getIssueList:' + url);
+    BaseOptions options = BaseOptions(
+        baseUrl: url,
+        receiveDataWhenStatusError: true,
+        connectTimeout: const Duration(seconds: 60), // 60 seconds
+        receiveTimeout: const Duration(seconds: 60) // 60 seconds
+        );
+
+    Dio dio = Dio(options);
     try {
       final response = await dio.get(url,
           queryParameters: queryParameters,
@@ -427,6 +444,7 @@ class IssueServiceRepoImpml extends IssueServiceRepository {
         '&sampleNo=$sampleNo'
         '&description=$description';
     //FormData formData = FormData.fromMap({"base64string": image});
+    print(url);
     try {
       final response = await super.dio.post(url,
           data: {'base64string': image, 'description': description},

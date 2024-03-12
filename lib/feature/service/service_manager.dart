@@ -6,9 +6,9 @@ class ServiceManager {
   ServiceManager() {
     final BaseOptions baseOptions = BaseOptions(
       responseType: ResponseType.json,
-      connectTimeout: const Duration(seconds: 5),
-      sendTimeout: const Duration(seconds: 5),
-      receiveTimeout: const Duration(seconds: 5),
+      connectTimeout: const Duration(seconds: 60),
+      sendTimeout: const Duration(seconds: 60),
+      receiveTimeout: const Duration(seconds: 60),
     );
     dio = Dio(baseOptions);
   }

@@ -45,6 +45,7 @@ class TestServiceRepositoryImpl extends TestServiceRepository {
     bool result = false;
 
     String url = '${ServiceTools.baseUrlV2}/workorder/reactive';
+    print('v2test : ' + url);
     try {
       final response = await super.dio.get(url,
           options: Options(

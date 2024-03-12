@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wm_ppp_4/feature/elastic_log/elastic_log.dart';
 import 'package:wm_ppp_4/feature/enums/shared_enums.dart';
-import 'package:wm_ppp_4/feature/exceptions/custom_service_exceptions.dart';
 import 'package:wm_ppp_4/feature/service/global_services.dart/auth_service/auth_service_repository.dart';
 import 'package:wm_ppp_4/feature/service/global_services.dart/auth_service/auth_service_repository_impl.dart';
 import 'package:wm_ppp_4/product/screens/home/service/home_service_repo_impl.dart';

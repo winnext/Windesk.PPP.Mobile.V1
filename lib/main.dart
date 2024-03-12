@@ -11,6 +11,7 @@ import 'feature/global_providers/global_provider.dart';
 import 'feature/injection.dart';
 import 'feature/route/app_route.dart';
 import 'feature/service/firebase/firebase_notification.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,6 +42,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return FGBGNotifier(
         child: MaterialApp.router(
+          
           routerConfig: _appRouter.config(),
           title: AppStrings.appName,
           debugShowCheckedModeBanner: false,

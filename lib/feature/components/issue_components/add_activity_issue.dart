@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:freeze/freeze.dart';
 import 'package:provider/provider.dart';
 import 'package:wm_ppp_4/feature/components/buttons/custom_half_buttons.dart';
 import 'package:wm_ppp_4/feature/components/input_fields/dropdown_input_fields.dart';
@@ -45,9 +44,7 @@ class AddActivity extends StatelessWidget {
               : null;
           if (issueActionProvider.isSuccessEnterActivity) {
             snackBar(context, LocaleKeys.processDone, 'success');
-            print('SUCCESS ADD ACTIVITY');
             issueSearchProvider.setIssueUpdateData = true;
-            print(issueSearchProvider.issueUpdateData);
             // Navigator.of(context).pop<bool>(true);
             Navigator.pop(context, true);
           }

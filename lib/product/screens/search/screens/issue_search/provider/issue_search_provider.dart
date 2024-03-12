@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:wm_ppp_4/feature/components/snackBar/snackbar.dart';
-import 'package:wm_ppp_4/product/screens/issue/view/issue_detail_screen.dart';
 
 import '../../../service/search_service_repo_impl.dart';
 
@@ -28,7 +27,6 @@ class IssueSearchProvider extends ChangeNotifier {
     final response =
         await _searchServiceRepository.checkIssueByAuth(searchIssueCode);
     // ignore: avoid_print
-    var result;
     response.fold(
         (l) => {
               if (l > 0)

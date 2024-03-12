@@ -2,16 +2,12 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
-import 'package:wm_ppp_4/feature/components/snackBar/snackbar.dart';
 import 'package:wm_ppp_4/feature/constants/functions/invalid_device_id_check.dart';
-import 'package:wm_ppp_4/feature/constants/other/snackbar_strings.dart';
-import 'package:wm_ppp_4/feature/route/app_route.gr.dart';
 import 'package:wm_ppp_4/product/screens/home/provider/home_provider.dart';
 import '../../../../feature/components/appbar/custom_tab_appbar.dart';
 import '../../../../feature/constants/other/app_strings.dart';
 import '../../../../feature/constants/other/colors.dart';
 import '../../../../feature/extensions/context_extension.dart';
-import '../../../../feature/global_providers/global_provider.dart';
 
 import '../../../../feature/constants/paths/service_tools.dart';
 import '../test_provider.dart';
@@ -231,27 +227,50 @@ SizedBox buttonTest(BuildContext context, String buttonText,
     width: context.width * 0.7,
     child: Padding(
       padding: const EdgeInsets.all(8.0),
-      child: RoundedLoadingButton(
-        color: APPColors.Main.red,
-        successColor: Colors.amber,
-        controller: controllerButton,
-        onPressed: () {
-          controllerButton.success();
-          testProvider.accessTestV1Function(context);
-          testProvider.accessTestV2Function();
+      child:
+          //RoundedLoadingButton(
+          //   color: APPColors.Main.red,
+          //   successColor: Colors.amber,
+          //   controller: controllerButton,
+          //   onPressed: () {
+          //     controllerButton.success();
+          //     testProvider.accessTestV1Function(context);
+          //     testProvider.accessTestV2Function();
 
-          controllerButton.reset();
-        },
-        valueColor: Colors.white,
-        borderRadius: 12,
-        child: Center(
-          child: Text(
-              buttonText == AppStrings.accessTest
-                  ? AppStrings.accessTest
-                  : AppStrings.issueNotify,
-              style: const TextStyle(color: Colors.white)),
-        ),
-      ),
+          //     controllerButton.reset();
+          //   },
+          //   valueColor: Colors.white,
+          //   borderRadius: 12,
+          //   child: Center(
+          //     child: Text(
+          //         buttonText == AppStrings.accessTest
+          //             ? AppStrings.accessTest
+          //             : AppStrings.issueNotify,
+          //         style: const TextStyle(color: Colors.white)),
+          //   ),
+          // ),
+          ElevatedButton(
+              onPressed: () {
+                controllerButton.success();
+                testProvider.accessTestV1Function(context);
+                testProvider.accessTestV2Function();
+
+                controllerButton.reset();
+              },
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.white,
+                backgroundColor: Colors.red,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12.0),
+                ),
+              ),
+              child: Center(
+                child: Text(
+                    buttonText == AppStrings.accessTest
+                        ? AppStrings.accessTest
+                        : AppStrings.issueNotify,
+                    style: const TextStyle(color: Colors.white)),
+              )),
     ),
   );
 }

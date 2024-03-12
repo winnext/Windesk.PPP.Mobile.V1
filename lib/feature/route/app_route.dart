@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:wm_ppp_4/product/screens/new_notif/new_notif_page.dart';
 
 import 'app_route.gr.dart';
 
@@ -24,6 +25,7 @@ class AppRouter extends $AppRouter {
                 AutoRoute(
                     path: 'homeScreen', page: HomeScreen.page, initial: true),
                 // work order
+
                 AutoRoute(
                     path: 'workOrderListScreen',
                     page: WorkOrderListScreen.page),
@@ -61,6 +63,14 @@ class AppRouter extends $AppRouter {
                     path: 'issueNotesScreen', page: IssueNotesScreen.page),
                 AutoRoute(
                     path: 'issueSummaryScreen', page: IssueSummaryScreen.page),
+                AutoRoute(path: 'newNotifPage', page: NewNotifRoute.page),
+                AutoRoute(path: 'newNotifScreen', page: NewNotifScreen.page),
+                AutoRoute(path: 'suggestion', page: Suggestion.page),
+
+                AutoRoute(path: 'caseSearch', page: CaseSearch.page),
+                AutoRoute(path: 'caseDetail', page: CaseCompDetail.page),
+                AutoRoute(
+                    path: 'caseComplaintPage', page: CaseComplaintRoute.page)
               ],
             ),
             AutoRoute(

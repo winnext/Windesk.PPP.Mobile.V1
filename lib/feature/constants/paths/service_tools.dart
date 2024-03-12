@@ -57,11 +57,14 @@ class ServiceTools {
   // static const tokenV1 = 'wdbesktest!_';
   // static const tokenV2 = 'besktest!';
   // static const attachPath = "http://sandbox.intranet.signumtte.com/besk";
-  // static const attachPathLive = "http://sandbox.intranet.signumtte.com/besk/xreadattach.php?token=$tokenV1&id=";
+  // static const attachPathLive =
+  //     "http://sandbox.intranet.signumtte.com/besk/xreadattach.php?token=$tokenV1&id=";
   // static const facilityName = "Bilkent Şehir Hastanesi";
   // static const appName = "BESK";
   // static const ipv4adress = '1.1.1.1';
   // static const isWorkOrderExist = true;
+  // static const environment = 'sandbox';
+  // static const loggerUrl = 'http://windeskmobile.eskisehir.yerel/mobilelog';
 
   //BESK PREPROD
   // static const String baseUrlV1 =
@@ -70,11 +73,16 @@ class ServiceTools {
   // static const tokenV1 = 'wdbesktest!_';
   // static const tokenV2 = 'besktest!';
   // static const attachPath = "http://10.198.12.130/besk";
-  // static const attachPathLive = "http://10.198.12.130/besk/xreadattach.php?token=$tokenV1&id=";
+  // static const attachPathLive =
+  //     "http://10.198.12.130/besk/xreadattach.php?token=$tokenV1&id=";
   // static const facilityName = "Bilkent Şehir Hastanesi";
   // static const appName = "BESK";
   // static const ipv4adress = '1.1.1.1';
   // static const isWorkOrderExist = true;
+  // static const environment = 'preprod';
+  // static const loggerUrl = 'http://windeskmobile.eskisehir.yerel/mobilelog';
+
+  //static const loggerUrl = 'http://windeskmobile.eskisehir.yerel/mobilelog';
 
   //BESK PROD
   // static const String baseUrlV1 =
@@ -83,10 +91,16 @@ class ServiceTools {
   // static const tokenV1 = 'wdbeskprod!_';
   // static const tokenV2 = 'beskprod!';
   // static const attachPath = "http://10.198.10.13/windesk";
-  // static const attachPathLive = "http://10.198.10.13/windesk/xreadattach.php?token=$tokenV1&id=";
+  // static const attachPathLive =
+  //     "http://10.198.10.13/windesk/xreadattach.php?token=$tokenV1&id=";
   // static const facilityName = "Bilkent Şehir Hastanesi";
   // static const appName = "BESK";
 
+  // static const loggerUrl = 'http://ishmobile.signumtte.com/mobilelog';
+  // static const ipv4adress = '1.1.1.1';
+  // static const environment = 'prod';
+
+  // static const isWorkOrderExist = true;
   // static const pppProject = "antep";
   // static const baseUrlV2 = 'http://wd-mobile-test.gaziantep.yerel';
   // static const tokenV1 = 'anteptest!_';
@@ -117,10 +131,14 @@ class ServiceTools {
   // static const tokenV1 = 'antep!_';
   // static const tokenV2 = 'antep!';
   // static const attachPath = "http://geskwdtestapp.gaziantep.yerel/windesk";
-  // static const attachPathLive = "http://geskwdtestapp.gaziantep.yerel/windesk/xreadattach.php?token=$tokenV1&id=";
+  // static const attachPathLive =
+  //     "http://geskwdtestapp.gaziantep.yerel/windesk/xreadattach.php?token=$tokenV1&id=";
   // static const facilityName = "Gaziantep Şehir Hastanesi";
   // static const appName = "GSH";
   // static const isWorkOrderExist = false;
+  // static const ipv4adress = '1.1.1.1';
+  // static const loggerUrl = 'http://ishmobile.signumtte.com/mobilelog';
+  // static const environment = 'sandbox';
 
   //ISH SANDBOX
   static const String baseUrlV1 =
